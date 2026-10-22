@@ -32,18 +32,25 @@ mode, on candidate 1214ij.
 
 | Mission | Corvo-Corvo | Emily-Emily | Emily-Corvo |
 |---|---|---|---|
-| A Long Day in Dunwall | campaign-dunwall-cc-v1750a: pass (with the route's deaths), both in the Void | | |
-| Edge of the World | campaign-eotw-cc-v1750a: pass, both in The Good Doctor | | |
-| The Good Doctor | campaign-institute-cc-v1750a: pass, both on the Clockwork Mansion boat | | |
-| The Clockwork Mansion | campaign-madinventor-cc-v1750b: pass, both in the Void (`void_02`); v1750a: the opening use on the boat did not register | | |
-| The Royal Conservatory | campaign-curator-cc-v1750b: pass, both on the Dust District boat; v1750a: the archived-journals note did not register (as in 1697a, 1713a) | | |
-| The Dust District | campaign-dust-cc-v1750a: pass, both in A Crack in the Slab | | |
-| A Crack in the Slab | campaign-bunker-cc-v1750a: pass, both on the Grand Palace boat | | |
-| The Grand Palace | campaign-palace-cc-v1750a: pass, both on the Death to the Empress boat | | |
-| Death to the Empress | campaign-empress-cc-v1750a/b: the mission passed (both games Corvo, through the credits to the title, gameflow equal), but the takes failed their end check, which read the main menu's figure (Emily) as both players (fixed in 1750). v1750b's credits were skipped by hand with Esc | | |
+| A Long Day in Dunwall | campaign-dunwall-cc-v1750a: pass (with the route's deaths), both in the Void | campaign-dunwall-ee-v1751a: pass, both in the Void | campaign-dunwall-ec-v1751a: pass, both in the Void |
+| Edge of the World | campaign-eotw-cc-v1750a: pass, both in The Good Doctor | not sampled | not sampled |
+| The Good Doctor | campaign-institute-cc-v1750a: pass, both on the Clockwork Mansion boat | not sampled | not sampled |
+| The Clockwork Mansion | campaign-madinventor-cc-v1750b: pass, both in the Void (`void_02`); v1750a: the opening use on the boat did not register | campaign-madinventor-ee-v1751b: pass; v1751a: the partner died at the heal step (both GameOver) | campaign-madinventor-ec-v1751b: pass; v1751a: the partner died at the guards step (both GameOver) |
+| The Royal Conservatory | campaign-curator-cc-v1750b: pass, both on the Dust District boat; v1750a: the archived-journals note did not register (as in 1697a, 1713a) | not sampled | not sampled |
+| The Dust District | campaign-dust-cc-v1750a: pass, both in A Crack in the Slab | not sampled | not sampled |
+| A Crack in the Slab | campaign-bunker-cc-v1750a: pass, both on the Grand Palace boat | not sampled | not sampled |
+| The Grand Palace | campaign-palace-cc-v1750a: pass, both on the Death to the Empress boat | not sampled | not sampled |
+| Death to the Empress | campaign-empress-cc-v1751a: pass, through the credits (skipped) to the title. v1750a/b: the mission passed but the end check read the main menu's figure (fixed in 1750); v1750b's credits were skipped by hand with Esc | campaign-empress-ee-v1751a: pass, to the title | campaign-empress-ec-v1753b: pass, to the title. v1751a: the partner stayed on the next map's mission card (the expect step pressed no key; fixed in 1753); v1751b: the partner died in the interior (both GameOver); v1753a: the host's tower door use did not register |
 
-Every Corvo-Corvo failure was a route step (a use that did not register) or the harness's end check; none was a
-divergence between the worlds: gameflow was equal in both at every step.
+**Result:** the Corvo-Corvo campaign passes all nine missions, and the Emily-Emily and Emily-Corvo samples pass the
+first mission, The Clockwork Mansion and the last mission. Every failed attempt was a route step (a use that did not
+register), a harness gap (the end check at the menu, the card key in the expect step) or a partner death in combat,
+which both games share as designed; none was a divergence between the worlds: gameflow was equal in both at every
+step, and both games played the requested pairing.
+
+Harness versions: 1751 skips the end credits; 1752 uses the VM's pad (B) for them, as its keyboard Esc took dozens of
+presses (campaign-empress-cc-v1751a: host 1 press, VM 45); 1753 presses A for a world on a mission card during an
+expect step.
 
 - **The end credits skip natively with Esc** (found by the user, 2026-10-22). Route-MissionVM-v1751 sends Esc to the VM
   and B to the host's pad every 9 s while a game is still on the credits map and the route waits for the menu.

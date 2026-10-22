@@ -1,0 +1,102 @@
+{
+  "passed": false,
+  "failure": "Expected both worlds on dunwall/return/tower/dunwall_return_tower: host campaign/dunwall/return/tower/dunwall_return_tower_p logic 1, client campaign/dunwall/return/interior/dunwall_return_interior_p logic 15",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ij",
+      "hostDll": "4E26D7DCA223A5EE388B0382A880A7FC16CA0CED1E4CFB5D684C5F1813209888",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "characters": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/tower/dunwall_return_tower_p",
+        "epoch": 36,
+        "cine": 33,
+        "pos": [
+          -61.299999,
+          80.5,
+          59.828007
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          3,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/4/0",
+        "hold": "timeout/90015",
+        "ka": "12/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_DTPowerSupply"
+      },
+      "client": {
+        "logic": 15,
+        "pending": 0,
+        "map": "campaign/dunwall/return/interior/dunwall_return_interior_p",
+        "epoch": 31,
+        "cine": 12,
+        "pos": [
+          -43.699646,
+          86.499901,
+          34.403645
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          3,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 7,
+        "lt": "applied/0/4",
+        "hold": "expecting/0",
+        "ka": "12/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_DTPowerSupply"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/dunwall_return/boat_dunwall_return.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-22T13:00:00+02:00",
+  "UpdatedAt": "2026-10-23T03:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22679,5 +22679,18 @@
       "Release notes: the Blink Assault stagger, base host swarm, corpse/rat possession as known limitations"
     ],
     "Next": "Merge PR #169 (closes #168), then #161 validation across the four pairings and the co-op menu, then release 0.9.0."
+  },
+  "PairingValidation": {
+    "Card": "#161 Validation across the four pairings and the co-op menu (stage 6)",
+    "Branch": "stage6/pairing-validation (PR #170)",
+    "Chapter": "documentation/handoff-2026-10-11/109-pairing-validation.md",
+    "Harness": "work/natural-moveset/Route-MissionVM-v1753.ps1 (-PartnerCharacter; credits skipped with B on both pads; A on mission cards in expect steps)",
+    "Results": {
+      "Corvo-Corvo": "all nine missions pass (campaign-*-cc-v1750a/b, empress v1751a)",
+      "Emily-Emily": "Dunwall, Clockwork Mansion, Empress pass (campaign-*-ee-v1751a/b)",
+      "Emily-Corvo": "Dunwall, Clockwork Mansion, Empress pass (campaign-*-ec-v1751a/b, empress v1753b)",
+      "Corvo-Emily": "the release campaign evidence, re-run on the 0.9.0 binaries"
+    },
+    "Next": "Merge PR #170 (closes #161), then release 0.9.0: candidate 1214ik (version 0.9.0), package, install test, co-op menu/save/leave re-runs, the Corvo-Emily campaign on the release binary, publish, clean-PC proof."
   }
 }
