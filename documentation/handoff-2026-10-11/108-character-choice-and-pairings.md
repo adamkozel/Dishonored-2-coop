@@ -214,3 +214,29 @@ product controller (`work/natural-moveset/Test-PartnerCorvoPower-*.ps1`, `Test-P
     replica was stale before the strike.
 - **Moved to #168 (stage 4):** Blink Assault's kick, her replicas' skeleton after her Stop Time ends, the upgrades
   (Greater Windblast, Double Swarm, the possession chains) and a framed visual review of each power.
+
+### #168: Blink Assault, the upgrades and her replicas after Stop Time
+
+Harness `work/natural-moveset/Test-PartnerCorvoPower-v1807.ps1` (`-Upgrade` grants a native upgrade after the power):
+for Blink Assault, Windblast and Swarm it waits for the guard's patrol pause, reads its position and facing from the host
+(authoritative), requires her replica to be ready within 0.3 m of it, and frames the host's camera 4.5 m to its side.
+
+- **Her replicas after her Stop Time (resolved, not a bug):** partner-bendtime-v1801a frames her copy of the guard
+  (her camera aimed twice: the first aim after the fixture leaves her view on the ceiling). Her film shows the guard
+  attacking her, frozen through her Stop Time, then moving and attacking again; her copy's head moves 704 mm after it
+  (the host's 605 mm). The still head in partner-bendtime-v1800a was an idle guard read by the probe.
+- **Greater Windblast and Shockwave (confirmed runtime):** her hit carries the upgrade's native damage to the host's
+  guard. partner-corvo-power-v1807a (`windblast_greater`): 40 -> 22.3 in both worlds, pushed 6.1 m together; v1807c
+  (`windblast_shockwave`): 40 -> 31, pushed 7.5 m.
+- **Double Swarm (confirmed runtime):** partner-corvo-power-v1806b (`devouring_swarm_double`): the host's swarm kills
+  the host's guard, 40 -> 0 in both worlds.
+- **Known limitations:**
+  - **Blink Assault's kick staggers rather than knocks down.** partner-corvo-power-v1805a: her kick lands
+    (`blink_attack.damage`), is forwarded as a PeerNative request and applied natively on the host, and both worlds'
+    guard staggers together at full health. A host's own kick knocks the guard down, because its kick scene binds the
+    NPC (1214ct); the damage alone does not reproduce that.
+  - **The host's swarm is always the base swarm.** The host spawns `devouring_swarm.def` for her swarm, so the size
+    upgrades (`devouring_swarm_bigger`) act only in her world. The Bigger Swarm cast never fired at the lab fixture
+    (v1806c, v1807b).
+  - **Corpse and rat possession are not shared.** Her Possession of a human is (partner-corvo-power-v1802a). Rats
+    and fish are not streamed NPCs, and `possession_decayed_harbor` (corpses) is untested.
