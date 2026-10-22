@@ -1,0 +1,117 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.1088 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             100 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Check failed: coopMode",
+  "checks": {
+    "inserted": true,
+    "entries6": true,
+    "coopMode": false,
+    "campaignMode": false
+  },
+  "notes": {
+    "title": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "home_not_bound",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 0,
+      "attempts": 0,
+      "inserts": 0,
+      "failures": 0,
+      "coopSelected": 0,
+      "campaignSelected": 0,
+      "coopMode": false,
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "03770074-1549-455d-a336-ca0692f1aea0",
+      "PSShowComputerName": true
+    },
+    "menu": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "inserted",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 6,
+      "attempts": 1,
+      "inserts": 1,
+      "failures": 0,
+      "coopSelected": 0,
+      "campaignSelected": 0,
+      "coopMode": false,
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "4ec87c68-af3d-403c-ba2c-9f18c119ec4e",
+      "PSShowComputerName": true
+    },
+    "coop": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "inserted",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 6,
+      "attempts": 1,
+      "inserts": 1,
+      "failures": 0,
+      "coopSelected": 0,
+      "campaignSelected": 0,
+      "coopMode": false,
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "5a72bbde-6733-4765-9eff-4bb73ef76715",
+      "PSShowComputerName": true
+    },
+    "back": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "inserted",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 6,
+      "attempts": 1,
+      "inserts": 1,
+      "failures": 0,
+      "coopSelected": 0,
+      "campaignSelected": 0,
+      "coopMode": false,
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "b3e399f7-c9e8-49ee-b036-aff2bf058d51",
+      "PSShowComputerName": true
+    },
+    "campaign": {
+      "enabled": true,
+      "hooked": true,
+      "menu": true,
+      "result": "inserted",
+      "failedStep": "",
+      "lastCode": 0,
+      "entries": 6,
+      "attempts": 1,
+      "inserts": 1,
+      "failures": 0,
+      "coopSelected": 0,
+      "campaignSelected": 0,
+      "coopMode": false,
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "0aee91d1-22c8-4c60-8f59-99dac34766f5",
+      "PSShowComputerName": true
+    }
+  },
+  "scope": "Co-op main menu entry probe (VM lab game, keyboard as a player): inserted under Campaign, chooses co-op mode, Campaign turns it off; VM lab role stopped."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\release\Probe-CoopMenu-v1757.ps1:37[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  37 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mCheck failed: coopMode[0m

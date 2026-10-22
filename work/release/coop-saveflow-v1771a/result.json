@@ -1,0 +1,988 @@
+{
+  "passed": false,
+  "failure": "Co-op entry not inserted again (again)",
+  "checks": {
+    "coopSaves": true,
+    "gameplay": true,
+    "coopSaveWritten": true
+  },
+  "notes": {
+    "steps": [
+      {
+        "step": "01-title",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "02-menu",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "03-coop-campaign",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "04-newgame-focus",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "05-newgame",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "06-newgame-slot",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "07-newgame-next",
+        "logic": 3,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "08-question",
+        "logic": 3,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "09-question",
+        "logic": 3,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+      },
+      {
+        "step": "10-gameplay",
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+      },
+      {
+        "step": "11-quicksaved",
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+      },
+      {
+        "step": "12-first-pause",
+        "logic": 2,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+      },
+      {
+        "step": "13-first-quit-focus",
+        "logic": 2,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+      },
+      {
+        "step": "14-first-quit-dialog",
+        "logic": 3,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+      },
+      {
+        "step": "15-first-quit-button",
+        "logic": 3,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+      },
+      {
+        "step": "16-first-quit-confirmed",
+        "logic": 6,
+        "pending": 0,
+        "map": ""
+      },
+      {
+        "step": "17-title-again",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "18-failure",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      }
+    ],
+    "menuEnters": 0,
+    "clearedCoop": "removed",
+    "before": {
+      "savegame": [
+        {
+          "path": "profile.bin",
+          "length": 2431,
+          "written": "2026-10-21T22:38:35.2387765Z",
+          "sha256": "A3D1B19BC351B21B578BB4E3EE9F1015412880605A365603958E7D455CA3F725",
+          "body": "8FE19CA147C8AE0DF8391C5518147DAAB0D3C5C6C43B303F218545596B9EFC1F"
+        },
+        {
+          "path": "steam_autocloud.vdf",
+          "length": 52,
+          "written": "2026-10-21T22:38:35.2773044Z",
+          "sha256": "C79C49DE98E7D4AE3836A61830CF263705F72D809CDAADDD1936FCD354595085",
+          "body": null
+        },
+        {
+          "path": "SLOT00\\checkpoint.dat",
+          "length": 2143,
+          "written": "2026-10-21T22:38:35.3418432Z",
+          "sha256": "77CAFBD202ED469D47CEBFCC22C888F3CDF103F6EC122CEA0BDED0BBEB81DD9C",
+          "body": null
+        },
+        {
+          "path": "SLOT00\\game.details",
+          "length": 228,
+          "written": "2026-10-21T22:38:35.4030380Z",
+          "sha256": "67B115D56CD3330E52C3A80F129F730F9AEDF9A39F0DD27840F4B891EFC0C1C1",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\checkpoint.dat",
+          "length": 182102,
+          "written": "2026-10-21T22:38:35.4816908Z",
+          "sha256": "AE0ED6C8844C91EB97FA6D24F11AADAC216E0C1821A4915C967D810B536C33E2",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\game.details",
+          "length": 286,
+          "written": "2026-10-21T22:38:35.5487221Z",
+          "sha256": "C690B99BC691C9EF86299A0018E793DB1DB5763987142F4210963E9E486534A2",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\screenshot.png",
+          "length": 243860,
+          "written": "2026-10-21T22:38:35.6496066Z",
+          "sha256": "E984F64FE0B55D07D15CEDECDE782B5D9BD274031F38539C9E0557238785FEB3",
+          "body": null
+        },
+        {
+          "path": "SLOT60\\checkpoint.dat",
+          "length": 1963,
+          "written": "2026-10-21T22:38:35.7029477Z",
+          "sha256": "2BD38C9F40D581D0D37C1B4B4C460CF4A83AE5EA0820D61A742A8001D27D08DD",
+          "body": null
+        },
+        {
+          "path": "SLOT60\\game.details",
+          "length": 229,
+          "written": "2026-10-21T22:38:35.7500803Z",
+          "sha256": "0C81E9F0F2D2370714968737D406C205E0859457F5908B9E192BFB162D6C9FB5",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\checkpoint.dat",
+          "length": 183678,
+          "written": "2026-10-21T22:38:35.8296645Z",
+          "sha256": "619393954A7568454E7C46662E11214A0EF0EE75160C00A15C5A3BB8850C208E",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\game.details",
+          "length": 289,
+          "written": "2026-10-21T22:38:35.8774814Z",
+          "sha256": "AE04EADBF4375CAD533C1FD5001E36DBD1CE921EB30F3F2AC5D17583385B0C28",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\screenshot.png",
+          "length": 163032,
+          "written": "2026-10-21T22:38:35.9722603Z",
+          "sha256": "F96227DEFA6F5BF84CD7249CC7BD1E09A7A94423BEDC1F7151E488C449A26CAC",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\checkpoint.dat",
+          "length": 183776,
+          "written": "2026-10-21T22:38:36.0510128Z",
+          "sha256": "F1BBECF18959E2485E9E160F2B77D89BE0F57BE0A0A73D9B51C53768F7EE0DD4",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\game.details",
+          "length": 289,
+          "written": "2026-10-21T22:38:36.0981688Z",
+          "sha256": "8C9CA430E5543C530380431A21D6AA6054296E3A4E0F2F45F02C49FB9600A23A",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\screenshot.png",
+          "length": 186035,
+          "written": "2026-10-21T22:38:36.1776426Z",
+          "sha256": "10965A5441A7EB124C58428E9262B0B615F8DC37DBED636A0BFBEEEE0BD201E1",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\checkpoint.dat",
+          "length": 180430,
+          "written": "2026-10-21T22:38:36.2567352Z",
+          "sha256": "5917CA8299F887441DA1DD216AF56082F9044732E8E837AB5461793386DA90EC",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\game.details",
+          "length": 287,
+          "written": "2026-10-21T22:38:36.3204506Z",
+          "sha256": "8F34156F3C80F2E301C276FDD7F11AAAD9E4FEFCC5DE6007FB3A47A8C3FAD711",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\screenshot.png",
+          "length": 225034,
+          "written": "2026-10-21T22:38:36.4149246Z",
+          "sha256": "3492258ECEF616A0038AFE531D9ECD0C562505A765F9098D35F06B67D2D1076A",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\checkpoint.dat",
+          "length": 13439,
+          "written": "2026-10-21T22:38:36.4635341Z",
+          "sha256": "57A0F583B53018722FAADF5F10488632ECAC0A223D2D0CD581D9B42442813C59",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\game.details",
+          "length": 241,
+          "written": "2026-10-21T22:38:36.5096831Z",
+          "sha256": "F5FE12BDE6D766EFF9AD034C808FAF63969B84104752F1A258DA935F99B50D5F",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\screenshot.png",
+          "length": 227964,
+          "written": "2026-10-21T22:38:36.6041715Z",
+          "sha256": "7D5B1787E505CFDC18481F609DED2576C1AFC342014F3CA2E803BABDB7C18D6D",
+          "body": null
+        },
+        {
+          "path": "SLOT83\\checkpoint.dat",
+          "length": 15090,
+          "written": "2026-10-21T22:38:36.6523325Z",
+          "sha256": "ECFCF77201A23F8A41A8F8FC727AF8DF11C0EBDE98105F2A8DD82E3F773DC41F",
+          "body": null
+        },
+        {
+          "path": "SLOT83\\game.details",
+          "length": 251,
+          "written": "2026-10-21T22:38:36.7097481Z",
+          "sha256": "29A36FDB44FF72867BEA2AA932FD34279C74A738D929478674BA4A0BA36F00FA",
+          "body": null
+        },
+        {
+          "path": "SLOT84\\checkpoint.dat",
+          "length": 13550,
+          "written": "2026-10-21T22:38:36.7543900Z",
+          "sha256": "3D9BC362EBD23CB0D59E02CF86B2E17BA8CAD15C3CB87D56946DE5B439A2AF0C",
+          "body": null
+        },
+        {
+          "path": "SLOT84\\game.details",
+          "length": 254,
+          "written": "2026-10-21T22:38:36.8269872Z",
+          "sha256": "12EB51AE457D0C1C4831CC2D452D145B52CC990022C10054D8A4E214F6A2A9C3",
+          "body": null
+        },
+        {
+          "path": "SLOT85\\checkpoint.dat",
+          "length": 15149,
+          "written": "2026-10-21T22:38:36.8751386Z",
+          "sha256": "1163410E73E79220392DB038B3BB3252DE987DD015D4C2039DC5460E1AEFDD29",
+          "body": null
+        },
+        {
+          "path": "SLOT85\\game.details",
+          "length": 240,
+          "written": "2026-10-21T22:38:36.9428140Z",
+          "sha256": "1F0736CEF90914B74730AAE2FCB375C579F5DAD69C5CF45B799302153DD0375D",
+          "body": null
+        },
+        {
+          "path": "SLOT86\\checkpoint.dat",
+          "length": 15165,
+          "written": "2026-10-21T22:38:36.9856989Z",
+          "sha256": "EBD5A6F6A105E2ED133723AB8D6918F3E116BAA60D46C5B8A42FD453054464F2",
+          "body": null
+        },
+        {
+          "path": "SLOT86\\game.details",
+          "length": 241,
+          "written": "2026-10-21T22:38:37.0491707Z",
+          "sha256": "835DFE0AA837328D99B59ECA043B53FCFBDE7702729C12A4067B22D85BF3ACE1",
+          "body": null
+        },
+        {
+          "path": "SLOT87\\checkpoint.dat",
+          "length": 530538,
+          "written": "2026-10-21T22:38:37.1758800Z",
+          "sha256": "28054FCAB9892CCC6C3AF52952A366E6BAB67A1733D68E6F8187473E8AEEA247",
+          "body": null
+        },
+        {
+          "path": "SLOT87\\game.details",
+          "length": 244,
+          "written": "2026-10-21T22:38:37.2392648Z",
+          "sha256": "F092686ACF2F2FEA37F99CC9D56092F9131E2BC669FB3D466D59118651147C5A",
+          "body": null
+        },
+        {
+          "path": "SLOT88\\checkpoint.dat",
+          "length": 14881,
+          "written": "2026-10-21T22:38:37.2863258Z",
+          "sha256": "6DA3B910A8EB422D805C825F7CC83D85C5E6DFA1DF48637D5E8BE6EE2E175FE0",
+          "body": null
+        },
+        {
+          "path": "SLOT88\\game.details",
+          "length": 249,
+          "written": "2026-10-21T22:38:37.3374053Z",
+          "sha256": "30733AB15E41C9FAA267A05CE8343840C26096F06C3ED0D7FBC07FE818BDE5BF",
+          "body": null
+        },
+        {
+          "path": "SLOT89\\checkpoint.dat",
+          "length": 15738,
+          "written": "2026-10-21T22:38:37.3887150Z",
+          "sha256": "E53550FD0E64E835C164E380AEAD24D7387E6FC6632C2F99D610924160167FCD",
+          "body": null
+        },
+        {
+          "path": "SLOT89\\game.details",
+          "length": 259,
+          "written": "2026-10-21T22:38:37.4435843Z",
+          "sha256": "8390200522B586E73BA31093AC48DC79BD04B859B8FCD9A7DF5FE96F532184CE",
+          "body": null
+        }
+      ],
+      "savegame_coop": [],
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "1f55cc7a-c0d0-4f1c-96e3-5abbba5c40a0",
+      "PSShowComputerName": true
+    },
+    "choices": 0,
+    "gameplay": {
+      "logic": 1,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+    },
+    "afterSave": {
+      "savegame": [
+        {
+          "path": "profile.bin",
+          "length": 2431,
+          "written": "2026-10-21T22:39:30.1255913Z",
+          "sha256": "4B1314913BD08DC2B742D0AB23633EA00D95AE6464D1F366F134E44258C3F4C5",
+          "body": "8FE19CA147C8AE0DF8391C5518147DAAB0D3C5C6C43B303F218545596B9EFC1F"
+        },
+        {
+          "path": "steam_autocloud.vdf",
+          "length": 52,
+          "written": "2026-10-21T22:38:35.2773044Z",
+          "sha256": "C79C49DE98E7D4AE3836A61830CF263705F72D809CDAADDD1936FCD354595085",
+          "body": null
+        },
+        {
+          "path": "SLOT00\\checkpoint.dat",
+          "length": 2143,
+          "written": "2026-10-21T22:38:35.3418432Z",
+          "sha256": "77CAFBD202ED469D47CEBFCC22C888F3CDF103F6EC122CEA0BDED0BBEB81DD9C",
+          "body": null
+        },
+        {
+          "path": "SLOT00\\game.details",
+          "length": 228,
+          "written": "2026-10-21T22:38:35.4030380Z",
+          "sha256": "67B115D56CD3330E52C3A80F129F730F9AEDF9A39F0DD27840F4B891EFC0C1C1",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\checkpoint.dat",
+          "length": 182102,
+          "written": "2026-10-21T22:38:35.4816908Z",
+          "sha256": "AE0ED6C8844C91EB97FA6D24F11AADAC216E0C1821A4915C967D810B536C33E2",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\game.details",
+          "length": 286,
+          "written": "2026-10-21T22:38:35.5487221Z",
+          "sha256": "C690B99BC691C9EF86299A0018E793DB1DB5763987142F4210963E9E486534A2",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\screenshot.png",
+          "length": 243860,
+          "written": "2026-10-21T22:38:35.6496066Z",
+          "sha256": "E984F64FE0B55D07D15CEDECDE782B5D9BD274031F38539C9E0557238785FEB3",
+          "body": null
+        },
+        {
+          "path": "SLOT60\\checkpoint.dat",
+          "length": 1963,
+          "written": "2026-10-21T22:38:35.7029477Z",
+          "sha256": "2BD38C9F40D581D0D37C1B4B4C460CF4A83AE5EA0820D61A742A8001D27D08DD",
+          "body": null
+        },
+        {
+          "path": "SLOT60\\game.details",
+          "length": 229,
+          "written": "2026-10-21T22:38:35.7500803Z",
+          "sha256": "0C81E9F0F2D2370714968737D406C205E0859457F5908B9E192BFB162D6C9FB5",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\checkpoint.dat",
+          "length": 183678,
+          "written": "2026-10-21T22:38:35.8296645Z",
+          "sha256": "619393954A7568454E7C46662E11214A0EF0EE75160C00A15C5A3BB8850C208E",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\game.details",
+          "length": 289,
+          "written": "2026-10-21T22:38:35.8774814Z",
+          "sha256": "AE04EADBF4375CAD533C1FD5001E36DBD1CE921EB30F3F2AC5D17583385B0C28",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\screenshot.png",
+          "length": 163032,
+          "written": "2026-10-21T22:38:35.9722603Z",
+          "sha256": "F96227DEFA6F5BF84CD7249CC7BD1E09A7A94423BEDC1F7151E488C449A26CAC",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\checkpoint.dat",
+          "length": 183776,
+          "written": "2026-10-21T22:38:36.0510128Z",
+          "sha256": "F1BBECF18959E2485E9E160F2B77D89BE0F57BE0A0A73D9B51C53768F7EE0DD4",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\game.details",
+          "length": 289,
+          "written": "2026-10-21T22:38:36.0981688Z",
+          "sha256": "8C9CA430E5543C530380431A21D6AA6054296E3A4E0F2F45F02C49FB9600A23A",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\screenshot.png",
+          "length": 186035,
+          "written": "2026-10-21T22:38:36.1776426Z",
+          "sha256": "10965A5441A7EB124C58428E9262B0B615F8DC37DBED636A0BFBEEEE0BD201E1",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\checkpoint.dat",
+          "length": 180430,
+          "written": "2026-10-21T22:38:36.2567352Z",
+          "sha256": "5917CA8299F887441DA1DD216AF56082F9044732E8E837AB5461793386DA90EC",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\game.details",
+          "length": 287,
+          "written": "2026-10-21T22:38:36.3204506Z",
+          "sha256": "8F34156F3C80F2E301C276FDD7F11AAAD9E4FEFCC5DE6007FB3A47A8C3FAD711",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\screenshot.png",
+          "length": 225034,
+          "written": "2026-10-21T22:38:36.4149246Z",
+          "sha256": "3492258ECEF616A0038AFE531D9ECD0C562505A765F9098D35F06B67D2D1076A",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\checkpoint.dat",
+          "length": 13439,
+          "written": "2026-10-21T22:38:36.4635341Z",
+          "sha256": "57A0F583B53018722FAADF5F10488632ECAC0A223D2D0CD581D9B42442813C59",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\game.details",
+          "length": 241,
+          "written": "2026-10-21T22:38:36.5096831Z",
+          "sha256": "F5FE12BDE6D766EFF9AD034C808FAF63969B84104752F1A258DA935F99B50D5F",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\screenshot.png",
+          "length": 227964,
+          "written": "2026-10-21T22:38:36.6041715Z",
+          "sha256": "7D5B1787E505CFDC18481F609DED2576C1AFC342014F3CA2E803BABDB7C18D6D",
+          "body": null
+        },
+        {
+          "path": "SLOT83\\checkpoint.dat",
+          "length": 15090,
+          "written": "2026-10-21T22:38:36.6523325Z",
+          "sha256": "ECFCF77201A23F8A41A8F8FC727AF8DF11C0EBDE98105F2A8DD82E3F773DC41F",
+          "body": null
+        },
+        {
+          "path": "SLOT83\\game.details",
+          "length": 251,
+          "written": "2026-10-21T22:38:36.7097481Z",
+          "sha256": "29A36FDB44FF72867BEA2AA932FD34279C74A738D929478674BA4A0BA36F00FA",
+          "body": null
+        },
+        {
+          "path": "SLOT84\\checkpoint.dat",
+          "length": 13550,
+          "written": "2026-10-21T22:38:36.7543900Z",
+          "sha256": "3D9BC362EBD23CB0D59E02CF86B2E17BA8CAD15C3CB87D56946DE5B439A2AF0C",
+          "body": null
+        },
+        {
+          "path": "SLOT84\\game.details",
+          "length": 254,
+          "written": "2026-10-21T22:38:36.8269872Z",
+          "sha256": "12EB51AE457D0C1C4831CC2D452D145B52CC990022C10054D8A4E214F6A2A9C3",
+          "body": null
+        },
+        {
+          "path": "SLOT85\\checkpoint.dat",
+          "length": 15149,
+          "written": "2026-10-21T22:38:36.8751386Z",
+          "sha256": "1163410E73E79220392DB038B3BB3252DE987DD015D4C2039DC5460E1AEFDD29",
+          "body": null
+        },
+        {
+          "path": "SLOT85\\game.details",
+          "length": 240,
+          "written": "2026-10-21T22:38:36.9428140Z",
+          "sha256": "1F0736CEF90914B74730AAE2FCB375C579F5DAD69C5CF45B799302153DD0375D",
+          "body": null
+        },
+        {
+          "path": "SLOT86\\checkpoint.dat",
+          "length": 15165,
+          "written": "2026-10-21T22:38:36.9856989Z",
+          "sha256": "EBD5A6F6A105E2ED133723AB8D6918F3E116BAA60D46C5B8A42FD453054464F2",
+          "body": null
+        },
+        {
+          "path": "SLOT86\\game.details",
+          "length": 241,
+          "written": "2026-10-21T22:38:37.0491707Z",
+          "sha256": "835DFE0AA837328D99B59ECA043B53FCFBDE7702729C12A4067B22D85BF3ACE1",
+          "body": null
+        },
+        {
+          "path": "SLOT87\\checkpoint.dat",
+          "length": 530538,
+          "written": "2026-10-21T22:38:37.1758800Z",
+          "sha256": "28054FCAB9892CCC6C3AF52952A366E6BAB67A1733D68E6F8187473E8AEEA247",
+          "body": null
+        },
+        {
+          "path": "SLOT87\\game.details",
+          "length": 244,
+          "written": "2026-10-21T22:38:37.2392648Z",
+          "sha256": "F092686ACF2F2FEA37F99CC9D56092F9131E2BC669FB3D466D59118651147C5A",
+          "body": null
+        },
+        {
+          "path": "SLOT88\\checkpoint.dat",
+          "length": 14881,
+          "written": "2026-10-21T22:38:37.2863258Z",
+          "sha256": "6DA3B910A8EB422D805C825F7CC83D85C5E6DFA1DF48637D5E8BE6EE2E175FE0",
+          "body": null
+        },
+        {
+          "path": "SLOT88\\game.details",
+          "length": 249,
+          "written": "2026-10-21T22:38:37.3374053Z",
+          "sha256": "30733AB15E41C9FAA267A05CE8343840C26096F06C3ED0D7FBC07FE818BDE5BF",
+          "body": null
+        },
+        {
+          "path": "SLOT89\\checkpoint.dat",
+          "length": 15738,
+          "written": "2026-10-21T22:38:37.3887150Z",
+          "sha256": "E53550FD0E64E835C164E380AEAD24D7387E6FC6632C2F99D610924160167FCD",
+          "body": null
+        },
+        {
+          "path": "SLOT89\\game.details",
+          "length": 259,
+          "written": "2026-10-21T22:38:37.4435843Z",
+          "sha256": "8390200522B586E73BA31093AC48DC79BD04B859B8FCD9A7DF5FE96F532184CE",
+          "body": null
+        }
+      ],
+      "savegame_coop": [
+        {
+          "path": "profile.bin",
+          "length": 327,
+          "written": "2026-10-21T22:42:16.9948585Z",
+          "sha256": "AF187EF8D3C9097F6499DE6AF8A3CDEF5B09A13358A9EE0280B880CE442372F7",
+          "body": "B9A5D511E3A1FA4CD165100FA9A719AE44FAAB38AB22863BB31F8D2726EF3B6D"
+        },
+        {
+          "path": "SLOT03\\checkpoint.dat",
+          "length": 181847,
+          "written": "2026-10-21T22:42:16.9398637Z",
+          "sha256": "AE5F1062251C77CD8CA8ECC2BDFA8085EFF82FEA97F0CC94F6D5814E4C9A98C5",
+          "body": null
+        },
+        {
+          "path": "SLOT03\\game.details",
+          "length": 285,
+          "written": "2026-10-21T22:42:16.9308421Z",
+          "sha256": "9C7D8C0760D2F25460DA03D17343B109ECA0C4133AAEDEF1E8A2E8E2D57C23FB",
+          "body": null
+        },
+        {
+          "path": "SLOT03\\screenshot.png",
+          "length": 204981,
+          "written": "2026-10-21T22:42:16.9498431Z",
+          "sha256": "B28BA73860B745134879E560F7B3923A0B75AE4D44CAB5372B746DD97EF021B8",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\checkpoint.dat",
+          "length": 181793,
+          "written": "2026-10-21T22:42:09.0915302Z",
+          "sha256": "B0D6116AF3985C733D2AB51E614FF874565F26B744D7EF25E3C4DF9BCE243911",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\game.details",
+          "length": 283,
+          "written": "2026-10-21T22:42:09.0575284Z",
+          "sha256": "97AB8CDF9024E52C7617941C9F5E749B2956B5E7F898CB7795B2489B802F1BE7",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\screenshot.png",
+          "length": 205672,
+          "written": "2026-10-21T22:42:09.1405293Z",
+          "sha256": "4A255F94F78D9F7B27869C11E068CD04AB413F1BA59E2FAC8AB284ABF36CE535",
+          "body": null
+        }
+      ],
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "beddf5a0-91b3-41e0-b8f3-1f0c8888ed9a",
+      "PSShowComputerName": true
+    },
+    "end": {
+      "savegame": [
+        {
+          "path": "profile.bin",
+          "length": 2431,
+          "written": "2026-10-21T22:39:30.1255913Z",
+          "sha256": "4B1314913BD08DC2B742D0AB23633EA00D95AE6464D1F366F134E44258C3F4C5",
+          "body": "8FE19CA147C8AE0DF8391C5518147DAAB0D3C5C6C43B303F218545596B9EFC1F"
+        },
+        {
+          "path": "steam_autocloud.vdf",
+          "length": 52,
+          "written": "2026-10-21T22:38:35.2773044Z",
+          "sha256": "C79C49DE98E7D4AE3836A61830CF263705F72D809CDAADDD1936FCD354595085",
+          "body": null
+        },
+        {
+          "path": "SLOT00\\checkpoint.dat",
+          "length": 2143,
+          "written": "2026-10-21T22:38:35.3418432Z",
+          "sha256": "77CAFBD202ED469D47CEBFCC22C888F3CDF103F6EC122CEA0BDED0BBEB81DD9C",
+          "body": null
+        },
+        {
+          "path": "SLOT00\\game.details",
+          "length": 228,
+          "written": "2026-10-21T22:38:35.4030380Z",
+          "sha256": "67B115D56CD3330E52C3A80F129F730F9AEDF9A39F0DD27840F4B891EFC0C1C1",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\checkpoint.dat",
+          "length": 182102,
+          "written": "2026-10-21T22:38:35.4816908Z",
+          "sha256": "AE0ED6C8844C91EB97FA6D24F11AADAC216E0C1821A4915C967D810B536C33E2",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\game.details",
+          "length": 286,
+          "written": "2026-10-21T22:38:35.5487221Z",
+          "sha256": "C690B99BC691C9EF86299A0018E793DB1DB5763987142F4210963E9E486534A2",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\screenshot.png",
+          "length": 243860,
+          "written": "2026-10-21T22:38:35.6496066Z",
+          "sha256": "E984F64FE0B55D07D15CEDECDE782B5D9BD274031F38539C9E0557238785FEB3",
+          "body": null
+        },
+        {
+          "path": "SLOT60\\checkpoint.dat",
+          "length": 1963,
+          "written": "2026-10-21T22:38:35.7029477Z",
+          "sha256": "2BD38C9F40D581D0D37C1B4B4C460CF4A83AE5EA0820D61A742A8001D27D08DD",
+          "body": null
+        },
+        {
+          "path": "SLOT60\\game.details",
+          "length": 229,
+          "written": "2026-10-21T22:38:35.7500803Z",
+          "sha256": "0C81E9F0F2D2370714968737D406C205E0859457F5908B9E192BFB162D6C9FB5",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\checkpoint.dat",
+          "length": 183678,
+          "written": "2026-10-21T22:38:35.8296645Z",
+          "sha256": "619393954A7568454E7C46662E11214A0EF0EE75160C00A15C5A3BB8850C208E",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\game.details",
+          "length": 289,
+          "written": "2026-10-21T22:38:35.8774814Z",
+          "sha256": "AE04EADBF4375CAD533C1FD5001E36DBD1CE921EB30F3F2AC5D17583385B0C28",
+          "body": null
+        },
+        {
+          "path": "SLOT61\\screenshot.png",
+          "length": 163032,
+          "written": "2026-10-21T22:38:35.9722603Z",
+          "sha256": "F96227DEFA6F5BF84CD7249CC7BD1E09A7A94423BEDC1F7151E488C449A26CAC",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\checkpoint.dat",
+          "length": 183776,
+          "written": "2026-10-21T22:38:36.0510128Z",
+          "sha256": "F1BBECF18959E2485E9E160F2B77D89BE0F57BE0A0A73D9B51C53768F7EE0DD4",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\game.details",
+          "length": 289,
+          "written": "2026-10-21T22:38:36.0981688Z",
+          "sha256": "8C9CA430E5543C530380431A21D6AA6054296E3A4E0F2F45F02C49FB9600A23A",
+          "body": null
+        },
+        {
+          "path": "SLOT62\\screenshot.png",
+          "length": 186035,
+          "written": "2026-10-21T22:38:36.1776426Z",
+          "sha256": "10965A5441A7EB124C58428E9262B0B615F8DC37DBED636A0BFBEEEE0BD201E1",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\checkpoint.dat",
+          "length": 180430,
+          "written": "2026-10-21T22:38:36.2567352Z",
+          "sha256": "5917CA8299F887441DA1DD216AF56082F9044732E8E837AB5461793386DA90EC",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\game.details",
+          "length": 287,
+          "written": "2026-10-21T22:38:36.3204506Z",
+          "sha256": "8F34156F3C80F2E301C276FDD7F11AAAD9E4FEFCC5DE6007FB3A47A8C3FAD711",
+          "body": null
+        },
+        {
+          "path": "SLOT81\\screenshot.png",
+          "length": 225034,
+          "written": "2026-10-21T22:38:36.4149246Z",
+          "sha256": "3492258ECEF616A0038AFE531D9ECD0C562505A765F9098D35F06B67D2D1076A",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\checkpoint.dat",
+          "length": 13439,
+          "written": "2026-10-21T22:38:36.4635341Z",
+          "sha256": "57A0F583B53018722FAADF5F10488632ECAC0A223D2D0CD581D9B42442813C59",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\game.details",
+          "length": 241,
+          "written": "2026-10-21T22:38:36.5096831Z",
+          "sha256": "F5FE12BDE6D766EFF9AD034C808FAF63969B84104752F1A258DA935F99B50D5F",
+          "body": null
+        },
+        {
+          "path": "SLOT82\\screenshot.png",
+          "length": 227964,
+          "written": "2026-10-21T22:38:36.6041715Z",
+          "sha256": "7D5B1787E505CFDC18481F609DED2576C1AFC342014F3CA2E803BABDB7C18D6D",
+          "body": null
+        },
+        {
+          "path": "SLOT83\\checkpoint.dat",
+          "length": 15090,
+          "written": "2026-10-21T22:38:36.6523325Z",
+          "sha256": "ECFCF77201A23F8A41A8F8FC727AF8DF11C0EBDE98105F2A8DD82E3F773DC41F",
+          "body": null
+        },
+        {
+          "path": "SLOT83\\game.details",
+          "length": 251,
+          "written": "2026-10-21T22:38:36.7097481Z",
+          "sha256": "29A36FDB44FF72867BEA2AA932FD34279C74A738D929478674BA4A0BA36F00FA",
+          "body": null
+        },
+        {
+          "path": "SLOT84\\checkpoint.dat",
+          "length": 13550,
+          "written": "2026-10-21T22:38:36.7543900Z",
+          "sha256": "3D9BC362EBD23CB0D59E02CF86B2E17BA8CAD15C3CB87D56946DE5B439A2AF0C",
+          "body": null
+        },
+        {
+          "path": "SLOT84\\game.details",
+          "length": 254,
+          "written": "2026-10-21T22:38:36.8269872Z",
+          "sha256": "12EB51AE457D0C1C4831CC2D452D145B52CC990022C10054D8A4E214F6A2A9C3",
+          "body": null
+        },
+        {
+          "path": "SLOT85\\checkpoint.dat",
+          "length": 15149,
+          "written": "2026-10-21T22:38:36.8751386Z",
+          "sha256": "1163410E73E79220392DB038B3BB3252DE987DD015D4C2039DC5460E1AEFDD29",
+          "body": null
+        },
+        {
+          "path": "SLOT85\\game.details",
+          "length": 240,
+          "written": "2026-10-21T22:38:36.9428140Z",
+          "sha256": "1F0736CEF90914B74730AAE2FCB375C579F5DAD69C5CF45B799302153DD0375D",
+          "body": null
+        },
+        {
+          "path": "SLOT86\\checkpoint.dat",
+          "length": 15165,
+          "written": "2026-10-21T22:38:36.9856989Z",
+          "sha256": "EBD5A6F6A105E2ED133723AB8D6918F3E116BAA60D46C5B8A42FD453054464F2",
+          "body": null
+        },
+        {
+          "path": "SLOT86\\game.details",
+          "length": 241,
+          "written": "2026-10-21T22:38:37.0491707Z",
+          "sha256": "835DFE0AA837328D99B59ECA043B53FCFBDE7702729C12A4067B22D85BF3ACE1",
+          "body": null
+        },
+        {
+          "path": "SLOT87\\checkpoint.dat",
+          "length": 530538,
+          "written": "2026-10-21T22:38:37.1758800Z",
+          "sha256": "28054FCAB9892CCC6C3AF52952A366E6BAB67A1733D68E6F8187473E8AEEA247",
+          "body": null
+        },
+        {
+          "path": "SLOT87\\game.details",
+          "length": 244,
+          "written": "2026-10-21T22:38:37.2392648Z",
+          "sha256": "F092686ACF2F2FEA37F99CC9D56092F9131E2BC669FB3D466D59118651147C5A",
+          "body": null
+        },
+        {
+          "path": "SLOT88\\checkpoint.dat",
+          "length": 14881,
+          "written": "2026-10-21T22:38:37.2863258Z",
+          "sha256": "6DA3B910A8EB422D805C825F7CC83D85C5E6DFA1DF48637D5E8BE6EE2E175FE0",
+          "body": null
+        },
+        {
+          "path": "SLOT88\\game.details",
+          "length": 249,
+          "written": "2026-10-21T22:38:37.3374053Z",
+          "sha256": "30733AB15E41C9FAA267A05CE8343840C26096F06C3ED0D7FBC07FE818BDE5BF",
+          "body": null
+        },
+        {
+          "path": "SLOT89\\checkpoint.dat",
+          "length": 15738,
+          "written": "2026-10-21T22:38:37.3887150Z",
+          "sha256": "E53550FD0E64E835C164E380AEAD24D7387E6FC6632C2F99D610924160167FCD",
+          "body": null
+        },
+        {
+          "path": "SLOT89\\game.details",
+          "length": 259,
+          "written": "2026-10-21T22:38:37.4435843Z",
+          "sha256": "8390200522B586E73BA31093AC48DC79BD04B859B8FCD9A7DF5FE96F532184CE",
+          "body": null
+        }
+      ],
+      "savegame_coop": [
+        {
+          "path": "profile.bin",
+          "length": 327,
+          "written": "2026-10-21T22:42:16.9948585Z",
+          "sha256": "AF187EF8D3C9097F6499DE6AF8A3CDEF5B09A13358A9EE0280B880CE442372F7",
+          "body": "B9A5D511E3A1FA4CD165100FA9A719AE44FAAB38AB22863BB31F8D2726EF3B6D"
+        },
+        {
+          "path": "SLOT03\\checkpoint.dat",
+          "length": 181847,
+          "written": "2026-10-21T22:42:16.9398637Z",
+          "sha256": "AE5F1062251C77CD8CA8ECC2BDFA8085EFF82FEA97F0CC94F6D5814E4C9A98C5",
+          "body": null
+        },
+        {
+          "path": "SLOT03\\game.details",
+          "length": 285,
+          "written": "2026-10-21T22:42:16.9308421Z",
+          "sha256": "9C7D8C0760D2F25460DA03D17343B109ECA0C4133AAEDEF1E8A2E8E2D57C23FB",
+          "body": null
+        },
+        {
+          "path": "SLOT03\\screenshot.png",
+          "length": 204981,
+          "written": "2026-10-21T22:42:16.9498431Z",
+          "sha256": "B28BA73860B745134879E560F7B3923A0B75AE4D44CAB5372B746DD97EF021B8",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\checkpoint.dat",
+          "length": 181793,
+          "written": "2026-10-21T22:42:09.0915302Z",
+          "sha256": "B0D6116AF3985C733D2AB51E614FF874565F26B744D7EF25E3C4DF9BCE243911",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\game.details",
+          "length": 283,
+          "written": "2026-10-21T22:42:09.0575284Z",
+          "sha256": "97AB8CDF9024E52C7617941C9F5E749B2956B5E7F898CB7795B2489B802F1BE7",
+          "body": null
+        },
+        {
+          "path": "SLOT21\\screenshot.png",
+          "length": 205672,
+          "written": "2026-10-21T22:42:09.1405293Z",
+          "sha256": "4A255F94F78D9F7B27869C11E068CD04AB413F1BA59E2FAC8AB284ABF36CE535",
+          "body": null
+        }
+      ],
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "7401cd56-9d6b-4591-9577-67695ab06716",
+      "PSShowComputerName": true
+    }
+  },
+  "scope": "Co-op save flow from the Co-op entry in the VM lab game (keyboard and pad as a player): new game, quicksave, back to the title and menu, CO-OP, CONTINUE loads the quicksave, back again, CAMPAIGN; the campaign saves must stay unchanged (profile.bin keys equal, rewrite recorded); VM lab role stopped."
+}

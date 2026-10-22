@@ -1,0 +1,44 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             99 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Checks failed: hostCorvo, loaded, campaignUnchanged",
+  "checks": {
+    "coopSaves": true,
+    "hostCorvo": false,
+    "missionStartSaved": true,
+    "connected": true,
+    "manualSaveWritten": true,
+    "loaded": false,
+    "partnerAfterLoad": true,
+    "campaignUnchanged": false
+  },
+  "notes": {
+    "steps": [
+      {
+        "step": "00-start",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "fresh": true,
+          "saves": {
+            "result": "idle",
+            "active": false,
+            "phase": 0,
+            "switches": 0,
+            "failures": 0,
+            "rebuilds": 0,
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\release\Probe-CoopHostSave-v1775.ps1:166[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 166 | [0m . out/result.json"|Select-Object -First 30;if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                         ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mChecks failed: hostCorvo, loaded, campaignUnchanged[0m

@@ -1,0 +1,54 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             97 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Check failed: loaded",
+  "checks": {
+    "coopSaves": true,
+    "gameplay": true,
+    "coopSaveWritten": true,
+    "loaded": false,
+    "campaignMode": false,
+    "campaignUnchanged": false
+  },
+  "notes": {
+    "steps": [
+      {
+        "step": "01-title",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "02-menu",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "03-coop-campaign",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "04-newgame-focus",
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p"
+      },
+      {
+        "step": "05-newgame",
+        "logic": 6,
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\release\Probe-CoopSaveFlow-v1768.ps1:90[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  90 | [0m . out/result.json"|Select-Object -First 40;if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                         ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mCheck failed: loaded[0m

@@ -27,6 +27,7 @@ ProductArm productArm{};
 // 1214cp (#104): power world visuals that were scoped to the isolated lab fixture also run while the product
 // controller holds an armed session (installed release or lab coop_product_auto).
 bool frontEndTitlePassed=false; // 1214ha (#146): a key was pressed at the title screen since boot
+bool coopSavesReadyForSession();void requestCoopSaves(); // 1214hs (#156, native_menu_ui.h)
 bool productSessionArmed(){return productArm.result&&!std::strcmp(productArm.result,"armed");}
 SHORT productKeyF7=0,productKeyF8=0;
 const char* productStep(unsigned i){
@@ -69,7 +70,7 @@ void serviceProductSession(void* system,ULONGLONG tick){
         if(!productLaunchChecked){productLaunchChecked=true;if(const auto lobby=onlineLaunchLobby())onlineSession.requestedLobby=lobby;}
         const bool focused=productWindowFocused();
         const SHORT f7=focused?GetAsyncKeyState(VK_F7):0,f8=focused?GetAsyncKeyState(VK_F8):0;
-        if((f7&0x8000)&&!(productKeyF7&0x8000)){++a.hostKeys;startOnlineHost();}
+        if((f7&0x8000)&&!(productKeyF7&0x8000)){++a.hostKeys;requestCoopSaves();startOnlineHost();} // 1214hs: co-op saves
         if((f8&0x8000)&&!(productKeyF8&0x8000)){++a.leaveKeys;stopOnlineSession("left_by_player");a={};}
         productKeyF7=f7;productKeyF8=f8;
     }
@@ -168,6 +169,9 @@ struct MissionFollowPacket {
 #pragma pack(pop)
 static_assert(sizeof(MissionFollowPacket)==200);
 bool followHostEnabled=false;
+// 1214hs (#156, native_menu_ui.h): a session never reads or writes the player's own saves. In product mode the partner's
+// game switches to co-op saves (savegame_coop and its profile) before it follows the host's mission (the native
+// "campaign" load would otherwise start a campaign in her own slots), and F7 puts the host in co-op mode too.
 #include "join_warp.h"
 struct MissionFollow {
     char hostMapinfo[160]{};std::uint32_t hostHigh=0;std::uint64_t hostMap=0,sequence=0,peerSequence=0,sent=0,received=0,loads=0,refused=0;
@@ -249,6 +253,7 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     // followed mission could not save ("No connected user", product-two-account-v1696a/v1699a). It waits, showing the
     // title, until the player presses a key.
     if(frontEnd&&!frontEndTitlePassed){m.result="waiting_title_key";return;}
+    if(productMode&&!coopSavesReadyForSession()){requestCoopSaves();m.result="waiting_coop_saves";return;} // 1214hs
     char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s emily",m.hostMapinfo,m.hostHigh?"high":"low");
     dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.followedMap=m.hostMap;m.result="loading_host_mission";
 }
