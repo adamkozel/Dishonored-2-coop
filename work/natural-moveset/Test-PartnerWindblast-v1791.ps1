@@ -1,0 +1,116 @@
+param([ValidatePattern('^[a-z0-9-]+$')][string]$Take='partner-windblast-v1791a',[string]$Candidate='candidate-npc-combat-v1214ic',[ValidateSet(80,81)][int]$HostSlot=81,[int]$SampleSeconds=8)
+# 1791: the pairing fixture now gets its sword (Enter-PairingFixture-v1790: LoadGame 80 then the native Mayhew scene;
+# partner-windblast-v1787a and diag-partner-sword-v1789a: the SLOT80 checkpoint holds no sword, so the Corvo partner's
+# shadow stream never armed and the presentation never went live).
+# 1787 (#160): Corvo's Windblast used by the partner, on the host's NPC. Today a partner never plays Corvo, so this is the
+# baseline of what reaches the host before any #160 code. On the local lab at the Dunwall fixture the partner loads
+# SLOT80 (the host's Corvo checkpoint at the same spot, Prepare-PairingFixtures-v1784) and the host keeps its Corvo
+# (-HostSlot 81) or loads Emily (-HostSlot 80). Under the product controller (avatars by character) the partner gets
+# Windblast (coop_grant_named; the lab equip switches the hand), stands 4 m in front of the upper-floor tutorial guard 2
+# facing it, and blasts it. For SampleSeconds the guard is sampled in both worlds (position, health) with the host's
+# and her npc-combat counters (what was forwarded and applied). Both windows are filmed.
+# Recorded, not yet judged: whether the host's guard moves, falls or loses health from her blast (the forwarded
+# windblast_npc hit, chapter 108 #160 plan). The fixture is restored (both instances reload SLOT81) after the case.
+$ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
+$mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null
+$pids=@{};$inventory=@{};$inv=[Globalization.CultureInfo]::InvariantCulture;$row=[ordered]@{passed=$false;failure=$null;checks=[Collections.Generic.List[string]]::new()}
+function Save($p,$v){$v|ConvertTo-Json -Depth 15|Set-Content -LiteralPath $p}
+function C($r,$cmd){& "$lab/Send-D2Command.ps1" -Role $r -Command $cmd -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
+function I($r,$b='Neutral',$ms=100){& "$lab/Send-D2Input.ps1" -Role $r -Button $b -DurationMs $ms|Out-Null}
+function S($r,$suffix=''){for($a=0;$a-lt40;$a++){try{return(Get-Content "$root/work/lab-instances/$r/coop-status.json$suffix" -Raw -ErrorAction Stop|ConvertFrom-Json -ErrorAction Stop)}catch{Start-Sleep -Milliseconds 25}};throw "Status unavailable $r"}
+function Q($r,$mode,$arg=0){for($a=0;$a-lt8;$a++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 20};throw "Native read failed $mode"}
+function F($v){([double]$v).ToString('F5',$inv)}
+function Guard($r){$g=@((Q $r '--world-npcs').npcs|Where-Object {$_.spawnerName-eq'ld_spawner_guard_tutorial_2'-and$_.unique-and$_.reciprocal-and$_.definition-eq'models/characters/def/generic/dunwall_guard_male_small_01.def'});if($g.Count-ne1){throw "Exact upper-floor guard2 absent ($r)"};$g[0]}
+function Live($r){$s=S $r;$m=S $r '.movement.json';$x=S $r '.shadow-stream.json';$a=$s.probeRenderPosition;$b=$s.remotePosition
+ $d=if($a-and$b){[Math]::Sqrt(($a[0]-$b[0])*($a[0]-$b[0])+($a[1]-$b[1])*($a[1]-$b[1])+($a[2]-$b[2])*($a[2]-$b[2]))}else{999}
+ @{follow=$s.probeFollowEnabled;distance=[Math]::Round($d,3);product=(S $r '.product.json').result;bank=[bool]$m.active;stream=[bool]($x.armed-and$x.ready);ok=($s.probeActorHandle-and$s.probeFollowEnabled-and$d-lt1.0-and$m.active-and$x.armed-and$x.ready-and$s.remoteFresh)}}
+function WaitLive($tag,$limit=30000){$w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 300;$p=@{host=(Live host);client=(Live client)};$ok=$p.host.ok-and$p.client.ok}while(!$ok-and$w.ElapsedMilliseconds-lt$limit);$p.ok=$ok;$p.waitMs=$w.ElapsedMilliseconds;Save "$out/live-$tag.json" $p;$p}
+function Arm{foreach($r in 'host','client'){I $r;C $r 'coop_movement_fixture off';C $r 'coop_product_auto on'}
+ $w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$ok=(S host '.product.json').result-eq'armed'-and(S client '.product.json').result-eq'armed'}while(!$ok-and$w.ElapsedMilliseconds-lt60000)
+ if(!$ok){throw 'Product controller not armed'}}
+function Disarm{$cw=[Diagnostics.Stopwatch]::StartNew();try{C host 'coop_npc_combat fixture_off'}catch{};try{C host 'coop_mesmerize_native follow_on'}catch{}
+ do{$off=$true;foreach($r in 'host','client'){try{I $r;C $r 'coop_player_health_hold off';C $r 'coop_observer_camera off';C $r 'coop_product_auto off';C $r 'coop_movement_resume off';foreach($cmd in 'coop_usable_sync off','coop_door_sync off','coop_coin_sync off','coop_npc_stream off','coop_shadow_stream off','coop_movement_bank off','coop_trigger_mirror off'){C $r $cmd};C $r 'coop_checkpoint_sync off'
+   if((S $r '.reset.json').enabled){$off=$false;$st=S $r;if($st.localGameLogicState-in8,15){I $r A 300}elseif($st.localGameLogicState-eq2){I $r B 200}}}catch{}}
+  if(!$off){Start-Sleep -Milliseconds 1500}}while(!$off-and$cw.ElapsedMilliseconds-lt60000)
+ foreach($r in 'host','client'){try{if((S $r).localGameLogicState-in2,12){I $r B 200;Start-Sleep -Milliseconds 800}}catch{}}}
+function Restore($tag){Disarm
+ & "$root/work/PrepareShadowSword.ps1" *>> "$out/checkpoint-restore.log"
+ & "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$PSScriptRoot/native-coin-reward-v786c" -Evidence "$out/note-restoration-$tag" *>> "$out/note-restoration.log"
+ foreach($r in 'host','client'){$restored=Q $r '--player-inventory'
+  if(Compare-Object @($inventory[$r].items|ForEach-Object {"$($_.name):$($_.quantity)"}) @($restored.items|ForEach-Object {"$($_.name):$($_.quantity)"})){throw "Checkpoint inventory differs ($r)"}
+  if((Q $r '--health' 1).current-ne56){throw "Restored player health differs ($r)"}}}
+$aim={param($target,$stand)
+ C client ('setviewpos {0} {1} {2} 90 0' -f (F $stand[0]),(F $stand[1]),(F ([double]$stand[2]+1.7)));Start-Sleep -Milliseconds 700
+ $pl=Q client '--player';$me=$pl.candidatePosition;$eye=[double]$pl.nativeViewPosition[2]
+ $yaw=[Math]::Atan2([double]$target[1]-[double]$me[1],[double]$target[0]-[double]$me[0])*180/[Math]::PI;$h=[Math]::Max(.5,[Math]::Sqrt([Math]::Pow([double]$target[0]-[double]$me[0],2)+[Math]::Pow([double]$target[1]-[double]$me[1],2)))
+ $pitch=[Math]::Max(-60,[Math]::Min(60,[Math]::Atan2($eye-([double]$target[2]+1.3),$h)*180/[Math]::PI))
+ C client ('setviewpos {0} {1} {2} {3} 0' -f (F $me[0]),(F $me[1]),(F ([double]$me[2]+1.7)),(F $yaw));Start-Sleep -Milliseconds 300;& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role client -Pitch $pitch -Quick|Out-Null
+ [ordered]@{target=$target;stand=$me;yaw=$yaw;pitch=$pitch;distance=$h}}
+$caps=@()
+$caps=@()
+try{
+ try{$owned=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$owned=$true};if(!$owned){throw 'Another native operation remains active'}
+ if(Test-Path -LiteralPath $out){throw 'Unique evidence take required'};New-Item -ItemType Directory $out|Out-Null;Copy-Item $PSCommandPath "$out/run-script.ps1"
+ [ordered]@{pid=$PID;operation='PartnerWindblast1787';take=$Take;started=(Get-Date).ToString('o');state='running'}|ConvertTo-Json|Set-Content "$root/work/movement-integration/native-operation-owner.json"
+ $pin=Get-Content "$root/work/movement-integration/$Candidate/identity.json" -Raw|ConvertFrom-Json;$dll=(Get-FileHash "$root/work/asset-game/dinput8.dll").Hash;if($dll-ne$pin.dll){throw "Expected $Candidate"}
+ foreach($r in 'host','client'){
+  $l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json
+  if(!$l.assetExperiment-or(Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated game'};$pids[$r]=$l.pid;I $r
+  if((S $r).localGameLogicState-ne1){throw "$r not in gameplay"}
+  $inventory[$r]=Q $r '--player-inventory';Save "$out/inventory-before-$r.json" $inventory[$r]
+ }
+ Save "$out/identity.json" ([ordered]@{candidate=$Candidate;dll=$dll;probe=(Get-FileHash "$lab/bin/d2_runtime_probe.exe").Hash})
+ $dirty=$true
+ # The pairing: the partner loads Corvo (SLOT80); the host keeps or swaps its character.
+ $loads=@('client');if($HostSlot-eq80){$loads+='host'}
+ foreach($r in $loads){& "$root/work/release/Enter-PairingFixture-v1790.ps1" -Role $r -Slot 80 -EvidencePath "$out/fixture-$r.json"|Out-Null}
+ Start-Sleep 3;$row.definitions=[ordered]@{host=(Q host '--character').definition;client=(Q client '--character').definition}
+ if("$($row.definitions.client)"-notmatch'/corvo/'){throw "The partner does not play Corvo ($($row.definitions.client))"}
+ Arm
+ foreach($q in 'host','client'){C $q 'setviewpos -33 -153 68.1 90 0'}
+ $live=WaitLive 'armed' 45000;if(!$live.ok){throw 'Partner presentation not live after arming'}
+ $row.characters=[ordered]@{host=(S host '.character.json');client=(S client '.character.json')}
+ C client 'coop_player_health_hold on';C host 'coop_player_health_hold on'
+ C client 'coop_grant_named models/powers/windblast/windblast.inventoryitem'
+ $e=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 400;$gr=try{(S client '.observer-camera.json').itemGrant.named}catch{$null}}while($e.ElapsedMilliseconds-lt4000-and"$($gr.result)"-notmatch'equip_requested|timeout');$row.grant=$gr
+ $g=Guard host;$cg=Guard client;$row.guardHandleHost=$g.handle;$row.guardHandleClient=$cg.handle
+ $cfx=[double]$cg.orientation[0];$cfy=[double]$cg.orientation[1];$stand=@(([double]$cg.position[0]+4*$cfx),([double]$cg.position[1]+4*$cfy),[double]$cg.position[2])
+ $row.castAim=(& $aim $cg.position $stand);Start-Sleep -Milliseconds 800
+ foreach($pair in @(@('client','source'),@('host','observer'))){$hwnd=(Get-Process -Id $pids[$pair[0]]).MainWindowHandle.ToInt64()
+  $caps+=Start-Process (Get-Command ffmpeg).Source -ArgumentList @('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',"$($SampleSeconds+6)",'-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-movflags','+frag_keyframe+empty_moov+default_base_moof',"$out/$($pair[1]).mp4") -WindowStyle Hidden -RedirectStandardError "$out/$($pair[1])-capture.log" -PassThru}
+ Start-Sleep 2
+ $before=[ordered]@{host=[ordered]@{position=$g.position;health=(Q host '--health' $g.handle).current;combat=(S host '.npc-combat.json')};client=[ordered]@{position=$cg.position;health=(Q client '--health' $cg.handle).current;combat=(S client '.npc-combat.json')}}
+ $row.before=$before
+ & "$lab/Send-D2Input.ps1" -Role client -LeftTrigger 255 -DurationMs 350|Out-Null;$row.castAt=(Get-Date).ToString('o')
+ $series=[Collections.Generic.List[object]]::new();$sw=[Diagnostics.Stopwatch]::StartNew()
+ while($sw.ElapsedMilliseconds-lt($SampleSeconds*1000)){$sample=[ordered]@{ms=$sw.ElapsedMilliseconds}
+  foreach($r in 'host','client'){$h=if($r-eq'host'){$g.handle}else{$cg.handle};$n=@((Q $r '--world-npcs').npcs|Where-Object {$_.handle-eq$h})|Select-Object -First 1
+   $sample[$r]=[ordered]@{position=$n.position;health=$(try{(Q $r '--health' $h).current}catch{$null})}}
+  $series.Add([pscustomobject]$sample);Start-Sleep -Milliseconds 250}
+ Save "$out/cast-series.json" @($series)
+ foreach($q in 'host','client'){foreach($suffix in '.npc-combat.json','.npc-stream.json','.windblast-fx.json','.character.json'){try{Copy-Item -LiteralPath "$root/work/lab-instances/$q/coop-status.json$suffix" -Destination "$out/after-$q$suffix" -Force}catch{}}}
+ foreach($c in $caps){try{if(!$c.WaitForExit(30000)){Stop-Process -Id $c.Id}}catch{}}
+ $dist={param($a,$b)if(!$a-or!$b){return $null};[Math]::Round([Math]::Sqrt([Math]::Pow([double]$a[0]-[double]$b[0],2)+[Math]::Pow([double]$a[1]-[double]$b[1],2)),2)}
+ $last=$series[$series.Count-1]
+ $hostMove=(@($series|ForEach-Object{& $dist $before.host.position $_.host.position}|Where-Object{$_-ne$null})|Measure-Object -Maximum).Maximum
+ $clientMove=(@($series|ForEach-Object{& $dist $before.client.position $_.client.position}|Where-Object{$_-ne$null})|Measure-Object -Maximum).Maximum
+ $row.summary=[ordered]@{hostGuardMaxMove=$hostMove;herCopyMaxMove=$clientMove;hostHealth=@($before.host.health,$last.host.health);herHealth=@($before.client.health,$last.client.health);grant=$row.grant.result}
+ $row.checks.Add("Host guard moved up to $hostMove m (health $($before.host.health) -> $($last.host.health)); her copy moved up to $clientMove m (health $($before.client.health) -> $($last.client.health))")
+ $row.passed=$true
+}catch{$failure=$_.Exception.Message;$row.failure=$failure;if(Test-Path -LiteralPath $out){Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace}}}finally{
+ foreach($c in $caps){if($c){try{if(!$c.HasExited){Stop-Process -Id $c.Id}}catch{}}}
+ if($owned){
+  if($dirty){try{Restore 'final';$row.restored=$true}catch{$row.restored=$false;$failure=($failure+'; restore: '+$_.Exception.Message).TrimStart('; ')}}
+  $errors=[Collections.Generic.List[string]]::new()
+  try{foreach($f in(Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json)){if((Get-FileHash $f.Path).Hash-ne$f.Hash){$errors.Add('Protected file changed')}}}catch{$errors.Add($_.Exception.Message)}
+  foreach($r in 'host','client'){try{$s=S $r;if($s.localGameLogicState-ne1-or!$s.remoteFresh-or(Q $r '--health' 1).current-ne56){$errors.Add("$r gameplay/transport/health not restored")}}catch{$errors.Add("$r status unavailable")}}
+  if(Test-Path -LiteralPath $out){
+   Save "$out/restoration.json" @{passed=(!$errors.Count);errors=@($errors)}
+   if($errors.Count-and!$failure){$failure=$errors-join '; '}
+   Save "$out/result.json" ([ordered]@{passed=(!$failure);failure=$failure;case=[pscustomobject]$row;scope='#160 baseline: a Corvo partner (lab SLOT80) blasts the Dunwall tutorial guard 2 with Windblast under the product controller; the guard is sampled in both worlds with the combat counters, recorded before any #160 change.'})
+  }
+  [ordered]@{pid=$PID;operation='PartnerWindblast1787';take=$Take;ended=(Get-Date).ToString('o');state='finished'}|ConvertTo-Json|Set-Content "$root/work/movement-integration/native-operation-owner.json"
+  $mutex.ReleaseMutex()
+ };$mutex.Dispose()
+}
+if($failure){throw $failure};'PASS_PARTNER_WINDBLAST_BASELINE'

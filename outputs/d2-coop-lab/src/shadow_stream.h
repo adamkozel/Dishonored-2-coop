@@ -322,6 +322,11 @@ struct RemoteHeldObject {std::uint32_t handle=0,phase=0;std::uint64_t key=0;floa
 RemoteHeldObject remoteHeld{};
 struct PartnerHeldObject {std::uint32_t handle=0,lastPhase=0;std::uint64_t applied=0,followed=0,settled=0,broken=0,refused=0;const char* result="idle";};
 PartnerHeldObject partnerHeld{};
+// 1214ic (#159): diag-pairing-stream-v1788a: a Corvo partner never armed its shadow stream (unavailable_or_busy, the pair
+// ready). The refusal now records which begin condition failed (shadowStreamBeginRefuse: 1 body stream, 2 running, 4 a
+// presented action, 8 pair, 16 source) and which source validity term (shadowSourceValidBits, set bits failed: 1 native
+// states, 2 no classified action, 4 sword read, 8 character, 16 game, 32 actor, 64 logic, 128 quantity, 256 drawn state).
+unsigned shadowStreamBeginRefuse=0,shadowSourceValidBits=0;
 bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=nullptr,CoopShadowActionPacket* airPacket=nullptr,unsigned* sceneHandle=nullptr){
     shadowSourceReadStage=1;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativePlayerStates states{};NativePlayerSword sword{};
@@ -385,6 +390,11 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
         shadowTimedRead(7,[&]{return readNativePlayerSword(memoryRead,base,sword);})&&sword.character==localCharacter()&&sword.sword.game==states.player.game&&
         sword.sword.actor==states.player.player&&sword.sword.logic==1&&sword.sword.quantity==1&&sword.sword.equipped==sword.sword.started;
     float side=0,up=0;
+    if(!valid){const bool classified=chokeValid||trapValid||trapIdle||heartValid||heartIdle||timepieceValid||timepieceIdle||possessionOccupied||stunValid||powerValid||rangedValid||grenadeValid||carryValid||carryPreparing||(nativeStateValid&&nativePlayerShadowAction(states,base,action));
+        NativePlayerSword w{};const bool swordRead=readNativePlayerSword(memoryRead,base,w);
+        shadowSourceValidBits=(nativeStateValid?0u:1u)|(classified?0u:2u)|(swordRead?0u:4u)|(swordRead&&w.character==static_cast<std::uint32_t>(localCharacter())?0u:8u)|
+            (swordRead&&w.sword.game==states.player.game?0u:16u)|(swordRead&&w.sword.actor==states.player.player?0u:32u)|(swordRead&&w.sword.logic==1?0u:64u)|
+            (swordRead&&w.sword.quantity==1?0u:128u)|(swordRead&&w.sword.equipped==w.sword.started?0u:256u);}
     if(!valid||(action==5&&!nativePlayerLeanAmount(memoryRead,states,base,side,up)))return false;
     shadowSourceReadStage=3;
     if(chokeValid){
@@ -538,7 +548,8 @@ void stopShadowStream(const char* reason){
 }
 void beginShadowStream(bool persistent=false){
     const auto tick=GetTickCount64();unsigned action=0;
-    if((bodyStreamEnabled&&!mixamoBodyCompatible())||shadowStream.until||shadowAction.actor||!shadowStreamPairReady(tick)||!shadowSourceAction(action)){
+    const unsigned busy=((bodyStreamEnabled&&!mixamoBodyCompatible())?1u:0u)|(shadowStream.until?2u:0u)|(shadowAction.actor?4u:0u)|(!shadowStreamPairReady(tick)?8u:0u);
+    if(busy||!shadowSourceAction(action)){shadowStreamBeginRefuse=busy?busy:16u; // 1214ic (#159)
         ++shadowStreamRefused;shadowStreamResult="unavailable_or_busy";return;
     }
     NativeSwordEquipment s{};NativeHealth h{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
@@ -803,6 +814,7 @@ void writeShadowStream(ULONGLONG tick){
     for(unsigned i=0;i<shadowSourceFailureCounts.size();++i)fprintf(f,"%s%llu",i?",":"",shadowSourceFailureCounts[i]);fprintf(f,"],");
     fprintf(f,"\"unboundSamples\":%llu,\"unboundRefused\":%llu,\"holdSamples\":%llu,\"unboundProbeActive\":%s,",shadowUnboundSamples,shadowUnboundRefused,shadowHoldSamples,tick<shadowUnboundProbeUntil?"true":"false");
     // 1074h diagnostic: individual pair-readiness terms (bit set = term false).
+    fprintf(f,"\"beginRefuse\":%u,\"sourceValidBits\":%u,",shadowStreamBeginRefuse,shadowSourceValidBits);
     fprintf(f,"\"pairBits\":%u,",(probeFollowExact?0u:1u)|(armProbePairReady(tick)?0u:2u)|(avatarAiHeld?0u:4u)|(avatarAiTarget.actor==probeActor?0u:8u)|(locomotionEnabled?0u:16u)|
         (coopPresentationReady(outgoing)?0u:32u)|(coopPresentationReady(remote)?0u:64u)|(probeFollow?0u:128u)|(networkFrameOwned.load()?0u:256u)|(lastReceive&&tick-lastReceive<presentationFreshMs()?0u:512u)|(coopPresentationPairReady(outgoing,remote)?0u:1024u));
     fputs("\"sourceReadTimings\":{",f);
