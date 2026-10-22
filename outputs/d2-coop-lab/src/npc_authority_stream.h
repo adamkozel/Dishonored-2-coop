@@ -597,14 +597,17 @@ void serviceNpcStream(ULONGLONG tick){
     npcPoseIntervalMs=static_cast<unsigned>(poseInterval);
     // 1213u (#46): the client's own native paired takedown (rear choke 1-3,
     // fast-back lethal 5) and the bound replica it targets.
-    unsigned pairedHandle=0,pairedVariant=0;
+    unsigned pairedHandle=0,pairedVariant=0,possessionTargetHandle=0;
     if(localRole){NativePlayerStates st{};NativePlayerChokeScene scene{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
         if(readNativePlayerStates(memoryRead,base,st)){
             if(readNativePlayerChokeScene(memoryRead,base,st,scene)&&npcPairedVariant(scene.variant)){pairedHandle=scene.target.handle;pairedVariant=scene.variant;}
             // 1214ga (#140, player_scene_probe.h): a takedown state whose scene is not recognized.
             else if(playerTakedownStateActive(st))probePlayerScene(memoryRead,base,st,"takedown_state_unrecognized",tick);
             // 1214if (#160): her Possession of a bound replica holds the host NPC; the host follows her possessed body.
-            if(!pairedHandle){std::uint32_t h=0;if(readNativeHumanPossessionOccupation(memoryRead,base,st,&h)&&h){pairedHandle=h;pairedVariant=kNpcPossessionVariant;}}}}
+            if(!pairedHandle){std::uint32_t h=0;if(readNativeHumanPossessionOccupation(memoryRead,base,st,&h)&&h){pairedHandle=h;pairedVariant=kNpcPossessionVariant;}}}
+        // 1214ig (#160): her Possession target (aimed, travelling or occupied) owns the replica natively; the ownership
+        // watchdog stopped its channel at once (partner-corvo-power-v1798a: ai_ownership_changed, 1 reverse pose sent).
+        NativePossessionTarget target{};if(readNativePossessionTarget(memoryRead,base,target)&&target.hasTarget)possessionTargetHandle=target.handle;}
     // 1214ef (#11 enemy_body_size_variants): the host's own native paired takedown. The client's
     // replica follows the victim by this stream alone, and the budget above gave 24 bound NPCs one
     // pose per 400 ms each while the client expires render data at 350 ms: in take 1491a (curator
@@ -711,8 +714,11 @@ void serviceNpcStream(ULONGLONG tick){
             else if(localRole&&(c.unconscious||(c.localPaired&&(fresh.health.ownerFlags&0x20)&&fresh.health.current>0))){
                 if(!c.unconscious){c.unconscious=true;c.unconsciousAt=tick;c.pairedResult="client_unconscious_native";}c.result="client_unconscious";}
             else if(localRole&&c.lease.references){const bool paused=npcAuthorityPaused(fresh);
-                if(!paused&&(c.lease.ready||tick-c.started>1500)){stopNpcChannel(c,"ai_ownership_changed");continue;}
-                c.lease.ready=paused;if(paused){c.ready=true;c.result="client_replica";}}
+                const bool possessed=(c.localPaired&&c.pairedVariant==kNpcPossessionVariant&&tick<c.pairedUntil)||
+                    (possessionTargetHandle&&c.lease.binding.npc.handle==possessionTargetHandle); // 1214ig (#160)
+                if(possessed){if(!paused)c.result="client_possessed";}
+                else{if(!paused&&(c.lease.ready||tick-c.started>1500)){stopNpcChannel(c,"ai_ownership_changed");continue;}
+                    c.lease.ready=paused;if(paused){c.ready=true;c.result="client_replica";}}}
         }
         if(tick-c.helloAt>=500){c.helloAt=tick;sendNpcControl(c,NpcAuthorityMessage::Hello);}
         if(localRole&&c.ready&&tick-c.readyAt>=500){c.readyAt=tick;sendNpcControl(c,NpcAuthorityMessage::Ready);}
