@@ -107,6 +107,12 @@ On disk, saves are `base/savegame/SLOTxx` folders, with `game.details`, `checkpo
     is impossible, so 1214hw maps the key `ui_gameover_button_back_main_menu` to the game's own `ui_common_confirm`
     in that function, in the same pause context. The dialog then reads "Leave the co-op session?" with Cancel,
     Confirm and Back To Desktop.
+  - Take coop-leave-v1770d (1214hw, two accounts, host video) passed all 15 behaviour checks, and the swap ran once
+    on each side (`localizeSwaps` 1). The dialog reads "Leave the co-op session?" with Cancel, **Confirm** and
+    Back To Desktop (confirmed runtime). #157 is complete.
+  - Its lab restore timed out like coop-hostsave-v1776a's. The relaunched host rebuilt its GPU shader cache for about
+    4 minutes at logic 0 (Not Responding) before its menu (deploy 1214hw, confirmed runtime). The v1776a "hang" was
+    most likely the same; it was killed after 5 minutes. `Restore-D2Lab.ps1` now waits up to 6 minutes.
 - **The host's co-op save on two accounts (take coop-hostsave-v1776a, 1214hv; every behaviour check passes):**
   - The host on this PC uses the simulated pad: pause, Quit Game, Back To Main Menu, the title, CO-OP, New Game. It
     gets the native character choice (Corvo) and starts the mission. It hosts a friends-only lobby, and the VM

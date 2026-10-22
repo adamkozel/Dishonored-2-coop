@@ -294,16 +294,20 @@ inline void installCoopTranslation(){
 // FUN_1400358c0 -> FUN_140034e40), not IggyFunctions.translate. Both tables end in the engine lookup
 // FUN_140165420(&0x1432c7e98, key) (confirmed static; it returns the key itself when there is no entry). The mod hooks
 // that lookup: in the pause context of a session the two keys resolve to the co-op text (static strings).
-using CoopLocalize=const char*(*)(void*,const char*);CoopLocalize realCoopLocalize=nullptr;bool coopLocalizeHooked=false;
+// 1214hw (#157): coop-leave-v1770c: that lookup hook never swapped (localizeSwaps 0). The quit dialog is an engine
+// message box (arkMessageBoxManagerLocal at game+0x30f260); its AS3 request handler 0x1404630f0 turns each button key
+// into a string id with FUN_140165c80(&id, key), and the movie shows the label by id (confirmed static), so a label
+// cannot be raw text. The mod hooks that key-to-id function instead (the same 16-byte prologue): in the pause context
+// of a session the key ui_gameover_button_back_main_menu becomes the game's own ui_common_confirm, so the dialog reads
+// Cancel, Confirm and Back To Desktop under "Leave the co-op session?" (the question keeps hookTranslate8).
+using CoopStringId=void*(*)(void*,const char*);CoopStringId realCoopStringId=nullptr;bool coopLocalizeHooked=false;
 std::atomic<std::uint64_t> coopLocalizeSwaps{0};
-inline const char* hookCoopLocalize(void* dict,const char* key){
-    if(key&&coopPauseContext.load()&&coopInSession()){
-        if(!_stricmp(key,"ui_gameover_button_back_main_menu")){++coopLocalizeSwaps;return kLeaveButton8;}
-        if(!_stricmp(key,"UI_quitgame_question")){++coopLocalizeSwaps;return kLeaveQuestion8;}}
-    return realCoopLocalize(dict,key);}
+inline void* hookCoopStringId(void* out,const char* key){
+    if(key&&coopPauseContext.load()&&coopInSession()&&!_stricmp(key,"ui_gameover_button_back_main_menu")){++coopLocalizeSwaps;key="ui_common_confirm";}
+    return realCoopStringId(out,key);}
 inline bool installCoopLocalizeHook(){
     static const unsigned char prologue[]={0x48,0x89,0x5c,0x24,0x08,0x57,0x48,0x83,0xec,0x20,0x48,0x8b,0xda,0x48,0x8b,0xf9};
-    coopLocalizeHooked=installNpcRemovalHook(0x165420,prologue,sizeof(prologue),reinterpret_cast<void*>(&hookCoopLocalize),realCoopLocalize);
+    coopLocalizeHooked=installNpcRemovalHook(0x165c80,prologue,sizeof(prologue),reinterpret_cast<void*>(&hookCoopStringId),realCoopStringId);
     return coopLocalizeHooked;}
 void serviceCoopPause(ULONGLONG tick){
     installCoopTranslation();
@@ -330,6 +334,29 @@ void serviceCoopPause(ULONGLONG tick){
     else if(!session&&coopPause.labelled){if(coopPause.original[0]&&setString(&quit,0,"label",coopPause.original,static_cast<std::int32_t>(std::strlen(coopPause.original)))){++coopPause.restores;}
         coopPause.labelled=false;coopPause.result="quit_game";}
 }
+// 1214hw (#158, lab): coop_loc_find <text> writes <status>.loc-find.json with the localization entries whose text contains
+// <text> (ASCII, case-insensitive), to find the keys the partner's character choice uses as message box button labels
+// (labels are string ids; the keys are not in the executable). The table (0x1432c7e98, chapter 108, confirmed static):
+// 0x58-byte entries at *table, count in the low 24 bits at +8; per entry the id (FNV-1a of the lowercased key) at +0,
+// the key idStr at +8 and the text idStr at +0x30 (an idStr is {char* text, u32 length, ...}).
+inline void coopLocJson(FILE* f,const char* s,std::uint32_t n){fputc('"',f);
+    for(std::uint32_t i=0;i<n&&s[i];++i){const unsigned char c=static_cast<unsigned char>(s[i]);if(c=='"'||c=='\\'){fputc('\\',f);fputc(c,f);}else if(c<32)fputc(' ',f);else fputc(c,f);}fputc('"',f);}
+void coopLocFind(const char* needle){
+    char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.loc-find.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
+    const auto table=reinterpret_cast<std::uintptr_t>(gameImage)+0x32c7e98;std::uintptr_t entries=0;std::uint32_t count=0;
+    memoryRead(table,&entries,8);memoryRead(table+8,&count,4);count&=0xffffff;const auto nlen=std::strlen(needle);
+    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
+    fprintf(f,"{\"needle\":");coopLocJson(f,needle,static_cast<std::uint32_t>(nlen));fprintf(f,",\"count\":%u,\"matches\":[",count);
+    unsigned matches=0;
+    for(std::uint32_t i=0;entries&&i<count&&matches<40;++i){const auto e=entries+static_cast<std::uintptr_t>(i)*0x58;
+        std::uint32_t id=0,klen=0,tlen=0;std::uintptr_t kp=0,tp=0;
+        if(!memoryRead(e,&id,4)||!memoryRead(e+8,&kp,8)||!memoryRead(e+0x10,&klen,4)||!memoryRead(e+0x30,&tp,8)||!memoryRead(e+0x38,&tlen,4)||!kp||!tp)continue;
+        char text[200]{},key[96]{};const auto tn=tlen<sizeof(text)-1?tlen:static_cast<std::uint32_t>(sizeof(text)-1);if(!memoryRead(tp,text,tn))continue;
+        bool hit=false;for(std::size_t p=0;!hit&&p+nlen<=tn;++p)hit=!_strnicmp(text+p,needle,nlen);if(!hit)continue;
+        const auto kn=klen<sizeof(key)-1?klen:static_cast<std::uint32_t>(sizeof(key)-1);memoryRead(kp,key,kn);
+        fprintf(f,"%s{\"id\":%u,\"key\":",matches?",":"",id);coopLocJson(f,key,kn);fprintf(f,",\"text\":");coopLocJson(f,text,tn);fputc('}',f);++matches;}
+    fprintf(f,"],\"found\":%u}\n",matches);
+    const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);}
 void writeCoopMenu(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.coop-menu.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;

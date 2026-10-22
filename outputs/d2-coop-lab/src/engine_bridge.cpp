@@ -1582,6 +1582,8 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_movement_resume on")||!std::strcmp(text,"coop_movement_resume off"))return true;
     if(!std::strcmp(text,"coop_movement_feet on")||!std::strcmp(text,"coop_movement_feet off")||!std::strcmp(text,"coop_movement_feet authored"))return true;
     if(!std::strcmp(text,"coop_decl_probe")||!std::strcmp(text,"coop_tables_probe"))return true;
+    if(!std::strncmp(text,"coop_loc_find ",14)){const char* c=text+14;if(!*c||std::strlen(c)>48)return false; // 1214hw (#158, lab)
+        for(;*c;++c)if(!((*c>='a'&&*c<='z')||(*c>='A'&&*c<='Z')||(*c>='0'&&*c<='9')||*c==' '||*c=='_'||*c=='-'||*c=='?'))return false;return true;}
     if(!std::strcmp(text,"coop_door_sync on")||!std::strcmp(text,"coop_door_sync session")||!std::strcmp(text,"coop_door_sync off")||!std::strcmp(text,"coop_door_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_breakable_sync on")||!std::strcmp(text,"coop_breakable_sync off"))return true;
     if(!std::strcmp(text,"coop_usable_sync on")||!std::strcmp(text,"coop_usable_sync session")||!std::strcmp(text,"coop_usable_sync off")||!std::strcmp(text,"coop_usable_sync duplicate"))return true;
@@ -1960,6 +1962,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     }
     if(!std::strcmp(request.command,"coop_decl_probe")){probePartnerDefinitions();return;}
     if(!std::strcmp(request.command,"coop_tables_probe")){probeNativeTables();return;}
+    if(!std::strncmp(request.command,"coop_loc_find ",14)){coopLocFind(request.command+14);return;} // 1214hw (#158, lab)
     if(!std::strcmp(request.command,"coop_door_sync on")){doorSyncEnableRequest=1;return;}
     if(!std::strcmp(request.command,"coop_usable_sync on")){usableSyncEnableRequest=1;return;}
     if(!std::strcmp(request.command,"coop_door_sync session")){doorSyncEnableRequest=2;return;}

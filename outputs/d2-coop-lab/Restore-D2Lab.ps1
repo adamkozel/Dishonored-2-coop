@@ -29,7 +29,9 @@ foreach($role in 'host','client') {
         $fresh=(Test-Path $statusPath) -and (Get-Item $statusPath).LastWriteTimeUtc -ge $process.StartTime.ToUniversalTime()
         if($fresh){$state=State $role;$fresh=$state.localGameLogicState -in 1,2,6,13 -and !$state.localPendingGameLogicState}
         if(!$fresh){Start-Sleep -Milliseconds 250}
-    }while(!$fresh -and $startup.ElapsedMilliseconds -lt 45000)
+    # 2026-10-22: a relaunched game can rebuild its GPU shader cache for minutes at logic 0 (Not Responding) before its
+    # first menu (deploy 1214hw: about 4 minutes); wait up to 6 minutes instead of 45 s.
+    }while(!$fresh -and $startup.ElapsedMilliseconds -lt 360000)
     if(!$fresh){throw "$role did not reach a fresh native menu/gameplay state."}
     $resetPath=Join-Path $root "work/lab-instances/$role/coop-status.json.reset.json"
     if((Test-Path $resetPath) -and (ReadLiveJson $resetPath).enabled) {
