@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "failure": null,
+  "case": {
+    "passed": true,
+    "failure": null,
+    "checks": [
+      "Her stoptime at 0 percent; host request held 12/12, world factors 0, after 0/11 at 1",
+      "Guard head mm host 72.8/0/284.8, her copy 72.9/0/0 (before/during/after)",
+      "Host walks before 2.822/1.958 m, during 2.843/1.923 m",
+      "Host player clock during hers 1; engine flags 1,0,0,0,106"
+    ],
+    "definitions": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "characters": {
+      "host": {
+        "avatar": 1,
+        "avatarReplacements": 1,
+        "local": 1,
+        "remote": 1,
+        "localUsed": 1,
+        "remoteUsed": 1,
+        "role": 0,
+        "choiceEnabled": false,
+        "choice": {
+          "state": 0,
+          "result": "idle",
+          "character": 0,
+          "handle": -1,
+          "lastResult": -1000,
+          "opens": 0,
+          "answers": 0,
+          "others": 0,
+          "failures": 0
+        }
+      },
+      "client": {
+        "avatar": 1,
+        "avatarReplacements": 0,
+        "local": 1,
+        "remote": 1,
+        "localUsed": 1,
+        "remoteUsed": 1,
+        "role": 1,
+        "choiceEnabled": false,
+        "choice": {
+          "state": 0,
+          "result": "idle",
+          "character": 0,
+          "handle": -1,
+          "lastResult": -1000,
+          "opens": 0,
+          "answers": 0,
+          "others": 0,
+          "failures": 0
+        }
+      }
+    },
+    "grant": {
+      "grants": 2,
+      "refused": 0,
+      "result": "granted_named"
+    },
+    "guardHandleHost": "0xb480764",
+    "guardHandleClient": "0xb480764",
+    "castAim": {
+      "target": [
+        -44.14,
+        -142.99,
+        66.4
+      ],
+      "stand": [
+        -44.3363,
+        -138.995,
+        66.4036
+      ],
+      "yaw": -87.1869529565813,
+      "pitch": 6,
+      "distance": 3.9998198321924496
+    },
+    "walks": [
+      {
+        "phase": "before",
+        "back": 1.958,
+        "forward": 2.822
+      },
+      {
+        "phase": "during",
+        "back": 1.923,
+        "forward": 2.843
+      }
+    ],
+    "attempts": [
+      {
+        "attempt": 1,
+        "ms": 6091,
+        "active": true,
+        "percent": 0
+      }
+    ],
+    "castMs": 6091,
+    "endPressed": true,
+    "endMs": 13127,
+    "herEndMs": 16212,
+    "head": {
+      "hostBefore": 72.8,
+      "hostDuring": 0.0,
+      "hostAfter": 284.8,
+      "clientBefore": 72.9,
+      "clientDuring": 0.0,
+      "clientAfter": 0.0
+    },
+    "guard": {
+      "hostBefore": 5.122,
+      "hostDuring": 0,
+      "hostAfter": 0,
+      "clientDuring": 0
+    },
+    "summary": {
+      "herPercent": [
+        0
+      ],
+      "hostHeldDuring": "12/12",
+      "hostWorldFactorsDuring": [
+        0.0
+      ],
+      "hostHeldAfter": "0/11",
+      "hostWorldFactorAfter": [
+        1.0
+      ],
+      "head": {
+        "hostBefore": 72.8,
+        "hostDuring": 0.0,
+        "hostAfter": 284.8,
+        "clientBefore": 72.9,
+        "clientDuring": 0.0,
+        "clientAfter": 0.0
+      },
+      "guard": {
+        "hostBefore": 5.122,
+        "hostDuring": 0,
+        "hostAfter": 0,
+        "clientDuring": 0
+      },
+      "walks": [
+        {
+          "phase": "before",
+          "back": 1.958,
+          "forward": 2.822
+        },
+        {
+          "phase": "during",
+          "back": 1.923,
+          "forward": 2.843
+        }
+      ],
+      "hostPlayerClockDuring": [
+        1
+      ],
+      "gtmDuring": [
+        "1,0,0,0,106"
+      ]
+    },
+    "restored": true
+  },
+  "scope": "#160: a Corvo partner (lab SLOT80) uses stoptime by the Dunwall tutorial guard 2 under the product controller; the host must hold her time factor for its world while both players keep real time."
+}

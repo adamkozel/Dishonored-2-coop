@@ -54,7 +54,9 @@ void sampleLocalTimeBend(){
     coopTimeBendFlags.store(flags);}
 void timeBendExempt(std::uintptr_t entity){
     if(!entity||!observedGame)return;
-    reinterpret_cast<void(*)(std::uintptr_t,std::uintptr_t,float)>(gameImage+0x80d8c0)(observedGame+0x1f52e8,entity,1e30f);++timeBendExempted;}
+    // 1214ih: the seconds are raw 32-bit bits in R8D (the power passes 0x7149f2ca, 1e30; 0x14080d8c5 spills R8D), not a
+    // float in XMM2: 1214ig's exemption read 1.97e15, whatever R8 held (partner-bendtime-v1799a).
+    reinterpret_cast<void(*)(std::uintptr_t,std::uintptr_t,std::uint32_t)>(gameImage+0x80d8c0)(observedGame+0x1f52e8,entity,0x7149f2cau);++timeBendExempted;}
 void timeBendRelease(const char* why){
     auto& h=timeBendHost;
     if(h.request>=0&&h.game==observedGame&&timeBendFindRequest(observedGame,h.request,nullptr)){
