@@ -1,0 +1,44 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             101 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The character box did not open (join2: corvo)",
+  "checks": {
+    "hostMission": true,
+    "join1-boxOpened": true,
+    "join1-vmPlays": true,
+    "join1-vmReports": true,
+    "join1-hostReceives": true,
+    "join1-connected": true,
+    "join2-boxOpened": false
+  },
+  "notes": {
+    "steps": [
+      {
+        "step": "00-start",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 2,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\release\Probe-CharacterChoice-v1778.ps1:132[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 132 | [0m . out/result.json"|Select-Object -First 30;if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                         ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe character box did not open (join2: corvo)[0m

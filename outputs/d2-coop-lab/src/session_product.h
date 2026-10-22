@@ -28,6 +28,8 @@ ProductArm productArm{};
 // controller holds an armed session (installed release or lab coop_product_auto).
 bool frontEndTitlePassed=false; // 1214ha (#146): a key was pressed at the title screen since boot
 bool coopSavesReadyForSession();void requestCoopSaves(); // 1214hs (#156, native_menu_ui.h)
+int coopPartnerCharacterForJoin(ULONGLONG tick,std::uint64_t joinKey); // 1214hx (#158, coop_character.h)
+bool coopCharacterChoiceEnabled=false; // 1214hx: the lab toggle coop_character_choice on|off (product mode always chooses)
 bool productSessionArmed(){return productArm.result&&!std::strcmp(productArm.result,"armed");}
 SHORT productKeyF7=0,productKeyF8=0;
 const char* productStep(unsigned i){
@@ -254,7 +256,11 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     // title, until the player presses a key.
     if(frontEnd&&!frontEndTitlePassed){m.result="waiting_title_key";return;}
     if(productMode&&!coopSavesReadyForSession()){requestCoopSaves();m.result="waiting_coop_saves";return;} // 1214hs
-    char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s emily",m.hostMapinfo,m.hostHigh?"high":"low");
+    // 1214hx (#158): the partner chooses Corvo or Emily on every join (coop_character.h); lab default stays Emily.
+    // The first mission has the game's own choice screen (its script switches the character), so it asks no question.
+    int character=2;const bool nativeChoice=!std::strcmp(m.hostMapinfo,"campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo");
+    if((productMode||coopCharacterChoiceEnabled)&&!nativeChoice){character=coopPartnerCharacterForJoin(tick,static_cast<std::uint64_t>(connection));if(!character){m.result="choosing_character";return;}}
+    char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s %s",m.hostMapinfo,m.hostHigh?"high":"low",character==1?"corvo":"emily");
     dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.followedMap=m.hostMap;m.result="loading_host_mission";
 }
 void writeMissionFollow(){
