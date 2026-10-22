@@ -107,6 +107,25 @@ On disk, saves are `base/savegame/SLOTxx` folders, with `game.details`, `checkpo
     is impossible, so 1214hw maps the key `ui_gameover_button_back_main_menu` to the game's own `ui_common_confirm`
     in that function, in the same pause context. The dialog then reads "Leave the co-op session?" with Cancel,
     Confirm and Back To Desktop.
+- **The host's co-op save on two accounts (take coop-hostsave-v1776a, 1214hv; every behaviour check passes):**
+  - The host on this PC uses the simulated pad: pause, Quit Game, Back To Main Menu, the title, CO-OP, New Game. It
+    gets the native character choice (Corvo) and starts the mission. It hosts a friends-only lobby, and the VM
+    (second account) joins from its menu and follows the mission as Emily.
+  - The host saves through the pause menu (Save Game, "Create a new Savegame": SLOT04 in `savegame_coop`). It then
+    loads that save (Load Game; the question "Do you want to load this savegame?" has the focus on No, so Right then
+    A). The world epoch changes and the partner is connected again.
+  - The campaign slot files are unchanged. The campaign `profile.bin` is saved once at the switch to co-op, which
+    persists the player's own pending profile; after that nothing in the co-op game touches it.
+  - There is a host window video.
+  - The restore after the take failed: the relaunched host game hung at startup (logic 0, Not Responding). It was
+    relaunched and restored by hand (coop-hostsave-v1776a-recovery.log).
+  - Earlier takes failed in the probe:
+    - v1773a: on the host's menu the pad focus started on QUIT GAME. Down reached the Also Available banner and A
+      opened the Steam overlay store page.
+    - v1774a: Up reaches that banner above CAMPAIGN, so two Downs are needed to reach CO-OP.
+    - v1775a: A answered No to the load question.
+  - In v1775a the intro skip passed the character choice and the host played Emily; in v1776a the choice appeared
+    (chapter 108).
 - **The save flow (take coop-saveflow-v1772a, 1214hv, pass):** CO-OP, New Game, quicksave, the title, CO-OP,
   CONTINUE loads the co-op quicksave, the title again, then CAMPAIGN lists the player's own saves. The campaign slots
   are unchanged and `profile.bin` keeps every key. The file itself is rewritten at each switch, because its dirty

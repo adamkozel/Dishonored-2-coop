@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-22T01:15:00+02:00",
+  "UpdatedAt": "2026-10-22T03:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22639,11 +22639,13 @@
     "Candidate": "candidate-npc-combat-v1214hv",
     "Chapter": "documentation/handoff-2026-10-11/107-coop-menu-and-saves.md",
     "Takes": {
-      "coop-leave-v1770a": "1214ht, behaviour pass, text fail (the engine registers the UTF-8 translation callback only).",
-      "coop-leave-v1770b": "1214hu, pass: question translated; middle button still Back To Main Menu.",
-      "coop-leave-v1770c": "1214hv, pass (15/15, restoration passed); the FUN_140165420 hook never swapped (localizeSwaps 0): message box button labels are string ids from FUN_140165c80, resolved by id.",
-      "coop-saveflow-v1772a": "1214hv, pass: CO-OP, New Game, quicksave into savegame_coop, title, CO-OP, CONTINUE loads the quicksave, CAMPAIGN lists the player own saves; campaign slots unchanged, profile.bin keys unchanged (the file is rewritten at each switch: its dirty byte was set at every switch)."
+      "coop-leave-v1770c": "1214hv, pass (15/15, two accounts, host video): LEAVE CO-OP, the translated question, the leave from each side; the middle button still reads Back To Main Menu.",
+      "coop-saveflow-v1772a": "1214hv, pass: the co-op save flow in the VM with the player own campaign list unchanged.",
+      "coop-hostsave-v1773a": "probe failure: the host menu pad focus started on QUIT GAME; the Steam overlay store page opened.",
+      "coop-hostsave-v1774a": "probe failure: the Also Available banner above CAMPAIGN; one Down opened CAMPAIGN.",
+      "coop-hostsave-v1775a": "probe failure: A answered No to the load question; the host played Emily (the intro skip passed the choice).",
+      "coop-hostsave-v1776a": "#156 done criteria met: every behaviour check passes on two accounts with a host video (co-op saves from the CO-OP entry, mission start save, session connected, manual save SLOT04 in savegame_coop, load with a new world epoch, partner reconnected, campaign slots unchanged, campaign profile untouched during co-op); the lab restore after the take failed (host startup hang), recovered by hand (coop-hostsave-v1776a-recovery.log)."
     },
-    "Next": "1214hw: map the button key ui_gameover_button_back_main_menu to the native ui_common_confirm in FUN_140165c80 (pause context of a session). coop-hostsave-v1773a: the host co-op save on two accounts (#156 done criteria)."
+    "Next": "1214hw (the Confirm button label, coop_loc_find for #158), coop-leave-v1770d, then merge PR #164 (closes #156, #157); then #158/#159."
   }
 }
