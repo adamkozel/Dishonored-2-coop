@@ -12,7 +12,7 @@ void sendArmStream(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!armStreamReady(tick)||tick-armStreamLastSend<33)return;
     armStreamLastSend=tick;
     NativePlayerArm arm{};NativeSkeleton s{};
-    if(!resolveRightArm(arm)||arm.character!=localRole+1||!readNativeSkeleton(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),arm.handle,s,NativeSkeletonScope::PlayerArm)||
+    if(!resolveRightArm(arm)||arm.character!=localCharacter()||!readNativeSkeleton(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),arm.handle,s,NativeSkeletonScope::PlayerArm)||
        !s.stable||s.logic!=1||s.game!=observedGame){++armStreamSampleRefused;return;}
     CoopArmPacket p{};p.sequence=++armStreamSequence;p.role=localRole;p.character=arm.character;p.rig=nativeArmRig(s);
     p.sourceSession=outgoing.session;p.targetSession=remote.session;p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;

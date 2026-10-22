@@ -21,7 +21,7 @@ int main(){
     check(validCoopArm(p,c,h),"Corvo to Emily observer");
     auto reverse=p;reverse.role=1;reverse.character=2;reverse.sourceSession=22;reverse.targetSession=11;reverse.sourceWorldEpoch=7;reverse.targetWorldEpoch=3;
     check(validCoopArm(reverse,h,c),"Emily to Corvo observer");
-    auto bad=p;bad.character=2;check(!validCoopArm(bad,c,h),"incorrect character");
+    auto bad=p;bad.character=3;check(!validCoopArm(bad,c,h),"incorrect character");
     bad=p;bad.side=1;check(!validCoopArm(bad,c,h),"incorrect arm side");
     bad=p;bad.rig=0;check(!validCoopArm(bad,c,h),"missing rig");
     bad=p;bad.sourceWorldEpoch++;check(!validCoopArm(bad,c,h),"changed source world");

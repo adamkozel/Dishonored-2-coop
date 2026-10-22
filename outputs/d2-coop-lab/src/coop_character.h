@@ -21,8 +21,9 @@ struct CoopCharacterChoice {int state=0;int handle=-1;int lastResult=-1000;int c
     std::uint64_t opens=0,answers=0,others=0,failures=0,joinKey=0;const char* result="idle";};
 CoopCharacterChoice coopChoice{};CoopBoxCallback coopChoiceCallback{};
 std::atomic<int> coopLocalCharacter{0},coopRemoteCharacter{0};ULONGLONG coopCharacterSampledAt=0;
-inline int remoteCharacter(){const int c=coopRemoteCharacter.load();return c==1||c==2?c:(localRole?1:2);}
-inline int localCharacter(){const int c=coopLocalCharacter.load();return c==1||c==2?c:(localRole?2:1);}
+bool remoteCharacterKnown(){const int c=coopRemoteCharacter.load();return c==1||c==2;}
+int remoteCharacter(){const int c=coopRemoteCharacter.load();return c==1||c==2?c:(localRole?1:2);}
+int localCharacter(){const int c=coopLocalCharacter.load();return c==1||c==2?c:(localRole?2:1);}
 inline void coopStampCharacter(){outgoing.flags=(outgoing.flags&1u)|(static_cast<std::uint32_t>(coopLocalCharacter.load()&3)<<8);}
 inline void coopChoiceAnswered(void*,int handle,int result){
     auto& c=coopChoice;if(handle!=c.handle)return;c.handle=-1;c.lastResult=result;++c.answers;

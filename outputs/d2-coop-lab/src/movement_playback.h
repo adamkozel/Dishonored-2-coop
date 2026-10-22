@@ -140,7 +140,7 @@ bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
     if(!readNativeSkeleton(memoryRead,base,probeHandle,s)||!s.stable||s.logic!=1||s.actor!=probeActor||s.game!=observedGame)return movementBeginRefused(11);
     if(!bodyShadowTarget(s))return movementBeginRefused(12);
     if(!movementHelperMatches(s))return movementBeginRefused(13);
-    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily))return movementBeginRefused(14);
+    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,sword,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily))return movementBeginRefused(14);
     // 1213j (#35): a settled native sword - drawn OR holstered - is valid. The partner's holster state
     // (requestMovementEquipment) holsters the avatar sword natively; requiring it drawn meant a bank that
     // dropped while the partner was holstered (1230/1230b: after the tutorial modal) could never re-arm.
@@ -166,13 +166,15 @@ bool beginMovementBank(bool persistent=false,std::uint64_t expectedChecksum=0){
     }
     // 1181: an installed release keeps both partner banks in <game>\d2coop and
     // loads the one for the partner it renders (host renders Emily).
-    if(productMode){if(std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s\\%s-choke-bank.bin",productDataDir,localRole?"corvo":"emily")>=static_cast<int>(sizeof(movementLoad.path)))return movementBeginRefused(16);}
-    else if(std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s.movement.bin",statusPath)>=sizeof(movementLoad.path))return movementBeginRefused(16);
+    if(productMode){if(std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s\\%s-choke-bank.bin",productDataDir,remoteIsCorvo()?"corvo":"emily")>=static_cast<int>(sizeof(movementLoad.path)))return movementBeginRefused(16);}
+    else{ // 1214hy (#159): the lab keeps both banks (<status>.movement-corvo.bin, -emily.bin); an older deploy keeps one .movement.bin
+        if(std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s.movement-%s.bin",statusPath,remoteIsCorvo()?"corvo":"emily")>=static_cast<int>(sizeof(movementLoad.path)))return movementBeginRefused(16);
+        if(GetFileAttributesA(movementLoad.path)==INVALID_FILE_ATTRIBUTES&&std::snprintf(movementLoad.path,sizeof(movementLoad.path),"%s.movement.bin",statusPath)>=static_cast<int>(sizeof(movementLoad.path)))return movementBeginRefused(16);}
     MovementPlayback next{};next.nativeFeet=movementNativeFeetRequested;next.currentFeet=movementCurrentFeetRequested;
     next.game=s.game;next.actor=s.actor;next.animation=s.animation;next.skeleton=s.skeleton;next.handle=probeHandle;next.parents=s.parents;
     next.epoch=outgoing.worldEpoch;next.peerEpoch=remote.worldEpoch;next.session=remote.session;next.persistent=persistent;
     next.presentedDrawn=sword.equipped;next.armedMix=sword.equipped?1.f:0.f; // 1213j (#35): start in the native sword state
-    movementLoad.next=std::move(next);movementLoad.layout=localRole?0x00db32d37719931full:0x84db84f5d1336b80ull;movementLoad.joints=localRole?215:219;
+    movementLoad.next=std::move(next);movementLoad.layout=remoteIsCorvo()?0x00db32d37719931full:0x84db84f5d1336b80ull;movementLoad.joints=remoteIsCorvo()?215:219;
     movementLoad.bind=s.bindLocal;movementLoad.bindMatches=false;
     movementLoad.expectedChecksum=expectedChecksum;movementLoad.requested=true;movementLoad.deadline=tick+5000;movementLoad.state.store(1,std::memory_order_release);
     HANDLE worker=CreateThread(nullptr,0,movementLoadWorker,nullptr,0,nullptr);
@@ -194,7 +196,7 @@ void serviceMovementBank(ULONGLONG tick){
             next.epoch==outgoing.worldEpoch&&next.peerEpoch==remote.worldEpoch&&next.session==remote.session&&probeFollow&&avatarAiHeld&&locomotionEnabled&&!bodyStreamEnabled&&
             !reviewClipActive()&&!authoringProof.end&&!shadowAction.actor&&networkFrameOwned.load()&&coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&lastReceive&&tick-lastReceive<presentationFreshMs()&&
             readNativeSkeleton(memoryRead,base,probeHandle,s)&&s.stable&&s.logic==1&&s.actor==next.actor&&s.game==next.game&&s.animation==next.animation&&s.skeleton==next.skeleton&&s.parents==next.parents&&movementHelperMatches(s)&&
-            readNativeSwordEquipment(memoryRead,base,probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)&&
+            readNativeSwordEquipment(memoryRead,base,probeHandle,sword,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)&&
             sword.equipped==sword.started&&sword.attachedTag==(sword.equipped?sword.drawTag:sword.holsterTag); // 1213j (#35): drawn or holstered
         // 1203b: the worker already checked every clip against the bind pose
         // captured at request time; only that snapshot is compared here.
@@ -495,7 +497,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
             p.equipmentWeight+=((equipmentActive?1.f:0.f)-p.equipmentWeight)*(1-std::exp(-combatDt/(equipmentActive?.035f:.12f)));
             if(equipmentValid){
                 equipmentDrawn=equipment.sword==2;
-                if(equipmentActive&&equipment.variant<=4){const float contact=movementEquipmentContact[localRole?0:1][equipment.variant-1];
+                if(equipmentActive&&equipment.variant<=4){const float contact=movementEquipmentContact[remoteIsCorvo()?0:1][equipment.variant-1];
                     equipmentDrawn=equipment.variant==1||equipment.variant==3?equipmentAmount>=contact:equipmentAmount<contact;}
                 p.presentedDrawn=equipmentDrawn;
                 p.armedMix+=((equipmentDrawn?1.f:0.f)-p.armedMix)*(1-std::exp(-combatDt/.15f));
@@ -746,7 +748,7 @@ void applyMovementBank(void* component,void* actor,int phase){
             }
             if(j==2&&p.traversalVariant==3&&p.bank.hasVault()){
                 const float frame=(std::max)(0.f,(std::min)(1.f,p.traversalAmount))*119;const auto a=unsigned(frame),b=(std::min)(119u,a+1);
-                const auto& curve=movementVaultLift[localRole?0:1];const float lift=curve[a]+(curve[b]-curve[a])*(frame-a);
+                const auto& curve=movementVaultLift[remoteIsCorvo()?0:1];const float lift=curve[a]+(curve[b]-curve[a])*(frame-a);
                 climb[6]+=(p.traversalHeight-1.f)*lift; // Visual pelvis only; no actor/root or animation events.
             }
             v=MovementBank::blend(v,climb,p.traversalWeight);

@@ -50,7 +50,7 @@ const char* powerFxName(unsigned kind){
         // Isolated native-derived world effects retain character sound/light
         // and all layers except the long 1p spark streaks (30% length).
         // The source player's native first-person declarations are unchanged.
-        kind==9?(localRole?"models/effects/d2coop/muzzle_remote_corvo.fx":"models/effects/d2coop/muzzle_remote_emily.fx"):nullptr;
+        kind==9?(remoteIsCorvo()?"models/effects/d2coop/muzzle_remote_corvo.fx":"models/effects/d2coop/muzzle_remote_emily.fx"):nullptr;
 }
 bool nativePowerFxApi(){
     const unsigned char start[]={0x48,0x89,0x5c,0x24,0x08,0x48,0x89,0x74,0x24,0x10,0x57,0x48,0x83,0xec,0x30,0x48,0x83,0x7c,0x24,0x68,0x00,0x8b,0x99,0xa8};
@@ -91,7 +91,7 @@ std::uintptr_t nativePowerFxRecord(const NativePowerFx& e){
 bool nativeFailureFxHand(float* point,float* axis){
     NativeSkeleton s{};
     if(!readNativeSkeleton(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,s)||!s.stable||s.logic!=1||
-       s.game!=observedGame||s.actor!=probeActor||!bodyShadowTarget(s)||s.parents.size()!=(localRole?215u:219u)||
+       s.game!=observedGame||s.actor!=probeActor||!bodyShadowTarget(s)||s.parents.size()!=(remoteIsCorvo()?215u:219u)||
        s.parents[9]!=8||s.parents[10]!=9||s.globalPose.size()!=s.parents.size())return false;
     const auto& hand=s.globalPose[9];
     for(unsigned r=0;r<3;++r){point[r]=s.root[r];for(unsigned k=0;k<3;++k)point[r]+=s.root[3+k*3+r]*hand[12+k];
@@ -116,7 +116,7 @@ bool startNativePowerFx(unsigned kind,const float* origin,ULONGLONG tick,bool ne
        !coopGameplayReady(outgoing)||!coopGameplayReady(remote)||!probeDoppelganger||!avatarAiHeld||!probeFollowExact||
        avatarAiTarget.actor!=probeActor)return reject("unsupported_scope");
     NativeSwordEquipment sword{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
-    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
+    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,sword,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
        sword.actor!=probeActor||sword.game!=observedGame)return reject("avatar_identity_changed");
     NativePowerFx* slot=nullptr;for(auto& e:nativePowerEffects)if(!e.expires){slot=&e;break;}if(!slot)return reject("effect_slots_full");
     float point[3]{};if(origin)std::memcpy(point,origin,12);else if(!memoryRead(probeActor+0x300,point,12))return reject("origin_unavailable");

@@ -1,0 +1,1061 @@
+{
+  "passed": false,
+  "failure": "Checks failed: join2-hostAvatar, join2-hostBank",
+  "checks": {
+    "hostMission": true,
+    "join1-boxOpened": true,
+    "join1-vmPlays": true,
+    "join1-vmReports": true,
+    "join1-hostReceives": true,
+    "join1-connected": true,
+    "join1-hostAvatar": true,
+    "join1-hostBank": true,
+    "join2-boxOpened": true,
+    "join2-vmPlays": true,
+    "join2-vmReports": true,
+    "join2-hostReceives": true,
+    "join2-connected": true,
+    "join2-hostAvatar": false,
+    "join2-hostBank": false,
+    "everyJoin": true
+  },
+  "notes": {
+    "steps": [
+      {
+        "step": "00-start",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 2,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "off",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 0
+          }
+        },
+        "vm": {
+          "logic": 6,
+          "pending": 0,
+          "map": "campaign/menu/menu_p",
+          "fresh": false,
+          "character": {
+            "local": 0,
+            "remote": 0,
+            "localUsed": 2,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "77aac00c-3dd5-48a5-add5-ba59927c7420",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "01-host-mission",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 2,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": false,
+            "host": false,
+            "phase": 0,
+            "result": "off",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 0
+          }
+        },
+        "vm": {
+          "logic": 6,
+          "pending": 0,
+          "map": "campaign/menu/menu_p",
+          "fresh": false,
+          "character": {
+            "local": 0,
+            "remote": 0,
+            "localUsed": 2,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "71617405-dbfe-4073-8124-844f6cde2847",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join1-box",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/menu/menu_p",
+          "fresh": true,
+          "character": {
+            "local": 0,
+            "remote": 1,
+            "localUsed": 2,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 1,
+              "result": "open",
+              "character": 0,
+              "handle": 1,
+              "lastResult": -1000,
+              "opens": 1,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "9b98ed37-2b9f-4ae6-9f60-c286ef50066d",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join1-box-focus",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/menu/menu_p",
+          "fresh": true,
+          "character": {
+            "local": 0,
+            "remote": 1,
+            "localUsed": 2,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 1,
+              "result": "open",
+              "character": 0,
+              "handle": 1,
+              "lastResult": -1000,
+              "opens": 1,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "ed200d83-2a83-4dd0-a836-2c6fab15a5cc",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join1-played",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 1,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 1,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "corvo",
+              "character": 1,
+              "handle": -1,
+              "lastResult": 0,
+              "opens": 1,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "173964b3-d168-4ca6-bef0-2db9186d7680",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join1-host-avatar",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 1,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 1,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "corvo",
+              "character": 1,
+              "handle": -1,
+              "lastResult": 0,
+              "opens": 1,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "afa725fa-765c-4462-95ae-af63d51696b2",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-pause",
+        "host": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "corvo",
+              "character": 1,
+              "handle": -1,
+              "lastResult": 0,
+              "opens": 1,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "a06666d7-a6ff-42a6-88f2-99f45d6054da",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-quit-dialog",
+        "host": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "corvo",
+              "character": 1,
+              "handle": -1,
+              "lastResult": 0,
+              "opens": 1,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "d64840d7-199a-430e-81f9-759a3a45b8c8",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-quit-button",
+        "host": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "corvo",
+              "character": 1,
+              "handle": -1,
+              "lastResult": 0,
+              "opens": 1,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "b74430e7-f005-4fc5-9f9c-cfc4ffdde820",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-title",
+        "host": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 6,
+          "pending": 0,
+          "map": "campaign/menu/menu_p",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "corvo",
+              "character": 1,
+              "handle": -1,
+              "lastResult": 0,
+              "opens": 1,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "b6a2b1c0-668e-40b6-bfad-ad5f3799dafa",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-menu",
+        "host": {
+          "logic": 2,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "connected",
+            "connectionState": 4,
+            "role": 0,
+            "lobbyMembers": 1
+          }
+        },
+        "vm": {
+          "logic": 6,
+          "pending": 0,
+          "map": "campaign/menu/menu_p",
+          "fresh": false,
+          "character": {
+            "local": 1,
+            "remote": 0,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "corvo",
+              "character": 1,
+              "handle": -1,
+              "lastResult": 0,
+              "opens": 1,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "a342087a-cc42-4acb-b3fd-0432f1586cd4",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-box",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 1,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "partner_connecting",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/menu/menu_p",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 1,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 1,
+              "result": "open",
+              "character": 0,
+              "handle": 1,
+              "lastResult": -1000,
+              "opens": 2,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "5d11ed8f-c851-4591-8556-47fa3c2e9f4c",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-box-focus",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 1,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "partner_connecting",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 3,
+          "pending": 0,
+          "map": "campaign/menu/menu_p",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 1,
+            "localUsed": 1,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 1,
+              "result": "open",
+              "character": 0,
+              "handle": 1,
+              "lastResult": -1000,
+              "opens": 2,
+              "answers": 1,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "34dd4e43-3341-4aed-9ffe-9aff2c784449",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-played",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 2,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "partner_connecting",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 2,
+            "remote": 1,
+            "localUsed": 2,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "emily",
+              "character": 2,
+              "handle": -1,
+              "lastResult": 1,
+              "opens": 2,
+              "answers": 2,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "11e53d69-faf0-43eb-9b82-bf0243832713",
+            "PSShowComputerName": true
+          }
+        }
+      },
+      {
+        "step": "join2-host-avatar",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 1,
+            "remote": 2,
+            "localUsed": 1,
+            "remoteUsed": 2,
+            "role": 0,
+            "choiceEnabled": false,
+            "choice": {
+              "state": 0,
+              "result": "idle",
+              "character": 0,
+              "handle": -1,
+              "lastResult": -1000,
+              "opens": 0,
+              "answers": 0,
+              "others": 0,
+              "failures": 0
+            }
+          },
+          "online": {
+            "active": true,
+            "host": true,
+            "phase": 5,
+            "result": "partner_connecting",
+            "connectionState": 3,
+            "role": 0,
+            "lobbyMembers": 2
+          }
+        },
+        "vm": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+          "fresh": true,
+          "character": {
+            "local": 2,
+            "remote": 1,
+            "localUsed": 2,
+            "remoteUsed": 1,
+            "role": 1,
+            "choiceEnabled": true,
+            "choice": {
+              "state": 2,
+              "result": "emily",
+              "character": 2,
+              "handle": -1,
+              "lastResult": 1,
+              "opens": 2,
+              "answers": 2,
+              "others": 0,
+              "failures": 0
+            },
+            "PSComputerName": "D2CoopVM",
+            "RunspaceId": "36eab319-86f2-4a94-936c-8317caf36eb6",
+            "PSShowComputerName": true
+          }
+        }
+      }
+    ],
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214hy",
+      "hostDll": "F8BC679D88EDE160E22AB7D27899B6DD36AF674F838757E4F52A78811614A2A3",
+      "guestDllMatches": true
+    },
+    "settle-host-mission": {
+      "ready": true,
+      "seconds": 15.0
+    },
+    "hostDefinition": "models/characters/player/corvo/body.def",
+    "hostMap": "campaign/edge_of_the_world/eotw_p_lowchaos",
+    "join1-choice": {
+      "state": 2,
+      "result": "corvo",
+      "character": 1,
+      "handle": -1,
+      "lastResult": 0,
+      "opens": 1,
+      "answers": 1,
+      "others": 0,
+      "failures": 0
+    },
+    "settle-join1": {
+      "ready": true,
+      "seconds": 18.0
+    },
+    "join1-vmDefinition": "models/characters/player/corvo/body.def",
+    "join1-hostAvatars": [
+      "d2coop_probe_corvo"
+    ],
+    "join1-hostBank": {
+      "active": true,
+      "joints": 215,
+      "checksum": "9048886355593648066"
+    },
+    "join2-choice": {
+      "state": 2,
+      "result": "emily",
+      "character": 2,
+      "handle": -1,
+      "lastResult": 1,
+      "opens": 2,
+      "answers": 2,
+      "others": 0,
+      "failures": 0
+    },
+    "settle-join2": {
+      "ready": true,
+      "seconds": 16.0
+    },
+    "join2-vmDefinition": "models/characters/player/emily/body.def",
+    "join2-hostAvatars": [
+      "d2coop_probe_corvo"
+    ],
+    "join2-hostBank": {
+      "active": false,
+      "joints": 215,
+      "checksum": "9048886355593648066"
+    }
+  },
+  "scope": "The partner character choice on every join (#158, 1214hx) on two accounts: the host plays Edge of the World as Corvo; the VM joins twice and chooses Corvo, then Emily, in the game own message box; each time it must play and report the chosen character, and the host must receive it."
+}

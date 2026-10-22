@@ -21,7 +21,7 @@ void hideGrenadeProp(){
 bool updateGrenadePropTrack(unsigned variant,float amount){
     auto& p=grenadeProp;
     if(variant>8||!rangedPropIdentityFor(p,true)||!rangedPropApiMatches())return false;
-    const auto& track=grenadeHandTracks[localRole?0:1][variant];
+    const auto& track=grenadeHandTracks[remoteIsCorvo()?0:1][variant];
     const float f=(std::max)(0.f,(std::min)(1.f,amount))*119;const auto a=unsigned(f),b=(std::min)(119u,a+1);
     MovementBank::Joint x{},y{};std::copy(track[a],track[a]+7,x.begin());std::copy(track[b],track[b]+7,y.begin());
     const auto q=MovementBank::blend(x,y,f-a);std::array<float,12> qts{};std::copy(q.begin(),q.end(),qts.begin());qts[8]=qts[9]=qts[10]=1;
@@ -86,7 +86,7 @@ void serviceGrenadeProp(ULONGLONG tick){
     if(!rangedPropIdentityFor(p,false)||!rangedPropIsHidden(p)){refuse("cosmetic_identity_unconfirmed");return;}
     if(p.joint==0xffff){
         const char* tag="left_wrist_jnt";const std::uint16_t joint=9;float offset[3]{},axis[9]{};
-        if(!grenadePropIdleCalibration(localRole?1u:2u,offset,axis)){refuse("calibration_missing");return;}
+        if(!grenadePropIdleCalibration(remoteIsCorvo()?1u:2u,offset,axis)){refuse("calibration_missing");return;}
         NativeSkeleton s{};std::uintptr_t manager=0,vt=0,entries=0,namePointer=0;unsigned count=0;std::string name;
         if(!readNativeSkeleton(memoryRead,base,p.parentHandle,s)||!s.stable||s.actor!=p.parent||!bodyShadowTarget(s)||s.jointIds.size()<11||
            !memoryRead(base+0x22995c0,&manager,8)||!manager||!memoryRead(manager,&vt,8)||vt!=base+0x1b093c8||

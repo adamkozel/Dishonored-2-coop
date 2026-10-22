@@ -15,7 +15,7 @@ int main(){
     bad=p;bad.kind=0;bad.state=1;check(!validAvatarWeapon(bad,c,h),"hello cannot carry equip request");
     auto reverse=p;reverse.role=1;reverse.character=2;reverse.sourceSession=22;reverse.targetSession=11;reverse.sourceWorldEpoch=7;reverse.targetWorldEpoch=3;
     check(validAvatarWeapon(reverse,h,c),"Emily holstered state");reverse.state=1;check(validAvatarWeapon(reverse,h,c),"Emily drawn state");reverse.kind=0;reverse.state=0;check(validAvatarWeapon(reverse,h,c),"receiver opt-in hello");
-    bad=p;bad.character=2;check(!validAvatarWeapon(bad,c,h),"wrong role character");
+    bad=p;bad.character=3;check(!validAvatarWeapon(bad,c,h),"invalid character");
     bad=p;bad.sourceSession++;check(!validAvatarWeapon(bad,c,h),"old source process");bad=p;bad.targetSession++;check(!validAvatarWeapon(bad,c,h),"old target process");
     bad=p;bad.sourceWorldEpoch++;check(!validAvatarWeapon(bad,c,h),"old source world");bad=p;bad.targetWorldEpoch++;check(!validAvatarWeapon(bad,c,h),"old receiver world");
     bad=p;bad.mapId++;check(!validAvatarWeapon(bad,c,h),"different map");bad=p;bad.rootSequence=91;check(!validAvatarWeapon(bad,c,h),"stale root");bad=p;bad.rootSequence=101;check(!validAvatarWeapon(bad,c,h),"future root");

@@ -109,6 +109,9 @@ void updateReferenceFrame(void* frame) {
     realReferenceFrameUpdate(frame);
 }
 std::uint32_t localRole=0,lastCommand=0;
+// 1214hy (#159, coop_character.h): the players' characters (1 Corvo, 2 Emily); until the partner's first pose the
+// role defaults stand (the host Corvo, the partner Emily).
+int remoteCharacter();int localCharacter();bool remoteCharacterKnown();inline bool remoteIsCorvo(){return remoteCharacter()==1;}
 // 1181: installed release (no lab environment); data in <game>\d2coop.
 bool productMode=false;char productDataDir[MAX_PATH]{};
 extern bool productAutoArm;
@@ -1192,7 +1195,7 @@ void probeShadowDamage(){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeHealth h{};NativeSwordEquipment s{};
     if(GetCurrentThreadId()!=engineThread.load()||!swordDamageApiMatches()||!avatarAiHeld||
        !readNativeHealth(memoryRead,base,probeHandle,h)||h.game!=observedGame||h.actor!=probeActor||h.logic!=1||h.current!=40||
-       !readNativeSwordEquipment(memoryRead,base,probeHandle,s,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
+       !readNativeSwordEquipment(memoryRead,base,probeHandle,s,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
        !shadowOwnedDamageSource(s.weaponHandle)||shadowOwnedDamageSource(1))return;
     const auto d=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,kSwordDamageDecl,false,false);
     if(!nativeSwordDeclaration(d))return;
@@ -1370,14 +1373,14 @@ bool prepareCheckpointPresentation(bool shadow) {
     // Restore the explicitly captured presentation, never silently substitute
     // a story body when a clone definition or its asset pack is unavailable.
     if(shadow&&!partnerAssetsEnabled)return false;
-    if(!probeActor&&!spawnProbe(shadow?(localRole?"shadow_corvo":"shadow_emily"):(localRole?"corvo":"emily")))return false;
+    if(!probeActor&&!spawnProbe(shadow?(remoteIsCorvo()?"shadow_corvo":"shadow_emily"):(remoteIsCorvo()?"corvo":"emily")))return false;
     return probeDoppelganger==shadow;
 }
 bool restoreCheckpointPresentation(bool shadow,bool exact){
     if(probeDoppelganger!=shadow)return false;
     if(shadow){NativeSwordEquipment sword{};
         if(!shadowOwnedDamageSource(probeHandle)||!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,sword,
-            localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
+            remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
             sword.actor!=probeActor||!sword.equipped||!sword.started)return false;
     }
     return enableProbeFollow(exact);
@@ -1743,7 +1746,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_mixamo_crouch 30000")||!std::strcmp(request.command,"coop_mixamo_crouch on")){
         if(!bodyStreamEnabled||!nativeCrouchReferenceReady()||!probeFollow||!guardPairReady(GetTickCount64())||mixamoResearch.active(GetTickCount64()))return;
         NativeSwordEquipment sword{};
-        if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||sword.actor!=probeActor||!sword.equipped||!sword.started)return;
+        if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,sword,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||sword.actor!=probeActor||!sword.equipped||!sword.started)return;
         clearBodyProbe();mixamoResearch={};mixamoResearch.persistent=!std::strcmp(request.command,"coop_mixamo_crouch on");mixamoResearch.until=GetTickCount64()+30000;mixamoResearch.actor=probeActor;mixamoResearch.epoch=outgoing.worldEpoch;mixamoResearch.peerEpoch=remote.worldEpoch;mixamoResearch.peerSession=remote.session;return;
     }
     if(!std::strcmp(request.command,"coop_shadow_crouch upright")||!std::strcmp(request.command,"coop_shadow_crouch native")){
@@ -1958,7 +1961,7 @@ void dispatchCoopCommand(void* system,const char* text) {
         const bool off=!std::strcmp(request.command+17,"off");
         shadowLocoUntil=0;shadowLocoCombat=!std::strcmp(request.command+17,"combat");
         NativeSwordEquipment sword{};
-        if(!off&&avatarAiHeld&&probeFollow&&coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&lastReceive&&GetTickCount64()-lastReceive<250&&readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,sword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)&&sword.actor==probeActor&&sword.equipped&&sword.started){
+        if(!off&&avatarAiHeld&&probeFollow&&coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&lastReceive&&GetTickCount64()-lastReceive<250&&readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,sword,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)&&sword.actor==probeActor&&sword.equipped&&sword.started){
             shadowLocoGame=probeGame;shadowLocoActor=probeActor;shadowLocoHandle=probeHandle;shadowLocoEpoch=outgoing.worldEpoch;
             shadowLocoRemoteEpoch=remote.worldEpoch;shadowLocoRemoteSession=remote.session;shadowLocoUntil=GetTickCount64()+15000;
             reinterpret_cast<void(*)(void*)>(gameImage+0x87c590)(reinterpret_cast<void*>(sword.entity));

@@ -26,7 +26,7 @@ inline bool armRootFresh(std::uint32_t source,std::uint32_t received){
 }
 inline bool validCoopArm(const CoopArmPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
     if(p.magic!=0x41433244||p.version!=3||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role>1||p.role!=peer.role||
-       !p.sequence||!p.rig||p.character!=p.role+1||p.side!=2||p.spaceMode>1||!coopWorldPairReady(local,peer)||
+       !p.sequence||!p.rig||(p.character!=1&&p.character!=2)||p.side!=2||p.spaceMode>1||!coopWorldPairReady(local,peer)||
        p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||
        p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return false;
     for(const auto& joint:p.global){BodyMatrix m{};

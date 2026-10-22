@@ -37,7 +37,7 @@ const char* productStep(unsigned i){
     case 0:return "coop_cinematic_sync on";
     case 1:return "coop_cinematic_barrier on";
     case 2:return "coop_world_observe on";
-    case 3:return partnerAssetsEnabled?(localRole?"coop_spawn_probe shadow_corvo":"coop_spawn_probe shadow_emily"):(localRole?"coop_spawn_probe corvo":"coop_spawn_probe emily");
+    case 3:return partnerAssetsEnabled?(remoteIsCorvo()?"coop_spawn_probe shadow_corvo":"coop_spawn_probe shadow_emily"):(remoteIsCorvo()?"coop_spawn_probe corvo":"coop_spawn_probe emily");
     case 4:return "coop_probe_follow exact";
     case 5:return "coop_probe_locomotion on";
     case 6:return "coop_movement_bank on";
@@ -82,6 +82,8 @@ void serviceProductSession(void* system,ULONGLONG tick){
         productNewWorld(a,outgoing.worldEpoch,remote.worldEpoch,outgoing.mapId,tick);return; // 1214ga (#145, product_arm.h)
     }
     if(tick<a.nextAt)return;
+    if(a.step==3){static ULONGLONG characterWaitSince=0; // 1214hy (#159)
+        if(remoteCharacterKnown())characterWaitSince=0;else{if(!characterWaitSince)characterWaitSince=tick;if(tick-characterWaitSince<3000){a.result="waiting_partner_character";return;}}}
     const char* command=productStep(a.step);
     if(!command){
         // Maintenance: re-issue idempotent session commands every 5 s so a

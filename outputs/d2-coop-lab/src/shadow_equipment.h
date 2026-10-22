@@ -39,7 +39,7 @@ bool shadowEquipmentObjects(const NativeSwordEquipment& a,const NativeSwordEquip
 bool shadowEquipmentRead(NativeSwordEquipment& s){
     const auto& b=shadowEquipment.before;
     return GetCurrentThreadId()==engineThread.load()&&guardEquipmentApiMatches()&&shadowEquipment.epoch==outgoing.worldEpoch&&observedGame==b.game&&
-        readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),b.handle,s,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)&&
+        readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),b.handle,s,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)&&
         shadowEquipmentObjects(s,b);
 }
 bool shadowEquipmentAiReady(){
@@ -70,7 +70,7 @@ void beginShadowEquipment(){
     if(shadowStream.until||shadowAction.actor||bodyStreamEnabled||movementBankActive()||avatarSword.until||avatarWeapon.until||
         !shadowStreamPairReady(tick)||!guardEquipmentApiMatches()||!shadowEquipmentAiReady()){refuse("unsupported_scope");return;}
     NativeSwordEquipment s{};
-    if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,s,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
+    if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,s,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
         s.actor!=probeActor||s.logic!=1||!s.equipped||!s.started||s.attachedTag!=s.drawTag){refuse("not_native_drawn");return;}
     shadowEquipment={s,outgoing.worldEpoch,remote.worldEpoch,remote.session,tick+2500};
     reinterpret_cast<void(*)(void*,void*)>(gameImage+0x619640)(reinterpret_cast<void*>(s.inventory),reinterpret_cast<void*>(s.entry));
@@ -118,7 +118,7 @@ void requestMovementEquipment(bool drawn){
         if(!shadowEquipmentRead(s))return;
         shadowEquipment.until=tick+250;
     }else{
-        if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,s,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
+        if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,s,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
             s.actor!=probeActor||s.logic!=1||s.equipped!=s.started)return;
         unsigned char visibility=0;
         if(!shadowSwordVisibilityApi()||!memoryRead(s.entity+0xd0,&visibility,1))return;

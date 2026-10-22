@@ -84,10 +84,10 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     // stays empty; the independent root channel owns position and depth.
     const bool swim=(p.state!=22&&p.state!=23)||(!p.combatVariant&&!p.powerVariant&&!p.traversalVariant&&!p.rangedKind&&!p.grenadeHeld&&!p.grenadeVariant&&!p.carryVariant&&
         !p.chokeVariant&&!p.trapHeld&&!p.trapVariant&&!p.heartHeld&&!p.heartVariant&&!p.stunVariant&&!p.airStage&&!p.equipmentVariant&&!p.leanSide&&!p.leanUp);
-    const bool possessionDraw=p.kind==1&&p.state==10&&p.role==0&&p.character==1&&p.swordState==2&&
+    const bool possessionDraw=p.kind==1&&p.state==10&&p.character==1&&p.swordState==2&&
         (p.powerVariant==26||p.powerVariant==27)&&p.equipmentTimeMs<=p.equipmentDurationMs&&
         ((p.equipmentVariant==1&&p.equipmentDurationMs==1066)||(p.equipmentVariant==3&&p.equipmentDurationMs==1133));
-    const bool equipment=(p.equipmentVariant<7||(p.role==1&&p.character==2&&p.equipmentDurationMs==333&&p.equipmentTimeMs<=333))&&(p.kind==0?p.swordState==0:p.swordState>=1&&p.swordState<=2)&&p.equipmentVariant<=8&&
+    const bool equipment=(p.equipmentVariant<7||(p.character==2&&p.equipmentDurationMs==333&&p.equipmentTimeMs<=333))&&(p.kind==0?p.swordState==0:p.swordState>=1&&p.swordState<=2)&&p.equipmentVariant<=8&&
         (p.equipmentVariant?((p.state==7||possessionDraw)&&p.equipmentDurationMs&&p.equipmentDurationMs<=10000&&p.equipmentTimeMs<=3600000):
             (p.state!=7&&!p.equipmentTimeMs&&!p.equipmentDurationMs))&&(!p.combatVariant||p.swordState==2||deathCombat);
     const bool power=PowerPresentation::valid({0,1,p.powerVariant,p.powerTimeMs,p.powerDurationMs})&&
@@ -102,7 +102,7 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
         (p.grenadeVariant?p.state==15:p.state!=15)&&(!p.grenadeHeld||(p.kind==1&&(p.state==0||p.state==3||p.state==15)&&!p.rangedKind&&!p.powerVariant&&!p.carryVariant&&!p.combatVariant&&(!p.airStage||p.state==3||p.grenadeVariant>=3)));
     const bool stun=StunPresentation::valid({0,1,p.stunVariant,p.stunTimeMs,p.stunDurationMs})&&
         (p.stunVariant?(p.kind==1&&p.state==16&&!p.grenadeHeld&&!p.rangedKind&&!p.powerVariant&&!p.carryVariant&&!p.combatVariant&&!p.airStage):p.state!=16);
-    const bool possession=p.state!=17||(p.kind==1&&p.character==1&&p.role==0&&p.swordState==1&&!p.powerVariant&&!p.airStage&&!p.rangedKind&&!p.grenadeHeld&&!p.carryVariant&&!p.stunVariant&&!p.combatVariant&&!p.equipmentVariant);
+    const bool possession=p.state!=17||(p.kind==1&&p.character==1&&p.swordState==1&&!p.powerVariant&&!p.airStage&&!p.rangedKind&&!p.grenadeHeld&&!p.carryVariant&&!p.stunVariant&&!p.combatVariant&&!p.equipmentVariant);
     // Hold (73): an unclassified native state keeps the stream alive and
     // presents nothing; it can never carry any action, scene or held item.
     const bool hold=p.state!=24||(p.kind==1&&(p.swordState==1||p.swordState==2)&&!p.combatVariant&&!p.combatPhase&&!p.equipmentVariant&&!p.traversalVariant&&
@@ -132,7 +132,7 @@ inline bool validShadowAction(const CoopShadowActionPacket& p,const CoopPosePack
     for(float v:p.heldObjectAxis)heldTransform=heldTransform&&std::isfinite(v)&&std::fabs(v)<=2.f;
     const bool heldObject=p.heldObjectPhase<=4&&heldTransform&&(p.heldObjectPhase?(p.heldObjectHandle&&p.heldObjectKey):(!p.heldObjectHandle&&!p.heldObjectKey));
     return heldObject&&dead&&use&&hold&&swim&&choke&&trap&&heart&&unbound&&possession&&stun&&grenade&&carry&&ranged&&power&&traversal&&equipment&&combat&&p.sampleTimeUs&&p.sampleTimeUs<=9007199254740991ull&&air&&p.magic==0x48413244&&p.version==80&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
-        p.sequence&&p.sourceToken&&p.character==p.role+1&&p.kind<=1&&p.state<=25&&
+        p.sequence&&p.sourceToken&&(p.character==1||p.character==2)&&p.kind<=1&&p.state<=25&&
         std::isfinite(p.leanSide)&&std::isfinite(p.leanUp)&&std::fabs(p.leanSide)<=1.f&&p.leanUp>=0&&p.leanUp<=1.f&&
         (p.state==5||(!p.leanSide&&!p.leanUp))&&
         (p.kind==0?(p.state==0&&!p.event):(p.targetToken&&p.event))&&coopPresentationPairReady(local,peer)&&

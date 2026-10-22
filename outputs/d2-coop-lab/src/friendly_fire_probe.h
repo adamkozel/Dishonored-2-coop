@@ -18,7 +18,7 @@ void probeFriendlyFire(){
        !readNativeHealth(memoryRead,base,1,player)||player.logic!=1||player.current!=56||player.maximum!=70||
        !readNativeHealth(memoryRead,base,probeHandle,partner)||partner.logic!=1||partner.current!=40||partner.maximum!=40){refuse("scope");return;}
     if(!readNativePlayerSword(memoryRead,base,localSword)||
-       !readNativeSwordEquipment(memoryRead,base,probeHandle,remoteSword,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)){
+       !readNativeSwordEquipment(memoryRead,base,probeHandle,remoteSword,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)){
         refuse("equipment");return;
     }
     const auto lookup=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030);

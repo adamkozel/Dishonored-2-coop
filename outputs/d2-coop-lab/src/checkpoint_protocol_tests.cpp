@@ -46,7 +46,7 @@ int main() {
         require(!checkpointSameAttempt(p,q),"attempt identity change rejected");}
     p.kind=CheckpointMessage::Ready;p.character=2;p.clientReady=18;
     require(checkpointPacketShape(p,0),"client ready");
-    q=p;q.character=1;require(!checkpointPacketShape(q,0),"wrong character");
+    q=p;q.character=3;require(!checkpointPacketShape(q,0),"invalid character");
     q=p;q.hostReady=17;require(!checkpointPacketShape(q,0),"cannot advertise peer ready token");
     q=p;q.clientReady=0;require(!checkpointPacketShape(q,0),"empty ready");
     p.kind=CheckpointMessage::Release;p.role=0;p.character=0;p.hostReady=17;
@@ -66,7 +66,7 @@ int main() {
     p.role=1;require(checkpointPacketShape(p,0),"client death notice");
     p.kind=CheckpointMessage::DeathReady;p.character=2;
     require(checkpointPacketShape(p,0),"client native death-screen acknowledgment");
-    q=p;q.character=1;require(!checkpointPacketShape(q,0),"wrong death-screen character");
+    q=p;q.character=3;require(!checkpointPacketShape(q,0),"invalid death-screen character");
     q=p;q.transaction=1;require(!checkpointPacketShape(q,0),"death cannot authorize a load transaction");
     q=p;q.hostEpoch++;require(!checkpointSameWorld(p,q),"old death belongs to another world");
     q=p;q.clientArm++;require(!checkpointSameWorld(p,q),"old death cannot cross a rearm");

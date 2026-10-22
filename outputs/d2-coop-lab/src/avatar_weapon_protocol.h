@@ -17,7 +17,7 @@ struct CoopAvatarWeaponPacket {
 static_assert(sizeof(CoopAvatarWeaponPacket)==96);
 inline bool validAvatarWeapon(const CoopAvatarWeaponPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
     return p.magic==0x57413244&&p.version==2&&p.size==sizeof(p)&&p.build==0x67a50cde&&p.role<=1&&p.role==peer.role&&
-        p.sequence&&p.sourceToken&&p.character==p.role+1&&p.kind<=1&&p.state<=1&&
+        p.sequence&&p.sourceToken&&(p.character==1||p.character==2)&&p.kind<=1&&p.state<=1&&
         (p.kind==0?p.state==0:p.targetToken!=0)&&coopWorldPairReady(local,peer)&&
         p.sourceSession==peer.session&&p.targetSession==local.session&&p.sourceWorldEpoch==peer.worldEpoch&&
         p.targetWorldEpoch==local.worldEpoch&&p.mapId==local.mapId&&armRootFresh(p.rootSequence,peer.sequence);

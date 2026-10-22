@@ -20,7 +20,7 @@ void hideHeartProp(){
 bool updateHeartPropTrack(unsigned held,unsigned variant,float amount){
     auto& p=*currentHeartProp;
     if(!HeartPresentation::variantFor(held,variant)||!rangedPropIdentityFor(p,true)||!rangedPropApiMatches())return false;
-    const auto& track=heartHandTracks[localRole?0:1][HeartPresentation::trackVariant(held,variant)];
+    const auto& track=heartHandTracks[remoteIsCorvo()?0:1][HeartPresentation::trackVariant(held,variant)];
     const float f=(std::max)(0.f,(std::min)(1.f,HeartPresentation::clipAmount(held,variant,amount)))*119;const auto a=unsigned(f),b=(std::min)(119u,a+1);
     MovementBank::Joint x{},y{};std::copy(track[a],track[a]+7,x.begin());std::copy(track[b],track[b]+7,y.begin());
     const auto q=MovementBank::blend(x,y,f-a);std::array<float,12> qts{};std::copy(q.begin(),q.end(),qts.begin());qts[8]=qts[9]=qts[10]=1;
@@ -90,7 +90,7 @@ void serviceHeartProp(ULONGLONG tick){
     if(p.joint==0xffff){
         const char* tag="left_wrist_jnt";const std::uint16_t joint=9;float offset[3]{},axis[9]{};
         {
-            std::array<float,12> qts{};std::copy(heartHandTracks[localRole?0:1][0][0],heartHandTracks[localRole?0:1][0][0]+7,qts.begin());qts[8]=qts[9]=qts[10]=1;
+            std::array<float,12> qts{};std::copy(heartHandTracks[remoteIsCorvo()?0:1][0][0],heartHandTracks[remoteIsCorvo()?0:1][0][0]+7,qts.begin());qts[8]=qts[9]=qts[10]=1;
             BodyMatrix m{};if(!bodyFromQts(qts,m)){refuse("calibration_missing");return;}
             for(unsigned r=0;r<3;++r){offset[r]=m.v[12+r];for(unsigned c=0;c<3;++c)axis[c*3+r]=m.v[c*4+r];}
         }
