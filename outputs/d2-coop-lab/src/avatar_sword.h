@@ -12,7 +12,7 @@ bool avatarSwordSame(const NativeSwordEquipment& s){
 }
 bool avatarSwordRead(NativeSwordEquipment& s){
     return GetCurrentThreadId()==engineThread.load()&&guardEquipmentApiMatches()&&outgoing.worldEpoch==avatarSword.epoch&&observedGame==avatarSword.before.game&&
-        readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),avatarSword.before.handle,s,localRole?NativeSwordScope::CorvoTutorial:NativeSwordScope::EmilyPartner)&&avatarSwordSame(s);
+        readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),avatarSword.before.handle,s,remoteIsCorvo()?NativeSwordScope::CorvoTutorial:NativeSwordScope::EmilyPartner)&&avatarSwordSame(s);
 }
 bool avatarSwordReady(ULONGLONG tick){
     if(!probeFollowExact||!armProbePairReady(tick)||!avatarAiHeld||avatarAiTarget.actor!=probeActor)return false;
@@ -40,7 +40,7 @@ void beginAvatarSword(bool remoteDriven=false,ULONGLONG remoteUntil=0){
     if(avatarSword.until||avatarSword.restoreUntil||(!remoteDriven&&avatarWeaponArmed())){refuse("duplicate_or_restoring");return;}
     if(GetCurrentThreadId()!=engineThread.load()||!guardEquipmentApiMatches()||!avatarSwordReady(tick)){refuse("unsupported_scope");return;}
     NativeSwordEquipment s{};
-    if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,s,localRole?NativeSwordScope::CorvoTutorial:NativeSwordScope::EmilyPartner)||
+    if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,s,remoteIsCorvo()?NativeSwordScope::CorvoTutorial:NativeSwordScope::EmilyPartner)||
        s.logic!=1||s.actor!=probeActor||s.equipped||s.started||s.attachedTag!=s.holsterTag){refuse("not_native_holster");return;}
     if(remoteDriven&&(remoteUntil<=tick||remoteUntil>tick+250)){refuse("invalid_remote_lease");return;}
     avatarSword={s,outgoing.worldEpoch,remote.worldEpoch,remote.session,remoteDriven?remoteUntil:tick+2000,0,false,false,remoteDriven};

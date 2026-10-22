@@ -94,3 +94,21 @@ Safe already:
    the Doppelganger rig of its character, so two Corvos are still two different entity kinds.
 5. **Lab fixtures for the new pairings:** the lab `campaign` command gives either character (with `corvo` or
    `emily`), so a host Emily and a partner Corvo are a fixture away. Each pairing gets its own lab checkpoints.
+
+## Progress (runtime)
+
+- **1214hx, the character on the wire and the partner's choice (protocol 81, pose version 12):**
+  - Each game samples its player's character from the native definition and sends it in the pose flags.
+  - Take character-choice-v1779a (two accounts; the host plays Edge of the World as Corvo) passes all 12 checks.
+    The VM partner's box opens in its main menu, drawn by the game: "Character", with "Play as Corvo Attano" and
+    "Play as Emily Kaldwin" (confirmed runtime). Result 0 picked Corvo and result 1 Emily.
+  - The VM played the chosen character each time (`corvo/body.def`, then `emily/body.def`), and both games reported
+    it. The box opened again on the second join.
+  - The first mission is excluded: its native choice screen decides there. A native New Game whose intro was
+    skipped once passed that screen and defaulted to Emily (coop-hostsave-v1775a); in v1776a the screen appeared.
+- **1214hy, the partner rendered by character:** in take character-render-v1780a, a Corvo partner on a Corvo host
+  got `d2coop_probe_corvo` with its movement bank active on the Corvo rig (215 joints). This was the first Corvo-Corvo
+  session (confirmed runtime).
+  - On the second join (as Emily) the host kept the first avatar, and the Emily bank could not bind to it. 1214hz
+    removes a stale avatar with the engine's own remove event, and the arm rebuilds it.
+

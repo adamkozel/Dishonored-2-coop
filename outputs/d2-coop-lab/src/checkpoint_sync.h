@@ -30,6 +30,9 @@ struct CheckpointSync {
     const char* result="disabled";
 };
 CheckpointSync checkpointSync{};
+// 1214hy (#159): the character the restored world must hold (the player's own, captured when the restore starts;
+// any pairing), instead of the role's default.
+int checkpointExpectCharacter=0;
 bool doorCheckpointBarrierActive(){
     return checkpointBlocksWorldActions(checkpointSync.enabled,checkpointSync.phase,checkpointSync.deathActive,
         outgoing.gameLogicState,outgoing.pendingGameLogicState,remote.gameLogicState,remote.pendingGameLogicState);
@@ -65,8 +68,8 @@ bool checkpointSend(CheckpointMessage kind) {
     auto p=kind==CheckpointMessage::Hello?checkpointScope(false):s.key;
     if(kind==CheckpointMessage::Death||kind==CheckpointMessage::DeathReady)p=s.deathKey;
     p.kind=kind;p.role=localRole;p.sequence=++checkpointPacketSequence;p.character=0;p.hostReady=0;p.clientReady=0;
-    if(kind==CheckpointMessage::Ready){p.character=localRole+1;if(localRole)p.clientReady=s.clientReady;else p.hostReady=s.hostReady;}
-    if(kind==CheckpointMessage::DeathReady)p.character=localRole+1;
+    if(kind==CheckpointMessage::Ready){p.character=localCharacter();if(localRole)p.clientReady=s.clientReady;else p.hostReady=s.hostReady;}
+    if(kind==CheckpointMessage::DeathReady)p.character=localCharacter();
     if(kind==CheckpointMessage::Release||kind==CheckpointMessage::Complete){p.hostReady=s.hostReady;p.clientReady=s.clientReady;}
     const bool ok=coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK;
     if(ok)++s.sent;return ok;
@@ -294,7 +297,7 @@ void checkpointService(std::uint64_t tick) {
         if(!s.deathReady&&outgoing.gameLogicState==13&&!outgoing.pendingGameLogicState) {
             NativeGameOverState g{};NativeCharacterState c{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
             if(readNativeGameOver(memoryRead,base,g)&&g.logic==13&&!g.pending&&g.flash&&g.showFunction[0]&&g.showFunction[1]&&
-               readNativeCharacter(memoryRead,base,c)&&c.character==static_cast<int>(localRole+1)&&!c.queued) {
+               readNativeCharacter(memoryRead,base,c)&&c.character==localCharacter()&&!c.queued) {
                 if(!checkpointSend(CheckpointMessage::DeathReady)){checkpointFail("death_ready_send_failed");return;}
                 s.deathReady=true;
             }
@@ -317,7 +320,7 @@ void checkpointService(std::uint64_t tick) {
     }
     if(s.phase==CheckpointPhase::Released&&!s.held&&!s.completeSent&&coopGameplayReady(outgoing)) {
         NativeCharacterState c{};
-        if(!readNativeCharacter(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c)||c.character!=static_cast<int>(localRole+1)||c.queued){checkpointFail("postload_role_invalid");return;}
+        if(!readNativeCharacter(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c)||c.character!=checkpointExpectCharacter||c.queued){checkpointFail("postload_role_invalid");return;}
         if(!checkpointSend(CheckpointMessage::Complete)){checkpointFail("complete_send_failed");return;}
         s.completeSent=true;
     }
@@ -397,6 +400,7 @@ void checkpointEngineService(void* system) {
     }
     if(!s.queueLoad)return;
     if(!checkpointWorldReady(outgoing)||!checkpointFixtureMatches()){checkpointFail("preload_scope_changed");return;}
+    checkpointExpectCharacter=localCharacter(); // 1214hy (#159)
     const bool retryProbe=s.retryProbeUntil>GetTickCount64()&&s.retryProbeArm==s.arm&&
         s.retryProbeEpoch==outgoing.worldEpoch&&observerIsolation.ready&&observerIsolation.movementFixture;
     s.retryProbeUntil=0;
@@ -419,8 +423,8 @@ bool checkpointLoadingBoundary(const NativeSwitchEvent& event) {
     NativeCharacterState c{};std::uintptr_t name=0;char map[192]{};
     const bool valid=event.from==15&&!event.pending&&event.phase==3&&s.loadingEntryAt&&event.tick>=s.loadingEntryAt&&event.game==s.loadingGame&&
         memoryRead(event.game+0x337138,&name,8)&&nativeName(name,map,sizeof(map))&&!std::strcmp(map,checkpointMission.map)&&
-        readNativeCharacter(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c,event.game)&&c.character==static_cast<int>(localRole+1)&&
-        !c.queued&&!std::strcmp(c.definitionName,c.variantNames[localRole+1])&&(checkpointMission.mission||checkpointFixtureMatches())&&
+        readNativeCharacter(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c,event.game)&&c.character==checkpointExpectCharacter&&
+        !c.queued&&!std::strcmp(c.definitionName,c.variantNames[checkpointExpectCharacter])&&(checkpointMission.mission||checkpointFixtureMatches())&&
         memoryRead(c.player+0x300,s.position,sizeof(s.position));
     loadingProbe.armed=false;s.expectBoundary=false;s.permitContinuation=false;s.game=event.game;s.player=c.player;s.manager=event.manager;
     if(!valid||(localRole&&!checkpointMission.mission&&!loadingRoleRestore.completed))checkpointFail("loaded_world_invalid");

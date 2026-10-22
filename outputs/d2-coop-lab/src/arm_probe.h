@@ -77,7 +77,7 @@ void applyArmProbe(void* component,void* actor){
     BodyMatrix correction=bodyIdentity();
     if(valid&&s.rig.directModelSpace){
         NativeSwordEquipment weapon{};float q[4]{},again[4]{};
-        valid=readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),s.handle,weapon,localRole?NativeSwordScope::CorvoTutorial:NativeSwordScope::EmilyPartner)&&weapon.actor==s.actor&&weapon.game==s.game;
+        valid=readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),s.handle,weapon,remoteIsCorvo()?NativeSwordScope::CorvoTutorial:NativeSwordScope::EmilyPartner)&&weapon.actor==s.actor&&weapon.game==s.game;
         if(valid&&weapon.equipped){
             valid=weapon.started&&memoryRead(weapon.frame+0x3e0,q,sizeof(q))&&memoryRead(weapon.frame+0x3e0,again,sizeof(again))&&!std::memcmp(q,again,sizeof(q));
             BodyMatrix targetBinding{},sourceBinding=bodyIdentity();

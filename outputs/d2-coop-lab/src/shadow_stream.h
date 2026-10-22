@@ -382,13 +382,13 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     if(chokeValid)action=21;else if(trapValid)action=20;else if(trapIdle)action=0;else if(heartValid||timepieceValid)action=19;else if(heartIdle||timepieceIdle)action=0;else if(possessionOccupied)action=17;else if(stunValid)action=16;else if(powerValid)action=10;else if(rangedValid)action=13;else if(grenadeValid)action=15;else if(carryValid||carryPreparing)action=14;
     shadowSourceReadStage=2;
     const bool valid=nativeStateValid&&(chokeValid||trapValid||trapIdle||heartValid||heartIdle||timepieceValid||timepieceIdle||possessionOccupied||stunValid||powerValid||rangedValid||grenadeValid||carryValid||carryPreparing||nativePlayerShadowAction(states,base,action))&&
-        shadowTimedRead(7,[&]{return readNativePlayerSword(memoryRead,base,sword);})&&sword.character==localRole+1&&sword.sword.game==states.player.game&&
+        shadowTimedRead(7,[&]{return readNativePlayerSword(memoryRead,base,sword);})&&sword.character==localCharacter()&&sword.sword.game==states.player.game&&
         sword.sword.actor==states.player.player&&sword.sword.logic==1&&sword.sword.quantity==1&&sword.sword.equipped==sword.sword.started;
     float side=0,up=0;
     if(!valid||(action==5&&!nativePlayerLeanAmount(memoryRead,states,base,side,up)))return false;
     shadowSourceReadStage=3;
     if(chokeValid){
-        if(sword.sword.equipped!=nativeTakedownSword(choke.variant)||choke.character!=localRole+1||choke.target.handle==probeHandle||choke.target.actor==probeActor)return false;
+        if(sword.sword.equipped!=nativeTakedownSword(choke.variant)||choke.character!=localCharacter()||choke.target.handle==probeHandle||choke.target.actor==probeActor)return false;
         if(sceneHandle)*sceneHandle=choke.handle;
         if(airPacket){airPacket->chokeVariant=choke.variant;airPacket->chokeTimeMs=choke.timeMs;airPacket->chokeDurationMs=choke.durationMs;
             airPacket->chokeSpawner=carryIdentityKey(choke.target.spawnerName);airPacket->chokeDefinition=carryIdentityKey(choke.target.definition);}
@@ -405,7 +405,7 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
         NativeWorldNpc native{},target{};const auto tick=GetTickCount64();
         const auto corpse=carryValid?carry.corpse:carryPreparation.corpse;
         const auto corpseHandle=carryValid?carry.corpseHandle:carryPreparation.corpseHandle;
-        if((carryValid&&(sword.sword.equipped||carry.character!=localRole+1))||!worldObservationReady(tick)||!worldCatalogTick||tick-worldCatalogTick>750||
+        if((carryValid&&(sword.sword.equipped||carry.character!=localCharacter()))||!worldObservationReady(tick)||!worldCatalogTick||tick-worldCatalogTick>750||
            !readWorldNpcIdentity(memoryRead,base,observedGame,corpseHandle,native)||native.actor!=corpse||!native.unique||
            !resolveCarryIdentity(memoryRead,base,observedGame,worldCatalog,carryIdentityKey(native.spawnerName),carryIdentityKey(native.definition),target)||target.actor!=corpse)return false;
         if(carryValid&&sceneHandle)*sceneHandle=carry.handle;
@@ -417,7 +417,7 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
             if(carryValid)airPacket->carryThrowVelocity=carry.throwVelocity;}
     }
     if(rangedValid){
-        if(ranged.weapon.player.character!=localRole+1)return false;
+        if(ranged.weapon.player.character!=localCharacter())return false;
         if(sceneHandle)*sceneHandle=ranged.handle;
         if(airPacket){airPacket->rangedKind=ranged.weapon.kind;airPacket->rangedVariant=ranged.variant;airPacket->rangedTimeMs=ranged.timeMs;airPacket->rangedDurationMs=ranged.durationMs;
             NativeCrossbowPresentation mechanical{};if(readNativeCrossbowPresentation(memoryRead,base,ranged.weapon,mechanical))airPacket->rangedMechanism=mechanical.state;}
@@ -432,19 +432,19 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     }
     if(trapValid||trapIdle){
         const auto& item=trapValid?trap.trap:heldTrap;
-        if(item.player.character!=localRole+1||item.player.sword.game!=observedGame||item.player.sword.actor!=observedPlayer)return false;
+        if(item.player.character!=localCharacter()||item.player.sword.game!=observedGame||item.player.sword.actor!=observedPlayer)return false;
         if(trapValid&&sceneHandle)*sceneHandle=trap.handle;
         if(airPacket){airPacket->trapHeld=item.kind;airPacket->trapStock=item.quantity;airPacket->trapVariant=trap.variant;airPacket->trapTimeMs=trap.timeMs;airPacket->trapDurationMs=trap.durationMs;}
     }
     if(heartValid||heartIdle){
         const auto& item=heartValid?heart.heart:heldHeart;
-        if(item.player.character!=localRole+1||item.player.sword.game!=observedGame||item.player.sword.actor!=observedPlayer)return false;
+        if(item.player.character!=localCharacter()||item.player.sword.game!=observedGame||item.player.sword.actor!=observedPlayer)return false;
         if(heartValid&&sceneHandle)*sceneHandle=heart.handle;
         if(airPacket){airPacket->heartHeld=1;airPacket->heartVariant=heart.variant;airPacket->heartTimeMs=heart.timeMs;airPacket->heartDurationMs=heart.durationMs;}
     }
     if(timepieceValid||timepieceIdle){
         const auto& item=timepieceValid?timepiece.timepiece:heldTimepiece;
-        if(item.player.character!=localRole+1||item.player.sword.game!=observedGame||item.player.sword.actor!=observedPlayer)return false;
+        if(item.player.character!=localCharacter()||item.player.sword.game!=observedGame||item.player.sword.actor!=observedPlayer)return false;
         unsigned timeMs=timepiece.timeMs;
         // The peek (5) holds one pose; the shift's raise (7) loops natively, so it is timed from its instance's start.
         if(timepieceValid&&timepiece.variant==5)timeMs=0;
@@ -455,12 +455,12 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
         if(airPacket){airPacket->heartHeld=2;airPacket->heartVariant=timepiece.variant;airPacket->heartTimeMs=timeMs;airPacket->heartDurationMs=timepiece.durationMs;}
     }
     if(grenadeValid){
-        if(grenade.grenade.player.character!=localRole+1)return false;
+        if(grenade.grenade.player.character!=localCharacter())return false;
         if(sceneHandle)*sceneHandle=grenade.handle;
         if(airPacket){airPacket->grenadeHeld=1;airPacket->grenadeVariant=grenade.variant;airPacket->grenadeTimeMs=grenade.timeMs;airPacket->grenadeDurationMs=grenade.durationMs;}
     }else if(((action==0&&nativePlayerGroundIdleStates(states,base))||(action==3&&nativePlayerAirIdleStates(states,base)))&&sword.sword.equipped){
         NativePlayerGrenade held{};
-        if(shadowTimedRead(9,[&]{return readNativePlayerGrenade(memoryRead,base,held,nullptr,true);})&&held.player.character==localRole+1&&held.equipped&&held.started&&held.quantity>0&&airPacket)airPacket->grenadeHeld=1;
+        if(shadowTimedRead(9,[&]{return readNativePlayerGrenade(memoryRead,base,held,nullptr,true);})&&held.player.character==localCharacter()&&held.equipped&&held.started&&held.quantity>0&&airPacket)airPacket->grenadeHeld=1;
     }
     if(powerValid){
         shadowSourceReadStage=4;
@@ -475,7 +475,7 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     }
     if(action==7){NativePlayerEquipmentScene equipment{};
         shadowSourceReadStage=5;
-        if(!readNativePlayerEquipmentScene(memoryRead,base,states,equipment)||equipment.character!=localRole+1)return false;
+        if(!readNativePlayerEquipmentScene(memoryRead,base,states,equipment)||equipment.character!=localCharacter())return false;
         if(sceneHandle)*sceneHandle=equipment.handle;
         if(airPacket){airPacket->equipmentVariant=equipment.variant;airPacket->equipmentTimeMs=equipment.timeMs;airPacket->equipmentDurationMs=equipment.durationMs;}
     }
@@ -485,13 +485,13 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
         if(readNativePlayerKeyholeScene(memoryRead,base,states,keyhole))shadowStream.keyholeHandoff.observe(states,keyhole,GetTickCount64());
         else if(!readNativeKeyholeHandoff(memoryRead,base,states,shadowStream.keyholeHandoff,GetTickCount64(),keyhole)&&
                 !readNativeKeyholeHandoff(memoryRead,base,states,shadowStream.keyholeHandoff,GetTickCount64(),keyhole,true))return false;
-        if(keyhole.character!=localRole+1)return false;
+        if(keyhole.character!=localCharacter())return false;
         if(sceneHandle)*sceneHandle=keyhole.handle;
         if(airPacket){airPacket->traversalVariant=keyhole.variant;airPacket->traversalTimeMs=keyhole.timeMs;airPacket->traversalDurationMs=keyhole.durationMs;airPacket->traversalEndStance=keyhole.endStance;}
     }
     else shadowStream.keyholeHandoff={};
     if(action==11){NativePlayerLandingScene landing{};
-        if(!readNativePlayerLandingScene(memoryRead,base,states,landing)||landing.character!=localRole+1)return false;
+        if(!readNativePlayerLandingScene(memoryRead,base,states,landing)||landing.character!=localCharacter())return false;
         if(sceneHandle)*sceneHandle=landing.handle;
         if(airPacket){airPacket->traversalVariant=6;airPacket->traversalTimeMs=landing.timeMs;airPacket->traversalDurationMs=landing.durationMs;airPacket->traversalEndStance=landing.endStance;}
     }
@@ -502,7 +502,7 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
             airPacket->traversalEndStance=traversal.endStance;airPacket->traversalStart=traversal.start;airPacket->traversalGoal=traversal.goal;}
     }
     if(action==9){NativePlayerVault vault{};
-        if(!readNativePlayerVault(memoryRead,base,states,vault)||vault.character!=localRole+1)return false;
+        if(!readNativePlayerVault(memoryRead,base,states,vault)||vault.character!=localCharacter())return false;
         if(sceneHandle)*sceneHandle=vault.handle;
         if(airPacket){airPacket->traversalVariant=3;airPacket->traversalTimeMs=unsigned(std::lround(vault.progress*1000));airPacket->traversalDurationMs=1000;
             airPacket->traversalStart=vault.start;airPacket->traversalGoal=vault.goal;airPacket->traversalPoint=vault.point;airPacket->traversalHeight=vault.height;}
@@ -517,7 +517,7 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
         if(!readNativePlayerCombatScene(memoryRead,base,states,combat)){
             if(recoilState){++shadowRecoilRefused;shadowRecoilStep=nativeCombatSceneStep;shadowRecoilVariant=nativeCombatSceneVariant;}return false;}
         if(recoilState){if(combat.variant==28||combat.variant==29)++shadowRecoilSent;else{++shadowRecoilOther;shadowRecoilVariant=combat.variant;}}
-        if(combat.character!=localRole+1||
+        if(combat.character!=localCharacter()||
            (combat.target.actor&&(combat.target.actor==probeActor||combat.target.handle==probeHandle)))return false;
         if(sceneHandle)*sceneHandle=combat.handle;
         if(airPacket){airPacket->combatVariant=combat.variant;airPacket->combatPhase=combat.subscene=="Loop"||combat.variant==11?2u:1u;
@@ -542,7 +542,7 @@ void beginShadowStream(bool persistent=false){
         ++shadowStreamRefused;shadowStreamResult="unavailable_or_busy";return;
     }
     NativeSwordEquipment s{};NativeHealth h{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
-    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,s,localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||s.actor!=probeActor){
+    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,s,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||s.actor!=probeActor){
         ++shadowStreamRefused;shadowStreamResult="clone_equipment_unreadable";return;
     }
     // Whole-body presentation already supports both stable native inventory
@@ -568,7 +568,7 @@ void beginShadowStream(bool persistent=false){
     ++shadowStreamStarted;shadowStreamResult="awaiting_peer";
 }
 CoopShadowActionPacket shadowStreamPacket(unsigned kind){
-    CoopShadowActionPacket p{};p.sequence=++shadowStreamSequence;p.role=localRole;p.character=localRole+1;p.kind=kind;
+    CoopShadowActionPacket p{};p.sequence=++shadowStreamSequence;p.role=localRole;p.character=localCharacter();p.kind=kind;
     p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);
     p.sourceSession=outgoing.session;p.targetSession=remote.session;p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;
     p.mapId=outgoing.mapId;p.rootSequence=outgoing.sequence;p.sourceToken=shadowStream.token;p.targetToken=shadowStream.peerToken;return p;
@@ -597,11 +597,11 @@ void sendShadowStream(ULONGLONG tick){
     if(!sourceValid){++shadowSourceMisses;shadowSourceLastFailure=shadowSourceReadStage;
         ++shadowSourceFailureCounts[(std::min)(7u,shadowSourceReadStage)];
         unsigned swordState=0;
-        if(readNativePresentationFallback(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,observedPlayer,localRole+1,swordState)){
+        if(readNativePresentationFallback(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,observedPlayer,localCharacter(),swordState)){
             // Discard every partially populated action field. Only independently
             // revalidated equipment and ground locomotion cross this path.
             p=shadowStreamPacket(1);p.swordState=swordState;action=18;scene=0;leanSide=leanUp=0;++shadowUnboundSamples;
-        }else if(readNativePresentationHold(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,observedPlayer,localRole+1,swordState,shadowStreamLastPacket.swordState)){
+        }else if(readNativePresentationHold(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,observedPlayer,localCharacter(),swordState,shadowStreamLastPacket.swordState)){
             p=shadowStreamPacket(1);p.swordState=swordState;action=24;scene=0;leanSide=leanUp=0;++shadowHoldSamples;
         }else{++shadowUnboundRefused;return;}
         // 1214fd (#115): the held or pulled movable is revalidated on its own (handle, name key and world transform), so it

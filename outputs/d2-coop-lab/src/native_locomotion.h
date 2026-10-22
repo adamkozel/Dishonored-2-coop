@@ -147,7 +147,7 @@ void publishLocomotion(ULONGLONG tick,const float* position,const float* orienta
     if(shadowLocoUntil>tick&&shadowLocoGame==probeGame&&shadowLocoActor==probeActor&&shadowLocoHandle==probeHandle&&
        shadowLocoEpoch==outgoing.worldEpoch&&shadowLocoRemoteEpoch==remote.worldEpoch&&shadowLocoRemoteSession==remote.session){
         NativeSwordEquipment sword{};
-        const auto scope=localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily;
+        const auto scope=remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily;
         const unsigned char stanceBytes[]={0x80,0xa1,0xc8,0,0,0,0xfb};
         const unsigned char equipBytes[]={0x80,0xa1,0xc8,0,0,0,0xf7};
         if(!std::memcmp(gameImage+0x486c50,stanceBytes,sizeof(stanceBytes))&&!std::memcmp(gameImage+0x486b00,equipBytes,sizeof(equipBytes))&&

@@ -88,13 +88,13 @@ bool playShadowAction(const char* action,float poseTime=-1.f){
     if(!alias)return false;
     NativeSwordEquipment sword{};
     if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,sword,
-       localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||sword.actor!=probeActor||!sword.equipped||!sword.started)return false;
+       remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||sword.actor!=probeActor||!sword.equipped||!sword.started)return false;
     std::uintptr_t list=0,anim=0,render=0,model=0,basic=0,items=0,name=0;unsigned count=0;std::string text;
     if(!memoryRead(probeActor+0x268,&list,8)||!list||!memoryRead(probeActor+0x270,&count,4)||(count&0xffffff)>256)return false;
     for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0,vt=0;if(!memoryRead(list+i*8,&c,8)||!c||!memoryRead(c,&vt,8))return false;if(vt==reinterpret_cast<std::uintptr_t>(gameImage)+0x1b80408)anim=c;}
     if(!anim||!memoryRead(anim+0x38,&render,8)||!render||!memoryRead(render+0x1fe8,&model,8)||!model||
        !memoryRead(model+8,&name,8)||!worldIdentityString(memoryRead,name,text)||
-       text!=(localRole?"models/characters/d2coop/shadow_corvo.md6":"models/characters/d2coop/shadow_emily.md6")||
+       text!=(remoteIsCorvo()?"models/characters/d2coop/shadow_corvo.md6":"models/characters/d2coop/shadow_emily.md6")||
        !memoryRead(model+0x148,&basic,8)||!basic||!memoryRead(basic+8,&name,8)||!worldIdentityString(memoryRead,name,text)||
        text!="models/characters/d2coop/shadow_actions.animbasic"||!memoryRead(basic+0x58,&items,8)||!items||
        !memoryRead(basic+0x60,&count,4)||(count&0xffffff)!=14)return false;

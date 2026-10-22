@@ -26,10 +26,10 @@ inline bool checkpointPacketShape(const CheckpointPacket& p,unsigned receiver) {
     if(p.kind==CheckpointMessage::Hello)return (p.role?p.clientArm:p.hostArm)&&!p.transaction&&!p.hostEpoch&&!p.clientEpoch&&!p.hostReady&&!p.clientReady&&!p.character;
     if(!p.hostArm||!p.clientArm||!p.hostEpoch||!p.clientEpoch)return false;
     if(p.kind==CheckpointMessage::Death||p.kind==CheckpointMessage::DeathReady)return !p.transaction&&!p.hostReady&&!p.clientReady&&
-        p.character==(p.kind==CheckpointMessage::DeathReady?p.role+1:0);
+        (p.kind==CheckpointMessage::DeathReady?(p.character==1||p.character==2):!p.character); // 1214hy (#159): any pairing
     if(p.kind==CheckpointMessage::Request)return !p.transaction&&!p.hostReady&&!p.clientReady&&!p.character;
     if(!p.transaction)return false;
-    if(p.kind==CheckpointMessage::Ready)return p.character==p.role+1&&(p.role?p.clientReady:p.hostReady)&&!(p.role?p.hostReady:p.clientReady);
+    if(p.kind==CheckpointMessage::Ready)return (p.character==1||p.character==2)&&(p.role?p.clientReady:p.hostReady)&&!(p.role?p.hostReady:p.clientReady);
     if(p.character)return false;
     if(p.kind==CheckpointMessage::Release||p.kind==CheckpointMessage::Complete)return p.hostReady&&p.clientReady;
     return !p.hostReady&&!p.clientReady;

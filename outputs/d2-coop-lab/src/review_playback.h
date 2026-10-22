@@ -18,8 +18,8 @@ bool beginReviewClip(int fixedFrame){
     char path[MAX_PATH]{};if(std::snprintf(path,sizeof(path),"%s.review.bin",statusPath)>=sizeof(path))return false;
     FILE* f=nullptr;if(fopen_s(&f,path,"rb")||!f)return false;
     std::vector<unsigned char> bytes(ReviewClip::maximumBytes+1);const auto size=fread(bytes.data(),1,bytes.size(),f);const bool io=!ferror(f);fclose(f);bytes.resize(size);
-    ReviewPlayback next{};const auto layout=localRole?0x00db32d37719931full:0x84db84f5d1336b80ull;
-    if(!io||!next.clip.decode(bytes,localRole?215:219,layout)||fixedFrame>=int(next.clip.frames)||fixedFrame < -1)return false;
+    ReviewPlayback next{};const auto layout=remoteIsCorvo()?0x00db32d37719931full:0x84db84f5d1336b80ull;
+    if(!io||!next.clip.decode(bytes,remoteIsCorvo()?215:219,layout)||fixedFrame>=int(next.clip.frames)||fixedFrame < -1)return false;
     for(unsigned frame=0;frame<next.clip.frames;++frame)for(unsigned j=3;j<=26;++j)if(j!=17)
         for(unsigned k=0;k<3;++k)if(std::fabs(next.clip.values[frame*next.clip.joints+j][4+k]-s.bindLocal[j][4+k])>.0001f)return false;
     next.game=s.game;next.actor=s.actor;next.animation=s.animation;next.skeleton=s.skeleton;next.handle=s.handle;next.parents=s.parents;

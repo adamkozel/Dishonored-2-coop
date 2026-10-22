@@ -16,8 +16,8 @@ std::uint64_t rangedPropCreated=0,rangedPropAttached=0,rangedPropHidden=0,ranged
 std::uint64_t rangedPropSwitched=0,rangedPropReused=0;
 const char* rangedPropResult="idle";
 const char* rangedPropDefinition(unsigned kind){
-    if(kind==1)return localRole?"models/weapons/d2coop/ranged_prop_corvo_gun.def":"models/weapons/d2coop/ranged_prop_emily_gun.def";
-    if(kind==2)return localRole?"models/weapons/d2coop/ranged_prop_corvo_crossbow.def":"models/weapons/d2coop/ranged_prop_emily_crossbow.def";
+    if(kind==1)return remoteIsCorvo()?"models/weapons/d2coop/ranged_prop_corvo_gun.def":"models/weapons/d2coop/ranged_prop_emily_gun.def";
+    if(kind==2)return remoteIsCorvo()?"models/weapons/d2coop/ranged_prop_corvo_crossbow.def":"models/weapons/d2coop/ranged_prop_emily_crossbow.def";
     if(kind==3)return "models/weapons/d2coop/grenade_prop.def";
     if(kind==4)return "models/weapons/d2coop/heart_prop.def";
     if(kind==5)return "models/weapons/d2coop/stunmine_prop.def";
@@ -111,7 +111,7 @@ void serviceRangedProp(ULONGLONG tick){
         if(!rangedPropIdentity(true)||!rangedPropApiMatches()){hideRangedProp();++rangedPropRefused;rangedPropResult="network_attachment_changed";return;}
         const auto slot=presentedVariant?RangedPresentation::slot(presentedVariant):0;
         // #30: ranged_hand_tracks_<character> [kind gun, crossbow x slot][120][7], rebuilt by the installer.
-        const auto* tracks=nativeTables().find(localRole?"ranged_hand_tracks_corvo":"ranged_hand_tracks_emily",{12,120,7});
+        const auto* tracks=nativeTables().find(remoteIsCorvo()?"ranged_hand_tracks_corvo":"ranged_hand_tracks_emily",{12,120,7});
         if(!tracks){hideRangedProp();++rangedPropRefused;rangedPropResult="native_tables_missing";return;}
         const float (*track)[7]=reinterpret_cast<const float(*)[7]>(tracks->f.data()+std::size_t((presentedKind-1)*6+slot)*120*7);
         const float f=(std::max)(0.f,(std::min)(1.f,presentedAmount))*119;const auto a=unsigned(f),b=(std::min)(119u,a+1);
@@ -173,7 +173,7 @@ void serviceRangedProp(ULONGLONG tick){
     if(rangedProp.joint==0xffff){
         auto& p=rangedProp;if(!rangedPropIdentity(false)){refuse("unbound_prop_identity_changed");return;}
         const char* tag="left_wrist_jnt";float offset[3]{},axis[9]{};const std::uint16_t joint=9;
-        if(!rangedPropIdleCalibration(localRole?1u:2u,p.kind,offset,axis)){refuse("hand_calibration_unavailable");return;}
+        if(!rangedPropIdleCalibration(remoteIsCorvo()?1u:2u,p.kind,offset,axis)){refuse("hand_calibration_unavailable");return;}
         {
             // Native equipment bind also supports a raw joint name. Check the
             // live skeleton/name table before invoking its fatal-on-miss path.
@@ -186,7 +186,7 @@ void serviceRangedProp(ULONGLONG tick){
                 refuse("native_left_hand_joint_unavailable");return;
             }
         }
-        if(joint>=(localRole?215:219)){refuse("native_left_hand_joint_invalid");return;}
+        if(joint>=(remoteIsCorvo()?215:219)){refuse("native_left_hand_joint_invalid");return;}
         p.tag=tag;
         reinterpret_cast<void(*)(void*,void*,const char**,const float*,const float*,bool)>(gameImage+0x875e80)(reinterpret_cast<void*>(p.parent),reinterpret_cast<void*>(p.actor),&p.tag,offset,axis,true);
         p.joint=joint;memoryRead(p.actor+0x358,&p.frame,8);

@@ -28,6 +28,8 @@ ProductArm productArm{};
 // controller holds an armed session (installed release or lab coop_product_auto).
 bool frontEndTitlePassed=false; // 1214ha (#146): a key was pressed at the title screen since boot
 bool coopSavesReadyForSession();void requestCoopSaves(); // 1214hs (#156, native_menu_ui.h)
+int coopPartnerCharacterForJoin(ULONGLONG tick,std::uint64_t joinKey); // 1214hx (#158, coop_character.h)
+bool coopCharacterChoiceEnabled=false; // 1214hx: the lab toggle coop_character_choice on|off (product mode always chooses)
 bool productSessionArmed(){return productArm.result&&!std::strcmp(productArm.result,"armed");}
 SHORT productKeyF7=0,productKeyF8=0;
 const char* productStep(unsigned i){
@@ -35,7 +37,7 @@ const char* productStep(unsigned i){
     case 0:return "coop_cinematic_sync on";
     case 1:return "coop_cinematic_barrier on";
     case 2:return "coop_world_observe on";
-    case 3:return partnerAssetsEnabled?(localRole?"coop_spawn_probe shadow_corvo":"coop_spawn_probe shadow_emily"):(localRole?"coop_spawn_probe corvo":"coop_spawn_probe emily");
+    case 3:return partnerAssetsEnabled?(remoteIsCorvo()?"coop_spawn_probe shadow_corvo":"coop_spawn_probe shadow_emily"):(remoteIsCorvo()?"coop_spawn_probe corvo":"coop_spawn_probe emily");
     case 4:return "coop_probe_follow exact";
     case 5:return "coop_probe_locomotion on";
     case 6:return "coop_movement_bank on";
@@ -80,6 +82,8 @@ void serviceProductSession(void* system,ULONGLONG tick){
         productNewWorld(a,outgoing.worldEpoch,remote.worldEpoch,outgoing.mapId,tick);return; // 1214ga (#145, product_arm.h)
     }
     if(tick<a.nextAt)return;
+    if(a.step==3){static ULONGLONG characterWaitSince=0; // 1214hy (#159)
+        if(remoteCharacterKnown())characterWaitSince=0;else{if(!characterWaitSince)characterWaitSince=tick;if(tick-characterWaitSince<3000){a.result="waiting_partner_character";return;}}}
     const char* command=productStep(a.step);
     if(!command){
         // Maintenance: re-issue idempotent session commands every 5 s so a
@@ -254,7 +258,11 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     // title, until the player presses a key.
     if(frontEnd&&!frontEndTitlePassed){m.result="waiting_title_key";return;}
     if(productMode&&!coopSavesReadyForSession()){requestCoopSaves();m.result="waiting_coop_saves";return;} // 1214hs
-    char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s emily",m.hostMapinfo,m.hostHigh?"high":"low");
+    // 1214hx (#158): the partner chooses Corvo or Emily on every join (coop_character.h); lab default stays Emily.
+    // The first mission has the game's own choice screen (its script switches the character), so it asks no question.
+    int character=2;const bool nativeChoice=!std::strcmp(m.hostMapinfo,"campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo");
+    if((productMode||coopCharacterChoiceEnabled)&&!nativeChoice){character=coopPartnerCharacterForJoin(tick,static_cast<std::uint64_t>(connection));if(!character){m.result="choosing_character";return;}}
+    char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s %s",m.hostMapinfo,m.hostHigh?"high":"low",character==1?"corvo":"emily");
     dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.followedMap=m.hostMap;m.result="loading_host_mission";
 }
 void writeMissionFollow(){

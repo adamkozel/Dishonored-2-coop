@@ -996,7 +996,7 @@ int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests()
     bad=p;bad.kind=0;check(!validShadowAction(bad,c,h),"hello cannot carry action/event");
     auto reverse=p;reverse.role=1;reverse.character=2;reverse.sourceSession=22;reverse.targetSession=11;reverse.sourceWorldEpoch=7;reverse.targetWorldEpoch=3;
     check(validShadowAction(reverse,h,c),"Emily action");
-    bad=p;bad.character=2;check(!validShadowAction(bad,c,h),"wrong character");
+    bad=p;bad.character=3;check(!validShadowAction(bad,c,h),"invalid character");
     bad=p;bad.sourceSession++;check(!validShadowAction(bad,c,h),"source session");bad=p;bad.targetSession++;check(!validShadowAction(bad,c,h),"target session");
     bad=p;bad.sourceWorldEpoch++;check(!validShadowAction(bad,c,h),"source epoch");bad=p;bad.targetWorldEpoch++;check(!validShadowAction(bad,c,h),"target epoch");
     bad=p;bad.mapId++;check(!validShadowAction(bad,c,h),"map");bad=p;bad.rootSequence=91;check(!validShadowAction(bad,c,h),"stale root");

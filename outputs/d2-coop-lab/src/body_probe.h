@@ -123,10 +123,10 @@ void publishBodyStream(ULONGLONG tick){
     for(unsigned j=0;j<20;++j)for(unsigned c=0;c<4;++c)for(unsigned r=0;r<3;++r)next.source[j].v[c*4+r]=remote.bodyPose[j][c*3+r];
     auto& m=mixamoResearch;
     next.mixamoStanding=false;
-    next.mixamoCrouch=next.shadowCrouch&&m.active(tick)&&m.actor==probeActor&&m.epoch==outgoing.worldEpoch&&m.peerEpoch==remote.worldEpoch&&m.peerSession==remote.session&&next.rig.parents.size()==(localRole?215:219);
+    next.mixamoCrouch=next.shadowCrouch&&m.active(tick)&&m.actor==probeActor&&m.epoch==outgoing.worldEpoch&&m.peerEpoch==remote.worldEpoch&&m.peerSession==remote.session&&next.rig.parents.size()==(remoteIsCorvo()?215:219);
     if(next.mixamoCrouch){NativeSwordEquipment sword{};
         if(!readNativeSwordEquipment(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),probeHandle,sword,
-           localRole?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||sword.actor!=probeActor||!sword.equipped||!sword.started){m.positioned=false;stopBodyProbe();return;}
+           remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||sword.actor!=probeActor||!sword.equipped||!sword.started){m.positioned=false;stopBodyProbe();return;}
     }
     if(next.shadowCrouch){
         PresentationPose sampled{};sampled.bodyValid=remote.bodyPoseValid!=0;sampled.stance=remote.playerStance;sampled.motion=remote.playerMotion;
@@ -146,7 +146,7 @@ void publishBodyStream(ULONGLONG tick){
     if(next.mixamoCrouch&&!next.mixamoStanding){
         if(m.positioned){float d2=0;for(unsigned i=0;i<2;++i){const float d=probeTargetPosition[i]-m.position[i];d2+=d*d;}
             if(d2>.04f){m.until=0;m.persistent=false;next.mixamoCrouch=false;} // refuse teleport-sized step
-            else if(d2>.00000001f)m.phase=std::fmod(m.phase+std::sqrt(d2)/(localRole?kMixamoCorvoStride:kMixamoEmilyStride),1.f); // distance-based artistic cadence; forward-only experiment
+            else if(d2>.00000001f)m.phase=std::fmod(m.phase+std::sqrt(d2)/(remoteIsCorvo()?kMixamoCorvoStride:kMixamoEmilyStride),1.f); // distance-based artistic cadence; forward-only experiment
         }
         std::memcpy(m.position,probeTargetPosition,12);m.positioned=true;next.mixamoPhase=m.phase;
     }

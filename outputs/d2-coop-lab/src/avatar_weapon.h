@@ -31,16 +31,16 @@ void beginAvatarWeapon(){
     if(!avatarSwordReady(tick)){refuse("counterpart_unavailable");return;}
     NativeSwordEquipment counterpart{};NativePlayerSword source{};
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
-    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,counterpart,localRole?NativeSwordScope::CorvoTutorial:NativeSwordScope::EmilyPartner)||
+    if(!readNativeSwordEquipment(memoryRead,base,probeHandle,counterpart,remoteIsCorvo()?NativeSwordScope::CorvoTutorial:NativeSwordScope::EmilyPartner)||
        counterpart.actor!=probeActor){refuse("counterpart_inventory_unavailable");return;}
-    if(!readNativePlayerSword(memoryRead,base,source)||source.character!=localRole+1||source.sword.logic!=1||
+    if(!readNativePlayerSword(memoryRead,base,source)||source.character!=localCharacter()||source.sword.logic!=1||
        source.sword.game!=observedGame){refuse("source_sword_unavailable");return;}
     avatarWeapon={};avatarWeapon.until=tick+15000;avatarWeapon.token=++avatarWeaponNonce;
     avatarWeapon.epoch=outgoing.worldEpoch;avatarWeapon.peerEpoch=remote.worldEpoch;avatarWeapon.peerSession=remote.session;
     ++avatarWeaponStarted;avatarWeaponResult="awaiting_peer";
 }
 CoopAvatarWeaponPacket avatarWeaponPacket(unsigned kind){
-    CoopAvatarWeaponPacket p{};p.sequence=++avatarWeaponSequence;p.role=localRole;p.character=localRole+1;p.kind=kind;
+    CoopAvatarWeaponPacket p{};p.sequence=++avatarWeaponSequence;p.role=localRole;p.character=localCharacter();p.kind=kind;
     p.sourceSession=outgoing.session;p.targetSession=remote.session;p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;
     p.mapId=outgoing.mapId;p.rootSequence=outgoing.sequence;p.sourceToken=avatarWeapon.token;p.targetToken=avatarWeapon.peerToken;return p;
 }
@@ -52,7 +52,7 @@ void sendAvatarWeapon(ULONGLONG tick){
     }
     if(!avatarWeapon.peerReady||tick-avatarWeapon.lastSend<33)return;
     avatarWeapon.lastSend=tick;NativePlayerSword s{};
-    if(!readNativePlayerSword(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),s)||s.character!=localRole+1||s.sword.logic!=1||s.sword.game!=observedGame)return;
+    if(!readNativePlayerSword(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),s)||s.character!=localCharacter()||s.sword.logic!=1||s.sword.game!=observedGame)return;
     auto p=avatarWeaponPacket(1);p.state=s.sword.equipped?1:0;
     if(validAvatarWeapon(p,remote,outgoing)&&coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_UnreliableNoNagle,nullptr)==k_EResultOK){
         ++avatarWeaponSent;avatarWeaponLastPacket=p;avatarWeapon.state=p.state;
