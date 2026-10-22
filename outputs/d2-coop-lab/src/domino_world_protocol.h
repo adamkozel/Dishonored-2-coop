@@ -19,7 +19,7 @@ struct CoopDominoWorldPacket {
 #pragma pack(pop)
 static_assert(sizeof(CoopDominoWorldPacket)==1000);
 inline bool validDominoWorldPacket(const CoopDominoWorldPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
-    if(p.magic!=0x44573244||p.version!=2||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=1||peer.role!=1||local.role!=0||
+    if(p.magic!=0x44573244||p.version!=2||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=peer.role||p.role==local.role||
        !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.present>1||p.count>4||p.beamCount>6||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||
        p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return false;

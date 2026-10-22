@@ -111,4 +111,32 @@ Safe already:
   session (confirmed runtime).
   - On the second join (as Emily) the host kept the first avatar, and the Emily bank could not bind to it. 1214hz
     removes a stale avatar with the engine's own remove event, and the arm rebuilds it.
+- **Pairing Emily-Corvo (take pairing-v1781a, two accounts):** each side renders the other as the other's character.
+  The host draws `d2coop_probe_corvo` (215 joints) and the VM draws `d2coop_probe_emily` (219). In the host's frame
+  the partner walks along the canal as masked Corvo.
+- **1214ia, the power presentation streams by character:**
+  - Each stream is sent by whichever game plays the power's character and presented by the other. The validators
+    accept a packet from the peer in either role.
+  - The world effects of an Emily partner's powers stay with the host: the shade puppet and the Mesmerize object
+    still need `localRole==0`.
+  - Lab notes: the named grant equips a power only once, and a hand already holding a power refused the next one
+    (`named_slot_occupied`); 1214ib switches it. A lab item grant (mana) also takes the hand.
+- **Take host-powers-v1786a (1214ib, local lab; an Emily host in Edge of the World and a Corvo partner)** passes.
+  The partner presents each of the host's casts:
+  - the Doppelganger clone (visible);
+  - the Mesmerize spirit (its native visual scene, state 3);
+  - a Far Reach beam and impact;
+  - the Domino stream.
+- **Lab fixtures:** `work/release/Prepare-PairingFixtures-v1784.ps1` copies the other character's Dunwall checkpoint
+  into each lab instance's SLOT80 (the client Corvo, the host Emily). `LoadGame 80` then gives any pairing at the
+  tutorial guards; SLOT81 stays the restore fixture.
+- **The shadow stream of a swapped-character lab fixture (diag-pairing-stream-v1788a/b, diag-partner-sword-v1789a):**
+  - At the Dunwall fixture a Corvo partner (client `LoadGame 80`) never armed its shadow action stream
+    (`unavailable_or_busy`). Its pair was ready (`pairBits` 0).
+  - 1214ic records the refusal: the source failed only its sword term (`sourceValidBits` 128: the native `ply_sword`
+    quantity is not 1).
+  - The checkpoint holds no sword: the restore fixture gets it from the native Mayhew scene (PrepareShadowSword). A
+    bare load skips that scene, so the sword quantity stays 0.
+  - `work/release/Enter-PairingFixture-v1790.ps1` loads the pairing slot and plays the same scene. This is a lab
+    fixture matter, not a mod one: a real mission start has its sword.
 

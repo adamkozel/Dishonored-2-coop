@@ -24,7 +24,7 @@ void sampleMesmerizeWorld(ULONGLONG tick){
     auto& s=mesmerizeWorldStream;
     if(!shadowStreamCurrent(tick)||!shadowStream.peerReady){s={};return;}
     if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){s={};s.token=shadowStream.token;s.peerToken=shadowStream.peerToken;}
-    if(localRole!=1||tick<s.nextSample)return;s.nextSample=tick+80;
+    if(localCharacter()!=2||tick<s.nextSample)return;s.nextSample=tick+80; // 1214ia (#159)
     NativeMesmerizeWorld world{};
     // An unreadable or retired pointer is not evidence of a gameplay removal.
     // Silence merely lets the receiver's short cosmetic lease expire.
@@ -36,7 +36,7 @@ void sampleMesmerizeWorld(ULONGLONG tick){
         s.sourceSnapshot=snapshot;s.sourceHandle=world.handle;s.sourceEvent=++mesmerizeWorldEvent;s.sourceState=0;
     }
     if(!s.sourceEvent)return;
-    CoopMesmerizeWorldPacket p{};p.sequence=++mesmerizeWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
+    CoopMesmerizeWorldPacket p{};p.role=localRole;p.sequence=++mesmerizeWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
     p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;p.sourceToken=s.token;p.targetToken=s.peerToken;
     p.event=s.sourceEvent;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.nativeHandle=world.handle;p.state=world.state;p.transform=world.transform;
     p.snapshot=s.sourceSnapshot&&world.state==3?1:0;

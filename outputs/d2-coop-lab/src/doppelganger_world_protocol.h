@@ -32,7 +32,7 @@ inline std::uint64_t doppelgangerWorldDigest(const CoopDoppelgangerWorldPacket& 
 }
 inline bool validDoppelgangerWorldPacket(const CoopDoppelgangerWorldPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer,unsigned* failure=nullptr){
     if(failure)*failure=0;const auto fail=[&](unsigned line){if(failure)*failure=line;return false;};
-    if(p.magic!=0x43443244||p.version!=6||p.kind>2||(!p.present&&p.kind)||p.slot>=kDoppelgangerWireSlots||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=1||peer.role!=1||local.role!=0||
+    if(p.magic!=0x43443244||p.version!=6||p.kind>2||(!p.present&&p.kind)||p.slot>=kDoppelgangerWireSlots||p.size!=sizeof(p)||p.build!=0x67a50cde||p.role!=peer.role||p.role==local.role||
        !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.present>1||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||
        p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return fail(__LINE__);

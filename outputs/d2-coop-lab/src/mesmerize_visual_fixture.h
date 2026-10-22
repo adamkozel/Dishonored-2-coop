@@ -90,7 +90,7 @@ void serviceMesmerizeVisual(ULONGLONG tick){
     const auto refuse=[&](const char* why){++mesmerizeVisualRefused;mesmerizeVisualResult=why;mesmerizeVisualError=why;};
     if(p.target.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};++mesmerizeVisualRetired;mesmerizeVisualResult="world_retired";}
     const auto& stream=mesmerizeWorldStream;
-    const bool automatic=localRole==0&&mesmerizeWorldStreamCurrent(tick)&&stream.lease>tick&&movementBankActive()&&coopGameplayReady(remote);
+    const bool automatic=!remoteIsCorvo()&&mesmerizeWorldStreamCurrent(tick)&&stream.lease>tick&&movementBankActive()&&coopGameplayReady(remote);
     const unsigned remoteVariant=stream.presented.state==1?1:stream.presented.state==3?2:3;
     const bool activeSnapshot=automatic&&stream.presented.snapshot==1&&stream.presented.state==3;
     if(p.network&&p.until&&(!automatic||p.event!=stream.presented.event||p.streamToken!=stream.token||p.peerToken!=stream.peerToken)){p.pendingHide=true;p.wanted=0;}

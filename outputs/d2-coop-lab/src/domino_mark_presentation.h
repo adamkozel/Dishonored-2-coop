@@ -11,7 +11,7 @@ unsigned dominoReadyMask=0;
 // 1024 avatar identity changed.
 unsigned dominoPresentationReadyMask(ULONGLONG tick){
     const auto& stream=dominoWorldStream;unsigned m=0;
-    if(localRole!=0)m|=1;if(!dominoWorldCurrent(tick))m|=2;if(stream.lease<=tick)m|=4;if(!movementBankActive())m|=8;if(!coopGameplayReady(remote))m|=16;
+    if(remoteIsCorvo())m|=1;if(!dominoWorldCurrent(tick))m|=2;if(stream.lease<=tick)m|=4;if(!movementBankActive())m|=8;if(!coopGameplayReady(remote))m|=16;
     if(!((!std::strcmp(mapName,kGuardMap)&&observerIsolation.ready&&observerIsolation.movementFixture)||productSessionArmed()))m|=32;
     if(!probeDoppelganger)m|=64;if(!avatarAiHeld)m|=128;if(!probeFollowExact)m|=256;if(avatarAiTarget.actor!=probeActor)m|=512;
     if(!m&&worldIdentityEntity(memoryRead,observedGame,probeHandle)!=probeActor)m|=1024;

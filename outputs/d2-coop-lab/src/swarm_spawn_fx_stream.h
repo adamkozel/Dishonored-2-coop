@@ -12,7 +12,7 @@ std::uint64_t swarmSpawnFxSequence=0,swarmSpawnFxEvent=0,swarmSpawnFxSent=0,swar
 std::uint64_t swarmSpawnFxReads=0,swarmSpawnFxReadFailures=0;double swarmSpawnFxReadMaxMs=0;
 bool swarmSpawnFxCurrent(ULONGLONG tick){return shadowStreamCurrent(tick)&&shadowStream.peerReady&&swarmSpawnFxStream.token==shadowStream.token&&swarmSpawnFxStream.peerToken==shadowStream.peerToken;}
 void sampleSwarmSpawnFx(const NativeSwarmWorld& world,const CoopSwarmWorldPacket& packet,ULONGLONG tick){
-    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||localRole||!shadowStreamCurrent(tick)||!shadowStream.peerReady)return;
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||localCharacter()!=1||!shadowStreamCurrent(tick)||!shadowStream.peerReady)return; // 1214ia (#159)
     auto& s=swarmSpawnFxStream;
     if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){s={};s.token=shadowStream.token;s.peerToken=shadowStream.peerToken;}
     const double now=presentationClock();s.discovery.observe(world.present?world.handle:0,now);
@@ -26,7 +26,7 @@ void sampleSwarmSpawnFx(const NativeSwarmWorld& world,const CoopSwarmWorldPacket
     swarmSpawnFxReadMaxMs=(std::max)(swarmSpawnFxReadMaxMs,presentationClock()-began);
     if(!valid){++swarmSpawnFxReadFailures;return;}
     s.discovery.consumed=true;
-    CoopSwarmSpawnFxPacket p{};p.sequence=++swarmSpawnFxSequence;p.event=++swarmSpawnFxEvent;p.nativeFxId=fx.id;p.powerEvent=action.event;
+    CoopSwarmSpawnFxPacket p{};p.role=localRole;p.sequence=++swarmSpawnFxSequence;p.event=++swarmSpawnFxEvent;p.nativeFxId=fx.id;p.powerEvent=action.event;
     p.worldEvent=packet.event;p.worldHandle=world.handle;p.castTimeMs=action.powerTimeMs;
     p.sourceSession=outgoing.session;p.targetSession=remote.session;p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;
     p.sourceToken=s.token;p.targetToken=s.peerToken;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;
@@ -45,7 +45,7 @@ void receiveSwarmSpawnFx(const CoopSwarmSpawnFxPacket& p,ULONGLONG tick){
 }
 void serviceSwarmSpawnFx(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
-    auto& s=swarmSpawnFxStream;if(!swarmSpawnFxCurrent(tick)){s={};return;}if(localRole!=1)return;
+    auto& s=swarmSpawnFxStream;if(!swarmSpawnFxCurrent(tick)){s={};return;}if(!remoteIsCorvo())return;
     const auto& world=swarmWorldStream.presented;
     const bool worldLive=swarmWorldCurrent(tick)&&swarmWorldStream.lease>tick&&world.present;
     if(s.appliedWorldEvent&&(!worldLive||world.event!=s.appliedWorldEvent||world.nativeHandle!=s.appliedWorldHandle)){
@@ -78,7 +78,7 @@ void duplicateSwarmSpawnFx(){const auto& p=swarmSpawnFxStream.last;
 }
 void writeSwarmSpawnFx(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.swarm-spawn-fx.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
-    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& s=swarmSpawnFxStream;const auto& p=localRole?s.applied:s.last;
+    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& s=swarmSpawnFxStream;const auto& p=localCharacter()==1?s.last:s.applied;
     fprintf(f,"{\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"rejected\":%llu,\"reads\":%llu,\"readFailures\":%llu,\"readMaxMs\":%.6f,\"pending\":%u,\"baseline\":%s,\"consumed\":%s,\"sequence\":%llu,\"event\":%llu,\"nativeFxId\":%u,\"worldEvent\":%llu,\"worldHandle\":%u,\"powerEvent\":%llu,\"castTimeMs\":%u,\"sampleTimeUs\":%llu,\"position\":[",swarmSpawnFxSent,swarmSpawnFxReceived,swarmSpawnFxApplied,swarmSpawnFxRejected,swarmSpawnFxReads,swarmSpawnFxReadFailures,swarmSpawnFxReadMaxMs,s.count,s.discovery.baseline?"true":"false",s.discovery.consumed?"true":"false",p.sequence,p.event,p.nativeFxId,p.worldEvent,p.worldHandle,p.powerEvent,p.castTimeMs,p.sampleTimeUs);
     for(unsigned i=0;i<3;++i)fprintf(f,"%s%.8f",i?",":"",p.position[i]);fputs("],\"axis\":[",f);
     for(unsigned i=0;i<9;++i)fprintf(f,"%s%.8f",i?",":"",p.axis[i]);fputs("]}\n",f);

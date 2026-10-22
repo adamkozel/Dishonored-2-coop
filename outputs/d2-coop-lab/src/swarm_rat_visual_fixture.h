@@ -158,7 +158,7 @@ void serviceSwarmRatSlot(ULONGLONG tick,unsigned index,bool& mayCreate){
     auto& p=swarmRatVisualPool[index];const auto& s=swarmWorldStream;
     const auto refuse=[&](const char* why){++swarmRatRefused;swarmRatResult=why;p.pendingHide=true;};
     if(p.target.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};++swarmRatRetired;swarmRatResult="world_retired";}
-    const bool automatic=localRole==1&&swarmWorldCurrent(tick)&&s.lease>tick&&s.presented.present&&s.presented.count&&movementBankActive()&&coopGameplayReady(remote)&&
+    const bool automatic=remoteIsCorvo()&&swarmWorldCurrent(tick)&&s.lease>tick&&s.presented.present&&s.presented.count&&movementBankActive()&&coopGameplayReady(remote)&&
         // 1214ej: product sessions too (1500a: 0 rat models while the stream presented 15 rats).
         ((observerIsolation.ready&&observerIsolation.movementFixture&&observerIsolation.until>tick+2000&&!std::strcmp(mapName,kGuardMap))||productSessionArmed())&&partnerAssetsEnabled;
     const CoopSwarmAgent* source=nullptr;
@@ -220,7 +220,7 @@ void serviceSwarmRatVisual(ULONGLONG tick){
         swarmRatTimings={};swarmRatServiceIntervals={};swarmRatPreviousService=0;
         swarmRatTimingGame=observedGame;swarmRatTimingEpoch=outgoing.worldEpoch;
     }
-    swarmRatTimingPhase=localRole==1&&swarmWorldCurrent(tick)&&swarmWorldStream.lease>tick&&swarmWorldStream.presented.present&&swarmWorldStream.presented.count?1:0;
+    swarmRatTimingPhase=remoteIsCorvo()&&swarmWorldCurrent(tick)&&swarmWorldStream.lease>tick&&swarmWorldStream.presented.present&&swarmWorldStream.presented.count?1:0;
     if(swarmRatPreviousService&&swarmRatPreviousTimingPhase==swarmRatTimingPhase&&began-swarmRatPreviousService<250.)swarmRatServiceIntervals[swarmRatTimingPhase].add(began-swarmRatPreviousService);
     swarmRatPreviousService=began;swarmRatPreviousTimingPhase=swarmRatTimingPhase;
     SwarmRatTimingScope measure(4);

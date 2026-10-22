@@ -16,7 +16,7 @@ void sampleNativeWindblastFx(ULONGLONG tick){
     if(!nativeMutationAllowed||!shadowStreamCurrent(tick)||!shadowStream.peerReady)return;
     auto& s=windblastFxStream;if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){s={};s.token=shadowStream.token;s.peerToken=shadowStream.peerToken;}
     // Observe immediately after the corresponding native semantic sample.
-    if(localRole||tick!=shadowStream.lastSend||tick-s.lastRead<33)return;s.lastRead=tick;
+    if(localCharacter()!=1||tick!=shadowStream.lastSend||tick-s.lastRead<33)return;s.lastRead=tick; // 1214ia (#159)
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::vector<NativeWindblastFxRecord> records;
     if(!readNativeWindblastFxRecords(memoryRead,base,observedGame,records)){++windblastFxReadFailures;return;}
     if(shadowStream.sourcePower==11){std::vector<NativeWindblastFxRecord> named;unsigned high=windblastFxSeenHigh;
@@ -42,7 +42,7 @@ void sampleNativeWindblastFx(ULONGLONG tick){
     // Baseline all already-existing records even if no cast is active. Re-arming
     // cannot replay an earlier native effect; ambiguous new effects fail closed.
     s.nativeHighWater=highest;s.baseline=true;if(count!=1)return;
-    CoopWindblastFxPacket p{};p.sequence=++windblastFxSequence;p.event=++windblastFxEvent;p.nativeFxId=candidate->id;p.powerEvent=shadowStream.sourceEvent;p.castTimeMs=shadowStreamLastPacket.powerTimeMs;
+    CoopWindblastFxPacket p{};p.role=localRole;p.sequence=++windblastFxSequence;p.event=++windblastFxEvent;p.nativeFxId=candidate->id;p.powerEvent=shadowStream.sourceEvent;p.castTimeMs=shadowStreamLastPacket.powerTimeMs;
     p.sourceSession=outgoing.session;p.targetSession=remote.session;p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;
     p.sourceToken=s.token;p.targetToken=s.peerToken;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;
     std::copy(candidate->origin,candidate->origin+3,p.position.begin());std::copy(candidate->axis,candidate->axis+9,p.axis.begin());
@@ -71,7 +71,7 @@ void presentNativeWindblastFx(const PresentationPose& pose,ULONGLONG tick){
 void serviceNativeWindblastFx(ULONGLONG tick){
     if(!nativeMutationAllowed)return;auto& s=windblastFxStream;if(!windblastFxCurrent(tick)){s={};return;}
     for(unsigned i=0;i<s.readyCount;++i){const auto& e=s.ready[i];
-        if(localRole==1&&movementBankActive()&&presentationClock()-e.time<400&&startNativePowerFx(e.p.variant==2?30:8,e.p.position.data(),tick,true,e.p.axis.data())){++windblastFxApplied;
+        if(remoteIsCorvo()&&movementBankActive()&&presentationClock()-e.time<400&&startNativePowerFx(e.p.variant==2?30:8,e.p.position.data(),tick,true,e.p.axis.data())){++windblastFxApplied;
             if(e.p.waveValid){if(startNativePowerFx(29,e.p.wave.data(),tick,true,e.p.waveAxis.data()))++windblastFxWaves;else ++windblastFxRejected;}}
         else ++windblastFxRejected;
     }s.readyCount=0;

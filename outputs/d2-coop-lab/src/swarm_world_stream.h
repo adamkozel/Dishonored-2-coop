@@ -27,7 +27,7 @@ void sampleSwarmWorld(ULONGLONG tick){
     if(s.token!=shadowStream.token||s.peerToken!=shadowStream.peerToken){s={};s.token=shadowStream.token;s.peerToken=shadowStream.peerToken;}
     // At most ~30Hz once ownership is known, so the presentation buffer
     // normally contains a following sample even with one delayed engine frame.
-    if(localRole!=0||tick<s.nextSample)return;s.nextSample=tick+(s.discovered?33:500);
+    if(localCharacter()!=1||tick<s.nextSample)return;s.nextSample=tick+(s.discovered?33:500); // 1214ia (#159)
     NativeSwarmWorld world{};const bool cached=s.discovered;const double start=presentationClock();
     const bool valid=readNativeSwarmWorld(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),world,&swarmReadStage,cached?&s.known:nullptr);
     const double elapsed=presentationClock()-start;swarmReadMaxMs=(std::max)(swarmReadMaxMs,elapsed);++swarmReadCount;
@@ -37,7 +37,7 @@ void sampleSwarmWorld(ULONGLONG tick){
     const auto handle=world.present?world.handle:0u;
     if(!s.sourceEvent&&!handle){sampleSwarmSpawnFx(world,{},tick);CoopSwarmWorldPacket empty{};sampleSwarmTrails(world,empty);return;}
     if(handle!=s.sourceHandle||!s.sourceEvent){s.sourceHandle=handle;s.sourceEvent=++swarmWorldEvent;}
-    CoopSwarmWorldPacket p{};p.sequence=++swarmWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
+    CoopSwarmWorldPacket p{};p.role=localRole;p.sequence=++swarmWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
     p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;p.sourceToken=s.token;p.targetToken=s.peerToken;
     p.event=s.sourceEvent;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.nativeHandle=handle;p.present=world.present?1u:0u;
     if(!memoryRead(world.equipment.player.sword.actor+0x300,p.sourceOrigin.data(),12))return;
@@ -73,7 +73,7 @@ void presentSwarmWorld(ULONGLONG tick){
 }
 void writeSwarmWorld(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.swarm-world.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
-    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& s=swarmWorldStream;const auto& p=localRole==0?s.sent:s.presented;
+    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& s=swarmWorldStream;const auto& p=localCharacter()==1?s.sent:s.presented;
     fprintf(f,"{\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"unknown\":%llu,\"presented\":%llu,\"sequence\":%llu,\"event\":%llu,\"nativeHandle\":%u,\"present\":%u,\"count\":%u,\"bytes\":%u,\"leased\":%s,\"readCount\":%llu,\"scopedReadCount\":%llu,\"readMaxMs\":%.4f,\"scopedReadMaxMs\":%.4f,\"readStage\":%u,\"olderSamples\":%llu,\"olderAgents\":%u,\"olderHandle\":%u,\"agents\":[",swarmWorldSent,swarmWorldReceived,swarmWorldRejected,swarmWorldUnknown,swarmWorldPresented,p.sequence,p.event,p.nativeHandle,p.present,p.count,p.size,s.lease>GetTickCount64()?"true":"false",swarmReadCount,swarmScopedReadCount,swarmReadMaxMs,swarmScopedReadMaxMs,swarmReadStage,swarmOlderSamples,swarmOlderAgents,swarmOlderHandle);
     for(unsigned i=0;i<p.count;++i){const auto& a=p.agents[i];fprintf(f,"%s{\"index\":%u,\"handle\":%u,\"incarnation\":%u,\"state\":%u,\"directDriver\":%u,\"scale\":%.6f,\"transform\":[",i?",":"",a.index,a.handle,a.incarnation,a.state,a.directDriver,a.scale);
         for(unsigned k=0;k<12;++k)fprintf(f,"%s%.6f",k?",":"",a.transform[k]);fputs("]}",f);}

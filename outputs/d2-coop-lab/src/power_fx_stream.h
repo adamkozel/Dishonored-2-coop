@@ -14,7 +14,7 @@ bool powerFxStreamCurrent(ULONGLONG tick){
     return shadowStreamCurrent(tick)&&shadowStream.peerReady&&powerFxStream.token==shadowStream.token&&powerFxStream.peerToken==shadowStream.peerToken;
 }
 bool sendNativeBlinkFx(unsigned kind,const std::array<float,3>& point){
-    CoopPowerFxPacket p{};p.sequence=++powerFxSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
+    CoopPowerFxPacket p{};p.role=localRole;p.sequence=++powerFxSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
     p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;p.sourceToken=shadowStream.token;p.targetToken=shadowStream.peerToken;
     p.event=powerFxStream.event;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.kind=kind;p.position=point;
     if(!validPowerFxPacket(p,remote,outgoing)||!sockets||!connection)return false;
@@ -24,7 +24,7 @@ bool sendNativeBlinkFx(unsigned kind,const std::array<float,3>& point){
 void sampleNativeBlinkFx(ULONGLONG tick){
     if(!nativeMutationAllowed||!shadowStreamCurrent(tick)||!shadowStream.peerReady)return;
     if(powerFxStream.token!=shadowStream.token||powerFxStream.peerToken!=shadowStream.peerToken){powerFxStream={};powerFxStream.token=shadowStream.token;powerFxStream.peerToken=shadowStream.peerToken;}
-    if(localRole!=0)return;auto& s=powerFxStream;const double now=presentationClock();
+    if(localCharacter()!=1)return;auto& s=powerFxStream;const double now=presentationClock(); // 1214ia (#159): whoever plays Corvo
     if(sampledBlinkValid){
         const auto& blink=sampledNativeBlink;
         if(!s.inBlink){s.inBlink=s.sourceActive=true;s.sourceGoal=blink.goal;s.event=++powerFxEvent;s.sourceStarted=now;s.sourceSent=sendNativeBlinkFx(1,blink.start);}
