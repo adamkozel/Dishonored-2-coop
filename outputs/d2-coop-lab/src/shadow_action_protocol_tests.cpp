@@ -186,7 +186,21 @@ void presentationHoldTests(){
     {RangedPresentation t;RangedPresentation::Sample o{};float phase=0;
       check(t.push({100,1,1,3,0,666})&&t.sample(300,o,phase)&&std::fabs(phase-100.f/666)<1e-6f,"lab action extrapolation still stops at 100 ms");}
 }
-int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests();
+// 1214ie (#160): a running Bend Time travels in the pose flags (bit 10, the percent in bits 16-22).
+void timeBendPoseTests(){
+    CoopPosePacket p{};p.role=1;p.sequence=1;p.session=1;p.worldEpoch=1;p.cinematicEpoch=1;p.mapId=coopMapId("campaign/test");p.flags=1|(1u<<8);
+    p.sampleTimeUs=1000000;p.orientation[0]=p.orientation[4]=p.orientation[8]=1;p.gameLogicState=1;p.cinematicMetadataValid=1;
+    check(validCoopPose(p,0),"1214ie: plain Corvo pose");
+    auto q=p;q.flags|=0x400u|(30u<<16);check(validCoopPose(q,0),"1214ie: a Bend Time at 30 percent");
+    q=p;q.flags|=0x400u;check(validCoopPose(q,0),"1214ie: Stop Time is percent 0");
+    q=p;q.flags|=0x400u|(99u<<16);check(validCoopPose(q,0),"1214ie: 99 percent");
+    q=p;q.flags|=0x400u|(100u<<16);check(!validCoopPose(q,0),"1214ie: 100 percent is no Bend Time");
+    q=p;q.flags|=(30u<<16);check(!validCoopPose(q,0),"1214ie: a percent without the running bit");
+    q=p;q.flags=0x400u|(1u<<8);check(!validCoopPose(q,0),"1214ie: a Bend Time outside gameplay");
+    q=p;q.flags|=0x800u;check(!validCoopPose(q,0),"1214ie: reserved bit 11");
+    q=p;q.flags|=0x800000u|0x400u;check(!validCoopPose(q,0),"1214ie: reserved bit 23");
+    q=p;q.version=12;check(!validCoopPose(q,0),"1214ie: pose version 12 refused");}
+int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests();timeBendPoseTests();
     grenadePresentationTests();
     carryPresentationTests();
     rangedShotTests();

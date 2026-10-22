@@ -29,7 +29,7 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
     if(!c.ready||c.corpse||c.unconscious||!npcPairedVariant(p.h.reserved)){++npcPairedRefused;c.pairedResult="host_paired_refused_state";return;}
     // 1213x: distance gates only the start of a hold; the held NPC then follows the
     // client's victim pose (PairedPose), which the native choke drags with the attacker.
-    if(!c.hostPairedLease&&!c.hostPairedFollow&&!npcPairedPartnerNear(c,3.f)){++npcPairedRefused;c.pairedResult="host_paired_refused_distance";return;}
+    if(!c.hostPairedLease&&!c.hostPairedFollow&&!npcPairedPartnerNear(c,p.h.reserved==kNpcPossessionVariant?60.f:3.f)){++npcPairedRefused;c.pairedResult="host_paired_refused_distance";return;}
     c.pairedVariant=p.h.reserved;c.pairedUntil=tick+1500;
     if(p.h.kind==NpcAuthorityMessage::PairedHold){
         if(!c.hostPairedLease){
@@ -40,8 +40,10 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
             // check: the guard got up in both worlds and killed her. A lethal scene now
             // follows the client's victim pose without the lease (its root is presented at
             // the client's victim, which also keeps the replay's proximity check true).
+            // 1214ij (#160): her Possession takes the lease even from an alert guard.
+            else if(c.pairedVariant==kNpcPossessionVariant&&(releaseNpcAiLease(c.lease),acquireNpcAiLease(c.lease,true))){c.hostPairedLease=true;++npcPairedHolds;++npcPairedForced;c.pairedResult="host_possession_hold";}
             else{releaseNpcAiLease(c.lease);
-                if(nativeTakedownLethal(c.pairedVariant)){if(!c.hostPairedFollow){c.hostPairedFollow=true;++npcPairedFollows;c.pairedResult="host_paired_follow";}}
+                if(nativeTakedownLethal(c.pairedVariant)||c.pairedVariant==kNpcPossessionVariant){if(!c.hostPairedFollow){c.hostPairedFollow=true;++npcPairedFollows;c.pairedResult="host_paired_follow";}}
                 else{++npcPairedRefused;c.pairedResult="host_paired_hold_refused";}}
         }
         return;

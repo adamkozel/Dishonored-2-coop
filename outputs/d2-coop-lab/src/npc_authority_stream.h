@@ -9,6 +9,7 @@ struct NpcRenderIdentity {
     unsigned animationGeneration=0,joints=0,slot=0;
     bool corpse=false; // 1113: shared-death corpse presentation (health0, AI not paused)
     bool unconscious=false; // 1214a: shared knockout (health > 0, AI destroyed by the knockout)
+    bool possessed=false; // 1214ij (#160): a host NPC her Possession drives (its AI may be awake)
 };
 struct NpcRenderState {NpcRenderIdentity id{};ULONGLONG until=0;std::uint64_t arm=0,sequence=0;CoopNpcPose pose{};};
 SRWLOCK npcPresentationLock=SRWLOCK_INIT;
@@ -32,7 +33,9 @@ bool npcRenderCurrent(const NpcRenderIdentity& id){
     float health=0;
     if(!eq(n.health.component+0x10,n.npc.actor)||!memoryRead(n.health.component+0x18,&u,4)||u!=n.healthGeneration||
        !memoryRead(n.health.component+0x20,&health,4)||!std::isfinite(health)||(id.corpse?health!=0:health<=0))return false;
-    if(id.corpse||id.unconscious)return true; // death/knockout already applied natively; that AI is not paused-owned
+    // 1214ij (#160): partner-corvo-power-v1800b refused all 621 frames of her possessed body here: the alert guard's AI
+    // was not paused. Her Possession owns that body as the game owns a possessed one.
+    if(id.corpse||id.unconscious||id.possessed)return true; // death/knockout already applied natively; that AI is not paused-owned
     for(unsigned i=0;i<3;++i){const auto& s=n.ai[i];
         if(!eq(s.component,base+nativeAiVtable(s.kind))||!eq(s.component+0x10,n.npc.actor)||
            !memoryRead(s.component+0x18,&u,4)||u!=n.aiGeneration[i]||!memoryRead(s.component+0x1c,&u,4))return false;
@@ -144,6 +147,7 @@ std::uint64_t npcVanishedDead=0; // 1214fb (#118)
 struct NpcAshRequest{std::uint32_t handle=0;std::uintptr_t actor=0;};
 std::vector<NpcAshRequest> npcAshPending;std::uint64_t npcAshSent=0,npcAshApplied=0,npcAshRefused=0,npcAshEffects=0;
 std::uint64_t npcDeadReconciled=0,npcDeadSent=0,npcCombatSharedDeaths=0,npcClientDeadApplied=0,npcClientDeadAlready=0,npcClientDeadRefused=0;const char* npcClientDeadLast="none";
+std::uint64_t npcPairedForced=0; // 1214ij (#160)
 std::uint64_t npcPairedHolds=0,npcPairedKnockouts=0,npcPairedRefused=0,npcPairedLocal=0,npcPairedCorpses=0,npcPairedFollows=0,npcHostOwnPaired=0,npcPriorityPoses=0;
 NpcAuthorityHeader npcHeader(const NpcAuthorityChannel& c,NpcAuthorityMessage kind){
     NpcAuthorityHeader h{};h.role=localRole;h.kind=kind;h.sequence=c.sequence+1;h.sourceSession=npcStreamSession;h.targetSession=npcStreamPeerSession;
@@ -186,6 +190,7 @@ std::uint64_t npcCorpseHoldReleases=0; // 1214ff
 // the root stays native, so a pull or another move still carries it) until a carry touches the body. Requesting the
 // ragdoll instead laid the host's corpse down but stood the client's copy up (1214fg and 1214fi: 1632a, 1635a).
 std::uint64_t npcCorpseFreezeFrames=0,npcCorpseFreezeEnds=0;
+std::uint64_t npcHostVictimFrames=0,npcHostVictimSampleRefused=0,npcHostVictimRenderRefused=0; // 1214ii (#160)
 void npcPhysicsRelease(NpcAuthorityChannel& c){
     if(c.corpsePhysics){std::uintptr_t vt=0;
         if(memoryRead(c.corpsePhysics,&vt,8)&&vt==reinterpret_cast<std::uintptr_t>(gameImage)+0x1c54008){
@@ -597,12 +602,17 @@ void serviceNpcStream(ULONGLONG tick){
     npcPoseIntervalMs=static_cast<unsigned>(poseInterval);
     // 1213u (#46): the client's own native paired takedown (rear choke 1-3,
     // fast-back lethal 5) and the bound replica it targets.
-    unsigned pairedHandle=0,pairedVariant=0;
+    unsigned pairedHandle=0,pairedVariant=0,possessionTargetHandle=0;
     if(localRole){NativePlayerStates st{};NativePlayerChokeScene scene{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
         if(readNativePlayerStates(memoryRead,base,st)){
             if(readNativePlayerChokeScene(memoryRead,base,st,scene)&&npcPairedVariant(scene.variant)){pairedHandle=scene.target.handle;pairedVariant=scene.variant;}
             // 1214ga (#140, player_scene_probe.h): a takedown state whose scene is not recognized.
-            else if(playerTakedownStateActive(st))probePlayerScene(memoryRead,base,st,"takedown_state_unrecognized",tick);}}
+            else if(playerTakedownStateActive(st))probePlayerScene(memoryRead,base,st,"takedown_state_unrecognized",tick);
+            // 1214if (#160): her Possession of a bound replica holds the host NPC; the host follows her possessed body.
+            if(!pairedHandle){std::uint32_t h=0;if(readNativeHumanPossessionOccupation(memoryRead,base,st,&h)&&h){pairedHandle=h;pairedVariant=kNpcPossessionVariant;}}}
+        // 1214ig (#160): her Possession target (aimed, travelling or occupied) owns the replica natively; the ownership
+        // watchdog stopped its channel at once (partner-corvo-power-v1798a: ai_ownership_changed, 1 reverse pose sent).
+        NativePossessionTarget target{};if(readNativePossessionTarget(memoryRead,base,target)&&target.hasTarget)possessionTargetHandle=target.handle;}
     // 1214ef (#11 enemy_body_size_variants): the host's own native paired takedown. The client's
     // replica follows the victim by this stream alone, and the budget above gave 24 bound NPCs one
     // pose per 400 ms each while the client expires render data at 350 ms: in take 1491a (curator
@@ -709,8 +719,11 @@ void serviceNpcStream(ULONGLONG tick){
             else if(localRole&&(c.unconscious||(c.localPaired&&(fresh.health.ownerFlags&0x20)&&fresh.health.current>0))){
                 if(!c.unconscious){c.unconscious=true;c.unconsciousAt=tick;c.pairedResult="client_unconscious_native";}c.result="client_unconscious";}
             else if(localRole&&c.lease.references){const bool paused=npcAuthorityPaused(fresh);
-                if(!paused&&(c.lease.ready||tick-c.started>1500)){stopNpcChannel(c,"ai_ownership_changed");continue;}
-                c.lease.ready=paused;if(paused){c.ready=true;c.result="client_replica";}}
+                const bool possessed=(c.localPaired&&c.pairedVariant==kNpcPossessionVariant&&tick<c.pairedUntil)||
+                    (possessionTargetHandle&&c.lease.binding.npc.handle==possessionTargetHandle); // 1214ig (#160)
+                if(possessed){if(!paused)c.result="client_possessed";}
+                else{if(!paused&&(c.lease.ready||tick-c.started>1500)){stopNpcChannel(c,"ai_ownership_changed");continue;}
+                    c.lease.ready=paused;if(paused){c.ready=true;c.result="client_replica";}}}
         }
         if(tick-c.helloAt>=500){c.helloAt=tick;sendNpcControl(c,NpcAuthorityMessage::Hello);}
         if(localRole&&c.ready&&tick-c.readyAt>=500){c.readyAt=tick;sendNpcControl(c,NpcAuthorityMessage::Ready);}
@@ -746,12 +759,17 @@ void presentNpcStream(ULONGLONG tick){
         const bool hostSettled=!hostVictim&&!localRole&&c.enabled&&c.ready&&c.corpse&&c.settledHold&&c.corpsePhysics&&c.reversePoses; // 1214hj
         if(!hostVictim&&!hostCorpseFreeze&&!hostSettled&&(!localRole||!c.enabled||!c.ready||c.localPaired||tick<c.localCarryUntil||(!c.lease.ready&&!c.corpse)||!c.poseAt||tick-c.poseAt>=350))continue;
         if(localRole&&c.corpse&&!c.corpsePhysics&&!npcPresentUnheldCorpse){++npcUnheldCorpsePresentSkips;continue;} // 1214hg (#140)
-        NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.id.unconscious=c.unconscious;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
+        NpcRenderState p{};p.id=c.render;p.id.corpse=c.corpse;p.id.unconscious=c.unconscious;p.id.possessed=hostVictim&&c.pairedVariant==kNpcPossessionVariant&&tick<c.pairedUntil;p.until=(hostVictim?c.reversePoseAt:c.poseAt)+350;p.arm=c.arm;
         if(hostCorpseFreeze){if(!c.buffer.latest(p.pose)||!npcRenderCurrent(p.id))continue;p.until=tick+350;p.sequence=p.pose.h.sequence;++npcCorpseFreezeFrames;next.push_back(std::move(p));continue;}
         if(hostSettled){if(!c.buffer.latest(p.pose)||!npcRenderCurrent(p.id))continue;p.until=tick+350;p.sequence=p.pose.h.sequence;
             reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),p.pose.root,p.pose.root+3,true,0);
             ++npcSettledHoldFrames;next.push_back(std::move(p));continue;}
-        if(!c.buffer.sample(presentationClock(),p.pose)||!npcRenderCurrent(p.id))continue;p.sequence=p.pose.h.sequence;
+        // 1214ii (#160): partner-corvo-power-v1800a accepted 191 of her possession reverse poses but never presented one
+        // (presentedRoot 0); each refusal of a host victim frame is counted.
+        if(hostVictim){++npcHostVictimFrames;if(!c.buffer.sample(presentationClock(),p.pose)){++npcHostVictimSampleRefused;continue;}
+            if(!npcRenderCurrent(p.id)){++npcHostVictimRenderRefused;continue;}}
+        else if(!c.buffer.sample(presentationClock(),p.pose)||!npcRenderCurrent(p.id))continue;
+        p.sequence=p.pose.h.sequence;
         reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(c.lease.binding.npc.actor),p.pose.root,p.pose.root+3,true,0);
         ++c.roots;if(hostVictim)std::memcpy(c.presentedRoot,p.pose.root,12);next.push_back(std::move(p));
     }
@@ -760,7 +778,7 @@ void presentNpcStream(ULONGLONG tick){
 void writeNpcStream(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-stream.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"heldSkips\":%llu,\"corpseReleases\":%llu,\"corpseFreezeFrames\":%llu,\"corpseFreezeEnds\":%llu,\"ashSent\":%llu,\"ashApplied\":%llu,\"ashRefused\":%llu,\"ashEffects\":%llu,\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs,static_cast<unsigned long long>(npcHeldPresentSkips),static_cast<unsigned long long>(npcCorpseHoldReleases),static_cast<unsigned long long>(npcCorpseFreezeFrames),static_cast<unsigned long long>(npcCorpseFreezeEnds),static_cast<unsigned long long>(npcAshSent),static_cast<unsigned long long>(npcAshApplied),static_cast<unsigned long long>(npcAshRefused),static_cast<unsigned long long>(npcAshEffects));
+    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"heldSkips\":%llu,\"corpseReleases\":%llu,\"corpseFreezeFrames\":%llu,\"corpseFreezeEnds\":%llu,\"ashSent\":%llu,\"ashApplied\":%llu,\"ashRefused\":%llu,\"ashEffects\":%llu,\"hostVictim\":[%llu,%llu,%llu],\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs,static_cast<unsigned long long>(npcHeldPresentSkips),static_cast<unsigned long long>(npcCorpseHoldReleases),static_cast<unsigned long long>(npcCorpseFreezeFrames),static_cast<unsigned long long>(npcCorpseFreezeEnds),static_cast<unsigned long long>(npcAshSent),static_cast<unsigned long long>(npcAshApplied),static_cast<unsigned long long>(npcAshRefused),static_cast<unsigned long long>(npcAshEffects),static_cast<unsigned long long>(npcHostVictimFrames),static_cast<unsigned long long>(npcHostVictimSampleRefused),static_cast<unsigned long long>(npcHostVictimRenderRefused));
     for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"civilian\":%s,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu,\"priorityPoses\":%llu,\"downSent\":%llu,\"downReceived\":%llu,\"downApplies\":%llu,\"downApplied\":%s,\"victimHolds\":%llu,\"victimReleases\":%llu,\"leaseReady\":%s,\"poseRejects\":[%llu,%llu,%llu,%llu,%llu],\"lastPoseLateMs\":%.1f}",i?",":"",c.lease.binding.npc.handle,npcCivilian(c.lease.binding)?"true":"false",c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses),static_cast<unsigned long long>(c.priorityPoses),static_cast<unsigned long long>(c.downSent),static_cast<unsigned long long>(c.downReceived),static_cast<unsigned long long>(c.downApplies),c.downApplied?"true":"false",static_cast<unsigned long long>(c.victimHolds),static_cast<unsigned long long>(c.victimReleases),c.lease.ready?"true":"false",
         static_cast<unsigned long long>(c.poseRejects[0]),static_cast<unsigned long long>(c.poseRejects[1]),static_cast<unsigned long long>(c.poseRejects[2]),static_cast<unsigned long long>(c.poseRejects[3]),static_cast<unsigned long long>(c.poseRejects[4]),c.lastPoseLateMs);}
     fprintf(f,"],\"bodyEntries\":[");for(unsigned i=0;i<npcChannels.size();++i)fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"applied\":%llu,\"sequence\":%llu}",i?",":"",npcChannels[i].arm,npcChannels[i].lease.binding.npc.handle,npcActorBodyApplied[i].load(),npcActorBodySequence[i].load());

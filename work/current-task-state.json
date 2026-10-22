@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-22T03:45:00+02:00",
+  "UpdatedAt": "2026-10-22T11:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22645,5 +22645,33 @@
     },
     "Lab": "Restore-D2Lab.ps1 waits up to 6 minutes for a relaunched game (shader-cache rebuilds took about 4 minutes on 2026-10-22).",
     "Next": "Merge PR #164 (closes #156, #157). Then #158/#159 (chapter 108): the character on the wire, the partner choice message box (keys from loc-find), role-keyed sites by character."
+  },
+  "PartnerCorvoPowers": {
+    "Card": "#160 Corvo's powers used by the partner act on the host's characters (stage 4)",
+    "Branch": "stage4/corvo-partner-powers (draft PR #167)",
+    "Chapter": "documentation/handoff-2026-10-11/108-character-choice-and-pairings.md (#160 section)",
+    "Candidates": {
+      "1214id": "swarm_host.h: a native host swarm at her swarm origin, ended with hers",
+      "1214ie": "time_bend.h: her Bend Time factor in the pose flags (pose version 13); the host adds the same native time request",
+      "1214if": "Possession as a paired scene (variant 1000); Bend Time diagnostics; lab switch coop_time_bend",
+      "1214ig": "players re-exempted every 100 ms; her channel kept through her Possession",
+      "1214ih": "exemption seconds passed as raw bits in R8D",
+      "1214ii": "host victim presentation counters",
+      "1214ij": "her Possession forces the host AI lease; a possessed render identity passes"
+    },
+    "Takes": {
+      "partner-windblast-v1791a": "pass: her Windblast hit is applied on the host (existing forwarded hit)",
+      "partner-corvo-power-v1794a/c": "pass: the host's native swarm kills the host's guard and ends with hers",
+      "partner-bendtime-v1800a": "pass: her Stop Time freezes the host's world, host player in real time",
+      "partner-bendtime-v1800b": "pass: her base Bend Time (25 percent) slows the host's world, host player in real time",
+      "partner-corvo-power-v1800b": "fail: possession reverse poses refused by the render identity (alert guard, AI not paused) -> 1214ij",
+      "partner-corvo-power-v1801a": "fixture miss: Blink Assault cast while the guard walked; harness v1802 waits for the patrol pause",
+      "partner-corvo-power-v1802a": "pass: her Possession drives the host guard (1214ij, within 0.55 m)",
+      "partner-corvo-power-v1802b/v1803a/v1804a": "Blink Assault fixture misses; v1804a: her post-blink sword kill is shared (40 -> 0 both), corpses 6.9 m apart"
+    },
+    "Open": [
+      "#168: Blink Assault kick, her replicas after her Stop Time, upgrades, framed visual review"
+    ],
+    "Next": "Merge PR #167 (closes #160), then #168 (stage 4), then #161 validation."
   }
 }

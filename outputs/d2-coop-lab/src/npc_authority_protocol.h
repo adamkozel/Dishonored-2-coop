@@ -62,7 +62,10 @@ inline bool npcDeadReconcileDue(bool host,bool corpse,bool ready,unsigned long l
     return host&&corpse&&ready&&corpseAt&&!combatShare&&sends<5&&tick>=corpseAt&&tick-corpseAt>=1500&&(!sends||tick-lastSent>=500);
 }
 inline bool npcPoseKind(NpcAuthorityMessage k){return k==NpcAuthorityMessage::Pose||k==NpcAuthorityMessage::PairedPose;}
-inline bool npcPairedVariant(std::uint32_t v){const auto k=nativeTakedownKind(v);return k&&k!=4;}
+// 1214if (#160): a Corvo partner possessing a host NPC (her bound replica) holds it like a paired scene: PairedHold
+// every 200 ms and her possessed body as PairedPose. Not a takedown id (those are 1..kNativeTakedownSceneCount).
+constexpr std::uint32_t kNpcPossessionVariant=1000;
+inline bool npcPairedVariant(std::uint32_t v){const auto k=nativeTakedownKind(v);return v==kNpcPossessionVariant||(k&&k!=4);}
 // The client asks for the host knockout when its native knockout scene begins (choke_win,
 // or a single-scene drop/slide/window/shadow-walk choke).
 inline bool npcPairedKnockoutVariant(std::uint32_t v){return nativeTakedownKind(v)==3;}

@@ -37,11 +37,13 @@ void releaseNpcAiLease(NpcAiLease& lease){
     }
     lease.references=0;lease.ready=false;
 }
-bool acquireNpcAiLease(NpcAiLease& lease){
+// 1214ij (#160): forced=true skips the calm-AI eligibility, for her Possession only: the game suspends a possessed
+// victim's AI whatever its state, and an alert guard refused the lease (partner-corvo-power-v1798a, v1800b).
+bool acquireNpcAiLease(NpcAiLease& lease,bool forced=false){
     if(lease.references||outgoing.worldEpoch!=lease.epoch||!nativeAiRequestsMatch())return false;
     NativeNpcAuthority fresh{};
     if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,lease.binding.npc.handle,fresh)||
-       !sameNpcAuthorityIdentity(lease.binding,fresh)||!npcAuthorityLeaseEligible(fresh))return false;
+       !sameNpcAuthorityIdentity(lease.binding,fresh)||(!forced&&!npcAuthorityLeaseEligible(fresh)))return false;
     lease.binding=std::move(fresh);
     for(unsigned i=0;i<2;++i){
         const auto& s=lease.binding.ai[i];

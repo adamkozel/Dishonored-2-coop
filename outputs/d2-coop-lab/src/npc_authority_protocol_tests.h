@@ -17,6 +17,8 @@ void npcAuthorityProtocolTests(){
      q.h.kind=NpcAuthorityMessage::PairedHold;q.h.reserved=2;require(validNpcControl(q,host,client),"client paired hold names the host NPC and its choke phase");
      q.h.reserved=5;require(validNpcControl(q,host,client),"client paired hold for the fast-back lethal");
      q.h.reserved=6;require(validNpcControl(q,host,client),"back lethal (6) is a paired hold variant");
+     q.h.reserved=kNpcPossessionVariant;require(validNpcControl(q,host,client)&&npcPairedVariant(kNpcPossessionVariant)&&!npcPairedKnockoutVariant(kNpcPossessionVariant)&&
+         !nativeTakedownLethal(kNpcPossessionVariant)&&!nativeTakedownScene(kNpcPossessionVariant)&&!npcPairedVariant(999),"1214if: her Possession is a paired hold, neither a knockout nor a lethal");
      q.h.reserved=58;require(validNpcControl(q,host,client)&&npcPairedKnockoutVariant(58)&&npcPairedKnockoutVariant(3)&&!npcPairedKnockoutVariant(5),"a drop choke (58) is a paired knockout scene");
      q.h.reserved=57;require(!validNpcControl(q,host,client),"choke cancel (57) is not a paired hold variant");
      q.h.reserved=119;require(validNpcControl(q,host,client)&&!npcPairedKnockoutVariant(119),"a sword lock (119) holds the host NPC and never asks for a knockout");
