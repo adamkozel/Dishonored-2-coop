@@ -221,7 +221,9 @@ void serviceLabNamedEquip(){
     for(unsigned i=0;i<s.sword.itemCount;++i){const auto entry=s.sword.items+i*56;std::uintptr_t decl=0;int quantity=0;
         if(!memoryRead(entry,&decl,8)||decl!=labNamedEquipDecl||!memoryRead(entry+32,&quantity,4))continue;
         if(quantity<1)return;
-        if(!labNamedEquipSent){if(s.sword.slots[1]){labNamedEquipUntil=0;labNamedResult="named_slot_occupied";return;}
+        // 1214ib (#159, lab): a power already in the left hand no longer blocks the next one (host-powers-v1785a: after the
+        // Doppelganger the Mesmerize and Far Reach grants stayed unequipped); the native equip switches it as the wheel does.
+        if(!labNamedEquipSent){if(s.sword.slots[1])labNamedResult="named_slot_switched";
             labNamedEquipSent=true;reinterpret_cast<void(*)(void*,void*,bool)>(gameImage+0x614b20)(reinterpret_cast<void*>(s.sword.inventory),reinterpret_cast<void*>(entry),true);
             labNamedEquipUntil=0;labNamedResult="named_power_equip_requested";}
         return;}
