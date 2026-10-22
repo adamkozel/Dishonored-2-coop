@@ -1,8 +1,28 @@
-# Dishonored 2 Corvo/Emily co-op 0.8.4
+# Dishonored 2 Corvo/Emily co-op 0.9.0
 
-Two friends play the Dishonored 2 campaign together. The host plays Corvo, the partner plays Emily, and each sees the other in the world.
+Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## New in 0.9.0
+
+- **Co-op on the main menu.** *Co-op* sits under *Campaign*. It starts or continues a co-op game with its own saves, kept
+  apart from your campaign saves ([#156](https://github.com/adamkozel/Dishonored-2-coop/issues/156)):
+  - every co-op save, autosave and checkpoint goes to the co-op saves;
+  - your own campaign saves and settings are never touched.
+- **Leave co-op.** During a session the pause menu's *Quit Game* reads *Leave Co-op*. It asks *Leave the co-op session?*
+  with *Cancel*, *Confirm* and *Back To Desktop* ([#157](https://github.com/adamkozel/Dishonored-2-coop/issues/157)).
+- **Play as Corvo or Emily, in any pairing** ([#158](https://github.com/adamkozel/Dishonored-2-coop/issues/158),
+  [#159](https://github.com/adamkozel/Dishonored-2-coop/issues/159)):
+  - the host chooses once, at the start of a co-op game;
+  - the partner chooses every time they join, in the game's own *Character* dialog;
+  - Corvo and Emily, Emily and Corvo, Corvo and Corvo, Emily and Emily all work.
+- **A Corvo partner's powers act on the host's world** ([#160](https://github.com/adamkozel/Dishonored-2-coop/issues/160),
+  [#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)):
+  - **Windblast**, *Greater Windblast* and *Shockwave* hit the host's characters;
+  - **Devouring Swarm** (and *Double Swarm*) eats the host's characters;
+  - **Bend Time** and **Stop Time** slow or stop the host's world, while both players keep moving in real time;
+  - **Possession** takes over the host's character: it walks where the partner walks it.
 
 ## Fixed in 0.8.4
 
@@ -53,7 +73,7 @@ Emily's powers now act on the host's characters as they do in single player ([#1
 ## Install (both players)
 
 1. Close Dishonored 2.
-2. Download `d2coop-v0.8.4.zip` from the GitHub release and extract it anywhere.
+2. Download `d2coop-v0.9.0.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.
@@ -66,16 +86,25 @@ Emily's powers now act on the host's characters as they do in single player ([#1
 ## Play
 
 1. Both players start Dishonored 2 from Steam as usual.
-2. **Host (Corvo):** start a new game as Corvo, or load a Corvo save. In game, press **F7**. A friends-only Steam lobby is created and Steam's invite window opens. Invite your friend.
-3. **Partner (Emily):** start the game, press a key at the title screen, and wait in the main menu (or anywhere in a mission). If you accept the invite at the title screen, your game waits there until you press a key. Accept the invite, or use **Join Game** on the host in your Steam friends list. Your game loads the host's current mission by itself; press any key at the mission card when it has loaded. If the host is already further into the mission, you are then placed beside the host.
-4. If the game asks who to play (the start of *A Long Day in Dunwall*), the host chooses **Corvo** and the partner **Emily**.
+2. **Host:** on the main menu choose **Co-op** (under *Campaign*), then **New Game** or a co-op save. A new co-op game asks
+   once who you play, Corvo or Emily. In game, press **F7**: a friends-only Steam lobby is created and Steam's invite window
+   opens. Invite your friend.
+3. **Partner:** start the game, press a key at the title screen, and wait in the main menu (or anywhere in a mission).
+   If you accept the invite at the title screen, your game waits there until you press a key. Accept the invite, or use
+   **Join Game** on the host in your Steam friends list.
+4. **Partner:** the game's *Character* dialog asks who you play this time: **Play as Corvo Attano** or **Play as Emily
+   Kaldwin**. You choose again every time you join. Your game then loads the host's current mission by itself; press any
+   key at the mission card when it has loaded. If the host is already further into the mission, you are placed beside
+   the host.
 5. Once both players are in the same mission, every co-op system turns on by itself.
-6. **F8** leaves the session.
+6. To leave, open the pause menu and choose **Leave Co-op** (or press **F8**).
 
 ## Saves, deaths and missions
 
-- Each game keeps its own saves in its usual profile: the host's are Corvo saves, the partner's are Emily saves.
-- To continue later, the host loads their save and presses F7, and the partner joins again. The partner's game follows the host's mission.
+- Co-op games have their own saves, apart from your campaign saves. *Co-op* on the main menu shows only co-op saves;
+  *Campaign* shows only your own.
+- To continue later, the host chooses *Co-op* and loads the co-op save, then presses F7, and the partner joins again.
+  The partner's game follows the host's mission.
 - When either player dies, both see the game-over screen. Restarting from the last checkpoint restarts both games together.
 - Cutscenes play for both players. Mission ends take both players to the next mission together.
 - Either player can do the story: objectives, story items and level changes completed by the partner count for both worlds.
@@ -105,7 +134,9 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 
 ## Known limitations
 
-- Two players only. The host is always Corvo and the partner is always Emily.
+- Two players only.
+- A Corvo partner's *Blink Assault* kick staggers the host's guards rather than knocking them down, the host's side of her *Devouring Swarm* is always the base swarm (*Bigger Swarm* acts only in her game), and possessing corpses or rats happens only in her game ([#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)).
+- In the first mission (*A Long Day in Dunwall*) the partner chooses Corvo or Emily on the game's own choice screen rather than the *Character* dialog.
 - After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.

@@ -1,0 +1,118 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             100 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Expected both worlds on dunwall/return/tower/dunwall_return_tower: host campaign/dunwall/return/tower/dunwall_return_tower_p logic 1, client campaign/dunwall/return/interior/dunwall_return_interior_p logic 15",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ij",
+      "hostDll": "4E26D7DCA223A5EE388B0382A880A7FC16CA0CED1E4CFB5D684C5F1813209888",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "characters": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/tower/dunwall_return_tower_p",
+        "epoch": 36,
+        "cine": 33,
+        "pos": [
+          -61.299999,
+          80.5,
+          59.828007
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          3,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/4/0",
+        "hold": "timeout/90015",
+        "ka": "12/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_DTPowerSupply"
+      },
+      "client": {
+        "logic": 15,
+        "pending": 0,
+        "map": "campaign/dunwall/return/interior/dunwall_return_interior_p",
+        "epoch": 31,
+        "cine": 12,
+        "pos": [
+          -43.699646,
+          86.499901,
+          34.403645
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          3,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 7,
+        "lt": "applied/0/4",
+        "hold": "expecting/0",
+        "ka": "12/0/0",
+        "active": "Mission_DTTE,Obj_DTTE_Assassinate_Delilah,Task_DTTE_DTPowerSupply"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/dunwall_return/boat_dunwall_return.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1751.ps1:457[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 457 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mExpected both worlds on dunwall/return/tower/dunwall_return_tower: host[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mcampaign/dunwall/return/tower/dunwall_return_tower_p logic 1, client[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mcampaign/dunwall/return/interior/dunwall_return_interior_p logic 15[0m
