@@ -1,0 +1,195 @@
+{
+  "passed": false,
+  "failure": "host guard head moved 43 mm in Stop Time; host walk forward during her Bend Time 0 m against 2.781 m; host walk back during her Bend Time 0 m against 2.02 m; host player not on the unbent clock during her Bend Time",
+  "case": {
+    "passed": false,
+    "failure": "host guard head moved 43 mm in Stop Time; host walk forward during her Bend Time 0 m against 2.781 m; host walk back during her Bend Time 0 m against 2.02 m; host player not on the unbent clock during her Bend Time",
+    "checks": [
+      "Her stoptime at 0 percent; host request held 13/14, world factors 1,0, after 0/10 at 1",
+      "Guard head mm host 587.4/43/436.4, her copy 475.8/18.1/437.1 (before/during/after)",
+      "Host walks before 2.781/2.02 m, during 0/0 m",
+      "Host own Bend Time: player clock 0,1, engine flags 0,0,0,0,106 / 1,0,0,0,106, own active False,True",
+      "Host player clock during hers 0; engine flags 0,0,0,0,106 / 1,0,0,0,106"
+    ],
+    "definitions": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "characters": {
+      "host": {
+        "avatar": 1,
+        "avatarReplacements": 1,
+        "local": 1,
+        "remote": 1,
+        "localUsed": 1,
+        "remoteUsed": 1,
+        "role": 0,
+        "choiceEnabled": false,
+        "choice": {
+          "state": 0,
+          "result": "idle",
+          "character": 0,
+          "handle": -1,
+          "lastResult": -1000,
+          "opens": 0,
+          "answers": 0,
+          "others": 0,
+          "failures": 0
+        }
+      },
+      "client": {
+        "avatar": 1,
+        "avatarReplacements": 0,
+        "local": 1,
+        "remote": 1,
+        "localUsed": 1,
+        "remoteUsed": 1,
+        "role": 1,
+        "choiceEnabled": false,
+        "choice": {
+          "state": 0,
+          "result": "idle",
+          "character": 0,
+          "handle": -1,
+          "lastResult": -1000,
+          "opens": 0,
+          "answers": 0,
+          "others": 0,
+          "failures": 0
+        }
+      }
+    },
+    "grant": {
+      "grants": 2,
+      "refused": 0,
+      "result": "granted_named"
+    },
+    "guardHandleHost": "0xb480764",
+    "guardHandleClient": "0xb480764",
+    "castAim": {
+      "target": [
+        -39.5995,
+        -147.143,
+        66.4
+      ],
+      "stand": [
+        -38.1596,
+        -150.875,
+        66.4036
+      ],
+      "yaw": 111.09787593308683,
+      "pitch": 6,
+      "distance": 4.0001419987295455
+    },
+    "walks": [
+      {
+        "phase": "before",
+        "back": 2.02,
+        "forward": 2.781
+      },
+      {
+        "phase": "during",
+        "back": 0.0,
+        "forward": 0.0
+      },
+      {
+        "phase": "hostcast",
+        "back": 1.375,
+        "forward": 1.913
+      }
+    ],
+    "attempts": [
+      {
+        "attempt": 1,
+        "ms": 6192,
+        "active": true,
+        "percent": 0
+      }
+    ],
+    "castMs": 6192,
+    "endPressed": true,
+    "endMs": 13228,
+    "herEndMs": 16372,
+    "hostCastMs": 24492,
+    "head": {
+      "hostBefore": 587.4,
+      "hostDuring": 43.0,
+      "hostAfter": 436.4,
+      "clientBefore": 475.8,
+      "clientDuring": 18.1,
+      "clientAfter": 437.1
+    },
+    "guard": {
+      "hostBefore": 1.897,
+      "hostDuring": 0,
+      "hostAfter": 2.725,
+      "clientDuring": 0.001
+    },
+    "summary": {
+      "herPercent": [
+        0
+      ],
+      "hostHeldDuring": "13/14",
+      "hostWorldFactorsDuring": [
+        1.0,
+        0.0
+      ],
+      "hostHeldAfter": "0/10",
+      "hostWorldFactorAfter": [
+        1.0
+      ],
+      "head": {
+        "hostBefore": 587.4,
+        "hostDuring": 43.0,
+        "hostAfter": 436.4,
+        "clientBefore": 475.8,
+        "clientDuring": 18.1,
+        "clientAfter": 437.1
+      },
+      "guard": {
+        "hostBefore": 1.897,
+        "hostDuring": 0,
+        "hostAfter": 2.725,
+        "clientDuring": 0.001
+      },
+      "walks": [
+        {
+          "phase": "before",
+          "back": 2.02,
+          "forward": 2.781
+        },
+        {
+          "phase": "during",
+          "back": 0.0,
+          "forward": 0.0
+        },
+        {
+          "phase": "hostcast",
+          "back": 1.375,
+          "forward": 1.913
+        }
+      ],
+      "hostPlayerClockDuring": [
+        0
+      ],
+      "gtmDuring": [
+        "0,0,0,0,106",
+        "1,0,0,0,106"
+      ],
+      "hostCastClock": [
+        0,
+        1
+      ],
+      "hostCastGtm": [
+        "0,0,0,0,106",
+        "1,0,0,0,106"
+      ],
+      "hostCastOwn": [
+        false,
+        true
+      ]
+    },
+    "restored": true
+  },
+  "scope": "#160: a Corvo partner (lab SLOT80) uses stoptime by the Dunwall tutorial guard 2 under the product controller; the host must hold her time factor for its world while both players keep real time."
+}

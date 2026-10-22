@@ -602,7 +602,9 @@ void serviceNpcStream(ULONGLONG tick){
         if(readNativePlayerStates(memoryRead,base,st)){
             if(readNativePlayerChokeScene(memoryRead,base,st,scene)&&npcPairedVariant(scene.variant)){pairedHandle=scene.target.handle;pairedVariant=scene.variant;}
             // 1214ga (#140, player_scene_probe.h): a takedown state whose scene is not recognized.
-            else if(playerTakedownStateActive(st))probePlayerScene(memoryRead,base,st,"takedown_state_unrecognized",tick);}}
+            else if(playerTakedownStateActive(st))probePlayerScene(memoryRead,base,st,"takedown_state_unrecognized",tick);
+            // 1214if (#160): her Possession of a bound replica holds the host NPC; the host follows her possessed body.
+            if(!pairedHandle){std::uint32_t h=0;if(readNativeHumanPossessionOccupation(memoryRead,base,st,&h)&&h){pairedHandle=h;pairedVariant=kNpcPossessionVariant;}}}}
     // 1214ef (#11 enemy_body_size_variants): the host's own native paired takedown. The client's
     // replica follows the victim by this stream alone, and the budget above gave 24 bound NPCs one
     // pose per 400 ms each while the client expires render data at 350 ms: in take 1491a (curator

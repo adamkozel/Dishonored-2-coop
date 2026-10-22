@@ -12,9 +12,15 @@
 // - When her Bend Time ends, or the stream, the world or the session does, FUN_14080ede0(tm, id, blend) removes it, and
 //   FUN_14080dab0 returns both players to world time unless the host's own Bend Time runs.
 // - The screen effect, sounds, events and mana stay with the caster: the power's own toggle (14061cd60) is never called.
-constexpr std::uint32_t kTimeBendActive=0x400u;constexpr float kTimeBendBlendIn=.3f,kTimeBendBlendOut=.3f;
+// 1214if: partner-bendtime-v1797a froze the host player too (0 m walks in her Stop Time). The manager's update rebends
+// every exempted entity while byte +0x1a0 of the engine time object (game+0x2e7428) is 0 (0x14080f18e, confirmed
+// static); what sets it is not known. The status records it with both players' clocks (entity+0x2ac: 0 world, 1
+// unbent) and the host player's exemption seconds (+0x2a8). The lab switch coop_time_bend unbent70 gives the players'
+// clock the native unbent scale (decl m_unbentTimeScale 70) to test whether a scaled clock 4 is what sets it. The blend
+// times are her native ones (her declaration: in 0.5 s, out 1.0 s; partner-bendtime-v1797a).
+constexpr std::uint32_t kTimeBendActive=0x400u;constexpr float kTimeBendBlendIn=.5f,kTimeBendBlendOut=1.f;
 struct TimeBendHost {int request=-1;std::uintptr_t game=0,avatar=0;std::uint64_t epoch=0;unsigned percent=0;};
-TimeBendHost timeBendHost{};bool timeBendEnabled=true;const char* timeBendResult="idle";
+TimeBendHost timeBendHost{};bool timeBendEnabled=true;const char* timeBendResult="idle";float timeBendUnbentScale=1.f;ULONGLONG timeBendRemoteSeenAt=0;
 std::uint64_t timeBendAdded=0,timeBendRemoved=0,timeBendGone=0,timeBendExempted=0,timeBendReleased=0;
 bool timeBendLocalActive=false,timeBendRemoteActive=false;unsigned timeBendLocalPercent=0,timeBendRemotePercent=0;int timeBendLocalRequest=-1;
 float timeBendLocalBlend[2]{};
@@ -29,6 +35,8 @@ float timeBendWorldFactor(std::uintptr_t game,std::uint32_t* requests){
     std::uintptr_t list=0;std::uint32_t count=0;float f=1;const auto tm=game+0x1f52e8;if(requests)*requests=0;
     if(!game||!memoryRead(tm,&list,8)||!memoryRead(tm+8,&count,4))return 1;count&=0xffffff;if(requests)*requests=count;
     if(!list||!count||count>64||!memoryRead(list+(count-1)*12+4,&f,4)||!std::isfinite(f))return 1;return f;}
+int timeBendClock(std::uintptr_t entity){int c=-1;if(!entity||!memoryRead(entity+0x2ac,&c,4))return -1;return c;}
+float timeBendExemptSeconds(std::uintptr_t entity){float s=-2;if(!entity||!memoryRead(entity+0x2a8,&s,4)||!std::isfinite(s))return -2;return s;}
 bool timeBendOwnActive(){std::uintptr_t c=0;unsigned char a=0;return observedPlayer&&memoryRead(observedPlayer+0x378,&c,8)&&c&&memoryRead(c+0xd0,&a,1)&&a==1;}
 void sampleLocalTimeBend(){
     std::uint32_t flags=0;std::uintptr_t c=0,decl=0;unsigned char a=0;int id=-1;float factor=1;
@@ -59,23 +67,31 @@ void serviceTimeBendHost(ULONGLONG tick){
     timeBendRemoteActive=(remote.flags&kTimeBendActive)!=0;timeBendRemotePercent=(remote.flags>>16)&0x7fu;
     if(h.request>=0&&(h.game!=observedGame||h.epoch!=outgoing.worldEpoch))timeBendRelease("world_changed");
     const bool fresh=lastReceive&&tick-lastReceive<1000;
+    // 1214if: her Stop Time re-issues its request on a second press, so for a frame she has none (v1797a: the host
+    // released and added again); the host keeps its request through 300 ms without her bit.
+    const bool active=timeBendRemoteActive&&timeBendRemotePercent<=99;if(active)timeBendRemoteSeenAt=tick;
+    const bool held=active||(h.request>=0&&timeBendRemoteSeenAt&&tick-timeBendRemoteSeenAt<300);
     const bool want=timeBendEnabled&&localRole==0&&observedGame&&observedPlayer&&fresh&&coopWorldPairReady(outgoing,remote)&&
-        coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&timeBendRemoteActive&&timeBendRemotePercent<=99;
-    if(!want){if(h.request>=0)timeBendRelease(!fresh?"stream_stale":!timeBendRemoteActive?"partner_ended":"not_ready");return;}
-    if(h.request>=0&&h.percent!=timeBendRemotePercent)timeBendRelease("factor_changed");
-    if(h.request<0){
+        coopGameplayReady(outgoing)&&coopGameplayReady(remote)&&held;
+    if(!want){if(h.request>=0)timeBendRelease(!fresh?"stream_stale":!held?"partner_ended":"not_ready");return;}
+    if(h.request>=0&&active&&h.percent!=timeBendRemotePercent)timeBendRelease("factor_changed");
+    if(h.request<0&&active){
         int id=-1;
-        reinterpret_cast<int*(*)(std::uintptr_t,int*,float,float,float,bool)>(gameImage+0x80eb40)(observedGame+0x1f52e8,&id,timeBendRemotePercent*.01f,1.0f,kTimeBendBlendIn,false);
+        reinterpret_cast<int*(*)(std::uintptr_t,int*,float,float,float,bool)>(gameImage+0x80eb40)(observedGame+0x1f52e8,&id,timeBendRemotePercent*.01f,timeBendUnbentScale,kTimeBendBlendIn,false);
         h.request=id;h.game=observedGame;h.epoch=outgoing.worldEpoch;h.percent=timeBendRemotePercent;++timeBendAdded;timeBendResult="applied";
         timeBendExempt(observedPlayer);}
-    if(probeActor&&probeGame==observedGame&&h.avatar!=probeActor){timeBendExempt(probeActor);h.avatar=probeActor;}}
+    if(h.request>=0&&probeActor&&probeGame==observedGame&&h.avatar!=probeActor){timeBendExempt(probeActor);h.avatar=probeActor;}}
 void writeTimeBend(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.time-bend.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& h=timeBendHost;std::uint32_t requests=0;const float world=timeBendWorldFactor(observedGame,&requests);
+    unsigned char gtm[5]{};float unbentClock=-1;const std::uintptr_t avatar=probeGame==observedGame?probeActor:0;
+    if(observedGame){memoryRead(observedGame+0x2e7428+0x1a0,gtm,5);memoryRead(observedGame+0x2e7428+0x24+4*0x50,&unbentClock,4);}
     fprintf(f,"{\"enabled\":%s,\"role\":%u,\"local\":{\"active\":%s,\"percent\":%u,\"request\":%d,\"blendIn\":%.3f,\"blendOut\":%.3f,\"flags\":%u},\"remote\":{\"active\":%s,\"percent\":%u},"
-        "\"host\":{\"request\":%d,\"percent\":%u,\"avatar\":%s},\"worldFactor\":%.3f,\"requests\":%u,\"ownActive\":%s,\"added\":%llu,\"removed\":%llu,\"gone\":%llu,\"exempted\":%llu,\"released\":%llu,\"result\":\"%s\"}\n",
+        "\"host\":{\"request\":%d,\"percent\":%u,\"avatar\":%s,\"unbentScale\":%.2f},\"clocks\":{\"player\":%d,\"avatar\":%d,\"playerExempt\":%.3g,\"avatarExempt\":%.3g,\"unbent\":%.3f,\"gtm\":[%u,%u,%u,%u,%u]},"
+        "\"worldFactor\":%.3f,\"requests\":%u,\"ownActive\":%s,\"added\":%llu,\"removed\":%llu,\"gone\":%llu,\"exempted\":%llu,\"released\":%llu,\"result\":\"%s\"}\n",
         timeBendEnabled?"true":"false",localRole,timeBendLocalActive?"true":"false",timeBendLocalPercent,timeBendLocalRequest,timeBendLocalBlend[0],timeBendLocalBlend[1],coopTimeBendFlags.load(),
-        timeBendRemoteActive?"true":"false",timeBendRemotePercent,h.request,h.percent,h.avatar?"true":"false",world,requests,timeBendOwnActive()?"true":"false",
+        timeBendRemoteActive?"true":"false",timeBendRemotePercent,h.request,h.percent,h.avatar?"true":"false",timeBendUnbentScale,
+        timeBendClock(observedPlayer),timeBendClock(avatar),timeBendExemptSeconds(observedPlayer),timeBendExemptSeconds(avatar),unbentClock,gtm[0],gtm[1],gtm[2],gtm[3],gtm[4],world,requests,timeBendOwnActive()?"true":"false",
         static_cast<unsigned long long>(timeBendAdded),static_cast<unsigned long long>(timeBendRemoved),static_cast<unsigned long long>(timeBendGone),
         static_cast<unsigned long long>(timeBendExempted),static_cast<unsigned long long>(timeBendReleased),timeBendResult);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);}
