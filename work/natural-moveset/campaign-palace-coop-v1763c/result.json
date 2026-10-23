@@ -1,0 +1,146 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214in",
+      "hostDll": "4A375D216E4964AA012CC43F3D19AD1D36A0C1D5BD2E5695239C718EDECD1844",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 10,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+        "epoch": 31,
+        "cine": 61,
+        "pos": [
+          -6.885194,
+          -14.154241,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          228,
+          1,
+          3,
+          14,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/3453",
+        "ka": "16/0/0",
+        "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+        "epoch": 31,
+        "cine": 22,
+        "pos": [
+          -6.878713,
+          -14.885789,
+          0.109605
+        ],
+        "fresh": true,
+        "gameflow": [
+          228,
+          1,
+          3,
+          14,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 16,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "5/11/0",
+        "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+      }
+    },
+    "gameflowEqual": true,
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/duke_palace/boat_palace.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

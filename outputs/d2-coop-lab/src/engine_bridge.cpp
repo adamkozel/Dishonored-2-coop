@@ -1593,6 +1593,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_decl_probe")||!std::strcmp(text,"coop_tables_probe"))return true;
     if(!std::strcmp(text,"coop_character_choice on")||!std::strcmp(text,"coop_character_choice off"))return true; // 1214hx (#158, lab)
     if(!std::strcmp(text,"coop_time_bend on")||!std::strcmp(text,"coop_time_bend off")||!std::strcmp(text,"coop_time_bend unbent100")||!std::strcmp(text,"coop_time_bend unbent70"))return true; // 1214if (#160, lab)
+    if(!std::strcmp(text,"coop_saves on")||!std::strcmp(text,"coop_saves off"))return true; // 1214in (#175, lab)
     if(!std::strncmp(text,"coop_loc_find ",14)){const char* c=text+14;if(!*c||std::strlen(c)>48)return false; // 1214hw (#158, lab)
         for(;*c;++c)if(!((*c>='a'&&*c<='z')||(*c>='A'&&*c<='Z')||(*c>='0'&&*c<='9')||*c==' '||*c=='_'||*c=='-'||*c=='?'))return false;return true;}
     if(!std::strcmp(text,"coop_door_sync on")||!std::strcmp(text,"coop_door_sync session")||!std::strcmp(text,"coop_door_sync off")||!std::strcmp(text,"coop_door_sync duplicate"))return true;
@@ -1666,6 +1667,10 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_character_choice on")){coopCharacterChoiceEnabled=true;return;} // 1214hx (#158, lab)
     if(!std::strcmp(request.command,"coop_character_choice off")){coopCharacterChoiceEnabled=false;return;}
     if(!std::strcmp(request.command,"coop_time_bend on")){timeBendEnabled=true;return;} // 1214if (#160, lab)
+    // 1214in (#175, lab): co-op saves (savegame_coop and its profile) as installed players have them; the switch runs on
+    // the main menu or in plain gameplay (native_menu_ui.h). Product mode never reads lab commands.
+    if(!std::strcmp(request.command,"coop_saves on")){requestCoopSaves();return;}
+    if(!std::strcmp(request.command,"coop_saves off")){coopModeSelected=false;return;}
     if(!std::strcmp(request.command,"coop_time_bend off")){timeBendEnabled=false;return;}
     if(!std::strcmp(request.command,"coop_time_bend unbent100")){timeBendUnbentScale=1.f;return;}
     if(!std::strcmp(request.command,"coop_time_bend unbent70")){timeBendUnbentScale=.7f;return;}

@@ -54,3 +54,36 @@ expect step.
 
 - **The end credits skip natively with Esc** (found by the user, 2026-10-22). Route-MissionVM-v1751 sends Esc to the VM
   and B to the host's pad every 9 s while a game is still on the credits map and the route waits for the menu.
+
+## The campaign on co-op saves (#175)
+
+Release 0.9.0 left deaths and checkpoints unshared in real co-op sessions (fixed in 0.9.1, [chapter 90](90-release-packaging-and-steam-sessions.md)). The lab's mission takes had both games on their normal saves, while installed players are on co-op saves (`savegame_coop` and its own profile, [chapter 107](107-coop-menu-and-saves.md)). This section replays the campaign the installed way.
+
+**Tools:**
+- 1214in adds the lab command `coop_saves on|off`. It is 1214im (the 0.9.1 binary) plus that command; product mode never reads lab commands.
+- Route-MissionVM-v1762 adds `-CoopSaves`: both games switch to co-op saves before the mission loads, and the notes record both switch states.
+- v1763 saves a frame of every message box before answering it.
+- v1765 answers a pending choice (logic 1, pending 9) with A.
+
+**Results** (1214in, release pairing: host Corvo, VM partner Emily):
+
+| Mission | Passing take | Earlier attempts |
+|---|---|---|
+| A Long Day in Dunwall (deaths) | campaign-dunwall-coop-v1762a | |
+| Edge of the World | campaign-eotw-coop-v1762a | |
+| The Good Doctor | campaign-institute-coop-v1762a | |
+| The Clockwork Mansion | campaign-madinventor-coop-v1762a | |
+| The Royal Conservatory | campaign-curator-coop-v1763a | v1762a: the archived-journals use did not register; v1762b: the final use on Meagan did not end the mission |
+| The Dust District | campaign-dust-coop-v1762a | |
+| A Crack in the Slab | campaign-bunker-coop-v1762a | |
+| The Grand Palace | campaign-palace-coop-v1763c | v1762a: the closing talk to Meagan did not end the mission; v1762b: cut off by a power failure (recovery log beside it); v1763a/b: the host died in the Duke fight |
+| Death to the Empress | campaign-empress-coop-v1765e | v1763a/v1764c: sat on the tower door's Go / Stay choice; v1763b: manually assisted, not evidence; v1764d: stopped by hand at its start |
+
+**Found (confirmed runtime):**
+- **Difficulty:** on co-op saves the game runs `difficulty/preset/medium`, set by the co-op profile's campaign slot; on the lab's normal saves it runs `easy`.
+  - Health hold refills health, so on Medium a big hit still killed the host in the Duke fight twice.
+  - A joining partner's world takes its own profile's difficulty, not the host's (#177).
+- **Level-transition choice:** the Death to the Empress tower door offers Go / Stay on co-op saves. The choice is a pending switch to logic 9 while the logic stays 1; X closes it and A takes Go.
+  - The user saw the harness sit on it ("leave or stay").
+  - v1765 confirms it in the use step and in Settle.
+- **Endings:** the stalled endings (Royal Conservatory v1762b, Grand Palace v1762a) were route-step misfires: the talk and use steps count any scene change as a hit. Both endings passed on the next attempts, as Meagan's endings did in four other missions.
