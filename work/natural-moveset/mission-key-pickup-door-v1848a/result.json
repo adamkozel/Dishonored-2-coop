@@ -1,0 +1,616 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "client",
+    "door": "script_door_streets_hypathiaapartment",
+    "keyEntity": "pickups_key_srteets_aftersquare_hypati",
+    "channelsBefore": {
+      "client": {
+        "session": "active",
+        "catalog": 19,
+        "entry": {
+          "name": "script_door_streets_hypathiaapartment",
+          "definition": "script_door_streets_hypathiaapartment",
+          "role": 1,
+          "enabled": true,
+          "ready": true,
+          "arm": 19,
+          "peerArm": 19,
+          "revision": 1,
+          "target": 0,
+          "side": 0,
+          "applied": 1,
+          "ack": 1,
+          "awaiting": false,
+          "inFlight": 0,
+          "sent": 11,
+          "received": 12,
+          "rejected": 8,
+          "duplicates": 0,
+          "requests": 0,
+          "commits": 1,
+          "nativeCalls": 0,
+          "converged": 1,
+          "sideCorrections": 0,
+          "locked": 1,
+          "unlocksSent": 0,
+          "unlocksReceived": 0,
+          "unlocksApplied": 0,
+          "result": "native_state_converged"
+        }
+      },
+      "host": {
+        "session": "active",
+        "catalog": 19,
+        "entry": {
+          "name": "script_door_streets_hypathiaapartment",
+          "definition": "script_door_streets_hypathiaapartment",
+          "role": 0,
+          "enabled": true,
+          "ready": true,
+          "arm": 19,
+          "peerArm": 19,
+          "revision": 1,
+          "target": 0,
+          "side": 0,
+          "applied": 1,
+          "ack": 1,
+          "awaiting": false,
+          "inFlight": 0,
+          "sent": 14,
+          "received": 11,
+          "rejected": 0,
+          "duplicates": 0,
+          "requests": 0,
+          "commits": 1,
+          "nativeCalls": 0,
+          "converged": 1,
+          "sideCorrections": 0,
+          "locked": 1,
+          "unlocksSent": 0,
+          "unlocksReceived": 0,
+          "unlocksApplied": 0,
+          "result": "native_state_converged"
+        }
+      }
+    },
+    "before": {
+      "host": {
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          61.6222,
+          -5.3066,
+          32.9527
+        ]
+      },
+      "client": {
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          61.6222,
+          -5.3066,
+          32.9527
+        ]
+      },
+      "keysHost": {
+        "models/interactive/keys/tutorial/tutorial_key_stealth.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_waiting.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_ticketoffice.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_bm_frontdoor.inventoryitem": 0,
+        "models/interactive/keys/bunker/kitchenkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_app_shopkeeper.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/palace/key_double_chestkey.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_security.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_robbers.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem": 0,
+        "models/interactive/keys/keybase.inventoryitem": 0,
+        "models/interactive/keys/dust/durantekey.inventoryitem": 0,
+        "models/interactive/keys/bunker/masterkey.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_alleygate.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_emilyoffice.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_labbridge.inventoryitem": 0,
+        "models/interactive/keys/palace/key_oldlady_apt.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_maint.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_galvani.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_hypatiaapartment.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_kitchens.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_archives.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_byrne_outpost.inventoryitem": 0,
+        "models/interactive/keys/dust/overseerconfiscationkey.inventoryitem": 0,
+        "models/interactive/keys/institute/hamiltonkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_vault.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_docker_boat.inventoryitem": 0,
+        "models/interactive/keys/institute/vascolabkey.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_uppersidealley.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_armory.inventoryitem": 0,
+        "models/interactive/keys/institute/masterkey.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_meagancabin.inventoryitem": 0,
+        "models/interactive/keys/dust/silvergraphshopkey.inventoryitem": 0
+      },
+      "keysClient": {
+        "models/interactive/keys/madinventor/madinventor_keys_waiting.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_alleygate.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_ticketoffice.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_bm_frontdoor.inventoryitem": 0,
+        "models/interactive/keys/bunker/kitchenkey.inventoryitem": 0,
+        "models/interactive/keys/tutorial/tutorial_key_stealth.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/palace/key_double_chestkey.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_galvani.inventoryitem": 0,
+        "models/interactive/keys/institute/masterkey.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_robbers.inventoryitem": 0,
+        "models/interactive/keys/keybase.inventoryitem": 0,
+        "models/interactive/keys/dust/durantekey.inventoryitem": 0,
+        "models/interactive/keys/bunker/masterkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_app_shopkeeper.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_emilyoffice.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_labbridge.inventoryitem": 0,
+        "models/interactive/keys/palace/key_oldlady_apt.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_maint.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_armory.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_hypatiaapartment.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_security.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_kitchens.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_archives.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_byrne_outpost.inventoryitem": 0,
+        "models/interactive/keys/dust/overseerconfiscationkey.inventoryitem": 0,
+        "models/interactive/keys/institute/hamiltonkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_docker_boat.inventoryitem": 0,
+        "models/interactive/keys/institute/vascolabkey.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_uppersidealley.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_vault.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_meagancabin.inventoryitem": 0,
+        "models/interactive/keys/dust/silvergraphshopkey.inventoryitem": 0
+      },
+      "keyEntityHost": [
+        {
+          "handle": "0x1f961bb0",
+          "position": [
+            62.5661,
+            -5.28671,
+            19.9608
+          ]
+        }
+      ],
+      "keyEntityClient": [
+        {
+          "handle": "0x1f961bb0",
+          "position": [
+            62.5661,
+            -5.28671,
+            19.9608
+          ]
+        }
+      ]
+    },
+    "pickTries": [
+      {
+        "bearing": 0,
+        "stand": [
+          63.7159,
+          -5.30036,
+          20.195
+        ],
+        "focus": "0x1f961bb0",
+        "keyEntitiesLeft": 0
+      }
+    ],
+    "picked": {
+      "item": "pickups_key_srteets_aftersquare_hypati",
+      "keysSource": {
+        "error": ""
+      },
+      "keysPeer": {
+        "models/interactive/keys/tutorial/tutorial_key_stealth.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_waiting.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_ticketoffice.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_bm_frontdoor.inventoryitem": 0,
+        "models/interactive/keys/bunker/kitchenkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_app_shopkeeper.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/palace/key_double_chestkey.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_security.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_robbers.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem": 0,
+        "models/interactive/keys/keybase.inventoryitem": 0,
+        "models/interactive/keys/dust/durantekey.inventoryitem": 0,
+        "models/interactive/keys/bunker/masterkey.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_alleygate.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_emilyoffice.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_labbridge.inventoryitem": 0,
+        "models/interactive/keys/palace/key_oldlady_apt.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_maint.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_galvani.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_hypatiaapartment.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_kitchens.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_archives.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_byrne_outpost.inventoryitem": 0,
+        "models/interactive/keys/dust/overseerconfiscationkey.inventoryitem": 0,
+        "models/interactive/keys/institute/hamiltonkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_vault.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_docker_boat.inventoryitem": 0,
+        "models/interactive/keys/institute/vascolabkey.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_uppersidealley.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_armory.inventoryitem": 0,
+        "models/interactive/keys/institute/masterkey.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_meagancabin.inventoryitem": 0,
+        "models/interactive/keys/dust/silvergraphshopkey.inventoryitem": 0
+      },
+      "keyEntityHost": [
+        {
+          "handle": "0x1f961bb0",
+          "position": [
+            62.5661,
+            -5.28671,
+            19.9608
+          ]
+        }
+      ],
+      "keyEntityClient": []
+    },
+    "unlockTries": [
+      {
+        "phase": "unlock",
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 180.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "unlock",
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 155.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "unlock",
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 205.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "unlock",
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 130.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "unlock",
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 230.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "unlock",
+        "offset": [
+          -1.0,
+          0
+        ],
+        "yaw": 0.0,
+        "locked": 0,
+        "current": 0,
+        "pending": 0
+      }
+    ],
+    "unlocked": {
+      "host": {
+        "current": 0,
+        "pending": 0,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          61.6222,
+          -5.3066,
+          32.9527
+        ]
+      },
+      "client": {
+        "current": 0,
+        "pending": 0,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          61.6222,
+          -5.3066,
+          32.9527
+        ]
+      },
+      "peerUnlockMs": 493,
+      "channels": {
+        "client": {
+          "session": "resumed_after_native_menu",
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_streets_hypathiaapartment",
+            "definition": "script_door_streets_hypathiaapartment",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 19,
+            "peerArm": 19,
+            "revision": 1,
+            "target": 0,
+            "side": 0,
+            "applied": 1,
+            "ack": 1,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 30,
+            "received": 27,
+            "rejected": 8,
+            "duplicates": 2,
+            "requests": 0,
+            "commits": 1,
+            "nativeCalls": 0,
+            "converged": 1,
+            "sideCorrections": 0,
+            "locked": 0,
+            "unlocksSent": 1,
+            "unlocksReceived": 0,
+            "unlocksApplied": 0,
+            "result": "unlock_sent"
+          }
+        },
+        "host": {
+          "session": "resumed_after_native_menu",
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_streets_hypathiaapartment",
+            "definition": "script_door_streets_hypathiaapartment",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 19,
+            "peerArm": 19,
+            "revision": 1,
+            "target": 0,
+            "side": 0,
+            "applied": 1,
+            "ack": 1,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 29,
+            "received": 29,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 0,
+            "commits": 1,
+            "nativeCalls": 1,
+            "converged": 1,
+            "sideCorrections": 0,
+            "locked": 0,
+            "unlocksSent": 0,
+            "unlocksReceived": 1,
+            "unlocksApplied": 1,
+            "result": "native_unlock_applied"
+          }
+        }
+      }
+    },
+    "openTries": [
+      {
+        "phase": "open",
+        "yaw": 0.0,
+        "locked": 0,
+        "current": 2,
+        "pending": 2
+      }
+    ],
+    "after": {
+      "host": {
+        "current": 2,
+        "pending": 2,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          61.6222,
+          -5.3066,
+          32.9527
+        ]
+      },
+      "client": {
+        "current": 2,
+        "pending": 2,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          61.6221,
+          -5.3066,
+          32.9527
+        ]
+      },
+      "channels": {
+        "client": {
+          "session": "resumed_after_native_menu",
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_streets_hypathiaapartment",
+            "definition": "script_door_streets_hypathiaapartment",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 19,
+            "peerArm": 19,
+            "revision": 2,
+            "target": 2,
+            "side": 1,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 36,
+            "received": 35,
+            "rejected": 8,
+            "duplicates": 5,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 0,
+            "converged": 2,
+            "sideCorrections": 0,
+            "locked": 0,
+            "unlocksSent": 1,
+            "unlocksReceived": 0,
+            "unlocksApplied": 0,
+            "result": "native_state_converged"
+          }
+        },
+        "host": {
+          "session": "resumed_after_native_menu",
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_streets_hypathiaapartment",
+            "definition": "script_door_streets_hypathiaapartment",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 19,
+            "peerArm": 19,
+            "revision": 2,
+            "target": 2,
+            "side": 1,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 38,
+            "received": 36,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 2,
+            "converged": 2,
+            "sideCorrections": 0,
+            "locked": 0,
+            "unlocksSent": 0,
+            "unlocksReceived": 1,
+            "unlocksApplied": 1,
+            "result": "native_state_converged"
+          }
+        }
+      },
+      "keysSource": {
+        "models/interactive/keys/madinventor/madinventor_keys_waiting.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_alleygate.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_ticketoffice.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_bm_frontdoor.inventoryitem": 0,
+        "models/interactive/keys/bunker/kitchenkey.inventoryitem": 0,
+        "models/interactive/keys/tutorial/tutorial_key_stealth.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/palace/key_double_chestkey.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_galvani.inventoryitem": 0,
+        "models/interactive/keys/institute/masterkey.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_robbers.inventoryitem": 0,
+        "models/interactive/keys/keybase.inventoryitem": 0,
+        "models/interactive/keys/dust/durantekey.inventoryitem": 0,
+        "models/interactive/keys/bunker/masterkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_app_shopkeeper.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_emilyoffice.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_labbridge.inventoryitem": 0,
+        "models/interactive/keys/palace/key_oldlady_apt.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_maint.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_armory.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_hypatiaapartment.inventoryitem": 1,
+        "models/interactive/keys/curator/key_cu_security.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_kitchens.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_archives.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_byrne_outpost.inventoryitem": 0,
+        "models/interactive/keys/dust/overseerconfiscationkey.inventoryitem": 0,
+        "models/interactive/keys/institute/hamiltonkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_docker_boat.inventoryitem": 0,
+        "models/interactive/keys/institute/vascolabkey.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_uppersidealley.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_vault.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_meagancabin.inventoryitem": 0,
+        "models/interactive/keys/dust/silvergraphshopkey.inventoryitem": 0
+      },
+      "keysPeer": {
+        "models/interactive/keys/tutorial/tutorial_key_stealth.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_waiting.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_ticketoffice.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_bm_frontdoor.inventoryitem": 0,
+        "models/interactive/keys/bunker/kitchenkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_app_shopkeeper.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/palace/key_double_chestkey.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_security.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_robbers.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_blackmarket.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem": 0,
+        "models/interactive/keys/keybase.inventoryitem": 0,
+        "models/interactive/keys/dust/durantekey.inventoryitem": 0,
+        "models/interactive/keys/bunker/masterkey.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_alleygate.inventoryitem": 0,
+        "models/interactive/keys/dunwall/dunwall_key_emilyoffice.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_labbridge.inventoryitem": 0,
+        "models/interactive/keys/palace/key_oldlady_apt.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_maint.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_galvani.inventoryitem": 0,
+        "models/interactive/keys/eotw/key_hypatiaapartment.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_kitchens.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_archives.inventoryitem": 0,
+        "models/interactive/keys/curator/key_cu_byrne_outpost.inventoryitem": 0,
+        "models/interactive/keys/dust/overseerconfiscationkey.inventoryitem": 0,
+        "models/interactive/keys/institute/hamiltonkey.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_vault.inventoryitem": 0,
+        "models/interactive/keys/palace/palace_key_docker_boat.inventoryitem": 0,
+        "models/interactive/keys/institute/vascolabkey.inventoryitem": 0,
+        "models/interactive/keys/madinventor/madinventor_keys_uppersidealley.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_armory.inventoryitem": 0,
+        "models/interactive/keys/institute/masterkey.inventoryitem": 0,
+        "models/interactive/keys/dtte/dtte_meagancabin.inventoryitem": 0,
+        "models/interactive/keys/dust/silvergraphshopkey.inventoryitem": 0
+      }
+    }
+  },
+  "scope": "1848 (#185): pickups_key_srteets_aftersquare_hypati picked up natively by the client, then script_door_streets_hypathiaapartment unlocked and opened by the client; the pickup, the unlock and the open state in both worlds"
+}

@@ -1,0 +1,696 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "client",
+    "dying": "host",
+    "door": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+    "key": "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem",
+    "channelsBefore": {
+      "host": {
+        "session": "active",
+        "rearms": 0,
+        "catalog": 19,
+        "entry": {
+          "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "role": 0,
+          "enabled": true,
+          "ready": true,
+          "arm": 17,
+          "peerArm": 17,
+          "revision": 1,
+          "target": 0,
+          "side": 0,
+          "applied": 1,
+          "ack": 1,
+          "awaiting": false,
+          "inFlight": 0,
+          "sent": 7,
+          "received": 5,
+          "rejected": 0,
+          "duplicates": 0,
+          "requests": 0,
+          "commits": 1,
+          "nativeCalls": 0,
+          "converged": 1,
+          "sideCorrections": 0,
+          "locked": 1,
+          "unlocksSent": 0,
+          "unlocksReceived": 0,
+          "unlocksApplied": 0,
+          "result": "native_state_converged"
+        }
+      },
+      "client": {
+        "session": "active",
+        "rearms": 0,
+        "catalog": 19,
+        "entry": {
+          "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "role": 1,
+          "enabled": true,
+          "ready": true,
+          "arm": 17,
+          "peerArm": 17,
+          "revision": 1,
+          "target": 0,
+          "side": 0,
+          "applied": 1,
+          "ack": 1,
+          "awaiting": false,
+          "inFlight": 0,
+          "sent": 5,
+          "received": 5,
+          "rejected": 0,
+          "duplicates": 0,
+          "requests": 0,
+          "commits": 1,
+          "nativeCalls": 0,
+          "converged": 1,
+          "sideCorrections": 0,
+          "locked": 1,
+          "unlocksSent": 0,
+          "unlocksReceived": 0,
+          "unlocksApplied": 0,
+          "result": "native_state_converged"
+        }
+      }
+    },
+    "checkpointArmed": {
+      "host": "armed",
+      "client": "armed"
+    },
+    "first": {
+      "phase": "first",
+      "before": {
+        "host": {
+          "current": 0,
+          "pending": 0,
+          "locked": 1,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        },
+        "client": {
+          "current": 0,
+          "pending": 0,
+          "locked": 1,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        }
+      },
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "granted_named"
+      },
+      "keyBefore": 1,
+      "tries": [
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 180.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 155.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 205.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 130.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 230.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            -1.0,
+            0
+          ],
+          "yaw": 0.0,
+          "locked": 0,
+          "current": 0,
+          "pending": 0
+        }
+      ],
+      "unlocked": {
+        "host": {
+          "current": 0,
+          "pending": 0,
+          "locked": 0,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        },
+        "client": {
+          "current": 0,
+          "pending": 0,
+          "locked": 0,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        },
+        "peerUnlockMs": 474,
+        "channels": {
+          "host": {
+            "session": "active",
+            "rearms": 0,
+            "catalog": 19,
+            "entry": {
+              "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+              "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+              "role": 0,
+              "enabled": true,
+              "ready": true,
+              "arm": 17,
+              "peerArm": 17,
+              "revision": 1,
+              "target": 0,
+              "side": 0,
+              "applied": 1,
+              "ack": 1,
+              "awaiting": false,
+              "inFlight": 0,
+              "sent": 15,
+              "received": 14,
+              "rejected": 0,
+              "duplicates": 0,
+              "requests": 0,
+              "commits": 1,
+              "nativeCalls": 1,
+              "converged": 1,
+              "sideCorrections": 0,
+              "locked": 0,
+              "unlocksSent": 0,
+              "unlocksReceived": 1,
+              "unlocksApplied": 1,
+              "result": "native_unlock_applied"
+            }
+          },
+          "client": {
+            "session": "active",
+            "rearms": 0,
+            "catalog": 19,
+            "entry": {
+              "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+              "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+              "role": 1,
+              "enabled": true,
+              "ready": true,
+              "arm": 17,
+              "peerArm": 17,
+              "revision": 1,
+              "target": 0,
+              "side": 0,
+              "applied": 1,
+              "ack": 1,
+              "awaiting": false,
+              "inFlight": 0,
+              "sent": 13,
+              "received": 12,
+              "rejected": 0,
+              "duplicates": 0,
+              "requests": 0,
+              "commits": 1,
+              "nativeCalls": 0,
+              "converged": 1,
+              "sideCorrections": 0,
+              "locked": 0,
+              "unlocksSent": 1,
+              "unlocksReceived": 0,
+              "unlocksApplied": 0,
+              "result": "unlock_sent"
+            }
+          }
+        }
+      }
+    },
+    "deathScreensMs": 6087,
+    "restartMs": 6936,
+    "renewed": {
+      "rearms": {
+        "host": 1,
+        "client": 1
+      },
+      "completed": {
+        "host": 1,
+        "client": 1
+      },
+      "channels": {
+        "host": {
+          "session": "renewed_after_shared_checkpoint",
+          "rearms": 1,
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 36,
+            "peerArm": 36,
+            "revision": 1,
+            "target": 0,
+            "side": 0,
+            "applied": 1,
+            "ack": 1,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 10,
+            "received": 9,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 0,
+            "commits": 1,
+            "nativeCalls": 0,
+            "converged": 1,
+            "sideCorrections": 0,
+            "locked": 1,
+            "unlocksSent": 0,
+            "unlocksReceived": 0,
+            "unlocksApplied": 0,
+            "result": "native_state_converged"
+          }
+        },
+        "client": {
+          "session": "renewed_after_shared_checkpoint",
+          "rearms": 1,
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 36,
+            "peerArm": 36,
+            "revision": 1,
+            "target": 0,
+            "side": 0,
+            "applied": 1,
+            "ack": 1,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 9,
+            "received": 10,
+            "rejected": 8,
+            "duplicates": 0,
+            "requests": 0,
+            "commits": 1,
+            "nativeCalls": 0,
+            "converged": 1,
+            "sideCorrections": 0,
+            "locked": 1,
+            "unlocksSent": 0,
+            "unlocksReceived": 0,
+            "unlocksApplied": 0,
+            "result": "native_state_converged"
+          }
+        }
+      },
+      "doors": {
+        "host": {
+          "current": 0,
+          "pending": 0,
+          "locked": 1,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        },
+        "client": {
+          "current": 0,
+          "pending": 0,
+          "locked": 1,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        }
+      }
+    },
+    "second": {
+      "phase": "second",
+      "before": {
+        "host": {
+          "current": 0,
+          "pending": 0,
+          "locked": 1,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        },
+        "client": {
+          "current": 0,
+          "pending": 0,
+          "locked": 1,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        }
+      },
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "granted_named"
+      },
+      "keyBefore": 1,
+      "tries": [
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 180.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 155.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 205.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 130.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            1.0,
+            0
+          ],
+          "yaw": 230.0,
+          "locked": 1,
+          "current": 0,
+          "pending": 0
+        },
+        {
+          "offset": [
+            -1.0,
+            0
+          ],
+          "yaw": 0.0,
+          "locked": 0,
+          "current": 0,
+          "pending": 0
+        }
+      ],
+      "unlocked": {
+        "host": {
+          "current": 0,
+          "pending": 0,
+          "locked": 0,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        },
+        "client": {
+          "current": 0,
+          "pending": 0,
+          "locked": 0,
+          "blocked": 0,
+          "linked": false,
+          "position": [
+            -33.7171,
+            40.6463,
+            30.9
+          ]
+        },
+        "peerUnlockMs": 470,
+        "channels": {
+          "host": {
+            "session": "renewed_after_shared_checkpoint",
+            "rearms": 1,
+            "catalog": 19,
+            "entry": {
+              "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+              "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+              "role": 0,
+              "enabled": true,
+              "ready": true,
+              "arm": 36,
+              "peerArm": 36,
+              "revision": 1,
+              "target": 0,
+              "side": 0,
+              "applied": 1,
+              "ack": 1,
+              "awaiting": false,
+              "inFlight": 0,
+              "sent": 16,
+              "received": 16,
+              "rejected": 0,
+              "duplicates": 0,
+              "requests": 0,
+              "commits": 1,
+              "nativeCalls": 1,
+              "converged": 1,
+              "sideCorrections": 0,
+              "locked": 0,
+              "unlocksSent": 0,
+              "unlocksReceived": 1,
+              "unlocksApplied": 1,
+              "result": "native_unlock_applied"
+            }
+          },
+          "client": {
+            "session": "renewed_after_shared_checkpoint",
+            "rearms": 1,
+            "catalog": 19,
+            "entry": {
+              "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+              "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+              "role": 1,
+              "enabled": true,
+              "ready": true,
+              "arm": 36,
+              "peerArm": 36,
+              "revision": 1,
+              "target": 0,
+              "side": 0,
+              "applied": 1,
+              "ack": 1,
+              "awaiting": false,
+              "inFlight": 0,
+              "sent": 17,
+              "received": 17,
+              "rejected": 8,
+              "duplicates": 0,
+              "requests": 0,
+              "commits": 1,
+              "nativeCalls": 0,
+              "converged": 1,
+              "sideCorrections": 0,
+              "locked": 0,
+              "unlocksSent": 1,
+              "unlocksReceived": 0,
+              "unlocksApplied": 0,
+              "result": "unlock_sent"
+            }
+          }
+        }
+      }
+    },
+    "openTries": [
+      {
+        "yaw": 0.0,
+        "locked": 0,
+        "current": 2,
+        "pending": 2
+      }
+    ],
+    "after": {
+      "host": {
+        "current": 2,
+        "pending": 2,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "client": {
+        "current": 2,
+        "pending": 2,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "channels": {
+        "host": {
+          "session": "renewed_after_shared_checkpoint",
+          "rearms": 1,
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 36,
+            "peerArm": 36,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 27,
+            "received": 25,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 2,
+            "converged": 2,
+            "sideCorrections": 0,
+            "locked": 0,
+            "unlocksSent": 0,
+            "unlocksReceived": 1,
+            "unlocksApplied": 1,
+            "result": "native_state_converged"
+          }
+        },
+        "client": {
+          "session": "renewed_after_shared_checkpoint",
+          "rearms": 1,
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 36,
+            "peerArm": 36,
+            "revision": 2,
+            "target": 2,
+            "side": 0,
+            "applied": 2,
+            "ack": 2,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 24,
+            "received": 26,
+            "rejected": 8,
+            "duplicates": 4,
+            "requests": 1,
+            "commits": 2,
+            "nativeCalls": 0,
+            "converged": 2,
+            "sideCorrections": 0,
+            "locked": 0,
+            "unlocksSent": 1,
+            "unlocksReceived": 0,
+            "unlocksApplied": 0,
+            "result": "native_state_converged"
+          }
+        }
+      }
+    }
+  },
+  "scope": "1843 (#185): a shared key unlock by the client, a shared checkpoint restart (host fell), the renewed door channel and a second shared unlock and open"
+}

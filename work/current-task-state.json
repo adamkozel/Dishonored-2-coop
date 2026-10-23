@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-23T17:40:00+02:00",
+  "UpdatedAt": "2026-10-24T01:50:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22790,5 +22790,13 @@
     "Evidence": "story-flags-v1836a (nine mission maps: equal flags at load, except the per-world Jindosh lock riddle values); route-dunwall-lead-v1835a (partner-led: her Ramsey kill sets both worlds' ramsey_is_alive 0, no flag difference)",
     "Open": "#197: non-lethal outcomes end to end, partner-made, in the final campaign validation",
     "Status": "done, chapter 110"
+  },
+  "MissionLockedDoors": {
+    "Card": "#185",
+    "Candidate": "candidate-npc-combat-v1214jf",
+    "Fix": "locked ordinary doors in the door catalog; a native unlock sends Unlock (door kind 4) and the other world calls the native lock routine 0x14074e4c0 (component, 0, 0); an open order waits while the door is still locked there",
+    "Evidence": "mission-locked-door-v1841b (gap); v1842a (partner key), v1844a (host key), mission-locked-door-restart-v1843a (shared restart, renewed), mission-key-pickup-door-v1848a (native key pickup), mission-door-sides-v1849a (opposite sides, one side correction)",
+    "Open": "keys are not shared pickups; a lock that already differs at channel arm is not reconciled; native relock not shared",
+    "Status": "done, chapter 84"
   }
 }

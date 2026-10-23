@@ -1,0 +1,139 @@
+{
+  "passed": false,
+  "failure": "Method invocation failed because [System.Object[]] does not contain a method named 'op_Addition'.",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "door": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+    "key": "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem",
+    "channelsBefore": {
+      "host": {
+        "session": "active",
+        "catalog": 19,
+        "entry": {
+          "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "role": 0,
+          "enabled": true,
+          "ready": true,
+          "arm": 17,
+          "peerArm": 17,
+          "revision": 1,
+          "target": 0,
+          "side": 0,
+          "applied": 1,
+          "ack": 1,
+          "awaiting": false,
+          "inFlight": 0,
+          "sent": 13,
+          "received": 11,
+          "rejected": 0,
+          "duplicates": 0,
+          "requests": 0,
+          "commits": 1,
+          "nativeCalls": 0,
+          "converged": 1,
+          "sideCorrections": 0,
+          "locked": 1,
+          "unlocksSent": 0,
+          "unlocksReceived": 0,
+          "unlocksApplied": 0,
+          "result": "native_state_converged"
+        }
+      },
+      "client": {
+        "session": "active",
+        "catalog": 19,
+        "entry": {
+          "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "role": 1,
+          "enabled": true,
+          "ready": true,
+          "arm": 17,
+          "peerArm": 17,
+          "revision": 1,
+          "target": 0,
+          "side": 0,
+          "applied": 1,
+          "ack": 1,
+          "awaiting": false,
+          "inFlight": 0,
+          "sent": 11,
+          "received": 11,
+          "rejected": 7,
+          "duplicates": 0,
+          "requests": 0,
+          "commits": 1,
+          "nativeCalls": 0,
+          "converged": 1,
+          "sideCorrections": 0,
+          "locked": 1,
+          "unlocksSent": 0,
+          "unlocksReceived": 0,
+          "unlocksApplied": 0,
+          "result": "native_state_converged"
+        }
+      }
+    },
+    "before": {
+      "host": {
+        "handle": 476977288,
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "client": {
+        "handle": 476977288,
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      }
+    },
+    "unlockTries": [
+      {
+        "offset": [
+          -1.0,
+          0
+        ],
+        "yaw": 0.0,
+        "locked": 0,
+        "current": 0
+      }
+    ],
+    "unlocked": {
+      "host": {
+        "handle": 476977288,
+        "current": 0,
+        "pending": 0,
+        "locked": 0,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "client": {
+        "handle": 476977288,
+        "current": 0,
+        "pending": 0,
+        "locked": 0,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      }
+    }
+  },
+  "scope": "1846 (#185): both players use the same mission door from opposite sides back to back; both worlds converge on the host order (side corrections recorded)"
+}
