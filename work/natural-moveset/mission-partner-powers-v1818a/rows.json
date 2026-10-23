@@ -1,0 +1,316 @@
+{
+  "power": "domino",
+  "pairing": "corvo-emily",
+  "passed": false,
+  "failure": "her takedown left the linked guard alive; guard 1 is not in a network of two or more (); the live guard ends 11.63 m apart in the two worlds",
+  "checks": [
+    "Domino: network , guard 1 alive/alive, members ",
+    "Host guard moved up to 10.06 m (health 40 -> 40); her copy up to 3.42 m (health 40 -> 40); outcome alive/alive, end gap 11.63 m (last samples 11.63 m)"
+  ],
+  "definitions": {
+    "host": "models/characters/player/corvo/body.def",
+    "client": "models/characters/player/emily/body.def"
+  },
+  "grants": [
+    {
+      "item": "models/powers/phantasmallink/phantasmal_link.inventoryitem",
+      "result": "named_power_equip_requested"
+    }
+  ],
+  "stand": {
+    "side": "right",
+    "stand": [
+      13.0139,
+      55.7454,
+      16.8607
+    ],
+    "guard": [
+      4.43583,
+      59.1994,
+      15.9529
+    ],
+    "facing": [
+      -0.16261298830251644,
+      0.9866899290229559
+    ],
+    "trials": [
+      {
+        "side": "left",
+        "asked": [
+          -0.48408950316069266,
+          53.071359081882385
+        ],
+        "rest": [
+          -0.513832,
+          53.0828,
+          15.1123
+        ],
+        "ok": false
+      },
+      {
+        "side": "right",
+        "asked": [
+          13.329569503160691,
+          55.34794091811761
+        ],
+        "rest": [
+          13.0139,
+          55.7454,
+          16.8607
+        ],
+        "ok": true
+      }
+    ],
+    "crouched": true
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43727,
+        59.201,
+        15.953
+      ]
+    },
+    "client": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43727,
+        59.201,
+        15.953
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": true,
+    "ms": 810,
+    "channel": "client_replica",
+    "gap": 0.0
+  },
+  "camera": [
+    10.967877603529258,
+    63.038460450343536,
+    18.553
+  ],
+  "aim": {
+    "target": [
+      4.43727,
+      59.201,
+      15.953
+    ],
+    "stand": [
+      13.0139,
+      55.7454,
+      16.8607
+    ],
+    "yaw": 158.1,
+    "pitch": 4.0,
+    "distance": 9.25
+  },
+  "before": {
+    "ms": 0,
+    "host": {
+      "present": true,
+      "position": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_host": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client": {
+      "present": true,
+      "position": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_client": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "host_2": {
+      "present": true,
+      "position": [
+        6.91648,
+        48.4619,
+        16.472
+      ],
+      "health": 30,
+      "suppressed": false
+    },
+    "channel_host_2": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client_2": {
+      "present": true,
+      "position": [
+        6.91648,
+        48.4619,
+        16.472
+      ],
+      "health": 30,
+      "suppressed": false
+    },
+    "channel_client_2": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    }
+  },
+  "attempts": [],
+  "castAt": 1,
+  "aims": [
+    {
+      "target": [
+        6.91648,
+        48.4619,
+        16.472
+      ],
+      "stand": [
+        0.590232,
+        53.401,
+        15.3183
+      ],
+      "yaw": -38.0,
+      "pitch": -10.0,
+      "distance": 8.03
+    },
+    {
+      "target": [
+        5.95037,
+        49.1058,
+        16.3202
+      ],
+      "stand": [
+        -1.25072,
+        51.0676,
+        15.4096
+      ],
+      "yaw": -15.2,
+      "pitch": -9.0,
+      "distance": 7.46
+    },
+    {
+      "target": [
+        2.87464,
+        60.4953,
+        15.9469
+      ],
+      "stand": [
+        9.245,
+        66.598,
+        -2.41229
+      ],
+      "yaw": -136.2,
+      "pitch": -60.0,
+      "distance": 8.82
+    },
+    {
+      "target": [
+        2.19501,
+        62.2054,
+        15.9512
+      ],
+      "stand": [
+        8.75695,
+        66.1303,
+        -207.9
+      ],
+      "yaw": -149.1,
+      "pitch": -60.0,
+      "distance": 7.65
+    },
+    {
+      "target": [
+        2.19501,
+        62.2054,
+        15.9512
+      ],
+      "stand": [
+        8.75695,
+        66.1303,
+        -207.9
+      ],
+      "yaw": -149.1,
+      "pitch": -60.0,
+      "distance": 7.65
+    }
+  ],
+  "marks": {
+    "script_spawner_checkpoint_guard_02": {
+      "tries": 2,
+      "marked": true,
+      "hostMarks": 768420329
+    },
+    "script_spawner_checkpoint_guard_01": {
+      "tries": 3,
+      "marked": false,
+      "hostMarks": null
+    }
+  },
+  "network": [],
+  "guardHandle": 768092644,
+  "dominoLinked": {
+    "sent": 196,
+    "markCount": 0,
+    "readyMask": 5
+  },
+  "killPress": "lethal,choke",
+  "castEnd": 25803,
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "outcome2": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "networkOutcomes": [],
+  "summary": {
+    "hostGuardMaxMove": 10.06,
+    "herCopyMaxMove": 3.42,
+    "endGap": 11.63,
+    "rawEndGap": 11.63,
+    "hostHealth": [
+      40,
+      40
+    ],
+    "herHealth": [
+      40,
+      40
+    ],
+    "outcome": {
+      "host": "alive",
+      "client": "alive"
+    }
+  }
+}

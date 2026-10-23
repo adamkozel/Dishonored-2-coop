@@ -22,7 +22,7 @@ struct NpcAuthorityHold {
 NpcAuthorityHold npcAuthorityHold{};
 int npcAuthorityHoldRequest=-1;
 bool npcLeaseGenerationCurrent(const NpcAiLease& lease,unsigned index){
-    if(index>=2||outgoing.worldEpoch!=lease.epoch||observedGame!=lease.binding.health.game)return false;
+    if(index>=3||outgoing.worldEpoch!=lease.epoch||observedGame!=lease.binding.health.game)return false;
     const auto& s=lease.binding.ai[index];unsigned generation=~0u;
     return worldIdentityEntity(memoryRead,s.game,s.handle)==s.actor&&
         memoryRead(s.component+0x18,&generation,4)&&generation==lease.binding.aiGeneration[index];
@@ -39,22 +39,30 @@ void releaseNpcAiLease(NpcAiLease& lease){
 }
 // 1214ij (#160): forced=true skips the calm-AI eligibility, for her Possession only: the game suspends a possessed
 // victim's AI whatever its state, and an alert guard refused the lease (partner-corvo-power-v1798a, v1800b).
-bool acquireNpcAiLease(NpcAiLease& lease,bool forced=false){
-    if(lease.references||outgoing.worldEpoch!=lease.epoch||!nativeAiRequestsMatch())return false;
+// 1214iv (#180): the step the last acquisition stopped at, and for a refused count the AI index and its flags before
+// and after the pause call (mission-partner-powers-v1811b: every forced lease on the client failed within 16 ms).
+const char* npcLeaseAcquireStep="none";unsigned npcLeaseAcquireFlags[3]{};
+// 1214iw (#180): attack=true also pauses the attack AI (the client's forced lease); release undoes every reference.
+bool acquireNpcAiLease(NpcAiLease& lease,bool forced=false,bool attack=false){
+    if(lease.references){npcLeaseAcquireStep="acquire_held";return false;}
+    if(outgoing.worldEpoch!=lease.epoch){npcLeaseAcquireStep="acquire_epoch";return false;}
+    if(!nativeAiRequestsMatch()){npcLeaseAcquireStep="acquire_requests";return false;}
     NativeNpcAuthority fresh{};
-    if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,lease.binding.npc.handle,fresh)||
-       !sameNpcAuthorityIdentity(lease.binding,fresh)||(!forced&&!npcAuthorityLeaseEligible(fresh)))return false;
+    if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,lease.binding.npc.handle,fresh)){npcLeaseAcquireStep="acquire_read";return false;}
+    if(!sameNpcAuthorityIdentity(lease.binding,fresh)){npcLeaseAcquireStep="acquire_identity";return false;}
+    if(!forced&&!npcAuthorityLeaseEligible(fresh)){npcLeaseAcquireStep="acquire_ineligible";return false;}
     lease.binding=std::move(fresh);
-    for(unsigned i=0;i<2;++i){
+    for(unsigned i=0;i<(attack?3u:2u);++i){
         const auto& s=lease.binding.ai[i];
-        if(!npcLeaseGenerationCurrent(lease,i))return false;
+        if(!npcLeaseGenerationCurrent(lease,i)){npcLeaseAcquireStep="acquire_generation";return false;}
         // 1214ex (#113): the game's own pause references (a scripted post) stay; the lease adds exactly one.
         const unsigned before=(s.flags>>6)&0x1fffff;
         reinterpret_cast<void(*)(void*,void*)>(gameImage+0x7e7800)(reinterpret_cast<void*>(s.component),reinterpret_cast<void*>(s.manager));
         ++lease.references;++lease.acquired;
-        unsigned flags=0;if(!memoryRead(s.component+0x1c,&flags,4)||((flags>>6)&0x1fffff)!=before+1)return false;
+        unsigned flags=0;if(!memoryRead(s.component+0x1c,&flags,4)||((flags>>6)&0x1fffff)!=before+1){
+            npcLeaseAcquireStep="acquire_count";npcLeaseAcquireFlags[0]=i;npcLeaseAcquireFlags[1]=s.flags;npcLeaseAcquireFlags[2]=flags;return false;}
     }
-    return true;
+    npcLeaseAcquireStep="acquired";return true;
 }
 void stopNpcAuthorityHold(const char* reason){
     if(!npcAuthorityHold.until)return;

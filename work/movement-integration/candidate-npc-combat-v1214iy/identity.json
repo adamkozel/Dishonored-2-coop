@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-23T18:14:31.023336+02:00",
+  "dll": "86FA91503D2B70650B861B5BBEE8C07D539CD79A8809549CEAD601D749FE39B4",
+  "probe": "FC7ADE078819E08D66EF21C6101E44D633A4709F58627A0181AB294B5A0CBE7A",
+  "setup": "0AB002BD43930A1EA8EDC079A12C84550D9CF6EBADA3CD0D34635984EF13CA2E",
+  "previous": "candidate-npc-combat-v1214ix",
+  "protocol": 81,
+  "npcAttackPacketVersion": 3,
+  "bankVersion": 75,
+  "clips": 382,
+  "banks": [
+    {
+      "path": "work/natural-moveset/shop-banks-v1409/corvo-choke-bank.bin",
+      "sha256": "AA8DA1AE7F5123B257D482CA73AFA56CDB2F9987D1F4298EE2EBE63631E96154"
+    },
+    {
+      "path": "work/natural-moveset/shop-banks-v1409/emily-choke-bank.bin",
+      "sha256": "0CC6EBD2CC349B3462985412C91F314F8972B5149AE9366982EE8A145CA815AD"
+    }
+  ],
+  "nativeTables": {
+    "path": "work/release/native-tables-v1/native-tables.bin",
+    "sha256": "4985F2DFA0AEEFF0AA5A563D8BB3FD197850C5C3807FA442398544B16AEB2461"
+  },
+  "runtimeVerified": false,
+  "coinProtocol": 7,
+  "coinCatalogListProtocol": 1,
+  "scope": "1214iy (protocol 81, pose version 13, Doppelganger world packet v6, shade kill packet v1, prop rest packet v1, #180): 1214ix with a native phase blip (world unchanged, a pose out of the menu context under 750 ms) suspending the NPC stream session instead of ending it, and the blip count, ends and phase fields in the session status: her Blink Assault ended her session for one blip, and her kick stayed in her world (mission-partner-powers-v1819c)."
+}

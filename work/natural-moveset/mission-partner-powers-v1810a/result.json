@@ -1,0 +1,254 @@
+{
+  "passed": false,
+  "failure": "Failed: possession (Her copy of the host guard is not a ready replica (, gap 8.53))",
+  "rows": [
+    {
+      "power": "possession",
+      "pairing": "corvo-corvo",
+      "passed": false,
+      "failure": "Her copy of the host guard is not a ready replica (, gap 8.53)",
+      "checks": [],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/corvo/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/possession/possession.inventoryitem",
+          "result": "named_power_equip_requested"
+        },
+        {
+          "item": "components/characters/player/base/attributes/possession_parasite.inventoryitem",
+          "result": "granted_named"
+        }
+      ],
+      "stand": {
+        "side": "front",
+        "stand": [
+          3.75727,
+          63.1228,
+          15.9714
+        ],
+        "guard": [
+          4.43954,
+          59.1825,
+          15.9529
+        ],
+        "facing": [
+          -0.17021402030270402,
+          0.9854071175369045
+        ],
+        "trials": [
+          {
+            "side": "front",
+            "asked": [
+              3.758683918789184,
+              63.12412847014762
+            ],
+            "rest": [
+              3.75727,
+              63.1228,
+              15.9714
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43834,
+            59.2015,
+            15.953
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            1.15711,
+            67.0725,
+            15.968
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": false,
+        "ms": 25004,
+        "channel": null,
+        "gap": 8.53
+      }
+    },
+    {
+      "power": "blinkkick",
+      "pairing": "corvo-corvo",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Blink Assault: host down poses sent 0, host guard moved 2.15 m",
+        "Host guard moved up to 2.15 m (health 40 -> 40); her copy up to 8.52 m (health 40 -> 21.1329441); outcome dead/dead, end gap 3.41 m"
+      ],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/corvo/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/blink/blink.inventoryitem",
+          "result": "named_power_equip_requested"
+        },
+        {
+          "item": "components/characters/player/base/attributes/blink_assault.inventoryitem",
+          "result": "granted_named"
+        }
+      ],
+      "stand": {
+        "side": "front",
+        "stand": [
+          3.43668,
+          65.1058,
+          15.9789
+        ],
+        "guard": [
+          4.43906,
+          59.1916,
+          15.9529
+        ],
+        "facing": [
+          -0.16656296952480903,
+          0.9860308195908875
+        ],
+        "trials": [
+          {
+            "side": "front",
+            "asked": [
+              3.4396821828511452,
+              65.10778491754533
+            ],
+            "rest": [
+              3.43668,
+              65.1058,
+              15.9789
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43885,
+            59.1877,
+            15.9529
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43885,
+            59.1877,
+            15.9529
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": true,
+        "ms": 115,
+        "channel": "client_replica",
+        "gap": 0.0
+      },
+      "camera": [
+        -1.9780141430482536,
+        61.14497301350286,
+        18.5529
+      ],
+      "aim": {
+        "target": [
+          4.43885,
+          59.1877,
+          15.9529
+        ],
+        "stand": [
+          3.43668,
+          65.1058,
+          15.9789
+        ],
+        "yaw": -80.4,
+        "pitch": 4.0,
+        "distance": 6.0
+      },
+      "before": {
+        "ms": 0,
+        "host": {
+          "present": true,
+          "position": [
+            4.39941,
+            59.4202,
+            15.9535
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_host": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client": {
+          "present": true,
+          "position": [
+            4.4964,
+            58.8421,
+            15.9518
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_client": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "sentBefore": 0,
+          "sentAfter": 1
+        }
+      ],
+      "castAt": 2,
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "summary": {
+        "hostGuardMaxMove": 2.15,
+        "herCopyMaxMove": 8.52,
+        "endGap": 3.41,
+        "hostHealth": [
+          40,
+          40
+        ],
+        "herHealth": [
+          40,
+          21.1329441
+        ],
+        "outcome": {
+          "host": "dead",
+          "client": "dead"
+        }
+      }
+    }
+  ],
+  "scope": "1810 (#180): the partner (corvo, host corvo) uses possession,blinkkick on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}

@@ -1,0 +1,172 @@
+{
+  "passed": true,
+  "failure": null,
+  "rows": [
+    {
+      "power": "windblast",
+      "pairing": "corvo-corvo",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Host guard moved up to 1.08 m (health 40 -> 0); her copy up to 1.09 m (health 40 -> 0); outcome dead/dead, end gap 1.55 m"
+      ],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/corvo/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/windblast/windblast.inventoryitem",
+          "result": "named_power_equip_requested"
+        }
+      ],
+      "stand": {
+        "side": "front",
+        "stand": [
+          3.78716,
+          63.1334,
+          15.9717
+        ],
+        "guard": [
+          4.43848,
+          59.1874,
+          15.9529
+        ],
+        "facing": [
+          -0.16267397944809608,
+          0.9866798753448457
+        ],
+        "trials": [
+          {
+            "side": "front",
+            "asked": [
+              3.787784082207616,
+              63.13411950137938
+            ],
+            "rest": [
+              3.78716,
+              63.1334,
+              15.9717
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43448,
+            59.198,
+            15.9529
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43448,
+            59.198,
+            15.9529
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": true,
+        "ms": 131,
+        "channel": "client_replica",
+        "gap": 0.0
+      },
+      "camera": [
+        -1.8096233764697844,
+        60.19186724946475,
+        18.5529
+      ],
+      "aim": {
+        "target": [
+          4.43448,
+          59.198,
+          15.9529
+        ],
+        "stand": [
+          3.78716,
+          63.1334,
+          15.9717
+        ],
+        "yaw": -80.7,
+        "pitch": 6.0,
+        "distance": 3.99
+      },
+      "before": {
+        "ms": 0,
+        "host": {
+          "present": true,
+          "position": [
+            4.2348,
+            60.402,
+            15.9572
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_host": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client": {
+          "present": true,
+          "position": [
+            4.48831,
+            58.8587,
+            15.9518
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_client": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "sentBefore": 0,
+          "sentAfter": 1
+        }
+      ],
+      "castAt": 2,
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "summary": {
+        "hostGuardMaxMove": 1.08,
+        "herCopyMaxMove": 1.09,
+        "endGap": 1.55,
+        "hostHealth": [
+          40,
+          0
+        ],
+        "herHealth": [
+          40,
+          0
+        ],
+        "outcome": {
+          "host": "dead",
+          "client": "dead"
+        }
+      }
+    }
+  ],
+  "scope": "1809 (#180): the partner (corvo, host corvo) uses windblast on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}

@@ -65,6 +65,8 @@ bool cinematicSync=false;
 bool nativeMutationAllowed=false;
 NativePlayerBlink sampledNativeBlink{};
 bool sampledBlinkValid=false,sampledBlinkStateKnown=false,sampledBlinkStatePresent=false;
+// 1214iz (#180): the last coherent published position (and its world epoch), held through an unverified Blink root.
+float sampledCoherentPosition[3]{};std::uint64_t sampledCoherentEpoch=0,blinkGapHeldSamples=0;bool sampledCoherentValid=false;
 std::atomic<std::uint64_t> nativeSkipCallbacks{0};
 std::atomic<DWORD> nativeSkipThread{0};
 std::uint64_t skipSent=0,skipReceived=0,skipApplied=0,skipDropped=0,skipSequence=0;
@@ -687,10 +689,16 @@ void sampleLocalPlayer() {
             sampledBlinkValid=readNativePlayerBlink(memoryRead,base,blinkStates,sampledNativeBlink);
             if(sampledBlinkValid)std::memcpy(outgoing.position,nativeBlinkNetworkPoint(sampledNativeBlink).data(),12);
             // Never publish an unverified eye-height/intermediate Blink root.
-            // The receiver retains its last coherent sample on this short gap.
-            else if(sampledBlinkStatePresent)outgoing.flags=0;
+            // 1214iz (#180): publish the last coherent position on this short gap instead of clearing flags bit 0. That bit
+            // is also every world session's gameplay check, so the cleared bit ended her NPC stream session and stopped NPC
+            // combat at her Blink Assault, and her kick stayed in her world (mission-partner-powers-v1819c, v1820c). The
+            // receiver still sees her at the last coherent sample, as before.
+            else if(sampledBlinkStatePresent){
+                if(sampledCoherentValid&&sampledCoherentEpoch==outgoing.worldEpoch){std::memcpy(outgoing.position,sampledCoherentPosition,12);++blinkGapHeldSamples;}
+                else outgoing.flags=0;}
         }
     }
+    if(outgoing.flags&1){std::memcpy(sampledCoherentPosition,outgoing.position,12);sampledCoherentEpoch=outgoing.worldEpoch;sampledCoherentValid=true;}
     NativePlayerStance stance{};
     if(outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState&&
        readNativePlayerStance(memoryRead,base,stance)&&stance.game==game&&stance.player==player) {

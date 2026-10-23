@@ -1,0 +1,321 @@
+{
+  "power": "domino",
+  "pairing": "corvo-emily",
+  "passed": false,
+  "failure": "her takedown left the network member alive; no network of two or more with the target ()",
+  "checks": [
+    "Domino: network , took down 768092644 (alive/alive), members ",
+    "Host guard moved up to 8.66 m (health 40 -> 40); her copy up to 9.07 m (health 40 -> 40); outcome alive/alive, end gap 0.44 m (last samples 0.44 m)"
+  ],
+  "definitions": {
+    "host": "models/characters/player/corvo/body.def",
+    "client": "models/characters/player/emily/body.def"
+  },
+  "grants": [
+    {
+      "item": "models/powers/phantasmallink/phantasmal_link.inventoryitem",
+      "result": "named_power_equip_requested"
+    }
+  ],
+  "stand": {
+    "side": "right",
+    "stand": [
+      13.0042,
+      55.7302,
+      16.8836
+    ],
+    "guard": [
+      4.43981,
+      59.1835,
+      15.9529
+    ],
+    "facing": [
+      -0.17000001044344096,
+      0.9854440605378013
+    ],
+    "trials": [
+      {
+        "side": "left",
+        "asked": [
+          -0.47414842376460875,
+          53.01199992689591
+        ],
+        "rest": [
+          -0.521343,
+          53.0308,
+          15.1147
+        ],
+        "ok": false
+      },
+      {
+        "side": "right",
+        "asked": [
+          13.322068423764609,
+          55.392000073104086
+        ],
+        "rest": [
+          13.0042,
+          55.7302,
+          16.8836
+        ],
+        "ok": true
+      }
+    ],
+    "crouched": true
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.44201,
+        59.1897,
+        15.953
+      ]
+    },
+    "client": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.44201,
+        59.1897,
+        15.953
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": true,
+    "ms": 705,
+    "channel": "client_replica",
+    "gap": 0.0
+  },
+  "camera": [
+    10.970828727668387,
+    63.023019120914874,
+    18.553
+  ],
+  "aim": {
+    "target": [
+      4.44201,
+      59.1897,
+      15.953
+    ],
+    "stand": [
+      13.0042,
+      55.7302,
+      16.8836
+    ],
+    "yaw": 158.0,
+    "pitch": 4.0,
+    "distance": 9.23
+  },
+  "before": {
+    "ms": 0,
+    "host": {
+      "present": true,
+      "position": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_host": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client": {
+      "present": true,
+      "position": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_client": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "host_2": {
+      "present": true,
+      "position": [
+        6.91648,
+        48.4619,
+        16.472
+      ],
+      "health": 30,
+      "suppressed": false
+    },
+    "channel_host_2": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client_2": {
+      "present": true,
+      "position": [
+        6.91648,
+        48.4619,
+        16.472
+      ],
+      "health": 30,
+      "suppressed": false
+    },
+    "channel_client_2": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    }
+  },
+  "attempts": [],
+  "castAt": 1,
+  "aims": [
+    {
+      "target": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "stand": [
+        5.78446,
+        51.7,
+        16.0344
+      ],
+      "yaw": 100.1,
+      "pitch": -1.0,
+      "distance": 8.0
+    },
+    {
+      "target": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "stand": [
+        8.68948,
+        52.224,
+        16.3123
+      ],
+      "yaw": 120.4,
+      "pitch": 0.0,
+      "distance": 8.52
+    },
+    {
+      "target": [
+        7.92712,
+        49.1425,
+        16.461
+      ],
+      "stand": [
+        6.282,
+        41.476,
+        1.00192
+      ],
+      "yaw": 77.9,
+      "pitch": -60.0,
+      "distance": 7.84
+    },
+    {
+      "target": [
+        9.18007,
+        51.9598,
+        16.3957
+      ],
+      "stand": [
+        6.42273,
+        42.1324,
+        -207.884
+      ],
+      "yaw": 74.3,
+      "pitch": -60.0,
+      "distance": 10.21
+    },
+    {
+      "target": [
+        9.18007,
+        51.9598,
+        16.3957
+      ],
+      "stand": [
+        6.42273,
+        42.1324,
+        -207.884
+      ],
+      "yaw": 74.3,
+      "pitch": -60.0,
+      "distance": 10.21
+    }
+  ],
+  "marks": {
+    "script_spawner_checkpoint_guard_01": {
+      "tries": 2,
+      "marked": true,
+      "hostMarks": 768092644
+    },
+    "script_spawner_checkpoint_guard_02": {
+      "tries": 3,
+      "marked": false,
+      "hostMarks": null
+    }
+  },
+  "network": [],
+  "guardHandle": 768092644,
+  "dominoLinked": {
+    "sent": 181,
+    "markCount": 0,
+    "readyMask": 5
+  },
+  "killTarget": 768092644,
+  "killPress": "lethal,choke",
+  "castEnd": 25866,
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "outcome2": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "networkOutcomes": [],
+  "summary": {
+    "hostGuardMaxMove": 8.66,
+    "herCopyMaxMove": 9.07,
+    "endGap": 0.44,
+    "rawEndGap": 0.44,
+    "hostHealth": [
+      40,
+      40
+    ],
+    "herHealth": [
+      40,
+      40
+    ],
+    "outcome": {
+      "host": "alive",
+      "client": "alive"
+    }
+  },
+  "killOutcome": {
+    "host": "alive",
+    "client": "alive"
+  }
+}

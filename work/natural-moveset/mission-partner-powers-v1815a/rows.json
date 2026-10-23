@@ -1,0 +1,312 @@
+{
+  "power": "domino",
+  "pairing": "corvo-emily",
+  "passed": false,
+  "failure": "her takedown left the linked guard alive; a guard was never marked; the live guard ends  m apart in the two worlds",
+  "checks": [
+    "Domino: guard 1 alive/alive, guard 2 alive/alive; marks True,False",
+    "Host guard moved up to 0 m (health 40 -> ); her copy up to 0 m (health 40 -> ); outcome alive/alive, end gap  m (last samples  m)"
+  ],
+  "definitions": {
+    "host": "models/characters/player/corvo/body.def",
+    "client": "models/characters/player/emily/body.def"
+  },
+  "grants": [
+    {
+      "item": "models/powers/phantasmallink/phantasmal_link.inventoryitem",
+      "result": "named_power_equip_requested"
+    }
+  ],
+  "stand": {
+    "side": "right",
+    "stand": [
+      13.0072,
+      55.734,
+      16.8774
+    ],
+    "guard": [
+      4.43996,
+      59.1826,
+      15.9529
+    ],
+    "facing": [
+      -0.1789720295214387,
+      0.9838541622867575
+    ],
+    "trials": [
+      {
+        "side": "left",
+        "asked": [
+          -0.4678041360073033,
+          52.94614579334993
+        ],
+        "rest": [
+          -0.478441,
+          52.9501,
+          15.1281
+        ],
+        "ok": false
+      },
+      {
+        "side": "right",
+        "asked": [
+          13.3061541360073,
+          55.451754206650065
+        ],
+        "rest": [
+          13.0072,
+          55.734,
+          16.8774
+        ],
+        "ok": true
+      }
+    ],
+    "crouched": true
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43843,
+        59.1914,
+        15.9529
+      ]
+    },
+    "client": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43843,
+        59.1914,
+        15.9529
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": true,
+    "ms": 862,
+    "channel": "client_replica",
+    "gap": 0.0
+  },
+  "camera": [
+    10.967882116653882,
+    63.02684177045476,
+    18.5529
+  ],
+  "aim": {
+    "target": [
+      4.43843,
+      59.1914,
+      15.9529
+    ],
+    "stand": [
+      13.0072,
+      55.734,
+      16.8774
+    ],
+    "yaw": 158.0,
+    "pitch": 4.0,
+    "distance": 9.24
+  },
+  "before": {
+    "ms": 0,
+    "host": {
+      "present": true,
+      "position": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_host": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client": {
+      "present": true,
+      "position": [
+        4.37578,
+        59.5733,
+        15.9546
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_client": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "host_2": {
+      "present": true,
+      "position": [
+        6.91648,
+        48.4619,
+        16.472
+      ],
+      "health": 30,
+      "suppressed": false
+    },
+    "channel_host_2": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client_2": {
+      "present": true,
+      "position": [
+        6.91648,
+        48.4619,
+        16.472
+      ],
+      "health": 30,
+      "suppressed": false
+    },
+    "channel_client_2": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    }
+  },
+  "attempts": [],
+  "castAt": 1,
+  "aims": [
+    {
+      "target": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "stand": [
+        -0.615837,
+        59.1594,
+        14.5692
+      ],
+      "yaw": 4.7,
+      "pitch": -19.0,
+      "distance": 5.01
+    },
+    {
+      "target": [
+        4.37615,
+        59.5724,
+        15.9546
+      ],
+      "stand": [
+        10.273,
+        60.7652,
+        14.8053
+      ],
+      "yaw": -168.6,
+      "pitch": -13.0,
+      "distance": 6.02
+    },
+    {
+      "target": [
+        4.30753,
+        50.129,
+        16.0792
+      ],
+      "stand": [
+        2.744,
+        45.261,
+        -1.07598
+      ],
+      "yaw": 72.2,
+      "pitch": -60.0,
+      "distance": 5.11
+    },
+    {
+      "target": [
+        -0.0601575,
+        57.6192,
+        14.7758
+      ],
+      "stand": [
+        2.95345,
+        45.9148,
+        -207.889
+      ],
+      "yaw": 104.4,
+      "pitch": -60.0,
+      "distance": 12.09
+    },
+    {
+      "target": [
+        -0.0601575,
+        57.6192,
+        14.7758
+      ],
+      "stand": [
+        2.95345,
+        45.9148,
+        -207.889
+      ],
+      "yaw": 104.4,
+      "pitch": -60.0,
+      "distance": 12.09
+    }
+  ],
+  "marks": {
+    "script_spawner_checkpoint_guard_01": {
+      "tries": 2,
+      "marked": true,
+      "hostMarks": 768092644
+    },
+    "script_spawner_checkpoint_guard_02": {
+      "tries": 3,
+      "marked": false,
+      "hostMarks": null
+    }
+  },
+  "dominoLinked": {
+    "sent": 189,
+    "markCount": 0,
+    "readyMask": 5
+  },
+  "killPress": "lethal,choke",
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "outcome2": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "summary": {
+    "hostGuardMaxMove": 0.0,
+    "herCopyMaxMove": 0.0,
+    "endGap": null,
+    "rawEndGap": null,
+    "hostHealth": [
+      40,
+      null
+    ],
+    "herHealth": [
+      40,
+      null
+    ],
+    "outcome": {
+      "host": "alive",
+      "client": "alive"
+    }
+  }
+}
