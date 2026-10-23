@@ -50,6 +50,9 @@ inline void nativeOpenableTests(){
     auto duplicate=out;duplicate.definitionName="different_definition";catalog=selectNativeOpenableCatalog({out,duplicate,second});require(catalog.entries.size()==1&&catalog.ambiguous==2,"ambiguous authored name never becomes a remote lookup target");
     duplicate.locked=1;catalog=selectNativeOpenableCatalog({out,duplicate,second});require(catalog.entries.size()==1&&catalog.ambiguous==2,"locked duplicate cannot hide an ambiguous identity");
     second.entries[1]=255;catalog=selectNativeOpenableCatalog({out,second});require(catalog.entries.size()==1&&catalog.ineligible==1,"missing reverse-side animation excluded from ordinary door catalog");
+    auto lockedDoor=out;lockedDoor.name="locked_door";lockedDoor.locked=1;catalog=selectNativeOpenableCatalog({out,lockedDoor});
+    require(catalog.entries.size()==2&&catalog.entries[1].name=="locked_door"&&catalog.entries[1].locked&&!nativeOpenableTransitionAllowed(lockedDoor,2,0),"locked ordinary door is cataloged and its native transition waits for the unlock");
+    lockedDoor.blocked=1;catalog=selectNativeOpenableCatalog({out,lockedDoor});require(catalog.entries.size()==1&&catalog.ineligible==1,"a locked and blocked door stays excluded");
     require(nativeOpenableParameters(out,2,0)==std::array<unsigned char,4>{1,0,0,7}&&nativeOpenableParameters(out,2,1)==std::array<unsigned char,4>{1,0,1,6},"native open parameter ordering");
     require(nativeOpenableParameters(out,0,0)==std::array<unsigned char,4>{0,0,0,2}&&nativeOpenableParameters(out,0,1)==std::array<unsigned char,4>{0,0,1,3},"native close retains opening side and selects opposite clip");
     require(!nativeOpenableTransitionAllowed(out,1,0)&&!nativeOpenableTransitionAllowed(out,2,2),"invalid target or side rejected");

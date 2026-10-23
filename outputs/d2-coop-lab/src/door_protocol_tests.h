@@ -43,6 +43,11 @@ inline void doorProtocolTests(){
     require(validCoopDoor(p,host,client),"client desired state request accepted");
     bad=p;bad.kind=DoorMessage::State;require(!validCoopDoor(bad,host,client),"client cannot publish host authority");
     auto paused=host;paused.gameLogicState=2;require(!validCoopDoor(p,paused,client),"no door mutation during native pause");
+    auto unlock=p;unlock.kind=DoorMessage::Unlock;unlock.revision=0;unlock.target=unlock.side=0;
+    require(validCoopDoor(unlock,host,client),"client key unlock accepted");
+    for(unsigned field=0;field<4;++field){bad=unlock;switch(field){case 0:bad.revision=1;break;case 1:bad.target=2;break;case 2:bad.targetArm=0;break;case 3:bad.requestAck=1;break;}require(!validCoopDoor(bad,host,client),"unlock carries no desired state and needs an apply scope");}
+    unlock.role=0;unlock.sourceSession=11;unlock.targetSession=22;unlock.sourceEpoch=3;unlock.targetEpoch=5;
+    require(validCoopDoor(unlock,client,host),"host key unlock accepted");
     DoorOrder order;require(order.set(0,0)&&order.revision==1,"initial host baseline revision");
     require(!order.set(0,1)&&order.revision==1,"closed target duplicate does not create toggle");
     require(order.set(2,0)&&order.revision==2&&order.set(0,0)&&order.revision==3,"host serializes conflicting desired states");

@@ -1,6 +1,7 @@
 #pragma once
 #include "world_protocol.h"
-enum class DoorMessage:std::uint32_t {Hello=0,Request=1,State=2,Ack=3};
+// 1214jf (#185): Unlock is either player's key unlock, applied once in the other world.
+enum class DoorMessage:std::uint32_t {Hello=0,Request=1,State=2,Ack=3,Unlock=4};
 #pragma pack(push,1)
 struct CoopDoorPacket {
     std::uint32_t magic=0x4f443244;
@@ -19,6 +20,8 @@ inline bool validCoopDoor(const CoopDoorPacket& p,const CoopPosePacket& local,co
        p.targetSession!=local.session||p.sourceEpoch!=peer.worldEpoch||p.targetEpoch!=local.worldEpoch||
        p.mapId!=local.mapId||!coopWorldName(p.name)||!coopWorldName(p.definition))return false;
     if(p.kind==DoorMessage::Hello)return !p.targetArm&&!p.revision&&!p.requestAck&&!p.target&&!p.side;
+    // An unlock comes from either role and carries no desired state.
+    if(p.kind==DoorMessage::Unlock)return p.targetArm&&!p.revision&&!p.requestAck&&!p.target&&!p.side;
     if(!p.targetArm||!p.revision||(p.target!=0&&p.target!=2)||p.side>1)return false;
     return (p.kind==DoorMessage::State&&p.role==0)||((p.kind==DoorMessage::Request||p.kind==DoorMessage::Ack)&&p.role==1&&!p.requestAck);
 }

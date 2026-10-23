@@ -1,0 +1,260 @@
+{
+  "passed": false,
+  "failure": "The source's unlocked door never opened (4 presses)",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "host",
+    "door": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+    "key": "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem",
+    "channelsBefore": {
+      "host": {
+        "session": "active",
+        "catalog": 19,
+        "entry": {
+          "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "role": 0,
+          "enabled": true,
+          "ready": true,
+          "arm": 17,
+          "peerArm": 17,
+          "revision": 1,
+          "target": 0,
+          "side": 0,
+          "applied": 1,
+          "ack": 1,
+          "awaiting": false,
+          "inFlight": 0,
+          "sent": 7,
+          "received": 5,
+          "rejected": 0,
+          "duplicates": 0,
+          "requests": 0,
+          "commits": 1,
+          "nativeCalls": 0,
+          "converged": 1,
+          "sideCorrections": 0,
+          "locked": 1,
+          "unlocksSent": 0,
+          "unlocksReceived": 0,
+          "unlocksApplied": 0,
+          "result": "native_state_converged"
+        }
+      },
+      "client": {
+        "session": "active",
+        "catalog": 19,
+        "entry": {
+          "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+          "role": 1,
+          "enabled": true,
+          "ready": true,
+          "arm": 17,
+          "peerArm": 17,
+          "revision": 1,
+          "target": 0,
+          "side": 0,
+          "applied": 1,
+          "ack": 1,
+          "awaiting": false,
+          "inFlight": 0,
+          "sent": 5,
+          "received": 5,
+          "rejected": 0,
+          "duplicates": 0,
+          "requests": 0,
+          "commits": 1,
+          "nativeCalls": 0,
+          "converged": 1,
+          "sideCorrections": 0,
+          "locked": 1,
+          "unlocksSent": 0,
+          "unlocksReceived": 0,
+          "unlocksApplied": 0,
+          "result": "native_state_converged"
+        }
+      }
+    },
+    "before": {
+      "host": {
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "client": {
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      }
+    },
+    "grant": {
+      "grants": 1,
+      "refused": 0,
+      "result": "granted_named"
+    },
+    "keyBefore": 1,
+    "unlockTries": [
+      {
+        "phase": "unlock",
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 180.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "unlock",
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 155.0,
+        "locked": 0,
+        "current": 0,
+        "pending": 0
+      }
+    ],
+    "unlocked": {
+      "host": {
+        "current": 0,
+        "pending": 0,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "client": {
+        "current": 0,
+        "pending": 0,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "peerUnlockMs": 480,
+      "channels": {
+        "host": {
+          "session": "active",
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "role": 0,
+            "enabled": true,
+            "ready": true,
+            "arm": 17,
+            "peerArm": 17,
+            "revision": 1,
+            "target": 0,
+            "side": 0,
+            "applied": 1,
+            "ack": 1,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 11,
+            "received": 8,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 0,
+            "commits": 1,
+            "nativeCalls": 0,
+            "converged": 1,
+            "sideCorrections": 0,
+            "locked": 0,
+            "unlocksSent": 1,
+            "unlocksReceived": 0,
+            "unlocksApplied": 0,
+            "result": "unlock_sent"
+          }
+        },
+        "client": {
+          "session": "active",
+          "catalog": 19,
+          "entry": {
+            "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+            "role": 1,
+            "enabled": true,
+            "ready": true,
+            "arm": 17,
+            "peerArm": 17,
+            "revision": 1,
+            "target": 0,
+            "side": 0,
+            "applied": 1,
+            "ack": 1,
+            "awaiting": false,
+            "inFlight": 0,
+            "sent": 8,
+            "received": 9,
+            "rejected": 0,
+            "duplicates": 0,
+            "requests": 0,
+            "commits": 1,
+            "nativeCalls": 1,
+            "converged": 1,
+            "sideCorrections": 0,
+            "locked": 0,
+            "unlocksSent": 0,
+            "unlocksReceived": 1,
+            "unlocksApplied": 1,
+            "result": "native_unlock_applied"
+          }
+        }
+      }
+    },
+    "openTries": [
+      {
+        "phase": "open",
+        "locked": 0,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "open",
+        "locked": 0,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "open",
+        "locked": 0,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "phase": "open",
+        "locked": 0,
+        "current": 0,
+        "pending": 0
+      }
+    ]
+  },
+  "scope": "1842 (#185): a locked door unlocked with its key and opened by the host on a mission map; the unlock and the open state in both worlds"
+}
