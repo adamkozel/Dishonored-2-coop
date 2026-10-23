@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-23T03:30:00+02:00",
+  "UpdatedAt": "2026-10-23T06:10:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22692,5 +22692,19 @@
       "Corvo-Emily": "the release campaign evidence, re-run on the 0.9.0 binaries"
     },
     "Next": "Merge PR #170 (closes #161), then release 0.9.0: candidate 1214ik (version 0.9.0), package, install test, co-op menu/save/leave re-runs, the Corvo-Emily campaign on the release binary, publish, clean-PC proof."
+  },
+  "Release090": {
+    "Card": "#171",
+    "Candidate": "candidate-npc-combat-v1214ik",
+    "Package": "outputs/release/d2coop-v0.9.0.zip (local), 37248398 bytes, SHA-256 5D1029B59F71273D58A85B460F2F7B298A64344F6E708C4A9606FA6C24872FFD (rebuilt with the tutorial notes; the first build is kept locally as d2coop-v0.9.0-r1)",
+    "Builder": "work/release/build_release_v1755.py",
+    "SetupTool": "work/release/setup-tool-v1755/identity.json",
+    "InstallTest": "work/release/release-install-v1755b: pass 8/8 (v1755a: 8/8 on the first build)",
+    "TwoAccount": "coop-leave-v1755a, coop-hostsave-v1755a; campaign-<mission>-vm-v1755a for all nine missions in the release pairing (host Corvo, VM partner Emily; The Royal Conservatory on v1755b)",
+    "Tutorial": "Memories of Training with two players is #174: the key theft works with the focus-gated action (campaign-training-focus-v1760a alone; v1760c with the partner hidden), the stealth lessons restart when either trainer notices either player, and a mid-tutorial join does not arm (v1760g). Release notes advise starting together and keeping out of sight.",
+    "Features": "#156 Co-op menu and saves, #157 Leave co-op, #158/#159 character choice and four pairings, #160/#168 a Corvo partner's powers, #161 validation",
+    "Status": "built and validated (install test, nine missions on two accounts); publishing and the clean-PC proof next",
+    "Published": "",
+    "CleanPc": ""
   }
 }

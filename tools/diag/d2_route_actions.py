@@ -314,6 +314,11 @@ def pickpocket_focus_try(a, k):
         r = ps(f"& '{REPO}/work/natural-moveset/Hide-RoutePartner-v1760.ps1' -X {x} -Y {y} -Z {z} -Yaw {hide.get('yaw', 0)}"
                + (' -Crouch' if hide.get('crouch') else ''))
         print(json.dumps({'try': k, 'partner': (r.stdout or r.stderr).strip()[-200:]}), flush=True)
+    # With a['wait_at'] ([x, y, z, yaw]) the host waits for the trainer there too: in the partner's game the host's avatar
+    # waiting at the lesson start was noticed, and that restart reached both games (campaign-training-vm-v1760c).
+    if a.get('wait_at'):
+        teleport(*a['wait_at'])
+        time.sleep(0.5)
     crouch()
     hit = None
     end = time.time() + 60
@@ -434,6 +439,14 @@ def face(sub):
     p = found[-1]['position']
     me = status().get('localPosition') or [0, 0, 0]
     command(f'setviewpos {me[0]:.3f} {me[1]:.3f} {me[2] + 1.7:.3f} {math.degrees(math.atan2(p[1] - me[1], p[0] - me[0])):.2f} 0')
+    # 1760 (#171): setviewpos keeps the pitch; campaign-training-vm-v1760c swung 22 times at the ceiling (the crossbow
+    # lesson left the view 33 degrees up), so a view more than 10 degrees off level is levelled first.
+    try:
+        f = probe('--player')['nativeViewOrientation']
+        if abs(math.degrees(math.asin(max(-1.0, min(1.0, f[2]))))) > 10:
+            ps(f"& '{REPO}/work/natural-moveset/Set-ObserverPitch.ps1' -Role host -Pitch 0 -Quick|Out-Null")
+    except (RuntimeError, KeyError, IndexError):
+        pass
 
 
 def cycle(a):

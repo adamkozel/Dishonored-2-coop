@@ -1,0 +1,103 @@
+{
+  "passed": false,
+  "failure": "Action pickpocket_focus failed (exit 1)",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ik",
+      "hostDll": "53ABE4DE304A3CCFE4B3983960E1C0AD419FB8376810C35AFAC0CBED04DB6DD1",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "characters": {
+      "host": null,
+      "client": null
+    },
+    "partnerRetries": 0,
+    "charactersReadable": false,
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 98,
+        "pos": [
+          707.017273,
+          -34.124733,
+          -2.11804
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          2,
+          4,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "27/0/0",
+        "active": "Mission_Intro,Obj_Intro_Stealth"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 92,
+        "pos": [
+          706.309998,
+          -34.250000,
+          -2.126407
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          2,
+          4,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 38,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "11/20/20",
+        "active": "Mission_Intro,Obj_Intro_Stealth"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/tutorial/tutorial.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner emily); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

@@ -1,0 +1,123 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             98 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The VM did not load the host mission",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ik",
+      "hostDll": "53ABE4DE304A3CCFE4B3983960E1C0AD419FB8376810C35AFAC0CBED04DB6DD1",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "characters": {
+      "host": null,
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": false,
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "join": {
+      "afterStep": 6,
+      "clientBefore": {
+        "logic": 6,
+        "map": "campaign/menu/menu_p"
+      },
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true,
+      "loadMs": 303041
+    },
+    "failureState": {
+      "host": {
+        "logic": 12,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 29,
+        "pos": [
+          706.309998,
+          -34.25,
+          -2.126407
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          3,
+          4,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "4/0/0",
+        "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+      },
+      "client": {
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p",
+        "epoch": 6,
+        "cine": 1,
+        "pos": [
+          0.000000,
+          0.000000,
+          0.000000
+        ],
+        "fresh": true,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": null
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/tutorial/tutorial.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner emily); 1714/1703 (#135): the VM joins after step 6 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1754.ps1:465[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 465 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe VM did not load the host mission[0m

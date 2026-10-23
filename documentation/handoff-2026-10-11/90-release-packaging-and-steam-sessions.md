@@ -262,7 +262,52 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
   - candidate 1214hm (1214hl with version resources at 0.8.4), setup tool v1754;
   - install test release-install-v1754b: 8/8;
   - clean-PC proof from the v0.8.4 download: product-two-account-v1754b.
+- Release 0.9.0 (#171; the Co-op menu entry and co-op saves #156, Leave co-op #157, the character choice and the
+  four pairings #158/#159, a Corvo partner's powers on the host's world #160/#168, validated in #161, chapters 107-109):
+  - candidate 1214ik (1214ij with version resources at 0.9.0), setup tool v1755, builder build_release_v1755.py;
+  - install test release-install-v1755b: 8/8, on the package rebuilt with the tutorial notes (release-install-v1755a:
+    8/8 on the first build, kept locally as d2coop-v0.9.0-r1);
+  - on two Steam accounts with the release binary: Leave co-op (coop-leave-v1755a) and a co-op save made and loaded
+    from the menu (coop-hostsave-v1755a);
+  - every mission in the release pairing, host Corvo and VM partner Emily, one take each: campaign-dunwall-vm-v1755a,
+    -eotw-, -institute-, -madinventor-, -curator- (v1755b; v1755a: the audiograph use did not register), -dust-, -bunker-,
+    -palace- and -empress-vm-v1755a;
+  - Memories of Training (the tutorial; not one of the nine missions), host Emily and VM partner Emily: not yet
+    passing on 0.9.0 (#174). The last full two-account passes are 1701b (1214fz) and 1713a (1214gf).
+    - The key theft failed on 0.9.0 in training-vm-v1756a/b and the host-alone take campaign-training-solo-v1758a
+      (0 of 29 tries) but passed on 0.8.4 at the seventh try (campaign-training-solo-v1759a). The cause was the route
+      action, not the mod (confirmed runtime):
+      - Pickpocketing works on 0.9.0. In coverage-v1760b both players stole the guard's key; that take fails only on
+        Record-Coverage-v1638's loot-state check, which 1398 skipped for pickpocket.
+      - The difficulty is the same: the active preset in the 0.9.0 tutorial reads `difficulty/preset/easy`
+        (game+0x1f7b90, preset at +0x10).
+      - The old action pressed X six times blind from 0.7 m behind the walking trainer. About one try in five worked
+        on older builds. The new action `pickpocket_focus` walks after him reading the use focus and presses X while
+        the focus is on him. Alone, the host stole the key on the second try (campaign-training-focus-v1760a, which
+        ends without a join by design).
+    - With the partner present, the stealth lessons restart again and again (campaign-training-vm-v1760a/b, confirmed
+      runtime):
+      - the trainer's attention list holds the partner's avatar just before a restart;
+      - a failure in either game restarts both, and every restart puts both players back at the lesson start, in his
+        sight;
+      - the choke lesson restarted the same way in the passing 0.8.x takes 1701b and 1713a.
+      Hiding the partner on the roof before each try (Hide-RoutePartner-v1760, routes/campaign-training-vm-v1760b)
+      was not enough. In v1760c a restart began in her game, where the host's avatar waited at the lesson start. The
+      theft passed at the eighth try in v1760c and failed all ten in v1760d.
+    - v1760c then swung 22 times at the ceiling in the sword lesson: the crossbow lesson had left the view 33 degrees
+      up, and `setviewpos` keeps the pitch. The route action `face` now levels a view more than 10 degrees off.
+    - A partner joining mid-tutorial:
+      - v1760e: Route-MissionVM's -JoinAfterStep counts step tags, so the join came right after the choke lesson. The
+        host sat on the next lesson's tutorial page (logic 12) and publishes its mission only in gameplay, so the
+        partner waited until the timeout.
+      - v1760f stopped at its start: the host lab instance was not yet in gameplay after v1760e's restore.
+      - v1760g: the partner joined after the crossbow use, loaded the tutorial in 14 s and was placed 1.2 m from the
+        host with equal gameflow. The co-op systems never armed: both sides stayed `waiting_shared_gameplay`.
+    - The release notes tell players to start the tutorial together, and to keep the other player out of the
+      trainer's sight during the stealth lessons. Both findings are #174.
 
 **Still open:**
-- Hosting starts with the F7 key. There is no entry in the game's own menus; the invite and join steps are Steam's native overlay and friends list.
+- Hosting starts with the F7 key once in a mission. Since 0.9.0 the main menu's Co-op entry opens the co-op saves
+  ([chapter 107](107-coop-menu-and-saves.md)); the invite and join steps are Steam's native overlay and friends list.
+- A lab restart hung at startup twice in a row on 1214ik (#173, hypothesis: the two lab instances starting together).
 - Needs you: the human playtest with a friend (#99), and the Defender false positive (#25).
