@@ -1,0 +1,27 @@
+{
+  "cases": [
+    {
+      "triggers": 90,
+      "visited": 8,
+      "passed": false,
+      "failure": "A player died (Game Over) during the trigger walk; the census is inconclusive",
+      "checks": [],
+      "hostAdded": [],
+      "hostRemoved": [],
+      "clientAdded": [],
+      "clientRemoved": [],
+      "onlyHost": [],
+      "onlyClient": [],
+      "onlyHostBefore": [],
+      "onlyClientBefore": []
+    }
+  ],
+  "scope": "1823 (#181) spawn census on campaign/dunwall/escape/streets/dunwall_escape_streets.mapinfo under the product controller: the host visits the script trigger volumes (mirrored for the client); the unique NPCs added and removed must match in both worlds and every unique NPC must be in both worlds; lab restored (Deploy-SourceClock).",
+  "failure": "A player died (Game Over) during the trigger walk; the census is inconclusive",
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Test-MissionSpawnCensus-v1823.ps1:113[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 113 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mA player died (Game Over) during the trigger walk; the census is inconclusive[0m
