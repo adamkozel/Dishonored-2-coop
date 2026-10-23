@@ -1,0 +1,82 @@
+[
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 30000
+ },
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_beforecrouch",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_roof_3",
+  "settle": 20000
+ },
+ {
+  "do": "partner",
+  "pos": [
+   694.9,
+   -33.4,
+   -0.6
+  ],
+  "yaw": 45,
+  "crouch": true,
+  "settle": 2000
+ },
+ {
+  "do": "wait",
+  "ms": 3000,
+  "settle": 2000
+ },
+ {
+  "do": "action",
+  "name": "chase_hold",
+  "args": {
+   "npc": "corvo_attano_tutorial_stealth",
+   "dist": 0.85,
+   "up": 1.0,
+   "button": "RightShoulder",
+   "ms": 4500,
+   "ly": 12000,
+   "crouch": true,
+   "until": "Task_Intro_ChokeCorvo",
+   "tries": 10
+  },
+  "settle": 15000
+ },
+ {
+  "do": "action",
+  "name": "pickpocket_focus",
+  "args": {
+   "npc": "corvo_attano_tutorial_stealth",
+   "stand": [
+    698.84,
+    -22.7
+   ],
+   "radius": 0.9,
+   "dist": 0.7,
+   "up": 1.0,
+   "pitch": 0,
+   "until": "Task_Intro_StealKey",
+   "tries": 6,
+   "then": {
+    "stand": [
+     695.48,
+     -32.33,
+     -0.6
+    ],
+    "yaw": 45,
+    "until": "Task_Intro_UnlockDoor_02"
+   },
+   "next": "Task_Intro_UnlockDoor_02"
+  },
+  "settle": 20000
+ }
+]

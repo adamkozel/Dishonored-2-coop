@@ -1,0 +1,99 @@
+{
+  "passed": false,
+  "failure": "Partner plays , expected emily",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ik",
+      "hostDll": "53ABE4DE304A3CCFE4B3983960E1C0AD419FB8376810C35AFAC0CBED04DB6DD1",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "characters": {
+      "host": null,
+      "client": null
+    },
+    "partnerRetries": 3,
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          15.987795,
+          12.032397,
+          -4.835707
+        ],
+        "fresh": true,
+        "gameflow": [
+          242,
+          3,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 31,
+        "cine": 13,
+        "pos": [
+          15.987795,
+          12.032397,
+          -4.835707
+        ],
+        "fresh": true,
+        "gameflow": [
+          242,
+          4,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "4/0/0",
+        "active": "Mission_Intro,Obj_Intro_Mobility"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/tutorial/tutorial.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner emily); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

@@ -1,0 +1,149 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             99 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Worlds ended on different maps: host campaign/tutorial/tutorial_p, client campaign/menu/menu_p",
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ik",
+      "hostDll": "53ABE4DE304A3CCFE4B3983960E1C0AD419FB8376810C35AFAC0CBED04DB6DD1",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "characters": {
+      "host": null,
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": false,
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 31,
+        "cine": 49,
+        "pos": [
+          538.900024,
+          -4.799999,
+          10.714069
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          7,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "10/0/0",
+        "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_GrabCrossbow"
+      },
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/menu/menu_p",
+        "epoch": 6,
+        "cine": 1,
+        "pos": [
+          0.000000,
+          0.000000,
+          0.000000
+        ],
+        "fresh": false,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": null
+      }
+    },
+    "gameflowEqual": false,
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/tutorial/tutorial_p",
+        "epoch": 31,
+        "cine": 49,
+        "pos": [
+          538.900024,
+          -4.799999,
+          10.714069
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          7,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "10/0/0",
+        "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_GrabCrossbow"
+      },
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/menu/menu_p",
+        "epoch": 6,
+        "cine": 1,
+        "pos": [
+          0.000000,
+          0.000000,
+          0.000000
+        ],
+        "fresh": false,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": null
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/tutorial/tutorial.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner emily); 1714/1703 (#135): the VM joins after step 8 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1754.ps1:465[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 465 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mWorlds ended on different maps: host campaign/tutorial/tutorial_p, client campaign/menu/menu_p[0m
