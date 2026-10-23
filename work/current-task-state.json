@@ -22735,7 +22735,16 @@
     "Code": "native_breakable.h / breakable_hits.h / breakable_sync.h (movables break, 1214io); prop_rest_protocol.h, prop_rest_sync.h, prop_rest_tests.h (D2PR rests, 1214ip-ir); product step 22 coop_prop_rest",
     "Harness": "work/natural-moveset/Probe-PhysicsProps-v1766..v1773.ps1",
     "Evidence": "physics-props-v1769a (divergence: six props broken and fruit thrown in the host world only); v1770a (breaks shared); v1771a/b, v1772a (attachment rule iterations); v1772b (host Windblast: breaks and rests shared, the belt key skipped); v1773a (partner sword: the apple's rest reaches the host)",
-    "Open": "breakable debris chunks and dropped guard swords stay per world (cosmetic); a mission take with #179",
+    "Open": "breakable debris chunks and dropped guard swords stay per world (cosmetic); the mission take is MissionBreakables (#179)",
     "Status": "lab-proven, chapter 105"
+  },
+  "MissionBreakables": {
+    "Card": "#179",
+    "Candidate": "candidate-npc-combat-v1214is (lab; release stays 0.9.1 / 1214im)",
+    "Code": "breakable_sync.h: catalog cap 4096 (was 1024) and the catalogFull counter",
+    "Harness": "work/natural-moveset/Survey-MissionBreakables-v1774.ps1, Frame-MissionSpots-v1775.ps1, Test-MissionBreakables-v1776..v1779.ps1",
+    "Evidence": "mission-breakables-v1774a (Edge of the World: 1269 breakables, all single-step); mission-spots-v1775a (stand b3-px); v1776a/v1777a (grenade fixture and grant failures); v1778a (host grenade: a bottle and two glasses shared, no plank; catalog stopped at 1024); v1779a (host sword: plank 03_12 in both worlds); v1779b (partner sword: plank 03_12 reaches the host); v1779c (host Windblast: four planks and a glass, 8 sent, 8 applied)",
+    "Open": "a grenade that breaks the planks themselves; 15 s catalog scans take 15-32 ms on large maps",
+    "Status": "lab-proven on a mission map, chapter 105"
   }
 }

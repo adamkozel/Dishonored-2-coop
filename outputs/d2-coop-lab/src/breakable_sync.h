@@ -17,7 +17,7 @@ struct BreakableSyncState {
     std::vector<BreakableEntry> entries;std::vector<BreakableRemoteStep> pending;
     ULONGLONG scanAt=0,pollAt=0;unsigned scanMs=0;
     std::uint64_t scans=0,sent=0,sentWithHit=0,sendFailures=0,received=0,rejected=0,ignored=0,unmatched=0,overflow=0,
-        applied=0,appliedSteps=0,applyRefused=0,healthLowered=0,worldResets=0,vanishedSent=0;
+        applied=0,appliedSteps=0,applyRefused=0,healthLowered=0,worldResets=0,vanishedSent=0,catalogFull=0;
     const char* result="off";const char* lastApply="none";
 };
 BreakableSyncState breakableSync;int breakableSyncEnableRequest=-1;
@@ -34,7 +34,9 @@ void scanBreakables(ULONGLONG tick){
         if(!memoryRead(handles+i*4,&handle,4)||!handle||!readNativeBreakable(memoryRead,base,game,handle,b,true))continue;
         BreakableEntry e{};e.handle=handle;e.name=b.name;e.stepCount=b.stepCount;e.step=e.sent=b.step;e.seenAt=tick;
         for(const auto& old:s.entries)if(old.handle==handle&&old.name==b.name){e.sent=(std::max)(old.sent,b.step);e.sends=old.sends;e.applied=old.applied;break;}
-        next.push_back(std::move(e));if(next.size()>=1024)break;
+        // 1214is (#179): 4096, was 1024. With movables Edge of the World has 1269 breakables (mission-breakables-v1774a),
+        // and the catalog stopped at 1024 (mission-breakables-v1778a): later entries were never polled.
+        next.push_back(std::move(e));if(next.size()>=4096){++s.catalogFull;break;}
     }
     s.entries=std::move(next);++s.scans;s.scanMs=static_cast<unsigned>(GetTickCount64()-started);
 }
@@ -118,9 +120,9 @@ void writeBreakableSync(){
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& s=breakableSync;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"lastApply\":\"%s\",\"catalog\":%zu,\"scans\":%llu,\"scanMs\":%u,\"sent\":%llu,\"sentWithHit\":%llu,\"sendFailures\":%llu,"
         "\"received\":%llu,\"rejected\":%llu,\"ignored\":%llu,\"unmatched\":%llu,\"overflow\":%llu,\"applied\":%llu,\"appliedSteps\":%llu,\"applyRefused\":%llu,"
-        "\"healthLowered\":%llu,\"worldResets\":%llu,\"hitsNoted\":%llu,\"vanishedSent\":%llu,\"broken\":[",
+        "\"healthLowered\":%llu,\"worldResets\":%llu,\"hitsNoted\":%llu,\"vanishedSent\":%llu,\"catalogFull\":%llu,\"broken\":[",
         s.enabled?"true":"false",s.result,s.lastApply,s.entries.size(),s.scans,s.scanMs,s.sent,s.sentWithHit,s.sendFailures,s.received,s.rejected,s.ignored,
-        s.unmatched,s.overflow,s.applied,s.appliedSteps,s.applyRefused,s.healthLowered,s.worldResets,breakableHitsNoted.load(),s.vanishedSent);
+        s.unmatched,s.overflow,s.applied,s.appliedSteps,s.applyRefused,s.healthLowered,s.worldResets,breakableHitsNoted.load(),s.vanishedSent,s.catalogFull);
     bool first=true;for(const auto& e:s.entries){if(!e.step&&!e.sent)continue;if(!first)fputc(',',f);first=false;
         fprintf(f,"{\"handle\":%u,\"name\":",e.handle);writeWorldText(f,e.name.c_str());
         fprintf(f,",\"step\":%d,\"steps\":%d,\"sent\":%d,\"sends\":%llu,\"applied\":%llu}",e.step,e.stepCount,e.sent,e.sends,e.applied);}

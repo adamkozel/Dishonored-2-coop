@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "client",
+    "cause": "sword",
+    "targets": [
+      "env_wooden_plank_03_11",
+      "env_wooden_plank_03_12"
+    ],
+    "before": {
+      "host": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        }
+      },
+      "client": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        }
+      }
+    },
+    "after": {
+      "host": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": "gone"
+      },
+      "client": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": "gone"
+      }
+    },
+    "brokenInSource": [
+      "env_wooden_plank_03_12"
+    ],
+    "brokenInPeer": [
+      "env_wooden_plank_03_12"
+    ]
+  },
+  "scope": "1776 (#179): a sword on a plank barricade on a mission map from the client; the planks must break in both worlds"
+}

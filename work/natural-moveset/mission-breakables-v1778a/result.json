@@ -1,0 +1,95 @@
+{
+  "passed": false,
+  "failure": "The grenade broke no target plank in the host world",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "host",
+    "cause": "grenade",
+    "targets": [
+      "env_wooden_plank_03_11",
+      "env_wooden_plank_03_12"
+    ],
+    "before": {
+      "host": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        }
+      },
+      "client": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        }
+      }
+    },
+    "grant": {
+      "grants": 1,
+      "refused": 0,
+      "result": "granted_item_equipped",
+      "named": {
+        "grants": 0,
+        "refused": 0,
+        "result": "idle"
+      }
+    },
+    "grenade": {
+      "readOnly": true,
+      "tick": 17808781,
+      "character": 1,
+      "quantity": 1,
+      "maximum": 4,
+      "handle": 404373,
+      "slot": 1,
+      "equipped": true,
+      "started": true,
+      "lowThrowCandidate": false,
+      "flags": 536870922,
+      "entry": "0x27ef01ebb28",
+      "component": "0x27f08016010",
+      "equipmentDeclaration": "0x27e70d6cb90",
+      "entity": "0x27f07de98c0"
+    },
+    "after": {
+      "host": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        }
+      },
+      "client": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        }
+      }
+    },
+    "brokenInSource": [],
+    "brokenInPeer": []
+  },
+  "scope": "1776 (#179): a grenade on a plank barricade on a mission map from the host; the planks must break in both worlds"
+}
