@@ -50,6 +50,7 @@ std::string objectType(HANDLE process,std::uintptr_t base,std::uintptr_t pointer
 #include "midnight_fx_probe.h"
 #include "native_ai_state.h"
 #include "native_npc_authority.h"
+#include "native_openable.h"
 #include "native_character.h"
 #include "native_gameover.h"
 #include "native_player_stance.h"
@@ -2103,6 +2104,22 @@ int main(int argc, char** argv) {
             std::cout<<"{\"handle\":"<<handle<<",\"name\":"<<jsonString(b.name)<<",\"step\":"<<b.step<<",\"steps\":"<<b.stepCount<<",\"health\":"<<b.current
                 <<",\"position\":["<<position[0]<<','<<position[1]<<','<<position[2]<<"]}";
         }
+        std::cout<<"]}\n";return 0;
+    }
+    // 1214jd (#185, research): every native door (arkDoor openable) with its state (current, pending), lock, block, broken
+    // and link flags and its position. Read-only.
+    if(argc==3&&!std::strcmp(argv[2],"--openables")){
+        std::uintptr_t game=0,handles=0;std::uint32_t flags=0;
+        if(!read(process.value,base+0x39a5290,&game,8)||!game||!read(process.value,game+0x601c0,&handles,8)||!read(process.value,game+0x601c8,&flags,4))return 15;
+        const auto count=flags&0xffffff;if(count>16384)return 16;
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        std::cout<<"{\"readOnly\":true,\"pid\":"<<pid<<",\"openables\":[";bool first=true;
+        for(std::uint32_t i=0;i<count;++i){std::uint32_t handle=0;if(!read(process.value,handles+i*4,&handle,4))continue;
+            NativeOpenable o{};if(!readNativeOpenable(reader,base,game,handle,o))continue;
+            float at[3]{};read(process.value,o.actor+0x300,at,12);
+            std::cout<<(first?"":",")<<"{\"handle\":"<<o.handle<<",\"name\":"<<jsonString(o.name)<<",\"definition\":"<<jsonString(o.definitionName)
+                <<",\"current\":"<<o.current<<",\"pending\":"<<o.pending<<",\"locked\":"<<unsigned(o.locked)<<",\"blocked\":"<<unsigned(o.blocked)
+                <<",\"broken\":"<<unsigned(o.broken)<<",\"linked\":"<<(o.linked?"true":"false")<<",\"position\":["<<at[0]<<","<<at[1]<<","<<at[2]<<"]}";first=false;}
         std::cout<<"]}\n";return 0;
     }
     if(argc==3 && std::strcmp(argv[2],"--entities")==0) {

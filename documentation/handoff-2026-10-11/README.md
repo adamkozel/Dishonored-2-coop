@@ -146,7 +146,7 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [Co-op session mode design (stage 7, parked)](81-session-mode-design.md)
 - [Water exit and action-stream hold (candidate 1056)](82-water-exit-and-action-stream-hold.md)
 - [Shared pickups on mission maps (candidates 1059–1059c)](83-mission-shared-pickups.md)
-- [Shared doors on mission maps (candidate 1059c)](84-mission-shared-doors.md)
+- [Shared doors on mission maps (candidates 1059c, 1214jf)](84-mission-shared-doors.md): ordinary doors, and since #185 locked doors (a key unlock opens the door for both), side corrections and checkpoint renewal
 - [Partner equipment on missions and item-wheel robustness (candidates 1071–1074j)](85-mission-equipment-and-item-wheel.md)
 - [Shared NPC authority on mission maps (candidate 1091)](86-mission-npc-authority.md)
 - [Shared usables on mission maps (candidates 1123–1123e)](87-mission-shared-usables.md)

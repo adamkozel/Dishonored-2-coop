@@ -3,7 +3,8 @@
 #include "door_native_queue.h"
 #include "door_session_scope.h"
 // Opt-in authored ordinary-door catalogue for the current paired world.
-// Locked, linked, blocked, broken and ambiguous doors need separate authority.
+// Linked, blocked, broken and ambiguous doors need separate authority. A locked door is cataloged, and its key
+// unlock is shared (1214jf).
 struct DoorSync {
     bool enabled=false,ready=false,awaiting=false,retryAfterMenu=false;
     NativeOpenable binding{};DoorOrder order{};
@@ -12,6 +13,10 @@ struct DoorSync {
     std::uint64_t inFlight=0,inFlightUntil=0,applied=0;
     unsigned observedTarget=0,observedSide=0,requestTarget=0,requestSide=0,inFlightTarget=0;
     std::uint64_t sent=0,received=0,rejected=0,duplicates=0,requests=0,commits=0,calls=0,converged=0,sideCorrections=0;
+    // 1214jf (#185): the shared key unlock. observedLocked is the last native lock byte seen here; unlockPending sends
+    // this world's unlock, unlockOrdered applies the peer's.
+    bool unlockPending=false,unlockOrdered=false;unsigned char observedLocked=0;
+    std::uint64_t unlocksSent=0,unlocksReceived=0,unlocksApplied=0;
     const char* result="disabled";
 };
 std::vector<DoorSync> doorChannels;
@@ -84,7 +89,8 @@ bool readBoundDoor(const DoorSync& s,NativeOpenable& current){
 bool doorNativeDesired(const NativeOpenable& n,unsigned& target,unsigned& side){
     if(n.current==1||n.pending==1){unsigned char p[4]{};if(!memoryRead(n.component+0x90,p,4)||p[0]>1||p[1]||p[2]>1)return false;target=p[0]?2:0;side=p[2];}
     else{if(n.current!=n.pending)return false;target=n.current;side=n.openSide;}
-    return !n.locked&&!n.blocked&&!n.broken&&!n.linked;
+    // 1214jf (#185): the lock is its own shared state (serviceDoorChannel), not an eligibility change.
+    return !n.blocked&&!n.broken&&!n.linked;
 }
 void enableDoorSync(bool on){
     if(!on){stopDoorSession("disabled");return;}
@@ -102,7 +108,7 @@ void enableDoorSync(bool on){
     if(catalog.entries.empty()||catalog.entries.size()>128){refuse("eligible_catalog_empty_or_overflow");return;}
     for(auto& n:catalog.entries){DoorSync fresh{};fresh.enabled=true;fresh.session=outgoing.session;fresh.peerSession=remote.session;
         fresh.epoch=outgoing.worldEpoch;fresh.peerEpoch=remote.worldEpoch;fresh.map=outgoing.mapId;fresh.binding=std::move(n);
-        fresh.observedTarget=fresh.binding.current;fresh.observedSide=fresh.binding.openSide;fresh.arm=++doorSyncArm;fresh.result="awaiting_peer";
+        fresh.observedTarget=fresh.binding.current;fresh.observedSide=fresh.binding.openSide;fresh.observedLocked=fresh.binding.locked;fresh.arm=++doorSyncArm;fresh.result="awaiting_peer";
         if(!(doorSession.enabled?doorSyncScope(fresh):doorSyncContext(fresh,GetTickCount64()))){doorChannels.clear();refuse("isolated_pair_context_required");return;}
         doorChannels.push_back(std::move(fresh));
     }
@@ -125,6 +131,7 @@ bool sendDoorPacket(DoorSync& s,DoorMessage kind,ULONGLONG tick){
     std::memcpy(p.name,s.binding.name.c_str(),s.binding.name.size());std::memcpy(p.definition,s.binding.definitionName.c_str(),s.binding.definitionName.size());
     if(kind!=DoorMessage::Hello){p.targetArm=s.peerArm;p.revision=s.order.revision;p.target=s.order.target;p.side=s.order.side;}
     if(kind==DoorMessage::Request){p.target=s.requestTarget;p.side=s.requestSide;}
+    if(kind==DoorMessage::Unlock){p.revision=0;p.target=p.side=0;}
     if(kind==DoorMessage::State)p.requestAck=s.requestAck;
     if(!validCoopDoor(p,remote,outgoing)||coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)!=k_EResultOK)return false;
     ++s.sent;
@@ -139,6 +146,12 @@ void receiveDoorChannel(DoorSync& s,const CoopDoorPacket& p,ULONGLONG tick){
         if(s.peerArm&&p.sourceArm!=s.peerArm){failDoorSync(s,"peer_rearmed_requires_new_pair");return;}
         if(p.sequence<=s.peerSequence){++s.duplicates;return;}
         s.peerArm=p.sourceArm;s.peerSequence=p.sequence;s.helloAt=tick;s.ready=true;return;
+    }
+    // 1214jf: an unlock needs only the paired arms. It is kept until this world can apply it.
+    if(p.kind==DoorMessage::Unlock){
+        if(!s.peerArm||p.targetArm!=s.arm||p.sourceArm!=s.peerArm){++s.rejected;return;}
+        if(p.sequence<=s.peerSequence){++s.duplicates;return;}
+        s.peerSequence=p.sequence;++s.unlocksReceived;s.unlockOrdered=true;return;
     }
     if(!s.ready||p.targetArm!=s.arm||p.sourceArm!=s.peerArm){++s.rejected;return;}
     if(p.sequence<=s.peerSequence){++s.duplicates;return;}
@@ -171,6 +184,20 @@ void serviceDoorChannel(DoorSync& s,ULONGLONG tick){
     if(!s.ready)return;
     NativeOpenable n{};unsigned target=0,side=0;
     if(!readBoundDoor(s,n)||!doorNativeDesired(n,target,side)){failDoorSync(s,"native_door_identity_or_eligibility_changed");return;}
+    // 1214jf (#185): a key unlock in either world is applied once in the other through the native lock routine. Keys are
+    // personal pickups, so the other player could never open that door (mission-locked-door-v1841b). An unlock applied
+    // here is not sent back. A later native relock is not shared: door scripts run in both worlds.
+    if(n.locked!=s.observedLocked){if(s.observedLocked&&!n.locked&&!s.unlockOrdered)s.unlockPending=true;s.observedLocked=n.locked;}
+    if(s.unlockPending){if(!sendDoorPacket(s,DoorMessage::Unlock,tick)){failDoorSync(s,"unlock_send_failed");return;}s.unlockPending=false;++s.unlocksSent;s.result="unlock_sent";}
+    if(s.unlockOrdered){
+        if(!n.locked)s.unlockOrdered=false;
+        else{
+            NativeOpenable fresh{};
+            if(!readBoundDoor(s,fresh)||!fresh.locked||fresh.current!=n.current||fresh.pending!=n.pending){failDoorSync(s,"native_lifetime_changed_before_unlock");return;}
+            ++s.calls;if(!unlockNativeDoor(fresh)){failDoorSync(s,"native_unlock_refused");return;}
+            s.unlockOrdered=false;s.observedLocked=0;++s.unlocksApplied;s.result="native_unlock_applied";return;
+        }
+    }
     if(!localRole&&!s.order.revision){s.order.set(target,side);++s.commits;s.deadline=tick+5000;}
     if(s.inFlight){
         if(tick>s.inFlightUntil){failDoorSync(s,"native_transition_timeout");return;}
@@ -206,6 +233,8 @@ void serviceDoorChannel(DoorSync& s,ULONGLONG tick){
     const bool correctSide=nativeOpenableNeedsSideCorrection(n,s.order.target,s.order.side);
     const auto applyTarget=correctSide?0u:s.order.target;
     const auto applySide=applyTarget==0?n.openSide:s.order.side;
+    // 1214jf: an order to open a door still locked here waits for the shared unlock (bounded by the desired-state deadline).
+    if(n.locked){s.result="waiting_native_unlock";return;}
     if(!nativeOpenableTransitionAllowed(n,applyTarget,applySide)){failDoorSync(s,"native_transition_not_eligible");return;}
     NativeOpenable fresh{};
     if(!readBoundDoor(s,fresh)||fresh.current!=n.current||fresh.pending!=n.pending||fresh.openSide!=n.openSide||!nativeOpenableTransitionAllowed(fresh,applyTarget,applySide)){failDoorSync(s,"native_lifetime_changed_before_apply");return;}
@@ -253,6 +282,8 @@ void serviceDoorSync(ULONGLONG tick){
             for(auto& c:doorChannels)if(c.enabled){
                 c.deadline=doorResumeDeadline(c.deadline,paused);c.inFlightUntil=doorResumeDeadline(c.inFlightUntil,paused);
                 c.ready=false;c.helloAt=c.helloSentAt=c.stateSentAt=c.ack=0;c.retryAfterMenu=c.awaiting;
+                // 1214jf: the peer may have dropped an unlock at its menu boundary; send it again (a duplicate is a no-op).
+                c.unlockPending=c.unlockPending||(c.unlocksSent&&!c.observedLocked);
             }
             s.menuSuspended=false;s.menuSince=0;++s.menuResumes;s.menuPausedMs+=paused;s.result="resumed_after_native_menu";
         }
@@ -280,7 +311,7 @@ void writeDoorSync(){
     fprintf(f,"\"menu\":{\"suspended\":%s,\"since\":%llu,\"suspensions\":%llu,\"resumes\":%llu,\"pausedMs\":%llu,\"packetsIgnored\":%llu},",doorSession.menuSuspended?"true":"false",doorSession.menuSince,doorSession.menuSuspensions,doorSession.menuResumes,doorSession.menuPausedMs,doorSession.menuPacketsIgnored);
     fprintf(f,"\"experimental\":true,\"enabled\":%s,\"catalogCount\":%zu,\"ambiguous\":%u,\"ineligible\":%u,\"ignoredWhileDisabled\":%llu,\"unmatched\":%llu,\"rejected\":%llu,\"scanMs\":%u,\"serviceMs\":%u,\"serviceMaxMs\":%u,\"result\":\"%s\",\"entries\":[",doorCatalogEnabled?"true":"false",doorChannels.size(),doorCatalogAmbiguous,doorCatalogIneligible,doorCatalogIgnored,doorCatalogUnmatched,doorCatalogRejected,doorCatalogScanMs,doorServiceMs,doorServiceMaxMs,doorCatalogResult);
     bool first=true;for(const auto& s:doorChannels){if(!first)fputc(',',f);first=false;fputs("{\"name\":",f);writeWorldText(f,s.binding.name.c_str());fputs(",\"definition\":",f);writeWorldText(f,s.binding.definitionName.c_str());
-    fprintf(f,",\"role\":%u,\"enabled\":%s,\"ready\":%s,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%llu,\"target\":%u,\"side\":%u,\"applied\":%llu,\"ack\":%llu,\"awaiting\":%s,\"inFlight\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"requests\":%llu,\"commits\":%llu,\"nativeCalls\":%llu,\"converged\":%llu,\"sideCorrections\":%llu,\"result\":\"%s\"}",localRole,s.enabled?"true":"false",s.ready?"true":"false",s.arm,s.peerArm,s.order.revision,s.order.target,s.order.side,s.applied,s.ack,s.awaiting?"true":"false",s.inFlight,s.sent,s.received,s.rejected,s.duplicates,s.requests,s.commits,s.calls,s.converged,s.sideCorrections,s.result);
+    fprintf(f,",\"role\":%u,\"enabled\":%s,\"ready\":%s,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%llu,\"target\":%u,\"side\":%u,\"applied\":%llu,\"ack\":%llu,\"awaiting\":%s,\"inFlight\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"requests\":%llu,\"commits\":%llu,\"nativeCalls\":%llu,\"converged\":%llu,\"sideCorrections\":%llu,\"locked\":%u,\"unlocksSent\":%llu,\"unlocksReceived\":%llu,\"unlocksApplied\":%llu,\"result\":\"%s\"}",localRole,s.enabled?"true":"false",s.ready?"true":"false",s.arm,s.peerArm,s.order.revision,s.order.target,s.order.side,s.applied,s.ack,s.awaiting?"true":"false",s.inFlight,s.sent,s.received,s.rejected,s.duplicates,s.requests,s.commits,s.calls,s.converged,s.sideCorrections,unsigned(s.observedLocked),s.unlocksSent,s.unlocksReceived,s.unlocksApplied,s.result);
     }
     fputs("]}\n",f);const bool ok=!ferror(f);const auto closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

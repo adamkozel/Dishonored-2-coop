@@ -1,0 +1,132 @@
+{
+  "passed": false,
+  "failure": "Lock differs: the client's door locked 0, the host's 1",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "client",
+    "door": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+    "key": "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem",
+    "before": {
+      "host": {
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "client": {
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      }
+    },
+    "grant": {
+      "grants": 1,
+      "refused": 0,
+      "result": "granted_named"
+    },
+    "keyBefore": 1,
+    "tries": [
+      {
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 180.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 155.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 205.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 130.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "offset": [
+          1.0,
+          0
+        ],
+        "yaw": 230.0,
+        "locked": 1,
+        "current": 0,
+        "pending": 0
+      },
+      {
+        "offset": [
+          -1.0,
+          0
+        ],
+        "yaw": 0.0,
+        "locked": 0,
+        "current": 0,
+        "pending": 0
+      }
+    ],
+    "after": {
+      "host": {
+        "current": 0,
+        "pending": 0,
+        "locked": 1,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      },
+      "client": {
+        "current": 0,
+        "pending": 0,
+        "locked": 0,
+        "blocked": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      }
+    },
+    "keyAfter": 1
+  },
+  "scope": "1841 (#185): a locked door opened with its key by the client on a mission map; both worlds' door state"
+}

@@ -80,7 +80,10 @@ inline NativeOpenableCatalog selectNativeOpenableCatalog(std::vector<NativeOpena
         if(end-first!=1)result.ambiguous+=static_cast<unsigned>(end-first);
         else{
             const auto& n=all[first];bool eligible=!n.name.empty()&&!n.definitionName.empty();
-            for(unsigned target:{0u,2u})for(unsigned side:{0u,1u})eligible=eligible&&nativeOpenableTransitionAllowed(n,target,side);
+            // 1214jf (#185): a locked door is otherwise an ordinary door. Its key unlock is shared (door_sync), and its
+            // native transitions stay refused until the lock byte clears.
+            auto unlocked=n;unlocked.locked=0;
+            for(unsigned target:{0u,2u})for(unsigned side:{0u,1u})eligible=eligible&&nativeOpenableTransitionAllowed(unlocked,target,side);
             if(eligible)result.entries.push_back(n);else ++result.ineligible;
         }
         first=end;
