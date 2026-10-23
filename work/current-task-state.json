@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-23T07:30:00+02:00",
+  "UpdatedAt": "2026-10-23T07:50:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22717,8 +22717,8 @@
     "Fix": "0.9.0 deaths and checkpoints were not shared in real co-op sessions: the mission autosave was read from the player's own savegame folder (co-op saves go to savegame_coop, fixed in 1214il) and only autosaves were accepted while a fresh co-op folder holds only the first map's mission-start save (type 2, fixed in 1214im)",
     "CleanPcLocal": "work/release/product-two-account-v1761b: pass (local 0.9.1 zip; VM armed on savegame_coop slot 21, shared death and restart); v1761a failed on the 1214il package (VM enable_refused)",
     "CleanPc090": "work/release/product-two-account-v1755a: failed at the shared death (the bug fixed in 0.9.1)",
-    "Status": "built and validated (install test, local clean-PC proof); publishing and the clean-PC proof from the download next",
-    "Published": "",
-    "CleanPc": ""
+    "Status": "published and validated (install test, clean-PC proof from the download on two accounts)",
+    "Published": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.1 (v0.9.0 notes now say superseded)",
+    "CleanPc": "work/release/product-two-account-v1761d: pass (downloaded from GitHub in the VM, Install.cmd alone, two Steam accounts, walk, story, both checkpoint syncs armed, shared death and restart, uninstall); v1761c stopped at its first check (the lab host still on the pause menu)"
   }
 }

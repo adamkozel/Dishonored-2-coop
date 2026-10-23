@@ -332,7 +332,14 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
   - Install test release-install-v1761a: 8/8.
   - Proof harness Test-ProductTwoAccount-v1761 records both checkpoint syncs before the death and waits up to 30 s
     for both to arm.
-  - Clean-PC proof from the v0.9.1 download: pending (published next).
+  - Clean-PC proof from the v0.9.1 download, product-two-account-v1761d: pass.
+    - The VM downloaded the release (SHA-256 591FA52A..., the published zip) and installed it with Install.cmd alone.
+    - Two Steam accounts joined, walked and passed the story step.
+    - Both checkpoint syncs armed (host slot 61 in savegame, VM slot 21 in savegame_coop). The host's death showed
+      GameOver in both games, and both restarted on the same map.
+    - The uninstall restored the game.
+    - v1761c had stopped at its first check: the lab host was still on the pause menu after v1761b's restore.
+  - Validating the missions on co-op saves, as installed players play them, is #175.
 
 **Still open:**
 - Hosting starts with the F7 key once in a mission. Since 0.9.0 the main menu's Co-op entry opens the co-op saves
