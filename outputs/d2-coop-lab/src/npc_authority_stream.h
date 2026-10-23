@@ -130,6 +130,10 @@ struct NpcStreamSession {
     const char* result="disabled";
 };
 NpcStreamSession npcStreamSessionState{};
+// 1214iy (#180): native phase blips (the world unchanged, a pose leaving the menu context for less than 750 ms): when the
+// last one began, how many there were, how many outlasted the grace, and both poses' phase fields at its start
+// (flags bit 0, logic, pending, cinematic nodes, cinematic metadata; local then remote).
+ULONGLONG npcPhaseBlipSince=0;std::uint64_t npcPhaseBlips=0,npcPhaseBlipEnds=0;unsigned npcPhaseBlipFields[10]{};
 bool doorCheckpointBarrierActive();
 // 1214he (#140): the partner's game in an NPC stream session (its NPCs are host-owned replicas).
 bool npcStreamReplicaSession(){return localRole==1&&npcAuthorityStreamActive&&npcStreamSessionState.enabled;}
@@ -625,7 +629,17 @@ void serviceNpcStream(ULONGLONG tick){
         if(!npcAuthorityStreamActive){disableNpcStreamSession("renewed_catalog_refused");return;}
         ++s.rearms;s.result="renewed_after_shared_checkpoint";
     }
-    if(!doorSessionCanRetainMenu(s.scope,outgoing,remote)){disableNpcStreamSession("world_or_native_phase_changed");return;}
+    // 1214iy (#180): a native phase blip with the world unchanged suspends the session below (as a native menu does)
+    // instead of ending it; only one lasting 750 ms ends it. Her Blink Assault ended her session for one frame's blip and
+    // stopped every channel: the host's guard channel timed out, and her kick stayed in her world
+    // (mission-partner-powers-v1819c: her guard 40 -> 22.7, the host's 40, 5.92 m apart; v1810a).
+    if(!doorSessionWorldMatches(s.scope,outgoing,remote)){disableNpcStreamSession("world_or_native_phase_changed");return;}
+    if(!doorSessionMenuContext(outgoing)||!doorSessionMenuContext(remote)){
+        if(!npcPhaseBlipSince){npcPhaseBlipSince=tick;++npcPhaseBlips;
+            const CoopPosePacket* poses[2]={&outgoing,&remote};
+            for(unsigned i=0;i<2;++i){const auto& q=*poses[i];unsigned* v=npcPhaseBlipFields+i*5;v[0]=q.flags&1;v[1]=q.gameLogicState;v[2]=q.pendingGameLogicState;v[3]=q.cinematicNodeCount;v[4]=q.cinematicMetadataValid;}}
+        if(tick-npcPhaseBlipSince>=750){npcPhaseBlipSince=0;++npcPhaseBlipEnds;disableNpcStreamSession("world_or_native_phase_changed");return;}
+    }else npcPhaseBlipSince=0;
     if(!lastReceive||tick-lastReceive>=kSessionStallLimitMs){disableNpcStreamSession("session_pose_stale");return;}
     if(tick-lastReceive>=1000||!coopWorldPairReady(outgoing,remote)){
         if(!s.menuSuspended){s.menuSuspended=true;s.menuSince=tick;++s.menuSuspensions;clearNpcPresentation();}
@@ -838,7 +852,8 @@ void writeNpcStream(){
     const auto& s=npcStreamSessionState;
     fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"vanishedDead\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcVanishedDead,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
-    fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu}",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost);
+    fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu,\"phaseBlips\":%llu,\"phaseBlipEnds\":%llu,\"phaseBlip\":[%u,%u,%u,%u,%u,%u,%u,%u,%u,%u]}",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost,npcPhaseBlips,npcPhaseBlipEnds,
+        npcPhaseBlipFields[0],npcPhaseBlipFields[1],npcPhaseBlipFields[2],npcPhaseBlipFields[3],npcPhaseBlipFields[4],npcPhaseBlipFields[5],npcPhaseBlipFields[6],npcPhaseBlipFields[7],npcPhaseBlipFields[8],npcPhaseBlipFields[9]);
     writeNpcCorpseTraces(f);writeNpcStreamTraces(f);fputs("}\n",f); // 1214gd (#140), 1214it (#180)
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

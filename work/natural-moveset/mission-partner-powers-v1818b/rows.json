@@ -1,0 +1,331 @@
+{
+  "power": "domino",
+  "pairing": "corvo-emily",
+  "passed": false,
+  "failure": "guard 1 is not in a network of two or more ()",
+  "checks": [
+    "Domino: network , guard 1 dead/dead, members ",
+    "Host guard moved up to 0.77 m (health 10 -> 0); her copy up to 0.77 m (health 10 -> 0); outcome dead/dead, end gap 0 m (last samples 0 m)"
+  ],
+  "definitions": {
+    "host": "models/characters/player/corvo/body.def",
+    "client": "models/characters/player/emily/body.def"
+  },
+  "grants": [
+    {
+      "item": "models/powers/phantasmallink/phantasmal_link.inventoryitem",
+      "result": "named_power_equip_requested"
+    }
+  ],
+  "stand": {
+    "side": "right",
+    "stand": [
+      -13.7948,
+      165.287,
+      3.07319
+    ],
+    "guard": [
+      -18.0383,
+      161.086,
+      3.38519
+    ],
+    "facing": [
+      -0.6884150128341212,
+      0.7253170135220852
+    ],
+    "trials": [
+      {
+        "side": "left",
+        "asked": [
+          -23.983719094654596,
+          155.62909491016117
+        ],
+        "rest": [
+          -23.984,
+          155.629,
+          -4.04566
+        ],
+        "ok": false
+      },
+      {
+        "side": "right",
+        "asked": [
+          -13.829280905345405,
+          165.26690508983884
+        ],
+        "rest": [
+          -13.7948,
+          165.287,
+          3.07319
+        ],
+        "ok": true
+      }
+    ],
+    "crouched": true
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2e092a25",
+      "position": [
+        -18.0383,
+        161.086,
+        3.38519
+      ]
+    },
+    "client": {
+      "handle": "0x2e092a25",
+      "position": [
+        -18.0383,
+        161.086,
+        3.38519
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": true,
+    "ms": 861,
+    "channel": "client_replica",
+    "gap": 0.0
+  },
+  "camera": [
+    -20.13778460265617,
+    167.45043930882446,
+    5.98519
+  ],
+  "aim": {
+    "target": [
+      -18.0383,
+      161.086,
+      3.38519
+    ],
+    "stand": [
+      -13.7948,
+      165.287,
+      3.07319
+    ],
+    "yaw": -135.3,
+    "pitch": -6.0,
+    "distance": 5.97
+  },
+  "before": {
+    "ms": 0,
+    "host": {
+      "present": true,
+      "position": [
+        -18.0383,
+        161.086,
+        3.38519
+      ],
+      "health": 10,
+      "suppressed": false
+    },
+    "channel_host": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client": {
+      "present": true,
+      "position": [
+        -18.0383,
+        161.086,
+        3.38519
+      ],
+      "health": 10,
+      "suppressed": false
+    },
+    "channel_client": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "host_2": {
+      "present": true,
+      "position": [
+        -19.7747,
+        159.81,
+        3.39741
+      ],
+      "health": 10,
+      "suppressed": false
+    },
+    "channel_host_2": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client_2": {
+      "present": true,
+      "position": [
+        -19.7747,
+        159.81,
+        3.39741
+      ],
+      "health": 10,
+      "suppressed": false
+    },
+    "channel_client_2": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    }
+  },
+  "attempts": [],
+  "castAt": 1,
+  "aims": [
+    {
+      "target": [
+        -19.7747,
+        159.81,
+        3.39741
+      ],
+      "stand": [
+        -24.214,
+        153.154,
+        -4.19059
+      ],
+      "yaw": 56.3,
+      "pitch": -42.0,
+      "distance": 8.0
+    },
+    {
+      "target": [
+        -19.7747,
+        159.81,
+        3.39741
+      ],
+      "stand": [
+        -21.718,
+        151.49,
+        -2.07742
+      ],
+      "yaw": 76.9,
+      "pitch": -30.0,
+      "distance": 8.54
+    },
+    {
+      "target": [
+        -19.7747,
+        159.81,
+        3.39741
+      ],
+      "stand": [
+        -23.104,
+        154.818,
+        -1.92674
+      ],
+      "yaw": 56.3,
+      "pitch": -38.0,
+      "distance": 6.0
+    },
+    {
+      "target": [
+        -18.0383,
+        161.086,
+        3.38519
+      ],
+      "stand": [
+        -12.531,
+        155.119,
+        -1.63175
+      ],
+      "yaw": 132.7,
+      "pitch": -28.0,
+      "distance": 8.12
+    },
+    {
+      "target": [
+        -18.0383,
+        161.086,
+        3.38519
+      ],
+      "stand": [
+        -10.3552,
+        157.351,
+        3.17065
+      ],
+      "yaw": 154.1,
+      "pitch": -3.0,
+      "distance": 8.54
+    },
+    {
+      "target": [
+        -18.0383,
+        161.086,
+        3.38519
+      ],
+      "stand": [
+        -12.9897,
+        157.177,
+        4.13835
+      ],
+      "yaw": 142.3,
+      "pitch": 4.0,
+      "distance": 6.39
+    }
+  ],
+  "marks": {
+    "script_spawner_docks_musician_violin": {
+      "tries": 3,
+      "marked": false,
+      "hostMarks": null
+    },
+    "script_spawner_docks_musician_guitar": {
+      "tries": 3,
+      "marked": false,
+      "hostMarks": null
+    }
+  },
+  "network": [],
+  "guardHandle": 772352549,
+  "dominoLinked": {
+    "sent": 386,
+    "markCount": 0,
+    "readyMask": 5
+  },
+  "killPress": "lethal",
+  "castEnd": 33955,
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "outcome2": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "networkOutcomes": [],
+  "summary": {
+    "hostGuardMaxMove": 0.77,
+    "herCopyMaxMove": 0.77,
+    "endGap": 0.0,
+    "rawEndGap": 0.0,
+    "hostHealth": [
+      10,
+      0
+    ],
+    "herHealth": [
+      10,
+      0
+    ],
+    "outcome": {
+      "host": "dead",
+      "client": "dead"
+    }
+  }
+}

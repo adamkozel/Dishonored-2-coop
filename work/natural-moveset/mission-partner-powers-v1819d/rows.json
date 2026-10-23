@@ -1,0 +1,701 @@
+[
+  {
+    "power": "farreach",
+    "pairing": "emily-emily",
+    "passed": true,
+    "failure": null,
+    "checks": [
+      "Host guard moved up to 6.33 m (health 40 -> 40); her copy up to 6.33 m (health 40 -> 40); outcome alive/alive, end gap 0 m (last samples 0.29 m)"
+    ],
+    "definitions": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "grants": [
+      {
+        "item": "models/powers/grapple/grapple.inventoryitem",
+        "result": "named_power_equip_requested"
+      },
+      {
+        "item": "components/characters/player/base/attributes/grapple_pull_objects.inventoryitem",
+        "result": "granted_named"
+      },
+      {
+        "item": "components/characters/player/base/attributes/grapple_pull_npcs.inventoryitem",
+        "result": "granted_named"
+      }
+    ],
+    "stand": {
+      "side": "front",
+      "stand": [
+        3.15384,
+        65.9616,
+        15.9811
+      ],
+      "guard": [
+        4.4363,
+        59.1995,
+        15.9529
+      ],
+      "facing": [
+        -0.16227103683901836,
+        0.9867462240126333
+      ],
+      "trials": [
+        {
+          "side": "front",
+          "asked": [
+            3.3004027421268716,
+            66.10672356808843
+          ],
+          "rest": [
+            3.15384,
+            65.9616,
+            15.9811
+          ],
+          "ok": true
+        }
+      ]
+    },
+    "guardAtWait": {
+      "host": {
+        "handle": "0x2dc829e4",
+        "position": [
+          4.43955,
+          59.1902,
+          15.9529
+        ]
+      },
+      "client": {
+        "handle": "0x2dc829e4",
+        "position": [
+          4.43955,
+          59.1902,
+          15.9529
+        ]
+      }
+    },
+    "replicaReady": {
+      "ready": true,
+      "ms": 726,
+      "channel": "client_replica",
+      "gap": 0.0
+    },
+    "camera": [
+      -2.0979883157235664,
+      61.45665534071848,
+      18.5529
+    ],
+    "aim": {
+      "target": [
+        4.43955,
+        59.1902,
+        15.9529
+      ],
+      "stand": [
+        3.15384,
+        65.9616,
+        15.9811
+      ],
+      "yaw": -79.2,
+      "pitch": 3.0,
+      "distance": 6.89
+    },
+    "before": {
+      "ms": 0,
+      "host": {
+        "present": true,
+        "position": [
+          4.49595,
+          58.8559,
+          15.9519
+        ],
+        "health": 40,
+        "suppressed": false
+      },
+      "channel_host": {
+        "result": "host_authority",
+        "localPaired": false,
+        "pairedVariant": 0,
+        "pairedResult": "none",
+        "reversePoses": 0,
+        "downSent": 0,
+        "downReceived": 0
+      },
+      "client": {
+        "present": true,
+        "position": [
+          4.49595,
+          58.8559,
+          15.9519
+        ],
+        "health": 40,
+        "suppressed": false
+      },
+      "channel_client": {
+        "result": "client_replica",
+        "localPaired": false,
+        "pairedVariant": 0,
+        "pairedResult": "none",
+        "reversePoses": 0,
+        "downSent": 0,
+        "downReceived": 0
+      }
+    },
+    "attempts": [],
+    "castAt": 1,
+    "castEnd": 1639,
+    "outcome": {
+      "host": "alive",
+      "client": "alive"
+    },
+    "summary": {
+      "hostGuardMaxMove": 6.33,
+      "herCopyMaxMove": 6.33,
+      "endGap": 0.0,
+      "rawEndGap": 0.29,
+      "hostHealth": [
+        40,
+        40
+      ],
+      "herHealth": [
+        40,
+        40
+      ],
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      }
+    }
+  },
+  {
+    "power": "doppelganger",
+    "pairing": "emily-emily",
+    "passed": true,
+    "failure": null,
+    "checks": [
+      "host puppets spawned 1",
+      "Host guard moved up to 4.98 m (health 40 -> 40); her copy up to 4.98 m (health 40 -> 40); outcome alive/alive, end gap 0 m (last samples 0 m)"
+    ],
+    "definitions": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "grants": [
+      {
+        "item": "models/powers/doppelganger/doppelganger.inventoryitem",
+        "result": "named_power_equip_requested"
+      }
+    ],
+    "stand": {
+      "side": "behind",
+      "stand": [
+        5.21962,
+        54.2533,
+        15.7169
+      ],
+      "guard": [
+        4.43586,
+        59.193,
+        15.9529
+      ],
+      "facing": [
+        -0.16245093782272774,
+        0.9867166223392188
+      ],
+      "trials": [
+        {
+          "side": "behind",
+          "asked": [
+            5.248114689113638,
+            54.2594168883039
+          ],
+          "rest": [
+            5.21962,
+            54.2533,
+            15.7169
+          ],
+          "ok": true
+        }
+      ]
+    },
+    "guardAtWait": {
+      "host": {
+        "handle": "0x2dc829e4",
+        "position": [
+          4.43438,
+          59.1911,
+          15.9529
+        ]
+      },
+      "client": {
+        "handle": "0x2dc829e4",
+        "position": [
+          4.43438,
+          59.1911,
+          15.9531
+        ]
+      }
+    },
+    "replicaReady": {
+      "ready": true,
+      "ms": 1739,
+      "channel": "client_replica",
+      "gap": 0.0
+    },
+    "camera": [
+      10.75254124166062,
+      57.66451682218834,
+      18.5529
+    ],
+    "aim": {
+      "target": [
+        4.43438,
+        59.1911,
+        15.9531
+      ],
+      "stand": [
+        5.21962,
+        54.2533,
+        15.7169
+      ],
+      "yaw": 99.0,
+      "pitch": 2.0,
+      "distance": 5.0
+    },
+    "before": {
+      "ms": 0,
+      "host": {
+        "present": true,
+        "position": [
+          4.37484,
+          59.574,
+          15.9546
+        ],
+        "health": 40,
+        "suppressed": false
+      },
+      "channel_host": {
+        "result": "host_authority",
+        "localPaired": false,
+        "pairedVariant": 0,
+        "pairedResult": "none",
+        "reversePoses": 0,
+        "downSent": 0,
+        "downReceived": 0
+      },
+      "client": {
+        "present": true,
+        "position": [
+          4.37484,
+          59.574,
+          15.9546
+        ],
+        "health": 40,
+        "suppressed": false
+      },
+      "channel_client": {
+        "result": "client_replica",
+        "localPaired": false,
+        "pairedVariant": 0,
+        "pairedResult": "none",
+        "reversePoses": 0,
+        "downSent": 0,
+        "downReceived": 0
+      },
+      "shadeHost": {
+        "spawned": 0,
+        "puppet": null,
+        "result": "idle"
+      }
+    },
+    "attempts": [],
+    "castAt": 0,
+    "castEnd": 1613,
+    "outcome": {
+      "host": "alive",
+      "client": "alive"
+    },
+    "summary": {
+      "hostGuardMaxMove": 4.98,
+      "herCopyMaxMove": 4.98,
+      "endGap": 0.0,
+      "rawEndGap": 0.0,
+      "hostHealth": [
+        40,
+        40
+      ],
+      "herHealth": [
+        40,
+        40
+      ],
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      }
+    }
+  },
+  {
+    "power": "mesmerize",
+    "pairing": "emily-emily",
+    "passed": true,
+    "failure": null,
+    "checks": [
+      "host Mesmerize object took an NPC in 30 samples",
+      "Host guard moved up to 0.55 m (health 40 -> 40); her copy up to 0.55 m (health 40 -> 40); outcome alive/alive, end gap 0 m (last samples 0 m)"
+    ],
+    "definitions": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "grants": [
+      {
+        "item": "models/powers/mesmerize/mesmerize.inventoryitem",
+        "result": "named_power_equip_requested"
+      },
+      {
+        "item": "components/characters/player/base/attributes/mesmerize_incombat.inventoryitem",
+        "result": "granted_named"
+      }
+    ],
+    "stand": {
+      "side": "behind",
+      "stand": [
+        5.12515,
+        54.1918,
+        15.6827
+      ],
+      "guard": [
+        4.43711,
+        59.193,
+        15.9529
+      ],
+      "facing": [
+        -0.16228190729251102,
+        0.9867444362982264
+      ],
+      "trials": [
+        {
+          "side": "behind",
+          "asked": [
+            5.248519536462554,
+            54.25927781850886
+          ],
+          "rest": [
+            5.12515,
+            54.1918,
+            15.6827
+          ],
+          "ok": true
+        }
+      ]
+    },
+    "guardAtWait": {
+      "host": {
+        "handle": "0x2dc829e4",
+        "position": [
+          4.43232,
+          59.2129,
+          15.953
+        ]
+      },
+      "client": {
+        "handle": "0x2dc829e4",
+        "position": [
+          4.43232,
+          59.2129,
+          15.953
+        ]
+      }
+    },
+    "replicaReady": {
+      "ready": true,
+      "ms": 1785,
+      "channel": "client_replica",
+      "gap": 0.0
+    },
+    "camera": [
+      10.722419390403761,
+      57.52248161582192,
+      18.553
+    ],
+    "aim": {
+      "target": [
+        4.43232,
+        59.2129,
+        15.953
+      ],
+      "stand": [
+        5.12515,
+        54.1918,
+        15.6827
+      ],
+      "yaw": 97.9,
+      "pitch": 1.0,
+      "distance": 5.07
+    },
+    "before": {
+      "ms": 0,
+      "host": {
+        "present": true,
+        "position": [
+          4.37484,
+          59.574,
+          15.9546
+        ],
+        "health": 40,
+        "suppressed": false
+      },
+      "channel_host": {
+        "result": "host_authority",
+        "localPaired": false,
+        "pairedVariant": 0,
+        "pairedResult": "none",
+        "reversePoses": 0,
+        "downSent": 0,
+        "downReceived": 0
+      },
+      "client": {
+        "present": true,
+        "position": [
+          4.37484,
+          59.574,
+          15.9546
+        ],
+        "health": 40,
+        "suppressed": false
+      },
+      "channel_client": {
+        "result": "client_replica",
+        "localPaired": false,
+        "pairedVariant": 0,
+        "pairedResult": "none",
+        "reversePoses": 0,
+        "downSent": 0,
+        "downReceived": 0
+      },
+      "mesmerizeHost": {
+        "state": -1,
+        "targets": 0,
+        "targetHandles": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "follow": {
+          "result": "idle",
+          "events": 0,
+          "begins": 0,
+          "forced": 0,
+          "stops": 0,
+          "refused": 0,
+          "event": 0,
+          "begun": false,
+          "forcedNow": false,
+          "ended": false,
+          "anchor": 0,
+          "anchorDistance": 0.0,
+          "partnerState": 0,
+          "partnerEvent": 0,
+          "leased": false,
+          "productArmed": true,
+          "at": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "enabled": true
+        },
+        "result": "idle"
+      }
+    },
+    "attempts": [],
+    "castAt": 0,
+    "castEnd": 1580,
+    "outcome": {
+      "host": "alive",
+      "client": "alive"
+    },
+    "summary": {
+      "hostGuardMaxMove": 0.55,
+      "herCopyMaxMove": 0.55,
+      "endGap": 0.0,
+      "rawEndGap": 0.0,
+      "hostHealth": [
+        40,
+        40
+      ],
+      "herHealth": [
+        40,
+        40
+      ],
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      }
+    }
+  },
+  {
+    "power": "shadowwalk",
+    "pairing": "emily-emily",
+    "passed": false,
+    "failure": "her shadow-form attack left her copy alive",
+    "checks": [
+      "Host guard moved up to 0.64 m (health 40 -> 40); her copy up to 0.64 m (health 40 -> 40); outcome alive/alive, end gap 0 m (last samples 0 m)"
+    ],
+    "definitions": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "grants": [
+      {
+        "item": "models/powers/shadow_walk/shadow_walk.inventoryitem",
+        "result": "named_power_equip_requested"
+      }
+    ],
+    "stand": {
+      "side": "behind",
+      "stand": [
+        4.89229,
+        56.8583,
+        16.5898
+      ],
+      "guard": [
+        4.4379,
+        59.1912,
+        15.9529
+      ],
+      "facing": [
+        -0.1693350919837783,
+        0.9855585353609624
+      ],
+      "trials": [
+        {
+          "side": "behind",
+          "asked": [
+            4.844304220761068,
+            56.82585951513369
+          ],
+          "rest": [
+            4.89229,
+            56.8583,
+            16.5898
+          ],
+          "ok": true
+        }
+      ]
+    },
+    "guardAtWait": {
+      "host": {
+        "handle": "0x2dc829e4",
+        "position": [
+          4.4376,
+          59.192,
+          15.9529
+        ]
+      },
+      "client": {
+        "handle": "0x2dc829e4",
+        "position": [
+          4.4376,
+          59.192,
+          15.9531
+        ]
+      }
+    },
+    "replicaReady": {
+      "ready": true,
+      "ms": 2684,
+      "channel": "client_replica",
+      "gap": 0.0
+    },
+    "camera": [
+      10.554204289378525,
+      59.17259281882312,
+      18.5529
+    ],
+    "aim": {
+      "target": [
+        4.4376,
+        59.192,
+        15.9531
+      ],
+      "stand": [
+        4.89229,
+        56.8583,
+        16.5898
+      ],
+      "yaw": 101.0,
+      "pitch": 23.0,
+      "distance": 2.38
+    },
+    "before": {
+      "ms": 0,
+      "host": {
+        "present": true,
+        "position": [
+          4.37484,
+          59.574,
+          15.9546
+        ],
+        "health": 40,
+        "suppressed": false
+      },
+      "channel_host": {
+        "result": "host_authority",
+        "localPaired": false,
+        "pairedVariant": 0,
+        "pairedResult": "none",
+        "reversePoses": 0,
+        "downSent": 0,
+        "downReceived": 0
+      },
+      "client": {
+        "present": true,
+        "position": [
+          4.37484,
+          59.574,
+          15.9546
+        ],
+        "health": 40,
+        "suppressed": false
+      },
+      "channel_client": {
+        "result": "client_replica",
+        "localPaired": false,
+        "pairedVariant": 0,
+        "pairedResult": "none",
+        "reversePoses": 0,
+        "downSent": 0,
+        "downReceived": 0
+      }
+    },
+    "attempts": [],
+    "castAt": 0,
+    "castEnd": 3137,
+    "outcome": {
+      "host": "alive",
+      "client": "alive"
+    },
+    "summary": {
+      "hostGuardMaxMove": 0.64,
+      "herCopyMaxMove": 0.64,
+      "endGap": 0.0,
+      "rawEndGap": 0.0,
+      "hostHealth": [
+        40,
+        40
+      ],
+      "herHealth": [
+        40,
+        40
+      ],
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      }
+    }
+  }
+]

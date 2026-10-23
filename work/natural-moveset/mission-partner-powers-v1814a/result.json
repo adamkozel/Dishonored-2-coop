@@ -1,0 +1,428 @@
+{
+  "passed": true,
+  "failure": null,
+  "rows": [
+    {
+      "power": "domino",
+      "pairing": "corvo-emily",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Domino: guard 1 dead/dead, guard 2 alive/alive",
+        "Host guard moved up to 0.99 m (health 40 -> 0); her copy up to 0.99 m (health 40 -> 0); outcome dead/dead, end gap 0 m (last samples 0 m)"
+      ],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/emily/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/phantasmallink/phantasmal_link.inventoryitem",
+          "result": "named_power_equip_requested"
+        }
+      ],
+      "stand": {
+        "side": "right",
+        "stand": [
+          13.0464,
+          55.7936,
+          16.7868
+        ],
+        "guard": [
+          4.4403,
+          59.1915,
+          15.9529
+        ],
+        "facing": [
+          -0.16976606714147421,
+          0.9854843897532403
+        ],
+        "trials": [
+          {
+            "side": "left",
+            "asked": [
+              -0.4814057282726818,
+              53.01448753000968
+            ],
+            "rest": [
+              -0.502239,
+              53.0224,
+              15.1187
+            ],
+            "ok": false
+          },
+          {
+            "side": "right",
+            "asked": [
+              13.315375728272683,
+              55.391212469990315
+            ],
+            "rest": [
+              13.0464,
+              55.7936,
+              16.7868
+            ],
+            "ok": true
+          }
+        ],
+        "crouched": true
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43908,
+            59.1909,
+            15.9529
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43908,
+            59.1909,
+            15.9531
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": true,
+        "ms": 707,
+        "channel": "client_replica",
+        "gap": 0.0
+      },
+      "camera": [
+        10.945556147298927,
+        63.07325358548524,
+        18.5529
+      ],
+      "aim": {
+        "target": [
+          4.43908,
+          59.1909,
+          15.9531
+        ],
+        "stand": [
+          13.0464,
+          55.7936,
+          16.7868
+        ],
+        "yaw": 158.5,
+        "pitch": 3.0,
+        "distance": 9.25
+      },
+      "before": {
+        "ms": 0,
+        "host": {
+          "present": true,
+          "position": [
+            4.37484,
+            59.574,
+            15.9546
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_host": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client": {
+          "present": true,
+          "position": [
+            4.37484,
+            59.574,
+            15.9546
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_client": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "host_2": {
+          "present": true,
+          "position": [
+            6.91648,
+            48.4619,
+            16.472
+          ],
+          "health": 30,
+          "suppressed": false
+        },
+        "channel_host_2": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client_2": {
+          "present": true,
+          "position": [
+            6.9156,
+            48.4626,
+            16.472
+          ],
+          "health": 30,
+          "suppressed": false
+        },
+        "channel_client_2": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        }
+      },
+      "attempts": [],
+      "castAt": 1,
+      "aims": [
+        {
+          "target": [
+            4.37484,
+            59.574,
+            15.9546
+          ],
+          "stand": [
+            13.0644,
+            55.8216,
+            16.7434
+          ],
+          "yaw": 156.6,
+          "pitch": 3.0,
+          "distance": 9.47
+        },
+        {
+          "target": [
+            6.74468,
+            48.584,
+            16.4538
+          ],
+          "stand": [
+            13.0643,
+            55.8225,
+            16.7437
+          ],
+          "yaw": -131.1,
+          "pitch": 0.0,
+          "distance": 9.61
+        }
+      ],
+      "dominoLinked": {
+        "sent": 164,
+        "markCount": 0,
+        "readyMask": 5
+      },
+      "killPress": "lethal",
+      "outcome": {
+        "host": "dead",
+        "client": "dead"
+      },
+      "outcome2": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "summary": {
+        "hostGuardMaxMove": 0.99,
+        "herCopyMaxMove": 0.99,
+        "endGap": 0.0,
+        "rawEndGap": 0.0,
+        "hostHealth": [
+          40,
+          0
+        ],
+        "herHealth": [
+          40,
+          0
+        ],
+        "outcome": {
+          "host": "dead",
+          "client": "dead"
+        }
+      }
+    },
+    {
+      "power": "doppelganger",
+      "pairing": "corvo-emily",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "host puppets spawned 1",
+        "Host guard moved up to 10.15 m (health 40 -> 40); her copy up to 10.15 m (health 40 -> 40); outcome alive/alive, end gap 0.45 m (last samples 1.64 m)"
+      ],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/emily/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/doppelganger/doppelganger.inventoryitem",
+          "result": "named_power_equip_requested"
+        }
+      ],
+      "stand": {
+        "side": "behind",
+        "stand": [
+          5.18044,
+          54.2084,
+          15.7037
+        ],
+        "guard": [
+          4.43838,
+          59.1914,
+          15.9529
+        ],
+        "facing": [
+          -0.16474097737694682,
+          0.9863368645512992
+        ],
+        "trials": [
+          {
+            "side": "behind",
+            "asked": [
+              5.262084886884734,
+              54.259715677243506
+            ],
+            "rest": [
+              5.18044,
+              54.2084,
+              15.7037
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.436,
+            59.2002,
+            15.953
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.40276,
+            59.4034,
+            15.9537
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": true,
+        "ms": 788,
+        "channel": "client_replica",
+        "gap": 0.21
+      },
+      "camera": [
+        10.742591131778084,
+        57.589308062290335,
+        18.553
+      ],
+      "aim": {
+        "target": [
+          4.40276,
+          59.4034,
+          15.9537
+        ],
+        "stand": [
+          5.18044,
+          54.2084,
+          15.7037
+        ],
+        "yaw": 98.5,
+        "pitch": 2.0,
+        "distance": 5.25
+      },
+      "before": {
+        "ms": 0,
+        "host": {
+          "present": true,
+          "position": [
+            4.37484,
+            59.574,
+            15.9546
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_host": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client": {
+          "present": true,
+          "position": [
+            4.37484,
+            59.574,
+            15.9546
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_client": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "shadeHost": {
+          "spawned": 0,
+          "puppet": null,
+          "result": "idle"
+        }
+      },
+      "attempts": [],
+      "castAt": 0,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "summary": {
+        "hostGuardMaxMove": 10.15,
+        "herCopyMaxMove": 10.15,
+        "endGap": 0.45,
+        "rawEndGap": 1.64,
+        "hostHealth": [
+          40,
+          40
+        ],
+        "herHealth": [
+          40,
+          40
+        ],
+        "outcome": {
+          "host": "alive",
+          "client": "alive"
+        }
+      }
+    }
+  ],
+  "scope": "1814 (#180): the partner (emily, host corvo) uses domino,doppelganger on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}

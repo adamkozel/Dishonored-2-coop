@@ -1,0 +1,197 @@
+{
+  "passed": false,
+  "failure": "Failed: domino (The term 'try' is not recognized as a name of a cmdlet, function, script file, or executable program.\r\nCheck the spelling of the name, or if a path was included, verify that the path is correct and try again.)",
+  "rows": [
+    {
+      "power": "domino",
+      "pairing": "corvo-emily",
+      "passed": false,
+      "failure": "The term 'try' is not recognized as a name of a cmdlet, function, script file, or executable program.\r\nCheck the spelling of the name, or if a path was included, verify that the path is correct and try again.",
+      "checks": [],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/emily/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/phantasmallink/phantasmal_link.inventoryitem",
+          "result": "named_power_equip_requested"
+        }
+      ],
+      "stand": {
+        "side": "right",
+        "stand": [
+          13.0199,
+          55.754,
+          16.8473
+        ],
+        "guard": [
+          4.43682,
+          59.1861,
+          15.9529
+        ],
+        "facing": [
+          -0.16692995877990688,
+          0.9859687565342719
+        ],
+        "trials": [
+          {
+            "side": "left",
+            "asked": [
+              -0.48347129573990344,
+              53.03214028854065
+            ],
+            "rest": [
+              -0.540797,
+              53.0549,
+              15.1095
+            ],
+            "ok": false
+          },
+          {
+            "side": "right",
+            "asked": [
+              13.320091295739903,
+              55.36915971145935
+            ],
+            "rest": [
+              13.0199,
+              55.754,
+              16.8473
+            ],
+            "ok": true
+          }
+        ],
+        "crouched": true
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43782,
+            59.1971,
+            15.953
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43782,
+            59.1971,
+            15.9531
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": true,
+        "ms": 713,
+        "channel": "client_replica",
+        "gap": 0.0
+      },
+      "camera": [
+        10.962946394617449,
+        63.044109776224474,
+        18.553
+      ],
+      "aim": {
+        "target": [
+          4.43782,
+          59.1971,
+          15.9531
+        ],
+        "stand": [
+          13.0199,
+          55.754,
+          16.8473
+        ],
+        "yaw": 158.1,
+        "pitch": 4.0,
+        "distance": 9.25
+      },
+      "before": {
+        "ms": 0,
+        "host": {
+          "present": true,
+          "position": [
+            4.37484,
+            59.574,
+            15.9546
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_host": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client": {
+          "present": true,
+          "position": [
+            4.37484,
+            59.574,
+            15.9546
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_client": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "host_2": {
+          "present": true,
+          "position": [
+            6.91648,
+            48.4619,
+            16.472
+          ],
+          "health": 30,
+          "suppressed": false
+        },
+        "channel_host_2": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client_2": {
+          "present": true,
+          "position": [
+            6.91648,
+            48.4619,
+            16.472
+          ],
+          "health": 30,
+          "suppressed": false
+        },
+        "channel_client_2": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        }
+      },
+      "attempts": [],
+      "castAt": 1,
+      "aims": [],
+      "marks": {}
+    }
+  ],
+  "scope": "1816 (#180): the partner (emily, host corvo) uses domino on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}
