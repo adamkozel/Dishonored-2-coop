@@ -17,7 +17,7 @@ struct BreakableSyncState {
     std::vector<BreakableEntry> entries;std::vector<BreakableRemoteStep> pending;
     ULONGLONG scanAt=0,pollAt=0;unsigned scanMs=0;
     std::uint64_t scans=0,sent=0,sentWithHit=0,sendFailures=0,received=0,rejected=0,ignored=0,unmatched=0,overflow=0,
-        applied=0,appliedSteps=0,applyRefused=0,healthLowered=0,worldResets=0;
+        applied=0,appliedSteps=0,applyRefused=0,healthLowered=0,worldResets=0,vanishedSent=0;
     const char* result="off";const char* lastApply="none";
 };
 BreakableSyncState breakableSync;int breakableSyncEnableRequest=-1;
@@ -102,7 +102,13 @@ void serviceBreakableSync(ULONGLONG tick){
     s.pending.clear();
     if(tick-s.pollAt>=100){s.pollAt=tick;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
         for(auto& e:s.entries){NativeBreakable b{};
-            if(!readNativeBreakable(memoryRead,base,observedGame,e.handle,b)||b.stepCount!=e.stepCount)continue;
+            if(!readNativeBreakable(memoryRead,base,observedGame,e.handle,b)||b.stepCount!=e.stepCount){
+                // 1214io (#178): a movable on its final step is removed from the world at once (a smashed bottle), before a
+                // poll reads the step. An entry that vanished within 5 s of a noted hit is sent as broken to its last step.
+                BreakableHit h{};
+                if(e.sent<e.stepCount&&!worldIdentityEntity(memoryRead,observedGame,e.handle)&&latestBreakableHit(e.handle,tick>=5000?tick-5000:0,h)&&
+                   sendBreakableStep(e,e.stepCount,tick)){e.sent=e.step=e.stepCount;++s.vanishedSent;}
+                continue;}
             e.step=b.step;if(b.step>e.sent&&sendBreakableStep(e,b.step,tick))e.sent=b.step;}
     }
     s.result="active";
@@ -112,9 +118,9 @@ void writeBreakableSync(){
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& s=breakableSync;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"lastApply\":\"%s\",\"catalog\":%zu,\"scans\":%llu,\"scanMs\":%u,\"sent\":%llu,\"sentWithHit\":%llu,\"sendFailures\":%llu,"
         "\"received\":%llu,\"rejected\":%llu,\"ignored\":%llu,\"unmatched\":%llu,\"overflow\":%llu,\"applied\":%llu,\"appliedSteps\":%llu,\"applyRefused\":%llu,"
-        "\"healthLowered\":%llu,\"worldResets\":%llu,\"hitsNoted\":%llu,\"broken\":[",
+        "\"healthLowered\":%llu,\"worldResets\":%llu,\"hitsNoted\":%llu,\"vanishedSent\":%llu,\"broken\":[",
         s.enabled?"true":"false",s.result,s.lastApply,s.entries.size(),s.scans,s.scanMs,s.sent,s.sentWithHit,s.sendFailures,s.received,s.rejected,s.ignored,
-        s.unmatched,s.overflow,s.applied,s.appliedSteps,s.applyRefused,s.healthLowered,s.worldResets,breakableHitsNoted.load());
+        s.unmatched,s.overflow,s.applied,s.appliedSteps,s.applyRefused,s.healthLowered,s.worldResets,breakableHitsNoted.load(),s.vanishedSent);
     bool first=true;for(const auto& e:s.entries){if(!e.step&&!e.sent)continue;if(!first)fputc(',',f);first=false;
         fprintf(f,"{\"handle\":%u,\"name\":",e.handle);writeWorldText(f,e.name.c_str());
         fprintf(f,",\"step\":%d,\"steps\":%d,\"sent\":%d,\"sends\":%llu,\"applied\":%llu}",e.step,e.stepCount,e.sent,e.sends,e.applied);}

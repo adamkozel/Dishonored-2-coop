@@ -9,6 +9,10 @@
 // +0x20), +0x38 the current step. 1407ed920 advances a step when health falls to the step threshold; 1407ed000
 // (component, damage params) advances one step: detaches the step's pieces, spawns its FX and chunks with the hit
 // impulse (params +0x24 hit point, +0x3c direction, +0x54 attacker) and notifies scripts.
+// 1214io (#178): movable props break the same way. Bottles, glasses and bales are arkMovable entities (vtable RVA 1c5de18,
+// confirmed runtime) with the same arkCpntBreakable (one step) and arkCpntHealth; a Windblast broke six of them in the
+// host's world only (physics-props-v1769a).
+inline bool breakableEntityVtable(std::uintptr_t vt,std::uintptr_t base){return vt==base+0x1b67bc8||vt==base+0x1c5de18;}
 struct NativeBreakable {
     std::uint32_t handle=0;std::uintptr_t actor=0,component=0,declaration=0,steps=0,health=0;
     int step=0,stepCount=0;float current=0;std::string name;
@@ -16,7 +20,7 @@ struct NativeBreakable {
 template<class Read> bool readNativeBreakable(Read read,std::uintptr_t base,std::uintptr_t game,std::uint32_t handle,NativeBreakable& out,bool withName=false){
     NativeBreakable b{};b.handle=handle;b.actor=worldIdentityEntity(read,game,handle);
     std::uintptr_t vt=0,list=0,owner=0;std::uint32_t count=0,steps=0;
-    if(!b.actor||!read(b.actor,&vt,8)||vt!=base+0x1b67bc8||!read(b.actor+0x268,&list,8)||!list||!read(b.actor+0x270,&count,4))return false;
+    if(!b.actor||!read(b.actor,&vt,8)||!breakableEntityVtable(vt,base)||!read(b.actor+0x268,&list,8)||!list||!read(b.actor+0x270,&count,4))return false;
     count&=0xffffff;if(!count||count>64)return false;
     for(std::uint32_t i=0;i<count;++i){std::uintptr_t c=0;if(!read(list+i*8,&c,8)||!c||!read(c,&vt,8))return false;
         if(vt==base+0x1c71a88){if(b.component)return false;b.component=c;}}

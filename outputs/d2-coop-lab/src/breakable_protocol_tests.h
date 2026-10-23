@@ -44,6 +44,7 @@ void breakableProtocolTests(){
     float threshold=-1;require(readNativeBreakableThreshold(read,b,0,threshold)&&threshold==0&&!readNativeBreakableThreshold(read,b,1,threshold),"1214fq: step thresholds are bounded by the count");
     put32(comp+0x38,2);require(!readNativeBreakable(read,base,game,handle,b),"1214fq: a step past the count is refused");put32(comp+0x38,1);
     put64(actor,base+0x1c5e108);require(!readNativeBreakable(read,base,game,handle,b),"1214fq: only arkBreakable entities are breakables");put64(actor,base+0x1b67bc8);
+    put64(actor,base+0x1c5de18);require(readNativeBreakable(read,base,game,handle,b)&&b.component==comp,"1214io (#178): a movable prop with a breakable component is a breakable");put64(actor,base+0x1b67bc8);
     put64(comp+0x10,0x9999);require(!readNativeBreakable(read,base,game,handle,b),"1214fq: the component must belong to the entity");put64(comp+0x10,actor);
     put32(actor+0xa8,handle+1);require(!readNativeBreakable(read,base,game,handle,b),"1214fq: a recycled handle is refused");
 }
