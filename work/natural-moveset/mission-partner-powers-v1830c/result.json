@@ -1,0 +1,196 @@
+{
+  "passed": false,
+  "failure": "Failed: swarm (the guard ends absent on the host and dead in her world)",
+  "rows": [
+    {
+      "power": "swarm",
+      "pairing": "corvo-corvo",
+      "passed": false,
+      "failure": "the guard ends absent on the host and dead in her world",
+      "checks": [
+        "host swarm spawned 1",
+        "Host guard moved up to 0.76 m (health 40 -> ); her copy up to 5.53 m (health 40 -> 0); outcome absent/dead, end gap  m (last samples  m)"
+      ],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/corvo/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/devouring_swarm/devouring_swarm.inventoryitem",
+          "result": "named_power_equip_requested"
+        },
+        {
+          "item": "components/characters/player/base/attributes/devouring_swarm_bigger.inventoryitem",
+          "result": "granted_named"
+        }
+      ],
+      "upgrades": [
+        "devouring_swarm_bigger"
+      ],
+      "stand": {
+        "side": "front",
+        "stand": [
+          3.77861,
+          63.1347,
+          15.9716
+        ],
+        "guard": [
+          4.43794,
+          59.1893,
+          15.9529
+        ],
+        "facing": [
+          -0.16462292891764546,
+          0.9863565741021731
+        ],
+        "trials": [
+          {
+            "side": "front",
+            "asked": [
+              3.779448284329418,
+              63.134726296408694
+            ],
+            "rest": [
+              3.77861,
+              63.1347,
+              15.9716
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43757,
+            59.1936,
+            15.9529
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43757,
+            59.1936,
+            15.9529
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": true,
+        "ms": 3959,
+        "channel": "client_replica",
+        "gap": 0.0
+      },
+      "camera": [
+        -1.8097589587249372,
+        60.17467352139216,
+        18.5529
+      ],
+      "aim": {
+        "target": [
+          4.43757,
+          59.1936,
+          15.9529
+        ],
+        "stand": [
+          4.63987,
+          62.455,
+          15.9747
+        ],
+        "yaw": -93.5,
+        "pitch": 7.0,
+        "distance": 3.27
+      },
+      "before": {
+        "ms": 0,
+        "host": {
+          "present": true,
+          "position": [
+            4.49675,
+            58.8347,
+            15.9518
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_host": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client": {
+          "present": true,
+          "position": [
+            4.49838,
+            58.8247,
+            15.9517
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_client": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "swarmHost": {
+          "alive": false,
+          "result": "idle",
+          "spawned": 0
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "sentBefore": 0,
+          "sentAfter": 0
+        },
+        {
+          "attempt": 2,
+          "sentBefore": 0,
+          "sentAfter": 20
+        }
+      ],
+      "castAt": 3881,
+      "castEnd": 6410,
+      "swarmEntities": {
+        "host": 250,
+        "client": 236
+      },
+      "outcome": {
+        "host": "absent",
+        "client": "dead"
+      },
+      "summary": {
+        "hostGuardMaxMove": 0.76,
+        "herCopyMaxMove": 5.53,
+        "endGap": null,
+        "rawEndGap": null,
+        "hostHealth": [
+          40,
+          null
+        ],
+        "herHealth": [
+          40,
+          0
+        ],
+        "outcome": {
+          "host": "absent",
+          "client": "dead"
+        }
+      }
+    }
+  ],
+  "scope": "1830 (#182): the partner (corvo, host corvo) uses swarm on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}

@@ -39,7 +39,7 @@ void sampleSwarmWorld(ULONGLONG tick){
     if(handle!=s.sourceHandle||!s.sourceEvent){s.sourceHandle=handle;s.sourceEvent=++swarmWorldEvent;}
     CoopSwarmWorldPacket p{};p.role=localRole;p.sequence=++swarmWorldSequence;p.sourceSession=outgoing.session;p.targetSession=remote.session;
     p.sourceWorldEpoch=outgoing.worldEpoch;p.targetWorldEpoch=remote.worldEpoch;p.mapId=outgoing.mapId;p.sourceToken=s.token;p.targetToken=s.peerToken;
-    p.event=s.sourceEvent;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.nativeHandle=handle;p.present=world.present?1u:0u;
+    p.event=s.sourceEvent;p.sampleTimeUs=static_cast<std::uint64_t>(presentationClock()*1000.);p.rootSequence=outgoing.sequence;p.nativeHandle=handle;p.present=world.present?(world.big?2u:1u):0u; // 1214ja (#182): 2 is a Bigger Swarm
     if(!memoryRead(world.equipment.player.sword.actor+0x300,p.sourceOrigin.data(),12))return;
     for(const auto& a:world.agents){if(p.count>=100)return;p.agents[p.count++]={a.index,a.handle,a.incarnation,a.state,a.transform,a.scale,a.drivingFrame?1u:0u};}
     sampleSwarmTrails(world,p);

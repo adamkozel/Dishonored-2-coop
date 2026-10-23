@@ -76,6 +76,9 @@ void npcAuthorityProtocolTests(){
       a.h.reserved=kNpcDeadAshed;require(validNpcControl(a,host,client),"1214fl: the client reports its copy turned to ash");
       a.h.reserved=7;require(!validNpcControl(a,host,client),"1214fl: a client Dead carries ASH1 or nothing");}
      d.h.role=0;d.h.reserved=kNpcDeadAshed;require(validNpcControl(d,client,host),"1214fl: the host reports its body turned to ash");d.h.role=1;d.h.reserved=0;
+     {CoopNpcControl r=d;r.h.role=0;r.h.reserved=kNpcDeadRemoved;require(validNpcControl(r,client,host),"1214jb: the host reports its corpse removed");
+      CoopNpcControl a=r;a.h.role=1;a.h.sourceSession=22;a.h.targetSession=11;a.h.sourceEpoch=5;a.h.targetEpoch=3;
+      require(!validNpcControl(a,host,client),"1214jb: the client never reports a removal");}
      require(!npcDeadReconcileDue(true,true,true,1000,2400,0,0,0),"dead waits out the shared-death grace");
      require(npcDeadReconcileDue(true,true,true,1000,2500,0,0,0),"an unshared host corpse is reconciled");
      require(!npcDeadReconcileDue(true,true,true,1000,2500,1,0,0)&&!npcDeadReconcileDue(true,true,true,1000,2500,2,0,0),"a pending or committed combat death is never reconciled");

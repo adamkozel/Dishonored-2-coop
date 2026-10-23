@@ -37,7 +37,7 @@ inline bool decodeSwarmWorldPacket(const void* data,std::size_t bytes,CoopSwarmW
 }
 inline bool validSwarmWorldPacket(const CoopSwarmWorldPacket& p,const CoopPosePacket& local,const CoopPosePacket& peer){
     if(p.magic!=0x53573244||p.version!=2||p.count>100||p.size!=swarmWorldWireSize(p.count)||p.build!=0x67a50cde||p.role!=peer.role||p.role==local.role||
-       !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.present>1||
+       !p.sequence||!p.event||!p.sourceToken||!p.targetToken||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||p.present>2||
        !coopWorldPairReady(local,peer)||p.sourceSession!=peer.session||p.targetSession!=local.session||p.sourceWorldEpoch!=peer.worldEpoch||
        p.targetWorldEpoch!=local.worldEpoch||p.mapId!=local.mapId||!armRootFresh(p.rootSequence,peer.sequence))return false;
     if(p.present){if(!p.nativeHandle||p.nativeHandle==1||p.nativeHandle==0x3fff0010||p.nativeHandle==~0u)return false;}

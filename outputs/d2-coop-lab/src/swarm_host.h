@@ -11,6 +11,8 @@
 // The rats belong to the host player (kills and chaos count for the host; the host's own swarm power is untouched). While
 // the puppet runs, the host's cosmetic copy of her rats is hidden (the real rats are there).
 constexpr const char* kSwarmHostDefinition="models/characters/animals/rat/devouring_swarm.def";
+// 1214ja (#182): her Bigger Swarm (world packet present 2) is spawned as the big swarm on the host too.
+constexpr const char* kSwarmHostBigDefinition="models/characters/animals/rat/devouring_swarm_big.def";
 struct SwarmHostPuppet {std::uintptr_t actor=0,game=0;std::uint32_t handle=0;std::uint64_t epoch=0,event=0,lastEvent=0;ULONGLONG createdAt=0,endAt=0;bool ending=false;float at[3]{};};
 SwarmHostPuppet swarmHostPuppet{};std::uint64_t swarmHostSpawned=0,swarmHostEnded=0,swarmHostRemoved=0,swarmHostRefused=0,swarmHostStimuli=0;
 const char* swarmHostResult="idle";bool swarmHostEnabled=true;int swarmHostTeam=-1;
@@ -27,7 +29,7 @@ void swarmHostEnd(SwarmHostPuppet& p,ULONGLONG tick){
     if(rat)reinterpret_cast<void(*)(std::uintptr_t)>(gameImage+0x6a6650)(rat);
     p.ending=true;p.endAt=tick+8000;++swarmHostEnded;swarmHostResult=rat?"fleeing":"ending_no_component";}
 bool swarmHostSpawn(SwarmHostPuppet& p,const CoopSwarmWorldPacket& q,ULONGLONG tick){
-    const auto definition=lookupEntityDefinition(kSwarmHostDefinition);if(!definition){swarmHostResult="definition_missing";++swarmHostRefused;return false;}
+    const auto definition=lookupEntityDefinition(q.present==2?kSwarmHostBigDefinition:kSwarmHostDefinition);if(!definition){swarmHostResult="definition_missing";++swarmHostRefused;return false;}
     if(!observedPlayer){swarmHostResult="no_host_player";++swarmHostRefused;return false;}
     void* actor=reinterpret_cast<void*(*)(std::uintptr_t,std::uintptr_t,const float*,const void*,std::uintptr_t,char,std::uintptr_t,std::uintptr_t,std::uintptr_t)>(gameImage+0x8ae9b0)(
         observedGame,definition,q.sourceOrigin.data(),gameImage+0x228a780,observedPlayer,0,0,0,0);

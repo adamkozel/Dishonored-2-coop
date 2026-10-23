@@ -1,0 +1,186 @@
+{
+  "power": "swarm",
+  "pairing": "corvo-corvo",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "host swarm spawned 1",
+    "the host's body is gone and her game hid its copy (2 hidden)",
+    "Host guard moved up to 2.93 m (health 40 -> ); her copy up to 2.02 m (health 40 -> 0); outcome absent/dead, end gap  m (last samples  m)"
+  ],
+  "definitions": {
+    "host": "models/characters/player/corvo/body.def",
+    "client": "models/characters/player/corvo/body.def"
+  },
+  "grants": [
+    {
+      "item": "models/powers/devouring_swarm/devouring_swarm.inventoryitem",
+      "result": "named_power_equip_requested"
+    },
+    {
+      "item": "components/characters/player/base/attributes/devouring_swarm_bigger.inventoryitem",
+      "result": "granted_named"
+    }
+  ],
+  "upgrades": [
+    "devouring_swarm_bigger"
+  ],
+  "stand": {
+    "side": "front",
+    "stand": [
+      3.81078,
+      63.1515,
+      15.972
+    ],
+    "guard": [
+      4.43329,
+      59.2012,
+      15.9529
+    ],
+    "facing": [
+      -0.15509298071814392,
+      0.9878998771798494
+    ],
+    "trials": [
+      {
+        "side": "front",
+        "asked": [
+          3.8129180771274247,
+          63.1527995087194
+        ],
+        "rest": [
+          3.81078,
+          63.1515,
+          15.972
+        ],
+        "ok": true
+      }
+    ]
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.4372,
+        59.1891,
+        15.9529
+      ]
+    },
+    "client": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.4372,
+        59.1891,
+        15.953
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": true,
+    "ms": 3882,
+    "channel": "client_replica",
+    "gap": 0.0
+  },
+  "camera": [
+    -1.8024084467435886,
+    60.233389411717866,
+    18.5529
+  ],
+  "aim": {
+    "target": [
+      4.4372,
+      59.1891,
+      15.953
+    ],
+    "stand": [
+      4.41484,
+      62.2803,
+      15.9721
+    ],
+    "yaw": -89.6,
+    "pitch": 8.0,
+    "distance": 3.09
+  },
+  "before": {
+    "ms": 0,
+    "host": {
+      "present": true,
+      "position": [
+        4.49134,
+        58.8551,
+        15.9519
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_host": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client": {
+      "present": true,
+      "position": [
+        4.49134,
+        58.8551,
+        15.952
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_client": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "swarmHost": {
+      "alive": false,
+      "result": "idle",
+      "spawned": 0
+    }
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "sentBefore": 0,
+      "sentAfter": 19
+    }
+  ],
+  "castAt": 1,
+  "castEnd": 2548,
+  "swarmEntities": {
+    "host": 252,
+    "client": 237
+  },
+  "outcome": {
+    "host": "absent",
+    "client": "dead"
+  },
+  "summary": {
+    "hostGuardMaxMove": 2.93,
+    "herCopyMaxMove": 2.02,
+    "endGap": null,
+    "rawEndGap": null,
+    "hostHealth": [
+      40,
+      null
+    ],
+    "herHealth": [
+      40,
+      0
+    ],
+    "outcome": {
+      "host": "absent",
+      "client": "dead"
+    }
+  },
+  "hiddenInHerWorld": 2
+}
