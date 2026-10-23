@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "failure": "Grenade fixture not ready (unsupported_scope_or_item_owned)",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "host",
+    "cause": "grenade",
+    "targets": [
+      "env_wooden_plank_03_11",
+      "env_wooden_plank_03_12"
+    ],
+    "before": {
+      "host": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        }
+      },
+      "client": {
+        "env_wooden_plank_03_11": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        },
+        "env_wooden_plank_03_12": {
+          "step": 0,
+          "steps": 1,
+          "health": 10
+        }
+      }
+    }
+  },
+  "scope": "1776 (#179): a grenade on a plank barricade on a mission map from the host; the planks must break in both worlds"
+}

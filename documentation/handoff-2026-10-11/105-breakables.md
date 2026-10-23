@@ -58,10 +58,11 @@ step 21 and in the maintenance list.
 
 ## Open
 
-- Multi-step barricades (wooden planks) are not on the lab map. The step rule and the health lowering cover them
-  (hypothesis until a mission take).
-- Grenades and other damage sources take the same path, because the stream polls steps whatever broke them
-  (hypothesis; the 1273b grenade door is not retaken).
+- Multi-step barricades are not on the lab map, and Edge of the World has none either: its planks have one step
+  (#179, below). The step rule and the health lowering cover them (hypothesis until a map with one).
+- Grenades and other damage sources take the same path, because the stream polls steps whatever broke them. On a
+  mission map, a grenade's and a Windblast's breaks were shared (confirmed runtime, #179 below). The 1273b grenade door
+  is not retaken.
 
 ## Movable props and pickups (#178)
 
@@ -116,4 +117,38 @@ before, 5 s and 15 s after. The lab is restored at the end.
 
 **Open:**
 - Breakable debris chunks and dropped guard swords stay per world (cosmetic).
-- A mission take, #179's grenade door included.
+- The mission take is #179, below.
+
+## Mission take: Edge of the World (#179)
+
+Survey-MissionBreakables-v1774, Frame-MissionSpots-v1775 and Test-MissionBreakables-v1776 to v1779 load Edge of the
+World in both lab games under the product controller. The source stands in front of the boarded window near the start
+(stand b3-px, mission-spots-v1775a) and breaks its planks, `env_wooden_plank_03_11` to `_14`. Every target plank that
+breaks in the source world must break in the other world too. Both streams' status and frames of both windows are
+kept, and the lab is restored at the end.
+
+**Found (confirmed runtime):**
+- With the movables, the map has 1269 breakables (mission-breakables-v1774a), all with one step. The planks are
+  `arkBreakable`s with health 10.
+- The stream's catalog stopped at 1024 entries, so later breakables were never polled (1778a). 1214is raises the cap to
+  4096 and counts a full catalog (`catalogFull` in the status). In the 1214is takes the catalog holds 1265-1269 and
+  `catalogFull` stays 0.
+- The lab grenade fixture refuses mission maps (1776a, `unsupported_scope_or_item_owned`), so the takes grant a grenade
+  with `coop_grant_item grenade`. 1777a stopped on the grant's result name, `granted_item_equipped`.
+- The prop rest stream runs on the mission too: 959-963 movables and pickups, and the rests the blast caused were
+  applied in the other world.
+- On this map one catalog scan takes 15-32 ms per stream, every 15 s. The 100 ms and 250 ms polls take under 1 ms.
+
+**Takes:**
+- mission-breakables-v1778a (host grenade, 1214ir): the grenade landed at the foot of the barricade. It broke a bottle
+  and two glasses but no plank, and the partner applied all three breaks.
+- mission-breakables-v1779a (host sword, 1214is): Corvo's swing broke `env_wooden_plank_03_12`, and the partner's world
+  broke it too (sent 1, applied 1).
+- mission-breakables-v1779b (partner sword): Emily's swing broke the same plank, and the host applied it.
+- mission-breakables-v1779c (host Windblast): the blast broke all four planks and a glass in the host world. The host
+  sent 8 breaks and the partner applied all 8, so the window is open in both worlds.
+- Visual review: the 1779c host frame shows the native splinters flying from the window.
+
+**Open:**
+- A grenade that breaks the planks themselves (its breaks take the same stream: 1778a).
+- The 15 s catalog scans may show as a short hitch on large maps.
