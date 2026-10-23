@@ -22,6 +22,13 @@
 // stealth restart (its own Corvo kept seeing the idle partner at the start)
 // and each restart's empty loadout (node 1868853291, 51 runs) was mirrored
 // into the host's world, emptying the host's hands in the crossbow lesson.
+// 1214jc (#183): a partner's first run of a mirrored node reaches the host once (count 1, reserved 1), when that first
+// run was her own (the host had not run it), off the Memories of Training map. In the partner-led Dunwall route
+// (route-dunwall-lead-v1756b) her safe-room locker (ld_ring_locker_01_3) ran three grants in her world only (host
+// local 1, hers 4), and the shared locker then stayed open and empty for the host. The host runs the node once; its own
+// later request is then covered, and her restart loops cannot replay (one run per node, never on the tutorial map).
+constexpr std::uint32_t kKisculePartnerFirst=1;
+bool kisculePartnerScope(){return std::strncmp(mapName,"campaign/tutorial/",18)!=0;}
 using NativeKisculeDispatch=unsigned char*(*)(void*,unsigned char*,unsigned char*);
 using NativeKisculeHandler=char(*)(void*);
 using NativeKisculeHandlerEx=char(*)(void*,void*,void*);
@@ -180,7 +187,9 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
         if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
         else{++c.executed;++kisculeMirror.local;kisculeEvent("local",cls,entity,nodeId,input,c.executed);
-            if(localRole==0){KisculeActionPacket p{};p.role=localRole;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.executed;
+            const bool partnerFirst=localRole==1&&c.executed==1&&kisculePartnerScope(); // 1214jc (#183)
+            if(localRole==0||partnerFirst){KisculeActionPacket p{};p.role=localRole;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.executed;
+            if(partnerFirst){p.reserved=kKisculePartnerFirst;kisculeEvent("partner_first",cls,entity,nodeId,input,1);}
             std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());
             if(kisculeMirror.outgoingQueue.size()<128)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}}
     ReleaseSRWLockExclusive(&kisculeLock);
@@ -212,7 +221,8 @@ bool installKisculeDispatchObserver(){
 }
 void receiveKisculeAction(const KisculeActionPacket& p){
     AcquireSRWLockExclusive(&kisculeLock);auto& k=kisculeMirror;++k.received;
-    if(!kisculeMirrorActive()||p.magic!=0x414B3244||p.version!=1||p.size!=sizeof(p)||p.role!=0||localRole!=1||p.session!=remote.session||
+    const bool hostCount=p.role==0&&localRole==1,partnerFirst=p.role==1&&localRole==0&&p.count==1&&p.reserved==kKisculePartnerFirst&&kisculePartnerScope(); // 1214jc
+    if(!kisculeMirrorActive()||p.magic!=0x414B3244||p.version!=1||p.size!=sizeof(p)||!(hostCount||partnerFirst)||p.session!=remote.session||
        p.sequence<=k.peerSequence||p.classIndex>=static_cast<std::uint32_t>(kisculeMirrorClassCount)||!kisculeMirrorClasses[p.classIndex].mirrored||!p.count||!p.mapId||!std::memchr(p.entity,0,sizeof(p.entity))||!p.entity[0]){++k.refused;k.result="refused";}
     else{k.peerSequence=p.sequence;if(k.pending.size()<128)k.pending.push_back({p,GetTickCount64()});else ++k.dropped;k.result="received";}
     ReleaseSRWLockExclusive(&kisculeLock);
@@ -255,7 +265,7 @@ void serviceKisculeMirror(std::uint64_t tick){
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
         for(unsigned guard=0;guard<4;++guard){
             AcquireSRWLockExclusive(&kisculeLock);auto& c=kisculeCount(p.entity,nodeId,inputId,p.classIndex,node);
-            const bool run=c.executed<p.count;if(run){++c.executed;++k.applied;k.result="applied";kisculeEvent(nodeId==p.node?"applied":"applied_counterpart",p.classIndex,p.entity,nodeId,inputId,c.executed);}
+            const bool run=c.executed<p.count;if(run){++c.executed;++k.applied;k.result="applied";kisculeEvent(p.role==1?(nodeId==p.node?"applied_partner":"applied_partner_counterpart"):(nodeId==p.node?"applied":"applied_counterpart"),p.classIndex,p.entity,nodeId,inputId,c.executed);}
             ReleaseSRWLockExclusive(&kisculeLock);if(!run)break;
             alignas(16) unsigned char signal[32]{};std::memcpy(signal+0xc,&nodeId,4);std::memcpy(signal+0x10,&inputId,4);std::memcpy(signal+0x18,&node,8);
             applyingKiscule=true;
