@@ -22764,5 +22764,14 @@
     "Result": "all 14 mission maps: no NPC spawned in either world, none in one world only; despawns shared (Edge of the World streets_wol_civilian_01, Death to the Empress tower gravehound bridge_gh_3)",
     "Open": "story spawns from scenes or objective steps (covered by the campaign routes); a mid-mission join (chapter 106)",
     "Status": "done, chapter 95 (spawn census on every mission)"
+  },
+  "PartnerPowerGaps": {
+    "Card": "#182",
+    "Candidate": "candidate-npc-combat-v1214jb",
+    "Code": "native_swarm_world.h, swarm_world_stream.h, swarm_world_protocol.h, swarm_host.h (Bigger Swarm, present 2, 1214ja); npc_authority_protocol.h, npc_authority_stream.h (RMV1: a host corpse removed after the ash window is hidden in her world, 1214jb)",
+    "Harness": "work/natural-moveset/Test-MissionPartnerPowers-v1830..v1833.ps1 (-Upgrades, swarm entity snapshot, hidden copies, possesscorpse)",
+    "Evidence": "mission-partner-powers-v1830a (big swarm not read), v1830b (1214ja: big swarm on the host; devoured body stays), v1830c and v1831a (1214jb: RMV1 sent and applied), v1831b (base swarm), v1832a/v1833a (corpse possession not taken)",
+    "Limitations": "Blink Assault staggers in both worlds; rat and fish possession in her world only; corpse possession unverified; Domino links of three or four and Domino on a mission",
+    "Status": "done, chapter 108 (#182 section)"
   }
 }

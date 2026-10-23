@@ -70,6 +70,8 @@ void swarmPacketTests(const CoopPosePacket& h,const CoopPosePacket& c){
     b=p;b.count=100;b.size=swarmWorldWireSize(100);for(unsigned i=0;i<100;++i){b.agents[i]=p.agents[0];b.agents[i].index=i;b.agents[i].handle+=i;}
     check(validSwarmWorldPacket(b,c,h)&&decodeSwarmWorldPacket(&b,b.size,decoded),"full native pool capacity fits bounded wire");
     b=p;b.count=0;b.size=124;check(validSwarmWorldPacket(b,c,h),"live native world may have zero surviving indexed agents");
+    {auto big=b;big.present=2;check(validSwarmWorldPacket(big,c,h),"1214ja: a Bigger Swarm world (present 2) accepted");
+     big.present=3;check(!validSwarmWorldPacket(big,c,h),"1214ja: present beyond 2 refused");}
     b.present=0;check(!validSwarmWorldPacket(b,c,h),"absence cannot retain a world handle");
     b.nativeHandle=0;check(validSwarmWorldPacket(b,c,h)&&decodeSwarmWorldPacket(&b,124,decoded),"confirmed world absence uses header-only clear");
     SwarmWorldOrder order{};check(order.accept(p)&&!order.accept(p),"duplicate rat snapshot refused");

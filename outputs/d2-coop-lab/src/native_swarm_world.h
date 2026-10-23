@@ -19,6 +19,7 @@ struct NativeSwarmWorld {
     std::uintptr_t actor=0,definition=0,component=0,declaration=0,list=0;
     std::uintptr_t pool=0,pipeline=0,indicesPointer=0,transforms=0;
     unsigned handle=0x3fff0010,flags=0,count=0,indexCount=0,capacity=0;
+    bool big=false; // 1214ja (#182): a Bigger Swarm (devouring_swarm_big.def)
     std::vector<unsigned> indices;
     std::vector<NativeSwarmAgent> agents;
     bool present=false;
@@ -61,7 +62,10 @@ template<class Read> bool readNativeSwarmWorldFrame(Read read,std::uintptr_t bas
     unsigned parent=0;
     if(!s.actor||s.actor==s.equipment.entity||!eq(s.actor,base+0x1c44b98)||
        !read(s.actor+0xac,&parent,4)||parent!=1||
-       !read(s.actor+0x2e8,&s.definition,8)||!named(s.definition,0x1ab58f8,"models/characters/animals/rat/devouring_swarm.def")||
+       // 1214ja (#182): Bigger Swarm spawns devouring_swarm_big.def with devouring_swarm_big.cpntratswarm (mission-partner-powers-
+       // v1830a: her cast was never read, so the host spawned no swarm and its guard was untouched).
+       !read(s.actor+0x2e8,&s.definition,8)||!((s.big=false,named(s.definition,0x1ab58f8,"models/characters/animals/rat/devouring_swarm.def"))||
+           (s.big=named(s.definition,0x1ab58f8,"models/characters/animals/rat/devouring_swarm_big.def")))||
        !read(s.actor+0x268,&s.list,8)||!s.list||!read(s.actor+0x270,&s.count,4)||!(s.count&0xffffff)||(s.count&0xffffff)>64)return false;
     for(unsigned i=0;i<(s.count&0xffffff);++i){std::uintptr_t c=0,vt=0;
         if(!read(s.list+i*8,&c,8)||!c||!read(c,&vt,8))return false;
@@ -69,7 +73,7 @@ template<class Read> bool readNativeSwarmWorldFrame(Read read,std::uintptr_t bas
     }
     mark(3);
     if(!s.component||!eq(s.component+0x10,s.actor)||!eq(s.component+0x20,base+0x1c42c30)||
-       !read(s.component+8,&s.declaration,8)||!named(s.declaration,0x1d25df8,"components/characters/animals/rat/devouring_swarm.cpntratswarm")||
+       !read(s.component+8,&s.declaration,8)||!named(s.declaration,0x1d25df8,s.big?"components/characters/animals/rat/devouring_swarm_big.cpntratswarm":"components/characters/animals/rat/devouring_swarm.cpntratswarm")||
        !read(s.component+0x1c,&s.flags,4)||(s.flags&0xc)!=8||
        !read(s.component+0x80,&s.pool,8)||!s.pool||!read(s.component+0x90,&s.indicesPointer,8)||
        !read(s.component+0x98,&s.indexCount,4)||(s.indexCount&0xffffff)>100||

@@ -314,3 +314,39 @@ reloaded fresh for each power. Each take then runs as follows:
 - Blink Assault staggers rather than knocks down (#182).
 - Door, usable and coin sessions use the same menu-context check. With 1214iz the Blink gap no longer trips it;
   other one-frame blips would still end those sessions (hypothesis, none seen).
+
+## #182: a Corvo partner's power gaps
+
+Harness `Test-MissionPartnerPowers-v1830..v1833.ps1` (Edge of the World, Corvo-Corvo, 1214ja-1214jb):
+- v1830 adds `-Upgrades` (native upgrades granted after the power) and a swarm entity snapshot;
+- v1831 counts a body hidden in her world as gone;
+- v1832-v1833 add the `possesscorpse` case.
+
+**Bigger Swarm (fixed, 1214ja; confirmed runtime and static):**
+- Her cast spawns `models/characters/animals/rat/devouring_swarm_big.def` with `devouring_swarm_big.cpntratswarm` (asset
+  index). Her swarm reader accepted only `devouring_swarm.def`, so nothing was streamed: the host spawned no swarm and
+  its guard was untouched (v1830a: 236 rat agents in her world, 193 on the host).
+- 1214ja reads the big swarm and streams it as `present` 2 in the swarm world packet, and the host spawns the big swarm.
+  v1830b: both worlds run `devouring_swarm_big.def`, and the guard dies.
+- This replaces the #168 limitation "the host's swarm is always the base swarm".
+
+**Devoured bodies (fixed, 1214jb):**
+- The host's rats ate the guard's body 15 s after its death. That is past the ash window (8 s), so her corpse stayed
+  (v1830b).
+- A host corpse removed natively after the ash window now sends a Dead marked RMV1 (host only), and her game hides its
+  copy with the native hide, without ash.
+- v1830c and v1831a (Bigger Swarm, the body devoured on the host): RMV1 sent and applied. v1831b (base swarm): dead in
+  both worlds.
+
+**Documented limitations (decided):**
+- **Blink Assault's kick staggers rather than knocks down.** Both worlds' guard staggers together (v1819b, v1821a/b), so
+  the outcome is shared. The single-player knockdown comes from the kick scene binding the NPC, which is not a paired
+  variant.
+- **Rat and fish possession happen only in her world.** Rats and fish are swarm agents, not streamed NPCs.
+- **Corpse possession is unverified.** In v1833a her takedown killed the guard in both worlds, but her cast with
+  `possession_decayed_harbor` on the corpse did not take: no possession stream, and her film shows her walking, not
+  possessing. v1832a never got a kill, because the guard noticed her.
+- **Domino:**
+  - Links of three or four NPCs (`domino_death_link` and the link upgrades) are not taken.
+  - On a mission the fixture never built a usable network (#180). Two-NPC linked deaths and knockouts are proven in
+    the lab (#117, chapter 104).

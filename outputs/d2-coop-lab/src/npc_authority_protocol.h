@@ -115,10 +115,13 @@ inline bool npcStreamPoseStale(std::uint64_t now,std::uint64_t started,std::uint
 }
 // 1214fk/fl (#117): a Dead marked ASH1 says the sender's copy turned to ash (Shadow Kill); either role may send it.
 constexpr std::uint32_t kNpcDeadAshed=0x31485341u; // 'ASH1'
+// 1214jb (#182): the host's corpse was removed natively after the ash window (devoured by a swarm); the peer hides its copy
+// without ash. Host only.
+constexpr std::uint32_t kNpcDeadRemoved=0x31564d52u; // 'RMV1'
 inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& local,const CoopPosePacket& peer){
     const bool paired=h.kind==NpcAuthorityMessage::PairedHold||h.kind==NpcAuthorityMessage::PairedKnockout;
     // 1214en: a host Pose may carry reserved bit 0 = the NPC is down (knocked down, native IsOnGround).
-    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.kind==NpcAuthorityMessage::Life?(h.reserved!=1&&h.reserved!=2):h.kind==NpcAuthorityMessage::Pose?h.reserved>1:h.kind==NpcAuthorityMessage::Dead?(h.reserved!=0&&h.reserved!=kNpcDeadAshed):h.reserved!=0)||h.reserved2||
+    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.kind==NpcAuthorityMessage::Life?(h.reserved!=1&&h.reserved!=2):h.kind==NpcAuthorityMessage::Pose?h.reserved>1:h.kind==NpcAuthorityMessage::Dead?(h.reserved!=0&&h.reserved!=kNpcDeadAshed&&h.reserved!=kNpcDeadRemoved):h.reserved!=0)||h.reserved2||
        !h.sequence||!h.sourceArm||!h.sourceHandle||!h.rig||!h.joints||h.joints>kNpcAuthorityMaxJoints||!coopWorldPairReady(local,peer)||
        h.sourceSession!=peer.session||h.targetSession!=local.session||h.sourceEpoch!=peer.worldEpoch||h.targetEpoch!=local.worldEpoch||h.map!=local.mapId)return false;
     switch(h.kind){
@@ -129,7 +132,7 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     case NpcAuthorityMessage::PairedHold:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::PairedKnockout:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle&&npcPairedKnockoutVariant(h.reserved);
     case NpcAuthorityMessage::Unconscious:return h.size==sizeof(CoopNpcControl)&&h.role==0&&h.targetArm&&h.targetHandle;
-    case NpcAuthorityMessage::Dead:return h.size==sizeof(CoopNpcControl)&&(h.role==0||h.reserved==kNpcDeadAshed)&&h.targetArm&&h.targetHandle;
+    case NpcAuthorityMessage::Dead:return h.size==sizeof(CoopNpcControl)&&(h.role==0||h.reserved==kNpcDeadAshed)&&(h.role==0||h.reserved!=kNpcDeadRemoved)&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::Carry:return h.size==sizeof(CoopNpcControl)&&h.role==1&&h.targetArm&&h.targetHandle;
     case NpcAuthorityMessage::Life:return h.size==sizeof(CoopNpcControl)&&!h.targetArm&&!h.targetHandle&&h.rig==1&&h.joints==1&&h.sourceArm==h.sourceHandle;
     case NpcAuthorityMessage::PairedPose:return h.size==npcPoseBytes(h.joints)&&h.role==1&&h.targetArm&&h.targetHandle;

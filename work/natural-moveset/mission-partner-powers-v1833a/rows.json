@@ -1,0 +1,251 @@
+{
+  "power": "possesscorpse",
+  "pairing": "corvo-corvo",
+  "passed": false,
+  "failure": "her possessed corpse walked 0 m",
+  "checks": [
+    "Corpse possession: her copy walked 0 m, the host corpse 0 m, end gap 0 m; killed alive,alive,alive,alive,alive,dead",
+    "Host guard moved up to 0.77 m (health 40 -> 0); her copy up to 0.77 m (health 40 -> 0); outcome dead/dead, end gap 0 m (last samples 0 m)"
+  ],
+  "definitions": {
+    "host": "models/characters/player/corvo/body.def",
+    "client": "models/characters/player/corvo/body.def"
+  },
+  "grants": [
+    {
+      "item": "models/powers/possession/possession.inventoryitem",
+      "result": "named_power_equip_requested"
+    },
+    {
+      "item": "components/characters/player/base/attributes/possession_parasite.inventoryitem",
+      "result": "granted_named"
+    },
+    {
+      "item": "components/characters/player/base/attributes/possession_decayed_harbor.inventoryitem",
+      "result": "granted_named"
+    }
+  ],
+  "upgrades": [],
+  "stand": {
+    "side": "front",
+    "stand": [
+      4.042,
+      61.6697,
+      15.9662
+    ],
+    "guard": [
+      4.43349,
+      59.2013,
+      15.9529
+    ],
+    "facing": [
+      -0.1557099711228878,
+      0.9878028168075395
+    ],
+    "trials": [
+      {
+        "side": "behind",
+        "asked": [
+          4.82276492780722,
+          56.731792957981156
+        ],
+        "rest": [
+          4.9069,
+          56.7881,
+          16.624
+        ],
+        "ok": false
+      },
+      {
+        "side": "front",
+        "asked": [
+          4.04421507219278,
+          61.67080704201885
+        ],
+        "rest": [
+          4.042,
+          61.6697,
+          15.9662
+        ],
+        "ok": true
+      }
+    ]
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43509,
+        59.1981,
+        15.9529
+      ]
+    },
+    "client": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43509,
+        59.1981,
+        15.9529
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": true,
+    "ms": 727,
+    "channel": "client_replica",
+    "gap": 0.0
+  },
+  "camera": [
+    -1.6869811328772952,
+    59.49148817463475,
+    18.5529
+  ],
+  "aim": {
+    "target": [
+      4.43509,
+      59.1981,
+      15.9529
+    ],
+    "stand": [
+      4.042,
+      61.6697,
+      15.9662
+    ],
+    "yaw": -81.0,
+    "pitch": 9.0,
+    "distance": 2.5
+  },
+  "before": {
+    "ms": 0,
+    "host": {
+      "present": true,
+      "position": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_host": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client": {
+      "present": true,
+      "position": [
+        4.37484,
+        59.574,
+        15.9546
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_client": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    }
+  },
+  "attempts": [],
+  "castAt": 1,
+  "kill": [
+    {
+      "try": 1,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 2,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 3,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 4,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 5,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 6,
+      "client": "dead",
+      "host": "dead"
+    }
+  ],
+  "deadBoth": {
+    "host": "dead",
+    "client": "dead",
+    "ms": 665
+  },
+  "corpseAim": {
+    "corpse": [
+      3.92401,
+      60.1965,
+      16.1145
+    ],
+    "pitch": 40.1
+  },
+  "corpseStart": {
+    "host": [
+      3.92143,
+      60.1957,
+      16.1129
+    ],
+    "client": [
+      3.92401,
+      60.1965,
+      16.1145
+    ]
+  },
+  "possessedState": {
+    "sent": 0,
+    "result": null
+  },
+  "castEnd": 18821,
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "summary": {
+    "hostGuardMaxMove": 0.77,
+    "herCopyMaxMove": 0.77,
+    "endGap": 0.0,
+    "rawEndGap": 0.0,
+    "hostHealth": [
+      40,
+      0
+    ],
+    "herHealth": [
+      40,
+      0
+    ],
+    "outcome": {
+      "host": "dead",
+      "client": "dead"
+    }
+  },
+  "corpseWalk": {
+    "her": 0.0,
+    "host": 0.0,
+    "endGap": 0.0
+  },
+  "hiddenInHerWorld": 0
+}

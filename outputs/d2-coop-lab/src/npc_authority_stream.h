@@ -151,8 +151,8 @@ unsigned npcCombatDeathShare(std::uint64_t arm);
 float npcReconcileDeclAmount=0;std::uint64_t npcReconcileDeclFlags=0;unsigned npcReconcileDeclReactions[2]{};
 std::uint64_t npcVanishedDead=0; // 1214fb (#118)
 // 1214fk (#117): a Dead marked ASH1 (kNpcDeadAshed, npc_authority_protocol.h) means the peer's copy turned to ash.
-struct NpcAshRequest{std::uint32_t handle=0;std::uintptr_t actor=0;};
-std::vector<NpcAshRequest> npcAshPending;std::uint64_t npcAshSent=0,npcAshApplied=0,npcAshRefused=0,npcAshEffects=0;
+struct NpcAshRequest{std::uint32_t handle=0;std::uintptr_t actor=0;bool fx=true;}; // 1214jb: fx false for a removal (RMV1)
+std::vector<NpcAshRequest> npcAshPending;std::uint64_t npcAshSent=0,npcAshApplied=0,npcAshRefused=0,npcAshEffects=0,npcRemovedSent=0,npcRemovedApplied=0;
 std::uint64_t npcDeadReconciled=0,npcDeadSent=0,npcCombatSharedDeaths=0,npcClientDeadApplied=0,npcClientDeadAlready=0,npcClientDeadRefused=0;const char* npcClientDeadLast="none";
 std::uint64_t npcPairedForced=0; // 1214ij (#160)
 std::uint64_t npcPairedHolds=0,npcPairedKnockouts=0,npcPairedRefused=0,npcPairedLocal=0,npcPairedCorpses=0,npcPairedFollows=0,npcHostOwnPaired=0,npcPriorityPoses=0;
@@ -546,6 +546,7 @@ void receiveNpcControl(const CoopNpcControl& p,ULONGLONG tick){
         if((p.h.kind==NpcAuthorityMessage::PairedHold||p.h.kind==NpcAuthorityMessage::PairedKnockout)&&!localRole)hostNpcPaired(c,p,tick);
         if(p.h.kind==NpcAuthorityMessage::Unconscious&&localRole)clientNpcUnconscious(c);
         if(p.h.kind==NpcAuthorityMessage::Dead&&p.h.reserved==kNpcDeadAshed)npcAshPending.push_back({c.lease.binding.npc.handle,c.lease.binding.npc.actor});
+        else if(p.h.kind==NpcAuthorityMessage::Dead&&p.h.reserved==kNpcDeadRemoved&&localRole)npcAshPending.push_back({c.lease.binding.npc.handle,c.lease.binding.npc.actor,false});
         else if(p.h.kind==NpcAuthorityMessage::Dead&&localRole)clientNpcDead(c);
         if(p.h.kind==NpcAuthorityMessage::Carry&&!localRole){c.carriedUntil=tick+800;++c.carryControls;}
     }
@@ -605,9 +606,9 @@ void serviceNpcAsh(ULONGLONG tick){
     if(npcAshPending.empty()||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     for(const auto& r:npcAshPending){const auto actor=worldIdentityEntity(memoryRead,observedGame,r.handle);
         if(!actor||actor!=r.actor){++npcAshRefused;continue;}
-        float at[3]{};if(memoryRead(actor+0x300,at,12)){const float lift[4][3]={{0,0,.3f},{0,0,.6f},{.35f,0,.2f},{-.35f,0,.2f}};
+        float at[3]{};if(r.fx&&memoryRead(actor+0x300,at,12)){const float lift[4][3]={{0,0,.3f},{0,0,.6f},{.35f,0,.2f},{-.35f,0,.2f}};
             for(unsigned k=0;k<4;++k){const float p[3]={at[0]+lift[k][0],at[1]+lift[k][1],at[2]+lift[k][2]};if(startNativePowerFx(31+k,p,tick,true,nullptr,nullptr))++npcAshEffects;}}
-        reinterpret_cast<void(*)(void*)>(gameImage+0x8784b0)(reinterpret_cast<void*>(actor));++npcAshApplied;}
+        reinterpret_cast<void(*)(void*)>(gameImage+0x8784b0)(reinterpret_cast<void*>(actor));++(r.fx?npcAshApplied:npcRemovedApplied);}
     npcAshPending.clear();
 }
 void serviceNpcStream(ULONGLONG tick){
@@ -751,6 +752,9 @@ void serviceNpcStream(ULONGLONG tick){
                 if(ashed&&sendNpcControl(c,NpcAuthorityMessage::Dead,kNpcDeadAshed)){++npcAshSent;c.deathShare="ash_sent";}
                 else if(!localRole&&c.ready&&!freshRead&&!c.corpse&&(tick<c.hostOwnPairedUntil+7000||c.hostPairedLease||c.hostPairedFollow)&&
                    sendNpcControl(c,NpcAuthorityMessage::Dead)){++npcDeadSent;++npcVanishedDead;c.deathShare="vanished_dead_sent";}
+                // 1214jb (#182): a host corpse removed natively after the ash window (her Bigger Swarm's rats devoured the guard
+                // 15 s after its death on the host; her copy stayed: mission-partner-powers-v1830b) is removed in her world too.
+                else if(!localRole&&c.ready&&!freshRead&&c.corpse&&sendNpcControl(c,NpcAuthorityMessage::Dead,kNpcDeadRemoved)){++npcRemovedSent;c.deathShare="removed_sent";}
                 c.lifecycleDiff=!freshRead?0x80000000u:((npcAuthorityIdentityDiff(c.lease.binding,fresh)&~0xe00u)|(!npcAuthorityLiving(fresh)?0x40000000u:0u));
                 stopNpcChannel(c,"native_lifecycle_changed");continue;}
             c.lease.binding.health=fresh.health;
@@ -840,7 +844,7 @@ void presentNpcStream(ULONGLONG tick){
 void writeNpcStream(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-stream.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"heldSkips\":%llu,\"corpseReleases\":%llu,\"corpseFreezeFrames\":%llu,\"corpseFreezeEnds\":%llu,\"ashSent\":%llu,\"ashApplied\":%llu,\"ashRefused\":%llu,\"ashEffects\":%llu,\"hostVictim\":[%llu,%llu,%llu],\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs,static_cast<unsigned long long>(npcHeldPresentSkips),static_cast<unsigned long long>(npcCorpseHoldReleases),static_cast<unsigned long long>(npcCorpseFreezeFrames),static_cast<unsigned long long>(npcCorpseFreezeEnds),static_cast<unsigned long long>(npcAshSent),static_cast<unsigned long long>(npcAshApplied),static_cast<unsigned long long>(npcAshRefused),static_cast<unsigned long long>(npcAshEffects),static_cast<unsigned long long>(npcHostVictimFrames),static_cast<unsigned long long>(npcHostVictimSampleRefused),static_cast<unsigned long long>(npcHostVictimRenderRefused));
+    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"epoch\":%llu,\"peerEpoch\":%llu,\"rejected\":%llu,\"bodyApplied\":%llu,\"bodyRefused\":%llu,\"framesOwned\":%llu,\"childrenUpdated\":%llu,\"poseIntervalMs\":%u,\"heldSkips\":%llu,\"corpseReleases\":%llu,\"corpseFreezeFrames\":%llu,\"corpseFreezeEnds\":%llu,\"ashSent\":%llu,\"ashApplied\":%llu,\"removedSent\":%llu,\"removedApplied\":%llu,\"ashRefused\":%llu,\"ashEffects\":%llu,\"hostVictim\":[%llu,%llu,%llu],\"entries\":[",npcAuthorityStreamActive?"true":"false",npcStreamResult,npcStreamEpoch,npcStreamPeerEpoch,npcPacketsRejected,npcBodiesApplied.load(),npcBodiesRefused.load(),npcFramesOwned.load(),npcChildUpdates.load(),npcPoseIntervalMs,static_cast<unsigned long long>(npcHeldPresentSkips),static_cast<unsigned long long>(npcCorpseHoldReleases),static_cast<unsigned long long>(npcCorpseFreezeFrames),static_cast<unsigned long long>(npcCorpseFreezeEnds),static_cast<unsigned long long>(npcAshSent),static_cast<unsigned long long>(npcAshApplied),static_cast<unsigned long long>(npcRemovedSent),static_cast<unsigned long long>(npcRemovedApplied),static_cast<unsigned long long>(npcAshRefused),static_cast<unsigned long long>(npcAshEffects),static_cast<unsigned long long>(npcHostVictimFrames),static_cast<unsigned long long>(npcHostVictimSampleRefused),static_cast<unsigned long long>(npcHostVictimRenderRefused));
     for(unsigned i=0;i<npcChannels.size();++i){const auto& c=npcChannels[i];fprintf(f,"%s{\"handle\":%u,\"civilian\":%s,\"arm\":%llu,\"peerArm\":%llu,\"peerHandle\":%u,\"enabled\":%s,\"ready\":%s,\"result\":\"%s\",\"joints\":%u,\"rig\":\"%llx\",\"references\":%u,\"released\":%llu,\"lost\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"poses\":%llu,\"roots\":%llu,\"lifecycleDiff\":%u,\"localPaired\":%s,\"unconscious\":%s,\"hostPairedLease\":%s,\"pairedVariant\":%u,\"pairedResult\":\"%s\",\"reversePoses\":%llu,\"reverseRoot\":[%.3f,%.3f,%.3f],\"presentedRoot\":[%.3f,%.3f,%.3f],\"corpse\":%s,\"deathShare\":\"%s\",\"deadSends\":%u,\"carryControls\":%llu,\"carryPoses\":%llu,\"priorityPoses\":%llu,\"downSent\":%llu,\"downReceived\":%llu,\"downApplies\":%llu,\"downApplied\":%s,\"victimHolds\":%llu,\"victimReleases\":%llu,\"leaseReady\":%s,\"poseRejects\":[%llu,%llu,%llu,%llu,%llu],\"lastPoseLateMs\":%.1f}",i?",":"",c.lease.binding.npc.handle,npcCivilian(c.lease.binding)?"true":"false",c.arm,c.peerArm,c.peerHandle,c.enabled?"true":"false",c.ready?"true":"false",c.result,c.render.joints,c.rig,c.lease.references,c.lease.released,c.lease.lost,c.sent,c.received,c.rejected,c.poses,c.roots,c.lifecycleDiff,c.localPaired?"true":"false",c.unconscious?"true":"false",c.hostPairedLease?"true":"false",c.pairedVariant,c.pairedResult,static_cast<unsigned long long>(c.reversePoses),c.reverseRoot[0],c.reverseRoot[1],c.reverseRoot[2],c.presentedRoot[0],c.presentedRoot[1],c.presentedRoot[2],c.corpse?"true":"false",c.deathShare,c.deadSends,static_cast<unsigned long long>(c.carryControls),static_cast<unsigned long long>(c.carryPoses),static_cast<unsigned long long>(c.priorityPoses),static_cast<unsigned long long>(c.downSent),static_cast<unsigned long long>(c.downReceived),static_cast<unsigned long long>(c.downApplies),c.downApplied?"true":"false",static_cast<unsigned long long>(c.victimHolds),static_cast<unsigned long long>(c.victimReleases),c.lease.ready?"true":"false",
         static_cast<unsigned long long>(c.poseRejects[0]),static_cast<unsigned long long>(c.poseRejects[1]),static_cast<unsigned long long>(c.poseRejects[2]),static_cast<unsigned long long>(c.poseRejects[3]),static_cast<unsigned long long>(c.poseRejects[4]),c.lastPoseLateMs);}
     fprintf(f,"],\"bodyEntries\":[");for(unsigned i=0;i<npcChannels.size();++i)fprintf(f,"%s{\"arm\":%llu,\"handle\":%u,\"applied\":%llu,\"sequence\":%llu}",i?",":"",npcChannels[i].arm,npcChannels[i].lease.binding.npc.handle,npcActorBodyApplied[i].load(),npcActorBodySequence[i].load());
