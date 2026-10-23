@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-23T15:30:00+02:00",
+  "UpdatedAt": "2026-10-23T17:40:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22728,5 +22728,14 @@
     "Passes": "campaign-dunwall-coop-v1762a (deaths), -eotw-, -institute-, -madinventor-, -dust-, -bunker-coop-v1762a, -curator-coop-v1763a, -palace-coop-v1763c, -empress-coop-v1765e",
     "Findings": "co-op saves run difficulty/preset/medium (lab saves easy); the partner takes her own profile difficulty (#177); the Empress tower door offers Go / Stay (pending 9), A confirms; two stalled endings were route-step misfires",
     "Status": "all nine missions pass on co-op saves, chapter 109"
+  },
+  "PhysicsProps": {
+    "Card": "#178",
+    "Candidate": "candidate-npc-combat-v1214ir (lab; release stays 0.9.1 / 1214im)",
+    "Code": "native_breakable.h / breakable_hits.h / breakable_sync.h (movables break, 1214io); prop_rest_protocol.h, prop_rest_sync.h, prop_rest_tests.h (D2PR rests, 1214ip-ir); product step 22 coop_prop_rest",
+    "Harness": "work/natural-moveset/Probe-PhysicsProps-v1766..v1773.ps1",
+    "Evidence": "physics-props-v1769a (divergence: six props broken and fruit thrown in the host world only); v1770a (breaks shared); v1771a/b, v1772a (attachment rule iterations); v1772b (host Windblast: breaks and rests shared, the belt key skipped); v1773a (partner sword: the apple's rest reaches the host)",
+    "Open": "breakable debris chunks and dropped guard swords stay per world (cosmetic); a mission take with #179",
+    "Status": "lab-proven, chapter 105"
   }
 }

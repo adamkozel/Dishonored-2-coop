@@ -62,3 +62,58 @@ step 21 and in the maintenance list.
   (hypothesis until a mission take).
 - Grenades and other damage sources take the same path, because the stream polls steps whatever broke them
   (hypothesis; the 1273b grenade door is not retaken).
+
+## Movable props and pickups (#178)
+
+Breakables covered fixed glass and barriers. Loose props and pickups were still per world. Probe-PhysicsProps-v1766 to
+v1773 measure a host Windblast (or a partner sword swing) on the Dunwall tower lab map, reading every entity in both worlds
+before, 5 s and 15 s after. The lab is restored at the end.
+
+**Found (confirmed runtime):**
+- At rest, the 29 `arkMovable` props sit at identical positions in both worlds.
+  - The first takes moved nothing: v1766a never cast; v1767a/v1768a hit only a chair, the globe and debris.
+  - v1768a: the Windblast threw broken-door debris 10-25 m in the host world. Debris pieces are runtime entities that the two
+    worlds name differently, so they are not matched (cosmetic, not shared).
+- physics-props-v1769a, the table 3 m in front:
+  - the Windblast broke four bales and two bottles in the host world only; the partner's world kept them all;
+  - the fruit flew up to 18 m off the table in the host world only.
+- Bottles, glasses and bales are `arkMovable` entities (vtable RVA `1c5de18`) with the same `arkCpntBreakable` and
+  `arkCpntHealth` as breakables. Pickups are `arkPickup` (`1c5e258`) with a rigid body.
+- `ld_key_01` moves with its guard: it is bound to his belt.
+
+**Breaking (1214io):**
+- The breakable reader accepts `arkMovable` entities, and hits on them are noted.
+- An entry that vanishes within 5 s of a noted hit is sent as broken. A smashed bottle leaves the world at once.
+- physics-props-v1770a: the host sent 6 breaks, and the partner applied all 6 through the native step advance.
+
+**Resting places (1214ip-1214ir, [prop_rest_sync.h](../../outputs/d2-coop-lab/src/prop_rest_sync.h)):**
+- **What is sent:** each world catalogs its movables and pickups and polls them every 250 ms. A prop that moved and has
+  been still for 1 s is sent (`D2PR`, 312 bytes) when:
+  - it is more than 5 cm from its last rest;
+  - no player holds it (the held object stream carries held ones);
+  - it is not quiet after an applied rest;
+  - it is not bound to another entity.
+- **Applying:** the peer places its copy through the native entity transform setter (`0x87d200`), unless its own copy is
+  held or bound. That prop then stays quiet for 2.5 s, so it is not sent back.
+- **Switch:** lab command `coop_prop_rest on|off`; product step 22, also in the maintenance list.
+- **Bound** (confirmed runtime):
+  - The native reference frame (`arkCpntReferenceFrame`, `1c573e8`) names what a prop stands on or is bound to at +0x84
+    (-1 is none).
+  - Only a prop bound to a joint also has a local offset at +0x70/+0x78. Of 98 props on the map, only the guard's key had
+    one; fruit on a plate and blasted fruit read a parent with zero offsets.
+  - 1214ip used the distance to a character instead, and sent Alexi's belt scroll case (v1771a). That item had fallen when
+    the blast knocked him over, so syncing it was right, but the rule was fragile.
+  - 1214iq used the +0x84 parent and sent nothing (v1771b: blasted fruit stands on something).
+  - 1214ir uses the local offset.
+
+**Takes:**
+- physics-props-v1772b (host Windblast, 1214ir):
+  - the six table props broke in both worlds;
+  - the four fruits rest within 1 mm of each other;
+  - Alexi's fallen scroll case rests in the same place in both worlds;
+  - the guard's key stays on its guard: 7 bound skips, 1.3 cm apart.
+- physics-props-v1773a (partner sword swing, 1214ir): the partner sent the apple's rest and the host placed it 2 cm from hers.
+
+**Open:**
+- Breakable debris chunks and dropped guard swords stay per world (cosmetic).
+- A mission take, #179's grenade door included.

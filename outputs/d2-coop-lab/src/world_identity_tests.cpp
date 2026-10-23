@@ -2088,6 +2088,7 @@ void mesmerizeTargetTests(){
 #include "breakable_protocol_tests.h"
 #include "gameflow_advance_tests.h"
 #include "checkpoint_scope_tests.h"
+#include "prop_rest_tests.h"
 #include "product_arm_tests.h"
 #include "join_warp_tests.h"
 #include "npc_attack_protocol_tests.h"
@@ -2103,6 +2104,7 @@ int main() {
     breakableProtocolTests();
     gameflowAdvanceTests();
     checkpointScopeTests();
+    propRestTests();
     productArmTests();
     joinWarpTests();
     npcAttackProtocolTests();
