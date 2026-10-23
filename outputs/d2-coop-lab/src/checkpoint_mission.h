@@ -41,6 +41,10 @@ bool readMissionAutosave(MissionAutosaveDetails& d) {
     if(!memoryRead(base+0x39a5290,&game,8)||!game||!memoryRead(game+0x2e75d8+0x1c,&d.slot,4)||d.slot<0||d.slot>99)return false;
     char root[MAX_PATH]{};std::snprintf(root,sizeof(root),"%s",checkpointDirectory);
     char* cut=std::strrchr(root,'\\');char* cut2=std::strrchr(root,'/');if(cut2>cut)cut=cut2;if(!cut)return false;*cut=0;
+    // 1214il (#171): the game's current save root (the pointer at 0x142286f40; savegame_coop during a co-op session).
+    std::uintptr_t rootName=0;std::string rootText;
+    if(!memoryRead(base+0x2286f40,&rootName,8)||!worldIdentityString(memoryRead,rootName,rootText)||rootText.size()>=32||
+       !missionSaveFolder(root,sizeof(root),rootText.c_str()))return false;
     char path[MAX_PATH]{};if(std::snprintf(path,sizeof(path),"%s\\SLOT%02d\\game.details",root,d.slot)>=static_cast<int>(sizeof(path)))return false;
     HANDLE file=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,nullptr,OPEN_EXISTING,0,nullptr);
     if(file==INVALID_HANDLE_VALUE)return false;
@@ -49,7 +53,12 @@ bool readMissionAutosave(MissionAutosaveDetails& d) {
     if(!read)return false;text[count]=0;
     char type[8]{};
     if(!missionDetailsField(text,"mapName",d.map,sizeof(d.map))||!missionDetailsField(text,"chapter",d.chapter,sizeof(d.chapter))||
-       !missionDetailsField(text,"mission",d.mission,sizeof(d.mission))||!missionDetailsField(text,"slotType",type,sizeof(type))||std::strcmp(type,"3"))return false;
+       !missionDetailsField(text,"mission",d.mission,sizeof(d.mission))||!missionDetailsField(text,"slotType",type,sizeof(type))||
+       (std::strcmp(type,"3")&&std::strcmp(type,"2")))return false;
+    // 1214im (#171): slot type 2 is the native mission-start save (FUN_140464e40: slot campaign*30+21 on the first map,
+    // campaign*30+20+mission at a mission start; confirmed static), type 3 an autosave. A fresh co-op save folder holds
+    // only the mission-start save until the first autosave, so the installed partner never armed on the tower
+    // (product-two-account-v1761a: savegame_coop held SLOT21, slotType 2, and enable was refused 205 times).
     // 1147b: the peer's last autosave must belong to the current map; right
     // after a load it may still be the previous map until the mission-start
     // autosave lands (1148: client still on its Dunwall autosave).

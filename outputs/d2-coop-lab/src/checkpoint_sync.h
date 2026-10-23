@@ -466,6 +466,11 @@ void writeCheckpointSync() {
     {const auto& a=autosavePair;fprintf(f,"\"autosavePair\":{\"active\":%s,\"ready\":%s,\"saves\":%u,\"originated\":%u,\"mirrored\":%u,\"pending\":%s,\"peerSaves\":%u,\"peerOriginated\":%u,\"peerMirrored\":%u,\"peerPending\":%s,\"requests\":%llu,\"refused\":%llu,\"resets\":%llu,\"received\":%llu,\"rejected\":%llu,\"peerRearms\":%llu,\"slot\":%d,\"result\":\"%s\",\"probeCalls\":%llu,\"probeRefused\":%llu},",
         a.active?"true":"false",autosavePairReady()?"true":"false",a.saves,a.originated,a.mirrored,a.pending?"true":"false",a.peerSaves,a.peerOriginated,a.peerMirrored,a.peerPending?"true":"false",a.requests,a.refused,a.resets,a.received,a.rejected,a.peerRearms,a.slot,a.result,autosaveProbeCalls,autosaveProbeRefused);}
     fprintf(f,"\"mission\":%s,\"missionMap\":\"%s\",\"missionSlot\":%d,\"missionGeneration\":%u,\"missionDetails\":\"%s\",",checkpointMission.mission?"true":"false",checkpointMission.map,checkpointMission.slot,checkpointMission.generation,checkpointMission.details);
+    // 1214im (#171): the native last autosave slot and save root as read now, for a digest that does not arm.
+    {int nativeSlot=-1;std::uintptr_t game=0,rootName=0;std::string rootText;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+     if(memoryRead(base+0x39a5290,&game,8)&&game)memoryRead(game+0x2e75d8+0x1c,&nativeSlot,4);
+     if(!memoryRead(base+0x2286f40,&rootName,8)||!worldIdentityString(memoryRead,rootName,rootText)||rootText.size()>=32)rootText.clear();
+     fprintf(f,"\"nativeAutosaveSlot\":%d,\"saveRoot\":\"%s\",",nativeSlot,rootText.c_str());}
     fprintf(f,"\"slotRetryCalls\":%llu,\"continuationCalls\":%llu,\"continuationDeferred\":%llu,\"continuationAccepted\":%llu,",s.slotRetryCalls,s.continuationCalls,s.continuationDeferred,s.continuationAccepted);
     fprintf(f,"\"retryProbeUntil\":%llu,\"retryProbeInjected\":%llu,",s.retryProbeUntil,s.retryProbeInjected);
     fprintf(f,"\"avatarRequested\":%s,\"avatarPending\":%s,\"avatarReady\":%s,\"avatarRestored\":%llu,\"avatarRefused\":%llu,",

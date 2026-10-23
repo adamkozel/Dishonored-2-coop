@@ -305,6 +305,34 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
         host with equal gameflow. The co-op systems never armed: both sides stayed `waiting_shared_gameplay`.
     - The release notes tell players to start the tutorial together, and to keep the other player out of the
       trainer's sight during the stealth lessons. Both findings are #174.
+  - Clean-PC proof from the v0.9.0 download, product-two-account-v1755a: download, install, join, walk and story
+    passed, but the host's death was not shared. The VM never showed GameOver: the host's checkpoint sync sent 157
+    hellos and received none (`death_peer_unavailable`, peer arm 0). Release 0.9.1 fixes it.
+- Release 0.9.1 (#171): shared deaths and checkpoints in a real co-op session (confirmed runtime and static).
+  - Cause: the installed partner's checkpoint sync never armed, for two reasons.
+    - The mission autosave was read beside the checkpoint directory, which names the player's own
+      `base\savegame\SLOT82`. Since 0.9.0 a co-op session saves to `base\savegame_coop` (#156), so the details were
+      missing or stale.
+    - Only autosaves (slot type 3) were accepted. On the campaign's first map a new game first writes the native
+      mission-start save (slot type 2, slot campaign x 30 + 21, FUN_140464e40, confirmed static), and a fresh co-op
+      save folder holds nothing else yet. The 0.8.x proofs armed only because the VM's own saves still held an older
+      tower autosave.
+    - The lab never saw either: lab partners neither switch to co-op saves nor start from an empty save folder.
+  - Fix:
+    - 1214il reads the autosave under the game's current save root (`missionSaveFolder`, checkpoint_scope.h, with unit
+      tests).
+    - 1214im also accepts the mission-start save, and reports `nativeAutosaveSlot` and `saveRoot` in the checkpoint
+      status.
+    - Proof with 1214il's package: product-two-account-v1761a still failed (VM `enable_refused` 205 times, only
+      SLOT21 of type 2 in savegame_coop).
+    - With 1214im's package: product-two-account-v1761b passed. The VM armed on savegame_coop slot 21 and the host on
+      slot 61. The host's death showed GameOver in both games, and both restarted on the same map.
+  - Candidate 1214im (version resources 0.9.1), setup tool v1761 (byte-identical for 1214il and 1214im), builder
+    build_release_v1761.py.
+  - Install test release-install-v1761a: 8/8.
+  - Proof harness Test-ProductTwoAccount-v1761 records both checkpoint syncs before the death and waits up to 30 s
+    for both to arm.
+  - Clean-PC proof from the v0.9.1 download: pending (published next).
 
 **Still open:**
 - Hosting starts with the F7 key once in a mission. Since 0.9.0 the main menu's Co-op entry opens the co-op saves

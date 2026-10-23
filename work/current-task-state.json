@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-23T06:10:00+02:00",
+  "UpdatedAt": "2026-10-23T07:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22704,6 +22704,20 @@
     "Tutorial": "Memories of Training with two players is #174: the key theft works with the focus-gated action (campaign-training-focus-v1760a alone; v1760c with the partner hidden), the stealth lessons restart when either trainer notices either player, and a mid-tutorial join does not arm (v1760g). Release notes advise starting together and keeping out of sight.",
     "Features": "#156 Co-op menu and saves, #157 Leave co-op, #158/#159 character choice and four pairings, #160/#168 a Corvo partner's powers, #161 validation",
     "Status": "built and validated (install test, nine missions on two accounts); publishing and the clean-PC proof next",
+    "Published": "",
+    "CleanPc": ""
+  },
+  "Release091": {
+    "Card": "#171",
+    "Candidate": "candidate-npc-combat-v1214im",
+    "Package": "outputs/release/d2coop-v0.9.1.zip (local), 37249323 bytes, SHA-256 591FA52A50DF7C351242748345E2BCE2966055F95E8CA37099692BFC3BBD87BF (the 1214il build is kept locally as d2coop-v0.9.1-r1)",
+    "Builder": "work/release/build_release_v1761.py",
+    "SetupTool": "work/release/setup-tool-v1761/identity.json (byte-identical for 1214il and 1214im)",
+    "InstallTest": "work/release/release-install-v1761a: pass 8/8",
+    "Fix": "0.9.0 deaths and checkpoints were not shared in real co-op sessions: the mission autosave was read from the player's own savegame folder (co-op saves go to savegame_coop, fixed in 1214il) and only autosaves were accepted while a fresh co-op folder holds only the first map's mission-start save (type 2, fixed in 1214im)",
+    "CleanPcLocal": "work/release/product-two-account-v1761b: pass (local 0.9.1 zip; VM armed on savegame_coop slot 21, shared death and restart); v1761a failed on the 1214il package (VM enable_refused)",
+    "CleanPc090": "work/release/product-two-account-v1755a: failed at the shared death (the bug fixed in 0.9.1)",
+    "Status": "built and validated (install test, local clean-PC proof); publishing and the clean-PC proof from the download next",
     "Published": "",
     "CleanPc": ""
   }
