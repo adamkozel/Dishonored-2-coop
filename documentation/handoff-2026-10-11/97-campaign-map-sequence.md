@@ -76,6 +76,18 @@ The goal's nine campaign missions are 2–10. Memories of Training is separate t
   6. 1214cb ([audit 1311](../../work/movement-integration/dunwall-loadout-audit-v1311.json), confirmed static and runtime): a few grants differ by character. CompareEntityDef(player, `corvo/body.def`) feeds an ActionTestBool whose branches give Corvo's or Emily's item.
      - `tools/diag/d2_character_grants.py` finds three such pairs in the campaign: two Dunwall pistol grants (`gun_player` or `gun_emily`) and the Edge of the World boat's crossbow.
      - A partner of the other character runs the other branch's node. With a Corvo host, Emily's mirror log shows `applied_counterpart` for `gun_emily`, and her item wheel shows the pistol and the spyglass (take 1311g, card #85).
+  7. 1214jc (#183): a partner's first run of a node reaches the host once.
+     - **Found:** in the partner-led Dunwall route, her safe-room locker (`ld_ring_locker_01_3`) ran three grants in her
+       world only (route-dunwall-lead-v1756b: her local count 4, the host's 1). The locker is shared, so it then stayed
+       open and empty for the host.
+     - **Rule:** she sends a count of 1 (reserved 1) when the first run of a mirrored node in her world was her own. Her
+       restart loops cannot replay: the rule allows one run per node, and none on the Memories of Training map. The host
+       runs the node once if it has not, and its own later request is then covered (suppressed).
+     - The Mark and power or no-power items stay personal, as before.
+     - **Runtime:** route-dunwall-lead-v1834b (partner-led, `Route-Mission-v1749`, v1674 steps) passes. After her
+       locker the host applied 3. In the void the host's world ran 7 actions (3 of its own, 4 of hers), matching her 7.
+       v1834a showed the same at the locker and then stopped on a Windows file lock on its route.json.
+     - **Regression:** route-dunwall-lead-v1834c (host-led, same steps) is the mirror image: the host ran his locker's 3 grants and her world applied 3, the void totals match (her 3 own and 4 applied, his 7), and nothing ran twice.
 - **Personal choices (1214bk):** the Outsider's offer (`ld_trigger_19`, `brief_outsider_powers`, `power_yes` → Give Mark) runs in both worlds through the trigger mirror, so each player accepts or refuses for themselves. The Mark control, power items (declaration type 9) and the `no_power` refusal item are therefore recorded but never mirrored. Each character keeps its own power: Corvo gets Blink and Emily gets Far Reach.
 - **Runtime:**
   - Take 1302d: eight actions crossed, including the mission keys the carriage removes.
