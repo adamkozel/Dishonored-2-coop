@@ -1,0 +1,21 @@
+{
+  "passed": false,
+  "failure": "The lab host is not in gameplay",
+  "notes": {
+    "labBefore": {
+      "logic": 2,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "fresh": true,
+      "dll": "176B0965C8F711EE471D4C40E9D770D969B394C1FD84B1AB0634EA8CEB7A0B21"
+    },
+    "vmFinal": {
+      "follow": null,
+      "online": null,
+      "logic": null,
+      "pending": null,
+      "map": null,
+      "fresh": null
+    }
+  },
+  "scope": "Release clean-PC session (1709; the host starts a fresh campaign as Corvo, as a real host does; 1705; 1699 with the VM pressing a key at its title screen like a player, and the Ramsey fallback picking the Ramsey nearest his room with a health trace), two machines/two accounts: as 1670 plus story progress that reaches the VM and a shared death with both games restarting together; release obtained in the VM (download from GitHub or copied zip), extracted in Downloads, Install.cmd with no arguments (game found through Steam, files built from the VM game, Defender on); lab host (same DLL) hosts a lobby; the VM joins via steam://joinlobby, follows the host mission, both walk and see each other, the VM leaves with F8; then Uninstall.cmd (rollback) and the lab restored."
+}

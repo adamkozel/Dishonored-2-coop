@@ -1,0 +1,23 @@
+{
+  "npc": "corvo_attano_tutorial_stealth",
+  "stand": [
+    698.84,
+    -22.7
+  ],
+  "radius": 0.9,
+  "dist": 0.7,
+  "up": 1.0,
+  "pitch": 0,
+  "until": "Task_Intro_StealKey",
+  "tries": 6,
+  "then": {
+    "stand": [
+      695.48,
+      -32.33,
+      -0.6
+    ],
+    "yaw": 45,
+    "until": "Task_Intro_UnlockDoor_02"
+  },
+  "next": "Task_Intro_UnlockDoor_02"
+}

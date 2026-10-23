@@ -1,8 +1,15 @@
-# Dishonored 2 Corvo/Emily co-op 0.9.0
+# Dishonored 2 Corvo/Emily co-op 0.9.1
 
 Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## Fixed in 0.9.1
+
+- **Deaths and checkpoint restarts are shared again.** In 0.9.0 a co-op game saved into the co-op saves, but the mod
+  still looked for the mission autosave among your campaign saves, so the shared checkpoints never started: when one
+  player died, the other played on ([#171](https://github.com/adamkozel/Dishonored-2-coop/issues/171)). Both players
+  need 0.9.1.
 
 ## New in 0.9.0
 
@@ -72,8 +79,8 @@ Emily's powers now act on the host's characters as they do in single player ([#1
 
 ## Install (both players)
 
-1. Close Dishonored 2.
-2. Download `d2coop-v0.9.0.zip` from the GitHub release and extract it anywhere.
+1. Close Dishonored 2. If an earlier version of the mod is installed, run its `Uninstall.cmd` first.
+2. Download `d2coop-v0.9.1.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.
@@ -137,6 +144,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 - Two players only.
 - A Corvo partner's *Blink Assault* kick staggers the host's guards rather than knocking them down, the host's side of her *Devouring Swarm* is always the base swarm (*Bigger Swarm* acts only in her game), and possessing corpses or rats happens only in her game ([#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)).
 - In the first mission (*A Long Day in Dunwall*) the partner chooses Corvo or Emily on the game's own choice screen rather than the *Character* dialog.
+- *Memories of Training* (the tutorial): Corvo fails his stealth lessons when he notices either player, in either game, and a failed lesson restarts both games at the start of the lesson. Let one player do the stealth lessons while the other stays well out of his sight. Start the tutorial together: a partner who joins it midway is placed beside the host, but the co-op systems do not start.
 - After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.

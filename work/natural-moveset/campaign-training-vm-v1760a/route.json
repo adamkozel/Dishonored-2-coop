@@ -1,0 +1,510 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        15.779062,
+        11.908777,
+        -4.828311
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 4,
+      "pos": [
+        16.556602,
+        12.374050,
+        -4.856650
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        15.779062,
+        11.908777,
+        -4.828311
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 4,
+      "pos": [
+        16.556602,
+        12.374050,
+        -4.856650
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    }
+  },
+  {
+    "step": "step02-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        15.779062,
+        11.908777,
+        -4.828311
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 4,
+      "pos": [
+        16.556602,
+        12.374050,
+        -4.856650
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    }
+  },
+  {
+    "step": "step03-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_beforecrouch",
+      "settle": 4000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -23.046648,
+        -24.017517,
+        -0.524934
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_MobilityPractice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 4,
+      "pos": [
+        16.556602,
+        12.374050,
+        -4.856650
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_MobilityPractice"
+    }
+  },
+  {
+    "step": "step04-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_roof_3",
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        722.673828,
+        -32.094887,
+        3.626673
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 8,
+      "pos": [
+        721.957275,
+        -32.437855,
+        3.437127
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    }
+  },
+  {
+    "step": "step05-partner",
+    "spec": {
+      "do": "partner",
+      "pos": [
+        694.9,
+        -33.4,
+        -0.6
+      ],
+      "yaw": 45,
+      "crouch": true,
+      "settle": 2000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        722.673828,
+        -32.094887,
+        3.626673
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 8,
+      "pos": [
+        694.900024,
+        -33.400002,
+        -2.096333
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    }
+  },
+  {
+    "step": "step06-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 3000,
+      "settle": 2000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        722.673828,
+        -32.094887,
+        3.626673
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 8,
+      "pos": [
+        694.900024,
+        -33.400002,
+        -2.096333
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    }
+  },
+  {
+    "step": "step07-action",
+    "spec": {
+      "do": "action",
+      "name": "chase_hold",
+      "args": {
+        "npc": "corvo_attano_tutorial_stealth",
+        "dist": 0.85,
+        "up": 1.0,
+        "button": "RightShoulder",
+        "ms": 4500,
+        "ly": 12000,
+        "crouch": true,
+        "until": "Task_Intro_ChokeCorvo",
+        "tries": 10
+      },
+      "settle": 15000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 42,
+      "pos": [
+        705.847839,
+        -34.32037,
+        -2.126496
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "7/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        707.018555,
+        -34.151688,
+        -2.151957
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 4,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/5/2",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+    }
+  }
+]

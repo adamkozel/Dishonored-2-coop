@@ -1,0 +1,67 @@
+[
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 30000
+ },
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_beforecrouch",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_roof_3",
+  "settle": 20000
+ },
+ {
+  "do": "partner",
+  "pos": [
+   694.9,
+   -33.4,
+   -0.6
+  ],
+  "yaw": 45,
+  "crouch": true,
+  "settle": 2000
+ },
+ {
+  "do": "wait",
+  "ms": 3000,
+  "settle": 2000
+ },
+ {
+  "do": "action",
+  "name": "chase_hold",
+  "args": {
+   "npc": "corvo_attano_tutorial_stealth",
+   "dist": 0.85,
+   "up": 1.0,
+   "button": "RightShoulder",
+   "ms": 4500,
+   "ly": 12000,
+   "crouch": true,
+   "until": "Task_Intro_ChokeCorvo",
+   "tries": 10
+  },
+  "settle": 15000
+ },
+ {
+  "do": "npcs",
+  "near": [
+   698.84,
+   -22.7
+  ],
+  "settle": 1000
+ },
+ {
+  "do": "wait",
+  "ms": 240000,
+  "settle": 1000
+ }
+]

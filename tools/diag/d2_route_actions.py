@@ -281,6 +281,105 @@ def pickpocket(a):
     return attempts(a, pickpocket_try)
 
 
+def interaction_sensor():
+    """The player's interaction sensor component (Record-Coverage's FocusInit); None when it is not unique."""
+    player = probe('--player')
+    me = [e for e in probe('--entities')['entities'] if e.get('pointer') == player.get('player')]
+    if len(me) != 1:
+        return None
+    sensors = [c for c in probe('--components', me[0]['handle'])['components']
+               if c.get('type') == '.?AVarkCpntPlayerSensorInteraction@@']
+    return sensors[0]['pointer'] if len(sensors) == 1 else None
+
+
+def use_focus(sensor, ents):
+    """(handle, name) of the sensor's target, as Record-Coverage's Focus reads it (word 0x80)."""
+    words = [w for w in probe('--object', sensor)['words'] if w.get('offset') == '0x80']
+    if len(words) != 1:
+        return None, None
+    h = int(words[0]['word'], 16) >> 32
+    names = {int(e['handle'], 16): e['name'] for e in ents}
+    return '0x%x' % h, names.get(h)
+
+
+def pickpocket_focus_try(a, k):
+    """1760 (#171): pickpocket_try that walks after him reading the use focus and presses X only while it is on him.
+
+    With a['partner'] ({pos, yaw, crouch}) the VM partner is placed out of the trainer's sight first: he fails his lesson
+    when he notices either player, and each lesson restart puts her back at the lesson start (campaign-training-vm-v1760a)."""
+    sx, sy = a['stand']
+    hide = a.get('partner')
+    if hide:
+        x, y, z = hide['pos']
+        r = ps(f"& '{REPO}/work/natural-moveset/Hide-RoutePartner-v1760.ps1' -X {x} -Y {y} -Z {z} -Yaw {hide.get('yaw', 0)}"
+               + (' -Crouch' if hide.get('crouch') else ''))
+        print(json.dumps({'try': k, 'partner': (r.stdout or r.stderr).strip()[-200:]}), flush=True)
+    # With a['wait_at'] ([x, y, z, yaw]) the host waits for the trainer there too: in the partner's game the host's avatar
+    # waiting at the lesson start was noticed, and that restart reached both games (campaign-training-vm-v1760c).
+    if a.get('wait_at'):
+        teleport(*a['wait_at'])
+        time.sleep(0.5)
+    crouch()
+    hit = None
+    end = time.time() + 60
+    while time.time() < end and not hit:
+        p0 = npcs(a['npc'])
+        time.sleep(0.1)
+        p1 = npcs(a['npc'])
+        if not p0 or not p1:
+            continue
+        q0, q1 = p0[-1]['position'], p1[-1]['position']
+        step = math.hypot(q1[0] - q0[0], q1[1] - q0[1])
+        d0, d1 = math.hypot(q0[0] - sx, q0[1] - sy), math.hypot(q1[0] - sx, q1[1] - sy)
+        if step > 0.03 and d1 < a.get('radius', 0.9) and d1 < d0:
+            hit = (q1, ((q1[0] - q0[0]) / step, (q1[1] - q0[1]) / step), p1[-1]['name'])
+    if not hit:
+        return None
+    p, h, npc = hit
+    d = a.get('dist', 0.7)
+    teleport(p[0] - d * h[0], p[1] - d * h[1], p[2] + a.get('up', 1.0), math.degrees(math.atan2(h[1], h[0])), a.get('pitch', 0))
+    try:
+        sensor = interaction_sensor()
+    except RuntimeError:
+        sensor = None
+    trace, presses, walk = [], 0, time.time() + a.get('walk', 6.0)
+    while sensor and time.time() < walk:
+        packet([], a.get('step_ms', 900), ly=a.get('ly', 12000))
+        try:
+            ents = probe('--entities')['entities']
+            fh, fname = use_focus(sensor, ents)
+            q = [e for e in ents if e['name'] == npc]
+            me = probe('--player')['candidatePosition']
+        except RuntimeError as e:
+            trace.append({'error': str(e)})
+            continue
+        dist = round(math.hypot(q[0]['position'][0] - me[0], q[0]['position'][1] - me[1]), 2) if q else None
+        on = bool(fname and a['npc'] in fname)
+        trace.append({'t': round(walk - time.time(), 1), 'focus': fname or fh, 'dist': dist, 'npc': bool(q)})
+        if on and presses < a.get('presses', 3):
+            packet(['X'], 150, ly=a.get('ly', 12000))
+            presses += 1
+            time.sleep(0.4)
+            trace[-1]['pressed'] = True
+            if any(a['next'] == x for x in active_tasks()):
+                break
+    time.sleep(1.0)
+    ok = any(a['next'] == x for x in active_tasks())
+    print(json.dumps({'try': k, 'npc': npc, 'at': [round(v, 2) for v in p], 'done': ok, 'presses': presses, 'sensor': sensor,
+                      'active': active_tasks(), 'trace': trace}), flush=True)
+    if ok:
+        if not a.get('then') or then_use(a['then']) == 0:
+            return 0
+        time.sleep(4.0)
+        return None
+    time.sleep(4.0)
+    return None
+
+
+def pickpocket_focus(a):
+    return attempts(a, pickpocket_focus_try)
+
+
 def then_use(t):
     """Right after a pickpocket: stand at a use target and press X (longer each time) until its task is done."""
     end = time.time() + 6
@@ -340,6 +439,14 @@ def face(sub):
     p = found[-1]['position']
     me = status().get('localPosition') or [0, 0, 0]
     command(f'setviewpos {me[0]:.3f} {me[1]:.3f} {me[2] + 1.7:.3f} {math.degrees(math.atan2(p[1] - me[1], p[0] - me[0])):.2f} 0')
+    # 1760 (#171): setviewpos keeps the pitch; campaign-training-vm-v1760c swung 22 times at the ceiling (the crossbow
+    # lesson left the view 33 degrees up), so a view more than 10 degrees off level is levelled first.
+    try:
+        f = probe('--player')['nativeViewOrientation']
+        if abs(math.degrees(math.asin(max(-1.0, min(1.0, f[2]))))) > 10:
+            ps(f"& '{REPO}/work/natural-moveset/Set-ObserverPitch.ps1' -Role host -Pitch 0 -Quick|Out-Null")
+    except (RuntimeError, KeyError, IndexError):
+        pass
 
 
 def cycle(a):
@@ -400,7 +507,8 @@ def main():
     REPO = sys.argv[1]
     raw = sys.argv[3] if len(sys.argv) > 3 else '{}'
     args = json.load(open(raw[1:], encoding='utf-8-sig')) if raw.startswith('@') else json.loads(raw)
-    return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'shoot': shoot, 'cycle': cycle, 'grab': grab}[sys.argv[2]](args)
+    return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'pickpocket_focus': pickpocket_focus, 'shoot': shoot, 'cycle': cycle,
+            'grab': grab}[sys.argv[2]](args)
 
 
 if __name__ == '__main__':
