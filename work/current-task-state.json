@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-23T07:50:00+02:00",
+  "UpdatedAt": "2026-10-23T15:30:00+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22720,5 +22720,13 @@
     "Status": "published and validated (install test, clean-PC proof from the download on two accounts)",
     "Published": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.1 (v0.9.0 notes now say superseded)",
     "CleanPc": "work/release/product-two-account-v1761d: pass (downloaded from GitHub in the VM, Install.cmd alone, two Steam accounts, walk, story, both checkpoint syncs armed, shared death and restart, uninstall); v1761c stopped at its first check (the lab host still on the pause menu)"
+  },
+  "CoopSavesCampaign": {
+    "Card": "#175",
+    "Candidate": "candidate-npc-combat-v1214in (1214im, the 0.9.1 binary, plus the lab command coop_saves on|off)",
+    "Harness": "work/natural-moveset/Route-MissionVM-v1762.ps1 (-CoopSaves), v1763 (message-box frames), v1764/v1765 (a level-transition Go / Stay choice, pending logic 9, confirmed with A)",
+    "Passes": "campaign-dunwall-coop-v1762a (deaths), -eotw-, -institute-, -madinventor-, -dust-, -bunker-coop-v1762a, -curator-coop-v1763a, -palace-coop-v1763c, -empress-coop-v1765e",
+    "Findings": "co-op saves run difficulty/preset/medium (lab saves easy); the partner takes her own profile difficulty (#177); the Empress tower door offers Go / Stay (pending 9), A confirms; two stalled endings were route-step misfires",
+    "Status": "all nine missions pass on co-op saves, chapter 109"
   }
 }
