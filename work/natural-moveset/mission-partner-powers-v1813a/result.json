@@ -1,0 +1,85 @@
+{
+  "passed": false,
+  "failure": "Failed: possession (Her copy of the host guard is not a ready replica (client_replica, gap 0.74))",
+  "rows": [
+    {
+      "power": "possession",
+      "pairing": "corvo-corvo",
+      "passed": false,
+      "failure": "Her copy of the host guard is not a ready replica (client_replica, gap 0.74)",
+      "checks": [],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/corvo/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/possession/possession.inventoryitem",
+          "result": "named_power_equip_requested"
+        },
+        {
+          "item": "components/characters/player/base/attributes/possession_parasite.inventoryitem",
+          "result": "granted_named"
+        }
+      ],
+      "engaged": true,
+      "stand": {
+        "side": "front",
+        "stand": [
+          3.79111,
+          63.871,
+          15.9754
+        ],
+        "guard": [
+          4.39214,
+          59.4596,
+          15.9539
+        ],
+        "facing": [
+          -0.16411795368550972,
+          0.9864407216240014
+        ],
+        "trials": [
+          {
+            "side": "front",
+            "asked": [
+              3.7356681852579614,
+              63.40536288649601
+            ],
+            "rest": [
+              3.79111,
+              63.871,
+              15.9754
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.43866,
+            59.1982,
+            15.953
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.55706,
+            58.4684,
+            15.9504
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": false,
+        "ms": 25482,
+        "channel": "client_replica",
+        "gap": 0.74
+      }
+    }
+  ],
+  "scope": "1813 (#180): the partner (corvo, host corvo) uses possession on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}

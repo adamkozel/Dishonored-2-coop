@@ -63,8 +63,12 @@ inline bool npcAuthorityHostStreamEligible(const NativeNpcAuthority& s){
     for(unsigned i=0;i<2;++i)if((s.ai[i].flags&12)!=8)return false;
     return true;
 }
+// 1214iw (#180): an attack AI paused like the decision and reflex AI (a pause reference, mode 2, scheduler inactive). A
+// forced client lease pauses it too, for an NPC that was fighting her when it bound: its attack AI kept running under the
+// decision and reflex pause, so the replica never read as paused (mission-partner-powers-v1812a).
+inline bool npcAuthorityAttackPaused(const NativeNpcAuthority& s){const auto& a=s.ai[2];return ((a.flags>>6)&0x1fffff)>=1&&((a.flags>>4)&3)==2&&!a.schedulerActive;}
 inline bool npcAuthorityPaused(const NativeNpcAuthority& s){
-    if(!npcAuthorityLiving(s)||!npcAuthorityAttackInactive(s))return false;
+    if(!npcAuthorityLiving(s)||!(npcAuthorityAttackInactive(s)||npcAuthorityAttackPaused(s)))return false;
     for(unsigned i=0;i<2;++i)if((s.ai[i].flags&12)!=8||((s.ai[i].flags>>6)&0x1fffff)<1||
         ((s.ai[i].flags>>4)&3)!=2||s.ai[i].schedulerActive)return false;
     return true;

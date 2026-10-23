@@ -1,0 +1,77 @@
+{
+  "power": "possession",
+  "pairing": "corvo-corvo",
+  "passed": false,
+  "failure": "Her copy of the host guard is not a ready replica (forced_lease_never_paused, gap 5.79)",
+  "checks": [],
+  "definitions": {
+    "host": "models/characters/player/corvo/body.def",
+    "client": "models/characters/player/corvo/body.def"
+  },
+  "grants": [
+    {
+      "item": "models/powers/possession/possession.inventoryitem",
+      "result": "named_power_equip_requested"
+    },
+    {
+      "item": "components/characters/player/base/attributes/possession_parasite.inventoryitem",
+      "result": "granted_named"
+    }
+  ],
+  "stand": {
+    "side": "front",
+    "stand": [
+      3.77143,
+      63.1326,
+      15.9716
+    ],
+    "guard": [
+      4.43852,
+      59.189,
+      15.9529
+    ],
+    "facing": [
+      -0.16656102501063882,
+      0.9860311480614623
+    ],
+    "trials": [
+      {
+        "side": "front",
+        "asked": [
+          3.772275899957444,
+          63.13312459224585
+        ],
+        "rest": [
+          3.77143,
+          63.1326,
+          15.9716
+        ],
+        "ok": true
+      }
+    ]
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43829,
+        59.189,
+        15.9529
+      ]
+    },
+    "client": {
+      "handle": "0x2dc829e4",
+      "position": [
+        1.98736,
+        64.4333,
+        15.961
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": false,
+    "ms": 25078,
+    "channel": "forced_lease_never_paused",
+    "gap": 5.79
+  }
+}

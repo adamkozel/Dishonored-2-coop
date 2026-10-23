@@ -41,7 +41,9 @@ void nativeNpcAuthorityTests(){
     require(inspect(paused)&&npcAuthorityGamePaused(s)&&npcAuthorityLeaseEligible(s),"1214ex: a game-paused NPC at a scripted post is lease-eligible");
     require(inspect(m)&&!npcAuthorityGamePaused(s)&&npcAuthorityLeaseEligible(s),"1214ex: a running NPC stays lease-eligible");
     {auto c=paused;c.d(components[2]+0x1c,0xa000000a);c.d(registries[2]+0x38,1);c.q(registries[2]+0x28,indices[2]+2);
-     require(inspect(c)&&!npcAuthorityLeaseEligible(s),"1214ex: a paused NPC whose attack AI runs is not lease-eligible");}
+     require(inspect(c)&&!npcAuthorityLeaseEligible(s),"1214ex: a paused NPC whose attack AI runs is not lease-eligible");
+     c.d(components[2]+0x1c,0xa000006a);c.d(registries[2]+0x38,0);c.q(registries[2]+0x28,indices[2]);
+     require(inspect(c)&&npcAuthorityAttackPaused(s)&&npcAuthorityPaused(s),"1214iw: an NPC whose attack AI is paused too reads as paused");}
     {auto c=m;c.q(components[0],base+nativeAiVtable(NativeAiKind::DecisionCivilian));c.q(manager+nativeAiRegistryOffset(NativeAiKind::DecisionCivilian),registries[0]);
      c.q(manager+nativeAiRegistryOffset(NativeAiKind::Decision),0);
      require(inspect(c)&&s.ai[0].kind==NativeAiKind::DecisionCivilian&&npcAuthorityAcquireEligible(s),"1214ex: a civilian decision (arkCpntAIDecisionCivilian) reads as the decision AI");

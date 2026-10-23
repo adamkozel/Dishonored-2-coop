@@ -22746,5 +22746,14 @@
     "Evidence": "mission-breakables-v1774a (Edge of the World: 1269 breakables, all single-step); mission-spots-v1775a (stand b3-px); v1776a/v1777a (grenade fixture and grant failures); v1778a (host grenade: a bottle and two glasses shared, no plank; catalog stopped at 1024); v1779a (host sword: plank 03_12 in both worlds); v1779b (partner sword: plank 03_12 reaches the host); v1779c (host Windblast: four planks and a glass, 8 sent, 8 applied)",
     "Open": "a grenade that breaks the planks themselves; 15 s catalog scans take 15-32 ms on large maps",
     "Status": "lab-proven on a mission map, chapter 105"
+  },
+  "MissionPartnerPowers": {
+    "Card": "#180",
+    "Candidate": "candidate-npc-combat-v1214ix (lab; release stays 0.9.1 / 1214im)",
+    "Code": "npc_authority_stream.h: stop and Hello traces (1214it), a forced client lease after 2 s of busy Hellos (1214iu), the lease step (1214iv); npc_authority_hold.h / native_npc_authority.h: the forced lease pauses the attack AI too and a paused attack AI reads as calm (1214iw); the render identity check accepts it (1214ix)",
+    "Harness": "work/natural-moveset/Test-MissionPartnerPowers-v1808..v1813.ps1 (Edge of the World, checkpoint guard 01, -HostCharacter, -PartnerCharacter, -Powers, -EngageFirst)",
+    "Evidence": "v1808a (replica wait miss); v1809a windblast pass; v1809b swarm and bendtime pass, possession never bound, blinkkick 2.24 m apart; v1810a (traces: busy Hellos); v1811a blinkkick pass; v1811b/v1812b possession lag 1.0/1.41 m; v1811c/v1812a forced lease never paused (attack AI running); v1813a forced replica not presented; v1813b possession with the guard engaged first: pass on 1214ix",
+    "Open": "the full matrix on 1214ix in the four pairings (Corvo partner: windblast, swarm, bendtime, possession, blinkkick; Emily partner: farreach, domino, doppelganger, mesmerize, shadowwalk); her NPC stream session ended once at her Blink Assault (v1810a, world_or_native_phase_changed, not reproduced in v1811a)",
+    "Status": "in progress"
   }
 }

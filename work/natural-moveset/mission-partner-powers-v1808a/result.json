@@ -1,0 +1,62 @@
+{
+  "passed": false,
+  "failure": "Failed: windblast (Her copy of the host guard is not a ready replica (, gap 5.22))",
+  "rows": [
+    {
+      "power": "windblast",
+      "pairing": "corvo-corvo",
+      "passed": false,
+      "failure": "Her copy of the host guard is not a ready replica (, gap 5.22)",
+      "checks": [],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/corvo/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/windblast/windblast.inventoryitem",
+          "result": "named_power_equip_requested"
+        }
+      ],
+      "stand": {
+        "side": "front",
+        "stand": [
+          3.77678,
+          63.1359,
+          15.9716
+        ],
+        "guard": [
+          4.43902,
+          59.1916,
+          15.9529
+        ],
+        "facing": [
+          -0.16551698972652631,
+          0.9862069387871235
+        ],
+        "trials": [
+          {
+            "side": "front",
+            "asked": [
+              3.776952041093895,
+              63.136427755148496
+            ],
+            "rest": [
+              3.77678,
+              63.1359,
+              15.9716
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "replicaReady": {
+        "ready": false,
+        "ms": 15289,
+        "channel": null,
+        "gap": 5.22
+      }
+    }
+  ],
+  "scope": "1808 (#180): the partner (corvo, host corvo) uses windblast on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}
