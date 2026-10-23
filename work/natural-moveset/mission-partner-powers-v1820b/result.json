@@ -1,0 +1,181 @@
+{
+  "passed": false,
+  "failure": "Failed: shadowwalk (her shadow-form attack left her copy alive)",
+  "rows": [
+    {
+      "power": "shadowwalk",
+      "pairing": "emily-emily",
+      "passed": false,
+      "failure": "her shadow-form attack left her copy alive",
+      "checks": [
+        "Host guard moved up to 5.95 m (health 40 -> 40); her copy up to 6.44 m (health 40 -> 40); outcome alive/alive, end gap 0.05 m (last samples 0.3 m)"
+      ],
+      "definitions": {
+        "host": "models/characters/player/emily/body.def",
+        "client": "models/characters/player/emily/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/shadow_walk/shadow_walk.inventoryitem",
+          "result": "named_power_equip_requested"
+        }
+      ],
+      "stand": {
+        "side": "front",
+        "stand": [
+          4.02992,
+          61.5483,
+          15.9655
+        ],
+        "guard": [
+          4.43988,
+          59.1836,
+          15.9529
+        ],
+        "facing": [
+          -0.17015990730635164,
+          0.9854164631999477
+        ],
+        "trials": [
+          {
+            "side": "behind",
+            "asked": [
+              4.8482637775352435,
+              56.81860048832012
+            ],
+            "rest": [
+              4.89657,
+              56.8515,
+              16.5901
+            ],
+            "ok": false
+          },
+          {
+            "side": "front",
+            "asked": [
+              4.031496222464756,
+              61.548599511679875
+            ],
+            "rest": [
+              4.02992,
+              61.5483,
+              15.9655
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.44079,
+            59.1842,
+            15.9529
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.44079,
+            59.1842,
+            15.953
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": true,
+        "ms": 706,
+        "channel": "client_replica",
+        "gap": 0.0
+      },
+      "camera": [
+        -1.6760327607361525,
+        59.338877262275844,
+        18.5529
+      ],
+      "aim": {
+        "target": [
+          4.44079,
+          59.1842,
+          15.953
+        ],
+        "stand": [
+          4.02992,
+          61.5483,
+          15.9655
+        ],
+        "yaw": -80.1,
+        "pitch": 9.0,
+        "distance": 2.4
+      },
+      "before": {
+        "ms": 0,
+        "host": {
+          "present": true,
+          "position": [
+            4.35729,
+            59.6599,
+            15.9534
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_host": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client": {
+          "present": true,
+          "position": [
+            4.49265,
+            58.8796,
+            15.952
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_client": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        }
+      },
+      "attempts": [],
+      "castAt": 1,
+      "castEnd": 3170,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "summary": {
+        "hostGuardMaxMove": 5.95,
+        "herCopyMaxMove": 6.44,
+        "endGap": 0.05,
+        "rawEndGap": 0.3,
+        "hostHealth": [
+          40,
+          40
+        ],
+        "herHealth": [
+          40,
+          40
+        ],
+        "outcome": {
+          "host": "alive",
+          "client": "alive"
+        }
+      }
+    }
+  ],
+  "scope": "1820 (#180): the partner (emily, host emily) uses shadowwalk on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}

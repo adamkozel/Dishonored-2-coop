@@ -1,0 +1,179 @@
+{
+  "passed": true,
+  "failure": null,
+  "rows": [
+    {
+      "power": "blinkkick",
+      "pairing": "corvo-corvo",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Blink Assault: host down poses sent 0, host guard moved 4.01 m",
+        "Host guard moved up to 4.01 m (health 40 -> 40); her copy up to 3.65 m (health 40 -> 40); outcome alive/alive, end gap 0.14 m (last samples 0.14 m)"
+      ],
+      "definitions": {
+        "host": "models/characters/player/corvo/body.def",
+        "client": "models/characters/player/corvo/body.def"
+      },
+      "grants": [
+        {
+          "item": "models/powers/blink/blink.inventoryitem",
+          "result": "named_power_equip_requested"
+        },
+        {
+          "item": "components/characters/player/base/attributes/blink_assault.inventoryitem",
+          "result": "granted_named"
+        }
+      ],
+      "stand": {
+        "side": "front",
+        "stand": [
+          3.38685,
+          65.0902,
+          15.9785
+        ],
+        "guard": [
+          4.442,
+          59.1846,
+          15.9529
+        ],
+        "facing": [
+          -0.17573491511399364,
+          0.9844375244828274
+        ],
+        "trials": [
+          {
+            "side": "front",
+            "asked": [
+              3.3875905093160386,
+              65.09122514689696
+            ],
+            "rest": [
+              3.38685,
+              65.0902,
+              15.9785
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "guardAtWait": {
+        "host": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.4367,
+            59.1906,
+            15.9529
+          ]
+        },
+        "client": {
+          "handle": "0x2dc829e4",
+          "position": [
+            4.4367,
+            59.1906,
+            15.9529
+          ]
+        }
+      },
+      "replicaReady": {
+        "ready": true,
+        "ms": 2987,
+        "channel": "client_replica",
+        "gap": 0.0
+      },
+      "camera": [
+        -1.9954218485412496,
+        61.08919811996728,
+        18.5529
+      ],
+      "aim": {
+        "target": [
+          4.4367,
+          59.1906,
+          15.9529
+        ],
+        "stand": [
+          3.38685,
+          65.0902,
+          15.9785
+        ],
+        "yaw": -79.9,
+        "pitch": 4.0,
+        "distance": 5.99
+      },
+      "before": {
+        "ms": 0,
+        "host": {
+          "present": true,
+          "position": [
+            4.49614,
+            58.8227,
+            15.952
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_host": {
+          "result": "host_authority",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        },
+        "client": {
+          "present": true,
+          "position": [
+            4.43418,
+            59.2065,
+            15.9536
+          ],
+          "health": 40,
+          "suppressed": false
+        },
+        "channel_client": {
+          "result": "client_replica",
+          "localPaired": false,
+          "pairedVariant": 0,
+          "pairedResult": "none",
+          "reversePoses": 0,
+          "downSent": 0,
+          "downReceived": 0
+        }
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "sentBefore": 0,
+          "sentAfter": 2
+        }
+      ],
+      "castAt": 2,
+      "castEnd": 3757,
+      "outcome": {
+        "host": "alive",
+        "client": "alive"
+      },
+      "summary": {
+        "hostGuardMaxMove": 4.01,
+        "herCopyMaxMove": 3.65,
+        "endGap": 0.14,
+        "rawEndGap": 0.14,
+        "hostHealth": [
+          40,
+          40
+        ],
+        "herHealth": [
+          40,
+          40
+        ],
+        "outcome": {
+          "host": "alive",
+          "client": "alive"
+        }
+      }
+    }
+  ],
+  "scope": "1821 (#180): the partner (corvo, host corvo) uses blinkkick on the host's checkpoint guard on a mission map; the guard is sampled and filmed in both worlds"
+}

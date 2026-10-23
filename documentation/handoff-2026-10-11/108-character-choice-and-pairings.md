@@ -240,3 +240,77 @@ for Blink Assault, Windblast and Swarm it waits for the guard's patrol pause, re
     (v1806c, v1807b).
   - **Corpse and rat possession are not shared.** Her Possession of a human is (partner-corvo-power-v1802a). Rats
     and fish are not streamed NPCs, and `possession_decayed_harbor` (corpses) is untested.
+
+## #180: the partner's powers on a mission map
+
+Harness `work/natural-moveset/Test-MissionPartnerPowers-v1808..v1821.ps1`. Both lab games load Edge of the World with
+the native `campaign` command in the chosen pairing (`-HostCharacter`, `-PartnerCharacter`), and the mission is
+reloaded fresh for each power. Each take then runs as follows:
+- **Power:** it goes into her own inventory through the native item grant (`coop_grant_named`, the item a rune
+  purchase adds), with the upgrade the cast needs. No route save buys powers.
+- **Target:** she stands by the host's checkpoint guard 01, and casts once her copy of it is a ready replica.
+- **Recording:** the host films from a free camera beside the guard, and both windows are filmed. The guard is sampled
+  in both worlds every 250 ms.
+- **Pass:** the power takes effect in her world, its host-world effect is there, and the guard ends the same in both
+  worlds. A live guard must end within 1.5 m of the host's positions over the last 1.5 s. Poses go every 400 ms with
+  24 bound NPCs, so a running guard trails by up to 2 m.
+
+**Results (confirmed runtime, 1214ix-1214iz):**
+
+| Pairing (host-partner) | Partner powers | Takes |
+|---|---|---|
+| Corvo-Corvo | Windblast, Swarm, Stop Time, Possession and Blink Assault pass | v1819b (1214ix); Blink Assault again on 1214iz (v1821a) |
+| Emily-Corvo | Windblast, Swarm, Stop Time and Possession pass; Blink Assault passes on 1214iy and 1214iz | v1819c (1214ix), v1820a, v1821b |
+| Corvo-Emily | Far Reach (pull NPCs), Doppelganger, Mesmerize and Shadow Walk pass | v1813c, v1814a |
+| Emily-Emily | Far Reach, Doppelganger, Mesmerize and Shadow Walk pass | v1819d (1214ix); Shadow Walk on 1214iz (v1821c) |
+
+- **What each power did:**
+  - Windblast hurt the host's guard (the forwarded `windblast_npc` hit), and it died in both worlds.
+  - The host's native swarm killed the guard.
+  - The host held her Stop Time request.
+  - Possession: the host guard followed her possessed copy, with host variant 1000.
+  - Far Reach pulled the guard about 6 m in both worlds.
+  - The host spawned her shade's puppet.
+  - The host's Mesmerize object took the guard.
+  - Shadow Walk's attack killed the guard in both worlds. In Emily-Emily a single strike missed twice (v1819d, v1820b);
+    the harness now strikes again when her copy lives (v1821c).
+  - Blink Assault's kick moved the guard in both worlds, staggering it at full health (the #168 limitation). On 1214iz
+    the kick is forwarded and applied on the host, with no phase blip (v1821a, v1821b).
+- **Possession on a mission:** while she runs, the host guard trails her possessed copy by 1.0-1.4 m, and it ends
+  0 m from it at rest (v1811b, v1812b). The lab rule of 0.75 m was set on a walk; the mission rule is 1.5 m while
+  running and 0.3 m at the end.
+- **Domino:** her marks reach the host (v1817a presented her network on checkpoint guards 02 and 04). The fixture
+  never built a usable two-guard network, though:
+  - near alerted checkpoint guards she was killed through the health hold (v1815a, v1818a);
+  - a second cast replaced the first mark;
+  - nothing was marked on the dock musicians (v1818b).
+
+  The linked outcome on a mission moves to #182, and the lab proof of linked deaths (#117, chapter 104) stands.
+
+**Fixed on the way (confirmed runtime):**
+- **A guard already fighting her never bound in her world (1214iu-1214ix).** She stood in front of the guard before
+  the host's 2 s relevance scan bound it. Her copy then attacked her, and an NPC whose attack AI runs is not
+  lease-eligible. The 1214cy wait for a momentarily inactive attack never came, because she never fought back. Every
+  Hello was `busy` and the host channel timed out every 5 s (v1808a, v1809b, v1810a, traced by 1214it).
+  - 1214iu: after 2 s of busy Hellos for one NPC, her game forces its lease.
+  - 1214iv: the stop reason names the failing lease step.
+  - 1214iw: a forced lease also pauses the attack AI, since decision and reflex alone left it running (v1812a, probe
+    `--npc-authority-all`); a paused attack AI reads as calm.
+  - 1214ix: the render identity check accepts it (v1813a: a ready forced replica got 0 bodies and stood 0.74 m off).
+  - v1813b (`-EngageFirst`: she faces the guard for 2.5 s first): 2 s of busy, a forced bind, all three AI paused,
+    and Possession passes. Reinforcements that run in already fighting her (v1811b) take the same path.
+- **Her Blink Assault stopped her world sessions (1214iy, 1214iz).** While the Blink root is unverified, the pose
+  published flags bit 0 clear, meaning "keep the last coherent sample". That bit is also every world session's
+  gameplay check, so for that gap her NPC stream session ended and NPC combat stopped. The host's guard channel timed
+  out, and her kick stayed in her world (v1819c: her copy at 22.7, the host's at 40, 5.92 m apart; v1820c: 18.5 and
+  40; v1809b, v1810a).
+  - 1214iy: a native phase blip with the world unchanged suspends the NPC stream session instead of ending it. Only a
+    blip lasting 750 ms ends it, and the blip's phase fields are in the session status.
+  - 1214iz: the Blink gap publishes the last coherent position with bit 0 kept, so the partner's game still sees her
+    at her last coherent sample.
+
+**Open:**
+- Domino on a mission (#182).
+- Blink Assault staggers rather than knocks down (#182).
+- Door, usable and coin sessions use the same menu-context check. With 1214iz the Blink gap no longer trips it;
+  other one-frame blips would still end those sessions (hypothesis, none seen).
