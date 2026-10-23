@@ -212,7 +212,10 @@ bool labGrantNameAllowed(const char* n){const auto len=std::strlen(n);if(len<20|
     // explosion carries PLAYER_HITREACT_KNOCKDOWN (bullet_explosive_damage, confirmed static); never equipped.
     // 1214eu (#102, lab only): the Timepiece, so its presentation can be tested outside A Crack in the Slab; it is
     // selected in the left hand like a granted power.
+    // 1214je (#185, lab only): a key, for the locked door tests on mission maps (mission-locked-door-v1841a: its grant was
+    // refused here, so the key never reached the inventory).
     return !std::strncmp(n,"models/powers/",14)||!std::strncmp(n,"components/characters/player/base/attributes/",45)||
+           !std::strncmp(n,"models/interactive/keys/",24)||
            !std::strncmp(n,"components/equipment/ammo/",26)||!std::strcmp(n,"models/weapons/timeshift_device/timeshift_device.inventoryitem");}
 void serviceLabNamedEquip(){
     if(!labNamedEquipUntil||labGrantNamedRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;

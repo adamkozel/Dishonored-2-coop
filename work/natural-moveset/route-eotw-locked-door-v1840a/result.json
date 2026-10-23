@@ -1,0 +1,95 @@
+{
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [
+      "coop_grant_named models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem"
+    ],
+    "healthHold": [
+      "from step step01-heal"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-heal",
+        "host": "armed a1 s0/o0/m0/p0 slot62 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step02-use",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot61 phase0 armed",
+        "client": "mirrored_save_landed a1 s1/o0/m1/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step03-wait",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot61 phase0 armed",
+        "client": "mirrored_save_landed a1 s1/o0/m1/p0 slot61 phase0 armed"
+      }
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 36,
+        "cine": 28,
+        "pos": [
+          -34.716999,
+          40.646,
+          30.903656
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          1,
+          5,
+          0,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 36,
+        "cine": 30,
+        "pos": [
+          -31.074644,
+          192.48735,
+          1.217182
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          1,
+          5,
+          0,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "held: restore with Restore-RouteHold-v1303.ps1",
+  "passed": false
+}
