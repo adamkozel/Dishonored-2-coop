@@ -1,0 +1,135 @@
+{
+  "failure": "Action chase_hold failed (exit 1)",
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot62 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step02-heal",
+        "host": "armed a1 s0/o0/m0/p0 slot62 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step03-at",
+        "host": "local_save_originated a1 s2/o1/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s2/o1/m1/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step04-wait",
+        "host": "local_save_originated a1 s2/o1/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s2/o1/m1/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step05-use",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot61 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step06-press",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot61 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step07-trigger",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot61 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step08-partner",
+        "host": "mirror_requested a1 s3/o2/m1/p1 slot61 phase0 armed",
+        "client": "local_save_originated a1 s4/o2/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step09-wait",
+        "host": "mirror_requested a1 s3/o2/m1/p1 slot61 phase0 armed",
+        "client": "local_save_originated a1 s4/o2/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step10-npcs",
+        "host": "mirror_requested a1 s3/o2/m1/p1 slot61 phase0 armed",
+        "client": "local_save_originated a1 s4/o2/m2/p0 slot61 phase0 armed"
+      }
+    ],
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 126,
+        "cine": 338,
+        "pos": [
+          -6.493863,
+          -49.962082,
+          300.419556
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          3,
+          3,
+          4,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "5/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 126,
+        "cine": 348,
+        "pos": [
+          -21.85,
+          16.620001,
+          307.003632
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          3,
+          3,
+          4,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 3,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/3/3",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "Both isolated checkpoints did not return to gameplay.",
+        "client: Final gameplay/health/transport not restored (logic 1, health 70, fresh True)"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  },
+  "passed": false,
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo in lab product mode; Dunwall fixture restored."
+}

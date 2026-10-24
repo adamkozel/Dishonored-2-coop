@@ -88,6 +88,29 @@ non-lethal branches with the partner acting, and diff the story flags at each mi
   - Every gameflow task advanced identically in both worlds.
   - `ramsey_in_vault` is 1 in both worlds.
 
+### Ramsey in the vault, partner-made, on 1214kd (#197, #209)
+
+With the combat choke fixed (#209, below), the partner can take Ramsey's whole non-lethal outcome. The lab routes
+`dunwall-nonlethal-partner-v1892/v1893/v1894` are partner-led (`-LeadRole client`) with the `grab_react` action.
+
+| Take | Change | Result |
+|---|---|---|
+| [route-dunwall-nonlethal-v1892a](../../work/natural-moveset/route-dunwall-nonlethal-v1892a) | the escape guards' AI held from the start (as v1883d) | Ramsey was never off-balance during the fight: no knockout. |
+| [v1893a](../../work/natural-moveset/route-dunwall-nonlethal-v1893a) | the guards held only after the knockout | She knocked him out (5 windows, 2 grabs, 158 s), took the ring, opened the safe room and carried him in. Arriving there completed the outcome in both worlds ("Place Mortimer Ramsey in the Safe Room" ticked, the objective updated, `Task_DW_LeaveTower` next). The route's drop and lock steps expected the host-made order, so the take failed. |
+| [v1894a](../../work/natural-moveset/route-dunwall-nonlethal-v1894a) | ends at the safe room with the story-flag checks | The host accepted her hold (`host_paired_released`), but the choke ended before the knockout (`client_paired_ended`): fight variance. |
+| [v1894b](../../work/natural-moveset/route-dunwall-nonlethal-v1894b) | | 28 of 30 windows belonged to another NPC, and her one grab caught a guard. `grab_react` now follows only its target's windows. |
+| [v1894c](../../work/natural-moveset/route-dunwall-nonlethal-v1894c) | target-only windows | Ramsey was not off-balance during the fight. |
+| v1894d, f, g (`Run-RamseyPartner-v1894.sh`) | | No knockout: fight variance. |
+| [v1894e](../../work/natural-moveset/route-dunwall-nonlethal-v1894e) | | Knockout in 33 s, ring, carry into the safe room, and the objective updated in both worlds. But `ramsey_in_vault` was still 0 at the check: it comes with the drop and the lock, which this route skipped. |
+| [v1896a](../../work/natural-moveset/route-dunwall-nonlethal-v1896a) | the drop (no task condition) and the lock before the flag checks | **Pass.** Knockout in 55 s (3 windows, 3 grabs), then the ring, the safe room opened, the carry, the drop and the lock. `ramsey_in_vault` is 1 in both worlds, the gameflow is equal (`Task_DW_LeaveTower` next), and restoration passed. |
+
+- **What the fight decides:** whether Ramsey ends up off-balance near her after a timed parry, with the guards out of
+  the way. Every mechanism the outcome needs worked in at least one take: the vulnerable bit, the forced hold, the
+  knockout in both worlds, the shared ring and safe-room door, and the carried body completing the task.
+- `Run-RamseyPartner-v1894.sh` repeats the take with new letters until one passes.
+- **Confirmed runtime: the partner-made Ramsey outcome reaches both worlds** (#197, Ramsey done for both roles: host-made
+  v1883d, partner-made v1896a). `Run-RamseyPartner-v1896.sh` is the repeat runner for this route.
+
 ### The other non-lethal branches (#197): static plan
 
 Read with `tools/diag/d2_mission_route.py`, `d2_kiscule_graph.py` and `d2_resource_index.py` on the game copy (read-only;
@@ -165,7 +188,7 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   replica follows the host's body stream and never plays it, so it is never vulnerable in her world, and her choke rule
   finds no scene.
 
-**1214kc (built after the campaign run):**
+**1214kc:**
 - A host NPC Pose carries `reserved` bit 1 while the NPC's `+0xd1` bit 6 is set; bit 0 is already "down" (1214en).
   Pose validation accepts 0-3, and the unit tests cover 2, 3 and the refused 4.
 - The client keeps her replica's bit 6 set while host poses carry it (within 400 ms) and clears it afterwards. Host
@@ -173,3 +196,20 @@ the game-derived outputs stay local). All of this is confirmed static; the route
 - Her grab then plays her native combat choke on the replica. The client-sourced choke relay (chapter 93) holds the
   host's NPC and asks for the native knockout.
 - Status: `vulnerableSent`, `vulnerableReceived` and `vulnerableApplies` per NPC channel in the NPC stream status.
+
+**1214kd:** the host takes the forced AI lease (as Possession does, 1214ij) for her combat choke (a takedown of kind
+entry, loop or knockout) on an NPC it saw vulnerable within 2.5 s. An alerted NPC refuses the ordinary lease, and a
+non-lethal choke had no fallback (`npc_paired.h`, status `pairedResult` `host_vulnerable_choke_hold`).
+
+**Takes** (lab, partner-led Dunwall, Ramsey; routes `dunwall-partner-grab-v1890/v1891`):
+
+| Take | Candidate | Result |
+|---|---|---|
+| [route-dunwall-partnergrab-v1890a](../../work/natural-moveset/route-dunwall-partnergrab-v1890a) | 1214kc | Her grab started (2 grabs; 0 in 235 presses on 1214jv). The host sent the vulnerable bit for Ramsey and both guards (18, 58 and 24 poses), and she applied it (1, 2 and 1 times). The host refused the hold: `host_paired_hold_refused`. |
+| [v1890b](../../work/natural-moveset/route-dunwall-partnergrab-v1890b) | 1214kd | Three off-balance windows reached her replica, but the fixed press rhythm (700 ms holds) landed in none: 0 grabs. |
+| [v1891a](../../work/natural-moveset/route-dunwall-partnergrab-v1891a) | 1214kd | Pass. The `grab_react` action taps grab as soon as a new window reaches her replica, as a player reacts to the stagger: one window, two taps, one grab, in 23.5 s. Ramsey reads h10/10 in both worlds, `Task_DW_NonLethal_KnockoutRamsey` completed in both, and the gameflow is equal. |
+
+- `tools/diag/d2_route_actions.py` `grab_react`: blocks in presses like `grab`, but on a new off-balance window
+  (`vulnerableApplies` grows in its own npc-stream status) it releases, faces the target and taps grab for up to 1.6 s.
+- **Confirmed runtime: #209 is fixed on 1214kd.** A partner can now knock out an alerted host-owned enemy with the
+  combat choke after a parry.

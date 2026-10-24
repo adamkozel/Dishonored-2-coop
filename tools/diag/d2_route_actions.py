@@ -221,8 +221,15 @@ def attempts(a, one):
     return 1
 
 
+def replica_unconscious(handle):
+    """True when this player's npc-stream entry for the NPC (handle as the probe prints it, hex) says unconscious."""
+    h = int(handle, 16) if isinstance(handle, str) else int(handle)
+    return any(int(e.get('handle', 0)) == h and e.get('unconscious') for e in status('.npc-stream.json').get('entries', []))
+
+
 def chase_try(a, k):
-    """None to try again, 0 when the task is done."""
+    """None to try again, 0 when the task is done, or with untilUnconscious when the chased NPC's replica is unconscious
+    (#197: Stilton's non-lethal outcome is a story flag, not a task)."""
     if a.get('crouch', True):
         crouch()
     npc, h = heading(a['npc'])
@@ -233,7 +240,7 @@ def chase_try(a, k):
     time.sleep(0.12)
     packet([a.get('button', 'RightShoulder')], a.get('ms', 3500), ly=a.get('ly', 0))
     time.sleep(a.get('ms', 3500) / 1000 + 2.0)
-    ok = done(a['until'])
+    ok = replica_unconscious(npc['handle']) if a.get('untilUnconscious') else done(a['until'])
     print(json.dumps({'try': k, 'npc': npc['name'], 'at': [round(v, 2) for v in p], 'done': ok}), flush=True)
     if ok:
         return 0
@@ -512,6 +519,82 @@ def grab(a):
     return 1
 
 
+def vulnerable_windows(handle=None):
+    """Off-balance windows applied to this player's replicas so far (1214kc npc-stream vulnerableApplies): of the NPC
+    with this handle, or of all of them."""
+    return sum(int(e.get('vulnerableApplies', 0)) for e in status('.npc-stream.json').get('entries', [])
+               if handle is None or int(e.get('handle', 0)) == handle)
+
+
+def target_handle(sub):
+    """The handle (an int, as the npc-stream status has it) of the nearest NPC matching sub, the one face() turns to."""
+    try:
+        found = npcs(sub)
+    except RuntimeError:
+        return None
+    if not found:
+        return None
+    me = status().get('localPosition') or [0, 0, 0]
+    h = min(found, key=lambda e: math.hypot(e['position'][0] - me[0], e['position'][1] - me[1]))['handle']
+    return int(h, 16) if isinstance(h, str) else int(h)
+
+
+def grab_react(a):
+    """Block in presses as grab does, but react to the stagger as a player would: when a new off-balance window reaches
+    this player's replica (vulnerableApplies grows, 1214kc), release, face the target and tap grab until the choke
+    starts or the window passes (route-dunwall-partnergrab-v1890b: three windows, no press landed in one).
+    Only the target's own windows count (route-dunwall-nonlethal-v1894b: 28 of 30 windows were another NPC, and the one
+    grab caught a guard)."""
+    start, n, grabs, windows, taps = time.time(), 0, 0, 0, 0
+    target = target_handle(a['face'])
+    seen = vulnerable_applies_at_start = vulnerable_windows(target)
+    face(a['face'])
+
+    def tap_window():
+        nonlocal taps
+        face(a['face'])
+        t = time.time()
+        while time.time() - t < a.get('window', 1600) / 1000:
+            packet([], 60)
+            time.sleep(0.06)
+            packet(['RightShoulder'], a.get('tap', 250) + 100)
+            taps += 1
+            t2 = time.time()
+            while time.time() - t2 < a.get('tap', 250) / 1000:
+                if player_state(a.get('state', 41)):
+                    return True
+        return False
+
+    while time.time() - start < a.get('ms', 300000) / 1000:
+        packet(['RightShoulder'], a.get('press', 700) + 100)
+        t = time.time()
+        grabbed = False
+        while time.time() - t < a.get('press', 700) / 1000:
+            if player_state(a.get('state', 41)):
+                grabbed = True
+                break
+            now = vulnerable_windows(target)
+            if now > seen:
+                seen = now
+                windows += 1
+                grabbed = tap_window()
+                break
+        if grabbed:
+            grabs += 1
+            packet(['RightShoulder'], a.get('hold', 5500))  # replaces the press while it is still down: no release
+            time.sleep(a.get('hold', 5500) / 1000 + 0.5)
+        packet([], a.get('gap', 150))
+        time.sleep(a.get('gap', 150) / 1000)
+        n += 1
+        if done(a['until']):
+            print(json.dumps({'presses': n, 'grabs': grabs, 'windows': windows, 'taps': taps, 'target': target, 'seconds': round(time.time() - start, 1), 'active': active_tasks()}), flush=True)
+            return 0
+        if n % a.get('faceEvery', 6) == 0:
+            face(a['face'])
+    print(json.dumps({'presses': n, 'grabs': grabs, 'windows': windows, 'taps': taps, 'target': target, 'windowsBefore': vulnerable_applies_at_start, 'timeout': True, 'active': active_tasks()}), flush=True)
+    return 1
+
+
 def main():
     global REPO, ROLE
     REPO = sys.argv[1]
@@ -521,7 +604,7 @@ def main():
     if ROLE not in ('host', 'client'):
         raise SystemExit('role must be host or client')
     return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'pickpocket_focus': pickpocket_focus, 'shoot': shoot, 'cycle': cycle,
-            'grab': grab}[sys.argv[2]](args)
+            'grab': grab, 'grab_react': grab_react}[sys.argv[2]](args)
 
 
 if __name__ == '__main__':

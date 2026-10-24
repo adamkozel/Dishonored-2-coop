@@ -1,0 +1,178 @@
+[
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_bedroom",
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_nearmayhew",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_mayhew",
+  "settle": 6000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "at",
+  "pos": [
+   -44.1,
+   -118.6,
+   62.7
+  ],
+  "yaw": -90,
+  "settle": 1000
+ },
+ {
+  "do": "action",
+  "name": "grab_react",
+  "args": {
+   "role": "client",
+   "face": "mortimer_ramsey",
+   "until": "Task_DW_NonLethal_KnockoutRamsey",
+   "ms": 240000,
+   "press": 700,
+   "gap": 150,
+   "hold": 5500,
+   "state": 41,
+   "window": 1600,
+   "tap": 250
+  },
+  "settle": 4000
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_ai_pause ld_spawner_guard_escape_1 300",
+  "settle": 500
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_ai_pause ld_spawner_guard_escape_2 300",
+  "settle": 500
+ },
+ {
+  "do": "loot",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "settle": 6000
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_2_open",
+  "z": 68.0,
+  "settle": 8000,
+  "offsets": [
+   [
+    -0.8,
+    0
+   ],
+   [
+    -0.6,
+    0
+   ],
+   [
+    -1.0,
+    0
+   ],
+   [
+    -0.7,
+    0.3
+   ],
+   [
+    -0.7,
+    -0.3
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "carry",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "settle": 3000,
+  "hold": 1200,
+  "pitches": [
+   55,
+   70,
+   40
+  ]
+ },
+ {
+  "do": "at",
+  "pos": [
+   -46.3,
+   -176.6,
+   68.1
+  ],
+  "yaw": 210,
+  "settle": 2000
+ },
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 1000
+ },
+ {
+  "do": "flag",
+  "role": "client",
+  "entity": "storyflags",
+  "name": "ramsey_in_vault",
+  "value": 1,
+  "ms": 30000,
+  "settle": 1000
+ },
+ {
+  "do": "flag",
+  "role": "host",
+  "entity": "storyflags",
+  "name": "ramsey_in_vault",
+  "value": 1,
+  "ms": 30000,
+  "settle": 1000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_ai_pause off",
+  "settle": 500
+ }
+]
