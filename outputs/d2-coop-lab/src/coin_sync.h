@@ -33,11 +33,16 @@ CoopCoinPacket coinLastAction{},coinRetiredAction{};
 // boundary. Never hold this lock during a native call or network/file I/O.
 SRWLOCK coinHookLock=SRWLOCK_INIT;
 struct CoinHookLease {NativeCoin binding{};std::uint64_t arm=0,epoch=0;};
-struct CoinHookEvent {std::uint64_t arm=0,epoch=0;int before=0,after=0,maximum=0;unsigned thread=0;bool valid=false;PickupFoodValue foodBefore{},foodAfter{};};
+struct CoinHookEvent {std::uint64_t arm=0,epoch=0;int before=0,after=0,maximum=0;unsigned thread=0;bool valid=false;PickupFoodValue foodBefore{},foodAfter{};bool grapple=false;};
 std::vector<CoinHookLease> coinHookLeases;
 std::array<CoinHookEvent,128> coinHookEvents{};unsigned coinHookCount=0;
 std::atomic<std::uint64_t> coinHookCalls{0},coinHookCandidates{0},coinHookOtherThread{0},coinHookOverflow{0};
 std::atomic<unsigned> coinHookLastThread{0};
+// 1214jg (#186): Far Reach rewards (fromGrapple) and refused rewards. For the last Far Reach or refused reward: the
+// checks it passed (bits: 1 player, 2 own state, 4 item, 8 claim flags, 16 outcome before, 32 wallet after, 64 item
+// after, 128 outcome delta), its state id and its state's vtable RVA.
+std::atomic<std::uint64_t> coinHookGrapple{0},coinHookGrappleValid{0},coinHookRefused{0},coinHookOtherState{0};
+std::atomic<unsigned> coinHookLastChecks{0},coinHookLastStateId{~0u},coinHookLastStateVt{0},coinHookLastGrapple{0};
 void publishCoinHookLease(){
     std::vector<CoinHookLease> next;for(const auto& c:coinSync.entries)next.push_back({c.binding,c.arm,coinSync.scope.epoch});
     AcquireSRWLockExclusive(&coinHookLock);coinHookLeases.swap(next);ReleaseSRWLockExclusive(&coinHookLock);
@@ -128,6 +133,15 @@ void receiveCoinPacket(const CoopCoinPacket& p,ULONGLONG tick){
     if(!c.revision){c.revision=1;++s.commits;c.deadline=tick+10000;c.result="host_commit_received";}else ++s.duplicates;
     c.actionSent=0;if(localRole)c.ack=0;
 }
+// The reward's state object must be the local player's own: LootObject (47) for an ordinary pickup, otherwise (a Far
+// Reach pull, a theft) any of the player's mode state slots whose id resolves back to it and whose owner is the player
+// component.
+bool coinRewardStateOwned(const CoinPlayer& p,std::uintptr_t state,unsigned& id){
+    if(p.loot==state){id=47;return true;}
+    std::uintptr_t slot=0,owner=0;
+    return state&&memoryRead(state+8,&id,4)&&id<90&&memoryRead(p.states.mode+0x10+id*8ull,&slot,8)&&slot==state&&
+        memoryRead(state+0x10,&owner,8)&&owner==p.states.component;
+}
 void observeCoinReward(void* state,void* pickable,unsigned char fromGrapple){
     CoinWalletGuard wallet;
     ++coinHookCalls;const auto thread=GetCurrentThreadId();coinHookLastThread=thread;if(thread!=engineThread.load())++coinHookOtherThread;
@@ -136,19 +150,25 @@ void observeCoinReward(void* state,void* pickable,unsigned char fromGrapple){
     ReleaseSRWLockShared(&coinHookLock);
     const bool candidate=lease.arm&&lease.epoch&&lease.binding.component;
     NativeCoin beforeCoin{};CoinPlayer before{};CoinOutcomeValue beforeValue{};bool valid=false;
-    if(candidate){++coinHookCandidates;valid=!fromGrapple&&readCoinPlayer(before,lease.binding.game)&&before.loot==reinterpret_cast<std::uintptr_t>(state)&&
-        readNativeCoin(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),lease.binding.game,lease.binding.handle,beforeCoin,true)&&sameNativeCoin(beforeCoin,lease.binding)&&
-        (beforeCoin.flags&2)&&!(beforeCoin.flags&8)&&!(beforeCoin.ownerFlags&1)&&readCoinOutcome(before,beforeCoin,beforeValue);
+    unsigned checks=0,stateId=~0u;const auto step=[&](bool ok,unsigned bit){if(ok)checks|=bit;return ok;};
+    if(candidate){++coinHookCandidates;
+        valid=step(readCoinPlayer(before,lease.binding.game),1)&&step(coinRewardStateOwned(before,reinterpret_cast<std::uintptr_t>(state),stateId),2)&&
+            step(readNativeCoin(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),lease.binding.game,lease.binding.handle,beforeCoin,true)&&sameNativeCoin(beforeCoin,lease.binding),4)&&
+            step((beforeCoin.flags&2)&&!(beforeCoin.flags&8)&&!(beforeCoin.ownerFlags&1),8)&&step(readCoinOutcome(before,beforeCoin,beforeValue),16);
     }
     realCoinReward(state,pickable,fromGrapple);
     if(!candidate)return;
     CoinPlayer after{};NativeCoin afterCoin{};CoinOutcomeValue afterValue{};
-    valid=valid&&readCoinPlayer(after,lease.binding.game)&&sameCoinWallet(before,after)&&
-       readNativeCoin(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),lease.binding.game,lease.binding.handle,afterCoin,true)&&sameNativeCoin(beforeCoin,afterCoin)&&
-       readCoinOutcome(after,afterCoin,afterValue)&&sameCoinOutcomeObjects(beforeValue,afterValue)&&(lease.binding.type==1||before.money==after.money)&&
-       validCoinOutcome(beforeValue,afterValue,lease.binding.quantity);
+    valid=valid&&step(readCoinPlayer(after,lease.binding.game)&&sameCoinWallet(before,after),32)&&
+       step(readNativeCoin(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),lease.binding.game,lease.binding.handle,afterCoin,true)&&sameNativeCoin(beforeCoin,afterCoin),64)&&
+       step(readCoinOutcome(after,afterCoin,afterValue)&&sameCoinOutcomeObjects(beforeValue,afterValue)&&(lease.binding.type==1||before.money==after.money)&&
+       validCoinOutcome(beforeValue,afterValue,lease.binding.quantity),128);
+    if(fromGrapple){++coinHookGrapple;if(valid)++coinHookGrappleValid;}
+    if(valid&&stateId!=47)++coinHookOtherState;
+    if(fromGrapple||!valid){std::uintptr_t vt=0;coinHookLastChecks=checks;coinHookLastStateId=stateId;coinHookLastGrapple=fromGrapple!=0;
+        if(state&&memoryRead(reinterpret_cast<std::uintptr_t>(state),&vt,8)&&vt>reinterpret_cast<std::uintptr_t>(gameImage))coinHookLastStateVt=static_cast<unsigned>(vt-reinterpret_cast<std::uintptr_t>(gameImage));}
     AcquireSRWLockExclusive(&coinHookLock);
-    if(coinHookCount<coinHookEvents.size())coinHookEvents[coinHookCount++]={lease.arm,lease.epoch,beforeValue.value,afterValue.value,beforeValue.maximum,thread,valid,beforeValue.food.value,afterValue.food.value};else ++coinHookOverflow;
+    if(coinHookCount<coinHookEvents.size())coinHookEvents[coinHookCount++]={lease.arm,lease.epoch,beforeValue.value,afterValue.value,beforeValue.maximum,thread,valid,beforeValue.food.value,afterValue.food.value,fromGrapple!=0};else ++coinHookOverflow;
     ReleaseSRWLockExclusive(&coinHookLock);
 }
 void consumeCoinHookEvents(){
@@ -158,6 +178,8 @@ void consumeCoinHookEvents(){
     for(unsigned i=0;i<count;++i){const auto& e=events[i];
         auto found=std::find_if(s.entries.begin(),s.entries.end(),[&](const auto& c){return c.arm==e.arm;});
         if(!coinWorldContext()||found==s.entries.end()||e.epoch!=s.scope.epoch){++s.rejected;continue;}auto& c=*found;
+        // 1214jg: an unconfirmed reward stays local to that item instead of stopping every shared pickup.
+        if(!e.valid){++coinHookRefused;++s.rejected;c.result=e.grapple?"far_reach_reward_unconfirmed":"native_reward_unconfirmed";continue;}
         if(!e.valid||!(c.binding.type==6?c.receipt.observeFood(e.foodBefore,e.foodAfter,c.binding.quantity):c.receipt.observe(e.before,e.after,c.binding.quantity,c.binding.type,e.maximum))){stopCoinSync("ordinary_reward_identity_or_delta_unconfirmed");return;}
         ++c.observations;++s.observations;c.result=s.result="ordinary_native_reward_observed";
     }
@@ -274,7 +296,7 @@ void writeCoinSync(){
     std::fputs("]}\n",f);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
     std::snprintf(path,sizeof(path),"%s.coin-hook.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     if(fopen_s(&f,tmp,"wb")||!f)return;
-    std::fprintf(f,"{\"calls\":%llu,\"candidates\":%llu,\"otherThreadCalls\":%llu,\"overflow\":%llu,\"lastThread\":%u,\"engineThread\":%u}\n",coinHookCalls.load(),coinHookCandidates.load(),coinHookOtherThread.load(),coinHookOverflow.load(),coinHookLastThread.load(),engineThread.load());
+    std::fprintf(f,"{\"calls\":%llu,\"candidates\":%llu,\"otherThreadCalls\":%llu,\"overflow\":%llu,\"lastThread\":%u,\"engineThread\":%u,\"grapple\":%llu,\"grappleValid\":%llu,\"refused\":%llu,\"otherState\":%llu,\"lastChecks\":%u,\"lastStateId\":%u,\"lastStateVtRva\":%u,\"lastGrapple\":%u}\n",coinHookCalls.load(),coinHookCandidates.load(),coinHookOtherThread.load(),coinHookOverflow.load(),coinHookLastThread.load(),engineThread.load(),coinHookGrapple.load(),coinHookGrappleValid.load(),coinHookRefused.load(),coinHookOtherState.load(),coinHookLastChecks.load(),coinHookLastStateId.load(),coinHookLastStateVt.load(),coinHookLastGrapple.load());
     const bool hookOk=!ferror(f);const int hookClosed=fclose(f);if(hookOk&&!hookClosed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
 
