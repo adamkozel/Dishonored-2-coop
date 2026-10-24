@@ -60,6 +60,8 @@ void log(const char* line) {
 LONG CALLBACK traceNativeException(EXCEPTION_POINTERS* event) {
     if(handleCoopPoseTrace(event)==EXCEPTION_CONTINUE_EXECUTION)return EXCEPTION_CONTINUE_EXECUTION;
     const auto code=event->ExceptionRecord->ExceptionCode;
+    // 1214jy (#195): a guarded native read's own fault; its __except returns the failure.
+    if(coopGuardedRead&&(code==EXCEPTION_ACCESS_VIOLATION||code==EXCEPTION_IN_PAGE_ERROR||code==EXCEPTION_GUARD_PAGE))return EXCEPTION_CONTINUE_SEARCH;
     if(code==EXCEPTION_ACCESS_VIOLATION||code==EXCEPTION_ILLEGAL_INSTRUCTION||code==EXCEPTION_STACK_OVERFLOW) {
         char line[256]{};
         const auto base=reinterpret_cast<std::uintptr_t>(GetModuleHandleW(nullptr));
@@ -223,6 +225,8 @@ BOOL WINAPI DllMain(HINSTANCE dll, DWORD reason, LPVOID) {
         std::snprintf(status,sizeof(status),"%s\\coop-status.json",data);std::snprintf(assets,sizeof(assets),"%s\\base\\game1voidmod.index",exe);
         SetEnvironmentVariableA("D2COOP_PRODUCT","1");SetEnvironmentVariableA("D2COOP_DATA_DIR",data);SetEnvironmentVariableA("D2COOP_STATUS_FILE",status);
         SetEnvironmentVariableA("D2COOP_PARTNER_ASSETS",GetFileAttributesA(assets)!=INVALID_FILE_ATTRIBUTES?"1":"0");
+        // 1214jz (#195): the diagnostic status files are opt-in for players (troubleshooting).
+        if(GetPrivateProfileIntA("d2coop","diagnostics",0,cfg)==1)SetEnvironmentVariableA("D2COOP_DIAGNOSTICS","1");
         // Mission checkpoints read the game's own autosave details (read only).
         char savegame[MAX_PATH]{};
         if(!GetPrivateProfileStringA("d2coop","savegame","",savegame,sizeof(savegame),cfg)){

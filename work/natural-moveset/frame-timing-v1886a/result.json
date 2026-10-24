@@ -1,0 +1,351 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "seconds": 120,
+    "phases": [
+      {
+        "phase": "lab",
+        "host": {
+          "framesPerSecond": 78.1,
+          "p50": 11.88,
+          "p90": 18.09,
+          "p99": 26.19,
+          "max": 62.18,
+          "spikes25PerMinute": 49.0,
+          "spikes50PerMinute": 1.0,
+          "spikes100PerMinute": 0.0,
+          "modP50": 5.752,
+          "modP99": 19.105,
+          "modMax": 51.356,
+          "modShare": 51.26,
+          "recentSpikeTops": {
+            "status_all": 32
+          },
+          "slowestStages": [
+            "engine_call_gap max 11492.9 ms, mean 13.397 ms",
+            "native_execute_buffer max 9503.3 ms, mean 1.271 ms",
+            "diagnostic_slice max 81.9 ms, mean 1.645 ms",
+            "status_all max 81.9 ms, mean 1.773 ms",
+            "writeDoppelgangerWorld max 81.9 ms, mean 1.713 ms",
+            "writeGuardStatus max 37 ms, mean 5.858 ms",
+            "writeDoorSync max 34.6 ms, mean 9.871 ms",
+            "writeAuthoringStatus max 29.7 ms, mean 0.815 ms"
+          ]
+        },
+        "client": {
+          "framesPerSecond": 79.1,
+          "p50": 11.48,
+          "p90": 17.68,
+          "p99": 24.4,
+          "max": 53.44,
+          "spikes25PerMinute": 44.0,
+          "spikes50PerMinute": 1.0,
+          "spikes100PerMinute": 0.0,
+          "modP50": 5.594,
+          "modP99": 17.443,
+          "modMax": 46.712,
+          "modShare": 53.42,
+          "recentSpikeTops": {
+            "status_all": 32
+          },
+          "slowestStages": [
+            "engine_call_gap max 10704.8 ms, mean 12.605 ms",
+            "native_execute_buffer max 8802.9 ms, mean 1.016 ms",
+            "status_all max 75.7 ms, mean 1.692 ms",
+            "writeMovementStatus max 72.7 ms, mean 0.96 ms",
+            "diagnostic_slice max 44.5 ms, mean 1.571 ms",
+            "writeGuardStatus max 41.9 ms, mean 5.553 ms",
+            "writeDoorSync max 37.5 ms, mean 9.531 ms",
+            "writeDoppelgangerFixture max 33.8 ms, mean 0.81 ms"
+          ]
+        }
+      },
+      {
+        "phase": "product",
+        "host": {
+          "framesPerSecond": 122.8,
+          "p50": 7.72,
+          "p90": 11.11,
+          "p99": 15.35,
+          "max": 20.47,
+          "spikes25PerMinute": 0.0,
+          "spikes50PerMinute": 0.0,
+          "spikes100PerMinute": 0.0,
+          "modP50": 1.281,
+          "modP99": 7.498,
+          "modMax": 11.286,
+          "modShare": 19.24,
+          "recentSpikeTops": {},
+          "slowestStages": [
+            "engine_call_gap max 11492.9 ms, mean 10.711 ms",
+            "native_execute_buffer max 9503.3 ms, mean 0.609 ms",
+            "diagnostic_slice max 81.9 ms, mean 1.649 ms",
+            "status_all max 81.9 ms, mean 1.242 ms",
+            "writeDoppelgangerWorld max 81.9 ms, mean 1.712 ms",
+            "writeGuardStatus max 37 ms, mean 5.856 ms",
+            "writeDoorSync max 34.6 ms, mean 9.873 ms",
+            "writeAuthoringStatus max 29.7 ms, mean 0.814 ms"
+          ]
+        },
+        "client": {
+          "framesPerSecond": 129.8,
+          "p50": 6.99,
+          "p90": 10.37,
+          "p99": 17.82,
+          "max": 27.32,
+          "spikes25PerMinute": 0.5,
+          "spikes50PerMinute": 0.0,
+          "spikes100PerMinute": 0.0,
+          "modP50": 0.383,
+          "modP99": 10.578,
+          "modMax": 18.341,
+          "modShare": 22.83,
+          "recentSpikeTops": {
+            "serviceBreakableSync": 1
+          },
+          "slowestStages": [
+            "engine_call_gap max 10704.8 ms, mean 10.096 ms",
+            "native_execute_buffer max 8802.9 ms, mean 0.488 ms",
+            "status_all max 75.7 ms, mean 1.18 ms",
+            "writeMovementStatus max 72.7 ms, mean 0.959 ms",
+            "diagnostic_slice max 44.5 ms, mean 1.577 ms",
+            "writeGuardStatus max 41.9 ms, mean 5.556 ms",
+            "writeDoorSync max 37.5 ms, mean 9.531 ms",
+            "writeDoppelgangerFixture max 33.8 ms, mean 0.81 ms"
+          ]
+        }
+      },
+      {
+        "phase": "off",
+        "host": {
+          "framesPerSecond": 162.6,
+          "p50": 6.1,
+          "p90": 7.84,
+          "p99": 8.58,
+          "max": 18.71,
+          "spikes25PerMinute": 3.0,
+          "spikes50PerMinute": 0.5,
+          "spikes100PerMinute": 0.0,
+          "modP50": 0.017,
+          "modP99": 1.154,
+          "modMax": 3.265,
+          "modShare": 2.64,
+          "recentSpikeTops": {
+            "followProbe": 1,
+            "sampleLocalPlayer": 5
+          },
+          "slowestStages": [
+            "engine_call_gap max 11492.9 ms, mean 8.735 ms",
+            "native_execute_buffer max 9503.3 ms, mean 0.342 ms",
+            "status_all max 81.9 ms, mean 0.855 ms",
+            "diagnostic_slice max 81.9 ms, mean 1.649 ms",
+            "writeDoppelgangerWorld max 81.9 ms, mean 1.712 ms",
+            "writeGuardStatus max 37 ms, mean 5.856 ms",
+            "writeDoorSync max 34.6 ms, mean 9.873 ms",
+            "writeAuthoringStatus max 29.7 ms, mean 0.814 ms"
+          ]
+        },
+        "client": {
+          "framesPerSecond": 164.9,
+          "p50": 6.06,
+          "p90": 6.43,
+          "p99": 6.82,
+          "max": 8.05,
+          "spikes25PerMinute": 0.5,
+          "spikes50PerMinute": 0.0,
+          "spikes100PerMinute": 0.0,
+          "modP50": 0.019,
+          "modP99": 1.171,
+          "modMax": 2.992,
+          "modShare": 2.4,
+          "recentSpikeTops": {
+            "status_all": 1
+          },
+          "slowestStages": [
+            "engine_call_gap max 10704.8 ms, mean 8.405 ms",
+            "native_execute_buffer max 8802.9 ms, mean 0.28 ms",
+            "status_all max 75.7 ms, mean 0.82 ms",
+            "writeMovementStatus max 72.7 ms, mean 0.959 ms",
+            "diagnostic_slice max 44.5 ms, mean 1.577 ms",
+            "writeGuardStatus max 41.9 ms, mean 5.556 ms",
+            "writeDoorSync max 37.5 ms, mean 9.531 ms",
+            "writeDoppelgangerFixture max 33.8 ms, mean 0.81 ms"
+          ]
+        }
+      }
+    ],
+    "lab": {
+      "phase": "lab",
+      "host": {
+        "framesPerSecond": 78.1,
+        "p50": 11.88,
+        "p90": 18.09,
+        "p99": 26.19,
+        "max": 62.18,
+        "spikes25PerMinute": 49.0,
+        "spikes50PerMinute": 1.0,
+        "spikes100PerMinute": 0.0,
+        "modP50": 5.752,
+        "modP99": 19.105,
+        "modMax": 51.356,
+        "modShare": 51.26,
+        "recentSpikeTops": {
+          "status_all": 32
+        },
+        "slowestStages": [
+          "engine_call_gap max 11492.9 ms, mean 13.397 ms",
+          "native_execute_buffer max 9503.3 ms, mean 1.271 ms",
+          "diagnostic_slice max 81.9 ms, mean 1.645 ms",
+          "status_all max 81.9 ms, mean 1.773 ms",
+          "writeDoppelgangerWorld max 81.9 ms, mean 1.713 ms",
+          "writeGuardStatus max 37 ms, mean 5.858 ms",
+          "writeDoorSync max 34.6 ms, mean 9.871 ms",
+          "writeAuthoringStatus max 29.7 ms, mean 0.815 ms"
+        ]
+      },
+      "client": {
+        "framesPerSecond": 79.1,
+        "p50": 11.48,
+        "p90": 17.68,
+        "p99": 24.4,
+        "max": 53.44,
+        "spikes25PerMinute": 44.0,
+        "spikes50PerMinute": 1.0,
+        "spikes100PerMinute": 0.0,
+        "modP50": 5.594,
+        "modP99": 17.443,
+        "modMax": 46.712,
+        "modShare": 53.42,
+        "recentSpikeTops": {
+          "status_all": 32
+        },
+        "slowestStages": [
+          "engine_call_gap max 10704.8 ms, mean 12.605 ms",
+          "native_execute_buffer max 8802.9 ms, mean 1.016 ms",
+          "status_all max 75.7 ms, mean 1.692 ms",
+          "writeMovementStatus max 72.7 ms, mean 0.96 ms",
+          "diagnostic_slice max 44.5 ms, mean 1.571 ms",
+          "writeGuardStatus max 41.9 ms, mean 5.553 ms",
+          "writeDoorSync max 37.5 ms, mean 9.531 ms",
+          "writeDoppelgangerFixture max 33.8 ms, mean 0.81 ms"
+        ]
+      }
+    },
+    "product": {
+      "phase": "product",
+      "host": {
+        "framesPerSecond": 122.8,
+        "p50": 7.72,
+        "p90": 11.11,
+        "p99": 15.35,
+        "max": 20.47,
+        "spikes25PerMinute": 0.0,
+        "spikes50PerMinute": 0.0,
+        "spikes100PerMinute": 0.0,
+        "modP50": 1.281,
+        "modP99": 7.498,
+        "modMax": 11.286,
+        "modShare": 19.24,
+        "recentSpikeTops": {},
+        "slowestStages": [
+          "engine_call_gap max 11492.9 ms, mean 10.711 ms",
+          "native_execute_buffer max 9503.3 ms, mean 0.609 ms",
+          "diagnostic_slice max 81.9 ms, mean 1.649 ms",
+          "status_all max 81.9 ms, mean 1.242 ms",
+          "writeDoppelgangerWorld max 81.9 ms, mean 1.712 ms",
+          "writeGuardStatus max 37 ms, mean 5.856 ms",
+          "writeDoorSync max 34.6 ms, mean 9.873 ms",
+          "writeAuthoringStatus max 29.7 ms, mean 0.814 ms"
+        ]
+      },
+      "client": {
+        "framesPerSecond": 129.8,
+        "p50": 6.99,
+        "p90": 10.37,
+        "p99": 17.82,
+        "max": 27.32,
+        "spikes25PerMinute": 0.5,
+        "spikes50PerMinute": 0.0,
+        "spikes100PerMinute": 0.0,
+        "modP50": 0.383,
+        "modP99": 10.578,
+        "modMax": 18.341,
+        "modShare": 22.83,
+        "recentSpikeTops": {
+          "serviceBreakableSync": 1
+        },
+        "slowestStages": [
+          "engine_call_gap max 10704.8 ms, mean 10.096 ms",
+          "native_execute_buffer max 8802.9 ms, mean 0.488 ms",
+          "status_all max 75.7 ms, mean 1.18 ms",
+          "writeMovementStatus max 72.7 ms, mean 0.959 ms",
+          "diagnostic_slice max 44.5 ms, mean 1.577 ms",
+          "writeGuardStatus max 41.9 ms, mean 5.556 ms",
+          "writeDoorSync max 37.5 ms, mean 9.531 ms",
+          "writeDoppelgangerFixture max 33.8 ms, mean 0.81 ms"
+        ]
+      }
+    },
+    "off": {
+      "phase": "off",
+      "host": {
+        "framesPerSecond": 162.6,
+        "p50": 6.1,
+        "p90": 7.84,
+        "p99": 8.58,
+        "max": 18.71,
+        "spikes25PerMinute": 3.0,
+        "spikes50PerMinute": 0.5,
+        "spikes100PerMinute": 0.0,
+        "modP50": 0.017,
+        "modP99": 1.154,
+        "modMax": 3.265,
+        "modShare": 2.64,
+        "recentSpikeTops": {
+          "followProbe": 1,
+          "sampleLocalPlayer": 5
+        },
+        "slowestStages": [
+          "engine_call_gap max 11492.9 ms, mean 8.735 ms",
+          "native_execute_buffer max 9503.3 ms, mean 0.342 ms",
+          "status_all max 81.9 ms, mean 0.855 ms",
+          "diagnostic_slice max 81.9 ms, mean 1.649 ms",
+          "writeDoppelgangerWorld max 81.9 ms, mean 1.712 ms",
+          "writeGuardStatus max 37 ms, mean 5.856 ms",
+          "writeDoorSync max 34.6 ms, mean 9.873 ms",
+          "writeAuthoringStatus max 29.7 ms, mean 0.814 ms"
+        ]
+      },
+      "client": {
+        "framesPerSecond": 164.9,
+        "p50": 6.06,
+        "p90": 6.43,
+        "p99": 6.82,
+        "max": 8.05,
+        "spikes25PerMinute": 0.5,
+        "spikes50PerMinute": 0.0,
+        "spikes100PerMinute": 0.0,
+        "modP50": 0.019,
+        "modP99": 1.171,
+        "modMax": 2.992,
+        "modShare": 2.4,
+        "recentSpikeTops": {
+          "status_all": 1
+        },
+        "slowestStages": [
+          "engine_call_gap max 10704.8 ms, mean 8.405 ms",
+          "native_execute_buffer max 8802.9 ms, mean 0.28 ms",
+          "status_all max 75.7 ms, mean 0.82 ms",
+          "writeMovementStatus max 72.7 ms, mean 0.959 ms",
+          "diagnostic_slice max 44.5 ms, mean 1.577 ms",
+          "writeGuardStatus max 41.9 ms, mean 5.556 ms",
+          "writeDoorSync max 37.5 ms, mean 9.531 ms",
+          "writeDoppelgangerFixture max 33.8 ms, mean 0.81 ms"
+        ]
+      }
+    }
+  },
+  "scope": "Frame pacing of both lab games on a mission with the co-op services on, then off; lab restored."
+}

@@ -1,0 +1,31 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 5000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_diagnostics off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_diagnostics off"
+ },
+ {
+  "do": "wait",
+  "ms": 15000
+ },
+ {
+  "do": "frametiming"
+ },
+ {
+  "do": "wait",
+  "ms": 120000
+ },
+ {
+  "do": "frametiming"
+ }
+]

@@ -6,7 +6,11 @@ struct NativeServiceTimings {
     struct Event {const char* name=nullptr;ULONGLONG tick=0;double ms=0;};
     std::array<Stage,128> stages{};std::array<Event,32> events{};
     unsigned used=0;std::uint64_t eventCount=0;
+    // 1214jx (#195): this frame's most expensive named scope; the aggregate scopes are left out so the service shows.
+    const char* frameTop=nullptr;double frameTopMs=0;
     void add(const char* name,double ms){
+        if(ms>frameTopMs){bool aggregate=false;for(const char* a:{"transport_all","native_services_all","presentation_all","native_execute_buffer","engine_call_gap","diagnostic_slice"})aggregate=aggregate||!std::strcmp(a,name);
+            if(!aggregate){frameTop=name;frameTopMs=ms;}}
         unsigned i=0;for(;i<used;++i)if(!std::strcmp(stages[i].name,name))break;
         if(i==used){if(used==stages.size())return;stages[used++].name=name;}
         auto& s=stages[i];++s.count;s.total+=ms;s.last=ms;s.maximum=(std::max)(s.maximum,ms);

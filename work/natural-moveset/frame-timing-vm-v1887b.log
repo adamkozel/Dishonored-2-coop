@@ -1,0 +1,245 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             96 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214jz",
+      "hostDll": "2217D81DBB1EA70A2BAD51822768B37BCBAF50B486535096604AFD96C1B8ED6C",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "commands": [
+      "step02-command host coop_diagnostics off",
+      "step03-command client coop_diagnostics off",
+      "step08-command host coop_product_auto off",
+      "step09-command host coop_checkpoint_sync off",
+      "step10-command host coop_door_sync off",
+      "step11-command host coop_usable_sync off",
+      "step12-command host coop_coin_sync off",
+      "step13-command host coop_npc_stream off",
+      "step14-command host coop_trigger_mirror off",
+      "step15-command host coop_breakable_sync off",
+      "step16-command host coop_prop_rest off",
+      "step17-command host coop_use_mirror off",
+      "step18-command client coop_product_auto off",
+      "step19-command client coop_checkpoint_sync off",
+      "step20-command client coop_door_sync off",
+      "step21-command client coop_usable_sync off",
+      "step22-command client coop_coin_sync off",
+      "step23-command client coop_npc_stream off",
+      "step24-command client coop_trigger_mirror off",
+      "step25-command client coop_breakable_sync off",
+      "step26-command client coop_prop_rest off",
+      "step27-command client coop_use_mirror off"
+    ],
+    "frameTiming": [
+      {
+        "step": "step05-frametiming",
+        "host": {
+          "diagnostics": false,
+          "frames": 35154,
+          "spikes25": 131,
+          "spikes50": 13,
+          "p50": 8.29,
+          "p99": 18.53,
+          "max": 25.42,
+          "modP50": 1.497,
+          "modP99": 8.943
+        },
+        "client": {
+          "diagnostics": false,
+          "frames": 4586,
+          "spikes25": 2485,
+          "spikes50": 64,
+          "p50": 26.63,
+          "p99": 52.58,
+          "max": 252.25,
+          "modP50": 7.035,
+          "modP99": 25.665
+        }
+      },
+      {
+        "step": "step07-frametiming",
+        "host": {
+          "diagnostics": false,
+          "frames": 53784,
+          "spikes25": 132,
+          "spikes50": 13,
+          "p50": 7.38,
+          "p99": 15.06,
+          "max": 22.65,
+          "modP50": 0.144,
+          "modP99": 7.764
+        },
+        "client": {
+          "diagnostics": false,
+          "frames": 10286,
+          "spikes25": 5068,
+          "spikes50": 68,
+          "p50": 24.16,
+          "p99": 46.56,
+          "max": 49.83,
+          "modP50": 3.586,
+          "modP99": 13.525
+        }
+      },
+      {
+        "step": "step29-frametiming",
+        "host": {
+          "diagnostics": false,
+          "frames": 96884,
+          "spikes25": 134,
+          "spikes50": 13,
+          "p50": 6.71,
+          "p99": 12.28,
+          "max": 20.35,
+          "modP50": 0.109,
+          "modP99": 4.138
+        },
+        "client": {
+          "diagnostics": false,
+          "frames": 22354,
+          "spikes25": 10431,
+          "spikes50": 76,
+          "p50": 22.82,
+          "p99": 46.70,
+          "max": 53.41,
+          "modP50": 1.992,
+          "modP99": 12.114
+        }
+      },
+      {
+        "step": "step31-frametiming",
+        "host": {
+          "diagnostics": false,
+          "frames": 120002,
+          "spikes25": 134,
+          "spikes50": 13,
+          "p50": 6.51,
+          "p99": 11.05,
+          "max": 23.41,
+          "modP50": 0.105,
+          "modP99": 3.834
+        },
+        "client": {
+          "diagnostics": false,
+          "frames": 28311,
+          "spikes25": 13014,
+          "spikes50": 76,
+          "p50": 21.77,
+          "p99": 46.21,
+          "max": 49.25,
+          "modP50": 1.823,
+          "modP99": 10.410
+        }
+      }
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 11,
+        "pos": [
+          -30.37451,
+          193.187561,
+          1.25397
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 6,
+        "pos": [
+          -31.082645,
+          192.483963,
+          1.205707
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "gameflowEqual": true,
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

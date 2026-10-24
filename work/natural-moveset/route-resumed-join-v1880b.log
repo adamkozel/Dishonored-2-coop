@@ -1,0 +1,211 @@
+{
+  "failure": null,
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "healthHold": [
+      "from step step01-heal"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-heal",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step02-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step03-use",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step04-save",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step05-load",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step06-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step07-use",
+        "host": "armed a1 s0/o0/m0/p0 slot70 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step08-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot70 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step09-census",
+        "host": "armed a1 s0/o0/m0/p0 slot70 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      }
+    ],
+    "saveSlot": {
+      "slot": "SLOT70",
+      "try": 1
+    },
+    "loadedEpoch": 21,
+    "join": {
+      "distance": 8.93,
+      "gameflowEqual": true,
+      "npcStateDiffs": 16
+    },
+    "joinAudit": {
+      "catchUp": "catching_up awarded 1/1 failed 0",
+      "pickupsOnlyClient": 1,
+      "pickupsOnlyHost": 77,
+      "doorDiffs": 0,
+      "usableDiffs": 6,
+      "flagDiffs": 0
+    },
+    "joinAudit60": {
+      "catchUp": "caught_up awarded 1/0 failed 0",
+      "pickupsOnlyClient": 0,
+      "pickupsOnlyHost": 77,
+      "doorDiffs": 0,
+      "usableDiffs": 6,
+      "flagDiffs": 0
+    },
+    "census": [
+      {
+        "step": "step09-census",
+        "host": {
+          "pickups": [
+            {
+              "name": "script_dried_lezard_01_2",
+              "quantity": 1,
+              "position": [
+                4.18913,
+                20.7907,
+                18.8805
+              ]
+            },
+            {
+              "name": "script_dried_lezard_01_3",
+              "quantity": 1,
+              "position": [
+                4.16894,
+                20.6486,
+                18.8718
+              ]
+            },
+            {
+              "name": "pickups_dried_lezard_01_1",
+              "quantity": 1,
+              "position": [
+                -15.4085,
+                160.7,
+                4.21011
+              ]
+            }
+          ],
+          "pickupTotal": 363,
+          "usables": []
+        },
+        "client": {
+          "pickups": [
+            {
+              "name": "script_dried_lezard_01_2",
+              "quantity": 1,
+              "position": [
+                4.18913,
+                20.7907,
+                18.8805
+              ]
+            },
+            {
+              "name": "script_dried_lezard_01_3",
+              "quantity": 1,
+              "position": [
+                4.16894,
+                20.6486,
+                18.8718
+              ]
+            }
+          ],
+          "pickupTotal": 287,
+          "usables": []
+        }
+      }
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 10,
+        "pos": [
+          -14.393361,
+          160.315643,
+          3.312917
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 21,
+        "cine": 10,
+        "pos": [
+          -38.889999,
+          189.490005,
+          3.21011
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "passed": true,
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo in lab product mode; Dunwall fixture restored."
+}
