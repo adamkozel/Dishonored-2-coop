@@ -302,7 +302,8 @@ void traceEntityEvent(std::uint32_t variant,void* entity,void* event){
 using NativeEventPost=void*(*)(void*,void*,void*,void*,void*);
 NativeEventPost realEventPost883=nullptr,realEventPost884=nullptr,realEventPost8848=nullptr;
 void* eventPost883(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(0,a,b);return realEventPost883(a,b,c,d,e);}
-void* eventPost884(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(1,a,c);return realEventPost884(a,b,c,d,e);}
+// 1214jn (#187): every "use" event (descriptor 0x1439aa130) also goes to the use mirror's observer.
+void* eventPost884(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(1,a,c);if(c==reinterpret_cast<void*>(gameImage+0x39aa130))observeUseEvent(a,d);return realEventPost884(a,b,c,d,e);}
 void* eventPost8848(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(2,a,c);return realEventPost8848(a,b,c,d,e);}
 bool hookEventPost(std::uintptr_t rva,const unsigned char* prefix,unsigned length,void* wrapper,NativeEventPost& real){
     auto* target=gameImage+rva;if(std::memcmp(target,prefix,length))return false;

@@ -1,0 +1,368 @@
+{
+  "passed": false,
+  "failure": "3 changes in the client's world did not happen in the host's",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "client",
+    "usable": "script_lever_windturbine_1_1_1",
+    "radius": 40.0,
+    "pairing": "corvo-emily",
+    "channel": {
+      "client": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 1,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 7,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      },
+      "host": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 0,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 9,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      }
+    },
+    "tries": [
+      {
+        "bearing": 0,
+        "logic": {
+          "settled": true,
+          "host": 12,
+          "client": 12
+        },
+        "view": [
+          -40.7325,
+          120.845,
+          23.5475
+        ]
+      },
+      {
+        "bearing": 0,
+        "height": 0.0,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": 0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": -0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 45,
+        "logic": {
+          "settled": true,
+          "host": 1,
+          "client": 1
+        },
+        "view": [
+          -41.0536,
+          121.589,
+          23.2355
+        ]
+      },
+      {
+        "bearing": 45,
+        "height": 0.0,
+        "stand": [
+          -41.0172,
+          121.626,
+          21.5466
+        ],
+        "focus": {
+          "handle": "0x1cf61910",
+          "name": "script_lever_windturbine_1_1_1"
+        },
+        "current": 1
+      }
+    ],
+    "trace": {
+      "client": {
+        "kept": 878,
+        "total": 878
+      },
+      "host": {
+        "kept": 770,
+        "total": 770
+      }
+    },
+    "signalsOnlyInSource": [
+      {
+        "signal": "|2057958289|1049596498|30020280",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|23263009|0|29785976",
+        "source": 206,
+        "peer": 160
+      },
+      {
+        "signal": "|186434337|1582773737|30283224",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|634052596|910182544|30109832",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|930260103|1049596498|30020280",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|25|1|30194824",
+        "source": 6,
+        "peer": 5
+      },
+      {
+        "signal": "|1778058138|1098592424|30020280",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|1022053085|1860297249|30257144",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "|152885526|1098592424|30020280",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|1466836816|910182544|30109832",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "|27|1|30194824",
+        "source": 33,
+        "peer": 27
+      },
+      {
+        "signal": "|629502647|1049596498|30020280",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "|375991567|910182544|30109832",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|1213425787|910182544|30109832",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|431834367|1683619872|30283512",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "|397074466|910182544|30109832",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|12|2|30257144",
+        "source": 39,
+        "peer": 32
+      },
+      {
+        "signal": "|13|1|30136392",
+        "source": 33,
+        "peer": 27
+      }
+    ],
+    "signalsOnlyInPeer": [
+      {
+        "signal": "|193|1|30228328",
+        "peer": 32,
+        "source": 30
+      },
+      {
+        "signal": "|121|2|30257144",
+        "peer": 32,
+        "source": 30
+      },
+      {
+        "signal": "|141|1|30109832",
+        "peer": 32,
+        "source": 30
+      },
+      {
+        "signal": "|138|4|30256664",
+        "peer": 32,
+        "source": 30
+      },
+      {
+        "signal": "|134|1|30164808",
+        "peer": 32,
+        "source": 30
+      },
+      {
+        "signal": "|139|4|30256664",
+        "peer": 32,
+        "source": 30
+      },
+      {
+        "signal": "|122|2|30257144",
+        "peer": 32,
+        "source": 30
+      },
+      {
+        "signal": "|137|1|30283224",
+        "peer": 32,
+        "source": 30
+      }
+    ],
+    "activations": {
+      "client": [],
+      "host": []
+    },
+    "changes": {
+      "client": {
+        "moved": {
+          "script_fx_target_blade_01": [
+            -42.888,
+            116.548,
+            22.5724
+          ],
+          "script_speaker_wol": [
+            -28.6821,
+            110.361,
+            20.6164
+          ],
+          "script_fx_target_blade_02": [
+            -45.2331,
+            123.251,
+            22.3196
+          ],
+          "script_kar_speaker_turnbuckle_01_1": [
+            -28.6817,
+            110.361,
+            20.6237
+          ],
+          "script_fx_target_blade_03": [
+            -43.9584,
+            119.606,
+            28.4374
+          ]
+        },
+        "appeared": [],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      },
+      "host": {
+        "moved": {
+          "script_kar_speaker_turnbuckle_01_1": [
+            -28.677,
+            110.362,
+            20.5778
+          ],
+          "script_speaker_wol": [
+            -28.6779,
+            110.361,
+            20.5707
+          ]
+        },
+        "appeared": [],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      }
+    },
+    "lever": {
+      "host": 1,
+      "client": 1,
+      "from": 0
+    },
+    "unshared": [
+      {
+        "entity": "script_fx_target_blade_01",
+        "source": [
+          -42.888,
+          116.548,
+          22.5724
+        ],
+        "peer": [
+          -42.9823,
+          116.821,
+          22.1439
+        ]
+      },
+      {
+        "entity": "script_fx_target_blade_02",
+        "source": [
+          -45.2331,
+          123.251,
+          22.3196
+        ],
+        "peer": [
+          -45.3171,
+          123.494,
+          22.8617
+        ]
+      },
+      {
+        "entity": "script_fx_target_blade_03",
+        "source": [
+          -43.9584,
+          119.606,
+          28.4374
+        ],
+        "peer": [
+          -43.7817,
+          119.095,
+          28.396
+        ]
+      }
+    ]
+  },
+  "scope": "1861 (#187): the scripted lever script_lever_windturbine_1_1_1 used by the client on campaign/edge_of_the_world/eotw.mapinfo; the lever state and its consequences within 40 m in both worlds"
+}
