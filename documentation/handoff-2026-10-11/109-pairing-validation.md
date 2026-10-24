@@ -91,9 +91,47 @@ Release 0.9.0 left deaths and checkpoints unshared in real co-op sessions (fixed
     - The console command `ark_difficulty_level_override 2` was queued (engine log) but did not change the cvar
       (still -1). The preset stayed Easy, including after a mission load. The console's reply is not logged.
       Hypothesis: the cvar is protected (cheat or init-only).
-    - Next, through the d2-ghidra MCP: find the cvar's readers and flags, and the native setter that the difficulty
-      options use, so the partner's game can apply the host's preset before join-follow loads the mission.
+    - Resolved through the d2-ghidra MCP and fixed in 1214kb: see [Difficulty sync](#difficulty-sync-177-1214kb) below.
 - **Level-transition choice:** the Death to the Empress tower door offers Go / Stay on co-op saves. The choice is a pending switch to logic 9 while the logic stays 1; X closes it and A takes Go.
   - The user saw the harness sit on it ("leave or stay").
   - v1765 confirms it in the use step and in Settle.
 - **Endings:** the stalled endings (Royal Conservatory v1762b, Grand Palace v1762a) were route-step misfires: the talk and use steps count any scene change as a hit. Both endings passed on the next attempts, as Meagan's endings did in four other missions.
+
+## Difficulty sync (#177, 1214kb)
+
+**Native path (d2-ghidra, confirmed static):**
+- The difficulty manager is embedded in the game object at `+0x1f7b90`:
+  - dword `+0` is 1 once it is initialized;
+  - `+4` is the preset index: 0 Easy, 1 Medium, 2 Hard, 3 Very Hard, 4 Custom;
+  - `+8` is the `arkDeclDifficulty`, and `+0x10` the active preset.
+- `FUN_140648f20(manager, index)` is the native setter. It:
+  1. removes every registered entity's difficulty modifiers (`FUN_1406491f0`);
+  2. takes preset `[index]` of the decl. An index past the decl's presets takes the static custom preset at `0x1439889f0`, whose fields `+0x68..+0xc4` are the 22 custom values;
+  3. re-applies the modifiers (`FUN_14060b970`);
+  4. sets `+4` and the cvar `ark_difficulty_current`;
+  5. writes the profile keys of the current campaign slot (`FUN_1406492c0`, under the profile write lock): `difficultyPresetIndex_%02d`, and for Custom the custom values (`difficultyEnemyDamage`, `difficultyEnemyPerception` and so on).
+- Its only caller is the profile load `FUN_140648590`. That reads the slot's keys, or takes the one-shot override `ark_difficulty_level_override` (it resets it to -1), then calls the setter.
+  - This explains difficulty-override-v1881a: the override is consumed only by that load.
+- `difficultySaveModel` (`0x143988aa4`) is written for every preset; the sync leaves it alone.
+- The setter's profile write lands in the partner's co-op profile (`savegame_coop/profile.bin`, chapter 107). Her single-player campaigns keep their own difficulty.
+
+**1214kb (`difficulty_sync.h`):**
+- The host publishes its index, and for Custom the 22 values, in a new packet `D2DF` (120 bytes), every 2 s and on a change.
+- The partner calls the setter on the engine thread in gameplay when her index or custom values differ, at most every 5 s. For Custom she first writes the host's values into the static preset.
+- Status: `coop-status.json.difficulty.json`.
+- Lab commands: `coop_difficulty_sync on|off`, and `coop_difficulty_set <0-4>`, which calls the same setter in the local game.
+- The harness Route-MissionVM-v1889 adds a `difficulty` step. It keeps both games' status and the probe's `--difficulty` preset, and with `expect` it waits until both games run that index with the same preset.
+
+**Confirmed runtime** ([difficulty-sync-vm-v1889a](../../work/natural-moveset/difficulty-sync-vm-v1889a), two accounts, both on co-op saves, Dunwall tower), pass:
+
+| Step | Host | Partner |
+|---|---|---|
+| Start | Medium | Medium (matched, nothing applied) |
+| Partner sync off, partner set to Easy | Medium | Easy |
+| Partner sync on | Medium | Medium (applied) |
+| Host set to Hard | Hard | Hard (applied) |
+| Host set to Custom | Custom (the static preset `+0x39889f0`) | Custom, the same values (applied) |
+| Host set back to Medium | Medium | Medium (applied) |
+
+- The partner applied 4 times with no failures. Both games ended on Medium, as they started, and restoration passed.
+- Hypothesis: the host's options menu changes the index through the same profile load, so the partner follows it too. That path was not driven in this take.
