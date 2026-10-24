@@ -99,7 +99,9 @@ Each case must commit once in both worlds, leave both worlds and reach each play
   - Both worlds hold the same pickup actors (about 458 on Edge of the World).
   - A pickup whose component flag byte (`+0xd0`) has any of its high bits set (`0xf0`) is not read, so it is not cataloged. In a world fresh from the mission start, about 165 are in that state. In a world loaded from a save, about 90 are.
   - After a join to a resumed host, 73 to 77 pickups readable in the host's world were dormant in the partner's, so the shared catalog left them out (`localOnly`).
-  - Since 1214jr, the host's taking of such a pickup still reaches the partner, through the pickup presence ([chapter 106](106-partner-led-story-and-mid-mission-join.md#a-partner-joining-a-resumed-host-189)). The partner's taking of one does not reach the host (#203).
+  - Since 1214jr, the host's taking of such a pickup still reaches the partner, through the pickup presence ([chapter 106](106-partner-led-story-and-mid-mission-join.md#a-partner-joining-a-resumed-host-189)).
+  - Since 1214jv (#203), the partner's taking of one reaches the host too, for authored names. [route-resumed-join-v1880a](../../work/natural-moveset/route-resumed-join-v1880a): she took `pickups_dried_lezard_01`, which was outside the catalog, and the host's world caught it up.
+  - Pickups that wake later still never join the catalog, so they have no shared one-transaction commit; the presence is eventually consistent instead.
 
 ## Open
 

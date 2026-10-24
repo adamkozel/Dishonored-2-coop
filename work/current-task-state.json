@@ -22838,5 +22838,12 @@
     "Fix": "join-follow loads a host mission only from a publication under 3 s old (1214ju); a partner on the main menu after the tutorial reloaded the mission the host had just left",
     "Evidence": "route-training-join-v1882a (the join arms once the tutorial page closes; the reload at the end), v1882b (fixed: both on the main menu); route-training-pair-v1883a/b (stealth lessons pass with both from the start, choke 4 tries, theft 1; combat lessons stall, #206)",
     "Status": "done, chapter 106; follow-up #206"
+  },
+  "PickupsBothWays": {
+    "Card": "#203",
+    "Candidate": "candidate-npc-combat-v1214jv",
+    "Fix": "the pickup presence and catch-up run in both roles (D2PP from either role); the host catches up authored pickups only; a target must be absent from the peer's last two presences",
+    "Evidence": "route-resumed-join-v1880a: the partner caught up the host's pre-save banana; she took pickups_dried_lezard_01 (outside the catalog) and the host's world caught it up; both worlds 456 pickup actors",
+    "Status": "done, chapters 83 and 106"
   }
 }

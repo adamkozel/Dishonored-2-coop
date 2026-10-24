@@ -537,7 +537,17 @@ partner's fresh world lacks.
   cycles reclassify only changed slots.
 - **The award:** a caught-up pickup rewards the partner as a shared pickup would have (currency to both, items to each
   player's inventory).
-- **Not covered:** the partner's taking of a pickup outside the shared catalog does not reach the host (#203).
+- **Both ways (1214jv, #203):**
+  - The partner sends its presence too. The host catches up the authored pickups the partner took that were outside
+    the shared catalog. It never catches up runtime-named ones: an NPC's drop can be missing from the partner's world
+    without her having taken it.
+  - In both roles a target must be absent from the peer's last two presences, the older received at least 10 s after
+    this world first had the pickup.
+  - [route-resumed-join-v1880a](../../work/natural-moveset/route-resumed-join-v1880a) (confirmed runtime):
+    - the partner caught up the banana the host took before saving (1 award);
+    - she then took `pickups_dried_lezard_01` (dormant in her world at the join, so outside the catalog), and the host's
+      world caught up exactly that pickup (1 award);
+    - both worlds ended with the same 456 pickup actors.
 
 ### Door locks (1214js)
 

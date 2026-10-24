@@ -12,7 +12,8 @@
 // each eligible pickup absent from it, as a shared pickup would have been.
 // Pickups spawned at load are named "<declaration>_<entity slot>" and their slots can differ between worlds
 // (ammo_bolt_pack_regular_12140 and _12358): those match by base name within 3 m. Character variants
-// (pickups_news_kg_ontherun_corvo/_emily) are never caught up.
+// (pickups_news_kg_ontherun_corvo/_emily) are never caught up. Since 1214jv (#203) the partner sends its presence too,
+// so a pickup outside the shared catalog that the partner took leaves the host's world as well (authored names only).
 constexpr unsigned kPickupPresenceMax=2048;
 #pragma pack(push,1)
 struct PickupPresenceEntry {std::uint64_t name=0,base=0;float position[3]{};std::uint32_t reserved=0;};
@@ -52,11 +53,12 @@ inline std::vector<PickupPresenceEntry> pickupPresenceEntries(const std::vector<
     out.erase(std::unique(out.begin(),out.end(),[](const auto& a,const auto& b){return a.name==b.name;}),out.end());
     return out;
 }
-// Only the host's presence crosses, scoped to both sessions, both world epochs and the shared map, with exactly its
-// entries' bytes; names are sorted and unique, and only runtime-named entries carry a base and a position.
+// The peer's presence, from either role since 1214jv (#203), scoped to both sessions, both world epochs and the shared
+// map, with exactly its entries' bytes; names are sorted and unique, and only runtime-named entries carry a base and a
+// position.
 inline bool validPickupPresence(const PickupPresencePacket& p,std::size_t bytes,const CoopPosePacket& local,const CoopPosePacket& peer){
     const auto& h=p.header;
-    if(h.magic!=0x50503244||h.version!=2||h.size!=sizeof(PickupPresenceHeader)||h.role!=0||h.role!=peer.role||h.count>kPickupPresenceMax||
+    if(h.magic!=0x50503244||h.version!=2||h.size!=sizeof(PickupPresenceHeader)||h.role>1||h.role!=peer.role||h.role==local.role||h.count>kPickupPresenceMax||
        bytes!=pickupPresenceBytes(h.count)||!h.sequence||!coopWorldPairReady(local,peer)||h.sourceSession!=peer.session||h.targetSession!=local.session||
        h.sourceEpoch!=peer.worldEpoch||h.targetEpoch!=local.worldEpoch||h.mapId!=local.mapId)return false;
     for(unsigned i=0;i<h.count;++i){const auto& e=p.entries[i];
@@ -72,7 +74,10 @@ inline bool pickupInPresence(const PickupPresenceItem& item,const std::vector<Pi
     for(const auto& e:host)if(e.base==base){float d=0;for(unsigned k=0;k<3;++k)d+=(e.position[k]-item.position[k])*(e.position[k]-item.position[k]);if(d<=9.f)return true;}
     return false;
 }
-// A local pickup the host's world no longer has.
-inline bool pickupCatchUpTarget(const PickupPresenceItem& item,const std::vector<PickupPresenceEntry>& host){
-    return !pickupCharacterNamed(item.name)&&!pickupInPresence(item,host);
+// A local pickup the peer's world no longer has, in its last two presences. The host catches up only authored names
+// (1214jv, #203): a pickup spawned at run time in the host's world (an NPC's drop) can be missing from the partner's
+// world without the partner having taken it.
+inline bool pickupCatchUpTarget(const PickupPresenceItem& item,const std::vector<PickupPresenceEntry>& peer,const std::vector<PickupPresenceEntry>& previous,bool authoredOnly=false){
+    if(pickupCharacterNamed(item.name)||(authoredOnly&&pickupRuntimeNamed(item.name,item.handle)))return false;
+    return !pickupInPresence(item,peer)&&!pickupInPresence(item,previous);
 }

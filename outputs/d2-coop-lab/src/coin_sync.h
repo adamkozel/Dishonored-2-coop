@@ -150,22 +150,22 @@ std::vector<PickupPresenceItem> pickupCensusItems(){
 struct PickupCatchUpTarget {std::string name;std::uint32_t handle=0;};
 struct PickupCatchUp {
     std::uint64_t epoch=0,peerEpoch=0,map=0,presenceSent=0,presenceReceived=0,rejected=0,refusedSends=0,awarded=0,failed=0,deferrals=0,planned=0;
-    std::uint64_t sentCycle=0,plannedCycle=0,sentDigest=0,sentEpoch=0,sentPeerEpoch=0,sentMap=0;ULONGLONG sentAt=0,hostAt=0;std::uint32_t sentEntries=0;
-    std::vector<PickupPresenceEntry> host;std::vector<PickupCatchUpTarget> targets;std::size_t cursor=0;std::unordered_map<std::string,bool> attempted;
+    std::uint64_t sentCycle=0,plannedCycle=0,sentDigest=0,sentEpoch=0,sentPeerEpoch=0,sentMap=0;ULONGLONG sentAt=0,peerAt=0,previousAt=0;std::uint32_t sentEntries=0;
+    std::vector<PickupPresenceEntry> peer,previous;std::vector<PickupCatchUpTarget> targets;std::size_t cursor=0;std::unordered_map<std::string,bool> attempted;
     CoinAwardReceipt receipt{};unsigned calls=0;const char* result="idle";std::vector<std::string> awardedNames,failedNames;
 } pickupCatchUp;
 std::uint64_t pickupPresenceSequence=0;
-// The host's presence, after each completed census cycle when it changed (positions of runtime pickups included), or
-// at least every 15 s, or at once for a new pair of worlds.
+// This world's presence, after each completed census cycle when it changed (positions of runtime pickups included), or
+// at least every 15 s, or at once for a new pair of worlds. Since 1214jv (#203) both roles send it.
 void sendPickupPresence(ULONGLONG tick){
     auto& c=pickupCatchUp;const auto& census=pickupCensus;
-    if(localRole||!census.cycles||c.sentCycle==census.cycles||census.game!=observedGame||!coinConnection()||!coopWorldPairReady(outgoing,remote)||outgoing.mapId!=remote.mapId)return;
+    if(localRole>1||!census.cycles||c.sentCycle==census.cycles||census.game!=observedGame||!coinConnection()||!coopWorldPairReady(outgoing,remote)||outgoing.mapId!=remote.mapId)return;
     c.sentCycle=census.cycles;const auto entries=pickupPresenceEntries(pickupCensusItems());
     if(entries.size()>kPickupPresenceMax){c.result="presence_overflow";return;}
     std::uint64_t digest=1469598103934665603ull;
     for(const auto& e:entries){const auto* b=reinterpret_cast<const unsigned char*>(&e);for(std::size_t i=0;i<sizeof(e);++i){digest^=b[i];digest*=1099511628211ull;}}
     if(c.sentEpoch==outgoing.worldEpoch&&c.sentPeerEpoch==remote.worldEpoch&&c.sentMap==outgoing.mapId&&c.sentDigest==digest&&tick-c.sentAt<15000)return;
-    static PickupPresencePacket p;p=PickupPresencePacket{};auto& h=p.header;h.role=0;h.sequence=++pickupPresenceSequence;
+    static PickupPresencePacket p;p=PickupPresencePacket{};auto& h=p.header;h.role=localRole;h.sequence=++pickupPresenceSequence;
     h.sourceSession=outgoing.session;h.targetSession=remote.session;h.sourceEpoch=outgoing.worldEpoch;h.targetEpoch=remote.worldEpoch;h.mapId=outgoing.mapId;
     h.count=static_cast<std::uint32_t>(entries.size());std::copy(entries.begin(),entries.end(),p.entries);const auto bytes=pickupPresenceBytes(h.count);
     if(!validPickupPresence(p,bytes,remote,outgoing)||coopSendMessage(connection,&p,static_cast<std::uint32_t>(bytes),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)!=k_EResultOK){++c.refusedSends;return;}
@@ -359,19 +359,20 @@ void serviceCoinSync(ULONGLONG tick){
 }
 void receivePickupPresence(const PickupPresencePacket& p,std::size_t bytes,ULONGLONG tick){
     auto& c=pickupCatchUp;
-    if(localRole!=1||!validPickupPresence(p,bytes,outgoing,remote)){++c.rejected;return;}
-    if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.attempted.clear();c.targets.clear();c.cursor=0;c.receipt={};}
-    ++c.presenceReceived;c.host.assign(p.entries,p.entries+p.header.count);c.hostAt=tick;
+    if(!validPickupPresence(p,bytes,outgoing,remote)){++c.rejected;return;}
+    if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.attempted.clear();c.targets.clear();c.cursor=0;c.receipt={};c.peer.clear();c.peerAt=0;}
+    c.previous.swap(c.peer);c.previousAt=c.peerAt; // 1214jv (#203): a target must be absent from both
+    ++c.presenceReceived;c.peer.assign(p.entries,p.entries+p.header.count);c.peerAt=tick;
     c.epoch=outgoing.worldEpoch;c.peerEpoch=remote.worldEpoch;c.map=outgoing.mapId;c.result="presence_received";
 }
-// Engine thread, in the native mutation window, with the shared catalog ready: after each local census cycle, the
-// partner awards itself, one at a time through the shared pickup's native application, each eligible pickup that is
-// not a shared catalog entry and has been absent from the host's presence for 10 s since this world first had it.
+// Engine thread, in the native mutation window, with the shared catalog ready: after each local census cycle, this
+// world awards itself, one at a time through the shared pickup's native application, each eligible pickup that is not
+// a shared catalog entry and is absent from the peer's last two presences, the older one received at least 10 s after
+// this world first had the pickup. Since 1214jv (#203) the host does too, for authored pickups only.
 void servicePickupCatchUp(ULONGLONG tick){
-    servicePickupCensus(tick);
-    if(!localRole){sendPickupPresence(tick);return;}
-    auto& c=pickupCatchUp;if(!c.hostAt)return;
-    if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.host.clear();c.hostAt=0;c.targets.clear();c.cursor=0;c.receipt={};c.result="presence_out_of_scope";return;}
+    servicePickupCensus(tick);sendPickupPresence(tick);
+    auto& c=pickupCatchUp;if(!c.peerAt||!c.previousAt)return;
+    if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.peer.clear();c.previous.clear();c.peerAt=c.previousAt=0;c.targets.clear();c.cursor=0;c.receipt={};c.result="presence_out_of_scope";return;}
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!coinSync.ready||!coinReadyContext(tick))return;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(c.cursor>=c.targets.size()&&pickupCensus.cycles&&c.plannedCycle!=pickupCensus.cycles){
@@ -379,7 +380,7 @@ void servicePickupCatchUp(ULONGLONG tick){
         std::unordered_map<std::string,bool> shared;for(const auto& e:coinSync.entries)shared[e.binding.name]=true;
         for(const auto& item:pickupCensusItems()){
             const auto at=pickupCensus.actors.find(item.handle>>16);
-            if(at==pickupCensus.actors.end()||c.hostAt<at->second.seenAt+10000||shared.count(item.name)||c.attempted.count(item.name)||!pickupCatchUpTarget(item,c.host))continue;
+            if(at==pickupCensus.actors.end()||c.previousAt<at->second.seenAt+10000||shared.count(item.name)||c.attempted.count(item.name)||!pickupCatchUpTarget(item,c.peer,c.previous,!localRole))continue;
             NativeCoin n{};if(readNativeCoin(memoryRead,base,observedGame,item.handle,n,true)&&coinCatalogEligible(n))c.targets.push_back({item.name,item.handle}); // dormant: a later cycle
         }
         c.planned+=c.targets.size();c.result=c.targets.empty()?"caught_up":"catching_up";
@@ -397,10 +398,10 @@ void writePickupCatchUp(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.pickup-catchup.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& c=pickupCatchUp;const auto& s=pickupCensus;
     std::fprintf(f,"{\"role\":%u,\"result\":\"%s\",\"census\":{\"cycles\":%llu,\"actors\":%zu,\"classifications\":%llu,\"maxReads\":%llu,\"lastCycleMs\":%llu,\"scanning\":%s},"
-        "\"map\":%llu,\"epoch\":%llu,\"peerEpoch\":%llu,\"presenceSent\":%llu,\"sentEntries\":%u,\"refusedSends\":%llu,\"presenceReceived\":%llu,\"rejected\":%llu,\"hostEntries\":%zu,"
+        "\"map\":%llu,\"epoch\":%llu,\"peerEpoch\":%llu,\"presenceSent\":%llu,\"sentEntries\":%u,\"refusedSends\":%llu,\"presenceReceived\":%llu,\"rejected\":%llu,\"peerEntries\":%zu,"
         "\"planned\":%llu,\"targets\":%zu,\"cursor\":%zu,\"awarded\":%llu,\"failed\":%llu,\"deferrals\":%llu,\"awardedNames\":[",
         localRole,c.result,s.cycles,s.actors.size(),s.classifications,s.maxReads,s.lastCycleMs,s.scanning?"true":"false",
-        c.map,c.epoch,c.peerEpoch,c.presenceSent,c.sentEntries,c.refusedSends,c.presenceReceived,c.rejected,c.host.size(),c.planned,c.targets.size(),c.cursor,c.awarded,c.failed,c.deferrals);
+        c.map,c.epoch,c.peerEpoch,c.presenceSent,c.sentEntries,c.refusedSends,c.presenceReceived,c.rejected,c.peer.size(),c.planned,c.targets.size(),c.cursor,c.awarded,c.failed,c.deferrals);
     const auto list=[&](const std::vector<std::string>& names){for(std::size_t i=0;i<names.size();++i){if(i)std::fputc(',',f);std::fputc('"',f);std::fputs(names[i].c_str(),f);std::fputc('"',f);}};
     list(c.awardedNames);std::fputs("],\"failedNames\":[",f);list(c.failedNames);std::fputs("],\"targetNames\":[",f);
     std::vector<std::string> targets;for(const auto& t:c.targets)targets.push_back(t.name);list(targets);
