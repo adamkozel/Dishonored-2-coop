@@ -694,6 +694,20 @@ def main():
     REPO = sys.argv[1]
     raw = sys.argv[3] if len(sys.argv) > 3 else '{}'
     args = json.load(open(raw[1:], encoding='utf-8-sig')) if raw.startswith('@') else json.loads(raw)
+    if raw.startswith('@') and args.get('kisculeTrace'):
+        # #206: keep each world's Kiscule trace (coop_kiscule_trace on, started by an earlier route step) beside the
+        # action's arguments in the take folder: <step>-kiscule-trace-<role>.json.
+        import atexit
+        stem = raw[1:][:-len('-action-args.json')] if raw.endswith('-action-args.json') else raw[1:]
+        def keep():
+            for role in ('host', 'client'):
+                src = f'{REPO}/work/lab-instances/{role}/coop-status.json.kiscule-trace.json'
+                try:
+                    with open(src, 'rb') as f, open(f'{stem}-kiscule-trace-{role}.json', 'wb') as g:
+                        g.write(f.read())
+                except OSError as e:
+                    print(json.dumps({'kisculeTrace': role, 'error': str(e)}), flush=True)
+        atexit.register(keep)
     ROLE = args.get('role', 'host')
     if ROLE not in ('host', 'client'):
         raise SystemExit('role must be host or client')

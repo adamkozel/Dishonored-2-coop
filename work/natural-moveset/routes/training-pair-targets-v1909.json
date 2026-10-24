@@ -230,6 +230,18 @@
   "settle": 3000
  },
  {
+  "do": "command",
+  "role": "host",
+  "text": "coop_kiscule_trace on",
+  "settle": 300
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_kiscule_trace on",
+  "settle": 300
+ },
+ {
   "do": "action",
   "name": "grab",
   "args": {
@@ -243,7 +255,8 @@
    "targets": "corvo_attano_tutorial.def",
    "targetsRoles": [
     "client"
-   ]
+   ],
+   "kisculeTrace": true
   },
   "settle": 3000
  },
