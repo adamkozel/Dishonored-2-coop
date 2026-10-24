@@ -1,0 +1,48 @@
+[
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 20000
+ },
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_player_reach_palace",
+  "settle": 8000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_task_entering_palace",
+  "settle": 8000
+ },
+ {
+  "do": "npcs",
+  "near": [
+   255.6,
+   -25.9
+  ],
+  "settle": 500
+ },
+ {
+  "do": "npcs",
+  "near": [
+   280.0,
+   -14.0
+  ],
+  "settle": 500
+ },
+ {
+  "do": "authority",
+  "match": "duke",
+  "settle": 500
+ },
+ {
+  "do": "authority",
+  "match": "double",
+  "settle": 500
+ }
+]

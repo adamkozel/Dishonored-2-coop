@@ -1,0 +1,135 @@
+{
+  "failure": null,
+  "scope": "Campaign route steps for campaign/palace/palace.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": true,
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step02-heal",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "mirrored_save_landed a1 s1/o0/m1/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step04-trigger",
+        "host": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step05-npcs",
+        "host": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step06-authority",
+        "host": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step07-wait",
+        "host": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step08-npcs",
+        "host": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step09-authority",
+        "host": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed",
+        "client": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed"
+      }
+    ],
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "authority": [
+      {
+        "step": "step06-authority",
+        "host": [],
+        "client": []
+      },
+      {
+        "step": "step09-authority",
+        "host": [],
+        "client": []
+      }
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 16,
+        "cine": 8,
+        "pos": [
+          224.65593,
+          6.565512,
+          7.003669
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          1,
+          6,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 16,
+        "cine": 5,
+        "pos": [
+          53.991161,
+          54.089462,
+          -4.234661
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          1,
+          6,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+      }
+    },
+    "gameflowEqual": true
+  }
+}

@@ -1,0 +1,104 @@
+[
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 20000
+ },
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_player_reach_palace",
+  "settle": 8000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_task_entering_palace",
+  "settle": 8000
+ },
+ {
+  "do": "talk",
+  "name": "luca_abele_double",
+  "settle": 60000
+ },
+ {
+  "do": "wait",
+  "ms": 10000,
+  "settle": 2000
+ },
+ {
+  "do": "choke",
+  "name": "story/luca_abele\\.def",
+  "near": [
+   255.6,
+   -25.8
+  ],
+  "until": "Task_PA_NL_Set_up_the_scene",
+  "crouch": true,
+  "dist": 1.0,
+  "walkMs": 800,
+  "ms": 6000,
+  "max": 4,
+  "settle": 4000
+ },
+ {
+  "do": "authority",
+  "match": "duke",
+  "settle": 500
+ },
+ {
+  "do": "carry",
+  "name": "story/luca_abele\\.def",
+  "near": [
+   255.6,
+   -25.8
+  ],
+  "settle": 3000,
+  "hold": 1200,
+  "pitches": [
+   55,
+   70,
+   40
+  ]
+ },
+ {
+  "do": "at",
+  "pos": [
+   263.1,
+   -21.4,
+   26.6
+  ],
+  "yaw": 0,
+  "settle": 3000
+ },
+ {
+  "do": "drop",
+  "settle": 4000
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 2000
+ },
+ {
+  "do": "flag",
+  "role": "client",
+  "entity": "storyflags",
+  "name": "nleth_palace_completed",
+  "value": 1,
+  "ms": 90000,
+  "settle": 1000
+ },
+ {
+  "do": "flag",
+  "role": "host",
+  "entity": "storyflags",
+  "name": "nleth_palace_completed",
+  "value": 1,
+  "ms": 90000,
+  "settle": 1000
+ }
+]

@@ -1,0 +1,114 @@
+{
+  "scope": "Campaign route steps for campaign/palace/palace.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "failure": "The choke of story/luca_abele\\.def never reached Task_PA_NL_Set_up_the_scene",
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step02-heal",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s1/o0/m1/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step04-trigger",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step05-talk",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step06-wait",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      }
+    ],
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "npcPicks": [
+      "5 client luca_abele_double -> models/characters/def/story/luca_abele_double.def_7183 .?AVarkNPC@@ @ 253.2,-26.9,28",
+      "7 client story/luca_abele\\.def -> models/characters/def/story/luca_abele.def_7184 .?AVarkNPC@@ @ 252.1,-27.9,28",
+      "7 client story/luca_abele\\.def -> models/characters/def/story/luca_abele.def_7184 .?AVarkNPC@@ @ 252.1,-27.9,28",
+      "7 client story/luca_abele\\.def -> models/characters/def/story/luca_abele.def_7184 .?AVarkNPC@@ @ 252.1,-27.9,28",
+      "7 client story/luca_abele\\.def -> models/characters/def/story/luca_abele.def_7184 .?AVarkNPC@@ @ 252.1,-27.9,28"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 36,
+        "cine": 22,
+        "pos": [
+          251.384567,
+          -28.154943,
+          28.008646
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          1,
+          5,
+          1,
+          1,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 1,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 36,
+        "cine": 19,
+        "pos": [
+          54.709003,
+          47.172176,
+          -3.749642
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          1,
+          5,
+          1,
+          1,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke"
+      }
+    }
+  }
+}

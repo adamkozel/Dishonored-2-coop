@@ -595,6 +595,39 @@ def grab_react(a):
     return 1
 
 
+def npcs_in(role, sub):
+    """npcs() read in another player's world (its process)."""
+    global ROLE
+    saved, ROLE = ROLE, role
+    try:
+        return npcs(sub)
+    finally:
+        ROLE = saved
+
+
+def enter_nearest(a):
+    """Teleport this player into the stand nearest an NPC as the host's world places it, then wait for a task to complete.
+
+    #197, the Duke's double: his confrontation plays when the player enters the trigger of the room he is in
+    (ld_trigger_dd_*). 1214ke streams story civilians, so the host's double is the one both worlds show."""
+    for k in range(a.get('tries', 3)):
+        found = npcs_in(a.get('from', 'host'), a['npc'])
+        if not found:
+            time.sleep(2.0)
+            continue
+        p = found[0]['position']
+        name, s = min(a['stands'].items(), key=lambda kv: math.hypot(kv[1][0] - p[0], kv[1][1] - p[1]) + abs(kv[1][2] - p[2]))
+        teleport(s[0], s[1], s[2], a.get('yaw', 0))
+        t = time.time()
+        while time.time() - t < a.get('wait', 40):
+            if done(a['until']):
+                print(json.dumps({'try': k, 'npcAt': [round(v, 1) for v in p], 'stand': name, 'done': True, 'active': active_tasks()}), flush=True)
+                return 0
+            time.sleep(1.0)
+        print(json.dumps({'try': k, 'npcAt': [round(v, 1) for v in p], 'stand': name, 'done': False, 'active': active_tasks()}), flush=True)
+    return 1
+
+
 def main():
     global REPO, ROLE
     REPO = sys.argv[1]
@@ -604,7 +637,7 @@ def main():
     if ROLE not in ('host', 'client'):
         raise SystemExit('role must be host or client')
     return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'pickpocket_focus': pickpocket_focus, 'shoot': shoot, 'cycle': cycle,
-            'grab': grab, 'grab_react': grab_react}[sys.argv[2]](args)
+            'grab': grab, 'grab_react': grab_react, 'enter_nearest': enter_nearest}[sys.argv[2]](args)
 
 
 if __name__ == '__main__':
