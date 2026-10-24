@@ -1,10 +1,14 @@
-param([string]$Take='frame-timing-vm-v1887a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[ValidateSet('corvo','emily')][string]$HostCharacter='corvo',[ValidateSet('corvo','emily')][string]$PartnerCharacter='emily',[ValidateSet('Left','Right')][string]$HostChoice='Left',[switch]$CoopSaves,[string]$Candidate='candidate-npc-combat-v1214cb',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0,[int]$JoinAfterStep=0,[int]$LeaveAfterStep=0,[int]$RejoinAfterStep=0,[int]$KillAfterStep=0,[int]$RelaunchAfterStep=0,[int]$KillHostAfterStep=0,[switch]$TitleJoin,[int]$StopAfterStep=0,[switch]$KeepLocalClient)
+param([string]$Take='frame-timing-vm-v1887a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[ValidateSet('corvo','emily')][string]$HostCharacter='corvo',[ValidateSet('corvo','emily')][string]$PartnerCharacter='emily',[ValidateSet('Left','Right')][string]$HostChoice='Left',[switch]$CoopSaves,[string]$Candidate='candidate-npc-combat-v1214cb',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=420,[int]$VideoSeconds=0,[int]$JoinAfterStep=0,[int]$LeaveAfterStep=0,[int]$RejoinAfterStep=0,[int]$KillAfterStep=0,[int]$RelaunchAfterStep=0,[int]$KillHostAfterStep=0,[switch]$StoryFlags,[switch]$TitleJoin,[int]$StopAfterStep=0,[switch]$KeepLocalClient)
 # 1909 (#221): an abrupt peer loss. -KillAfterStep ends the VM game with Stop-Process (as a crash or a closed game)
 # and checks the host for stale ownership 15 s after it sees the loss: no NPC channel or relay binding still ready, no
 # lease reference, no NPC left with more AI pause references than before, the partner's avatar retired, the host
 # still in gameplay, moving and hosting its lobby. -RelaunchAfterStep starts the VM game again and joins the same lobby
 # from its main menu (the mid-mission join, #135), then checks fresh bindings. -KillHostAfterStep ends the host game
 # instead and checks the partner the same way (its replicas' AI must run again); the route stops there.
+# 1909 (#220): -StoryFlags diffs the decision flags of both worlds (runtime probe --storyflags, 1214kg) at the start
+# and at the end of the route, and a storyflags step does it anywhere (expectEqual fails the take on a difference).
+# Only differing flags are saved (names are game-derived; the take stays local). The Jindosh riddle's
+# EnigmaExpectedStage* differ per world by design (chapter 110).
 # 1891 (#213): the lab's local partner instance (work/lab-instances/client) takes no part in a two-account take, where
 # the VM is the partner, but it kept rendering beside the host: about as much CPU as the host game and 5 GB of RAM
 # (measured during campaign-palace-vm-v1890a). It is stopped once the host checks pass, unless -KeepLocalClient; the
@@ -192,7 +196,9 @@ try{
   $chars.client=try{(Q client '--character').definition}catch{$null};$notes.characters=$chars}
  if(!$solo-and$chars.client-and"$($chars.client)"-notmatch"/$PartnerCharacter/"){throw "Partner plays $($chars.client), expected $PartnerCharacter"}
  C host 'coop_player_health_hold on';if(!$solo){C client 'coop_player_health_hold on'}
- Start-Sleep 3;$rows=[Collections.Generic.List[object]]::new();$rows.Add([ordered]@{step='start';host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r 'step00-start'}
+ Start-Sleep 3;$rows=[Collections.Generic.List[object]]::new();$rows.Add([ordered]@{step='start';host=(Snap host);client=(Snap client)});
+ if($StoryFlags-and!$solo){try{[void](FlagsDiff 'start')}catch{$notes.storyFlagsError=$_.Exception.Message}}
+foreach($r in 'host','client'){Frame $r 'step00-start'}
  $i=0
  function Npc($rx,$near){$all=@((Q host '--entities').entities|Where-Object {$_.type-eq'.?AVarkNPC@@'-and$_.name-match$rx})
   if(!$all.Count){$near2=if($near){$near}else{(Snap host).pos};$names=@((Q host '--entities').entities|Where-Object {$_.type-eq'.?AVarkNPC@@'}|Sort-Object {[Math]::Pow($_.position[0]-$near2[0],2)+[Math]::Pow($_.position[1]-$near2[1],2)}|Select-Object -First 8|ForEach-Object {"$($_.name)@$([int]$_.position[0]),$([int]$_.position[1])"});throw "No NPC matches $rx (nearest: $($names -join ' '))"};if($near){$all=@($all|Sort-Object {[Math]::Pow($_.position[0]-$near[0],2)+[Math]::Pow($_.position[1]-$near[1],2)})};$all[0]}
@@ -277,6 +283,15 @@ function RejoinNow(){
  if(!$r.gameflow.equal){throw "Gameflow did not converge after the rejoin (host $($r.gameflow.host), VM $($r.gameflow.client))"}
  if(!$r.armed.ok){throw 'The co-op systems did not rearm after the rejoin'}
  if($null-eq$r.distance-or$r.distance-gt3){throw "The rejoined partner was not placed beside the host ($($r.distance) m, warps $($f.warps))"}}
+function FlagsDiff($label){
+ $h=Q host '--storyflags';$c=Q client '--storyflags'
+ $hm=@{};foreach($f in @($h.flags)){$hm["$($f.decl)|$($f.name)"]=$f};$cm=@{};foreach($f in @($c.flags)){$cm["$($f.decl)|$($f.name)"]=$f}
+ $diff=[Collections.Generic.List[object]]::new()
+ foreach($key in @(@($hm.Keys)+@($cm.Keys)|Sort-Object -Unique)){$a=$hm[$key];$z=$cm[$key]
+  if(!$a-or!$z-or$a.value-ne$z.value-or$a.default-ne$z.default){$diff.Add([ordered]@{flag=$key;host=$(if($a){$a.value}else{$null});client=$(if($z){$z.value}else{$null});perWorld=($key-match'EnigmaExpectedStage')})}}
+ $res=[ordered]@{label=$label;host=$hm.Count;client=$cm.Count;differences=$diff.Count;decisionDifferences=@($diff|Where-Object {!$_.perWorld}).Count;diff=@($diff)}
+ Save "$out/storyflags-$label.json" $res;$notes.storyFlags+=@([ordered]@{label=$label;host=$res.host;client=$res.client;decisionDifferences=$res.decisionDifferences})
+ $res}
 function OwnState($r){
  # #221: what each world still owns: ready NPC channels and their lease references, ready relay bindings, the
  # partner's avatar, and each listed NPC's decision-AI pause references.
@@ -405,6 +420,7 @@ function KillHostNow(){
      if($hit){break}}
     if($st.heal){C host 'coop_player_health_hold off'}
     if(!$hit){throw "Use of $($st.name) not registered"}}
+   'storyflags'{$sf=FlagsDiff $tag;if($st.expectEqual-and$sf.decisionDifferences){throw "Story flags differ between the worlds at $tag ($($sf.decisionDifferences))"}}
    'command'{$cr=if($st.role){$st.role}else{'host'};C $cr $st.text;$notes.commands+=@("$tag $cr $($st.text)")}
    'difficulty'{$dd=[ordered]@{};$want=$st.expect;$dl=(Get-Date).AddMilliseconds($(if($st.ms){$st.ms}else{15000}))
     do{foreach($r in 'host','client'){$dd[$r]=[ordered]@{status=$(try{S $r '.difficulty.json'}catch{$null});probe=$(try{Q $r '--difficulty'}catch{$null})}}
@@ -553,6 +569,7 @@ function KillHostNow(){
   $rows.Add([ordered]@{step=$tag;spec=$st;host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r $tag;try{Save "$out/$tag-triggers-$r.json" (S $r '.triggers.json');Save "$out/$tag-loading-$r.json" (S $r '.loading.json');Save "$out/$tag-missionend-$r.json" (S $r '.missionend.json')}catch{}}
   Save "$out/route.json" @($rows)}
  if(!$script:hostKilled){ # 1909: a host-loss take ends at its checks; the host game is gone
+ if($StoryFlags){try{[void](FlagsDiff 'end')}catch{$notes.storyFlagsError=$_.Exception.Message}}
  $notes.final=@{host=(Snap host);client=(Snap client)}
  $notes.gameflowEqual=("$($notes.final.host.gameflow)"-eq"$($notes.final.client.gameflow)")
  # Both worlds must end on the same map (a mission end the partner did not follow fails the take).
