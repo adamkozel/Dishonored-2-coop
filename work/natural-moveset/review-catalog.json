@@ -1475,7 +1475,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_keyhole_phases_through_Steam",
-      "visual_validation": "bounded_actual_game_recordings_inspected",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 142,
       "priority": 1,
       "title": "keyhole enter look exit",
@@ -1555,7 +1555,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "bounded_actual_game_recordings_inspected"
     },
     {
       "id": "standing_jump_takeoff",
@@ -2264,7 +2265,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "native_confined_low_mantle_through_climbable_eotw_window_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 155,
       "priority": 2,
       "title": "window enter exit",
@@ -2307,7 +2308,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "not_accepted"
     },
     {
       "id": "slide_enter_loop_exit",
@@ -2501,7 +2503,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_chain_climb_both_roles_mission_map",
-      "visual_validation": "bounded_actual_game_frames_inspected",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 155,
       "priority": 2,
       "title": "ladder up down entry exit",
@@ -2559,7 +2561,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "bounded_actual_game_frames_inspected"
     },
     {
       "id": "chain_rope_climb",
@@ -2570,7 +2573,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "blocked_native_fixture_missing_components",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 155,
       "priority": 2,
       "title": "chain rope climb",
@@ -2615,7 +2618,8 @@
           }
         ],
         "lifecycle": "See method."
-      }
+      },
+      "visual_validation_before": "not_accepted"
     },
     {
       "id": "swim_idle_directions",
@@ -2626,7 +2630,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_swimming_both_roles_mission_map",
-      "visual_validation": "bounded_actual_game_frames_inspected",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 155,
       "priority": 2,
       "title": "swim idle directions",
@@ -2705,7 +2709,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "bounded_actual_game_frames_inspected"
     },
     {
       "id": "dive_surface_water_exit",
@@ -2716,7 +2721,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_water_exit_both_roles_mission_map",
-      "visual_validation": "bounded_actual_game_frames_inspected",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 155,
       "priority": 2,
       "title": "dive surface water exit",
@@ -2793,7 +2798,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "bounded_actual_game_frames_inspected"
     },
     {
       "id": "sword_draw_holster",
@@ -3469,7 +3475,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_block_impact_and_timed_parry_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 195,
       "priority": 2,
       "title": "parry directions",
@@ -3520,7 +3526,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "not_accepted"
     },
     {
       "id": "parry_recovery",
@@ -3531,7 +3538,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_block_impact_and_timed_parry_both_roles",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 195,
       "priority": 2,
       "title": "parry recovery",
@@ -3578,7 +3585,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "not_accepted"
     },
     {
       "id": "counterattack",
@@ -3589,7 +3597,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_counter_kill_finisher_shared_host_source",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 195,
       "priority": 2,
       "title": "counterattack",
@@ -3647,7 +3655,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "not_accepted"
     },
     {
       "id": "hit_reactions_directions",
@@ -3947,8 +3956,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_runtime_completion_audit",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 195,
       "priority": 2,
       "title": "stagger knockdown recovery",
@@ -4023,7 +4032,9 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "not_accepted",
+      "runtime_binding_before": "not_verified"
     },
     {
       "id": "kick_or_shove_if_present",
@@ -4034,7 +4045,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_player_kick_outcome_host_source_mission_map",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 195,
       "priority": 2,
       "title": "kick or shove if present",
@@ -4101,7 +4112,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "not_accepted"
     },
     {
       "id": "death_variants",
@@ -4484,8 +4496,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_runtime_completion_audit",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 251,
       "priority": 3,
       "title": "bolt or ammo switch",
@@ -4522,7 +4534,9 @@
       "complete": true,
       "evidence": [
         "mission-coverage-v1328j/result.json"
-      ]
+      ],
+      "visual_validation_before": "not_accepted",
+      "runtime_binding_before": "not_verified"
     },
     {
       "id": "grenade_equip_aim_throw",
@@ -6566,7 +6580,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "native_network_movement_during_mana_use_partial_verified",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 251,
       "priority": 3,
       "title": "mana elixir",
@@ -6709,7 +6723,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "not_accepted"
     },
     {
       "id": "item_switch_interruptions",
@@ -6720,7 +6735,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map",
-      "visual_validation": "bounded_actual_game_frames_inspected",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 251,
       "priority": 3,
       "title": "item switch interruptions",
@@ -6768,7 +6783,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "bounded_actual_game_frames_inspected"
     },
     {
       "id": "lethal_takedown_front_back_sides",
@@ -7277,8 +7293,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_runtime_completion_audit",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 927,
       "priority": 3,
       "title": "wall and window variants",
@@ -7392,7 +7408,9 @@
         "mission-coverage-v1564c/result.json",
         "mission-coverage-v1545a/result.json",
         "mission-coverage-v1545b/result.json"
-      ]
+      ],
+      "visual_validation_before": "not_accepted",
+      "runtime_binding_before": "not_verified"
     },
     {
       "id": "enemy_body_size_variants",
@@ -7402,8 +7420,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_runtime_completion_audit",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 927,
       "priority": 3,
       "title": "enemy body size variants",
@@ -7607,7 +7625,9 @@
         "mission-coverage-v1577a/result.json",
         "mission-coverage-v1578e/result.json",
         "mission-coverage-v1579a/result.json"
-      ]
+      ],
+      "visual_validation_before": "not_accepted",
+      "runtime_binding_before": "not_verified"
     },
     {
       "id": "paired_victim_alignment",
@@ -9739,8 +9759,8 @@
         "corvo"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_runtime_completion_audit",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 217,
       "priority": 3,
       "title": "Corvo Blink Assault kick and slash",
@@ -9805,7 +9825,9 @@
       "evidence": [
         "coverage-v1359b/result.json",
         "coverage-v1359a/result.json"
-      ]
+      ],
+      "visual_validation_before": "not_accepted",
+      "runtime_binding_before": "not_verified"
     },
     {
       "id": "corvo_dark_vision_cast_end",
@@ -9815,7 +9837,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam",
-      "visual_validation": "bounded_actual_game_frames_inspected",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 217,
       "priority": 3,
       "title": "corvo dark vision cast end",
@@ -9912,7 +9934,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "bounded_actual_game_frames_inspected"
     },
     {
       "id": "corvo_possession_enter_loop_exit",
@@ -14632,8 +14655,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_runtime_completion_audit",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 217,
       "priority": 3,
       "title": "emily far reach pull variants",
@@ -14691,7 +14714,9 @@
       "complete": true,
       "evidence": [
         "object-carry-v1471b/result.json"
-      ]
+      ],
+      "visual_validation_before": "not_accepted",
+      "runtime_binding_before": "not_verified"
     },
     {
       "id": "emily_dark_vision_cast_end",
@@ -14701,7 +14726,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam",
-      "visual_validation": "bounded_actual_game_frames_inspected",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 217,
       "priority": 3,
       "title": "emily dark vision cast end",
@@ -14798,7 +14823,8 @@
         ],
         "lifecycle": "See method."
       },
-      "complete": true
+      "complete": true,
+      "visual_validation_before": "bounded_actual_game_frames_inspected"
     },
     {
       "id": "emily_domino_mark_link_cancel",
@@ -16598,7 +16624,7 @@
       ],
       "authoring": "candidates",
       "runtime_binding": "grounded_armed_and_holstered_scoped",
-      "visual_validation": "not_accepted",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 217,
       "priority": 3,
       "title": "emily doppelganger cast",
@@ -16772,7 +16798,8 @@
         "coverage-v1332c/result.json",
         "coverage-v1332e/result.json",
         "coverage-v1332d/result.json"
-      ]
+      ],
+      "visual_validation_before": "not_accepted"
     },
     {
       "id": "emily_mesmerize_cast",
@@ -19136,8 +19163,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_runtime_completion_audit",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 217,
       "priority": 3,
       "title": "power upgrade variants",
@@ -19280,7 +19307,9 @@
         "mission-coverage-v1492a/result.json",
         "coverage-v1332f/result.json",
         "coverage-v1359b/result.json"
-      ]
+      ],
+      "visual_validation_before": "not_accepted",
+      "runtime_binding_before": "not_verified"
     },
     {
       "id": "power_interruptions_and_no_mana",
@@ -21267,8 +21296,8 @@
         "emily"
       ],
       "authoring": "candidates",
-      "runtime_binding": "not_verified",
-      "visual_validation": "not_accepted",
+      "runtime_binding": "native_runtime_completion_audit",
+      "visual_validation": "accepted_completion_audit",
       "native_reference_family_count": 47,
       "priority": 3,
       "title": "shop dialogue gestures",
@@ -21335,7 +21364,9 @@
         "mission-coverage-v1416c/result.json",
         "mission-coverage-v1402b/result.json",
         "mission-coverage-v1402c/result.json"
-      ]
+      ],
+      "visual_validation_before": "not_accepted",
+      "runtime_binding_before": "not_verified"
     },
     {
       "id": "sit_stand",

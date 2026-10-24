@@ -1,6 +1,6 @@
 # ranged_and_items: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:39:06.380324+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-24T20:40:37.938648+02:00. All fields below retain the catalog wording.
 
 ## pistol_draw_aim_fire_reload_holster
 
@@ -289,8 +289,8 @@ Regular/sleep-bolt changes are recorded in both directions with native bolt mode
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_runtime_completion_audit",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "bolt or ammo switch",
@@ -327,7 +327,9 @@ Regular/sleep-bolt changes are recorded in both directions with native bolt mode
   "complete": true,
   "evidence": [
     "mission-coverage-v1328j/result.json"
-  ]
+  ],
+  "visual_validation_before": "not_accepted",
+  "runtime_binding_before": "not_verified"
 }
 ````
 
@@ -2530,7 +2532,7 @@ Audit 1290: in product mode the lab grants a mana potion, but the native drink n
   ],
   "authoring": "candidates",
   "runtime_binding": "native_network_movement_during_mana_use_partial_verified",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "mana elixir",
@@ -2673,7 +2675,8 @@ Audit 1290: in product mode the lab grants a mana potion, but the native drink n
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "not_accepted"
 }
 ````
 
@@ -2701,7 +2704,7 @@ Three native item switches and equip cancellation at 30/70 percent are recorded,
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map",
-  "visual_validation": "bounded_actual_game_frames_inspected",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 251,
   "priority": 3,
   "title": "item switch interruptions",
@@ -2749,7 +2752,8 @@ Three native item switches and equip cancellation at 30/70 percent are recorded,
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "bounded_actual_game_frames_inspected"
 }
 ````
 

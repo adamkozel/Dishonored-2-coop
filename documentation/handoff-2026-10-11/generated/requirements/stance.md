@@ -1,6 +1,6 @@
 # stance: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:39:06.380324+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-24T20:40:37.938648+02:00. All fields below retain the catalog wording.
 
 ## crouch_idle
 
@@ -861,7 +861,7 @@ Owned native Peeking scenes select full-body NPC-derived entry/look/exit, both d
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_keyhole_phases_through_Steam",
-  "visual_validation": "bounded_actual_game_recordings_inspected",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 142,
   "priority": 1,
   "title": "keyhole enter look exit",
@@ -941,7 +941,8 @@ Owned native Peeking scenes select full-body NPC-derived entry/look/exit, both d
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "bounded_actual_game_recordings_inspected"
 }
 ````
 

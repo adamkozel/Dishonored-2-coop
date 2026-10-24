@@ -62,6 +62,12 @@ def main():
         item['completion'] = record
         if entry['decision'] == 'complete':
             item['phase_status'] = 'complete'; item['complete'] = True
+            # Final audit (v1909): the reviewed videos and the passing takes are the item's visual acceptance and
+            # runtime binding (23 and 8 items kept their pre-audit columns before reconcile_visual_validation_v1909.py).
+            if entry.get('visual') and not str(item.get('visual_validation', '')).startswith('accepted'):
+                item['visual_validation'] = 'accepted_completion_audit'
+            if entry.get('takes') and item.get('runtime_binding') == 'not_verified':
+                item['runtime_binding'] = 'native_runtime_completion_audit'
         for ref in entry.get('takes', []):
             ev = f"{ref['take']}/result.json"
             if ev not in item.setdefault('evidence', []):

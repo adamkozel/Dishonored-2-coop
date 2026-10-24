@@ -1,6 +1,6 @@
 # interactions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:39:06.380324+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-24T20:40:37.938648+02:00. All fields below retain the catalog wording.
 
 ## door_open_close_locked
 
@@ -1283,8 +1283,8 @@ Candidates require animation review and appropriate game-state/contact binding.
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_runtime_completion_audit",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 47,
   "priority": 3,
   "title": "shop dialogue gestures",
@@ -1351,7 +1351,9 @@ Candidates require animation review and appropriate game-state/contact binding.
     "mission-coverage-v1416c/result.json",
     "mission-coverage-v1402b/result.json",
     "mission-coverage-v1402c/result.json"
-  ]
+  ],
+  "visual_validation_before": "not_accepted",
+  "runtime_binding_before": "not_verified"
 }
 ````
 

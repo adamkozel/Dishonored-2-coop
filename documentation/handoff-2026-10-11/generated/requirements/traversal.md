@@ -1,6 +1,6 @@
 # traversal: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:39:06.380324+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-24T20:40:37.938648+02:00. All fields below retain the catalog wording.
 
 ## standing_jump_takeoff
 
@@ -882,7 +882,7 @@ Candidates require animation review and appropriate game-state/contact binding. 
   ],
   "authoring": "candidates",
   "runtime_binding": "native_confined_low_mantle_through_climbable_eotw_window_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 155,
   "priority": 2,
   "title": "window enter exit",
@@ -925,7 +925,8 @@ Candidates require animation review and appropriate game-state/contact binding. 
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "not_accepted"
 }
 ````
 
@@ -1224,7 +1225,7 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_chain_climb_both_roles_mission_map",
-  "visual_validation": "bounded_actual_game_frames_inspected",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 155,
   "priority": 2,
   "title": "ladder up down entry exit",
@@ -1282,7 +1283,8 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "bounded_actual_game_frames_inspected"
 }
 ````
 
@@ -1312,7 +1314,7 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "authoring": "candidates",
   "runtime_binding": "blocked_native_fixture_missing_components",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 155,
   "priority": 2,
   "title": "chain rope climb",
@@ -1357,7 +1359,8 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
       }
     ],
     "lifecycle": "See method."
-  }
+  },
+  "visual_validation_before": "not_accepted"
 }
 ````
 
@@ -1378,7 +1381,7 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_swimming_both_roles_mission_map",
-  "visual_validation": "bounded_actual_game_frames_inspected",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 155,
   "priority": 2,
   "title": "swim idle directions",
@@ -1457,7 +1460,8 @@ Audit 1267: crouched exits for both characters (1267a); Corvo stand and jump exi
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "bounded_actual_game_frames_inspected"
 }
 ````
 
@@ -1498,7 +1502,7 @@ Dive/surface are vertical-velocity blends of native swimming (1038c-f, 1049 both
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_water_exit_both_roles_mission_map",
-  "visual_validation": "bounded_actual_game_frames_inspected",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 155,
   "priority": 2,
   "title": "dive surface water exit",
@@ -1575,7 +1579,8 @@ Dive/surface are vertical-velocity blends of native swimming (1038c-f, 1049 both
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "bounded_actual_game_frames_inspected"
 }
 ````
 

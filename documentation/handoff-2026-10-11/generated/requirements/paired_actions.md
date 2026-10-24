@@ -1,6 +1,6 @@
 # paired_actions: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:39:06.380324+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-24T20:40:37.938648+02:00. All fields below retain the catalog wording.
 
 ## lethal_takedown_front_back_sides
 
@@ -638,8 +638,8 @@ Rear window lethal and nonlethal entry/hold/finish/release studies. Native victi
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_runtime_completion_audit",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "wall and window variants",
@@ -753,7 +753,9 @@ Rear window lethal and nonlethal entry/hold/finish/release studies. Native victi
     "mission-coverage-v1564c/result.json",
     "mission-coverage-v1545a/result.json",
     "mission-coverage-v1545b/result.json"
-  ]
+  ],
+  "visual_validation_before": "not_accepted",
+  "runtime_binding_before": "not_verified"
 }
 ````
 
@@ -779,8 +781,8 @@ Tall and female native-rig stand-ins only. These are neutral-grey review targets
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_runtime_completion_audit",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 927,
   "priority": 3,
   "title": "enemy body size variants",
@@ -984,7 +986,9 @@ Tall and female native-rig stand-ins only. These are neutral-grey review targets
     "mission-coverage-v1577a/result.json",
     "mission-coverage-v1578e/result.json",
     "mission-coverage-v1579a/result.json"
-  ]
+  ],
+  "visual_validation_before": "not_accepted",
+  "runtime_binding_before": "not_verified"
 }
 ````
 
