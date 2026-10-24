@@ -1,0 +1,56 @@
+{
+  "passed": false,
+  "failure": "Item pickups_pratchette_jellied_eels_01_2 is not a shared pickup in both worlds",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "plan": [
+      {
+        "name": "pickups_pratchette_jellied_eels_01_2",
+        "role": "client",
+        "mode": "pickup"
+      },
+      {
+        "name": "pickups_mana_potion_01_13",
+        "role": "host",
+        "mode": "pickup"
+      },
+      {
+        "name": "pickups_life_potion_01_7",
+        "role": "client",
+        "mode": "farreach"
+      },
+      {
+        "name": "pouch_small_02_12143",
+        "role": "client",
+        "mode": "pickpocket"
+      }
+    ],
+    "cases": [
+      {
+        "case": {
+          "name": "pickups_pratchette_jellied_eels_01_2",
+          "role": "client",
+          "mode": "pickup"
+        },
+        "item": {
+          "handle": "0x1f431b5d",
+          "position": [
+            0.123011,
+            151.361,
+            8.19471
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "entryBefore": {
+          "client": null,
+          "host": null
+        }
+      }
+    ],
+    "catalog": {
+      "client": 286,
+      "host": 286
+    }
+  },
+  "scope": "1851 (#186): pickup families on a mission map (pickups_pratchette_jellied_eels_01_2:client:pickup,pickups_mana_potion_01_13:host:pickup,pickups_life_potion_01_7:client:farreach,pouch_small_02_12143:client:pickpocket); receipts, removal from both worlds and each player's inventory"
+}
