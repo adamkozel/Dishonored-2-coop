@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-24T06:40:06+02:00",
+  "UpdatedAt": "2026-10-24T11:24:05+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22828,9 +22828,10 @@
   },
   "DifficultySync": {
     "Card": "#177",
-    "Candidate": "candidate-npc-combat-v1214jt (research)",
-    "Evidence": "difficulty-override-v1881a: probe --difficulty reads the manager at game+0x1f7b90 (preset decl at +0x10, difficulty/preset/easy in the lab); the console set ark_difficulty_level_override 2 was queued but the cvar stayed -1 and the preset Easy through a mission load",
-    "Status": "needs the d2-ghidra MCP reconnected (/mcp) to find the cvar's readers and flags or the native difficulty setter; chapter 109"
+    "Candidate": "candidate-npc-combat-v1214kb",
+    "Fix": "difficulty_sync.h: the host publishes its preset index and custom values (D2DF); the partner applies them in gameplay through the native setter FUN_140648f20 (game+0x1f7b90), which writes her co-op profile; lab coop_difficulty_sync on|off and coop_difficulty_set <0-4>",
+    "Evidence": "difficulty-sync-vm-v1889a (two accounts, co-op saves): partner Easy with sync off, then Medium on sync on; host Hard, Custom and Medium each followed by the partner with the same preset (4 applies, 0 failures)",
+    "Status": "done, chapter 109 (Difficulty sync); the host options-menu path is a hypothesis (same profile load), not driven"
   },
   "TrainingTwoPlayers": {
     "Card": "#174",
@@ -22858,5 +22859,12 @@
     "Fix": "frame-time recorder frame_timing.h (1214jx); memoryRead as an in-process copy under SEH instead of ReadProcessMemory (1214jy); diagnostic status files off in an installed release unless d2coop.cfg diagnostics=1, lab coop_diagnostics on|off (1214jz); release notes: how to report stutters",
     "Evidence": "frame-timing-v1885a (before: 20 fps, 1206 spikes>25/min, mod 85% of the frame), v1885b (guarded reads: 76 fps, 55/min), v1886a (release setting: 123 fps, 0/min; baseline 3/min); frame-timing-vm-v1887a/b (two accounts: host 155 fps 0.5/min vs baseline 0, VM partner p99 46.6 vs 46.2 ms); route-resumed-join-v1880b (regression pass on 1214jz)",
     "Status": "done, chapter 111"
+  },
+  "ProductStatus": {
+    "Card": "#213",
+    "Candidate": "candidate-npc-combat-v1214kb",
+    "Fix": "with diagnostics off (an installed game) the product status set is written in turn every 160 ms: product (with follow and sends), online, missionend, reset, npc-combat, movement and difficulty",
+    "Evidence": "product-two-account-v1888a failed: VM product mode did not report (no product status) on 0.9.2 (1214jz wrote only the main status in product mode)",
+    "Status": "built; the 0.9.3 clean-PC proof checks it"
   }
 }
