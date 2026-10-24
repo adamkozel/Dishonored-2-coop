@@ -148,6 +148,17 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   - Confirmed static: the confrontation (`brief_double_confront`) plays when the player is in the trigger of the
     double's room (`ld_trigger_dd_quarters/throneroom/office/garden/delilahroom`, `Entity_Double_TriggerListened`), the
     Duke is not there (`Entity_Duke_TriggerListened`), and no alarm has rung (`DEV_NLETH_ALARM_RINGED` closes it).
+  - **What starts the confrontation (confirmed static, `palace_p_lowchaos` `ld_kiscule_script`, read with
+    [d2_kiscule_graph.py](../../tools/diag/d2_kiscule_graph.py)):**
+    - It starts from the double's talk override (`AITalkNotification` on `ld_spawner_double`): the player talks to him.
+    - The talk passes a gate that `DEV_NLETH_ALARM_RINGED` closes.
+    - It then needs `player_is_in_standard_confront_loc`, which is (the player and the double both in the double's room
+      trigger, `Entity_Double_TriggerListened`) XOR (the player and the Duke both in the Duke's,
+      `Entity_Duke_TriggerListened`).
+    - Then `Bool_MissionEvent_DoubleConfrontedByPlayer` must still be false, and a once-only gate starts the scene.
+    - The room triggers filter on `arkPlayer`. In the host's world the partner's avatar is an NPC and never counts, so
+      a partner's confrontation can only play in her own world, and its outcome must reach the host from there.
+    - v1901a talked from outside the room. v1903a and v1904a entered the room but never talked.
   - Takes v1901a (the talk step teleported next to him; the identify task closed without the scene), v1902a (her double
     was elsewhere) and v1903a/v1904a (`enter_nearest`, the double alone in the quarters, six 30 s tries): no confrontation.
     The partner was undetected in the bedroom, so a remaining scene condition is not met (hypothesis: the standard
