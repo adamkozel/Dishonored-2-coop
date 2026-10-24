@@ -1,0 +1,157 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             97 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214kb",
+      "hostDll": "55D23FEE212A0E4259414171A91C7502DB9A2755B03636E4B1A06A716DC1A710",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "healthHold": [
+      "clear guard|elite|officer",
+      "ld_kar_whaleoil_tank_01_3"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/madinventor/boat_madinventor_p",
+        "epoch": 21,
+        "cine": 112,
+        "pos": [
+          -6.871594,
+          -14.152867,
+          0.018671
+        ],
+        "fresh": true,
+        "gameflow": [
+          225,
+          2,
+          3,
+          13,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "released/24078",
+        "ka": "6/0/0",
+        "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/madinventor/boat_madinventor_p",
+        "epoch": 21,
+        "cine": 13,
+        "pos": [
+          -6.867673,
+          -14.884515,
+          0.111613
+        ],
+        "fresh": true,
+        "gameflow": [
+          225,
+          2,
+          3,
+          13,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 24,
+        "lt": "idle/0/0",
+        "hold": "released/0",
+        "ka": "1/5/0",
+        "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+      }
+    },
+    "gameflowEqual": true,
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

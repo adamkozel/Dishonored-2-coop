@@ -1,0 +1,114 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+10:56:08 copying lab scripts, tooling and bin
+10:56:13 mod resources (voidmod, master.index) into the game copy
+10:56:17 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : 6C0F707B864D9593
+probe           : 8B5F5A4DAAC3C814
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 96
+PSComputerName  : D2CoopVM
+RunspaceId      : 00fbe859-b189-4993-9bba-b98901af255d
+
+
+10:57:23 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             96 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "VM product mode did not report (no product status)",
+  "notes": {
+    "labBefore": {
+      "logic": 1,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "fresh": true,
+      "dll": "6C0F707B864D959364D4A2E3F3DB651F65D470CA4F8A3BFEB9B7677A4431D9B6"
+    },
+    "download": {
+      "url": "https://github.com/adamkozel/Dishonored-2-coop/releases/download/v0.9.2/d2coop-v0.9.2.zip",
+      "seconds": 3.0,
+      "bytes": 37301895,
+      "sha256": "634F52E180ABC5F29F8B9C49C271CC94EFA5480F5AAFEF02C9BEF0607CAEC2B5",
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "636d82f0-43f1-40af-9888-05ccb2f9199d",
+      "PSShowComputerName": true
+    },
+    "vmInstall": {
+      "exit": 0,
+      "seconds": 69.0,
+      "output": [
+        "Dishonored 2 found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Building the co-op resource packages from your game files...",
+        "Building the corvo movement bank from your game files...",
+        "Building the emily movement bank from your game files...",
+        "Building the prop animation tables from your game files...",
+        "Installed Dishonored 2 co-op 0.9.2: 14 files; originals backed up in d2coop-backup\\20261024-105820",
+        ""
+      ],
+      "receipt": true,
+      "dll": true,
+      "built": [
+        "base\\master.index",
+        "base\\game1voidmod.index",
+        "d2coop\\corvo-choke-bank.bin",
+        "d2coop\\emily-choke-bank.bin",
+        "d2coop\\native-tables.bin"
+      ],
+      "defender": {
+        "realTime": true,
+        "antivirus": true,
+        "steamExcluded": false,
+        "detections": []
+      },
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "636d82f0-43f1-40af-9888-05ccb2f9199d",
+      "PSShowComputerName": true
+    },
+    "vmFinal": {
+      "follow": null,
+      "online": null,
+      "logic": 6,
+      "pending": 0,
+      "map": "campaign/menu/menu_p",
+      "fresh": false
+    },
+    "vmUninstall": {
+      "exit": 0,
+      "receiptGone": true,
+      "dllGone": true,
+      "dataGone": true,
+      "voidmodGone": true,
+      "exeHash": "B671F8249422862B",
+      "masterHash": "E76D1A13AC95F561",
+      "output": [
+        "Co-op installation found: c:\\program files (x86)\\steam\\steamapps\\common\\Dishonored2",
+        "Rolled back: 13 added files removed, 1 originals restored.",
+        ""
+      ],
+      "PSComputerName": "D2CoopVM",
+      "RunspaceId": "c632af47-d29b-4047-a516-6eea68f6b5b4",
+      "PSShowComputerName": true
+    }
+  },
+  "scope": "Release clean-PC session (1709; the host starts a fresh campaign as Corvo, as a real host does; 1705; 1699 with the VM pressing a key at its title screen like a player, and the Ramsey fallback picking the Ramsey nearest his room with a health trace), two machines/two accounts: as 1670 plus story progress that reaches the VM and a shared death with both games restarting together; release obtained in the VM (download from GitHub or copied zip), extracted in Downloads, Install.cmd with no arguments (game found through Steam, files built from the VM game, Defender on); lab host (same DLL) hosts a lobby; the VM joins via steam://joinlobby, follows the host mission, both walk and see each other, the VM leaves with F8; then Uninstall.cmd (rollback) and the lab restored."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\release\Test-ProductTwoAccount-v1761.ps1:262[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 262 | [0m Get-Content "$out/result.json"; if ($failure) { [36;1mthrow $failure[0m }[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                                 ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mVM product mode did not report (no product status)[0m

@@ -87,3 +87,89 @@ non-lethal branches with the partner acting, and diff the story flags at each mi
     and [v1883c](../../work/natural-moveset/route-dunwall-nonlethal-v1883c)), dropped him and locked it.
   - Every gameflow task advanced identically in both worlds.
   - `ramsey_in_vault` is 1 in both worlds.
+
+### The other non-lethal branches (#197): static plan
+
+Read with `tools/diag/d2_mission_route.py`, `d2_kiscule_graph.py` and `d2_resource_index.py` on the game copy (read-only;
+the game-derived outputs stay local). All of this is confirmed static; the routes are still to be taken.
+
+- **Stilton (A Crack in the Slab), the simplest:**
+  - `storyflags/bunker.kiscule` declares only variables (`stilton_is_incapacited` defaults to false), and no map
+    script node writes the flag.
+  - `pa_ld_past_scripting` only reads it, to choose the ritual with or without him ("stilton dead or chocked").
+  - Stilton in the past is `pa_ld_spawner_stilton` (-26.2, 3.6, 307.0, patrol `pa_ld_patrolroute_62`). His
+    definition inherits `components/characters/npc/base/assassination_key_target.cpntassassination`.
+  - Hypothesis: the native key-target component sets the flag when he is knocked out.
+  - Route: the partner travels to the past and chokes him before the ritual. A partner's choke already asks the host
+    for the native knockout (chapter 93). Then diff the flags and load *The Dust District* return variant.
+- **The Duke's double (The Grand Palace):** the tasks are `Task_PA_NL_Identify_Talk_Double_title`,
+  `Task_PA_NL_Neutralise_The_Real_Duke` and `Task_PA_NL_Set_up_the_scene` (`palace_p_lowchaos`).
+  1. The double's confrontation scene (`brief_double_confront`) sends `EVENT_DEV_MissionEvent_DoubleDealtWithPlayer`.
+  2. `duke_is_choked` is the incapacitation of `ld_spawner_duke` (280.1, -15.1, 20.0).
+  3. The success dialogue (`dial_nleth_success_01`, or `_nodrop`) sends `EVENT_DEV_NlethEvent_NLCompleted`.
+  The shape is the same as Ramsey's: talk, choke, carry. What starts the success dialogue is still to be read
+  (`ld_kiscule_script`).
+- **Jindosh (The Clockwork Mansion), a puzzle:**
+  1. `Task_MI_NonLethal` starts on `non_lethal_known`: the electroshock notes, or using `env_lab_electrohelm` or
+     `env_lab_electrochair`.
+  2. `Task_MI_Find_Electro` needs `found_electro_therapy` (looking at `script_target_electrolookat_1`).
+  3. `Task_MI_Electro_Tweak` needs `electroshock_tuned`: `script_nonlethal_kiscule` #363, behind the dial variable
+     `dial_setting` and the power routing (`total_power`, `available_power`).
+  4. `Task_MI_KO_Jindosh`: knock out `script_spawner_jindosh`.
+  5. `Task_MI_Electro_Place`: the body in the chair spawns `script_spawner_jindosh_electroshock`.
+  6. `Task_MI_Electro_Jindosh`: the handle `script_handle_electroshock` sends `nonlethal_complete` through
+     `nleth_shocked_success`.
+  7. `Task_MI_NonLethalEnd`.
+- **Hypatia (The Good Doctor), five steps** (`institute_p_lowchaos`, `ld_kiscule_objectivs`):
+  1. Take Vasco's journal: `ld_belt_note_is_vasco_journal_cur_1` in his safe, or his scroll case
+     `ld_npc_belt_scroll_case_01`.
+  2. Take the syringe, `ld_campaign_syringe` (26.8, 35.6, 28.0).
+  3. Get blood from an infected body (`task_blood_sample_complete`).
+  4. Make the preparation (`creat_the_antidote_finished`).
+  5. Use the syringe on Hypatia (`hypatia_cured`).
+  Pickups and usables are shared (chapters 95 and 97, #187), so the partner can do every step.
+- **Ramsey:** the host-made outcome passes (above); the partner-made one waits for #209 (1214kc).
+- **Breanna (The Royal Conservatory), a device chain** (`curator_p_lowchaos`, `ld_script_main`):
+  1. `Task_CU_FindOutHow` (`NonlethalLearned`).
+  2. `Task_CU_InvertLens`, gated by `Ashworth_Knocked_Out`.
+  3. `Task_CU_movebreanna`.
+  4. `Task_CU_OverloadPower` (`NonlethalCompleted`).
+  Next, read the lens and power usables with `--event`.
+- **Delilah (Death to the Empress), the longest** (`dunwall_return_tower_p`, `obj_tr_kiscule`):
+  1. Use the Heart.
+  2. Craft the corrupted runes (`EVENT_DEV_NLStep_Rune_Crafted`).
+  3. `Task_DTTE_NL_Cor_Runes_Throne`: place them on the throne (`EVENT_DEV_NLStep_Rune_PlacedOnThrone`).
+  4. Follow her painting.
+  5. `Task_DTTE_NL_Knockout_Delilah`: knock her out (`EVENT_DEV_MissionStep_Delilah_IsUnconscious`).
+  6. `Task_DTTE_NL_Delilah_Throne` (`EVENT_DEV_NLStep_Delilah_NLed`).
+- **Order once the lab is free:** Stilton, the Duke's double, Ramsey partner-made (after 1214kc) and Hypatia, the
+  simplest first. Jindosh, Breanna and Delilah are puzzle chains and follow.
+
+### The partner's combat choke (#209)
+
+**Why her grab never starts (d2-ghidra, confirmed static):**
+- The player's choke rule handler (`components/characters/player/base/rules/choke.rulehandler`, chapter 100) ends with
+  the unaware, vulnerable or always-chokable targets (`choke_front/back/left/right`). An alerted NPC is chokable only
+  while it is vulnerable.
+- `TargetIsVulnerable` (`TIProvide_ProvideTargetIsVulnerable`, provider `0x1409e9e70` → `FUN_14082d2f0`) and
+  `IsVulnerable` (`0x1409e9ef0` → `FUN_1403b09d0`) both read bit 6 (`0x40`) of the target entity's flag byte `+0xd1`.
+- The only writer of that bit is a component handler for entity message `0xc4` (`0x14071bc20`, registered through
+  `FUN_140810810` at `0x14071ad05`). It flips the component's `+0x150` bit 0 and copies it into the entity's bit.
+- The only sender of `0xc4` is `0x14084e530`, handler 9 of the table at `0x1423263c0`, which runs a midnight event track's
+  events by type (`0x140850d70`). It sends the message to the entity playing the scene.
+- A timed parry that the attacker loses starts `arkCpntAICombatAttack::StartParryLose`
+  (`D2_AICombatAttack_StartParryLose`), which plays the slash type's parry-lose midnight on the NPC.
+- Hypothesis: that midnight's event track sends `0xc4` at the start and end of the window, which makes the NPC
+  vulnerable while it is off-balance.
+- In co-op the parry is resolved in the host's world (chapter 80), so the midnight plays only there. The partner's
+  replica follows the host's body stream and never plays it, so it is never vulnerable in her world, and her choke rule
+  finds no scene.
+
+**1214kc (built after the campaign run):**
+- A host NPC Pose carries `reserved` bit 1 while the NPC's `+0xd1` bit 6 is set; bit 0 is already "down" (1214en).
+  Pose validation accepts 0-3, and the unit tests cover 2, 3 and the refused 4.
+- The client keeps her replica's bit 6 set while host poses carry it (within 400 ms) and clears it afterwards. Host
+  poses get priority (every 50 ms) while the NPC is vulnerable, as they do while it is down.
+- Her grab then plays her native combat choke on the replica. The client-sourced choke relay (chapter 93) holds the
+  host's NPC and asks for the native knockout.
+- Status: `vulnerableSent`, `vulnerableReceived` and `vulnerableApplies` per NPC channel in the NPC stream status.

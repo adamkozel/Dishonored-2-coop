@@ -1,0 +1,161 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             97 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214kb",
+      "hostDll": "55D23FEE212A0E4259414171A91C7502DB9A2755B03636E4B1A06A716DC1A710",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "healthHold": [
+      "from step step09-heal"
+    ],
+    "jindosh": 31,
+    "skipped": [
+      "step11-use",
+      "step12-heal"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 26,
+        "cine": 13,
+        "pos": [
+          -0.951976,
+          -118.896713,
+          -304.919098
+        ],
+        "fresh": true,
+        "gameflow": [
+          227,
+          5,
+          3,
+          8,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 17,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "3/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 26,
+        "cine": 36,
+        "pos": [
+          -0.445545,
+          -118.387535,
+          -304.996307
+        ],
+        "fresh": true,
+        "gameflow": [
+          227,
+          5,
+          3,
+          8,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/14813",
+        "ka": "3/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+      }
+    },
+    "gameflowEqual": true,
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/dust/boat_dust.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

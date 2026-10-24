@@ -1,0 +1,16 @@
+[
+ {"do": "wait", "ms": 20000, "settle": 5000},
+ {"do": "difficulty"},
+ {"do": "command", "role": "client", "text": "coop_difficulty_sync off"},
+ {"do": "command", "role": "client", "text": "coop_difficulty_set 0"},
+ {"do": "wait", "ms": 3000},
+ {"do": "difficulty"},
+ {"do": "command", "role": "client", "text": "coop_difficulty_sync on"},
+ {"do": "difficulty", "expect": 1},
+ {"do": "command", "role": "host", "text": "coop_difficulty_set 2"},
+ {"do": "difficulty", "expect": 2},
+ {"do": "command", "role": "host", "text": "coop_difficulty_set 4"},
+ {"do": "difficulty", "expect": 4},
+ {"do": "command", "role": "host", "text": "coop_difficulty_set 1"},
+ {"do": "difficulty", "expect": 1}
+]
