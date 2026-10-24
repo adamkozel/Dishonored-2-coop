@@ -1,0 +1,104 @@
+{
+  "afterStep": 8,
+  "joinMs": 29654,
+  "distance": 1.2,
+  "host": {
+    "logic": 1,
+    "pending": 0,
+    "map": "campaign/tutorial/tutorial_p",
+    "epoch": 16,
+    "cine": 54,
+    "pos": [
+      533.393005,
+      -8.145,
+      10.774017
+    ],
+    "fresh": true,
+    "gameflow": [
+      236,
+      1,
+      3,
+      8,
+      0,
+      0,
+      0
+    ],
+    "gfMirror": "idle",
+    "idHash": "00000000",
+    "gfApplied": 0,
+    "lt": "idle/0/0",
+    "hold": "idle/0",
+    "ka": "15/0/0",
+    "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle"
+  },
+  "client": {
+    "logic": 1,
+    "pending": 0,
+    "map": "campaign/tutorial/tutorial_p",
+    "epoch": 16,
+    "cine": 8,
+    "pos": [
+      534.421997,
+      -7.528,
+      10.714069
+    ],
+    "fresh": true,
+    "gameflow": [
+      242,
+      3,
+      3,
+      0,
+      0,
+      0,
+      0
+    ],
+    "gfMirror": "idle",
+    "idHash": "00000000",
+    "gfApplied": 0,
+    "lt": "idle/0/0",
+    "hold": "idle/0",
+    "ka": "1/2/0",
+    "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+  },
+  "gameflowEqual": false,
+  "npcCounts": {
+    "client": 6,
+    "host": 5
+  },
+  "npcStateDiffs": [
+    {
+      "handle": "0x7cc03e8",
+      "name": "ld_spawner_corvo_stealth_2",
+      "host": "absent",
+      "client": "alive"
+    },
+    {
+      "handle": "0x7cc04af",
+      "name": "ld_spawner_corvo_stealth_2",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x7cf03eb",
+      "name": "ld_spawner_corvo_stealth_1",
+      "host": "absent",
+      "client": "alive"
+    }
+  ],
+  "sync": {
+    "client": {
+      "door": "active",
+      "usable": "active",
+      "product": "arming",
+      "follow": "same_mission",
+      "npc": "no_bound_npcs"
+    },
+    "host": {
+      "door": "active",
+      "usable": "active",
+      "product": "arming",
+      "follow": "publishing",
+      "npc": "no_bound_npcs"
+    }
+  }
+}
