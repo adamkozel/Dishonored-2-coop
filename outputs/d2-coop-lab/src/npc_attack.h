@@ -9,11 +9,13 @@
 // only the NPCs present at its start and stopped on any retirement or timeout
 // (take 1258j: no_ready_actors / negotiation_timeout), so guards could not hurt the
 // client for most of a mission (Emily's health stayed 70 in every 1270 fight).
+// 1214kg (#219): any allowlisted enemy damage declaration, sent by name: guns, grenades, clockwork arms, hounds and
+// witches hit the clone too and were dropped (suppressCloneWorldDamage). Melee weapons keep the native defense.
 struct NpcAttackBinding {std::uint64_t arm=0,peerNonce=0;bool ready=false;ULONGLONG started=0;};
 struct NpcAttackRetired {std::uint64_t arm=0;ULONGLONG at=0;};
 struct NpcAttackPending {std::uint64_t event=0,arm=0;ULONGLONG at=0;unsigned weapon=0;};
 struct NpcAttackCaptureIdentity {NativeNpcAuthority source{};std::uint64_t arm=0,nonce=0;};
-struct NpcAttackContact {std::uint64_t arm=0,nonce=0;ULONGLONG tick=0;unsigned attacker=0,inflictor=0,flags=0;float offset[3]{},direction[3]{};};
+struct NpcAttackContact {std::uint64_t arm=0,nonce=0;ULONGLONG tick=0;unsigned attacker=0,inflictor=0,flags=0;float offset[3]{},direction[3]{};char damage[kNpcAttackDamageNameSize]{};};
 struct NpcAttackCaptureScope {
     NativeHealth victim{};unsigned generation=0;ULONGLONG until=0;bool host=false,terminal=false;
     std::vector<NpcAttackCaptureIdentity> sources;
@@ -41,6 +43,18 @@ std::atomic<std::uint64_t> npcAttackCaptured{0},npcAttackReplicaBlocked{0},npcAt
 // 1214cv: hits on the registered victim that were not relayed, by reason: no live source scope, victim identity,
 // attacker without a ready binding, contact shape (weapon, amount, flags, declaration). Cumulative per process.
 std::atomic<std::uint64_t> npcAttackCaptureMisses[4]{};std::atomic<unsigned> npcAttackLastMissAttacker{0};
+// 1214kg (#219): contacts relayed by kind (the guard sword, other melee weapons, ranged and area), contacts whose hit
+// geometry was replaced (an explosion centre or an unset direction), and received declarations this world lacks.
+std::atomic<std::uint64_t> npcAttackCapturedSword{0},npcAttackCapturedMelee{0},npcAttackCapturedOther{0},npcAttackGeometryDefaulted{0};
+std::uint64_t npcAttackDamageMissing=0;char npcAttackLastDamage[kNpcAttackDamageNameSize]{};
+// The name of a native damage declaration (the damage manager's, like the sword's) when the relay may carry it.
+bool npcAttackDamageName(std::uintptr_t decl,char (&out)[kNpcAttackDamageNameSize]){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t vt=0,manager=0,name=0;std::string path;
+    if(!decl||!memoryRead(decl,&vt,8)||vt!=base+0x1c5d138||!memoryRead(decl+0x10,&manager,8)||manager!=base+0x3990b60||
+       !memoryRead(decl+8,&name,8)||!worldIdentityString(memoryRead,name,path)||path.size()>=sizeof(out))return false;
+    std::memset(out,0,sizeof(out));std::memcpy(out,path.data(),path.size());
+    return npcAttackDamageAllowed(out,sizeof(out));
+}
 thread_local bool npcAttackApplying=false;
 // Passive observer of native arkPlayerStateBlock melee resolution 140859980
 // (block 0, parry-lose 1, parry-win 2). It never changes arguments or result;
@@ -260,19 +274,33 @@ bool routeNpcAttackDamage(void* component,void* info,void* result){
             missAttacker=attacker;
             for(const auto& b:s.sources)if(attacker==b.source.npc.handle){
                 miss=4;const auto& n=b.source;unsigned parent=0;
+                // 1214kg (#219): any allowlisted declaration; the guard sword keeps its exact native shape.
+                char name[kNpcAttackDamageNameSize]{};
+                if(worldIdentityEntity(memoryRead,game,attacker)!=n.npc.actor||!npcAttackDamageName(decl,name))break;
                 const auto weapon=worldIdentityEntity(memoryRead,game,inflictor);
-                if(worldIdentityEntity(memoryRead,game,attacker)!=n.npc.actor||!weapon||!memoryRead(weapon+0xac,&parent,4)||parent!=attacker||
-                   amount!=20||flags!=0x80||!nativeSwordDeclaration(decl))break;
+                const bool owned=weapon&&memoryRead(weapon+0xac,&parent,4)&&parent==attacker,sword=!std::strcmp(name,kSwordDamageDecl);
+                if(sword&&(!owned||amount!=20||flags!=0x80||!nativeSwordDeclaration(decl)))break;
                 handled=true;miss=0;
                 if(s.host&&!s.terminal){
                     NpcAttackContact e{};e.arm=b.arm;e.nonce=b.nonce;e.tick=GetTickCount64();e.attacker=attacker;e.inflictor=inflictor;
-                    if(!nativeMeleeAttackFlags(weapon,e.flags)){npcAttackFault.store(1);break;}
-                    float root[3]{};bool good=memoryRead(s.victim.actor+0x300,root,12);
+                    std::memcpy(e.damage,name,sizeof(e.damage));
+                    unsigned melee=0;
+                    if(owned&&nativeMeleeAttackFlags(weapon,melee))e.flags=melee|kNpcAttackMelee;
+                    else if(sword){npcAttackFault.store(1);break;}
+                    float root[3]{};const bool rooted=memoryRead(s.victim.actor+0x300,root,12);bool place=rooted,aim=true;
                     std::memcpy(e.offset,data.data()+0x24,12);std::memcpy(e.direction,data.data()+0x3c,12);
-                    float norm=0;for(unsigned i=0;i<3;++i){e.offset[i]-=root[i];good=good&&std::isfinite(e.offset[i])&&std::fabs(e.offset[i])<=3&&std::isfinite(e.direction[i]);norm+=e.direction[i]*e.direction[i];}
-                    good=good&&norm>=.9f&&norm<=1.1f;
-                    if(good&&npcAttackContacts.size()<32){npcAttackContacts.push_back(e);++npcAttackCaptured;}
-                    else npcAttackFault.store(1);
+                    float norm=0;for(unsigned i=0;i<3;++i){e.offset[i]-=root[i];place=place&&std::isfinite(e.offset[i])&&std::fabs(e.offset[i])<=3;aim=aim&&std::isfinite(e.direction[i]);norm+=e.direction[i]*e.direction[i];}
+                    aim=aim&&norm>=.9f&&norm<=1.1f;
+                    // A ranged or area contact can name an explosion centre or no direction: the chest, struck from above.
+                    if(!sword&&rooted&&(!place||!aim)){
+                        if(!place){e.offset[0]=e.offset[1]=0;e.offset[2]=1.2f;}
+                        if(!aim){e.direction[0]=e.direction[1]=0;e.direction[2]=-1;}
+                        place=aim=true;++npcAttackGeometryDefaulted;
+                    }
+                    if(place&&aim&&npcAttackContacts.size()<32){
+                        npcAttackContacts.push_back(e);++npcAttackCaptured;
+                        ++(sword?npcAttackCapturedSword:(e.flags&kNpcAttackMelee)?npcAttackCapturedMelee:npcAttackCapturedOther);
+                    }else npcAttackFault.store(1);
                 }else if(s.terminal)++npcAttackTerminalBlocked;else ++npcAttackReplicaBlocked;
                 break;
             }
@@ -330,8 +358,14 @@ void npcAttackPeerRestarted(){
 bool applyNpcAttack(NpcAuthorityChannel& c,const CoopNpcAttack& p){
     NativeHealth h{},source{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(!npcCombatIdentity(c,source)||!readNativeHealth(memoryRead,base,1,h)||h.game!=observedGame||h.logic!=1||h.current<=0||h.current>h.maximum||!swordDamageApiMatches())return false;
-    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,kSwordDamageDecl,false,false);
-    if(!nativeSwordDeclaration(decl))return false;
+    if(source.actor!=c.lease.binding.npc.actor)return false;
+    // 1214kg (#219): the host's declaration by name (validNpcAttack checked it). The native lookup returns a loaded
+    // declaration first (confirmed static, 14001e030); one this world cannot name back is skipped, never a fault.
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,p.damage,false,false);
+    char name[kNpcAttackDamageNameSize]{};
+    if(!npcAttackDamageName(decl,name)||std::memcmp(name,p.damage,sizeof(name))||(!std::strcmp(name,kSwordDamageDecl)&&!nativeSwordDeclaration(decl))){
+        ++npcAttackDamageMissing;npcAttack.lastDefense=NpcAttackDefense::Damage;npcAttack.inflicted=0;npcAttack.before=npcAttack.after=h.current;return true;
+    }
     float position[3]{};if(!memoryRead(h.actor+0x300,position,12))return false;
     for(unsigned i=0;i<3;++i){position[i]+=p.offset[i];if(!std::isfinite(position[i]))return false;}
     alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
@@ -339,11 +373,13 @@ bool applyNpcAttack(NpcAuthorityChannel& c,const CoopNpcAttack& p){
     reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
     const unsigned regionMask=1,region=0;std::memcpy(params.data()+0x20,&regionMask,4);std::memcpy(params.data()+0x4c,&region,4);
     std::memcpy(params.data()+0x24,position,12);std::memcpy(params.data()+0x3c,p.direction,12);std::memcpy(params.data()+0x54,&c.lease.binding.npc.handle,4);
-    npcAttack.before=h.current;npcAttack.lastAttacker=c.lease.binding.npc.handle;
+    npcAttack.before=h.current;npcAttack.lastAttacker=c.lease.binding.npc.handle;npcAttack.lastDefense=NpcAttackDefense::Damage;
+    std::memcpy(npcAttackLastDamage,p.damage,sizeof(npcAttackLastDamage));
     // A native block is resolved by the attacker's weapon before any damage
     // event (1406357d0). Run that resolution against the local replica of the
     // authoritative attacker; a defended contact never reaches 717950.
-    if(source.actor!=c.lease.binding.npc.actor||!resolveNativeMeleeDefense(h.actor,source.actor,p.flags,npcAttack.lastDefense))return false;
+    // 1214kg: only a melee weapon's contact; shots, explosions and bites are not blocked.
+    if((p.flags&kNpcAttackMelee)&&!resolveNativeMeleeDefense(h.actor,source.actor,p.flags,npcAttack.lastDefense))return false;
     if(npcAttack.lastDefense!=NpcAttackDefense::Damage){
         npcAttack.inflicted=0;npcAttack.after=h.current;
         (npcAttack.lastDefense==NpcAttackDefense::Blocked?npcAttack.blocked:npcAttack.lastDefense==NpcAttackDefense::ParryLose?npcAttack.parryLose:npcAttack.parryWin)++;
@@ -472,6 +508,7 @@ void serviceNpcAttack(ULONGLONG tick){
         if(localRole||e.nonce!=npcAttack.nonce||tick<e.tick||tick-e.tick>=250||!b||!b->ready||!c||!npcCombatIdentity(*c,h)||npcAttack.pending.size()>=32){stopNpcAttack("contact_expired_or_replaced");return;}
         auto p=npcAttackPacket(*c,*b,NpcAttackMessage::Hit);p.event=++npcAttack.event;
         std::memcpy(p.offset,e.offset,12);std::memcpy(p.direction,e.direction,12);p.flags=e.flags;
+        std::memcpy(p.damage,e.damage,sizeof(p.damage));std::memcpy(npcAttackLastDamage,e.damage,sizeof(npcAttackLastDamage));
         if(!sendNpcAttack(p,*c)){stopNpcAttack("hit_send_failed");return;}
         npcAttack.pending.push_back({p.event,c->arm,tick,e.inflictor});
     }
@@ -496,9 +533,10 @@ void repeatNpcAttack(){
 void writeNpcAttack(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-attack.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    fprintf(f,"{\"experimental\":true,\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"event\":%llu,\"consumed\":%llu,\"acked\":%llu,\"pending\":%zu,\"captured\":%llu,\"replicaBlocked\":%llu,\"sent\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"before\":%.9g,\"after\":%.9g,\"inflicted\":%.9g,\"lastAttacker\":%u,\"blocked\":%llu,\"parryLose\":%llu,\"parryWin\":%llu,\"reactions\":%llu,\"reactionFailures\":%llu,\"lastDefense\":%u,\"captureMisses\":[%llu,%llu,%llu,%llu],\"lastMissAttacker\":%u,\"entries\":[",
+    fprintf(f,"{\"experimental\":true,\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"event\":%llu,\"consumed\":%llu,\"acked\":%llu,\"pending\":%zu,\"captured\":%llu,\"replicaBlocked\":%llu,\"sent\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"before\":%.9g,\"after\":%.9g,\"inflicted\":%.9g,\"lastAttacker\":%u,\"blocked\":%llu,\"parryLose\":%llu,\"parryWin\":%llu,\"reactions\":%llu,\"reactionFailures\":%llu,\"lastDefense\":%u,\"captureMisses\":[%llu,%llu,%llu,%llu],\"lastMissAttacker\":%u,\"capturedKinds\":[%llu,%llu,%llu],\"geometryDefaulted\":%llu,\"damageMissing\":%llu,\"lastDamage\":\"%s\",\"entries\":[",
         npcAttack.enabled?"true":"false",npcAttack.result,npcAttack.nonce,npcAttack.event,npcAttack.consumed,npcAttack.acked,npcAttack.pending.size(),npcAttackCaptured.load(),npcAttackReplicaBlocked.load(),npcAttack.sent,npcAttack.applied,npcAttack.duplicates,npcAttack.rejected,npcAttack.before,npcAttack.after,npcAttack.inflicted,npcAttack.lastAttacker,npcAttack.blocked,npcAttack.parryLose,npcAttack.parryWin,npcAttack.reactions,npcAttack.reactionFailures,static_cast<unsigned>(npcAttack.lastDefense),
-        npcAttackCaptureMisses[0].load(),npcAttackCaptureMisses[1].load(),npcAttackCaptureMisses[2].load(),npcAttackCaptureMisses[3].load(),npcAttackLastMissAttacker.load());
+        npcAttackCaptureMisses[0].load(),npcAttackCaptureMisses[1].load(),npcAttackCaptureMisses[2].load(),npcAttackCaptureMisses[3].load(),npcAttackLastMissAttacker.load(),
+        npcAttackCapturedSword.load(),npcAttackCapturedMelee.load(),npcAttackCapturedOther.load(),npcAttackGeometryDefaulted.load(),npcAttackDamageMissing,npcAttackLastDamage);
     for(unsigned i=0;i<npcAttack.bindings.size();++i){const auto& b=npcAttack.bindings[i];fprintf(f,"%s{\"arm\":%llu,\"peerNonce\":%llu,\"ready\":%s}",i?",":"",b.arm,b.peerNonce,b.ready?"true":"false");}
     std::array<MeleeDefenseObservation,64> defense{};std::uint64_t defenseCount=0;
     AcquireSRWLockShared(&meleeDefenseObserveLock);defense=meleeDefenseObservations;defenseCount=meleeDefenseObservationCount;ReleaseSRWLockShared(&meleeDefenseObserveLock);

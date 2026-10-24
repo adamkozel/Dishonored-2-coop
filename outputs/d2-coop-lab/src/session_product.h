@@ -32,6 +32,11 @@ int coopPartnerCharacterForJoin(ULONGLONG tick,std::uint64_t joinKey); // 1214hx
 bool coopCharacterChoiceEnabled=false; // 1214hx: the lab toggle coop_character_choice on|off (product mode always chooses)
 bool productSessionArmed(){return productArm.result&&!std::strcmp(productArm.result,"armed");}
 SHORT productKeyF7=0,productKeyF8=0;
+// 1214kg (#222): a game started or loaded from the Co-op menu hosts its friends-only lobby by itself once it is on a
+// mission map, quietly (no invite window). F7 then opens Steam's invite window for that lobby instead of restarting
+// the session. Leaving (F8) or joining someone else disarms it until the Co-op menu entry is chosen again.
+std::uint64_t coopMenuCoopSelections();bool coopModeChosen(); // native_menu_ui.h
+bool productAutoHostArmed=false;std::uint64_t productAutoHostSeen=0,productAutoHosts=0,productInviteKeys=0;
 const char* productStep(unsigned i){
     switch(i){
     case 0:return "coop_cinematic_sync on";
@@ -74,10 +79,17 @@ void serviceProductSession(void* system,ULONGLONG tick){
         if(!productLaunchChecked){productLaunchChecked=true;if(const auto lobby=onlineLaunchLobby())onlineSession.requestedLobby=lobby;}
         const bool focused=productWindowFocused();
         const SHORT f7=focused?GetAsyncKeyState(VK_F7):0,f8=focused?GetAsyncKeyState(VK_F8):0;
-        if((f7&0x8000)&&!(productKeyF7&0x8000)){++a.hostKeys;requestCoopSaves();startOnlineHost();} // 1214hs: co-op saves
-        if((f8&0x8000)&&!(productKeyF8&0x8000)){++a.leaveKeys;stopOnlineSession("left_by_player");a={};}
+        if((f7&0x8000)&&!(productKeyF7&0x8000)){++a.hostKeys;const auto& o=onlineSession;
+            if(o.active&&o.host&&o.lobby&&(o.phase==OnlinePhase::Hosting||o.phase==OnlinePhase::Connected)){onlineSteam.inviteDialog(onlineSteam.friends,o.lobby);++productInviteKeys;}
+            else{requestCoopSaves();startOnlineHost();}} // 1214hs: co-op saves
+        if((f8&0x8000)&&!(productKeyF8&0x8000)){++a.leaveKeys;productAutoHostArmed=false;stopOnlineSession("left_by_player");a={};}
         productKeyF7=f7;productKeyF8=f8;
     }
+    // 1214kg (#222): also under the lab product controller, so a lab take can choose Co-op and see the lobby.
+    {const auto seen=coopMenuCoopSelections();if(seen!=productAutoHostSeen){productAutoHostSeen=seen;productAutoHostArmed=coopModeChosen();}}
+    if(onlineSession.active&&!onlineSession.host)productAutoHostArmed=false;
+    if(productAutoHostArmed&&coopModeChosen()&&!onlineSession.active&&!onlineSession.requestedLobby&&outgoing.gameLogicState==1&&
+       mapName[0]&&std::strncmp(mapName,"campaign/menu/",14)){productAutoHostArmed=false;++productAutoHosts;startOnlineHost(true);}
     const bool connected=sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected&&lastReceive&&tick-lastReceive<1000;
     if(!connected||!coopWorldPairReady(outgoing,remote)||outgoing.mapId!=remote.mapId){a.result=connected?"waiting_shared_gameplay":"waiting_partner";return;}
     if(a.epoch!=outgoing.worldEpoch||a.peerEpoch!=remote.worldEpoch||a.map!=outgoing.mapId){
@@ -156,8 +168,8 @@ void writeProductSession(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.product.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& a=productArm;
-    fprintf(f,"{\"productMode\":%s,\"autoArm\":%s,\"result\":\"%s\",\"step\":%u,\"worlds\":%u,\"dispatched\":%llu,\"last\":\"%s\",\"hostKeys\":%llu,\"leaveKeys\":%llu,\"repairs\":%llu,\"quickRepairs\":%llu,\"bulkCongestionSkips\":%llu,\"bulkQueueUsMax\":%lld,\"lateRebases\":%llu,\"presentationLost\":%s,\"missing\":%u,\"repairBackoffMs\":%llu,\"role\":%u,\"partnerAssets\":%s,\"dataDir\":\"%s\"}\n",
-        productMode?"true":"false",productAutoArm?"true":"false",a.result,a.step,a.worlds,a.dispatched,a.last,a.hostKeys,a.leaveKeys,a.repairs,a.quickRepairs,bulkCongestionSkips,bulkQueueUsMax,sourcePoseTimeline.lateRebases,a.lostAt?"true":"false",a.missing,a.repairBackoff,localRole,partnerAssetsEnabled?"true":"false",productMode?"set":"");
+    fprintf(f,"{\"productMode\":%s,\"autoArm\":%s,\"result\":\"%s\",\"step\":%u,\"worlds\":%u,\"dispatched\":%llu,\"last\":\"%s\",\"hostKeys\":%llu,\"leaveKeys\":%llu,\"autoHostArmed\":%s,\"autoHosts\":%llu,\"inviteKeys\":%llu,\"repairs\":%llu,\"quickRepairs\":%llu,\"bulkCongestionSkips\":%llu,\"bulkQueueUsMax\":%lld,\"lateRebases\":%llu,\"presentationLost\":%s,\"missing\":%u,\"repairBackoffMs\":%llu,\"role\":%u,\"partnerAssets\":%s,\"dataDir\":\"%s\"}\n",
+        productMode?"true":"false",productAutoArm?"true":"false",a.result,a.step,a.worlds,a.dispatched,a.last,a.hostKeys,a.leaveKeys,productAutoHostArmed?"true":"false",productAutoHosts,productInviteKeys,a.repairs,a.quickRepairs,bulkCongestionSkips,bulkQueueUsMax,sourcePoseTimeline.lateRebases,a.lostAt?"true":"false",a.missing,a.repairBackoff,localRole,partnerAssetsEnabled?"true":"false",productMode?"set":"");
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
 // 1188 join-follow: the host publishes its current mission (idCommonLocal +0x2b8
