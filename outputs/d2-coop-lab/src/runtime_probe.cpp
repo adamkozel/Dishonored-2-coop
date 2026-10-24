@@ -1880,6 +1880,20 @@ int main(int argc, char** argv) {
                 <<",\"position\":["<<c.position[0]<<','<<c.position[1]<<','<<c.position[2]<<"]}";}
         std::cout<<"]}\n";return 0;
     }
+    if(argc==3 && std::strcmp(argv[2],"--difficulty")==0) {
+        // 1214jt (#177): the difficulty manager is embedded in the game at +0x1f7b90 (game code passes that address as
+        // its this); +0x10 is the active arkDeclDifficultyPreset. Read-only; the manager's first words are printed for
+        // research.
+        std::uintptr_t game=0,vt=0,preset=0,presetVt=0,p=0;std::string name;
+        const auto reader=[&](std::uintptr_t at,void* data,std::size_t size){return read(process.value,at,data,size);};
+        if(!reader(base+0x39a5290,&game,8)||!game)return 45;
+        const auto manager=game+0x1f7b90;
+        if(!reader(manager,&vt,8)||!reader(manager+0x10,&preset,8))return 45;
+        if(preset&&reader(preset,&presetVt,8)&&reader(preset+8,&p,8))worldIdentityString(reader,p,name);
+        std::cout<<"{\"pid\":"<<pid<<",\"managerVtRva\":\"0x"<<std::hex<<(vt-base)<<"\",\"presetVtRva\":\"0x"<<(presetVt?presetVt-base:0)<<std::dec<<"\",\"preset\":"<<jsonString(name)<<",\"words\":[";
+        for(unsigned i=0;i<24;++i){std::uintptr_t w=0;reader(manager+i*8,&w,8);if(i)std::cout<<',';std::cout<<"\"0x"<<std::hex<<w<<std::dec<<"\"";}
+        std::cout<<"]}\n";return 0;
+    }
     if(argc==3 && std::strcmp(argv[2],"--pickup-census")==0) {
         // 1214jq (#189): every actor with a pickup component, whatever its state; the shared catalog (--coin-catalog)
         // reads only active components. Read-only.
@@ -2316,7 +2330,7 @@ int main(int argc, char** argv) {
     }
     std::vector<IMAGE_SECTION_HEADER> sections(nt.FileHeader.NumberOfSections);
     if (!read(process.value, base + dos.e_lfanew + 24 + nt.FileHeader.SizeOfOptionalHeader, sections.data(), sections.size() * sizeof(IMAGE_SECTION_HEADER))) return 6;
-    const std::vector<std::string> names{"win_allowMultipleInstances", "fs_savepath", "r_fullscreen", "r_windowWidth", "r_windowHeight", "r_windowPosX", "r_windowPosY", "win_pauseOnFocusLoss", "in_controlInactiveWindow", "com_showLoadingScreen", "com_timeScaler", "r_maxDynamicDecalsPreset", "r_textureDetailsPreset", "r_viewDistPreset", "r_modelsQualityPreset", "r_oceanQualityPreset", "r_shadowQualityPreset", "r_AntiAliasingPreset", "r_skipCameraMotionBlur", "r_skipSSAO"};
+    const std::vector<std::string> names{"win_allowMultipleInstances", "fs_savepath", "r_fullscreen", "r_windowWidth", "r_windowHeight", "r_windowPosX", "r_windowPosY", "win_pauseOnFocusLoss", "in_controlInactiveWindow", "com_showLoadingScreen", "com_timeScaler", "r_maxDynamicDecalsPreset", "r_textureDetailsPreset", "r_viewDistPreset", "r_modelsQualityPreset", "r_oceanQualityPreset", "r_shadowQualityPreset", "r_AntiAliasingPreset", "r_skipCameraMotionBlur", "r_skipSSAO", "ark_difficulty_current", "ark_difficulty_level_override"};
     std::vector<std::pair<std::string, std::uintptr_t>> strings;
     for (auto& section : sections) {
         if (!(section.Characteristics & IMAGE_SCN_MEM_READ) || (section.Characteristics & IMAGE_SCN_MEM_EXECUTE)) continue;

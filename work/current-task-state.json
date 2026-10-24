@@ -22825,5 +22825,11 @@
     "Fix": "pickup census (every pickup actor, active or dormant; incremental slot-table scan) and the host presence D2PP v2, with the partner catch-up of eligible pickups absent from it (1214jr); the host Unlock for its unlocked doors when a door channel arms (1214js); regression fix: 1214jl's event trace hook on the pickedUp post 0x1408848a0 refused every shared pickup binding (native_api) until 1214jq, now kept off by a static_assert; coin-sync.json bindRefusal (1214jp)",
     "Evidence": "route-resumed-join-v1871c (gap: the banana stayed), v1873a/v1874a (initial_binding_refused, native_api), v1875a (census, dormant pickups, wrong amber award by 1214jo), v1876a (the banana caught up, nothing else), v1879a (the door unlocked and opened before the save reaches the partner unlocked and open); mission-pickup-families-v1855c (shared pickups pass again on 1214jr); fixtures v1871a/b, v1877a, v1878a/b",
     "Status": "done, chapter 106; follow-up #203"
+  },
+  "DifficultySync": {
+    "Card": "#177",
+    "Candidate": "candidate-npc-combat-v1214jt (research)",
+    "Evidence": "difficulty-override-v1881a: probe --difficulty reads the manager at game+0x1f7b90 (preset decl at +0x10, difficulty/preset/easy in the lab); the console set ark_difficulty_level_override 2 was queued but the cvar stayed -1 and the preset Easy through a mission load",
+    "Status": "needs the d2-ghidra MCP reconnected (/mcp) to find the cvar's readers and flags or the native difficulty setter; chapter 109"
   }
 }
