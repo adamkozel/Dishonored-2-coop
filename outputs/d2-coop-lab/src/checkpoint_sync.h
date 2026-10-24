@@ -393,7 +393,10 @@ void checkpointEngineService(void* system) {
         }
         return;
     }
-    if(s.phase==CheckpointPhase::Failed&&outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState&&observedGame) {
+    // 1214kh (#221): a lost partner is not a failed restart, and the player plays on alone (peer-loss-dunwall-vm-v1909a:
+    // the host's pause screen opened when the VM's game was ended).
+    if(s.phase==CheckpointPhase::Failed&&outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState&&observedGame&&
+       std::strcmp(s.result,"session_peer_disconnected")&&std::strcmp(s.result,"peer_disconnected")&&std::strcmp(s.result,"death_peer_unavailable")) {
         // Keep failed sessions in the existing native pause screen until the
         // experiment is explicitly disabled or restarted by the harness.
         realLogicSwitch(reinterpret_cast<void*>(observedGame+0x1f6ec8),2);return;
