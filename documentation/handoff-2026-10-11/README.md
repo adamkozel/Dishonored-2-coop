@@ -150,7 +150,7 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [Partner equipment on missions and item-wheel robustness (candidates 1071–1074j)](85-mission-equipment-and-item-wheel.md)
 - [Shared NPC authority on mission maps (candidate 1091)](86-mission-npc-authority.md)
 - [Shared usables on mission maps (candidates 1123–1123e, 1214jh–1214jn)](87-mission-shared-usables.md): two-state toggles, and since #187 lever scripts in both worlds (the native `use` event) and the use mirror for buttons and lifts
-- [Shared death, checkpoint restart and paired autosaves on mission maps (candidates 1147–1153)](88-mission-shared-death-and-checkpoint.md)
+- [Shared death, checkpoint restart and paired autosaves on mission maps (candidates 1147–1153)](88-mission-shared-death-and-checkpoint.md): and since #188 simultaneous deaths, autosaves and a manual save during an autosave, each settling into one transaction
 - [Mission progression: discovery and trigger mirroring (candidates 1163–1171)](89-mission-progression-discovery.md)
 - [Stage 7: release packaging, native Steam sessions, product mode, join-follow and soak (candidates 1171–1193)](90-release-packaging-and-steam-sessions.md)
 - [Product partner-presentation recovery: pause, modal, load, restart; bank stall, stream handshake, congestion, usable hellos (candidates 1203–1203f)](91-product-presentation-recovery.md)

@@ -22812,5 +22812,11 @@
     "Fix": "the replica of a shared lever posts the native use event (_user, 0x1439aa130) with this world's player before the use method (1214jm); the use mirror D2UM shares one-state buttons and two-state levers outside the toggle family (1214jn); lab traces coop_kiscule_trace (Kiscule signals and posted entity events)",
     "Evidence": "mission-usables-v1856a (survey); mission-lever-v1858a (gap); v1860a, v1861b (traces); v1862a, v1863a (turbine both roles); v1865a, v1866a (lift both roles); v1866b (Clockwork Mansion entrance lever); v1866c (escape button); audit scripted-levers-audit-v1868",
     "Status": "done, chapter 87"
+  },
+  "SimultaneousRequests": {
+    "Card": "#188",
+    "Candidate": "candidate-npc-combat-v1214jn",
+    "Evidence": "mission-simultaneous-v1869a (simultaneous deaths: one transaction each, the client's press a duplicate), v1870a (simultaneous autosaves: 2 saves each, settled, both back at their stands), v1870b (manual save during the other's autosave: paired as an origin, both back); v1869b fixture",
+    "Status": "done, chapter 88"
   }
 }
