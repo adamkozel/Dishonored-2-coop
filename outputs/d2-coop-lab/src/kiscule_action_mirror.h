@@ -169,7 +169,19 @@ KisculeActionCount& kisculeCount(const std::string& entity,std::uint32_t node,st
     KisculeActionCount c{};c.entity=entity;c.node=node;c.input=input;c.cls=cls;c.instanceNode=instanceNode;kisculeMirror.counts.push_back(c);return kisculeMirror.counts.back();
 }
 char kisculeHandlerSkipped(void*){return 1;}
+// 1214jj (#187, lab diagnostic): with coop_kiscule_trace on, every dispatched signal (entity, node, input, node vtable
+// RVA) is kept, the first 8192 after the trace starts (1214jk; 1024 filled before the lever press in mission-lever-v1859b), in coop-status.json.kiscule-trace.json.
+struct KisculeTraceEntry{std::uint64_t tick=0;std::uint32_t node=0,input=0,vt=0;char entity[96]{};};
+bool kisculeTraceOn=false;std::array<KisculeTraceEntry,8192> kisculeTrace{};unsigned kisculeTraceCount=0;std::uint64_t kisculeTraceTotal=0,kisculeTraceStarted=0;
+void traceKisculeSignal(const unsigned char* signal){
+    const auto node=*reinterpret_cast<const std::uintptr_t*>(reinterpret_cast<std::uintptr_t>(signal)+0x18);if(!node)return;
+    KisculeTraceEntry e{};e.tick=GetTickCount64();std::memcpy(&e.node,signal+0xc,4);std::memcpy(&e.input,signal+0x10,4);
+    std::uintptr_t vt=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);if(memoryRead(node,&vt,8)&&vt>base)e.vt=static_cast<std::uint32_t>(vt-base);
+    std::string entity;if(kisculeNodeEntity(node,entity))std::snprintf(e.entity,sizeof(e.entity),"%s",entity.c_str());
+    AcquireSRWLockExclusive(&kisculeLock);if(kisculeTraceCount<kisculeTrace.size())kisculeTrace[kisculeTraceCount++]=e;++kisculeTraceTotal;ReleaseSRWLockExclusive(&kisculeLock);
+}
 unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned char* signal){
+    if(kisculeTraceOn)traceKisculeSignal(signal);
     if(!kisculeMirrorActive()||applyingKiscule)return realKisculeDispatch(self,out,signal);
     // Hot path: the native dispatcher dereferences the same pointers next.
     const auto s=reinterpret_cast<std::uintptr_t>(signal);const auto node=*reinterpret_cast<const std::uintptr_t*>(s+0x18);
@@ -275,7 +287,59 @@ void serviceKisculeMirror(std::uint64_t tick){
     }
     if(!keep.empty()){AcquireSRWLockExclusive(&kisculeLock);for(auto& w:keep)if(k.pending.size()<128)k.pending.push_back(w);ReleaseSRWLockExclusive(&kisculeLock);}
 }
+// 1214jl (#187, lab diagnostic): entity events posted while the trace is on. Each post variant is hooked with a jump to
+// a pass-through wrapper (the original always runs); the prologue copies are complete instructions without branches or
+// RIP-relative operands: 0x140883f80 (entity, event, ...) 20 bytes, 0x140884920 (entity, out, event, arg) 15 bytes,
+// 0x1408848a0 (entity, out, event, arg, arg) 16 bytes.
+struct EventTraceEntry{std::uint64_t tick=0;std::uint32_t variant=0;char entity[96]{};char event[48]{};};
+std::array<EventTraceEntry,4096> eventTrace{};unsigned eventTraceCount=0;std::uint64_t eventTraceTotal=0;
+void traceEntityEvent(std::uint32_t variant,void* entity,void* event){
+    EventTraceEntry e{};e.tick=GetTickCount64();e.variant=variant;std::uintptr_t name=0;std::string text;
+    if(entity&&memoryRead(reinterpret_cast<std::uintptr_t>(entity)+0x20,&name,8)&&worldIdentityString(memoryRead,name,text))std::snprintf(e.entity,sizeof(e.entity),"%s",text.c_str());
+    text.clear();if(event&&memoryRead(reinterpret_cast<std::uintptr_t>(event),&name,8)&&worldIdentityString(memoryRead,name,text))std::snprintf(e.event,sizeof(e.event),"%s",text.c_str());
+    AcquireSRWLockExclusive(&kisculeLock);if(eventTraceCount<eventTrace.size())eventTrace[eventTraceCount++]=e;++eventTraceTotal;ReleaseSRWLockExclusive(&kisculeLock);
+}
+using NativeEventPost=void*(*)(void*,void*,void*,void*,void*);
+NativeEventPost realEventPost883=nullptr,realEventPost884=nullptr,realEventPost8848=nullptr;
+void* eventPost883(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(0,a,b);return realEventPost883(a,b,c,d,e);}
+void* eventPost884(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(1,a,c);return realEventPost884(a,b,c,d,e);}
+void* eventPost8848(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(2,a,c);return realEventPost8848(a,b,c,d,e);}
+bool hookEventPost(std::uintptr_t rva,const unsigned char* prefix,unsigned length,void* wrapper,NativeEventPost& real){
+    auto* target=gameImage+rva;if(std::memcmp(target,prefix,length))return false;
+    auto* trampoline=static_cast<unsigned char*>(VirtualAlloc(nullptr,64,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));if(!trampoline)return false;
+    std::memcpy(trampoline,prefix,length);unsigned char jump[14]{0xff,0x25,0,0,0,0};void* resume=target+length;std::memcpy(jump+6,&resume,8);std::memcpy(trampoline+length,jump,14);
+    DWORD old=0,unused=0;if(!VirtualProtect(trampoline,64,PAGE_EXECUTE_READ,&old)){VirtualFree(trampoline,0,MEM_RELEASE);return false;}
+    FlushInstructionCache(GetCurrentProcess(),trampoline,64);
+    unsigned char patch[20];std::memset(patch,0x90,sizeof(patch));std::memcpy(patch,jump,6);std::memcpy(patch+6,&wrapper,8);
+    if(!VirtualProtect(target,length,PAGE_EXECUTE_READWRITE,&old)){VirtualFree(trampoline,0,MEM_RELEASE);return false;}
+    real=reinterpret_cast<NativeEventPost>(trampoline);std::memcpy(target,patch,length);FlushInstructionCache(GetCurrentProcess(),target,length);
+    return VirtualProtect(target,length,old,&unused)!=0;
+}
+bool installEntityEventTrace(){
+    const unsigned char p883[20]={0x48,0x8b,0xc4,0x4c,0x89,0x48,0x20,0x57,0x48,0x83,0xec,0x40,0x48,0xc7,0x40,0xe8,0xfe,0xff,0xff,0xff};
+    const unsigned char p884[15]={0x4c,0x89,0x4c,0x24,0x20,0x48,0x89,0x54,0x24,0x10,0x57,0x48,0x83,0xec,0x40};
+    const unsigned char p8848[16]={0x48,0x8b,0xc4,0x4c,0x89,0x48,0x20,0x48,0x89,0x50,0x10,0x57,0x48,0x83,0xec,0x40};
+    return hookEventPost(0x883f80,p883,20,reinterpret_cast<void*>(&eventPost883),realEventPost883)&&
+        hookEventPost(0x884920,p884,15,reinterpret_cast<void*>(&eventPost884),realEventPost884)&&
+        hookEventPost(0x8848a0,p8848,16,reinterpret_cast<void*>(&eventPost8848),realEventPost8848);
+}
+void writeKisculeTrace(){
+    char path[MAX_PATH]{},temp[MAX_PATH]{};
+    if(std::snprintf(path,sizeof(path),"%s.kiscule-trace.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
+    FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
+    AcquireSRWLockShared(&kisculeLock);
+    fprintf(f,"{\"on\":%s,\"started\":%llu,\"total\":%llu,\"kept\":%u,\"entries\":[",kisculeTraceOn?"true":"false",kisculeTraceStarted,kisculeTraceTotal,kisculeTraceCount);
+    for(unsigned i=0;i<kisculeTraceCount;++i){const auto& e=kisculeTrace[i];
+        fprintf(f,"%s{\"tick\":%llu,\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"vtRva\":%u}",i?",":"",e.tick,e.entity,e.node,e.input,e.vt);}
+    fprintf(f,"],\"eventsTotal\":%llu,\"eventsKept\":%u,\"events\":[",eventTraceTotal,eventTraceCount);
+    for(unsigned i=0;i<eventTraceCount;++i){const auto& e=eventTrace[i];
+        fprintf(f,"%s{\"tick\":%llu,\"variant\":%u,\"entity\":\"%s\",\"event\":\"%s\"}",i?",":"",e.tick,e.variant,e.entity,e.event);}
+    fprintf(f,"]}\n");
+    ReleaseSRWLockShared(&kisculeLock);
+    const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
+}
 void writeKisculeMirror(){
+    writeKisculeTrace();
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.kiscule.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;

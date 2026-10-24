@@ -1,0 +1,412 @@
+{
+  "passed": false,
+  "failure": "3 changes in the client's world did not happen in the host's",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "client",
+    "usable": "script_lever_windturbine_1_1_1",
+    "radius": 40.0,
+    "pairing": "corvo-emily",
+    "channel": {
+      "client": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 1,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 7,
+        "received": 7,
+        "rejected": 1,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      },
+      "host": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 0,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 9,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      }
+    },
+    "tries": [
+      {
+        "bearing": 0,
+        "logic": {
+          "settled": true,
+          "client": 12,
+          "host": 12
+        },
+        "view": [
+          -40.7325,
+          120.845,
+          23.6023
+        ]
+      },
+      {
+        "bearing": 0,
+        "height": 0.0,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": 0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": -0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 45,
+        "logic": {
+          "settled": true,
+          "client": 1,
+          "host": 1
+        },
+        "view": [
+          -41.0566,
+          121.59,
+          23.2409
+        ]
+      },
+      {
+        "bearing": 45,
+        "height": 0.0,
+        "stand": [
+          -41.0201,
+          121.626,
+          21.5429
+        ],
+        "focus": {
+          "handle": "0x1cf61910",
+          "name": "script_lever_windturbine_1_1_1"
+        },
+        "current": 1
+      }
+    ],
+    "trace": {
+      "client": {
+        "total": 790,
+        "kept": 790
+      },
+      "host": {
+        "total": 729,
+        "kept": 729
+      }
+    },
+    "signalsOnlyInSource": [
+      {
+        "signal": "script_wind_turbine_kiscule|1611476794|108287731|29773848",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|1228061314|518479975|30109832",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|258|2|30257144",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_wind_turbine_kiscule|632622601|2096912602|30279896",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|234|4|28829048",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|192227791|953516550|30257144",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|829578830|1333026033|30256664",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|758841029|1025225867|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|1133112049|1141321629|30020280",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_wind_turbine_kiscule|1889186195|108287731|29773848",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|1007517529|401842042|28820312",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_wind_turbine_kiscule|1412272837|108287731|29773848",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|42|1|30109832",
+        "source": 3,
+        "peer": 0
+      },
+      {
+        "signal": "|189|1|29766728",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|13|1|30136392",
+        "source": 27,
+        "peer": 24
+      },
+      {
+        "signal": "script_wind_turbine_kiscule|1057705715|1204358302|30256664",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|27|1|30194824",
+        "source": 27,
+        "peer": 24
+      },
+      {
+        "signal": "|30|2|30283512",
+        "source": 3,
+        "peer": 0
+      },
+      {
+        "signal": "|23263009|0|29785976",
+        "source": 194,
+        "peer": 150
+      },
+      {
+        "signal": "|1130360087|55716762|30111064",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|25|1|30194824",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "|214|6|30256664",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|211|1|30020280",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|203|3|28820312",
+        "source": 3,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_player_oneliners|6112|6|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|1423588975|537447394|30109832",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|257|2|30257144",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|1754944900|480811783|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|1774729889|1484137581|30257144",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|12|2|30257144",
+        "source": 32,
+        "peer": 28
+      }
+    ],
+    "signalsOnlyInPeer": [
+      {
+        "signal": "|122|2|30257144",
+        "peer": 33,
+        "source": 30
+      },
+      {
+        "signal": "|139|4|30256664",
+        "peer": 33,
+        "source": 30
+      },
+      {
+        "signal": "|134|1|30164808",
+        "peer": 33,
+        "source": 30
+      },
+      {
+        "signal": "script_kiscule_eotw|978616745|2021550191|30257144",
+        "peer": 1,
+        "source": 0
+      },
+      {
+        "signal": "|193|1|30228328",
+        "peer": 33,
+        "source": 30
+      },
+      {
+        "signal": "|137|1|30283224",
+        "peer": 33,
+        "source": 30
+      },
+      {
+        "signal": "|138|4|30256664",
+        "peer": 33,
+        "source": 30
+      },
+      {
+        "signal": "|141|1|30109832",
+        "peer": 33,
+        "source": 30
+      },
+      {
+        "signal": "|121|2|30257144",
+        "peer": 33,
+        "source": 30
+      }
+    ],
+    "activations": {
+      "client": [],
+      "host": []
+    },
+    "changes": {
+      "client": {
+        "moved": {
+          "script_fx_target_blade_02": [
+            -45.2315,
+            123.246,
+            22.3108
+          ],
+          "script_fx_target_blade_01": [
+            -42.8865,
+            116.544,
+            22.5799
+          ],
+          "script_fx_target_blade_03": [
+            -43.9614,
+            119.615,
+            28.4375
+          ]
+        },
+        "appeared": [],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      },
+      "host": {
+        "moved": {},
+        "appeared": [],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      }
+    },
+    "lever": {
+      "from": 0,
+      "client": 1,
+      "host": 1
+    },
+    "unshared": [
+      {
+        "entity": "script_fx_target_blade_02",
+        "source": [
+          -45.2315,
+          123.246,
+          22.3108
+        ],
+        "peer": [
+          -45.3171,
+          123.494,
+          22.8617
+        ]
+      },
+      {
+        "entity": "script_fx_target_blade_01",
+        "source": [
+          -42.8865,
+          116.544,
+          22.5799
+        ],
+        "peer": [
+          -42.9823,
+          116.821,
+          22.1439
+        ]
+      },
+      {
+        "entity": "script_fx_target_blade_03",
+        "source": [
+          -43.9614,
+          119.615,
+          28.4375
+        ],
+        "peer": [
+          -43.7817,
+          119.095,
+          28.396
+        ]
+      }
+    ]
+  },
+  "scope": "1861 (#187): the scripted lever script_lever_windturbine_1_1_1 used by the client on campaign/edge_of_the_world/eotw.mapinfo; the lever state and its consequences within 40 m in both worlds"
+}

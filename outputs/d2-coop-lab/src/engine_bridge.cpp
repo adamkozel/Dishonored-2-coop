@@ -1506,6 +1506,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_mission_end_mirror on")||!std::strcmp(text,"coop_mission_end_mirror off"))return true;
     if(!std::strcmp(text,"coop_gameflow_mirror on")||!std::strcmp(text,"coop_gameflow_mirror off"))return true;
     if(!std::strcmp(text,"coop_kiscule_mirror on")||!std::strcmp(text,"coop_kiscule_mirror off"))return true;
+    if(!std::strcmp(text,"coop_kiscule_trace on")||!std::strcmp(text,"coop_kiscule_trace off"))return true;
     if(!std::strncmp(text,"coop_chaos_points ",18)&&std::strlen(text)<=24&&std::strspn(text+18,"0123456789")==std::strlen(text+18)&&text[18])return true;
     if(!std::strcmp(text,"coop_checkpoint_sync on")||!std::strcmp(text,"coop_checkpoint_sync off")||!std::strcmp(text,"coop_checkpoint_sync retry_probe")||
        !std::strcmp(text,"coop_checkpoint_delay 0")||!std::strcmp(text,"coop_checkpoint_delay 1500")||
@@ -1706,6 +1707,9 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_gameflow_mirror on")){if(!gameflowMirrorEnabled){gameflowMirrorEnabled=true;gameflowMirror={};gameflowMirror.result="armed";}return;}
     if(!std::strcmp(request.command,"coop_gameflow_mirror off")){gameflowMirrorEnabled=false;gameflowMirror={};gameflowMirror.result="disabled";return;}
     if(!std::strcmp(request.command,"coop_kiscule_mirror on")){AcquireSRWLockExclusive(&kisculeLock);if(!kisculeMirrorEnabled){kisculeMirrorEnabled=true;kisculeMirror={};kisculeMirror.result="armed";}ReleaseSRWLockExclusive(&kisculeLock);return;}
+    // 1214jj (#187, lab diagnostic): the dispatched Kiscule signal trace.
+    if(!std::strcmp(request.command,"coop_kiscule_trace on")){AcquireSRWLockExclusive(&kisculeLock);kisculeTraceCount=0;kisculeTraceTotal=0;eventTraceCount=0;eventTraceTotal=0;kisculeTraceStarted=GetTickCount64();kisculeTraceOn=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(!std::strcmp(request.command,"coop_kiscule_trace off")){AcquireSRWLockExclusive(&kisculeLock);kisculeTraceOn=false;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_kiscule_mirror off")){AcquireSRWLockExclusive(&kisculeLock);kisculeMirrorEnabled=false;kisculeMirror={};kisculeMirror.result="disabled";ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_checkpoint_sync on")){checkpointEnable(true);return;}
     if(!std::strcmp(request.command,"coop_checkpoint_sync off")){checkpointEnable(false);return;}
@@ -2363,6 +2367,7 @@ bool installEngineBridge(unsigned char* image,const char* role) {
     realCommonScreenUpdate=reinterpret_cast<CommonScreenUpdate>(*screenSlot);
     if(!installEntityActivateObserver()||!installTriggerEventObserver()||!installKisculeDispatchObserver()||!installAvatarPerception()||!installNativeSwitchTrace()||!installReplacementTrace()||!installDamageObserver()||!installMeleeDefenseObserver()||!installObserverCamera()||!installNativeHealthSubtractObserver()||!installCoinRewardObserver()||!installMesmerizePartnerFilter()||!installDominoPartnerFilter()||!installPossessionPartnerFilter()||!installAssassinationPartnerFilter()||!installInteractionPartnerFilter()||!installBodyPoseCapture()||!installMovementFootHooks())return false;
     installCoopKisculeHook(); // 1214hn (#156): the Co-op entry's event
+    installEntityEventTrace(); // 1214jl (#187, lab diagnostic): records only while coop_kiscule_trace is on
     installCoopHubHook(); // 1214ho (#156)
     installCoopLocalizeHook(); // 1214hv (#157): the Leave co-op dialog text
     installNpcRemovalTrace(); // 1214hb/1214he (#140): the trace records in a lab build only; the replica corpse fix in any

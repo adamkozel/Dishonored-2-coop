@@ -207,7 +207,9 @@ void serviceUsableChannel(UsableSync& s,ULONGLONG tick){
     if(!readBoundUsable(s,fresh)||fresh.current!=n.current||fresh.pending!= -1||fresh.transitioning()||
        !nativeUsableToggleFamily(fresh)||!nativeUsableTargetValid(fresh,s.order.target)){failUsableSync(s,"native_lifetime_changed_before_apply");return;}
     ++s.calls;
-    if(!requestNativeUsableIndex(fresh,s.order.target,after)){failUsableSync(s,"native_index_refused");return;}
+    // 1214jh: the replica's script events name this world's player as the user, so a lever's script runs here too.
+    // 1214ji: a two-state usable goes through the native use method instead, as a player's use does.
+    if(fresh.stateCount==2?!useNativeUsableAsLocalPlayer(fresh,s.order.target,after):!requestNativeUsableIndex(fresh,s.order.target,after,true)){failUsableSync(s,"native_index_refused");return;}
     s.inFlight=s.order.revision;s.inFlightTarget=s.order.target;s.inFlightUntil=tick+4000;
     s.observedTarget=s.order.target;s.result="native_transition_requested";
 
