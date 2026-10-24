@@ -42,6 +42,11 @@ void hostNpcPaired(NpcAuthorityChannel& c,const CoopNpcControl& p,ULONGLONG tick
             // the client's victim, which also keeps the replay's proximity check true).
             // 1214ij (#160): her Possession takes the lease even from an alert guard.
             else if(c.pairedVariant==kNpcPossessionVariant&&(releaseNpcAiLease(c.lease),acquireNpcAiLease(c.lease,true))){c.hostPairedLease=true;++npcPairedHolds;++npcPairedForced;c.pairedResult="host_possession_hold";}
+            // 1214kd (#209): her combat choke (entry, loop or knockout) on an NPC the host saw vulnerable (off-balance after a
+            // parry, 1214kc) within 2.5 s takes the lease even from an alerted NPC, as Possession does: the ordinary lease
+            // refused it (route-dunwall-partnergrab-v1890a: her choke started, the host answered host_paired_hold_refused).
+            else if(tick<c.hostVulnerableUntil+1000&&nativeTakedownKind(c.pairedVariant)>=1&&nativeTakedownKind(c.pairedVariant)<=3&&
+                    (releaseNpcAiLease(c.lease),acquireNpcAiLease(c.lease,true))){c.hostPairedLease=true;++npcPairedHolds;++npcPairedForced;++npcPairedVulnerableChokes;c.pairedResult="host_vulnerable_choke_hold";}
             else{releaseNpcAiLease(c.lease);
                 if(nativeTakedownLethal(c.pairedVariant)||c.pairedVariant==kNpcPossessionVariant){if(!c.hostPairedFollow){c.hostPairedFollow=true;++npcPairedFollows;c.pairedResult="host_paired_follow";}}
                 else{++npcPairedRefused;c.pairedResult="host_paired_hold_refused";}}
