@@ -1,0 +1,145 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 5000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_diagnostics off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_diagnostics off"
+ },
+ {
+  "do": "wait",
+  "ms": 15000
+ },
+ {
+  "do": "frametiming"
+ },
+ {
+  "do": "wait",
+  "ms": 120000
+ },
+ {
+  "do": "frametiming"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_product_auto off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_checkpoint_sync off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_door_sync off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_usable_sync off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_coin_sync off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_npc_stream off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_trigger_mirror off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_breakable_sync off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_prop_rest off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_use_mirror off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_product_auto off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_checkpoint_sync off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_door_sync off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_usable_sync off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_coin_sync off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_npc_stream off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_trigger_mirror off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_breakable_sync off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_prop_rest off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_use_mirror off"
+ },
+ {
+  "do": "wait",
+  "ms": 15000
+ },
+ {
+  "do": "frametiming"
+ },
+ {
+  "do": "wait",
+  "ms": 120000
+ },
+ {
+  "do": "frametiming"
+ }
+]

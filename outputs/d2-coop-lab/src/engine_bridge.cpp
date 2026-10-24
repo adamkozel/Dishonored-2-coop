@@ -46,9 +46,16 @@
 #include "native_tables.h"
 #include <mutex>
 
+thread_local bool coopGuardedRead=false; // 1214jy (#195), engine_bridge.h
+
 namespace {
 unsigned char* gameImage=nullptr;
 char commandPath[MAX_PATH]{},statusPath[MAX_PATH]{},consolePath[MAX_PATH]{};
+// 1214jz (#195): the diagnostic status files (the 72-writer slice, movement and stream reports) cost the engine thread
+// 1.8 ms per call several times a frame (frame-timing-v1885b: the top scope of 29 of 32 spikes). On in the lab; off in an
+// installed release unless d2coop.cfg sets diagnostics=1 (D2COOP_DIAGNOSTICS=1), where only coop-status.json is written,
+// once a second, with the 1 Hz frame and service timings.
+bool coopDiagnostics=true;
 using ExecuteBuffer=void(*)(void*);
 ExecuteBuffer realExecuteBuffer=nullptr;
 // Native screen update accepts six integer-class arguments. The disassembly
@@ -232,8 +239,20 @@ unsigned transformSampleCount=0;
 ULONGLONG transformTraceUntil=0;
 std::uint32_t transformTraceHandle=0,transformTraceCommand=0;
 void invalidFormat(const wchar_t*,const wchar_t*,const wchar_t*,unsigned int,std::uintptr_t) {invalidConsoleFormat=true;}
+// 1214jy (#195): an in-process copy under structured exception handling instead of ReadProcessMemory, which entered
+// the kernel on every read (frame-timing-v1885a: the mod's own work took 85% of each frame in product mode, the pose
+// stream alone 3.6 ms). An unmapped, guarded or failed page still fails the read; coopGuardedRead tells the
+// diagnostic exception logger (lab_proxy.cpp) that the fault belongs to this read.
+int guardedReadFilter(unsigned long code){
+    return code==EXCEPTION_ACCESS_VIOLATION||code==EXCEPTION_IN_PAGE_ERROR||code==EXCEPTION_GUARD_PAGE?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH;
+}
 bool memoryRead(std::uintptr_t at,void* data,SIZE_T size) {
-    SIZE_T done=0;return ReadProcessMemory(GetCurrentProcess(),reinterpret_cast<void*>(at),data,size,&done)&&done==size;
+    if(!size)return true;
+    if(at<0x10000||at>UINTPTR_MAX-size)return false;
+    bool ok=false;coopGuardedRead=true;
+    __try{std::memcpy(data,reinterpret_cast<const void*>(at),size);ok=true;}
+    __except(guardedReadFilter(GetExceptionCode())){ok=false;}
+    coopGuardedRead=false;return ok;
 }
 std::atomic<std::uint64_t> guardChildrenUpdated{0},guardChildrenRefused{0};
 std::atomic<std::uint64_t> avatarChildrenUpdated{0},avatarChildrenRefused{0};
@@ -1652,6 +1671,7 @@ bool allowedCommand(const char* text) {
         return *rest==0;
     }
     if(!std::strcmp(text,"coop_player_health_hold on")||!std::strcmp(text,"coop_player_health_hold off"))return true;
+    if(!std::strcmp(text,"coop_diagnostics on")||!std::strcmp(text,"coop_diagnostics off"))return true; // 1214jz (#195)
     // 1214jt (#177, lab): the native difficulty override cvar, -1 (off) or a preset index 0-4.
     if(!std::strncmp(text,"ark_difficulty_level_override ",30)){const char* v=text+30;return !std::strcmp(v,"-1")||(v[0]>='0'&&v[0]<='4'&&!v[1]);}
     if(!std::strcmp(text,"coop_grant_item grenade")||!std::strcmp(text,"coop_grant_item health")||!std::strcmp(text,"coop_grant_item mana"))return true;
@@ -1846,6 +1866,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strncmp(request.command,"coop_lab_hit ",13)&&labHitAllowed(request.command+13,&labHitKind,&labHitSide)){labKnockdownRequest=true;return;}
     if(!std::strncmp(request.command,"coop_lab_npc_place ",19)&&labNpcPlaceAllowed(request.command+19,labPlaceSpawner,labPlaceAt)){labPlaceRequest=true;return;}
     if(!std::strcmp(request.command,"coop_lab_ai_pause off")){labAiPauseRequest=2;return;}
+    if(!std::strcmp(request.command,"coop_diagnostics on")||!std::strcmp(request.command,"coop_diagnostics off")){coopDiagnostics=!std::strcmp(request.command,"coop_diagnostics on");return;}
     if(!std::strncmp(request.command,"coop_lab_ai_pause ",18)&&labAiPauseAllowed(request.command+18,labAiPauseSpawner,&labAiPauseSeconds)){labAiPauseRequest=1;return;}
     if(!std::strcmp(request.command,"coop_grant_item pistol")){labGrantRequest=4;return;}
     if(!std::strcmp(request.command,"coop_grant_item crossbow")){labGrantRequest=5;return;}
@@ -2136,6 +2157,7 @@ void followProbe(ULONGLONG tick) {
     }
 }
 #include "native_service_timing.h"
+#include "frame_timing.h"
 #include "diagnostic_schedule.h"
 void writeDiagnosticSlice(ULONGLONG tick){
     if(!*statusPath)return;NativeServiceTimer timer("diagnostic_slice");
@@ -2226,12 +2248,16 @@ void writeStatus(ULONGLONG tick) {
     // of its progression; sample only the small movement report at 50 ms
     // while the explicit experimental bank is active.
     static ULONGLONG lastMovementStatus=0;
-    if(*statusPath&&tick-lastMovementStatus>=(movementBankActive()?50u:250u)){timedNativeService("writeMovementStatus",[&]{writeMovementStatus();});lastMovementStatus=tick;}
-    writeDiagnosticSlice(tick);
-    if(!*statusPath||tick-lastStatus<250)return;lastStatus=tick;
-    timedNativeService("writeMovementResumeStatus",[&]{writeMovementResumeStatus();});
-    timedNativeService("writeShadowStream",[&]{writeShadowStream(tick);});
-    timedNativeService("writeObserverIsolation",[&]{writeObserverIsolation(tick);});
+    if(coopDiagnostics){
+        if(*statusPath&&tick-lastMovementStatus>=(movementBankActive()?50u:250u)){timedNativeService("writeMovementStatus",[&]{writeMovementStatus();});lastMovementStatus=tick;}
+        writeDiagnosticSlice(tick);
+    }
+    if(!*statusPath||tick-lastStatus<(coopDiagnostics?250u:1000u))return;lastStatus=tick;
+    if(coopDiagnostics){
+        timedNativeService("writeMovementResumeStatus",[&]{writeMovementResumeStatus();});
+        timedNativeService("writeShadowStream",[&]{writeShadowStream(tick);});
+        timedNativeService("writeObserverIsolation",[&]{writeObserverIsolation(tick);});
+    }
     char text[6144]{};
     int length=std::snprintf(text,sizeof(text),
         "{\"role\":%u,\"engineThread\":%lu,\"screenTransportPumps\":%llu,\"nativeInterface\":\"%s\",\"steamAvailable\":%s,\"listener\":%u,\"connection\":%u,\"connectionState\":%d,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"lastCommand\":%u,\"localPoseAvailable\":%s,\"localPosition\":[%.6f,%.6f,%.6f],\"remotePoseAvailable\":%s,\"remoteFresh\":%s,\"remoteSequence\":%u,\"remotePosition\":[%.6f,%.6f,%.6f],\"probeActorHandle\":%u,\"probeFollowEnabled\":%s,\"probeFollowExact\":%s,\"probeRenderPosition\":[%.6f,%.6f,%.6f],\"probeOffset\":[%.6f,%.6f,%.6f],\"remoteActorImplemented\":false,\"localMap\":\"%s\",\"localMapId\":\"%llx\",\"localEpoch\":%llu,\"remoteMapId\":\"%llx\",\"remoteEpoch\":%llu,\"localGameLogicState\":%u,\"localPendingGameLogicState\":%u,\"remoteGameLogicState\":%u,\"remotePendingGameLogicState\":%u,\"localCinematicMetadataValid\":%u,\"localCinematicNodeCount\":%u,\"localCinematicSignature\":\"%llx\",\"remoteCinematicMetadataValid\":%u,\"remoteCinematicNodeCount\":%u,\"remoteCinematicSignature\":\"%llx\"}\n",
@@ -2309,6 +2335,7 @@ void executeBuffer(void* system) {
         // 1213q: interval between engine-thread command-buffer calls, which drive the
         // whole bridge pump; a long gap here means nothing was sent or received.
         {static double lastEngineCall=0;const double engineNow=presentationClock();if(lastEngineCall)nativeServiceTimings.add("engine_call_gap",engineNow-lastEngineCall);lastEngineCall=engineNow;}
+        frameTimingBegin(); // 1214jx (#195)
         const auto tick=GetTickCount64();setPresentationHold(productMode||productAutoArm);
         if(tick-lastPump>=10) {
             installCheckpointCommandObservers();
@@ -2317,9 +2344,9 @@ void executeBuffer(void* system) {
         }
         // Render presentation at each native engine frame, independent of
         // transport/gameplay service cadence. QPC avoids coarse tick stepping.
-        {NativeServiceTimer scope("presentation_all");serviceAuthoringProof(tick);timedNativeService("serviceMovementBank",[&]{serviceMovementBank(tick);});serviceReviewClip(tick);nativeMutationAllowed=true;timedNativeService("serviceMovementResume",[&]{serviceMovementResume(tick);});nativeMutationAllowed=false;timedNativeService("followProbe",[&]{followProbe(tick);});nativeMutationAllowed=true;serviceNativeGrappleFx(tick);serviceNativeWindblastFx(tick);serviceRangedMuzzle(tick);servicePowerFailureFx(tick);timedNativeService("presentNpcStream",[&]{presentNpcStream(tick);});nativeMutationAllowed=false;}writeStatus(tick);writeNativeServiceTimings(tick);
+        {NativeServiceTimer scope("presentation_all");serviceAuthoringProof(tick);timedNativeService("serviceMovementBank",[&]{serviceMovementBank(tick);});serviceReviewClip(tick);nativeMutationAllowed=true;timedNativeService("serviceMovementResume",[&]{serviceMovementResume(tick);});nativeMutationAllowed=false;timedNativeService("followProbe",[&]{followProbe(tick);});nativeMutationAllowed=true;serviceNativeGrappleFx(tick);serviceNativeWindblastFx(tick);serviceRangedMuzzle(tick);servicePowerFailureFx(tick);timedNativeService("presentNpcStream",[&]{presentNpcStream(tick);});nativeMutationAllowed=false;}writeStatus(tick);writeNativeServiceTimings(tick);writeFrameTiming(tick);
     }
-    if(thread==engineThread.load()){NativeServiceTimer scope("native_execute_buffer");realExecuteBuffer(system);}else realExecuteBuffer(system);
+    if(thread==engineThread.load()){frameTimingEnd();NativeServiceTimer scope("native_execute_buffer");realExecuteBuffer(system);}else realExecuteBuffer(system);
 }
 void updateNativeScreen(void* common,std::uintptr_t second,int third,bool fourth,std::uintptr_t fifth,bool sixth) {
     // Movie playback bypasses command execution but keeps the native screen
@@ -2381,6 +2408,8 @@ bool installEngineBridge(unsigned char* image,const char* role) {
     outgoing.session=(GetTickCount64()<<32)|GetCurrentProcessId();
     GetEnvironmentVariableA("D2COOP_COMMAND_FILE",commandPath,sizeof(commandPath));
     GetEnvironmentVariableA("D2COOP_STATUS_FILE",statusPath,sizeof(statusPath));
+    {char product[8]{},diagnostics[8]{};GetEnvironmentVariableA("D2COOP_PRODUCT",product,sizeof(product));GetEnvironmentVariableA("D2COOP_DIAGNOSTICS",diagnostics,sizeof(diagnostics));
+     if(!std::strcmp(product,"1"))coopDiagnostics=!std::strcmp(diagnostics,"1");} // 1214jz (#195)
     GetEnvironmentVariableA("D2COOP_ENGINE_LOG",consolePath,sizeof(consolePath));
     GetEnvironmentVariableA("D2COOP_CHECKPOINT_DIR",checkpointDirectory,sizeof(checkpointDirectory));
     realExecuteBuffer=reinterpret_cast<ExecuteBuffer>(*slot);

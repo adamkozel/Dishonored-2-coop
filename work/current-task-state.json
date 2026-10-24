@@ -22851,5 +22851,12 @@
     "Candidate": "candidate-npc-combat-v1214jv",
     "Evidence": "route-dunwall-nonlethal-v1881a/b/c, v1882a: Ramsey's partner-led non-lethal fails; his encounter is a scripted fight and the partner cannot grab an off-balance host-owned NPC (#209)",
     "Status": "in progress: Ramsey non-lethal by the host reaches both worlds (route-dunwall-nonlethal-v1883d, ramsey_in_vault 1 in both); by the partner blocked by #209; lab coop_lab_ai_pause (1214jw); chapter 110"
+  },
+  "FramePacing": {
+    "Card": "#195",
+    "Candidate": "candidate-npc-combat-v1214jz",
+    "Fix": "frame-time recorder frame_timing.h (1214jx); memoryRead as an in-process copy under SEH instead of ReadProcessMemory (1214jy); diagnostic status files off in an installed release unless d2coop.cfg diagnostics=1, lab coop_diagnostics on|off (1214jz); release notes: how to report stutters",
+    "Evidence": "frame-timing-v1885a (before: 20 fps, 1206 spikes>25/min, mod 85% of the frame), v1885b (guarded reads: 76 fps, 55/min), v1886a (release setting: 123 fps, 0/min; baseline 3/min); frame-timing-vm-v1887a/b (two accounts: host 155 fps 0.5/min vs baseline 0, VM partner p99 46.6 vs 46.2 ms); route-resumed-join-v1880b (regression pass on 1214jz)",
+    "Status": "done, chapter 111"
   }
 }

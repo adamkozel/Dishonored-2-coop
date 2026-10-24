@@ -1,0 +1,263 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "seconds": 120,
+    "phases": [
+      {
+        "phase": "on",
+        "host": {
+          "framesPerSecond": 20.5,
+          "p50": 42.23,
+          "p90": 64.65,
+          "p99": 85.44,
+          "max": 133.35,
+          "spikes25PerMinute": 1206.0,
+          "spikes50PerMinute": 544.0,
+          "spikes100PerMinute": 3.5,
+          "modP50": 35.285,
+          "modP99": 76.824,
+          "modMax": 125.288,
+          "modShare": 85.04,
+          "recentSpikeTops": {
+            "status_all": 2,
+            "serviceUsableSync": 1,
+            "sendShadowStream": 14,
+            "prepareWorldObservation": 4,
+            "serviceBreakableSync": 7,
+            "serviceNpcStream": 4
+          },
+          "slowestStages": [
+            "engine_call_gap max 10782.2 ms, mean 28.572 ms",
+            "native_execute_buffer max 9572.2 ms, mean 2.704 ms",
+            "native_services_all max 120.5 ms, mean 14.742 ms",
+            "serviceNpcStream max 106.8 ms, mean 2.915 ms",
+            "status_all max 62.5 ms, mean 1.063 ms",
+            "diagnostic_slice max 58.9 ms, mean 0.933 ms",
+            "writeSwarmWorld max 58.9 ms, mean 2.502 ms",
+            "serviceBreakableSync max 36.2 ms, mean 2.393 ms"
+          ]
+        },
+        "client": {
+          "framesPerSecond": 21.8,
+          "p50": 44.35,
+          "p90": 61.96,
+          "p99": 80.47,
+          "max": 126.3,
+          "spikes25PerMinute": 1266.0,
+          "spikes50PerMinute": 415.0,
+          "spikes100PerMinute": 0.5,
+          "modP50": 37.439,
+          "modP99": 72.409,
+          "modMax": 117.968,
+          "modShare": 84.9,
+          "recentSpikeTops": {
+            "sendShadowStream": 15,
+            "status_all": 4,
+            "serviceBreakableSync": 10,
+            "prepareWorldObservation": 3
+          },
+          "slowestStages": [
+            "engine_call_gap max 10196.5 ms, mean 25.168 ms",
+            "native_execute_buffer max 8752.1 ms, mean 2.004 ms",
+            "native_services_all max 102.3 ms, mean 13.268 ms",
+            "serviceNpcStream max 98 ms, mean 2.079 ms",
+            "status_all max 78.9 ms, mean 1.038 ms",
+            "writeMovementStatus max 75.6 ms, mean 0.91 ms",
+            "diagnostic_slice max 52.6 ms, mean 0.912 ms",
+            "writeGuardStatus max 51.7 ms, mean 5.291 ms"
+          ]
+        }
+      },
+      {
+        "phase": "off",
+        "host": {
+          "framesPerSecond": 56.6,
+          "p50": 15.36,
+          "p90": 25.94,
+          "p99": 43.98,
+          "max": 59.27,
+          "spikes25PerMinute": 419.0,
+          "spikes50PerMinute": 4.0,
+          "spikes100PerMinute": 0.0,
+          "modP50": 8.633,
+          "modP99": 36.379,
+          "modMax": 48.444,
+          "modShare": 64.33,
+          "recentSpikeTops": {
+            "sendShadowStream": 13,
+            "status_all": 8,
+            "prepareWorldObservation": 11
+          },
+          "slowestStages": [
+            "engine_call_gap max 10782.2 ms, mean 23 ms",
+            "native_execute_buffer max 9572.2 ms, mean 1.293 ms",
+            "native_services_all max 120.5 ms, mean 6.692 ms",
+            "serviceNpcStream max 106.8 ms, mean 1.194 ms",
+            "status_all max 62.5 ms, mean 1.767 ms",
+            "diagnostic_slice max 58.9 ms, mean 1.572 ms",
+            "writeSwarmWorld max 58.9 ms, mean 2.375 ms",
+            "transport_all max 38.1 ms, mean 5.479 ms"
+          ]
+        },
+        "client": {
+          "framesPerSecond": 43.5,
+          "p50": 20.65,
+          "p90": 39.87,
+          "p99": 53.14,
+          "max": 75.32,
+          "spikes25PerMinute": 877.5,
+          "spikes50PerMinute": 39.5,
+          "spikes100PerMinute": 0.0,
+          "modP50": 14.417,
+          "modP99": 46.456,
+          "modMax": 65.255,
+          "modShare": 72.6,
+          "recentSpikeTops": {
+            "sendShadowStream": 22,
+            "status_all": 5,
+            "prepareWorldObservation": 5
+          },
+          "slowestStages": [
+            "engine_call_gap max 10196.5 ms, mean 24.38 ms",
+            "native_execute_buffer max 8752.1 ms, mean 1.154 ms",
+            "native_services_all max 102.3 ms, mean 9.3 ms",
+            "serviceNpcStream max 98 ms, mean 1.013 ms",
+            "status_all max 78.9 ms, mean 1.612 ms",
+            "writeMovementStatus max 75.6 ms, mean 0.889 ms",
+            "diagnostic_slice max 52.6 ms, mean 1.417 ms",
+            "writeGuardStatus max 51.7 ms, mean 5.393 ms"
+          ]
+        }
+      }
+    ],
+    "on": {
+      "phase": "on",
+      "host": {
+        "framesPerSecond": 20.5,
+        "p50": 42.23,
+        "p90": 64.65,
+        "p99": 85.44,
+        "max": 133.35,
+        "spikes25PerMinute": 1206.0,
+        "spikes50PerMinute": 544.0,
+        "spikes100PerMinute": 3.5,
+        "modP50": 35.285,
+        "modP99": 76.824,
+        "modMax": 125.288,
+        "modShare": 85.04,
+        "recentSpikeTops": {
+          "status_all": 2,
+          "serviceUsableSync": 1,
+          "sendShadowStream": 14,
+          "prepareWorldObservation": 4,
+          "serviceBreakableSync": 7,
+          "serviceNpcStream": 4
+        },
+        "slowestStages": [
+          "engine_call_gap max 10782.2 ms, mean 28.572 ms",
+          "native_execute_buffer max 9572.2 ms, mean 2.704 ms",
+          "native_services_all max 120.5 ms, mean 14.742 ms",
+          "serviceNpcStream max 106.8 ms, mean 2.915 ms",
+          "status_all max 62.5 ms, mean 1.063 ms",
+          "diagnostic_slice max 58.9 ms, mean 0.933 ms",
+          "writeSwarmWorld max 58.9 ms, mean 2.502 ms",
+          "serviceBreakableSync max 36.2 ms, mean 2.393 ms"
+        ]
+      },
+      "client": {
+        "framesPerSecond": 21.8,
+        "p50": 44.35,
+        "p90": 61.96,
+        "p99": 80.47,
+        "max": 126.3,
+        "spikes25PerMinute": 1266.0,
+        "spikes50PerMinute": 415.0,
+        "spikes100PerMinute": 0.5,
+        "modP50": 37.439,
+        "modP99": 72.409,
+        "modMax": 117.968,
+        "modShare": 84.9,
+        "recentSpikeTops": {
+          "sendShadowStream": 15,
+          "status_all": 4,
+          "serviceBreakableSync": 10,
+          "prepareWorldObservation": 3
+        },
+        "slowestStages": [
+          "engine_call_gap max 10196.5 ms, mean 25.168 ms",
+          "native_execute_buffer max 8752.1 ms, mean 2.004 ms",
+          "native_services_all max 102.3 ms, mean 13.268 ms",
+          "serviceNpcStream max 98 ms, mean 2.079 ms",
+          "status_all max 78.9 ms, mean 1.038 ms",
+          "writeMovementStatus max 75.6 ms, mean 0.91 ms",
+          "diagnostic_slice max 52.6 ms, mean 0.912 ms",
+          "writeGuardStatus max 51.7 ms, mean 5.291 ms"
+        ]
+      }
+    },
+    "off": {
+      "phase": "off",
+      "host": {
+        "framesPerSecond": 56.6,
+        "p50": 15.36,
+        "p90": 25.94,
+        "p99": 43.98,
+        "max": 59.27,
+        "spikes25PerMinute": 419.0,
+        "spikes50PerMinute": 4.0,
+        "spikes100PerMinute": 0.0,
+        "modP50": 8.633,
+        "modP99": 36.379,
+        "modMax": 48.444,
+        "modShare": 64.33,
+        "recentSpikeTops": {
+          "sendShadowStream": 13,
+          "status_all": 8,
+          "prepareWorldObservation": 11
+        },
+        "slowestStages": [
+          "engine_call_gap max 10782.2 ms, mean 23 ms",
+          "native_execute_buffer max 9572.2 ms, mean 1.293 ms",
+          "native_services_all max 120.5 ms, mean 6.692 ms",
+          "serviceNpcStream max 106.8 ms, mean 1.194 ms",
+          "status_all max 62.5 ms, mean 1.767 ms",
+          "diagnostic_slice max 58.9 ms, mean 1.572 ms",
+          "writeSwarmWorld max 58.9 ms, mean 2.375 ms",
+          "transport_all max 38.1 ms, mean 5.479 ms"
+        ]
+      },
+      "client": {
+        "framesPerSecond": 43.5,
+        "p50": 20.65,
+        "p90": 39.87,
+        "p99": 53.14,
+        "max": 75.32,
+        "spikes25PerMinute": 877.5,
+        "spikes50PerMinute": 39.5,
+        "spikes100PerMinute": 0.0,
+        "modP50": 14.417,
+        "modP99": 46.456,
+        "modMax": 65.255,
+        "modShare": 72.6,
+        "recentSpikeTops": {
+          "sendShadowStream": 22,
+          "status_all": 5,
+          "prepareWorldObservation": 5
+        },
+        "slowestStages": [
+          "engine_call_gap max 10196.5 ms, mean 24.38 ms",
+          "native_execute_buffer max 8752.1 ms, mean 1.154 ms",
+          "native_services_all max 102.3 ms, mean 9.3 ms",
+          "serviceNpcStream max 98 ms, mean 1.013 ms",
+          "status_all max 78.9 ms, mean 1.612 ms",
+          "writeMovementStatus max 75.6 ms, mean 0.889 ms",
+          "diagnostic_slice max 52.6 ms, mean 1.417 ms",
+          "writeGuardStatus max 51.7 ms, mean 5.393 ms"
+        ]
+      }
+    }
+  },
+  "scope": "Frame pacing of both lab games on a mission with the co-op services on, then off; lab restored."
+}

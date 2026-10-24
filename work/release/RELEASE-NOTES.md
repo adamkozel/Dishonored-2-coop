@@ -138,6 +138,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 | The partner cannot join | Both players need the same mod version and must be Steam friends. The lobby is friends-only. |
 | The partner's game stays at the title screen after accepting the invite | Press a key: it joins after that ([#146](https://github.com/adamkozel/Dishonored-2-coop/issues/146)). |
 | Something went wrong during install | Nothing in the game folder changed unless the installer said "Installed". Run `Uninstall.cmd` if a receipt exists. |
+| Stutters or hitches in a session | Open `d2coop\coop-status.json.frame-timing.json` in the game folder after a few minutes of play (the mod rewrites it every second). Report its `window` (frame-time percentiles and spikes per minute) and its `spikes` list (each hitch with the mod's own time and its most expensive part) in a [GitHub issue](https://github.com/adamkozel/Dishonored-2-coop/issues), with both players' files if you can. For a deeper report, add `diagnostics=1` under `[d2coop]` in `d2coop\d2coop.cfg`, play the moment again, and attach the `coop-status.json.*` files. Remove the line afterwards, because the full diagnostics cost frame time. |
 
 ## Known limitations
 
