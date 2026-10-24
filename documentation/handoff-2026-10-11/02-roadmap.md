@@ -1,6 +1,6 @@
 # Complete roadmap and completion gates
 
-The requested product is a single-player campaign played cooperatively by Corvo and Emily, with shared cutscenes, native game UI, native Steam sessions and consistent gameplay outcomes. The current priority is finishing the movement phase. On 2026-10-11 the user explicitly authorized an active goal of finished playable co-op and asked development to continue beyond movement without milestone approval pauses while they sleep. Finishing movement is a transition to the next development work, not a stop condition.
+The requested product is a single-player campaign played cooperatively by Corvo and Emily, with shared cutscenes, native game UI, native Steam sessions and consistent gameplay outcomes. Stages 3 to 5 are complete (their umbrella cards are closed); the current priority is stage 6, campaign and recovery. On 2026-10-11 the user explicitly authorized an active goal of finished playable co-op and asked development to continue beyond movement without milestone approval pauses while they sleep. Finishing movement is a transition to the next development work, not a stop condition.
 
 The exact 105-item movement checklist, role applicability, motion candidates, evidence links, power requirements and remaining notes is generated in [movement requirements](generated/movement-requirements.md). That document is the detailed moveset list; do not replace it with a short selection of locomotion clips.
 
@@ -10,10 +10,10 @@ The exact 105-item movement checklist, role applicability, motion candidates, ev
 |---|---|---|
 | 1. Protected development lab | Original baseline, independent save paths, native input automation, side-by-side windows and background play | Maintain exact executable guards, original-file integrity and reproducible restoration |
 | 2. Native transport and remote identity | Native Steam connection; epochs, roles, handles, leases; presentation actors | Real two-account host/join/invite workflow, disconnect and reconnect with no stale ownership |
-| 3. Complete movement phase — active | Authored/native/retargeted candidates, D2 playback, many isolated role/state tests and videos | Every applicable motion bound to genuine game state, natural full-body quality, transitions, contact/equipment/VFX, both roles and reviewable real-game videos |
+| 3. Complete movement phase | Authored/native/retargeted candidates, D2 playback, many isolated role/state tests and videos | Every applicable motion bound to genuine game state, natural full-body quality, transitions, contact/equipment/VFX, both roles and reviewable real-game videos |
 | 4. Shared combat and world authority | Bounded guard and native damage experiments | Enemies perceive/fight both players; one authoritative damage/outcome path; synchronized health, deaths, spawn, bodies and physics |
 | 5. Interactions and progression | Native state/resource investigations, contextual animation candidates | Doors, pickups, inventory, objectives, dialogue, mission decisions and scripted interactions remain consistent |
-| 6. Campaign and recovery | Fixed Dunwall shared reload/death and cinematic experiments | General checkpoint/save transfer, role restoration, simultaneous request deduplication, both-ready barriers, every relevant map/load/scene boundary |
+| 6. Campaign and recovery — active | Fixed Dunwall shared reload/death and cinematic experiments | General checkpoint/save transfer, role restoration, simultaneous request deduplication, both-ready barriers, every relevant map/load/scene boundary |
 | 7. Native UI and release | Existing pause/death/character/menu assets identified | Native host/join/choice/recovery flows, packaging, rollback, sustained stability and online validation |
 
 Stages overlap where dependencies demand it. A new animation must not independently apply combat damage or invent world authority merely to look correct.
