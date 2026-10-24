@@ -120,8 +120,30 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   6. `Task_MI_Electro_Jindosh`: the handle `script_handle_electroshock` sends `nonlethal_complete` through
      `nleth_shocked_success`.
   7. `Task_MI_NonLethalEnd`.
+- **Hypatia (The Good Doctor), five steps** (`institute_p_lowchaos`, `ld_kiscule_objectivs`):
+  1. Take Vasco's journal: `ld_belt_note_is_vasco_journal_cur_1` in his safe, or his scroll case
+     `ld_npc_belt_scroll_case_01`.
+  2. Take the syringe, `ld_campaign_syringe` (26.8, 35.6, 28.0).
+  3. Get blood from an infected body (`task_blood_sample_complete`).
+  4. Make the preparation (`creat_the_antidote_finished`).
+  5. Use the syringe on Hypatia (`hypatia_cured`).
+  Pickups and usables are shared (chapters 95 and 97, #187), so the partner can do every step.
 - **Ramsey:** the host-made outcome passes (above); the partner-made one waits for #209 (1214kc).
-- **Not yet read:** Hypatia (`hypatia_is_cured`), Breanna (`breanna_is_powerless`) and Delilah (`delilah_is_nl`).
+- **Breanna (The Royal Conservatory), a device chain** (`curator_p_lowchaos`, `ld_script_main`):
+  1. `Task_CU_FindOutHow` (`NonlethalLearned`).
+  2. `Task_CU_InvertLens`, gated by `Ashworth_Knocked_Out`.
+  3. `Task_CU_movebreanna`.
+  4. `Task_CU_OverloadPower` (`NonlethalCompleted`).
+  Next, read the lens and power usables with `--event`.
+- **Delilah (Death to the Empress), the longest** (`dunwall_return_tower_p`, `obj_tr_kiscule`):
+  1. Use the Heart.
+  2. Craft the corrupted runes (`EVENT_DEV_NLStep_Rune_Crafted`).
+  3. `Task_DTTE_NL_Cor_Runes_Throne`: place them on the throne (`EVENT_DEV_NLStep_Rune_PlacedOnThrone`).
+  4. Follow her painting.
+  5. `Task_DTTE_NL_Knockout_Delilah`: knock her out (`EVENT_DEV_MissionStep_Delilah_IsUnconscious`).
+  6. `Task_DTTE_NL_Delilah_Throne` (`EVENT_DEV_NLStep_Delilah_NLed`).
+- **Order once the lab is free:** Stilton, the Duke's double, Ramsey partner-made (after 1214kc) and Hypatia, the
+  simplest first. Jindosh, Breanna and Delilah are puzzle chains and follow.
 
 ### The partner's combat choke (#209)
 
