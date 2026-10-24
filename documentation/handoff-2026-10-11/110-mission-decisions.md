@@ -72,3 +72,18 @@ non-lethal branches with the partner acting, and diff the story flags at each mi
   - A partner cannot grab an off-balance host-owned NPC (#209): the parry is relayed, but her native grab never
     starts on the replica.
   - Until #209 is fixed, the host has to take Ramsey's non-lethal outcome.
+- **The lab AI pause (1214jw, the user's suggestion):**
+  - `coop_lab_ai_pause <spawner> <seconds>` holds up to 8 named NPCs' AI decision with the native pause request
+    ([observer_camera.h](../../outputs/d2-coop-lab/src/observer_camera.h)); `off` releases them all. Status is in
+    `observer-camera.json` `labAiPause`.
+  - Route-Mission-v1883 adds a `command` step.
+  - [v1883a](../../work/natural-moveset/route-dunwall-nonlethal-v1883a): with Ramsey and both guards held, they stood
+    passive while the partner sneaked behind Ramsey. Her native choke still never started on his replica
+    (`pairedKnockouts` 0). So the partner-made path stays blocked (#209, and perhaps his scripted state).
+- **The host-made outcome reaches both worlds (confirmed runtime, [route-dunwall-nonlethal-v1883d](../../work/natural-moveset/route-dunwall-nonlethal-v1883d), 1214jw):**
+  - The fixture holds the two escape guards' AI.
+  - The host blocked Ramsey and grabbed him off-balance (`grab`), took his ring, opened the safe room, carried him in
+    (X held 1200 ms; 400 ms never picked him up in [v1883b](../../work/natural-moveset/route-dunwall-nonlethal-v1883b)
+    and [v1883c](../../work/natural-moveset/route-dunwall-nonlethal-v1883c)), dropped him and locked it.
+  - Every gameflow task advanced identically in both worlds.
+  - `ramsey_in_vault` is 1 in both worlds.

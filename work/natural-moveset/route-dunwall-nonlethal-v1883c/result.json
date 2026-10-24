@@ -1,0 +1,177 @@
+{
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [],
+    "healthHold": [
+      "from step step01-heal"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-heal",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step02-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step06-authority",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step07-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-at",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step10-action",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step11-authority",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step12-loot",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step13-use",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      }
+    ],
+    "authority": [
+      {
+        "step": "step06-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h50/50 acq1 lease1 paused0 gp0 hs1"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h50/50 acq0 lease1 paused1 gp1 hs1"
+        ]
+      },
+      {
+        "step": "step11-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h5/10 acq0 lease0 paused0 gp0 hs0"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h5/10 acq0 lease0 paused0 gp0 hs0"
+        ]
+      }
+    ],
+    "commands": [
+      "step07-command host coop_lab_ai_pause ld_spawner_guard_escape_1 300",
+      "step08-command host coop_lab_ai_pause ld_spawner_guard_escape_2 300"
+    ],
+    "commandResults": [
+      "step07-command {\"held\":1,\"holds\":4,\"refused\":0,\"released\":3,\"result\":\"holding\"}",
+      "step08-command {\"held\":2,\"holds\":5,\"refused\":0,\"released\":3,\"result\":\"holding\"}"
+    ],
+    "npcPicks": [
+      "12 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -42.8,-114.3,61.2",
+      "14 host mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -42.8,-114.3,61.2"
+    ],
+    "lootStands": [
+      "12 host d=1 at -42.548,-113.365997,61.003677"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 36,
+        "cine": 145,
+        "pos": [
+          -42.768002,
+          -115.442001,
+          61.003677
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          1,
+          6,
+          7,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_KillRamsey,Task_DW_LeaveTower,Task_DW_NonLethal_DropRamseyInVault"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 36,
+        "cine": 103,
+        "pos": [
+          -38.895824,
+          -161.106354,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          1,
+          6,
+          7,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 8,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/1/1",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_KillRamsey,Task_DW_LeaveTower,Task_DW_NonLethal_DropRamseyInVault"
+      }
+    }
+  },
+  "passed": false,
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "Carry of mortimer_ramsey not registered"
+}

@@ -1659,6 +1659,7 @@ bool allowedCommand(const char* text) {
     if(!std::strncmp(text,"coop_partner_effect ",20))return labPartnerEffectAllowed(text+20);
     if(!std::strncmp(text,"coop_lab_hit ",13))return labHitAllowed(text+13);
     if(!std::strncmp(text,"coop_lab_npc_place ",19))return labNpcPlaceAllowed(text+19);
+    if(!std::strncmp(text,"coop_lab_ai_pause ",18))return labAiPauseAllowed(text+18); // 1214jw (#197)
     if(!std::strcmp(text,"coop_grant_item pistol")||!std::strcmp(text,"coop_grant_item crossbow")||!std::strcmp(text,"coop_grant_item stunmine")||!std::strcmp(text,"coop_grant_item springrazor")||!std::strcmp(text,"coop_grant_item heart"))return true;
     if(!std::strcmp(text,"coop_use_item health")||!std::strcmp(text,"coop_use_item mana"))return true;
     const char* commands[]={"getviewpos","where","Ansel_PlayerVisible","LoadGame","listDecls","debugEntityByName","trigger","teleport","setviewpos","find","listModels"};
@@ -1844,6 +1845,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strncmp(request.command,"coop_partner_effect ",20)&&labPartnerEffectAllowed(request.command+20)){requestLabPartnerEffect(request.command+20);return;}
     if(!std::strncmp(request.command,"coop_lab_hit ",13)&&labHitAllowed(request.command+13,&labHitKind,&labHitSide)){labKnockdownRequest=true;return;}
     if(!std::strncmp(request.command,"coop_lab_npc_place ",19)&&labNpcPlaceAllowed(request.command+19,labPlaceSpawner,labPlaceAt)){labPlaceRequest=true;return;}
+    if(!std::strcmp(request.command,"coop_lab_ai_pause off")){labAiPauseRequest=2;return;}
+    if(!std::strncmp(request.command,"coop_lab_ai_pause ",18)&&labAiPauseAllowed(request.command+18,labAiPauseSpawner,&labAiPauseSeconds)){labAiPauseRequest=1;return;}
     if(!std::strcmp(request.command,"coop_grant_item pistol")){labGrantRequest=4;return;}
     if(!std::strcmp(request.command,"coop_grant_item crossbow")){labGrantRequest=5;return;}
     if(!std::strcmp(request.command,"coop_grant_item stunmine")){labGrantRequest=6;return;}

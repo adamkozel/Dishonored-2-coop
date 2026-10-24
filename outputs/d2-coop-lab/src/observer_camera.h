@@ -132,6 +132,47 @@ void serviceLabNpcPlace(){
     reinterpret_cast<void(*)(void*,const float*,const float*,bool,int)>(gameImage+0x87d200)(reinterpret_cast<void*>(npc->actor),labPlaceAt,orientation,true,0);
     ++labPlaces;labPlaceResult="placed";
 }
+// 1214jw (#197, lab only; the user's suggestion): "coop_lab_ai_pause <spawner> <seconds>" holds one unique catalogued
+// NPC's AI decision with the native pause request (0x7e7800, as native_ai_hold.h does) for up to 300 s, so a fixture can
+// reach a target unnoticed (Ramsey's scripted confrontation, route-dunwall-nonlethal-v1882a). Up to 8 NPCs are held at
+// once; "coop_lab_ai_pause off" releases them all. Only these holds' references are released (0x7e79c0), on expiry, in
+// a new world or with off. The outcome under test (a knockout, a story flag) stays native.
+struct LabAiPause {NativeAiDecisionState target{};std::uint64_t epoch=0;ULONGLONG until=0;};
+std::vector<LabAiPause> labAiPauses;char labAiPauseSpawner[96]{};unsigned labAiPauseSeconds=0;int labAiPauseRequest=0;
+std::uint64_t labAiPauseHolds=0,labAiPauseRefused=0,labAiPauseReleased=0;const char* labAiPauseResult="idle";
+bool labAiPauseAllowed(const char* t,char* spawner=nullptr,unsigned* seconds=nullptr){
+    if(!std::strcmp(t,"off"))return true;
+    char name[96]{};unsigned s=0;int used=0;
+    if(sscanf_s(t,"%95s %u%n",name,static_cast<unsigned>(sizeof(name)),&s,&used)!=2||t[used]||!s||s>300)return false;
+    const auto len=std::strlen(name);if(len<3)return false;
+    for(std::size_t i=0;i<len;++i){const char c=name[i];if(!((c>='a'&&c<='z')||(c>='0'&&c<='9')||c=='_'))return false;}
+    if(spawner)strcpy_s(spawner,96,name);if(seconds)*seconds=s;return true;}
+void releaseLabAiPauses(ULONGLONG tick,bool all){
+    for(auto it=labAiPauses.begin();it!=labAiPauses.end();){
+        const bool due=all||tick>=it->until||observedGame!=it->target.game||outgoing.worldEpoch!=it->epoch;
+        if(!due){++it;continue;}
+        labAiPauseResult=releaseNativeAiReference(it->target,it->epoch)?(all?"released":tick>=it->until?"expired":"world_changed"):"identity_invalidated";
+        ++labAiPauseReleased;it=labAiPauses.erase(it);}
+}
+void serviceLabAiPause(ULONGLONG tick){
+    if(!labAiPauses.empty()&&GetCurrentThreadId()==engineThread.load())releaseLabAiPauses(tick,false);
+    if(!labAiPauseRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    const int request=labAiPauseRequest;labAiPauseRequest=0;
+    if(request==2){releaseLabAiPauses(tick,true);return;}
+    const auto refuse=[](const char* why){++labAiPauseRefused;labAiPauseResult=why;};
+    if(labAiPauses.size()>=8){refuse("too_many");return;}
+    if(!coopGameplayReady(outgoing)||!nativeAiRequestsMatch()){refuse("unsupported_scope");return;}
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::vector<NativeWorldNpc> catalog;unsigned unbound=0;const NativeWorldNpc* npc=nullptr;
+    if(!readWorldNpcCatalog(memoryRead,base,observedGame,catalog,unbound)){refuse("catalog_unavailable");return;}
+    for(const auto& n:catalog)if(n.unique&&n.spawnerName==labAiPauseSpawner){if(npc){refuse("ambiguous");return;}npc=&n;}
+    NativeAiDecisionState s{};
+    if(!npc||!readNativeAiDecision(memoryRead,base,observedGame,npc->handle,s)||(s.flags&0xc)!=8){refuse("decision_not_found");return;}
+    for(const auto& h:labAiPauses)if(h.target.component==s.component){refuse("already_held");return;}
+    const std::uint32_t before=(s.flags>>6)&0x1fffff;std::uint32_t flags=0;
+    reinterpret_cast<void(*)(void*,void*)>(gameImage+0x7e7800)(reinterpret_cast<void*>(s.component),reinterpret_cast<void*>(s.manager));
+    labAiPauses.push_back({s,outgoing.worldEpoch,tick+labAiPauseSeconds*1000ull});
+    if(!memoryRead(s.component+0x1c,&flags,4)||((flags>>6)&0x1fffff)!=before+1){labAiPauses.back().until=tick;releaseLabAiPauses(tick,false);refuse("unexpected_pause_result");return;}
+    ++labAiPauseHolds;labAiPauseResult="holding";}
 bool labHitAllowed(const char* t,unsigned* kind=nullptr,unsigned* side=nullptr){
     const char* kinds[]={"shove ","sword ","blast "};const char* sides[]={"front","back","left","right"};
     for(unsigned k=0;k<3;++k){const auto n=std::strlen(kinds[k]);if(std::strncmp(t,kinds[k],n))continue;
@@ -281,7 +322,7 @@ bool installObserverCamera(){
     return VirtualProtect(target,sizeof(jump),old,&unused)!=0;
 }
 void serviceObserverCamera(ULONGLONG tick){
-    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();serviceLabPartnerEffect(tick);serviceLabKnockdown();serviceLabNpcPlace();
+    servicePlayerHealthHold();serviceLabItemGrant();serviceLabNamedGrant();serviceLabItemUse();serviceLabPartnerEffect(tick);serviceLabKnockdown();serviceLabNpcPlace();serviceLabAiPause(tick);
     {bool active=false;AcquireSRWLockShared(&observerCameraLock);active=observerCamera.active;ReleaseSRWLockShared(&observerCameraLock);
      if(active)observerCameraArms(true,tick);else if(observerHiddenArms[0].actor||observerHiddenArms[1].actor)observerCameraArms(false,tick);}
     const int request=observerCameraRequest;observerCameraRequest=-1;
@@ -317,6 +358,7 @@ void writeObserverCamera(){
     fprintf(f,"\"itemGrant\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\",\"named\":{\"grants\":%llu,\"refused\":%llu,\"result\":\"%s\"}},",static_cast<unsigned long long>(labGrants),static_cast<unsigned long long>(labGrantRefused),labGrantResult,static_cast<unsigned long long>(labNamedGrants),static_cast<unsigned long long>(labNamedRefused),labNamedResult);
     {NativePlayerMana m{};const bool mr=readNativePlayerMana(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),m);
      fprintf(f,"\"labNpcPlace\":{\"placed\":%llu,\"refused\":%llu,\"result\":\"%s\"},",static_cast<unsigned long long>(labPlaces),static_cast<unsigned long long>(labPlaceRefused),labPlaceResult);
+     fprintf(f,"\"labAiPause\":{\"held\":%zu,\"holds\":%llu,\"refused\":%llu,\"released\":%llu,\"result\":\"%s\"},",labAiPauses.size(),static_cast<unsigned long long>(labAiPauseHolds),static_cast<unsigned long long>(labAiPauseRefused),static_cast<unsigned long long>(labAiPauseReleased),labAiPauseResult);
      fprintf(f,"\"labKnockdown\":{\"applied\":%llu,\"refused\":%llu,\"result\":\"%s\"},",static_cast<unsigned long long>(labKnockdowns),static_cast<unsigned long long>(labKnockdownRefused),labKnockdownResult);
      fprintf(f,"\"itemUse\":{\"uses\":%llu,\"refused\":%llu,\"result\":\"%s\",\"manaBefore\":%.3f,\"manaNow\":%.3f},",static_cast<unsigned long long>(labUses),static_cast<unsigned long long>(labUseRefused),labUseResult,labManaBefore,mr?m.current:-1.f);}
     fprintf(f,"\"healthHold\":{\"active\":%s,\"refills\":%llu,\"misses\":%llu,\"last\":%.3f}}\n",playerHealthHold?"true":"false",
