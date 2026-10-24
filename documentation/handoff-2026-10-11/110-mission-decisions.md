@@ -165,7 +165,7 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   replica follows the host's body stream and never plays it, so it is never vulnerable in her world, and her choke rule
   finds no scene.
 
-**1214kc (built after the campaign run):**
+**1214kc:**
 - A host NPC Pose carries `reserved` bit 1 while the NPC's `+0xd1` bit 6 is set; bit 0 is already "down" (1214en).
   Pose validation accepts 0-3, and the unit tests cover 2, 3 and the refused 4.
 - The client keeps her replica's bit 6 set while host poses carry it (within 400 ms) and clears it afterwards. Host
@@ -173,3 +173,20 @@ the game-derived outputs stay local). All of this is confirmed static; the route
 - Her grab then plays her native combat choke on the replica. The client-sourced choke relay (chapter 93) holds the
   host's NPC and asks for the native knockout.
 - Status: `vulnerableSent`, `vulnerableReceived` and `vulnerableApplies` per NPC channel in the NPC stream status.
+
+**1214kd:** the host takes the forced AI lease (as Possession does, 1214ij) for her combat choke (a takedown of kind
+entry, loop or knockout) on an NPC it saw vulnerable within 2.5 s. An alerted NPC refuses the ordinary lease, and a
+non-lethal choke had no fallback (`npc_paired.h`, status `pairedResult` `host_vulnerable_choke_hold`).
+
+**Takes** (lab, partner-led Dunwall, Ramsey; routes `dunwall-partner-grab-v1890/v1891`):
+
+| Take | Candidate | Result |
+|---|---|---|
+| [route-dunwall-partnergrab-v1890a](../../work/natural-moveset/route-dunwall-partnergrab-v1890a) | 1214kc | Her grab started (2 grabs; 0 in 235 presses on 1214jv). The host sent the vulnerable bit for Ramsey and both guards (18, 58 and 24 poses), and she applied it (1, 2 and 1 times). The host refused the hold: `host_paired_hold_refused`. |
+| [v1890b](../../work/natural-moveset/route-dunwall-partnergrab-v1890b) | 1214kd | Three off-balance windows reached her replica, but the fixed press rhythm (700 ms holds) landed in none: 0 grabs. |
+| [v1891a](../../work/natural-moveset/route-dunwall-partnergrab-v1891a) | 1214kd | Pass. The `grab_react` action taps grab as soon as a new window reaches her replica, as a player reacts to the stagger: one window, two taps, one grab, in 23.5 s. Ramsey reads h10/10 in both worlds, `Task_DW_NonLethal_KnockoutRamsey` completed in both, and the gameflow is equal. |
+
+- `tools/diag/d2_route_actions.py` `grab_react`: blocks in presses like `grab`, but on a new off-balance window
+  (`vulnerableApplies` grows in its own npc-stream status) it releases, faces the target and taps grab for up to 1.6 s.
+- **Confirmed runtime: #209 is fixed on 1214kd.** A partner can now knock out an alerted host-owned enemy with the
+  combat choke after a parry.
