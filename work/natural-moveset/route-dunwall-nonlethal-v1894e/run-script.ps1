@@ -1,0 +1,477 @@
+param([string]$Take='route-dunwall-nonlethal-v1883a',[string]$MapInfo='campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo',[ValidateSet('low','high')][string]$Chaos='low',[ValidateSet('corvo','emily')][string]$HostCharacter='corvo',[ValidateSet('Left','Right')][string]$HostChoice='Left',[string]$Candidate='candidate-npc-combat-v1214cb',[Parameter(Mandatory)][string]$StepsFile,[int]$LoadSeconds=300,[switch]$NoLoad,[int]$VideoSeconds=0,[switch]$HoldAtEnd,[ValidateSet('host','client')][string]$LeadRole='host',[int]$JoinAfterStep=0,[string]$JoinFromMap='',[string[]]$ClientCommands=@())
+# 1883 (#197): {"do":"command","role":<role>,"text":<allowlisted lab command>} sends one lab command, for example
+# coop_lab_ai_pause (1214jw), which holds named NPCs' AI so the fixture reaches a target unnoticed. The lab is restored
+# (relaunched) at the end, so every hold ends with it.
+# 1882 (#197): the choke step can crouch first ("crouch": true; native player state 6) and creep in ("walkMs": a forward
+# push of the left stick after standing "dist" behind), so an unaware NPC is not alerted by a stand right behind it
+# (route-dunwall-nonlethal-v1881a: Ramsey turned to fight).
+# 1881 (#197): {"do":"choke","name":<npc>,"near":[x,y],"until":<task>} holds RB from behind the NPC until the task is
+# active (a non-lethal knockout); {"do":"drop","until":<task>} presses X until the player no longer carries a body
+# (native player state 45) and, with until, the task is active. Tries are kept in <step>-choke.json / <step>-drop.json.
+# 1880 (#203): the census step also keeps both worlds' pickup catch-up status and full pickup census
+# (<step>-catchup-<role>.json, <step>-pickups-<role>.json).
+# 1879 (#189): the save step tries the pause menu three times, 15 s apart (route-resumed-join-v1878a/b: Save Game was
+# disabled while the host was in combat, hypothesis; the frames show it dimmed and the host hurt).
+# 1878 (#189): the open presses try every stand, the unlocking stand first (route-resumed-join-v1877a: the door unlocked
+# from one side and never opened from it; mission-locked-door-v1844a opened it from the other side).
+# 1877 (#189): {"do":"unlock","name":<door>,"key":<inventory item>,"open":true}: the lab grants the door's key
+# (coop_grant_named, setup), the role presses use around the door with a yaw sweep (Test-MissionLockedDoor-v1844) until
+# its native lock clears, then, with open, presses again from that stand until the door moves. The presses are kept in
+# <step>-tries.json. The join audit's door comparison then shows whether the partner's door is unlocked and open too.
+# 1876 (#189): the save step requires a newer file in the role's save slots (route-resumed-join-v1875a: the menu closed
+# without a save, so the load went back to the mission-start autosave), waits longer on the pause menu before Save Game,
+# and tries the menu twice; the written slot is kept in the notes (saveSlot). The second join audit runs 60 s after the
+# join (join-60s; 1214jr's first census cycle and the 10 s absence rule need about half a minute).
+# 1875 (#189): the join audit also saves each world's pickup census (probe --pickup-census, 1214jq: every actor with a
+# pickup component, active or not) as <label>-census-<role>.json, with counts in the audit.
+# 1874 (#189): the pickup sync summary also keeps the binding refusal reason and pickup (1214jp; route-resumed-join-v1873a:
+# both worlds stayed at initial_binding_refused).
+# 1873 (#189): the join audit also keeps both worlds' pickup sync summary (route-resumed-join-v1872a: the host never sent
+# its pickup presence).
+# 1872 (#189): the join audit also keeps both worlds' pickup catch-up status (1214jo, coop-status.json.pickup-catchup.json).
+# 1871 (#189): {"do":"save","role":"host"} saves through the pause menu (Save Game, the first slot) and
+# {"do":"load","role":"host"} loads the newest save through it (Load Game; the world epoch must change). The join
+# audit (JoinAudit) also compares both worlds' shared pickups (catalog names), doors (current/locked), usables (current)
+# and story flags (tools/diag/d2_storyflags_diff.py), at the join and again 30 s later (join-30s), so a partner joining
+# a host who resumed from a mid-mission save shows what did not reach the partner's world.
+# 1749 (#140, 1214hf): the loot step saves both worlds' npc-stream status ($tag-npcstream-<role>.json, with the corpse
+# traces) before its sweep, and a failure saves it too (failure-npcstream-<role>.json): in route-dunwall-lead-v1748d
+# her search found the entity but no body, and no trace was saved because the NPC lookup succeeded.
+# 1710 (#140, 1214gd): -ClientCommands are sent to the partner after the mission start (for example
+# 'coop_corpse_hold own_paired_skip', which leaves the corpse of her own paired kill to native physics). A failed
+# NPC lookup also saves both worlds' npc-stream status ($tag-npcstream-<role>.json), which holds the corpse traces.
+# 1706 (#140): when an NPC lookup finds nothing (route-dunwall-lead-v1702a: after a shared kill of Ramsey the
+# partner's search found no mortimer_ramsey entity and her frame showed only the blood pool), both worlds'
+# --entities and --world-npcs lists are saved ($tag-entities-<role>.json, $tag-worldnpcs-<role>.json) before the
+# step fails, so the corpse's fate (absent, renamed, another type) is on record.
+# 1677 (#136): the loot step steers by the native use focus (arkCpntPlayerSensorInteraction+0x80, as the use step's focus option): at each stand it sweeps pitch and bearing and presses X only while the body is focused (logged to $tag-lootfocus.json). After an assassination the fixed-pitch presses missed the body (route-dunwall-autosave-v1678a: the host's five stands over Ramsey's body never showed a search prompt, while the elimination waited for the search). Generated by make_route_v1677.py.
+# 1676 (#135): the join's loading wait presses through the mission card even while a load is still pending (route-dunwall-join-v1675a: the card showed with logic 15 and pending 5, and v1675 waited for pending 0). Generated by make_route_v1676.py.
+# 1675 (#135): the join's loading wait settles the partner like a player: A at the mission card (logic 15), Emily at a character choice (route-dunwall-join-v1672a: the partner's game loaded Dunwall and waited at the mission card until the 180 s wait ran out). Generated by make_route_v1675.py.
+# 1674 (#134): {"do":"authority","match":<regex>} saves both worlds' matching NPCs from --npc-authority-all (acquire, lease, paused and host-stream eligibility, health) with their NPC stream and combat status to $tag-authority.json (route-dunwall-autosave-v1669b: the partner's assassination of Ramsey ran only in her world; her channel retired with initial_health_or_nonce_mismatch and the host timed out negotiating). Generated by make_route_v1674.py.
+# 1673: logic 7 is the journal (Lore & Maps, confirmed runtime: route-dunwall-lead-v1668b, where the partner's journal opened during a wait and her 40 attacks on Ramsey went into it). Settle closes it with B (notes.menuClosed), and an attack settles the leading role before each press when it is not in gameplay. Generated by make_route_v1673.py.
+# 1672 (#135): the join also turns on the host's mission publishing (coop_follow_host on). In the lab product mode is off (no D2COOP_PRODUCT), so the host published nothing and the partner waited for a host mission (1668a; 1666b on the same map). A product host always publishes. The partner's follow status is saved with the join (join-follow-<role>.json). Generated by make_route_v1672.py.
+# 1671 (#134, multi-state devices): {"do":"census","match":<regex>} saves both worlds' matching pickups (coin catalog) and state-list usables (usable catalog) to $tag-census.json and notes.census; a use step with "state":true counts a press when the usable's native state changes (a safe door opening changes no objective). Generated by make_route_v1671.py.
+# 1669 (#136): after every step both worlds' checkpoint sidecar is kept ($tag-reset-<role>.json) and its autosave pair is summarised in notes.autosaves (saves, originated, mirrored, pending, slot, result), so a take shows where a real mission-script autosave fired in the leading world and whether the partner mirrored it; a later die step then restarts both worlds from that pair. Generated by make_route_v1669.py.
+# 1667 (#134, #135): -JoinFromMap <mapinfo> puts the partner on another mission before the host starts, so the join really loads the host's mission from its start (1666b: the Dunwall fixture is the same map, so nothing loaded). Every NPC lookup is logged with its pick (notes.npcPicks), and each loot stand is filmed (1665b: the partner's body search never registered and she ended in the throne room). Generated by make_route_v1667.py.
+# 1666 (#135): -JoinAfterStep N: only the host loads the mission and runs steps 1..N while the partner stays in the Dunwall fixture; then the partner joins (coop_follow_host on), its game loads the mission from its start, and both worlds are compared: the players' distance, every NPC's life and health in both worlds, objectives and the shared sessions (join.json). The remaining steps run with both. Generated by make_route_v1666.py.
+# 1665 (#134): -LeadRole client runs every step without a role as the partner (Emily): the lookups, stands, presses and checks of trigger, use, at, attack, talk, loot, press and follow steps act in the leading role's world. Both worlds are still recorded after each step. Generated by make_route_v1665.py.
+# 1590 (#102): 'at' and 'use' steps take an optional role. Generated by make_route_v1590.py.
+# Campaign route take (chapter 97): both lab worlds load a mission start in lab
+# product mode with the mission end mirror, pass the native character choice
+# (host Corvo, client Emily; -HostCharacter emily for Memories of Training, which the
+# menu starts as Emily with Corvo as an NPC), then the host runs a step list:
+#   {"do":"trigger","name":<arkTrigger>}            stand in the volume
+#   {"do":"use","name":<entity>,"z":<eye z>?}       stand beside it and press X
+#   {"do":"at","pos":[x,y,z],"yaw":<deg>}           move there
+#   {"do":"wait","ms":<n>}
+#   {"do":"attack","name":<npc regex>,"near":[x,y],"max":<presses>,"behind":true}  fight it until its health is 0 (behind: from its back)
+#   {"do":"loot","name":<npc regex>,"near":[x,y]}  use the body (search)
+#   {"do":"talk","name":<npc regex>,"near":[x,y]}  face and talk (scene must start)
+#   {"do":"press","button":"B","ms":200,"role":"host"}  one controller press (close a note)
+#   {"do":"press","leftY":20000,"ms":800}  walk (cross a thin trigger such as a doorway slab); talk "leftTrigger":true raises the Heart at an NPC;
+#   expect "anyLogic":true accepts the map in any logic state (the campaign ending stays in its scene)
+#   {"do":"flag","entity":"storyflags","name":<variable>,"value":1,"ms":<n>}  wait for a native script variable
+#   {"do":"npcs","near":[x,y]}  save the NPCs nearest a point (names, positions, health)
+#   {"do":"clear","name":<npc regex>,"near":[x,y],"radius":12,"max":4}  fight every living match nearby
+#   {"do":"follow","name":<npc regex>,"near":[x,y],"ms":<n>,"dist":2.0}  stay beside an NPC
+#   {"do":"action","name":"cycle","args":{...}}  timed host action (tools/diag/d2_route_actions.py)
+#   {"do":"partner","pos":[x,y,z],"yaw":<deg>,"crouch":true}  move the partner (client) to a stand
+#   {"do":"die","role":"host"|"client"}  native fall: shared GameOver, both restart
+#     from their own last checkpoint (chapter 88), held and released together
+# After each step both worlds' logic, map, gameflow counts by state and a
+# frame per window are recorded; scenes are skipped with the ordinary hold.
+# Dunwall fixture restored.
+$ErrorActionPreference='Stop';$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$lab="$root/outputs/d2-coop-lab";$out=Join-Path $PSScriptRoot $Take
+$mutex=[Threading.Mutex]::new($false,'Local\D2CoopLab_NativeOperation_01a11a65');$owned=$false;$dirty=$false;$failure=$null;$pids=@{};$notes=[ordered]@{}
+function Save($p,$v){$v|ConvertTo-Json -Depth 12|Set-Content -LiteralPath $p}
+function C($r,$cmd){& "$lab/Send-D2Command.ps1" -Role $r -Command $cmd -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null}
+# 1876: the newest file in a role's save slots.
+function NewestSave($r){$f=@(Get-ChildItem "$root/work/lab-instances/$r/base/savegame" -Directory -Filter 'SLOT*' -ErrorAction SilentlyContinue|Get-ChildItem -File -ErrorAction SilentlyContinue|Sort-Object LastWriteTimeUtc -Descending|Select-Object -First 1)
+ if($f.Count){[ordered]@{time=$f[0].LastWriteTimeUtc;slot=$f[0].Directory.Name}}else{[ordered]@{time=[datetime]::MinValue;slot=$null}}}
+function S($r,$suffix=''){for($i=0;$i-lt40;$i++){try{return(Get-Content "$root/work/lab-instances/$r/coop-status.json$suffix" -Raw -ErrorAction Stop|ConvertFrom-Json -ErrorAction Stop)}catch{Start-Sleep -Milliseconds 25}};throw "Status unavailable $r"}
+function Q($r,$mode,$arg=0){for($i=0;$i-lt8;$i++){$raw=if($arg){& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode $arg}else{& "$lab/bin/d2_runtime_probe.exe" $pids[$r] $mode};if(!$LASTEXITCODE){return($raw|ConvertFrom-Json)};Start-Sleep -Milliseconds 50};throw "Native query failed $r $mode"}
+function I($r,[string]$b='',[int]$ms=100){$a=@{Role=$r;DurationMs=$ms};if($b){$a.Button=$b};& "$lab/Send-D2Input.ps1" @a|Out-Null}
+function Frame($r,$name){$hwnd=(Get-Process -Id $pids[$r]).MainWindowHandle.ToInt64()
+ & (Get-Command ffmpeg).Source -hide_banner -loglevel error -nostdin -f lavfi -i "gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra" -frames:v 1 -y "$out/$name-$r.png" 2>$null|Out-Null}
+# Gameflow node ids are FNV-1a hashes of the lowercased names (1214bp): name the active ones
+# from the local cache (tools/diag/d2_gameflow_dump.py gameflow_names; game-derived, not committed).
+$gfNames=$null;try{$gfNames=Get-Content "$PSScriptRoot/gameflow-names.local.json" -Raw|ConvertFrom-Json}catch{}
+function ActiveNames($m){if(!$gfNames-or!$m-or!$m.gameflowNodes){return $null};(@($m.gameflowNodes|Where-Object {$_[1]-eq2}|ForEach-Object {$n=$gfNames."$($_[0])";if($n){$n}else{"#$($_[0])"}})|Sort-Object)-join ','}
+function Snap($r){$s=S $r;$m=$null;try{$m=S $r '.missionend.json'}catch{}
+ [ordered]@{logic=$s.localGameLogicState;pending=$s.localPendingGameLogicState;map=$s.localMap;epoch=$s.localEpoch;cine=$s.localCinematicEpoch;pos=$s.localPosition;fresh=$s.remoteFresh;gameflow=$(if($m){$m.gameflowStates}else{$null});gfMirror=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.result});idHash=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.idHash});gfApplied=$(if($m-and$m.gameflowMirror){$m.gameflowMirror.applied});lt=$(if($m-and$m.levelTransition){"$($m.levelTransition.result)/$($m.levelTransition.sent)/$($m.levelTransition.applied)"});hold=$(if($m-and$m.hold){"$($m.hold.result)/$($m.hold.lastWaitMs)"});ka=$(try{$k=S $r '.kiscule.json';"$($k.local)/$($k.applied)/$($k.suppressed)"}catch{$null});active=(ActiveNames $m)}}
+# Drives both worlds through scenes, prompts, the character choice and loads
+# until both are in gameplay or the time runs out.
+function Settle($label,$sec){
+ $w=[Diagnostics.Stopwatch]::StartNew();$last=@{host=0;client=0};$choice=@{host=0;client=0}
+ do{Start-Sleep -Milliseconds 700;$ready=$true
+  foreach($r in 'host','client'){$x=Snap $r;if($x.logic-ne1-or$x.pending){$ready=$false}
+   if($w.ElapsedMilliseconds-$last[$r]-lt3500){continue}
+   switch($x.logic){
+    # 14: the character choice. The host steers with the D-pad and the stick after the screen settles (the remembered
+    # choice wins when the press lands too early: take loadout-dunwall-v1311d started the host as Emily); -HostChoice names the side (Left is Corvo, take choice-dunwall-v1311f).
+    14{$choice[$r]++;if($r-eq'host'){Start-Sleep -Milliseconds 1500;foreach($k in 1,2){& "$lab/Send-D2Input.ps1" -Role host -Button $HostChoice -LeftX $(if($HostChoice-eq'Left'){-32000}else{32000}) -DurationMs 250|Out-Null;Start-Sleep -Milliseconds 600}}else{I $r Right 250};Start-Sleep -Milliseconds 400;I $r A 400;$last[$r]=$w.ElapsedMilliseconds}
+    3{I $r Right 250;Start-Sleep -Milliseconds 400;I $r A 400;$last[$r]=$w.ElapsedMilliseconds}
+    5{I $r X 3000;$last[$r]=$w.ElapsedMilliseconds}
+    {$_-in 8,15,9,11}{I $r A 300;$last[$r]=$w.ElapsedMilliseconds}
+    12{$choice[$r]++;I $r $(if($choice[$r]%2){'B'}else{'A'}) 300;$last[$r]=$w.ElapsedMilliseconds} # a tutorial page closes with B (the Timepiece's); other logic-12 screens take A
+    4{I $r B 250;$last[$r]=$w.ElapsedMilliseconds} # a readable (ReadNote) left open
+    2{I $r B 250;$last[$r]=$w.ElapsedMilliseconds} # the pause menu (a game window that lost focus pauses itself): resume
+    7{I $r B 250;$notes.menuClosed+=@("$label $r");$last[$r]=$w.ElapsedMilliseconds} # the journal (Lore & Maps) left open (1668b)
+    13{throw "$r died during $label (GameOver)"}}}
+ }while(!$ready-and$w.ElapsedMilliseconds-lt($sec*1000))
+ return $ready}
+try{
+ try{$owned=$mutex.WaitOne(0)}catch [Threading.AbandonedMutexException]{$owned=$true};if(!$owned){throw 'Native operation active'}
+ if(Test-Path $out){throw 'Unique take required'};New-Item -ItemType Directory $out|Out-Null;Copy-Item $PSCommandPath "$out/run-script.ps1";Copy-Item $StepsFile "$out/steps.json"
+ $steps=Get-Content $StepsFile -Raw|ConvertFrom-Json
+ foreach($r in 'host','client'){$l=Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json;if((Get-Process -Id $l.pid).Path-ne(Join-Path $root 'work/asset-game/Dishonored2.exe')){throw 'Wrong isolated process'};$pids[$r]=$l.pid;if((S $r).localGameLogicState-ne1){throw 'Gameplay required'}}
+ $pin=Get-Content "$root/work/movement-integration/$Candidate/identity.json" -Raw|ConvertFrom-Json;if((Get-FileHash "$root/work/asset-game/dinput8.dll").Hash-ne$pin.dll){throw "Expected $Candidate"}
+ Save "$out/identity.json" @{dll=$pin.dll;candidate=$Candidate;mapInfo=$MapInfo;chaos=$Chaos;hostCharacter=$HostCharacter}
+ $dirty=$true
+ # -VideoSeconds records both windows for the whole take (evidence video; never committed).
+ $captures=[Collections.Generic.List[object]]::new()
+ if($VideoSeconds){foreach($r in 'host','client'){$hwnd=(Get-Process -Id $pids[$r]).MainWindowHandle.ToInt64()
+  $va=@('-hide_banner','-loglevel','warning','-nostdin','-f','lavfi','-i',"gfxcapture=hwnd=${hwnd}:capture_cursor=0:max_framerate=30:width=-2:height=-2,hwdownload,format=bgra",'-t',[string]$VideoSeconds,'-an','-c:v','libx264','-preset','veryfast','-crf','23','-pix_fmt','yuv420p','-fps_mode','passthrough','-movflags','+faststart',"$out/take-$r.mp4")
+  $captures.Add((Start-Process (Get-Command ffmpeg).Source -ArgumentList $va -WindowStyle Hidden -RedirectStandardError "$out/take-$r-capture.log" -PassThru))}}
+ # The script action mirror is armed before the load: product auto arms its steps
+ # only after both worlds reach gameplay, after the intro's grants (1214bj).
+ foreach($r in 'host','client'){C $r 'coop_mission_end_mirror on';C $r 'coop_kiscule_mirror on';C $r 'coop_product_auto on'}
+ # -NoLoad starts from the current Dunwall fixture (story state after Mayhew) to iterate later steps faster.
+ if(!$NoLoad){C host "campaign $MapInfo $Chaos $HostCharacter";if(!$JoinAfterStep){C client "campaign $MapInfo $Chaos emily"}elseif($JoinFromMap){C client "campaign $JoinFromMap low emily"}}
+ if(!(Settle 'start' $LoadSeconds)){$notes.startState=@{host=(Snap host);client=(Snap client)};foreach($r in 'host','client'){Frame $r 'start-timeout'};throw 'Both worlds did not reach mission gameplay'}
+ # The characters the worlds play (the native choice decides on a mission start; -HostCharacter is what the host must be).
+ $chars=@{};foreach($r in 'host','client'){try{$chars[$r]=(Q $r '--character').definition}catch{$chars[$r]=$null}};$notes.characters=$chars
+ if($chars.host-and$chars.host-notmatch"/$HostCharacter/"){throw "Host plays $($chars.host), expected $HostCharacter"}
+ C host 'coop_player_health_hold on';C client 'coop_player_health_hold on'
+ foreach($cc in $ClientCommands){if($cc){C client $cc}};$notes.clientCommands=@($ClientCommands)
+ Start-Sleep 3;$rows=[Collections.Generic.List[object]]::new();$rows.Add([ordered]@{step='start';host=(Snap host);client=(Snap client)});foreach($r in 'host','client'){Frame $r 'step00-start'}
+function JoinNow(){
+ C host 'coop_follow_host on';Start-Sleep 2;$jw=[Diagnostics.Stopwatch]::StartNew();C client 'coop_follow_host on'
+ do{Start-Sleep -Milliseconds 1000;$cs=Snap client;if($cs.logic-in 15,14,3,8,9,11){[void](Settle 'join-load' 4)}}while((Snap client).map-ne(Snap host).map-and$jw.ElapsedMilliseconds-lt240000)
+ foreach($r in 'host','client'){try{Save "$out/join-follow-$r.json" (S $r '.follow.json')}catch{}}
+ if((Snap client).map-ne(Snap host).map){throw 'The partner did not load the host mission'}
+ if(!(Settle 'join' 300)){throw 'Both worlds did not reach gameplay after the join'};Start-Sleep 8;foreach($r in 'host','client'){try{Save "$out/join-follow-after-$r.json" (S $r '.follow.json')}catch{}}
+ $h=Snap host;$c=Snap client;$dist=if($h.pos-and$c.pos){[Math]::Round([Math]::Sqrt([Math]::Pow($h.pos[0]-$c.pos[0],2)+[Math]::Pow($h.pos[1]-$c.pos[1],2)+[Math]::Pow($h.pos[2]-$c.pos[2],2)),2)}else{$null}
+ $npcs=@{};foreach($r in 'host','client'){$npcs[$r]=@{};foreach($n in @((Q $r '--world-npcs').npcs)){$hp=$null;try{$hp=Q $r '--health' ([Convert]::ToInt64($n.handle.Substring(2),16))}catch{}
+   $npcs[$r][$n.handle]=[ordered]@{name=$n.spawnerName;position=$n.position;health=$(if($hp){$hp.current}else{$null});suppressed=$(if($hp){$hp.ownerSuppressed}else{$null})}}}
+ $diff=[Collections.Generic.List[object]]::new();foreach($k in @($npcs.host.Keys)+@($npcs.client.Keys)|Sort-Object -Unique){$a=$npcs.host[$k];$b=$npcs.client[$k]
+  $ad=if($a){if($null-eq$a.health){'unread'}elseif($a.health-le0){'dead'}elseif($a.suppressed){'out'}else{'alive'}}else{'absent'};$bd=if($b){if($null-eq$b.health){'unread'}elseif($b.health-le0){'dead'}elseif($b.suppressed){'out'}else{'alive'}}else{'absent'}
+  if($ad-ne$bd){$diff.Add([ordered]@{handle=$k;name=$(if($a){$a.name}else{$b.name});host=$ad;client=$bd})}}
+ $sync=@{};foreach($r in 'host','client'){$sync[$r]=[ordered]@{door=$(try{(S $r '.door-sync.json').session.result}catch{$null});usable=$(try{(S $r '.usable-sync.json').session.result}catch{$null});product=$(try{(S $r '.product.json').result}catch{$null});follow=$(try{(S $r '.follow.json').result}catch{$null});npc=$(try{(S $r '.npc-stream.json').result}catch{$null})}}
+ $j=[ordered]@{afterStep=$JoinAfterStep;joinMs=$jw.ElapsedMilliseconds;distance=$dist;host=$h;client=$c;gameflowEqual=("$($h.gameflow)"-eq"$($c.gameflow)");npcCounts=@{host=$npcs.host.Count;client=$npcs.client.Count};npcStateDiffs=@($diff);sync=$sync}
+ Save "$out/join.json" $j;Save "$out/join-npcs.json" $npcs;foreach($r in 'host','client'){Frame $r 'join'};$notes.join=[ordered]@{distance=$dist;gameflowEqual=$j.gameflowEqual;npcStateDiffs=$diff.Count}
+ $notes.joinAudit=JoinAudit 'join';Start-Sleep -Seconds 60;$notes.joinAudit60=JoinAudit 'join-60s'}
+# 1871: shared pickups, doors, usables and story flags in both worlds after a join.
+function JoinAudit($label){
+ $pick=@{};$doors=@{};$uses=@{}
+ $census=@{};foreach($r in 'host','client'){try{$x=Q $r '--pickup-census';Save "$out/$label-census-$r.json" $x;$census[$r]=[ordered]@{entities=$x.entities;pickups=@($x.pickups).Count;readable=@($x.pickups|Where-Object {$_.readable}).Count}}catch{$census[$r]='unread'}}
+ foreach($r in 'host','client'){$pick[$r]=@((Q $r '--coin-catalog').items|ForEach-Object {$_.name})
+  $doors[$r]=@{};foreach($o in @((Q $r '--openables').openables)){$doors[$r][$o.name]="$($o.current)/$($o.locked)"}
+  $uses[$r]=@{};foreach($u in @((Q $r '--usable-catalog').usables)){$uses[$r][$u.name]=$u.current}}
+ $a=[ordered]@{label=$label;census=$census;pickups=@{host=$pick.host.Count;client=$pick.client.Count};pickupsOnlyClient=@($pick.client|Where-Object {$pick.host-notcontains$_});pickupsOnlyHost=@($pick.host|Where-Object {$pick.client-notcontains$_})
+  doorDiffs=@($doors.host.Keys|Where-Object {$doors.client.ContainsKey($_)-and$doors.client[$_]-ne$doors.host[$_]}|ForEach-Object {[ordered]@{door=$_;host=$doors.host[$_];client=$doors.client[$_]}})
+  usableDiffs=@($uses.host.Keys|Where-Object {$uses.client.ContainsKey($_)-and$uses.client[$_]-ne$uses.host[$_]}|ForEach-Object {[ordered]@{usable=$_;host=$uses.host[$_];client=$uses.client[$_]}})}
+ try{& python -I "$root/tools/diag/d2_storyflags_diff.py" --out "$out/$label-flags.json"|Out-Null;$f=Get-Content "$out/$label-flags.json" -Raw|ConvertFrom-Json;$a.flagDiffs=@($f.diffs)}catch{$a.flagDiffs='unread'}
+ foreach($r in 'host','client'){try{$a["catchUp$r"]=S $r '.pickup-catchup.json'}catch{};try{$y=S $r '.coin-sync.json';$a["coinSync$r"]=[ordered]@{bindRefusal=$y.bindRefusal;bindRefusalItem=$y.bindRefusalItem;bindRefusals=$y.bindRefusals;enabled=$y.enabled;ready=$y.ready;result=$y.result;settled=$y.settled;listsSent=$y.listsSent;listsReceived=$y.listsReceived;catalogCount=$y.catalogCount;localOnly=$y.localOnly;peerOnly=$y.peerOnly;epoch=$y.epoch;peerEpoch=$y.peerEpoch}}catch{}}
+ Save "$out/$label-audit.json" $a
+ [ordered]@{catchUp=$(if($a.catchUpclient){"$($a.catchUpclient.result) awarded $($a.catchUpclient.awarded)/$($a.catchUpclient.targets) failed $($a.catchUpclient.failed)"});pickupsOnlyClient=$a.pickupsOnlyClient.Count;pickupsOnlyHost=$a.pickupsOnlyHost.Count;doorDiffs=$a.doorDiffs.Count;usableDiffs=$a.usableDiffs.Count;flagDiffs=$(if($a.flagDiffs-is[string]){$a.flagDiffs}else{@($a.flagDiffs).Count})}}
+ $i=0
+ function NpcRaw($rx,$near){$all=@((Q $who '--entities').entities|Where-Object {$_.type-eq'.?AVarkNPC@@'-and$_.name-match$rx})
+  if(!$all.Count){foreach($r2 in 'host','client'){try{Save "$out/$tag-entities-$r2.json" (Q $r2 '--entities')}catch{};try{Save "$out/$tag-worldnpcs-$r2.json" (Q $r2 '--world-npcs')}catch{};try{Save "$out/$tag-npcstream-$r2.json" (S $r2 '.npc-stream.json')}catch{}}
+  $near2=if($near){$near}else{(Snap $who).pos};$names=@((Q $who '--entities').entities|Where-Object {$_.type-eq'.?AVarkNPC@@'}|Sort-Object {[Math]::Pow($_.position[0]-$near2[0],2)+[Math]::Pow($_.position[1]-$near2[1],2)}|Select-Object -First 8|ForEach-Object {"$($_.name)@$([int]$_.position[0]),$([int]$_.position[1])"});throw "No NPC matches $rx (nearest: $($names -join ' '))"};if($near){$all=@($all|Sort-Object {[Math]::Pow($_.position[0]-$near[0],2)+[Math]::Pow($_.position[1]-$near[1],2)})};$all[0]}
+ function Npc($rx,$near){$p=NpcRaw $rx $near;$notes.npcPicks+=@("$i $who $rx -> $($p.name) $($p.type) @ $([Math]::Round([double]$p.position[0],1)),$([Math]::Round([double]$p.position[1],1)),$([Math]::Round([double]$p.position[2],1))");$p}
+ function UState($r,$n){$u=@((Q $r '--usable-catalog').usables|Where-Object name -eq $n);if($u.Count){"$($u[0].current)/$($u[0].enabled)"}else{'absent'}}
+# Behind: stand $dist m behind an NPC (its forward axis is the entity's rotation row 0 at +0x84; confirmed runtime,
+# take route-pa-v1308e) and face it, for a takedown from behind instead of a stand-up fight.
+ function Behind($e,$dist,$eyeUp){$w=@((Q $who '--object' $e.pointer).words);$f=@($w|Where-Object offset -eq '0x80')[0];$g=@($w|Where-Object offset -eq '0x88')[0]
+  $fx=[BitConverter]::ToSingle([BitConverter]::GetBytes([Convert]::ToUInt64($f.word.Substring(2),16)),4);$fy=[BitConverter]::ToSingle([BitConverter]::GetBytes([Convert]::ToUInt64($g.word.Substring(2),16)),0)
+  $n=[Math]::Max([Math]::Sqrt($fx*$fx+$fy*$fy),.001);$fx/=$n;$fy/=$n;$p=$e.position
+  C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f($p[0]-$dist*$fx),($p[1]-$dist*$fy),($p[2]+$eyeUp),([Math]::Atan2($fy,$fx)*180/[Math]::PI))}
+ function Face($p,$dist,$eyeUp){$h=(Snap $who).pos;$dx=$h[0]-$p[0];$dy=$h[1]-$p[1];$n=[Math]::Max([Math]::Sqrt($dx*$dx+$dy*$dy),.001)
+  $x=$p[0]+$dist*$dx/$n;$y=$p[1]+$dist*$dy/$n;$yaw=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
+  C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,($p[2]+$eyeUp),$yaw)}
+ # Entity list for a step; a world still loading from the previous step is settled first.
+ function Ents($r='host'){for($k=0;$k-lt6;$k++){try{return (Q $r '--entities').entities}catch{[void](Settle 'entities' 60);Start-Sleep 2}};throw "Native query failed $r --entities"}
+ foreach($st in $steps){$i++;$tag='step{0:D2}-{1}'-f$i,$st.do
+  if($JoinAfterStep-and$i-eq$JoinAfterStep+1){JoinNow}
+  # unlessMap: skip a step once the host is already on a matching map (a talk that may already have ended the mission).
+  if($st.unlessMap-and"$((Snap $who).map)"-match$st.unlessMap){$notes.skipped+=@($tag);continue};$who=if($st.role){$st.role}else{$LeadRole};$ents=Ents $who
+  switch($st.do){
+   'trigger'{$e=@($ents|Where-Object name -eq $st.name);if($e.Count-ne1){throw "Missing trigger $($st.name)"};$p=$e[0].position;$back=(Snap $who).pos
+    C $who ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$p[0],$p[1],($p[2]+1.0))
+    # bounce: the enter event fires on entry; return to the last stand before a volume without a floor drops the player.
+    if($st.bounce){Start-Sleep -Milliseconds 600;C $who ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$back[0],$back[1],($back[2]+1.7))}}
+   'at'{C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$(if($st.yaw){$st.yaw}else{0}))}
+   'use'{$e=if($st.match){@($ents|Where-Object {$_.name-match$st.match}|Sort-Object {if($st.near){[Math]::Pow($_.position[0]-$st.near[0],2)+[Math]::Pow($_.position[1]-$st.near[1],2)}else{0}}|Select-Object -First 1)}else{@($ents|Where-Object name -eq $st.name)};if($e.Count-ne1){throw "Missing usable $($st.name)$($st.match)"};$p=$e[0].position;$z=if($st.z){$st.z}else{$p[2]+1.0};$hit=$false
+    $offs=if($st.offsets){$st.offsets}else{@(@(0.9,0),@(-0.9,0),@(0,0.9),@(0,-0.9))}
+    # A one-stand list ([[x,y]]) comes out of the if as the bare pair; keep it a list of stands.
+    if($offs.Count-gt0-and$offs[0]-isnot[Collections.IList]){$offs=@(,@($offs))}
+    # Sweep pitch and bearing at each stand (small targets such as signet buttons).
+    $pitches=if($st.pitches){$st.pitches}else{@(0)};$yaws=if($st.yaws){$st.yaws}else{@(0)};$k=0
+    # Objectives can change a few seconds after the use (a door's task): compare with the step's start too.
+    $g0="$((Snap $who).gameflow)";$liveLog=[Collections.Generic.List[object]]::new()
+    # focus: press only while the native use focus (arkCpntPlayerSensorInteraction+0x80 high dword, take 1133) is on the target,
+    # so a press never lands on something else (a guard, a door, a carried body's drop).
+    $sensor=$null;$th=$null;$focusLog=[Collections.Generic.List[object]]::new();if($st.focus){$pl=Q $who '--player';$me=@((Q $who '--entities').entities|Where-Object pointer -eq $pl.player);$th=[Convert]::ToUInt32(($e[0].handle-replace'^0x',''),16)
+     $sensor=@((Q $who '--components' $me[0].handle).components|Where-Object type -eq '.?AVarkCpntPlayerSensorInteraction@@')[0].pointer}
+    # heal: the lab health hold for a stand under fire (the Karnaca watchtower's searchlight); recorded in the take.
+    if($st.heal){C $who 'coop_player_health_hold on';$notes.healthHold+=@($st.name)}
+    foreach($o in $offs){$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
+     foreach($pt in $pitches){foreach($yo in $yaws){$k++
+      # live: a target on something that moves (a Karnaca watchtower) is re-read before each try.
+      # orbit: the target turns about a fixed axis (the Karnaca watchtower's top carries its tank); stand radius m out from the axis through the target.
+      if($st.live){$cur=@((Q $who '--entities').entities|Where-Object {$_.name-eq$e[0].name});if($cur.Count){$p=$cur[0].position;$x=$p[0]+$o[0];$y=$p[1]+$o[1]
+        if($st.orbit){$ang=[Math]::Atan2($p[1]-$st.orbit[1],$p[0]-$st.orbit[0]);$x=$st.orbit[0]+$st.radius*[Math]::Cos($ang);$y=$st.orbit[1]+$st.radius*[Math]::Sin($ang)
+         $liveLog.Add([ordered]@{try=$k;target=$p;bearing=[Math]::Round($ang*180/[Math]::PI,1);stand=@($x,$y)});Save "$out/$tag-live.json" @($liveLog)}
+        $yaw0=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI}}
+      C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$z,($yaw0+$yo));Start-Sleep -Milliseconds 700
+      # aim: the pitch from the native eye to the target, plus the listed offsets.
+      $pitch=$pt;if($st.aim){try{$eye=(Q $who '--player').nativeViewPosition;$hd=[Math]::Sqrt([Math]::Pow($p[0]-$eye[0],2)+[Math]::Pow($p[1]-$eye[1],2));$pitch=[Math]::Max(-60,[Math]::Min(75,[Math]::Atan2($eye[2]-$p[2],[Math]::Max($hd,.2))*180/[Math]::PI+$pt))}catch{}}
+      if($pitch){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $who -Pitch $pitch -Quick|Out-Null}catch{}}
+      if($sensor){$w=@((Q $who '--object' $sensor).words|Where-Object offset -eq '0x80');$fh=[uint32]([Convert]::ToUInt64($w[0].word.Substring(2),16)-shr32)
+       $focusLog.Add([ordered]@{try=$k;stand=@($x,$y,$z);yaw=$yaw0+$yo;pitch=$pitch;focus=('0x{0:x}'-f$fh);target=('0x{0:x}'-f$th)});Save "$out/$tag-focus.json" @($focusLog);if($fh-ne$th){continue}}
+      $b=Snap $who;$u0=if($st.state){UState $who $e[0].name};if($k-le6){Frame $who "$tag-try$k"};I $who X $(if($st.hold){$st.hold}else{250});Start-Sleep -Milliseconds $(if($st.checkMs){$st.checkMs}else{1500});$a=Snap $who
+      if($a.logic-eq13){throw "$who died at $($st.name)"}
+      # checkMs: wait longer before reading the result (the Grand Palace vault button completes its task after an autosave delay).
+      # state: a state-list usable counts when its native state changes (1671).
+      if($st.state){$u1=UState $who $e[0].name;$notes.stateUses+=@("$tag $who $($e[0].name) $u0 -> $u1");if($u1-ne$u0){$hit=$true;break};continue}
+      # gone: a pickup counts only when the entity has left the world.
+      if($st.gone){if($a.logic-eq4){I $who B 250;Start-Sleep -Milliseconds 800};$left=@((Q $who '--entities').entities|Where-Object name -eq $st.name).Count-eq0;if($left){$hit=$true;break};continue}
+      # expect logic: only a press that leaves gameplay (a talk's scene) counts; a one-liner scene also changes the cinematic epoch.
+      if($st.expect-eq'logic'){if($a.logic-ne1){$hit=$true;break};continue}
+      if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"-or"$($a.gameflow)"-ne$g0){$hit=$true;break}}
+      if($hit){break}}
+     if($hit){break}}
+    if($st.heal){C $who 'coop_player_health_hold off'}
+    if(!$hit){throw "Use of $($st.name) not registered"}}
+   'unlock'{$ds={param($r)@((Q $r '--openables').openables|Where-Object name -eq $st.name)[0]};$d0=& $ds $who;if(!$d0){throw "Missing door $($st.name)"};if(!$d0.locked){throw "The door $($st.name) is not locked"}
+    C $who "coop_grant_named $($st.key)";Start-Sleep -Milliseconds 1500;$hp=$d0.position;$z=[double]$hp[2]+1.6;$spot=$null;$tries=[Collections.Generic.List[object]]::new()
+    :unlock foreach($o in @(@(1.0,0),@(-1.0,0),@(0,1.0),@(0,-1.0),@(0.8,0.8),@(-0.8,-0.8),@(0.8,-0.8),@(-0.8,0.8))){$x=[double]$hp[0]+$o[0];$y=[double]$hp[1]+$o[1];$base=[Math]::Atan2([double]$hp[1]-$y,[double]$hp[0]-$x)*180/[Math]::PI
+     foreach($dy in 0,-25,25,-50,50){C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$z,($base+$dy));Start-Sleep -Milliseconds 500;I $who X 200;Start-Sleep -Milliseconds 1200
+      $u=& $ds $who;$tries.Add([ordered]@{phase='unlock';offset=$o;yaw=$base+$dy;locked=$u.locked;current=$u.current;pending=$u.pending});if(!$u.locked){$spot=@($x,$y,$base,$o);break unlock}}}
+    if(!$spot){Save "$out/$tag-tries.json" @($tries);throw "The door $($st.name) never unlocked ($($tries.Count) presses)"}
+    if($st.open){Start-Sleep -Seconds 2;$opened=$false
+     $stands=@(,$spot[3])+@(@(1.0,0),@(-1.0,0),@(0,1.0),@(0,-1.0),@(0.8,0.8),@(-0.8,-0.8),@(0.8,-0.8),@(-0.8,0.8)|Where-Object {"$_"-ne"$($spot[3])"})
+     :open foreach($o in $stands){$x=[double]$hp[0]+$o[0];$y=[double]$hp[1]+$o[1];$base=[Math]::Atan2([double]$hp[1]-$y,[double]$hp[0]-$x)*180/[Math]::PI
+      foreach($dy in 0,-25,25,-50,50){C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$z,($base+$dy));Start-Sleep -Milliseconds 500;I $who X 200;Start-Sleep -Milliseconds 1500
+       $u=& $ds $who;$tries.Add([ordered]@{phase='open';offset=$o;yaw=$base+$dy;locked=$u.locked;current=$u.current;pending=$u.pending});if($u.current-ne0-or$u.pending-ne0){$opened=$true;break open}}}
+     if(!$opened){Save "$out/$tag-tries.json" @($tries);throw "The unlocked door $($st.name) never opened"}}
+    Start-Sleep -Seconds 2;Save "$out/$tag-tries.json" @($tries);$notes.unlocked=[ordered]@{door=$st.name;role=$who;state=(& $ds $who)}}
+   'choke'{$ok=$false;$tries=[Collections.Generic.List[object]]::new();$max=if($st.max){$st.max}else{8}
+    for($k=0;$k-lt$max-and!$ok;$k++){if((Snap $who).logic-ne1){[void](Settle "$tag-choke" 20)};$npc=Npc $st.name $st.near
+     if($st.crouch){for($c=0;$c-lt4;$c++){$ids=@();try{$ids=@((Q $who '--player-states').active|ForEach-Object {$_.id})}catch{};if($ids-contains6){break};I $who B 150;Start-Sleep -Milliseconds 900}}
+     Behind $npc $(if($st.dist){$st.dist}else{0.8}) $(if($st.crouch){1.1}else{1.6});Start-Sleep -Milliseconds 400
+     if($st.walkMs){& "$lab/Send-D2Input.ps1" -Role $who -LeftY 12000 -DurationMs $st.walkMs|Out-Null;Start-Sleep -Milliseconds ($st.walkMs+100)}
+     I $who RightShoulder $(if($st.ms){$st.ms}else{5000});Start-Sleep -Milliseconds 2500;$x=Snap $who;$tries.Add([ordered]@{try=$k;at=$npc.position;active=$x.active;logic=$x.logic})
+     if($x.logic-eq13){Save "$out/$tag-choke.json" @($tries);throw "$who died choking $($st.name)"};if("$($x.active)"-match[regex]::Escape($st.until)){$ok=$true}}
+    Save "$out/$tag-choke.json" @($tries);if(!$ok){throw "The choke of $($st.name) never reached $($st.until)"}}
+   'drop'{$ok=$false;$tries=[Collections.Generic.List[object]]::new()
+    for($k=0;$k-lt6-and!$ok;$k++){I $who X 300;Start-Sleep -Milliseconds 1800;$carrying=$true;try{$carrying=@((Q $who '--player-states').active|Where-Object id -eq 45).Count-gt0}catch{}
+     $x=Snap $who;$tries.Add([ordered]@{try=$k;carrying=$carrying;active=$x.active});if(!$carrying-and(!$st.until-or"$($x.active)"-match[regex]::Escape($st.until))){$ok=$true}}
+    Save "$out/$tag-drop.json" @($tries);if(!$ok){throw "The body was not dropped$(if($st.until){" with $($st.until) active"})"}}
+   'command'{C $who $st.text;$notes.commands+=@("$tag $who $($st.text)");Start-Sleep -Milliseconds 500;try{$notes.commandResults+=@("$tag $((S $who '.observer-camera.json').labAiPause|ConvertTo-Json -Compress)")}catch{}}
+   'wait'{Start-Sleep -Milliseconds $st.ms}
+   # partner: move the partner to a stand, optionally crouched (Memories of Training: an idle partner in view of its own
+   # stealth Corvo restarts that lesson in its world in a loop, take route-tut-v1310g).
+   'partner'{C client ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$(if($st.yaw){$st.yaw}else{0}));Start-Sleep -Milliseconds 700
+    if($st.crouch){for($k=0;$k-lt4;$k++){$ids=@();try{$ids=@((Q client '--player-states').active|ForEach-Object {$_.id})}catch{};if($ids-contains6){break};I client B 150;Start-Sleep -Milliseconds 900}}}
+   # action: a timed host action from tools/diag/d2_route_actions.py (chase_hold, pickpocket, shoot, cycle); its args and output are kept with the step.
+   'action'{Save "$out/$tag-action-args.json" $st.args;$lines=@(python -I "$root/tools/diag/d2_route_actions.py" $root $st.name "@$out/$tag-action-args.json" 2>&1);$code=$LASTEXITCODE;$lines|Set-Content "$out/$tag-action.log";if($code){throw "Action $($st.name) failed (exit $code)"}}
+   # at: stand at a pose (x, y, view z, yaw, optional pitch), e.g. to set a carried body down on a dock before a talk.
+   'at'{C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$st.pos[0],$st.pos[1],$st.pos[2],$st.yaw);Start-Sleep -Milliseconds 700;if($st.pitch){try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $who -Pitch $st.pitch -Quick|Out-Null}catch{}}}
+   # jindosh: dial the Dust District's Jindosh lock. tools/diag/d2_jindosh_lock.py reads each seat's family and heirloom
+   # indices; seat i is pressed to index i (each use advances a wheel one stage; take route-dd-v1306a), aiming each wheel
+   # from stands 1 to 1.4 m west of it, pressing only while the native use focus is on it. The lock opens at index sum 31.
+   'jindosh'{$dial=[Collections.Generic.List[object]]::new()
+    $pl=Q $who '--player';$me=@((Q $who '--entities').entities|Where-Object pointer -eq $pl.player);$sensor=@((Q $who '--components' $me[0].handle).components|Where-Object type -eq '.?AVarkCpntPlayerSensorInteraction@@')[0].pointer
+    foreach($seat in 1..5){foreach($kind in 'family','herloom'){
+      $name="ld_wheel_${kind}_$seat";$key=if($kind-eq'family'){'WheelFamilyIndex'}else{'WheelHeirloomIndex'}
+      $w=@((Q $who '--entities').entities|Where-Object name -eq $name)[0];$th=[Convert]::ToUInt32(($w.handle-replace'^0x',''),16);$p=$w.position
+      for($n=0;$n-lt7;$n++){
+       $lock=& python -I "$root/tools/diag/d2_jindosh_lock.py" $root $pids.host|ConvertFrom-Json
+       $row=@($lock.wheels|Where-Object {(@($_.WheelFamily)+@($_.WheelHeirloom))-contains$name})[0];$cur=$row.$key;$dial.Add([ordered]@{wheel=$name;press=$n;index=$cur});if($cur-eq$seat){break}
+       $hit=$false
+       foreach($stand in @(@(1.0,180),@(1.4,180),@(1.0,160),@(1.0,200),@(1.4,160),@(1.4,200))){$ang=$stand[1]*[Math]::PI/180;$sx=$p[0]+$stand[0]*[Math]::Cos($ang);$sy=$p[1]+$stand[0]*[Math]::Sin($ang);$yaw0=[Math]::Atan2($p[1]-$sy,$p[0]-$sx)*180/[Math]::PI
+       foreach($pt in 10,0,20,-10,30,40,-20){foreach($yo in 0,-10,10){
+         C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$sx,$sy,($p[2]+1.35),($yaw0+$yo));Start-Sleep -Milliseconds 400
+         try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $who -Pitch $pt -Quick|Out-Null}catch{}
+         $wd=@((Q $who '--object' $sensor).words|Where-Object offset -eq '0x80');$fh=[uint32]([Convert]::ToUInt64($wd[0].word.Substring(2),16)-shr32)
+         if($fh-eq$th){I $who X 300;Start-Sleep -Milliseconds 1200;$hit=$true;break}}
+        if($hit){break}}
+       if($hit){break}}
+       if(!$hit){Save "$out/$tag-dial.json" @($dial);throw "Jindosh wheel $name never took the focus"}}}}
+    Save "$out/$tag-dial.json" @($dial);$sum=(& python -I "$root/tools/diag/d2_jindosh_lock.py" $root $pids.host|ConvertFrom-Json).combination.CombinationIndexSum
+    $notes.jindosh=$sum;if($sum-ne31){throw "Jindosh lock index sum $sum, not 31"}}
+   # flag: wait until a native Kiscule variable reaches a value (tools/diag/d2_kiscule_vars.py reads the host's script
+   # memory; entity "storyflags" or a script entity, name an exact variable). Scenes and prompts on the way settle as usual.
+   # A Crack in the Slab: the ritual counts as seen only while the player stands on the hall floor (pa_ld_trigger_1's volume).
+   'flag'{$fw=[Diagnostics.Stopwatch]::StartNew();$want=if($null-ne$st.value){[int]$st.value}else{1};$seen=$null
+    do{$line=@(& python -I "$root/tools/diag/d2_kiscule_vars.py" $pids[$who] $st.entity --grep " $($st.name): "|Where-Object {$_-match" $([regex]::Escape($st.name)): default"})[0]
+     if($line-match'value (-?\d+)'){$seen=[int]$Matches[1]};if($seen-eq$want){break}
+     Start-Sleep -Milliseconds 2000;$x=Snap $who;if($x.logic-eq13){throw "Host died waiting for $($st.name)"};if($x.logic-ne1){[void](Settle $tag 60)}}while($fw.ElapsedMilliseconds-lt$st.ms)
+    $notes."$tag"=[ordered]@{variable=$st.name;value=$seen;ms=$fw.ElapsedMilliseconds};if($seen-ne$want){throw "$($st.name) stayed $seen, not $want"}}
+   # heal: the lab health hold on or off across several steps (a carry under fire); recorded in the take.
+   'heal'{if($st.on){C $who 'coop_player_health_hold on';$notes.healthHold+=@("from step $tag")}else{C $who 'coop_player_health_hold off'}}
+   # carry: pick up an unconscious NPC (Sokolov). Each try stands beside the body's live position and holds use (900 ms or more
+   # picks a body up; a first press may talk to him instead); it counts when the player carries a body or the story flag
+   # the mission's script sets on Carried reads 1 (tools/diag/d2_kiscule_vars.py).
+   'carry'{$npc=Npc $st.name $st.near;$offs=if($st.offsets){$st.offsets}else{@(@(1.1,0),@(-1.1,0),@(0,1.1),@(0,-1.1))};if($offs.Count-gt0-and$offs[0]-isnot[Collections.IList]){$offs=@(,@($offs))};$pitches=if($st.pitches){$st.pitches}else{@(50,65,35)};$done=$false;$k=0;$tries=[Collections.Generic.List[object]]::new()
+    foreach($o in $offs){foreach($pt in $pitches){$k++
+      $cur=@((Q $who '--entities').entities|Where-Object handle -eq $npc.handle);$p=if($cur.Count){$cur[0].position}else{$npc.position};$x=$p[0]+$o[0];$y=$p[1]+$o[1];$yaw=[Math]::Atan2($p[1]-$y,$p[0]-$x)*180/[Math]::PI
+      C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$x,$y,$(if($st.z){$st.z}else{$p[2]+$(if($st.dz){$st.dz}else{1.4})}),$yaw);Start-Sleep -Milliseconds 600
+      try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $who -Pitch $pt -Quick|Out-Null}catch{}
+      if($k-le6){Frame $who "$tag-try$k"};I $who X $(if($st.hold){$st.hold}else{400});Start-Sleep -Milliseconds 1500
+      $flag="$(& python -I "$root/tools/diag/d2_kiscule_vars.py" $pids[$who] storyflags --grep $st.flag 2>$null)";$tries.Add([ordered]@{try=$k;stand=@($x,$y);pitch=$pt;flag=$flag})
+      if((Snap $who).logic-eq13){Save "$out/$tag-carry.json" @($tries);throw "Host died carrying $($st.name)"}
+      # Native player state 45 is carrying a body (Observe-NativeCarry); the flag can follow a moment later.
+      $carrying=$false;try{$carrying=@((Q $who '--player-states').active|Where-Object id -eq 45).Count-gt0}catch{};$tries[$tries.Count-1].carrying=$carrying
+      if($flag-match'value 1'-or$carrying){$done=$true;break}}
+     if($done){break}}
+    Save "$out/$tag-carry.json" @($tries);if(!$done){throw "Carry of $($st.name) not registered"}}
+   # expect: both worlds reach a map (regex) within ms, or the take fails (a mission end must move both worlds on).
+   'expect'{$w=[Diagnostics.Stopwatch]::StartNew();do{$h=Snap host;$c=Snap client;if($h.map-match$st.map-and$c.map-match$st.map-and(($h.logic-eq1-and$c.logic-eq1)-or$st.anyLogic)){break}
+     foreach($x in @(@('host',$h),@('client',$c))){if($x[1].logic-eq2){I $x[0] B 250}} # a paused world (focus lost) resumes and follows
+     Start-Sleep -Seconds 3}while($w.ElapsedMilliseconds-lt$(if($st.ms){$st.ms}else{180000}))
+    if($h.map-notmatch$st.map-or$c.map-notmatch$st.map){throw "Expected both worlds on $($st.map): host $($h.map) logic $($h.logic), client $($c.map) logic $($c.logic)"}}
+   'clear'{$c=$st.near;$rad=if($st.radius){$st.radius}else{12};$max=if($st.max){$st.max}else{4};$fights=[Collections.Generic.List[object]]::new()
+    if($st.heal){C $who 'coop_player_health_hold on';$notes.healthHold+=@("clear $($st.name)")}
+    function LiveNear(){foreach($e in @((Q $who '--entities').entities|Where-Object {$_.type-eq'.?AVarkNPC@@'-and$_.name-match$st.name-and([Math]::Pow($_.position[0]-$c[0],2)+[Math]::Pow($_.position[1]-$c[1],2))-le$rad*$rad}|Sort-Object {[Math]::Pow($_.position[0]-$c[0],2)+[Math]::Pow($_.position[1]-$c[1],2)})){
+      $hp=$null;try{$hp=Q $who '--health' ([Convert]::ToInt64($e.handle.Substring(2),16))}catch{};if($hp-and$hp.current-gt0){return $e}};return $null}
+    for($n=0;$n-lt$max;$n++){$e=LiveNear;if(!$e){break};$hd=[Convert]::ToInt64($e.handle.Substring(2),16);$dead=$false;$trace=[Collections.Generic.List[object]]::new()
+     for($k=0;$k-lt40-and!$dead;$k++){if($k%4-eq0){$cur=@((Q $who '--entities').entities|Where-Object handle -eq $e.handle);if($cur.Count){Face $cur[0].position 1.5 1.6};Start-Sleep -Milliseconds 400}
+      & "$lab/Send-D2Input.ps1" -Role $who -RightTrigger 255 -DurationMs $(if($k%3-eq0){1300}else{150})|Out-Null;Start-Sleep -Milliseconds 700
+      $hp=$null;try{$hp=Q $who '--health' $hd}catch{};$trace.Add(@{press=$k;health=$(if($hp){$hp.current}else{$null})});if(!$hp-or$hp.current-le0){$dead=$true}
+      if((Snap $who).logic-eq13){throw 'Host died in the fight'}}
+     $fights.Add([ordered]@{npc=$e.name;dead=$dead;presses=$trace.Count;trace=@($trace)})}
+    if($st.heal){C $who 'coop_player_health_hold off'}
+    Save "$out/$tag-clear.json" @($fights)}
+   'authority'{$au=[ordered]@{step=$tag};foreach($r in 'host','client'){$all=$null;try{$all=Q $r '--npc-authority-all'}catch{}
+     $au[$r]=[ordered]@{npcs=@(if($all){$all.entries|Where-Object {$_.name-match$st.match}});stream=$(try{S $r '.npc-stream.json'}catch{$null});combat=$(try{S $r '.npc-combat.json'}catch{$null})}}
+    Save "$out/$tag-authority.json" $au;$notes.authority+=@([ordered]@{step=$tag;host=@($au.host.npcs|ForEach-Object {"$($_.name) h$($_.health)/$($_.maximum) acq$([int]$_.acquireEligible) lease$([int]$_.leaseEligible) paused$([int]$_.paused) gp$([int]$_.gamePaused) hs$([int]$_.hostStreamEligible)"});client=@($au.client.npcs|ForEach-Object {"$($_.name) h$($_.health)/$($_.maximum) acq$([int]$_.acquireEligible) lease$([int]$_.leaseEligible) paused$([int]$_.paused) gp$([int]$_.gamePaused) hs$([int]$_.hostStreamEligible)"})})}
+   'census'{$cs=[ordered]@{step=$tag};foreach($r in 'host','client'){$cc=Q $r '--coin-catalog';$uc=Q $r '--usable-catalog'
+     $cs[$r]=[ordered]@{pickups=@($cc.items|Where-Object {$_.name-match$st.match}|ForEach-Object {[ordered]@{name=$_.name;quantity=$_.quantity;position=$_.position}});pickupTotal=$cc.pickups
+       usables=@($uc.usables|Where-Object {$_.name-match$st.match}|ForEach-Object {[ordered]@{name=$_.name;current=$_.current;enabled=$_.enabled;states=$_.states}})}}
+    Save "$out/$tag-census.json" $cs;$notes.census+=@($cs)
+    foreach($r in 'host','client'){try{Save "$out/$tag-catchup-$r.json" (S $r '.pickup-catchup.json')}catch{};try{Save "$out/$tag-pickups-$r.json" (Q $r '--pickup-census')}catch{}}}
+   'npcs'{$c=$st.near;$list=@((Q $who '--entities').entities|Where-Object {$_.type-eq'.?AVarkNPC@@'}|Sort-Object {[Math]::Pow($_.position[0]-$c[0],2)+[Math]::Pow($_.position[1]-$c[1],2)}|Select-Object -First 16|ForEach-Object {[ordered]@{name=$_.name;handle=$_.handle;position=$_.position}});Save "$out/$tag-npcs.json" @($list)}
+   'follow'{$fw=[Diagnostics.Stopwatch]::StartNew();$d=if($st.dist){$st.dist}else{2.0};$trace=[Collections.Generic.List[object]]::new()
+    while($fw.ElapsedMilliseconds-lt$st.ms){$npc=Npc $st.name $st.near;Face $npc.position $d 1.6;$trace.Add([ordered]@{ms=$fw.ElapsedMilliseconds;npc=$npc.name;position=$npc.position;host=(Snap $who).logic});Start-Sleep -Milliseconds 1500;$x=Snap $who;if($x.logic-eq13){throw 'Host died while following'};if($x.logic-ne1){[void](Settle $tag 60)}}
+    Save "$out/$tag-follow.json" @($trace)}
+   'press'{$who=if($st.role){$st.role}else{$LeadRole};if($st.leftY){& "$lab/Send-D2Input.ps1" -Role $who -LeftY $st.leftY -DurationMs $(if($st.ms){$st.ms}else{800})|Out-Null}elseif($st.leftTrigger){& "$lab/Send-D2Input.ps1" -Role $who -LeftTrigger 255 -DurationMs $(if($st.ms){$st.ms}else{300})|Out-Null}else{I $who $st.button $(if($st.ms){$st.ms}else{200})}} # leftTrigger: the Timepiece's timeline change
+   'save'{$m=$who;$t0=(NewestSave $m).time;$saved=$false
+    foreach($try in 1,2,3){if($try-gt1){Start-Sleep -Seconds 15};I $m Start 180;$w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 250}while((S $m).localGameLogicState-ne2-and$w.ElapsedMilliseconds-lt8000)
+     Start-Sleep -Milliseconds 1500;foreach($k in 1..8){I $m Up 120;Start-Sleep -Milliseconds 250};I $m Down 200;Start-Sleep -Milliseconds 1200;I $m A 250;Start-Sleep 3;Frame $m "$tag-screen$try";I $m A 250;Start-Sleep 3
+     if((S $m).localGameLogicState-eq3){I $m A 250;Start-Sleep 3}
+     foreach($k in 1..4){if((S $m).localGameLogicState-eq1){break};I $m B 250;Start-Sleep -Milliseconds 1500}
+     if((S $m).localGameLogicState-ne1){throw "The save left $m at logic $((S $m).localGameLogicState)"}
+     $w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 500;$n=NewestSave $m;$saved=$n.time-gt$t0}while(!$saved-and$w.ElapsedMilliseconds-lt8000)
+     if($saved){$notes.saveSlot=[ordered]@{slot=$n.slot;try=$try};break}}
+    if(!$saved){throw "No save slot was written for $m"}}
+   'load'{$m=$who;$e0=(S $m).localEpoch;I $m Start 180;$w=[Diagnostics.Stopwatch]::StartNew();do{Start-Sleep -Milliseconds 250}while((S $m).localGameLogicState-ne2-and$w.ElapsedMilliseconds-lt8000)
+    foreach($k in 1..8){I $m Up 120;Start-Sleep -Milliseconds 250};foreach($k in 1,2){I $m Down 200;Start-Sleep -Milliseconds 600};I $m A 250;Start-Sleep 3;Frame $m "$tag-screen";I $m A 250;Start-Sleep 3
+    if((S $m).localGameLogicState-eq3){I $m Right 250;Start-Sleep -Milliseconds 700;I $m A 250;Start-Sleep 3}
+    if(!(Settle 'load' 300)){throw 'The load did not come back to gameplay'}
+    if((S $m).localEpoch-eq$e0){throw 'The load did not change the world epoch'};$notes.loadedEpoch=(S $m).localEpoch}
+   'die'{$who=if($st.role){$st.role}else{$LeadRole};$other=if($who-eq'host'){'client'}else{'host'};$e0=@{host=(Snap host).epoch;client=(Snap client).epoch}
+    # Same sequence as Test-MissionCheckpoint-v1151: both death screens ready, one
+    # A each, then A only on load prompts; the checkpoint session state is traced.
+    function DS($tag){$row=[ordered]@{ms=$dw.ElapsedMilliseconds;event=$tag};foreach($r in 'host','client'){$b=Snap $r;$x=$null;try{$x=S $r '.reset.json'}catch{}
+      $row[$r]=[ordered]@{logic=$b.logic;pending=$b.pending;map=$b.map;epoch=$b.epoch;phase=$(if($x){$x.phase});result=$(if($x){$x.result});deathReady=$(if($x){$x.deathReady});peerDeathReady=$(if($x){$x.peerDeathReady});mission=$(if($x){$x.mission});slot=$(if($x){$x.missionSlot});loads=$(if($x){$x.loads});completed=$(if($x){$x.completed});aborted=$(if($x){$x.aborted});requests=$(if($x){$x.requests});duplicates=$(if($x){$x.duplicates});rejected=$(if($x){$x.rejected});arm=$(if($x){$x.arm});peerArm=$(if($x){$x.peerArm});remaps=$(if($x){$x.remaps});digest=$(if($x){$x.digest});details=$(if($x){$x.missionDetails});received=$(if($x){$x.received});pair=$(if($x-and$x.autosavePair){$y=$x.autosavePair;"$($y.result) a$([int]$y.active) s$($y.saves)/o$($y.originated)/m$($y.mirrored)/p$([int]$y.pending) peer s$($y.peerSaves)/o$($y.peerOriginated)/m$($y.peerMirrored)/p$([int]$y.peerPending) req$($y.requests) ref$($y.refused) rej$($y.rejected)"})}};$trace.Add($row);$row}
+    $dw=[Diagnostics.Stopwatch]::StartNew();$trace=[Collections.Generic.List[object]]::new();[void](DS 'before')
+    C $who 'coop_player_health_hold off';Start-Sleep -Milliseconds 400;$pos=(Snap $who).pos
+    C $who ("setviewpos {0:F3} {1:F3} {2:F3} 0 0"-f$pos[0],$pos[1],($pos[2]+45));$dw.Restart()
+    do{Start-Sleep -Milliseconds 250;$d=DS 'death';$ready=$d.host.logic-eq13-and$d.client.logic-eq13-and$d.host.deathReady-and$d.host.peerDeathReady-and$d.client.deathReady-and$d.client.peerDeathReady
+     foreach($r in 'host','client'){if($d[$r].phase-eq7){Save "$out/$tag-death.json" @($trace);throw "Death failed on $r ($($d[$r].result))"}}}while(!$ready-and$dw.ElapsedMilliseconds-lt30000)
+    if(!$ready){Save "$out/$tag-death.json" @($trace);throw "Shared death screens not ready ($who fell)"}
+    foreach($r in 'host','client'){Frame $r "$tag-gameover"};Start-Sleep -Seconds 3;I $who A 200;Start-Sleep -Milliseconds 300;I $other A 200;$dw.Restart();$lastA=@{host=0;client=0};$confirm=0
+    do{Start-Sleep -Milliseconds 300;$d=DS 'restart'
+     # Both still on GameOver: a refused attempt fails within 8 s and the session
+     # re-arms 3 s later (1214bn); press Restart again, as a player would.
+     if($d.host.logic-eq13-and$d.client.logic-eq13-and$dw.ElapsedMilliseconds-gt(12000+$confirm*12000)-and$confirm-lt4){
+      $confirm++;foreach($r in 'host','client'){Frame $r "$tag-retry$confirm"};[void](DS "retry$confirm");I $who A 300}
+     # A failed attempt re-arms after 3 s (1214bn); the retry below presses again.
+     foreach($r in 'host','client'){
+      if($d[$r].logic-in 8,15-and$dw.ElapsedMilliseconds-$lastA[$r]-gt2500-and$dw.ElapsedMilliseconds-gt6000){I $r A 300;$lastA[$r]=$dw.ElapsedMilliseconds}
+      elseif($d[$r].logic-eq5-and$dw.ElapsedMilliseconds-$lastA[$r]-gt3500){I $r X 3000;$lastA[$r]=$dw.ElapsedMilliseconds}}
+     $back=$d.host.logic-eq1-and!$d.host.pending-and$d.client.logic-eq1-and!$d.client.pending-and$d.host.epoch-ne$e0.host-and$d.client.epoch-ne$e0.client}while(!$back-and$dw.ElapsedMilliseconds-lt180000)
+    [void](DS 'end');Save "$out/$tag-death.json" @($trace)
+    if(!$back){throw "Shared checkpoint restart did not complete ($who fell)"};C $who 'coop_player_health_hold on'}
+   'attack'{$npc=Npc $st.name $st.near;$hd=[Convert]::ToInt64($npc.handle.Substring(2),16);$trace=[Collections.Generic.List[object]]::new();$max=if($st.max){$st.max}else{40};$dead=$false
+    if($st.heal){C $who 'coop_player_health_hold on';$notes.healthHold+=@("attack $($st.name)")}
+    # A story NPC's health may not be readable: then an objective completed during the fight also ends it (only then:
+    # take loadout-dunwall-v1311a ended Ramsey's fight at 40 health on an unrelated completion).
+    $gf0=(Snap $who).gameflow
+    for($k=0;$k-lt$max-and!$dead;$k++){if((Snap $who).logic-ne1){[void](Settle "$tag-fight" 20)};if($k%4-eq0){$npc=Npc $st.name $st.near;if($st.behind){Behind $npc 1.0 1.6}else{Face $npc.position 1.5 1.6};Start-Sleep -Milliseconds 500}
+     & "$lab/Send-D2Input.ps1" -Role $who -RightTrigger 255 -DurationMs $(if($k%3-eq0){1300}else{150})|Out-Null;Start-Sleep -Milliseconds 700
+     $hp=$null;try{$hp=Q $who '--health' $hd}catch{};$trace.Add(@{press=$k;health=$(if($hp){$hp.current}else{$null});host=(Snap $who).logic});if($hp-and$hp.current-le0){$dead=$true};$gfn=(Snap $who).gameflow;if(!$hp-and$gf0-and$gfn-and$gfn[3]-gt$gf0[3]){$dead=$true}
+     if((Snap $who).logic-eq13){throw 'Host died in the fight'}}
+    if($st.heal){C $who 'coop_player_health_hold off'}
+    Save "$out/$tag-fight.json" @($trace);if(!$dead){throw "$($st.name) still alive after $max attacks"}}
+   'talk'{$npc=$null;try{$npc=Npc $st.name $st.near}catch{if($st.optional){$notes["$tag"]='skipped: npc gone (scene already ran)';break}else{throw}};$hit=$false
+    foreach($dp in @(@(1.5,5),@(1.2,10),@(2.0,0),@(1.0,15))){Face $npc.position $dp[0] 1.65;Start-Sleep -Milliseconds 700;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $who -Pitch $dp[1] -Quick|Out-Null}catch{}
+     $b=Snap $who;if($st.leftTrigger){& "$lab/Send-D2Input.ps1" -Role $who -LeftTrigger 255 -DurationMs $(if($st.hold){$st.hold}else{1500})|Out-Null}else{I $who X 400};Start-Sleep -Milliseconds 2000;$a=Snap $who;if($a.cine-ne$b.cine-or$a.logic-ne1-or"$($a.gameflow)"-ne"$($b.gameflow)"){$hit=$true;break}}
+    if(!$hit){throw "Talk to $($st.name) not registered"}}
+   'loot'{$npc=Npc $st.name $st.near;$hit=$false
+    foreach($r2 in 'host','client'){try{Save "$out/$tag-npcstream-$r2.json" (S $r2 '.npc-stream.json')}catch{}}
+    # 1677: the native use focus on the body decides each press (target: the NPC entity handle).
+    $pl=Q $who '--player';$me=@((Q $who '--entities').entities|Where-Object pointer -eq $pl.player);$th=[Convert]::ToUInt32(($npc.handle-replace'^0x',''),16)
+    $sensor=@((Q $who '--components' $me[0].handle).components|Where-Object type -eq '.?AVarkCpntPlayerSensorInteraction@@')[0].pointer;$lf=[Collections.Generic.List[object]]::new()
+    $tries=foreach($dp in @(@(1.0,45),@(0.8,60),@(1.2,35),@(0.7,70),@(1.4,30))){foreach($pa in 0,-12,12,-24,24){foreach($yo in 0,-20,20){,@($dp[0],($dp[1]+$pa),$yo)}}}
+    $stand=$null;foreach($dp in $tries){$d=$dp[0];if($stand-ne$d){Face $npc.position $d 1.2;Start-Sleep -Milliseconds 700;$stand=$d}
+     try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $who -Pitch $dp[1] -Quick|Out-Null}catch{}
+     if($true){$p0=(Snap $who).pos;$yaw=[Math]::Atan2($npc.position[1]-$p0[1],$npc.position[0]-$p0[0])*180/[Math]::PI+$dp[2];C $who ("setviewpos {0:F3} {1:F3} {2:F3} {3:F2} 0"-f$p0[0],$p0[1],($npc.position[2]+1.2),$yaw);Start-Sleep -Milliseconds 400;try{& "$PSScriptRoot/Set-ObserverPitch.ps1" -Role $who -Pitch $dp[1] -Quick|Out-Null}catch{}}
+     Start-Sleep -Milliseconds 250;$fh=0;if($sensor){try{$w=@((Q $who '--object' $sensor).words|Where-Object offset -eq '0x80');$fh=[uint32]([Convert]::ToUInt64($w[0].word.Substring(2),16)-shr32)}catch{}}
+     $lf.Add([ordered]@{d=$d;pitch=$dp[1];yaw=$dp[2];focus=('0x{0:x}'-f$fh);target=('0x{0:x}'-f$th)});Save "$out/$tag-lootfocus.json" @($lf);if($sensor-and$fh-ne$th){continue}
+     # Done only when a gameflow node completes (state 3 count rises), after any scene.
+     $b=Snap $who;I $who X 600;$w2=[Diagnostics.Stopwatch]::StartNew();try{Frame $who "$tag-loot$d";$notes.lootStands+=@("$i $who d=$d at $((Snap $who).pos -join ',')")}catch{}
+     do{Start-Sleep -Milliseconds 600;$a=Snap $who;if($a.logic-eq5){I $who X 3000}
+      if($a.gameflow-and$b.gameflow){if($st.expect){if($a.gameflow[3]-ge$st.expect){$hit=$true}}elseif($a.gameflow[3]-gt$b.gameflow[3]){$hit=$true}}}while(!$hit-and$w2.ElapsedMilliseconds-lt9000)
+     if($hit){break}}
+    if(!$hit){throw "Loot of $($st.name) not registered"}}}
+  Start-Sleep -Milliseconds $(if($st.settle){$st.settle}else{3000})
+  [void](Settle $tag 120);Start-Sleep 2
+  $rows.Add([ordered]@{step=$tag;spec=$st;host=(Snap host);client=(Snap client)})
+  $ap=[ordered]@{step=$tag};foreach($r in 'host','client'){try{$x=S $r '.reset.json';$y=$x.autosavePair;$ap[$r]="$($y.result) a$([int]$y.active) s$($y.saves)/o$($y.originated)/m$($y.mirrored)/p$([int]$y.pending) slot$($y.slot) phase$($x.phase) $($x.result)";Save "$out/$tag-reset-$r.json" $x}catch{$ap[$r]='unread'}};$notes.autosaves+=@($ap)
+  foreach($r in 'host','client'){Frame $r $tag;try{Copy-Item "$root/work/lab-instances/$r/coop-status.json.triggers.json" "$out/$tag-triggers-$r.json";Copy-Item "$root/work/lab-instances/$r/coop-status.json.loading.json" "$out/$tag-loading-$r.json";Copy-Item "$root/work/lab-instances/$r/coop-status.json.missionend.json" "$out/$tag-missionend-$r.json"}catch{}}
+  Save "$out/route.json" @($rows)}
+ if($JoinAfterStep-and$i-le$JoinAfterStep){JoinNow}
+ $notes.final=@{host=(Snap host);client=(Snap client)}
+ $notes.gameflowEqual=("$($notes.final.host.gameflow)"-eq"$($notes.final.client.gameflow)")
+ # Both worlds must end on the same map (a mission end the partner did not follow fails the take).
+ if($notes.final.host.map-ne$notes.final.client.map){throw "Worlds ended on different maps: host $($notes.final.host.map), client $($notes.final.client.map)"}
+}catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace};foreach($r2 in 'host','client'){try{Save "$out/failure-npcstream-$r2.json" (S $r2 '.npc-stream.json')}catch{}};try{foreach($r in 'host','client'){Frame $r 'failure'}}catch{};try{$notes.failureState=@{host=(Snap host);client=(Snap client)}}catch{}}
+finally{
+ if($owned){
+  $errors=[Collections.Generic.List[string]]::new()
+  if($captures){foreach($c in @($captures)){try{if(!$c.HasExited){Stop-Process -Id $c.Id}}catch{}}}
+  # -HoldAtEnd leaves the mission running for interactive probing; Restore-RouteHold-v1303.ps1
+  # then runs this same restoration and its checks.
+  if($HoldAtEnd){$errors.Add('held: restore with Restore-RouteHold-v1303.ps1')}else{
+  if($dirty){
+   foreach($r in 'host','client'){try{I $r;C $r 'coop_product_auto off';C $r 'coop_mission_end_mirror off';C $r 'coop_gameflow_mirror off';C $r 'coop_kiscule_mirror off'}catch{}}
+   # Product mode armed checkpoint sync: a shared death would block the fixture restore.
+   foreach($r in 'host','client'){try{if((S $r).localGameLogicState-eq13){I $r A 400;Start-Sleep 5}}catch{}}
+   foreach($r in 'host','client'){try{C $r 'coop_checkpoint_sync off';C $r 'coop_usable_sync off';C $r 'coop_player_health_hold off'}catch{}}
+   $w=[Diagnostics.Stopwatch]::StartNew()
+   do{$ok=$true;foreach($r in 'host','client'){try{$s=S $r;if($s.localGameLogicState-notin 1,2,6,13-or$s.localPendingGameLogicState){$ok=$false;if($s.localGameLogicState-eq5){I $r X 3000}elseif($s.localGameLogicState-eq3){I $r Right 250;Start-Sleep -Milliseconds 300;I $r A 600}elseif($s.localGameLogicState-eq14){I $r A 600}else{I $r A 300}}}catch{$ok=$false}};if(!$ok){Start-Sleep -Milliseconds 1500}}while(!$ok-and$w.ElapsedMilliseconds-lt120000)
+   foreach($r in 'host','client'){try{if((S $r).localGameLogicState-eq13){I $r A 400}}catch{}}
+   try{& "$root/work/PrepareShadowSword.ps1" -EvidencePath "$out/restored-setup.json"|Out-Null;& "$PSScriptRoot/Restore-LabNoteInventory-v779.ps1" -Baseline "$root/work/natural-moveset/native-coin-reward-v786c" -Evidence "$out/note-restoration"|Out-Null}catch{$errors.Add($_.Exception.Message)}
+  }
+  foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;if($s.localGameLogicState-ne1-or$hp.current-ne56-or!$s.remoteFresh){throw "Final gameplay/health/transport not restored (logic $($s.localGameLogicState), health $($hp.current), fresh $($s.remoteFresh))"}}catch{$errors.Add("${r}: $($_.Exception.Message)")}}
+  # After a shared death or a stuck scene the in-place fixture restore can fail (full health 70, not 56: takes 1303aj, 1303al, 1303ao; no fresh state: 1304l).
+  # The recovery is the documented relaunch (Deploy-SourceClock: both roles restarted on the Dunwall fixture), then the same check.
+  $final=@($errors) # any restore error, in place or in the final check (before the protected-file check below)
+  if($final.Count){$again=[Collections.Generic.List[string]]::new()
+   try{& "$root/work/movement-integration/Deploy-SourceClock.ps1"|Out-Null
+    foreach($r in 'host','client'){$pids[$r]=(Get-Content "$root/work/lab-instances/$r/launch.json" -Raw|ConvertFrom-Json).pid} # the relaunch starts new processes
+    foreach($r in 'host','client'){try{$s=S $r;$hp=Q $r '--health' 1;if($s.localGameLogicState-ne1-or$hp.current-ne56-or!$s.remoteFresh){throw "logic $($s.localGameLogicState), health $($hp.current), fresh $($s.remoteFresh)"}}catch{$again.Add("${r}: $($_.Exception.Message)")}}}catch{$again.Add("relaunch: $($_.Exception.Message)")}
+   $notes.restoreRecovery=[ordered]@{before=@($final);after=@($again);method='Deploy-SourceClock (relaunch of both roles, Dunwall fixture)'}
+   if(!$again.Count){$errors.Clear()}}
+  foreach($f in Get-Content "$root/work/movement-integration/protected-save-hashes-before-v4.json" -Raw|ConvertFrom-Json){if((Get-FileHash -LiteralPath $f.Path).Hash-ne$f.Hash){$errors.Add('Protected file changed')}}
+  }
+  Save "$out/restoration.json" @{passed=(!$errors.Count);errors=@($errors)};if($errors.Count-and!$failure){$failure=$errors-join '; '}
+  Save "$out/result.json" @{passed=(!$failure);failure=$failure;notes=$notes;scope="Campaign route steps for $MapInfo in lab product mode; Dunwall fixture restored."}
+  $mutex.ReleaseMutex()
+ };$mutex.Dispose()
+}
+Get-Content "$out/result.json";if($failure){throw $failure}

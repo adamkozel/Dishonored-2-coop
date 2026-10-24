@@ -221,8 +221,15 @@ def attempts(a, one):
     return 1
 
 
+def replica_unconscious(handle):
+    """True when this player's npc-stream entry for the NPC (handle as the probe prints it, hex) says unconscious."""
+    h = int(handle, 16) if isinstance(handle, str) else int(handle)
+    return any(int(e.get('handle', 0)) == h and e.get('unconscious') for e in status('.npc-stream.json').get('entries', []))
+
+
 def chase_try(a, k):
-    """None to try again, 0 when the task is done."""
+    """None to try again, 0 when the task is done, or with untilUnconscious when the chased NPC's replica is unconscious
+    (#197: Stilton's non-lethal outcome is a story flag, not a task)."""
     if a.get('crouch', True):
         crouch()
     npc, h = heading(a['npc'])
@@ -233,7 +240,7 @@ def chase_try(a, k):
     time.sleep(0.12)
     packet([a.get('button', 'RightShoulder')], a.get('ms', 3500), ly=a.get('ly', 0))
     time.sleep(a.get('ms', 3500) / 1000 + 2.0)
-    ok = done(a['until'])
+    ok = replica_unconscious(npc['handle']) if a.get('untilUnconscious') else done(a['until'])
     print(json.dumps({'try': k, 'npc': npc['name'], 'at': [round(v, 2) for v in p], 'done': ok}), flush=True)
     if ok:
         return 0
