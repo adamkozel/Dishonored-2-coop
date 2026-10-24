@@ -1652,6 +1652,8 @@ bool allowedCommand(const char* text) {
         return *rest==0;
     }
     if(!std::strcmp(text,"coop_player_health_hold on")||!std::strcmp(text,"coop_player_health_hold off"))return true;
+    // 1214jt (#177, lab): the native difficulty override cvar, -1 (off) or a preset index 0-4.
+    if(!std::strncmp(text,"ark_difficulty_level_override ",30)){const char* v=text+30;return !std::strcmp(v,"-1")||(v[0]>='0'&&v[0]<='4'&&!v[1]);}
     if(!std::strcmp(text,"coop_grant_item grenade")||!std::strcmp(text,"coop_grant_item health")||!std::strcmp(text,"coop_grant_item mana"))return true;
     if(!std::strncmp(text,"coop_grant_named ",17))return labGrantNameAllowed(text+17);
     if(!std::strncmp(text,"coop_partner_effect ",20))return labPartnerEffectAllowed(text+20);

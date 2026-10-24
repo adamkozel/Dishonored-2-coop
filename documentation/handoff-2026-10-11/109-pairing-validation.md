@@ -83,6 +83,16 @@ Release 0.9.0 left deaths and checkpoints unshared in real co-op sessions (fixed
 - **Difficulty:** on co-op saves the game runs `difficulty/preset/medium`, set by the co-op profile's campaign slot; on the lab's normal saves it runs `easy`.
   - Health hold refills health, so on Medium a big hit still killed the host in the Duke fight twice.
   - A joining partner's world takes its own profile's difficulty, not the host's (#177).
+  - **Research (1214jt, [difficulty-override-v1881a](../../work/natural-moveset/difficulty-override-v1881a), confirmed runtime):**
+    - The probe's `--difficulty` reads the difficulty manager embedded in the game at `+0x1f7b90`; its active
+      `arkDeclDifficultyPreset` is at `+0x10` (`difficulty/preset/easy.difficultypreset` in the lab).
+    - The probe's cvar reader also reports `ark_difficulty_current` (0 on Easy) and `ark_difficulty_level_override`
+      (-1). Both are listed in the saved cvar references, and the game binary has the string "Difficulty decl not found".
+    - The console command `ark_difficulty_level_override 2` was queued (engine log) but did not change the cvar
+      (still -1). The preset stayed Easy, including after a mission load. The console's reply is not logged.
+      Hypothesis: the cvar is protected (cheat or init-only).
+    - Next, through the d2-ghidra MCP: find the cvar's readers and flags, and the native setter that the difficulty
+      options use, so the partner's game can apply the host's preset before join-follow loads the mission.
 - **Level-transition choice:** the Death to the Empress tower door offers Go / Stay on co-op saves. The choice is a pending switch to logic 9 while the logic stays 1; X closes it and A takes Go.
   - The user saw the harness sit on it ("leave or stay").
   - v1765 confirms it in the use step and in Settle.
