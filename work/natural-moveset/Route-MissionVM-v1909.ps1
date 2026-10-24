@@ -9,6 +9,10 @@ param([string]$Take='frame-timing-vm-v1887a',[string]$MapInfo='campaign/dunwall/
 # and at the end of the route, and a storyflags step does it anywhere (expectEqual fails the take on a difference).
 # Only differing flags are saved (names are game-derived; the take stays local). The Jindosh riddle's
 # EnigmaExpectedStage* differ per world by design (chapter 110).
+# 1909: a cast step has a player (role) use the equipped power (the left trigger held for ms, after an optional
+# coop_grant_named grant) and records the caster's power stream sent and the other world's received and applied
+# (expectPresented fails the take without them). press sends a trigger or stick for the VM partner to the VM (it went
+# to the local client instance, which a two-account take stops).
 # 1891 (#213): the lab's local partner instance (work/lab-instances/client) takes no part in a two-account take, where
 # the VM is the partner, but it kept rendering beside the host: about as much CPU as the host game and 5 GB of RAM
 # (measured during campaign-palace-vm-v1890a). It is stopped once the host checks pass, unless -KeepLocalClient; the
@@ -516,7 +520,17 @@ function KillHostNow(){
    'follow'{$fw=[Diagnostics.Stopwatch]::StartNew();$d=if($st.dist){$st.dist}else{2.0};$trace=[Collections.Generic.List[object]]::new()
     while($fw.ElapsedMilliseconds-lt$st.ms){$npc=Npc $st.name $st.near;Face $npc.position $d 1.6;$trace.Add([ordered]@{ms=$fw.ElapsedMilliseconds;npc=$npc.name;position=$npc.position;host=(Snap host).logic});Start-Sleep -Milliseconds 1500;$x=Snap host;if($x.logic-eq13){throw 'Host died while following'};if($x.logic-ne1){[void](Settle $tag 60)}}
     Save "$out/$tag-follow.json" @($trace)}
-   'press'{$who=if($st.role){$st.role}else{'host'};if($st.leftY){& "$lab/Send-D2Input.ps1" -Role $who -LeftY $st.leftY -DurationMs $(if($st.ms){$st.ms}else{800})|Out-Null}elseif($st.leftTrigger){& "$lab/Send-D2Input.ps1" -Role $who -LeftTrigger 255 -DurationMs $(if($st.ms){$st.ms}else{300})|Out-Null}else{I $who $st.button $(if($st.ms){$st.ms}else{200})}} # leftTrigger: the Timepiece's timeline change
+   'press'{$who=if($st.role){$st.role}else{'host'}
+    if($who-eq'client'-and($st.leftY-or$st.leftTrigger)){if($st.leftY){Send-D2LabVMInput -LeftY $st.leftY -DurationMs $(if($st.ms){$st.ms}else{800})|Out-Null}else{Send-D2LabVMInput -LeftTrigger 255 -DurationMs $(if($st.ms){$st.ms}else{300})|Out-Null}}
+    elseif($st.leftY){& "$lab/Send-D2Input.ps1" -Role $who -LeftY $st.leftY -DurationMs $(if($st.ms){$st.ms}else{800})|Out-Null}elseif($st.leftTrigger){& "$lab/Send-D2Input.ps1" -Role $who -LeftTrigger 255 -DurationMs $(if($st.ms){$st.ms}else{300})|Out-Null}else{I $who $st.button $(if($st.ms){$st.ms}else{200})}}
+   'cast'{$cr=if($st.role){$st.role}else{'host'};$other=if($cr-eq'host'){'client'}else{'host'}
+    if($st.grant){C $cr "coop_grant_named $($st.grant)";Start-Sleep -Milliseconds 1300}
+    $b0=S $cr '.power-fx-stream.json';$o0=S $other '.power-fx-stream.json';$ms=if($st.ms){$st.ms}else{1000}
+    if($cr-eq'client'){Send-D2LabVMInput -LeftTrigger 255 -DurationMs $ms|Out-Null}else{& "$lab/Send-D2Input.ps1" -Role host -LeftTrigger 255 -DurationMs $ms|Out-Null}
+    Start-Sleep -Milliseconds 2500;$b1=S $cr '.power-fx-stream.json';$o1=S $other '.power-fx-stream.json'
+    $cs=[ordered]@{role=$cr;grant=$st.grant;sent=[int]$b1.sent-[int]$b0.sent;received=[int]$o1.received-[int]$o0.received;applied=[int]$o1.applied-[int]$o0.applied}
+    $notes.casts+=@($cs);Save "$out/$tag-cast.json" $cs
+    if($st.expectPresented-and(!$cs.sent-or!$cs.applied)){throw "The power cast by $cr was not presented in the other world (sent $($cs.sent), applied $($cs.applied))"}} # leftTrigger: the Timepiece's timeline change
    'die'{$who=if($st.role){$st.role}else{'host'};$other=if($who-eq'host'){'client'}else{'host'};$e0=@{host=(Snap host).epoch;client=(Snap client).epoch}
     # Same sequence as Test-MissionCheckpoint-v1151: both death screens ready, one
     # A each, then A only on load prompts; the checkpoint session state is traced.
