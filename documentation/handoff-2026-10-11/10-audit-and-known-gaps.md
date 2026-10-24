@@ -1,5 +1,7 @@
 # Independent audit and continuation priorities
 
+> Historical: the first audit (14 October 2026). The current audit is [chapter 112](112-final-stage-exit-audit.md).
+
 ## First audit pass
 
 1. Verify the exact executable, deployed DLL, probe and selected banks against the current pins. Confirm the live processes and physical clone rather than trusting a stale status record.

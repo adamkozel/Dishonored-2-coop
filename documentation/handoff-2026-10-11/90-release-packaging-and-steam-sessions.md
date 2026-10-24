@@ -369,7 +369,6 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
     - The lab pair was relaunched and connected, and no SteamID was recorded.
 
 **Still open:**
-- Hosting starts with the F7 key once in a mission. Since 0.9.0 the main menu's Co-op entry opens the co-op saves
+- Hosting starts with the F7 key once in a mission (#222). Since 0.9.0 the main menu's Co-op entry opens the co-op saves
   ([chapter 107](107-coop-menu-and-saves.md)); the invite and join steps are Steam's native overlay and friends list.
-- A lab restart hung at startup twice in a row on 1214ik (#173, hypothesis: the two lab instances starting together).
 - Needs you: the human playtest with a friend (#99), and the Defender false positive (#25).

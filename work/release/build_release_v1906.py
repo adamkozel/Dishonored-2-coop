@@ -15,7 +15,7 @@ Usage: python -I build_release_v1668.py CANDIDATE SETUP_DIR
 Writes outputs/release/d2coop-v0.9.4/ and outputs/release/d2coop-v0.9.4.zip (local; published as a GitHub release).
 """
 from pathlib import Path
-import hashlib, json, shutil, datetime, subprocess, sys, tempfile, zipfile
+import hashlib, json, re, shutil, datetime, subprocess, sys, tempfile, zipfile
 R = Path(__file__).resolve().parents[2]
 VERSION = '0.9.4'
 LAB = R / 'work/asset-game'; ORIG = Path(r'C:\Program Files (x86)\Steam\steamapps\common\Dishonored2')
@@ -62,6 +62,11 @@ for rel, src in data.items():
     shutil.copy2(src, OUT / rel)
 for script in ('Install.cmd', 'Uninstall.cmd', 'Install-D2Coop.ps1', 'Uninstall-D2Coop.ps1'):
     shutil.copy2(REL / script, OUT / script)
+notes = (REL / 'RELEASE-NOTES.md').read_text(encoding='utf-8')
+# The final audit found the install steps still naming d2coop-v0.9.1.zip in 0.9.2 and 0.9.3: the notes must name this
+# version in their title and their download step, and no other zip.
+assert notes.startswith(f'# Dishonored 2 Corvo/Emily co-op {VERSION}\n'), 'release notes title is not this version'
+assert re.findall(r'd2coop-v[0-9.]+\.zip', notes) == [f'd2coop-v{VERSION}.zip'], 'release notes name another zip'
 shutil.copy2(REL / 'RELEASE-NOTES.md', OUT / 'README.md')
 # No package file may be a game file.
 originals = {sha(p) for p in ORIG.rglob('*') if p.is_file() and p.stat().st_size < 64 << 20}

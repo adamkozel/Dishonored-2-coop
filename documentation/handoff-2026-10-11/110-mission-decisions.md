@@ -41,10 +41,10 @@ task) and the **story flags**. Labels follow the handoff rules: confirmed static
   v1674 route, held at the end), she kills and loots Ramsey, opens the vault and her locker. Both worlds then hold
   `ramsey_is_alive` 0, and the 22 flags show no difference (`storyflags-diff.json`, `storyflags-values.json`).
 
-**Open (#197):** the non-lethal outcomes end to end, with the partner completing them. Each needs its mission's
-non-lethal sequence (the Ramsey vault, the Hypatia cure, the Jindosh shock, the Breanna shrine, the Duke's double,
-Stilton, Delilah). The campaign routes take the lethal branches. The final two-account campaign validation will take
-non-lethal branches with the partner acting, and diff the story flags at each mission's end.
+**Status:** #197 was closed with Ramsey and Stilton completed by the partner in both worlds (below). The other
+branches (the Duke's double confrontation, Hypatia, Jindosh, Breanna and Delilah) and a story-flag diff at each campaign
+mission's end are [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) (the final audit, [chapter 112](112-final-stage-exit-audit.md)). The campaign
+routes take the lethal branches.
 
 ### Ramsey in the vault, partner-led (#197, in progress)
 
@@ -178,7 +178,7 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   4. Make the preparation (`creat_the_antidote_finished`).
   5. Use the syringe on Hypatia (`hypatia_cured`).
   Pickups and usables are shared (chapters 95 and 97, #187), so the partner can do every step.
-- **Ramsey:** the host-made outcome passes (above); the partner-made one waits for #209 (1214kc).
+- **Ramsey:** the host-made and the partner-made outcomes both pass (above; #209 was fixed on 1214kd).
 - **Breanna (The Royal Conservatory), a device chain** (`curator_p_lowchaos`, `ld_script_main`):
   1. `Task_CU_FindOutHow` (`NonlethalLearned`).
   2. `Task_CU_InvertLens`, gated by `Ashworth_Knocked_Out`.

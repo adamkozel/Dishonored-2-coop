@@ -1,6 +1,6 @@
 # Dishonored 2 Corvo/Emily co-op
 
-This mod makes the Dishonored 2 campaign playable cooperatively, with Corvo and Emily. Work follows [the roadmap](documentation/handoff-2026-10-11/02-roadmap.md) in stage order (stage 3, movement, is active).
+This mod makes the Dishonored 2 campaign playable cooperatively, with Corvo and Emily. Work follows [the roadmap](documentation/handoff-2026-10-11/02-roadmap.md) in stage order. Stages 3 to 5 closed and stage 6 is active; [the final audit](documentation/handoff-2026-10-11/112-final-stage-exit-audit.md) reopened cards in stages 2, 4, 5 and 7.
 
 Read these first:
 - [handoff README](documentation/handoff-2026-10-11/README.md);
