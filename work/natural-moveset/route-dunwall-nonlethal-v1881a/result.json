@@ -1,0 +1,120 @@
+{
+  "passed": false,
+  "failure": "The choke of mortimer_ramsey never reached Task_DW_NonLethal_GetRing",
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot69 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot61 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot69 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot61 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot69 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot61 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot69 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot61 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-authority",
+        "host": "disabled a0 s0/o0/m0/p0 slot69 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot61 phase0 awaiting_peer"
+      }
+    ],
+    "authority": [
+      {
+        "step": "step05-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h50/50 acq1 lease1 paused0 gp0 hs1"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h50/50 acq0 lease1 paused1 gp1 hs1"
+        ]
+      }
+    ],
+    "npcPicks": [
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -43.3,-119.4,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -43.4,-119.8,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -42.9,-119.7,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -42.1,-119.2,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -42,-119.1,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -41.9,-118.7,61",
+      "6 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -42.8,-117.8,61"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 31,
+        "cine": 38,
+        "pos": [
+          -38.918556,
+          -161.143845,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          2,
+          6,
+          3,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_KillRamsey,Task_DW_NonLethal_KnockoutRamsey,Task_DW_OpenVault"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 26,
+        "cine": 37,
+        "pos": [
+          -43.580853,
+          -118.625267,
+          61.003677
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          2,
+          6,
+          3,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_KillRamsey,Task_DW_NonLethal_KnockoutRamsey,Task_DW_OpenVault"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored."
+}

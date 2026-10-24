@@ -24,6 +24,7 @@ Usage: python -I d2_route_actions.py <repo> <action> '<json args>' | @<json file
   grab        {"face": str, "until": task, "ms": 300000, "press": 700, "gap": 150, "hold": 5500, "state": 41}
               block in short RB presses; a press that becomes a grab (player state 41, the choke)
               is held on until the choke ends (choke an off-balance enemy)
+Every action takes "role": "host" (default) or "client" (#197: a partner completing a non-lethal outcome).
 Task names come from the gameflow name cache (work/natural-moveset/gameflow-names.local.json).
 Pitch is set with Set-ObserverPitch.ps1 (setviewpos ignores its pitch argument).
 """
@@ -40,6 +41,7 @@ import uuid
 PWSH = r'C:\Users\adako\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe'
 BUTTONS = {'RightShoulder': 0x200, 'LeftShoulder': 0x100, 'A': 0x1000, 'B': 0x2000, 'X': 0x4000, 'Y': 0x8000}
 REPO = ''
+ROLE = 'host'
 
 
 def ps(command):
@@ -47,7 +49,7 @@ def ps(command):
 
 
 def pid():
-    return json.load(open(f'{REPO}/work/lab-instances/host/launch.json', encoding='utf-8-sig'))['pid']
+    return json.load(open(f'{REPO}/work/lab-instances/{ROLE}/launch.json', encoding='utf-8-sig'))['pid']
 
 
 def probe(*args):
@@ -67,7 +69,7 @@ def probe(*args):
 def status(suffix=''):
     for _ in range(40):
         try:
-            return json.load(open(f'{REPO}/work/lab-instances/host/coop-status.json{suffix}', encoding='utf-8-sig'))
+            return json.load(open(f'{REPO}/work/lab-instances/{ROLE}/coop-status.json{suffix}', encoding='utf-8-sig'))
         except (OSError, ValueError):
             time.sleep(0.03)
     return {}
@@ -103,14 +105,14 @@ def logic():
 
 
 def command(text):
-    ps(f"& '{REPO}/outputs/d2-coop-lab/Send-D2Command.ps1' -Role host -Command '{text}' -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null")
+    ps(f"& '{REPO}/outputs/d2-coop-lab/Send-D2Command.ps1' -Role {ROLE} -Command '{text}' -WaitConsumed -ReceiptTimeoutMs 8000|Out-Null")
 
 
 def teleport(x, y, z, yaw, pitch=0.0):
     command(f'setviewpos {x:.3f} {y:.3f} {z:.3f} {yaw:.3f} 0')
     if pitch:
         time.sleep(0.25)
-        ps(f"& '{REPO}/work/natural-moveset/Set-ObserverPitch.ps1' -Role host -Pitch {max(-70, min(70, pitch)):.2f} -Quick|Out-Null")
+        ps(f"& '{REPO}/work/natural-moveset/Set-ObserverPitch.ps1' -Role {ROLE} -Pitch {max(-70, min(70, pitch)):.2f} -Quick|Out-Null")
 
 
 _last = [0]
@@ -126,7 +128,7 @@ def packet(buttons=(), ms=150, lt=0, rt=0, ly=0):
     expires = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(milliseconds=ms)
     filetime = int((expires - datetime.datetime(1601, 1, 1, tzinfo=datetime.timezone.utc)).total_seconds() * 10_000_000)
     data = struct.pack('<IHHIQHBBhhhhQ', 0x49433244, 1, 40, seq, filetime, mask, lt, rt, 0, ly, 0, 0, 0)
-    folder = f'{REPO}/work/lab-instances/host'
+    folder = f'{REPO}/work/lab-instances/{ROLE}'
     temp = os.path.join(folder, 'packet-' + uuid.uuid4().hex + '.tmp')
     with open(temp, 'wb') as f:
         f.write(data)
@@ -144,17 +146,24 @@ def npcs(sub):
 
 
 def heading(sub, moving=0.2, timeout=60.0):
-    """Last matching NPC and its walking heading (unit vector) from two samples; None if it never walks."""
+    """The nearest walking matching NPC and its heading (unit vector) from two samples; None if none walks.
+
+    #197: Dunwall has two Ramsey entities (the audience one stands still), so each match is followed by its handle."""
     end = time.time() + timeout
     while time.time() < end:
         a = npcs(sub)
         time.sleep(0.25)
         b = npcs(sub)
-        if a and b:
-            dx, dy = b[-1]['position'][0] - a[-1]['position'][0], b[-1]['position'][1] - a[-1]['position'][1]
+        me = status().get('localPosition') or [0, 0, 0]
+        before = {e['handle']: e['position'] for e in a}
+        for e in sorted(b, key=lambda e: math.hypot(e['position'][0] - me[0], e['position'][1] - me[1])):
+            q = before.get(e['handle'])
+            if not q:
+                continue
+            dx, dy = e['position'][0] - q[0], e['position'][1] - q[1]
             n = math.hypot(dx, dy)
             if n > moving:
-                return b[-1], (dx / n, dy / n)
+                return e, (dx / n, dy / n)
     return None, None
 
 
@@ -436,15 +445,16 @@ def face(sub):
         return
     if not found:
         return
-    p = found[-1]['position']
     me = status().get('localPosition') or [0, 0, 0]
+    # #197: the nearest match (Dunwall has an audience Ramsey far from the one in the throne room).
+    p = min(found, key=lambda e: math.hypot(e['position'][0] - me[0], e['position'][1] - me[1]))['position']
     command(f'setviewpos {me[0]:.3f} {me[1]:.3f} {me[2] + 1.7:.3f} {math.degrees(math.atan2(p[1] - me[1], p[0] - me[0])):.2f} 0')
     # 1760 (#171): setviewpos keeps the pitch; campaign-training-vm-v1760c swung 22 times at the ceiling (the crossbow
     # lesson left the view 33 degrees up), so a view more than 10 degrees off level is levelled first.
     try:
         f = probe('--player')['nativeViewOrientation']
         if abs(math.degrees(math.asin(max(-1.0, min(1.0, f[2]))))) > 10:
-            ps(f"& '{REPO}/work/natural-moveset/Set-ObserverPitch.ps1' -Role host -Pitch 0 -Quick|Out-Null")
+            ps(f"& '{REPO}/work/natural-moveset/Set-ObserverPitch.ps1' -Role {ROLE} -Pitch 0 -Quick|Out-Null")
     except (RuntimeError, KeyError, IndexError):
         pass
 
@@ -503,10 +513,13 @@ def grab(a):
 
 
 def main():
-    global REPO
+    global REPO, ROLE
     REPO = sys.argv[1]
     raw = sys.argv[3] if len(sys.argv) > 3 else '{}'
     args = json.load(open(raw[1:], encoding='utf-8-sig')) if raw.startswith('@') else json.loads(raw)
+    ROLE = args.get('role', 'host')
+    if ROLE not in ('host', 'client'):
+        raise SystemExit('role must be host or client')
     return {'chase_hold': chase_hold, 'pickpocket': pickpocket, 'pickpocket_focus': pickpocket_focus, 'shoot': shoot, 'cycle': cycle,
             'grab': grab}[sys.argv[2]](args)
 
