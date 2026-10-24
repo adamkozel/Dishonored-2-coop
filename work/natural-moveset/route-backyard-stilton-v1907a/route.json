@@ -1,0 +1,397 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 14,
+      "pos": [
+        5.294999,
+        30.858995,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 16,
+      "pos": [
+        5.294999,
+        30.858995,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 14,
+      "pos": [
+        5.521492,
+        31.085493,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 16,
+      "pos": [
+        4.939039,
+        30.503038,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    }
+  },
+  {
+    "step": "step02-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 14,
+      "pos": [
+        5.521492,
+        31.085493,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 16,
+      "pos": [
+        4.939039,
+        30.503038,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    }
+  },
+  {
+    "step": "step03-command",
+    "spec": {
+      "do": "command",
+      "role": "host",
+      "text": "coop_player_health_hold on",
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 14,
+      "pos": [
+        5.521492,
+        31.085493,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 16,
+      "pos": [
+        4.939039,
+        30.503038,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    }
+  },
+  {
+    "step": "step04-authority",
+    "spec": {
+      "do": "authority",
+      "match": "stilton",
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 14,
+      "pos": [
+        5.521492,
+        31.085493,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 16,
+      "pos": [
+        4.939039,
+        30.503038,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    }
+  },
+  {
+    "step": "step05-npcs",
+    "spec": {
+      "do": "npcs",
+      "near": [
+        1.31,
+        60.46
+      ],
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 14,
+      "pos": [
+        5.521492,
+        31.085493,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_backyard_p",
+      "epoch": 36,
+      "cine": 16,
+      "pos": [
+        4.939039,
+        30.503038,
+        300.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": null
+    }
+  }
+]

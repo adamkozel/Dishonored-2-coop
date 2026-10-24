@@ -125,18 +125,18 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   - Hypothesis: the native key-target component sets the flag when he is knocked out.
   - Route: the partner travels to the past and chokes him before the ritual. A partner's choke already asks the host
     for the native knockout (chapter 93). Then diff the flags and load *The Dust District* return variant.
-- **Stilton, partner-made: blocked by #216 (confirmed runtime).** Route-Mission-v1895 lets the `choke` step act as the
-  partner while the host leads into the past.
-  - [route-bunker-stilton-v1895a](../../work/natural-moveset/route-bunker-stilton-v1895a): Stilton stood still at the
-    ritual circle, and `chase_hold` needs a walking NPC.
-  - [v1897a](../../work/natural-moveset/route-bunker-stilton-v1897a): the partner's choke found no target, and
-    `stilton_is_incapacited` stayed 0.
-  - [v1898a](../../work/natural-moveset/route-bunker-stilton-v1898a), authority report:
-    - Stilton and the other ritual characters are scripted actors with only `arkCpntAICombatAttack`, so the NPC stream
-      never binds them;
-    - each world runs its own copy: Stilton stood at (-26.2, 3.6) in the host's world and at (-21.9, 10.0) in the
-      partner's.
-  - A partner's knockout of such a character stays in her world (#216).
+- **Stilton, partner-made: done (confirmed runtime, [route-backyard-stilton-v1908a](../../work/natural-moveset/route-backyard-stilton-v1908a), 1214ke).**
+  - The flag's only writer is in the backyard map (`bunker_backyard_p`, `backyard_ld_kiscule_node_template`):
+    `stilton_is_incapacited` becomes true when `backyard_ld_spawner_stilton_1` dies or falls asleep (confirmed static).
+  - That Stilton uses the story definition `aramis_stilton.def`, a civilian with AI. He is streamed and stood at the same
+    place in both worlds.
+  - Route-Mission-v1907 (the choke step's task condition is optional, since the backyard has no active gameflow): the
+    partner choked him from behind. He was knocked out in both worlds (h10/10), and the flag is 1 in both.
+  - Earlier takes, in the past of the main map: route-bunker-stilton-v1895a/v1897a/v1898a. The past ritual characters
+    (`*_ritual.def`) are scripted actors that the NPC stream never binds, and each world runs its own copy, but they
+    are not the target of any decision. #216 recorded them as a gap and was closed with this correction.
+  - The next mission's variant follows the host's flag (map changes follow the host, chapter 97), and the flag is
+    equal in both worlds.
 - **The Duke's double, partner-made: the double now agrees between worlds (1214ke); his confrontation is not yet driven.**
   - Reconnaissance (route-palace-duke-v1899a/v1900a, confirmed runtime):
     - the Duke (`ld_spawner_duke`) is an AI NPC, unique and streamed;
