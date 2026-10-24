@@ -367,6 +367,24 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
     - The host's death showed GameOver in both games, and both restarted on the same map.
     - F8 left the session, and the uninstall restored the game (the executable and master.index hashes).
     - The lab pair was relaunched and connected, and no SteamID was recorded.
+- Release 0.9.4: the partner's combat choke on a host-owned enemy (#209), and story characters that agree between
+  worlds (1214ke).
+  - Candidate 1214kf (version resources 0.9.4), setup tool v1906, builder build_release_v1906.py. Package
+    `d2coop-v0.9.4.zip`, SHA-256 5250E17E..., 13 files, no game files.
+  - The builder now checks that the release notes name only this version's zip. The final audit found the download step
+    still naming `d2coop-v0.9.1.zip` in 0.9.2 and 0.9.3.
+  - Install test: release-install-v1906a, 8/8.
+  - The nine missions on two accounts with this binary pass on the first attempt (chapter 109, "The campaign on
+    0.9.4").
+  - Clean-PC proof from the v0.9.4 download, product-two-account-v1906a: pass.
+    - The VM downloaded the published zip (SHA-256 5250E17E..., 2 s) and installed it with Install.cmd alone in 64 s.
+    - Product mode reported. The two accounts connected on the same mission, with the movement banks active on both.
+    - Each player walked about 8 m and the other saw it. A story trigger advanced both worlds' objectives equally,
+      with native melee active.
+    - The host's death showed GameOver in both games, and both restarted on the same map with new world epochs.
+    - F8 left the session, and the uninstall restored the game (13 added files removed, the original master.index
+      restored).
+    - The lab pair was relaunched and connected, and no SteamID was recorded.
 
 **Still open:**
 - Hosting starts with the F7 key once in a mission (#222). Since 0.9.0 the main menu's Co-op entry opens the co-op saves
