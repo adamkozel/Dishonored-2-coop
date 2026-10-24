@@ -88,6 +88,41 @@ non-lethal branches with the partner acting, and diff the story flags at each mi
   - Every gameflow task advanced identically in both worlds.
   - `ramsey_in_vault` is 1 in both worlds.
 
+### The other non-lethal branches (#197): static plan
+
+Read with `tools/diag/d2_mission_route.py`, `d2_kiscule_graph.py` and `d2_resource_index.py` on the game copy (read-only;
+the game-derived outputs stay local). All of this is confirmed static; the routes are still to be taken.
+
+- **Stilton (A Crack in the Slab), the simplest:**
+  - `storyflags/bunker.kiscule` declares only variables (`stilton_is_incapacited` defaults to false), and no map
+    script node writes the flag.
+  - `pa_ld_past_scripting` only reads it, to choose the ritual with or without him ("stilton dead or chocked").
+  - Stilton in the past is `pa_ld_spawner_stilton` (-26.2, 3.6, 307.0, patrol `pa_ld_patrolroute_62`). His
+    definition inherits `components/characters/npc/base/assassination_key_target.cpntassassination`.
+  - Hypothesis: the native key-target component sets the flag when he is knocked out.
+  - Route: the partner travels to the past and chokes him before the ritual. A partner's choke already asks the host
+    for the native knockout (chapter 93). Then diff the flags and load *The Dust District* return variant.
+- **The Duke's double (The Grand Palace):** the tasks are `Task_PA_NL_Identify_Talk_Double_title`,
+  `Task_PA_NL_Neutralise_The_Real_Duke` and `Task_PA_NL_Set_up_the_scene` (`palace_p_lowchaos`).
+  1. The double's confrontation scene (`brief_double_confront`) sends `EVENT_DEV_MissionEvent_DoubleDealtWithPlayer`.
+  2. `duke_is_choked` is the incapacitation of `ld_spawner_duke` (280.1, -15.1, 20.0).
+  3. The success dialogue (`dial_nleth_success_01`, or `_nodrop`) sends `EVENT_DEV_NlethEvent_NLCompleted`.
+  The shape is the same as Ramsey's: talk, choke, carry. What starts the success dialogue is still to be read
+  (`ld_kiscule_script`).
+- **Jindosh (The Clockwork Mansion), a puzzle:**
+  1. `Task_MI_NonLethal` starts on `non_lethal_known`: the electroshock notes, or using `env_lab_electrohelm` or
+     `env_lab_electrochair`.
+  2. `Task_MI_Find_Electro` needs `found_electro_therapy` (looking at `script_target_electrolookat_1`).
+  3. `Task_MI_Electro_Tweak` needs `electroshock_tuned`: `script_nonlethal_kiscule` #363, behind the dial variable
+     `dial_setting` and the power routing (`total_power`, `available_power`).
+  4. `Task_MI_KO_Jindosh`: knock out `script_spawner_jindosh`.
+  5. `Task_MI_Electro_Place`: the body in the chair spawns `script_spawner_jindosh_electroshock`.
+  6. `Task_MI_Electro_Jindosh`: the handle `script_handle_electroshock` sends `nonlethal_complete` through
+     `nleth_shocked_success`.
+  7. `Task_MI_NonLethalEnd`.
+- **Ramsey:** the host-made outcome passes (above); the partner-made one waits for #209 (1214kc).
+- **Not yet read:** Hypatia (`hypatia_is_cured`), Breanna (`breanna_is_powerless`) and Delilah (`delilah_is_nl`).
+
 ### The partner's combat choke (#209)
 
 **Why her grab never starts (d2-ghidra, confirmed static):**
