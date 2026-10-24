@@ -1,4 +1,4 @@
-# Shared pickups on mission maps (candidates 1059–1059c)
+# Shared pickups on mission maps (candidates 1059–1059c, 1214jg)
 
 Updated 2026-10-14. Continues the Dunwall-only pickup work in [chapters 64–67](64-native-steam-shared-coin.md) (one coin, then a 51-object catalog). This is the first of the remaining Dunwall-only gates to be lifted (gate list in [audit 1040](../../work/movement-integration/mission-swim-audit-v1040.json)). Audit: [mission-pickup-audit-v1065](../../work/movement-integration/mission-pickup-audit-v1065.json).
 
@@ -54,8 +54,39 @@ Each pickup was made by placing the player at the item, aiming with native look 
 
 **Harness:** [`Test-MissionPickup-v1064.ps1`](../../work/natural-moveset/Test-MissionPickup-v1064.ps1). It uses world items above the waterline, excludes NPC-carried `pouch_*` items, and picks the nearest items.
 
+## Pickup families on missions (candidate 1214jg, #186)
+
+Updated 2026-10-24. Harness: [`Test-MissionPickupFamilies-v1855.ps1`](../../work/natural-moveset/Test-MissionPickupFamilies-v1855.ps1), Edge of the World in product mode. Each case takes one shared pickup natively:
+- **pickup:** native aim, with use (X) pressed only while the pickup has the use focus;
+- **pickpocket:** crouched behind the NPC carrying it, pressing only while that NPC has the use focus;
+- **Far Reach:** LT on the aimed pickup;
+- **container:** open the container usable natively, then take the item inside.
+
+Each case must commit once in both worlds, leave both worlds and reach each player's own inventory. Lab setup only: the health hold, and Far Reach with its pull upgrade granted for the Far Reach cases.
+
+**Found (confirmed runtime):** a theft's reward arrives with the game's `fromGrapple` flag set, from the LootObject state (47). The reward observer refused every `fromGrapple` reward, and one refused reward stopped all pickup sharing on the map (`ordinary_reward_identity_or_delta_unconfirmed`). In [mission-pickup-families-v1850a](../../work/natural-moveset/mission-pickup-families-v1850a), her pickpocket presses left the catalog re-armed by product mode with no receipts. A Far Reach pull of a pickup is an ordinary reward (`fromGrapple` 0), so it was never affected.
+
+**Fix (1214jg, [coin_sync.h](../../outputs/d2-coop-lab/src/coin_sync.h)):**
+- A reward from any of the local player's own mode state slots can be confirmed: the state id must resolve back to the same object, and its owner must be the player component. The item, wallet, claim-flag and outcome checks are unchanged.
+- An unconfirmed reward is refused for that item only and no longer stops the sync.
+- `coin-hook.json` keeps the last refused or `fromGrapple` reward's checks (bit mask), state id and vtable.
+
+| Take | Result |
+|---|---|
+| 1850a (1214jf) | Food: the host's banana committed in both worlds and left both. Stored potion: her mana potion committed in both, and both inventories went from 1 to 2. Her pickpocket stopped the pickup sync (above). |
+| 1851a (fixture) | The jellied eels were not in that load's shared catalog: catalogs vary slightly between loads. |
+| **1852a** | Her jellied eels and banana (food) and the host's mana potion committed in both worlds: **food and stored potions pass in both roles.** Fixture: the Far Reach grant left both worlds on a native page, so the pull and the crouch never ran. |
+| **1853a** | Her pickpocket of a dock worker's pouch committed on the first press: both players got +10. The reward had `fromGrapple` 1, state 47 and all eight checks. Her Far Reach pull of a mana potion committed in both worlds (both 1 to 2). |
+| **1854a** | The host's pickpocket of a walking civilian: both +20. Her container: the metal crate opened in both worlds (603 ms), then the mana potion inside committed in both. The host's cash register opened in both (570 ms), but the coin inside never had the use focus (fixture: it was aimed at the closed position). |
+| **1855a** | The host's cash register opened in both worlds (554 ms); its coin, aimed at its position after opening, committed in both (+1 each). **Containers pass in both roles.** A trash bin opened in both (565 ms), but native look stopped responding afterwards (fixture). |
+| **1855b (host Emily)** | Run with `-HostCharacter emily -ClientCharacter corvo`; this harness version does not save the pairing in the take folder. The host's Far Reach pull of a mana potion committed in both worlds (both 1 to 2). It was an ordinary reward (`fromGrapple` 0). **Far Reach pickups pass in both roles.** |
+
+- **Food** restores each player's own health. Both players were at full health here, so 0 was restored; Dunwall measured the healing ([chapter 67](67-food-and-grouped-pickup-validation.md)).
+- **Stored items** go to each player's own inventory, within that player's native capacity.
+- **Currency** is credited to both players.
+
 ## Open
 
-- **Families not yet exercised on missions:** food, stored potions, pickpocket pouches, containers and Far Reach pickups (the ones Dunwall verified).
-- **Mission catalog renewal** after a checkpoint reload.
+- **Pickup families on missions:** food, stored potions, pickpocket pouches, containers and Far Reach pickups are covered above (#186).
+- **Mission catalog renewal** after a checkpoint reload: covered by the shared restart takes in [chapter 88](88-mission-shared-death-and-checkpoint.md) (coin sync re-armed and settled again after each restart).
 - **Remaining Dunwall-only gates:** usable/door sync, checkpoint/shared death, Doppelganger visual, props, power effects, and the legacy guard/damage experiments.

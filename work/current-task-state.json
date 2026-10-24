@@ -22798,5 +22798,12 @@
     "Evidence": "mission-locked-door-v1841b (gap); v1842a (partner key), v1844a (host key), mission-locked-door-restart-v1843a (shared restart, renewed), mission-key-pickup-door-v1848a (native key pickup), mission-door-sides-v1849a (opposite sides, one side correction)",
     "Open": "keys are not shared pickups; a lock that already differs at channel arm is not reconciled; native relock not shared",
     "Status": "done, chapter 84"
+  },
+  "MissionPickupFamilies": {
+    "Card": "#186",
+    "Candidate": "candidate-npc-combat-v1214jg",
+    "Fix": "pickup rewards from any of the local player's own mode state slots confirmable (a theft carries fromGrapple, state 47); an unconfirmed reward is refused for that item only instead of stopping the whole pickup sync",
+    "Evidence": "mission-pickup-families-v1850a (food, potion; pickpocket stopped the sync on 1214jf), v1852a (food both roles, potion host), v1853a (pickpocket client, Far Reach client), v1854a (pickpocket host, container client), v1855a (container host), v1855b (Far Reach host)",
+    "Status": "done, chapter 83"
   }
 }
