@@ -1,0 +1,153 @@
+{
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "stilton_is_incapacited stayed 0, not 1",
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step02-heal",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step03-at",
+        "host": "mirrored_save_landed a1 s2/o1/m1/p0 slot61 phase0 armed",
+        "client": "local_save_originated a1 s2/o1/m1/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step04-wait",
+        "host": "mirrored_save_landed a1 s2/o1/m1/p0 slot61 phase0 armed",
+        "client": "local_save_originated a1 s2/o1/m1/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step05-use",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step06-press",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step07-trigger",
+        "host": "local_save_originated a1 s3/o2/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step08-partner",
+        "host": "mirror_requested a1 s3/o2/m1/p1 slot62 phase0 armed",
+        "client": "local_save_originated a1 s4/o2/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step09-wait",
+        "host": "mirror_requested a1 s3/o2/m1/p1 slot62 phase0 armed",
+        "client": "local_save_originated a1 s4/o2/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step10-npcs",
+        "host": "mirror_requested a1 s3/o2/m1/p1 slot62 phase0 armed",
+        "client": "local_save_originated a1 s4/o2/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step11-choke",
+        "host": "mirror_requested a1 s3/o2/m1/p1 slot62 phase0 armed",
+        "client": "local_save_originated a1 s4/o2/m2/p0 slot61 phase0 armed"
+      }
+    ],
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "npcPicks": [
+      "11 client aramis_stilton -> models/characters/def/maps/bunker/aramis_stilton_ritual.def_10414 .?AVarkNPC@@ @ -21.9,10,307"
+    ],
+    "step12-flag": {
+      "variable": "stilton_is_incapacited",
+      "value": 0,
+      "ms": 31471
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 26,
+        "cine": 37,
+        "pos": [
+          13.071929,
+          -41.689281,
+          300.136353
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          3,
+          3,
+          4,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "5/0/0",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_p_lowchaos",
+        "epoch": 26,
+        "cine": 63,
+        "pos": [
+          -21.888796,
+          10.71406,
+          307.003571
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          3,
+          3,
+          4,
+          0,
+          3,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 5,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/3/3",
+        "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "Both isolated checkpoints did not return to gameplay.",
+        "client: Final gameplay/health/transport not restored (logic 1, health 70, fresh True)"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  },
+  "passed": false
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1895.ps1:480[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 480 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mstilton_is_incapacited stayed 0, not 1[0m

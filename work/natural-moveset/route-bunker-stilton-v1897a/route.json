@@ -1,0 +1,835 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 31,
+      "pos": [
+        -0.445845,
+        -118.387535,
+        -304.996307
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        5,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -0.445845,
+        -118.387535,
+        -304.996338
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        5,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 31,
+      "pos": [
+        -2.563956,
+        -120.299606,
+        -304.94812
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        5,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -1.833989,
+        -120.494705,
+        -304.996307
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        5,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+    }
+  },
+  {
+    "step": "step02-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 31,
+      "pos": [
+        -2.563956,
+        -120.299606,
+        -304.94812
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        5,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -1.833989,
+        -120.494705,
+        -304.996307
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        5,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_FindStilton"
+    }
+  },
+  {
+    "step": "step03-at",
+    "spec": {
+      "do": "at",
+      "pos": [
+        33.2,
+        -40.7,
+        -295.4
+      ],
+      "yaw": -90,
+      "settle": 60000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 31,
+      "pos": [
+        33.200001,
+        -40.700001,
+        -299.996368
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        6,
+        2,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -1.833989,
+        -120.494705,
+        -304.996307
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        6,
+        2,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/2/2",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers"
+    }
+  },
+  {
+    "step": "step04-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 20000,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 31,
+      "pos": [
+        33.200001,
+        -40.700001,
+        -299.996368
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        5,
+        3,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_Pick_TimeDevice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -1.833989,
+        -120.494705,
+        -304.996307
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        5,
+        3,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/3",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_Pick_TimeDevice"
+    }
+  },
+  {
+    "step": "step05-use",
+    "spec": {
+      "do": "use",
+      "name": "pr_a_ld_timeshift_device_pickup_1",
+      "focus": true,
+      "offsets": [
+        [
+          0.7,
+          0
+        ]
+      ],
+      "z": -298.65,
+      "pitches": [
+        25,
+        40,
+        55,
+        70
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 300,
+      "settle": 20000,
+      "gone": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 31,
+      "pos": [
+        39.034,
+        -49.729,
+        -299.996429
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        5,
+        3,
+        2,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -1.833989,
+        -120.494705,
+        -304.996307
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        5,
+        3,
+        2,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/3",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+    }
+  },
+  {
+    "step": "step06-press",
+    "spec": {
+      "do": "press",
+      "leftTrigger": true,
+      "ms": 300,
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 31,
+      "pos": [
+        39.034,
+        -49.729,
+        300.01358
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        5,
+        3,
+        2,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -1.833989,
+        -120.494705,
+        -304.996307
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        5,
+        3,
+        2,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 4,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/3",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_ExitRoom"
+    }
+  },
+  {
+    "step": "step07-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "pa_ld_trigger_61",
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 31,
+      "pos": [
+        23.095284,
+        -39.404667,
+        300.004059
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        5,
+        3,
+        3,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_DukesPlan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -1.833989,
+        -120.494705,
+        -304.996307
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        5,
+        3,
+        3,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 5,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/3",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_DukesPlan"
+    }
+  },
+  {
+    "step": "step08-partner",
+    "spec": {
+      "do": "partner",
+      "pos": [
+        -21.85,
+        16.62,
+        311.0
+      ],
+      "yaw": -90,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 32,
+      "pos": [
+        15.346806,
+        -40.111023,
+        300.003601
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        3,
+        3,
+        4,
+        0,
+        3,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -21.85,
+        16.620001,
+        307.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        3,
+        3,
+        4,
+        0,
+        3,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 5,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/3",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+    }
+  },
+  {
+    "step": "step09-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 10000,
+      "settle": 2000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 35,
+      "pos": [
+        13.074917,
+        -41.26672,
+        300.513489
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        3,
+        3,
+        4,
+        0,
+        3,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -21.85,
+        16.620001,
+        307.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        3,
+        3,
+        4,
+        0,
+        3,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 5,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/3",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+    }
+  },
+  {
+    "step": "step10-npcs",
+    "spec": {
+      "do": "npcs",
+      "near": [
+        -26.15,
+        3.64
+      ],
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 35,
+      "pos": [
+        13.06957,
+        -41.258724,
+        300.511475
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        3,
+        3,
+        4,
+        0,
+        3,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -21.85,
+        16.620001,
+        307.003632
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        3,
+        3,
+        4,
+        0,
+        3,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 5,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/3",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+    }
+  },
+  {
+    "step": "step11-choke",
+    "spec": {
+      "do": "choke",
+      "role": "client",
+      "name": "aramis_stilton",
+      "near": [
+        -26.15,
+        3.64
+      ],
+      "until": "Mission_BK",
+      "crouch": true,
+      "dist": 1.0,
+      "walkMs": 800,
+      "ms": 6000,
+      "max": 1,
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 35,
+      "pos": [
+        13.074834,
+        -41.267002,
+        300.513519
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        3,
+        3,
+        4,
+        0,
+        3,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/bunker/bunker_p_lowchaos",
+      "epoch": 26,
+      "cine": 63,
+      "pos": [
+        -21.888796,
+        10.71406,
+        307.003571
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        3,
+        3,
+        4,
+        0,
+        3,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 5,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/3",
+      "active": "Mission_BK,Obj_BK_DelilahsPowers,Task_BK_WatcheRitual"
+    }
+  }
+]

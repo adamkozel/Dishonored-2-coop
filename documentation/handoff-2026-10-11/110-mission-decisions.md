@@ -125,6 +125,18 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   - Hypothesis: the native key-target component sets the flag when he is knocked out.
   - Route: the partner travels to the past and chokes him before the ritual. A partner's choke already asks the host
     for the native knockout (chapter 93). Then diff the flags and load *The Dust District* return variant.
+- **Stilton, partner-made: blocked by #216 (confirmed runtime).** Route-Mission-v1895 lets the `choke` step act as the
+  partner while the host leads into the past.
+  - [route-bunker-stilton-v1895a](../../work/natural-moveset/route-bunker-stilton-v1895a): Stilton stood still at the
+    ritual circle, and `chase_hold` needs a walking NPC.
+  - [v1897a](../../work/natural-moveset/route-bunker-stilton-v1897a): the partner's choke found no target, and
+    `stilton_is_incapacited` stayed 0.
+  - [v1898a](../../work/natural-moveset/route-bunker-stilton-v1898a), authority report:
+    - Stilton and the other ritual characters are scripted actors with only `arkCpntAICombatAttack`, so the NPC stream
+      never binds them;
+    - each world runs its own copy: Stilton stood at (-26.2, 3.6) in the host's world and at (-21.9, 10.0) in the
+      partner's.
+  - A partner's knockout of such a character stays in her world (#216).
 - **The Duke's double (The Grand Palace):** the tasks are `Task_PA_NL_Identify_Talk_Double_title`,
   `Task_PA_NL_Neutralise_The_Real_Duke` and `Task_PA_NL_Set_up_the_scene` (`palace_p_lowchaos`).
   1. The double's confrontation scene (`brief_double_confront`) sends `EVENT_DEV_MissionEvent_DoubleDealtWithPlayer`.
