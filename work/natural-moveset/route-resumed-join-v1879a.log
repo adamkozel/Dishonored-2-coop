@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "failure": null,
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "healthHold": [
+      "from step step01-heal"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-heal",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step02-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step03-unlock",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step04-at",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step05-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step06-use",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step07-save",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step08-load",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step09-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot68 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      }
+    ],
+    "unlocked": {
+      "door": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+      "role": "host",
+      "state": {
+        "handle": 476977288,
+        "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+        "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+        "current": 2,
+        "pending": 2,
+        "locked": 0,
+        "blocked": 0,
+        "broken": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      }
+    },
+    "saveSlot": {
+      "slot": "SLOT68",
+      "try": 1
+    },
+    "loadedEpoch": 51,
+    "join": {
+      "distance": 8.93,
+      "gameflowEqual": false,
+      "npcStateDiffs": 16
+    },
+    "joinAudit": {
+      "catchUp": "catching_up awarded 1/1 failed 0",
+      "pickupsOnlyClient": 62,
+      "pickupsOnlyHost": 77,
+      "doorDiffs": 0,
+      "usableDiffs": 6,
+      "flagDiffs": 0
+    },
+    "joinAudit60": {
+      "catchUp": "caught_up awarded 1/0 failed 0",
+      "pickupsOnlyClient": 61,
+      "pickupsOnlyHost": 77,
+      "doorDiffs": 0,
+      "usableDiffs": 6,
+      "flagDiffs": 0
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 31,
+        "cine": 24,
+        "pos": [
+          -30.814009,
+          192.748062,
+          1.25397
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          1,
+          5,
+          0,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 1,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 51,
+        "cine": 55,
+        "pos": [
+          -38.889999,
+          189.490005,
+          3.21011
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          1,
+          5,
+          0,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "gameflowEqual": true
+  }
+}

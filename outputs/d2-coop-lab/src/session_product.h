@@ -221,7 +221,7 @@ void receiveMissionFollow(const MissionFollowPacket& p){
     if(p.magic!=0x464D3244||p.version!=1||p.size!=sizeof(p)||p.role!=0||localRole!=1||p.session!=remote.session||p.sequence<=m.peerSequence||!std::memchr(p.mapinfo,0,sizeof(p.mapinfo))||
        std::strncmp(p.mapinfo,"campaign/",9)||std::strpbrk(p.mapinfo," ;\"")){++m.refused;return;}
     m.peerSequence=p.sequence;std::snprintf(m.hostMapinfo,sizeof(m.hostMapinfo),"%s",p.mapinfo);m.hostHigh=p.highChaos?1u:0u;m.hostMap=p.mapId;
-}
+}
 void serviceMissionFollow(void* system,ULONGLONG tick){
     if(!productMode&&!followHostEnabled)return;
     auto& m=missionFollow;

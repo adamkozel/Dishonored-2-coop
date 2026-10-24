@@ -1,0 +1,92 @@
+[
+ {
+  "do": "heal",
+  "on": true
+ },
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 3000
+ },
+ {
+  "do": "unlock",
+  "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+  "key": "models/interactive/keys/eotw/key_overseersoutpost_interrogationroom.inventoryitem",
+  "open": true,
+  "settle": 3000
+ },
+ {
+  "do": "at",
+  "pos": [
+   -37.1,
+   165.2,
+   3.1
+  ],
+  "yaw": 90,
+  "settle": 2000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 2000
+ },
+ {
+  "do": "use",
+  "name": "pickups_fruit_banana_02_6",
+  "aim": true,
+  "gone": true,
+  "settle": 3000,
+  "offsets": [
+   [
+    1.1,
+    0
+   ],
+   [
+    -1.1,
+    0
+   ],
+   [
+    0,
+    1.1
+   ],
+   [
+    0,
+    -1.1
+   ],
+   [
+    0.8,
+    0.8
+   ],
+   [
+    -0.8,
+    -0.8
+   ]
+  ]
+ },
+ {
+  "do": "attack",
+  "name": "worker_male_small_01",
+  "near": [
+   -39.5,
+   165.7
+  ],
+  "max": 40,
+  "behind": true,
+  "settle": 3000
+ },
+ {
+  "do": "save",
+  "role": "host",
+  "settle": 3000
+ },
+ {
+  "do": "load",
+  "role": "host",
+  "settle": 5000
+ },
+ {
+  "do": "wait",
+  "ms": 3000,
+  "settle": 2000
+ }
+]

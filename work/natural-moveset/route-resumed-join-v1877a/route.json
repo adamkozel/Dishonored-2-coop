@@ -1,0 +1,360 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -30.814009,
+        192.748062,
+        1.25397
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 11,
+      "cine": 6,
+      "pos": [
+        -33.0,
+        -148.0,
+        66.978355
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step01-heal",
+    "spec": {
+      "do": "heal",
+      "on": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -30.814009,
+        192.748062,
+        1.25397
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 11,
+      "cine": 6,
+      "pos": [
+        -33.0,
+        -148.0,
+        66.978355
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step02-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 5000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -30.814009,
+        192.748062,
+        1.25397
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 11,
+      "cine": 6,
+      "pos": [
+        -33.0,
+        -148.0,
+        66.978355
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step03-use",
+    "spec": {
+      "do": "use",
+      "name": "pickups_fruit_banana_02_6",
+      "aim": true,
+      "gone": true,
+      "settle": 3000,
+      "offsets": [
+        [
+          1.1,
+          0
+        ],
+        [
+          -1.1,
+          0
+        ],
+        [
+          0,
+          1.1
+        ],
+        [
+          0,
+          -1.1
+        ],
+        [
+          0.8,
+          0.8
+        ],
+        [
+          -0.8,
+          -0.8
+        ]
+      ]
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -38.889999,
+        189.490005,
+        3.210109
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 11,
+      "cine": 6,
+      "pos": [
+        -33.0,
+        -148.0,
+        66.978355
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step04-attack",
+    "spec": {
+      "do": "attack",
+      "name": "worker_male_small_01",
+      "near": [
+        -39.5,
+        165.7
+      ],
+      "max": 40,
+      "behind": true,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        -37.12286,
+        165.249832,
+        3.120304
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 11,
+      "cine": 6,
+      "pos": [
+        -33.0,
+        -148.0,
+        66.978355
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  }
+]

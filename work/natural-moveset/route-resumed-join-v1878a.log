@@ -1,0 +1,131 @@
+{
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "No save slot was written for host",
+  "passed": false,
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "healthHold": [
+      "from step step01-heal"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-heal",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step02-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step03-use",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step04-attack",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step05-unlock",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      }
+    ],
+    "npcPicks": [
+      "4 host worker_male_small_01 -> models/characters/def/generic/worker_male_small_01.def_10828 .?AVarkNPC@@ @ -39.4,165.8,3.4",
+      "4 host worker_male_small_01 -> models/characters/def/generic/worker_male_small_01.def_10828 .?AVarkNPC@@ @ -39.4,165.8,3.4"
+    ],
+    "unlocked": {
+      "door": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+      "role": "host",
+      "state": {
+        "handle": 476977288,
+        "name": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+        "definition": "script_door_overseersoutpost_3rdfloor_interrogationroom_01",
+        "current": 2,
+        "pending": 2,
+        "locked": 0,
+        "blocked": 0,
+        "broken": 0,
+        "linked": false,
+        "position": [
+          -33.7171,
+          40.6463,
+          30.9
+        ]
+      }
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 10,
+        "pos": [
+          -33.0,
+          -148.0,
+          66.978355
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "disabled",
+        "idHash": "00000000",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 26,
+        "cine": 23,
+        "pos": [
+          -33.904613,
+          41.076073,
+          30.903656
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          1,
+          5,
+          0,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "disabled",
+        "idHash": "00000000",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    }
+  }
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1878.ps1:450[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 450 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mNo save slot was written for host[0m

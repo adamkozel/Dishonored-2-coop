@@ -56,7 +56,10 @@ Updated 2026-10-24. Harnesses: [`Test-MissionLockedDoor-v1844.ps1`](../../work/n
 
 - **Keys are not shared pickups (confirmed runtime, 1848a).** The shared pickup catalog ([chapter 83](83-mission-shared-pickups.md)) does not include them: the key stayed in the host's world, where the host can still take their own copy. With the shared unlock they don't need to.
 - **The inventory probe and pickups (hypothesis):** `--player-inventory` reads through the sword equipment, which the pickup animation interrupts. The same read worked again 10 s later and showed her key.
-- **Not reconciled:** a lock that already differs when a channel arms. Only unlocks seen during a session are shared; shared checkpoints keep both worlds equal (1843a). A native relock is not shared either, because door scripts run in both worlds.
+- **A lock that already differs when a channel arms:**
+  - Reconciled since 1214js (#189, [chapter 106](106-partner-led-story-and-mid-mission-join.md#door-locks-1214js)). The host sends `Unlock` for its unlocked doors until the partner acknowledges a first `State`, so a door the host unlocked before saving is unlocked in a joining partner's world too (route-resumed-join-v1879a).
+  - A door locked in the host's world and unlocked in the partner's stays as it is.
+  - A native relock is not shared, because door scripts run in both worlds.
 
 ## Open
 

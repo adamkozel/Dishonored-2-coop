@@ -300,11 +300,18 @@ void traceEntityEvent(std::uint32_t variant,void* entity,void* event){
     AcquireSRWLockExclusive(&kisculeLock);if(eventTraceCount<eventTrace.size())eventTrace[eventTraceCount++]=e;++eventTraceTotal;ReleaseSRWLockExclusive(&kisculeLock);
 }
 using NativeEventPost=void*(*)(void*,void*,void*,void*,void*);
-NativeEventPost realEventPost883=nullptr,realEventPost884=nullptr,realEventPost8848=nullptr;
+NativeEventPost realEventPost883=nullptr,realEventPost884=nullptr;
 void* eventPost883(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(0,a,b);return realEventPost883(a,b,c,d,e);}
 // 1214jn (#187): every "use" event (descriptor 0x1439aa130) also goes to the use mirror's observer.
 void* eventPost884(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(1,a,c);if(c==reinterpret_cast<void*>(gameImage+0x39aa130))observeUseEvent(a,d);return realEventPost884(a,b,c,d,e);}
-void* eventPost8848(void* a,void* b,void* c,void* d,void* e){if(kisculeTraceOn)traceEntityEvent(2,a,c);return realEventPost8848(a,b,c,d,e);}
+// 1214jq (#189): the third post 0x1408848a0 (pickedUp) is not hooked; the shared pickup API requires its bytes verbatim.
+struct EntityEventHookSite {std::uintptr_t rva;unsigned length;};
+constexpr EntityEventHookSite kEntityEventHookSites[]={{0x883f80,20},{0x884920,15}};
+constexpr bool entityEventHooksSpareCoinApi(){
+    for(const auto& h:kEntityEventHookSites)for(auto c:kCoinVerbatimRvas)if(h.rva<c+32&&c<h.rva+h.length)return false;
+    return true;
+}
+static_assert(entityEventHooksSpareCoinApi(),"an entity event hook would patch code the shared pickup API requires verbatim");
 bool hookEventPost(std::uintptr_t rva,const unsigned char* prefix,unsigned length,void* wrapper,NativeEventPost& real){
     auto* target=gameImage+rva;if(std::memcmp(target,prefix,length))return false;
     auto* trampoline=static_cast<unsigned char*>(VirtualAlloc(nullptr,64,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE));if(!trampoline)return false;
@@ -319,10 +326,8 @@ bool hookEventPost(std::uintptr_t rva,const unsigned char* prefix,unsigned lengt
 bool installEntityEventTrace(){
     const unsigned char p883[20]={0x48,0x8b,0xc4,0x4c,0x89,0x48,0x20,0x57,0x48,0x83,0xec,0x40,0x48,0xc7,0x40,0xe8,0xfe,0xff,0xff,0xff};
     const unsigned char p884[15]={0x4c,0x89,0x4c,0x24,0x20,0x48,0x89,0x54,0x24,0x10,0x57,0x48,0x83,0xec,0x40};
-    const unsigned char p8848[16]={0x48,0x8b,0xc4,0x4c,0x89,0x48,0x20,0x48,0x89,0x50,0x10,0x57,0x48,0x83,0xec,0x40};
     return hookEventPost(0x883f80,p883,20,reinterpret_cast<void*>(&eventPost883),realEventPost883)&&
-        hookEventPost(0x884920,p884,15,reinterpret_cast<void*>(&eventPost884),realEventPost884)&&
-        hookEventPost(0x8848a0,p8848,16,reinterpret_cast<void*>(&eventPost8848),realEventPost8848);
+        hookEventPost(0x884920,p884,15,reinterpret_cast<void*>(&eventPost884),realEventPost884);
 }
 void writeKisculeTrace(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};

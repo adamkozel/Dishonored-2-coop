@@ -457,3 +457,127 @@ The shared toggle family (chapter 87) leaves out safes, combination dials, typew
   - After Enter, it followed and loaded the host's mission (same gameflow, 48 NPCs each, both armed).
   - It failed only on the harness's 3 m placement check. `join_warp.h` warps only from 25 m, and she was 12.6 m away.
 - **campaign-titlejoin-vm-v1744a** (v1744: a partner within 25 m with no warp is accepted): the acceptance take.
+
+## A partner joining a resumed host (#189)
+
+Join-follow loads the host's mission from its start ([chapter 108](108-character-choice-and-pairings.md)). A host who
+resumed from a mid-mission co-op save ([chapter 107](107-coop-menu-and-saves.md)) therefore has progress that the
+partner's fresh world lacks.
+
+**Harness:** [Route-Mission-v1879.ps1](../../work/natural-moveset/Route-Mission-v1879.ps1) (v1871-v1879) with
+`-JoinAfterStep`. Only the host plays the steps, then the partner joins.
+- [route-steps-resumed-join-v1871c.json](../../work/natural-moveset/route-steps-resumed-join-v1871c.json):
+  1. take a banana;
+  2. kill a dock worker;
+  3. save through the pause menu (since v1876 a new file in the save slots is required);
+  4. load that save.
+- [route-steps-resumed-join-v1880.json](../../work/natural-moveset/route-steps-resumed-join-v1880.json): unlock and
+  open the Overseer outpost's interrogation room with its key (granted, setup), go back to the docks, take the banana,
+  save and load.
+- `JoinAudit` compares both worlds at the join and 60 s later: shared pickups, doors (current/locked), usables, story
+  flags, both pickup syncs and the pickup census.
+
+**What transfers:**
+
+| State | How | Evidence |
+|---|---|---|
+| NPC lives | The life roster (existing) | v1871c, v1876a: the worker killed before the save is dead in the partner's world too. |
+| Objectives and story flags | The gameflow mirror (existing) | Equal gameflow, 0 flag differences. |
+| Door open or closed | The door session (existing; confirmed static): the host commits each door's current state when its channel arms | 0 door differences. |
+| Door locks | 1214js (below) | v1879a: the interrogation room the host unlocked and opened before the save is unlocked and open in the partner's world, with 0 door differences at the join and 60 s later. |
+| Pickups | 1214jo-jr (below) | v1876a |
+| Safe dials | Per world by design ([chapter 87](87-mission-shared-usables.md)) | 6 dial differences. |
+| Script spawners | The host's load re-creates 8 of them with new handles: the same spawners under other handles | 8 pairs. |
+
+### Pickups (1214jo-1214jr)
+
+- **The gap (confirmed runtime, [v1871c](../../work/natural-moveset/route-resumed-join-v1871c)):** the banana the host
+  took before saving was still in the partner's world.
+- **1214jo:** the host sent the names of its readable pickups with each catalog list, and the partner awarded itself
+  the eligible ones absent from them. It never ran ([v1872a](../../work/natural-moveset/route-resumed-join-v1872a)):
+  shared pickups were off in every world, a regression from 1214jl fixed in 1214jq
+  ([chapter 83](83-mission-shared-pickups.md)).
+- **What "absent" means (confirmed runtime, [v1875a](../../work/natural-moveset/route-resumed-join-v1875a), probe
+  `--pickup-census`):**
+  - Both worlds hold the same pickup actors, about 458. A pickup with a high bit of its component flag byte set
+    (`+0xd0 & 0xf0`) is dormant and is not read: about 165 in a fresh world and about 90 in a loaded one.
+  - Readable names are therefore no presence. 1214jo awarded `amber_01_12151`, which was dormant in the host's world
+    (flags 240), not taken.
+  - Pickups spawned at load are named `<declaration>_<entity slot>` (the slot is the handle's high 16 bits). Most get
+    the same names in both worlds; some differ (`ammo_bolt_pack_regular_12140` / `_12358`, `outsider_rune_12363` /
+    `_12364`, each pair at one position).
+  - Character variants differ by name at one position (`pickups_news_kg_ontherun_corvo` / `_emily`).
+  - The take's save step had failed silently (the load list had no newer manual save), so the host's world was the
+    mission-start autosave. Route v1876 requires a new file in the save slots.
+- **1214jr ([pickup_catchup.h](../../outputs/d2-coop-lab/src/pickup_catchup.h), [coin_sync.h](../../outputs/d2-coop-lab/src/coin_sync.h)):**
+  - **The census:** every pickup actor, active or dormant. Each 5 s cycle reads the entity slot table
+    (`game+0x3130b0`, 128 KB) in one call and each occupied slot's handle. Only a slot whose entity or handle changed
+    is classified again, at most 256 reads per tick.
+  - **The host's presence (D2PP version 2):**
+    - It holds each census name's hash; runtime-named entries also carry their base name and position.
+    - It is sent after a census cycle when it changed, at least every 15 s, and at once for a new pair of worlds.
+    - It is scoped to both sessions, both world epochs and the map, and only the entries in use travel (64 + 32 per
+      entry bytes, at most 2048 entries).
+  - **The partner's catch-up:**
+    - After each local census cycle, the partner awards itself, through the shared pickup's native application
+      (`applyNativeCoin`), each eligible readable pickup that is absent from the host's presence.
+    - The pickup must not be a shared catalog entry, and must have been in this world 10 s before the presence
+      arrived.
+    - A runtime-named pickup counts as present if the host has its base name within 3 m. Character variants are never
+      caught up.
+    - Dormant pickups wait for a later cycle.
+  - **Unit tests:** the packet (scope, size, sorted names, positions only on runtime entries), the runtime-name rule,
+    and the target rules.
+- **Result (confirmed runtime, [v1876a](../../work/natural-moveset/route-resumed-join-v1876a)):**
+  - At the join, the banana was the only readable pickup in the partner's world that was missing from the host's.
+  - 60 s later the partner had caught up exactly the banana (planned 1, awarded 1, failed 0), and the two worlds'
+    readable pickups no longer differed on the partner's side.
+  - Both pickup sessions were bound (291 shared).
+- **Cost:** the first census cycle classified about 11,200 slots in 2.1-2.5 s at no more than 267 reads per tick; later
+  cycles reclassify only changed slots.
+- **The award:** a caught-up pickup rewards the partner as a shared pickup would have (currency to both, items to each
+  player's inventory).
+- **Not covered:** the partner's taking of a pickup outside the shared catalog does not reach the host (#203).
+
+### Door locks (1214js)
+
+- **The gap (confirmed static):**
+  - The door session shares an unlock only as a transition seen during the session
+    ([chapter 84](84-mission-shared-doors.md): "a lock that already differs when a channel arms" was not reconciled).
+  - A door the host unlocked with its key before saving is therefore still locked in the partner's fresh world.
+  - The host's first `State` (open) would then wait for an unlock that never comes and retire after its 5 s deadline.
+- **Fix (1214js, [door_sync.h](../../outputs/d2-coop-lab/src/door_sync.h)):**
+  - Until the partner acknowledges a first `State`, the host sends `Unlock` for its unlocked door just before each
+    `State` resend (every 250 ms). The partner accepts the `State` only once paired, and `Unlock` needs the same pairing.
+  - A partner whose door is unlocked ignores it; one whose door is locked calls the native lock routine, as for a
+    shared key unlock.
+  - `armUnlocksSent` counts these sends in `door-sync.json`.
+- **Result ([v1879a](../../work/natural-moveset/route-resumed-join-v1879a), candidate 1214js):**
+  - The host was granted the key (setup), unlocked and opened `script_door_overseersoutpost_3rdfloor_interrogationroom_01`,
+    returned to the docks, took the banana, saved (SLOT68) and loaded.
+  - The partner joined. At the join and 60 s later both worlds had 0 door differences, so the partner's copy was
+    unlocked and open too.
+  - The banana was caught up (only it). The host's outpost visit had advanced the gameflow, and the partner's gameflow
+    equaled the host's by the end.
+- **Saving in combat (hypothesis):**
+  - The pause menu's Save Game did nothing while the host was fighting ([v1878a](../../work/natural-moveset/route-resumed-join-v1878a)
+    in the outpost; [v1878b](../../work/natural-moveset/route-resumed-join-v1878b) after the dock worker turned and
+    fought): the item was dimmed and no slot file was written.
+  - Route v1879 tries three times, 15 s apart, and the door route has no fight.
+
+### Takes
+
+| Take | Candidate | Result |
+|---|---|---|
+| 1871a | 1214jn | Fixture: the host died in the worker fight. |
+| 1871b | 1214jn | Fixture: an interior door's use never registered (dropped from the route). |
+| **1871c** | 1214jn | The measurement: the banana stayed in the partner's world. The worker's death transferred. No door or flag differences. |
+| 1872a | 1214jo | Route passed. The catch-up never ran (`presenceSent` 0). |
+| 1873a | 1214jo | Both pickup sessions `initial_binding_refused`. |
+| 1874a | 1214jp | `bindRefusal` `native_api` in both worlds (the regression). |
+| 1875a | 1214jq | Pickups shared again (287). The census. The catch-up awarded a dormant `amber_01_12151` (wrong). The save had failed silently. |
+| **1876a** | 1214jr | The banana caught up, and nothing else. |
+| 1877a | 1214js | Fixture: the door unlocked from one side and never opened from it. |
+| 1878a | 1214js | The door unlocked and opened (every stand). Fixture: no save in combat in the outpost. |
+| 1878b | 1214js | Door again. Fixture: no save after the worker fought back. |
+| **1879a** | 1214js | The door reached the partner unlocked and open, and the banana was caught up. Saved in SLOT68. |
