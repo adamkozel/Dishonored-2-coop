@@ -97,6 +97,33 @@ Release 0.9.0 left deaths and checkpoints unshared in real co-op sessions (fixed
   - v1765 confirms it in the use step and in Settle.
 - **Endings:** the stalled endings (Royal Conservatory v1762b, Grand Palace v1762a) were route-step misfires: the talk and use steps count any scene change as a hit. Both endings passed on the next attempts, as Meagan's endings did in four other missions.
 
+## The campaign on 0.9.4 (1214kf)
+
+The release binary of 0.9.4 (candidate 1214kf: the partner's combat choke of #209, story characters agree between
+worlds) plays the nine missions on two Steam accounts: the host is Corvo on this PC, and the partner is Emily in the lab
+VM. Both games run in product mode on co-op saves. The runner is
+[Run-Campaign-v1906.sh](../../work/natural-moveset/Run-Campaign-v1906.sh) on the harness Route-MissionVM-v1891, with the
+0.9.3 routes; the Grand Palace runs on Easy, as in campaign-palace-vm-v1890a.
+
+| Mission | Passing take |
+|---|---|
+| A Long Day in Dunwall (deaths) | [campaign-dunwall-vm-v1906a](../../work/natural-moveset/campaign-dunwall-vm-v1906a) |
+| Edge of the World (death) | [campaign-eotw-vm-v1906a](../../work/natural-moveset/campaign-eotw-vm-v1906a) |
+| The Good Doctor | [campaign-institute-vm-v1906a](../../work/natural-moveset/campaign-institute-vm-v1906a) |
+| The Clockwork Mansion | [campaign-madinventor-vm-v1906a](../../work/natural-moveset/campaign-madinventor-vm-v1906a) |
+| The Royal Conservatory | [campaign-curator-vm-v1906a](../../work/natural-moveset/campaign-curator-vm-v1906a) |
+| The Dust District | [campaign-dust-vm-v1906a](../../work/natural-moveset/campaign-dust-vm-v1906a) |
+| A Crack in the Slab | [campaign-bunker-vm-v1906a](../../work/natural-moveset/campaign-bunker-vm-v1906a) |
+| The Grand Palace (on Easy) | [campaign-palace-vm-v1906a](../../work/natural-moveset/campaign-palace-vm-v1906a) |
+| Death to the Empress, through the credits to the menu | [campaign-empress-vm-v1906a](../../work/natural-moveset/campaign-empress-vm-v1906a) |
+
+- **All nine passed on the first attempt**, from 20:28 to 00:05 (about 24 minutes per mission).
+- **Every take:**
+  - the right characters;
+  - equal gameflow in both worlds at every step and at the end;
+  - both games on the next mission's map (the main menu after the credits);
+  - restoration passed.
+
 ## The campaign on 0.9.3 (#213, 1214kb)
 
 The release binary of 0.9.3 (candidate 1214kb, with the difficulty sync of #177) plays the nine missions on two Steam
