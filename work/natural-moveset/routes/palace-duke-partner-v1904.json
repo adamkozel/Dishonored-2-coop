@@ -1,0 +1,157 @@
+[
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 20000
+ },
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_player_health_hold on",
+  "settle": 500
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_player_reach_palace",
+  "settle": 8000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_task_entering_palace",
+  "settle": 8000
+ },
+ {
+  "do": "authority",
+  "match": "double",
+  "settle": 500
+ },
+ {
+  "do": "action",
+  "name": "enter_nearest",
+  "args": {
+   "role": "client",
+   "npc": "luca_abele_double",
+   "from": "host",
+   "stands": {
+    "quarters": [
+     258.55,
+     -21.64,
+     27.1
+    ],
+    "throneroom": [
+     240.28,
+     24.69,
+     5.6
+    ],
+    "office": [
+     237.89,
+     -14.55,
+     19.9
+    ],
+    "garden": [
+     337.65,
+     -3.38,
+     -2.1
+    ],
+    "delilahroom": [
+     269.97,
+     -14.22,
+     17.2
+    ]
+   },
+   "until": "Task_PA_NL_Identify_Talk_Double_title",
+   "wait": 30,
+   "tries": 6,
+   "avoid": "story/luca_abele.def",
+   "ms": 420000
+  },
+  "settle": 30000
+ },
+ {
+  "do": "authority",
+  "match": "double",
+  "settle": 500
+ },
+ {
+  "do": "wait",
+  "ms": 10000,
+  "settle": 2000
+ },
+ {
+  "do": "choke",
+  "name": "story/luca_abele\\.def",
+  "near": [
+   255.6,
+   -25.8
+  ],
+  "until": "Task_PA_NL_Set_up_the_scene",
+  "crouch": true,
+  "dist": 1.0,
+  "walkMs": 800,
+  "ms": 6000,
+  "max": 4,
+  "settle": 4000
+ },
+ {
+  "do": "authority",
+  "match": "duke",
+  "settle": 500
+ },
+ {
+  "do": "carry",
+  "name": "story/luca_abele\\.def",
+  "near": [
+   255.6,
+   -25.8
+  ],
+  "settle": 3000,
+  "hold": 1200,
+  "pitches": [
+   55,
+   70,
+   40
+  ]
+ },
+ {
+  "do": "at",
+  "pos": [
+   263.1,
+   -21.4,
+   26.6
+  ],
+  "yaw": 0,
+  "settle": 3000
+ },
+ {
+  "do": "drop",
+  "settle": 4000
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 2000
+ },
+ {
+  "do": "flag",
+  "role": "client",
+  "entity": "storyflags",
+  "name": "nleth_palace_completed",
+  "value": 1,
+  "ms": 90000,
+  "settle": 1000
+ },
+ {
+  "do": "flag",
+  "role": "host",
+  "entity": "storyflags",
+  "name": "nleth_palace_completed",
+  "value": 1,
+  "ms": 90000,
+  "settle": 1000
+ }
+]

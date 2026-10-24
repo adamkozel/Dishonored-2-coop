@@ -609,22 +609,39 @@ def enter_nearest(a):
     """Teleport this player into the stand nearest an NPC as the host's world places it, then wait for a task to complete.
 
     #197, the Duke's double: his confrontation plays when the player enters the trigger of the room he is in
-    (ld_trigger_dd_*). 1214ke streams story civilians, so the host's double is the one both worlds show."""
-    for k in range(a.get('tries', 3)):
+    (ld_trigger_dd_*), but not while the Duke is in that room too (route-palace-duke-v1903a: both in the quarters). With
+    'avoid', the stand is used only when the avoided NPC's nearest stand differs; the action polls for up to a['ms'].
+    1214ke streams story civilians, so the host's double is the one both worlds show."""
+    def nearest(p):
+        return min(a['stands'].items(), key=lambda kv: math.hypot(kv[1][0] - p[0], kv[1][1] - p[1]) + abs(kv[1][2] - p[2]))[0]
+    start, tries, last = time.time(), 0, None
+    while time.time() - start < a.get('ms', 300000) / 1000 and tries < a.get('tries', 6):
         found = npcs_in(a.get('from', 'host'), a['npc'])
         if not found:
             time.sleep(2.0)
             continue
         p = found[0]['position']
-        name, s = min(a['stands'].items(), key=lambda kv: math.hypot(kv[1][0] - p[0], kv[1][1] - p[1]) + abs(kv[1][2] - p[2]))
+        name = nearest(p)
+        other = None
+        if a.get('avoid'):
+            av = npcs_in(a.get('from', 'host'), a['avoid'])
+            other = nearest(av[0]['position']) if av else None
+        if other == name:
+            if last != ('shared', name):
+                print(json.dumps({'npcAt': [round(v, 1) for v in p], 'stand': name, 'avoidedHere': True}), flush=True)
+                last = ('shared', name)
+            time.sleep(5.0)
+            continue
+        s = a['stands'][name]
+        tries += 1
         teleport(s[0], s[1], s[2], a.get('yaw', 0))
         t = time.time()
         while time.time() - t < a.get('wait', 40):
             if done(a['until']):
-                print(json.dumps({'try': k, 'npcAt': [round(v, 1) for v in p], 'stand': name, 'done': True, 'active': active_tasks()}), flush=True)
+                print(json.dumps({'try': tries, 'npcAt': [round(v, 1) for v in p], 'stand': name, 'avoidAt': other, 'done': True, 'active': active_tasks()}), flush=True)
                 return 0
             time.sleep(1.0)
-        print(json.dumps({'try': k, 'npcAt': [round(v, 1) for v in p], 'stand': name, 'done': False, 'active': active_tasks()}), flush=True)
+        print(json.dumps({'try': tries, 'npcAt': [round(v, 1) for v in p], 'stand': name, 'avoidAt': other, 'done': False, 'active': active_tasks()}), flush=True)
     return 1
 
 

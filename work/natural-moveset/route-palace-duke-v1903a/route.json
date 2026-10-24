@@ -1,0 +1,460 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.667233,
+        47.433643,
+        -3.820289
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 5,
+      "pos": [
+        54.667233,
+        47.433643,
+        -3.820289
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        53.650494,
+        54.295029,
+        -4.025425
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 5,
+      "pos": [
+        54.2486,
+        54.771114,
+        -4.028607
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step02-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        53.650494,
+        54.295029,
+        -4.025425
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 5,
+      "pos": [
+        54.2486,
+        54.771114,
+        -4.028607
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step03-command",
+    "spec": {
+      "do": "command",
+      "role": "host",
+      "text": "coop_player_health_hold on",
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        53.650494,
+        54.295029,
+        -4.025425
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 5,
+      "pos": [
+        54.2486,
+        54.771114,
+        -4.028607
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        1,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Eliminate_The_Duke,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step04-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_player_reach_palace",
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        53.650494,
+        54.295029,
+        -4.025425
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Get_Inside_The_Palace"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 5,
+      "pos": [
+        148.495834,
+        40.229031,
+        -24.364235
+      ],
+      "fresh": true,
+      "gameflow": [
+        243,
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Get_Inside_The_Palace"
+    }
+  },
+  {
+    "step": "step05-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_task_entering_palace",
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        53.650494,
+        54.295029,
+        -4.025425
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        6,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        235.134003,
+        3.021168,
+        7.003914
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        6,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+    }
+  },
+  {
+    "step": "step06-authority",
+    "spec": {
+      "do": "authority",
+      "match": "double",
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        53.650494,
+        54.295029,
+        -4.025425
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        6,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/palace/palace_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        235.134003,
+        3.021168,
+        7.003914
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        6,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+    }
+  }
+]
