@@ -185,6 +185,7 @@ struct MissionFollow {
     // worlds were last seen in gameplay together.
     std::uint64_t followedMap=0,warpedMap=0,warps=0;ULONGLONG togetherSince=0;float warpDistance=0;unsigned warpedConnection=0;
     ULONGLONG sentAt=0,loadAt=0;std::uint64_t loadedForMap=0;const char* result="idle";
+    ULONGLONG receivedAt=0; // 1214ju (#174): when the host's last publication arrived
 };
 MissionFollow missionFollow{};
 // 1214bu: idCommonLocal+0x2b8 (the idDeclMapInfo) is null during a mission
@@ -221,6 +222,7 @@ void receiveMissionFollow(const MissionFollowPacket& p){
     if(p.magic!=0x464D3244||p.version!=1||p.size!=sizeof(p)||p.role!=0||localRole!=1||p.session!=remote.session||p.sequence<=m.peerSequence||!std::memchr(p.mapinfo,0,sizeof(p.mapinfo))||
        std::strncmp(p.mapinfo,"campaign/",9)||std::strpbrk(p.mapinfo," ;\"")){++m.refused;return;}
     m.peerSequence=p.sequence;std::snprintf(m.hostMapinfo,sizeof(m.hostMapinfo),"%s",p.mapinfo);m.hostHigh=p.highChaos?1u:0u;m.hostMap=p.mapId;
+    m.receivedAt=GetTickCount64();
 }
 void serviceMissionFollow(void* system,ULONGLONG tick){
     if(!productMode&&!followHostEnabled)return;
@@ -250,6 +252,10 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
             dispatchCoopCommand(system,command);++m.warps;m.result="placed_beside_host";}
         return;}
     if(m.loadedForMap==m.hostMap&&tick-m.loadAt<60000){m.result="loading_host_mission";return;}
+    // 1214ju (#174): only a fresh publication starts a load. The host publishes its mission every second in gameplay and
+    // nothing from the main menu, so a partner whose tutorial had ended on the menu with the host's reloaded the mission
+    // the host had just left (route-training-join-v1882a).
+    if(!m.receivedAt||tick-m.receivedAt>3000){m.result="waiting_host_mission";return;}
     const unsigned logic=outgoing.gameLogicState;
     // 1214cf: also from the front-end main menu (campaign/menu/menu_p, logic 6), where a partner waits for the
     // invite; the 0.7.0 clean-PC take 1314a stayed there (join-follow had only covered gameplay and pause menus).

@@ -581,3 +581,52 @@ partner's fresh world lacks.
 | 1878a | 1214js | The door unlocked and opened (every stand). Fixture: no save in combat in the outpost. |
 | 1878b | 1214js | Door again. Fixture: no save after the worker fought back. |
 | **1879a** | 1214js | The door reached the partner unlocked and open, and the banana was caught up. Saved in SLOT68. |
+
+## Memories of Training with two players (#174)
+
+### A partner joining mid-tutorial
+
+- **The 0.9.0 report:** [campaign-training-vm-v1760g](../../work/natural-moveset/campaign-training-vm-v1760g) (two
+  accounts) ended with both product arms at `waiting_shared_gameplay`. At the failure the partner's game was on logic 12,
+  a tutorial page.
+- **In the lab, [route-training-join-v1882a](../../work/natural-moveset/route-training-join-v1882a) (1214jt):**
+  - The host, playing Emily, ran the route through the crossbow use, then the partner joined from the Dunwall fixture.
+  - After the join, the gameflow mirror applied the current lessons in the partner's world. About 36 s after its load,
+    her game opened that lesson's tutorial page (logic 12, the same native caller `0x63ed01` as the host's pages).
+  - The lab route closes a tutorial page with B, as a player would. Once it closed, both product arms armed, both
+    worlds stayed equal through the remaining lessons, and she was placed 1.2 m from the host.
+  - The VM harness of v1760g never closed the page, so the pair check (gameplay in both games) could not pass. That
+    part was a harness gap (confirmed runtime).
+- **The real bug (confirmed runtime, v1882a):**
+  - At the tutorial's end both games reached the main menu within 16 ms. 2.1 s later the partner's game loaded the
+    tutorial again from its start.
+  - The host publishes its mission (D2MF) every second in gameplay and nothing from the main menu. A partner on the
+    front-end menu follows (1214cf), and it followed the stale publication of the mission the host had just left.
+- **Fix (1214ju, [session_product.h](../../outputs/d2-coop-lab/src/session_product.h)):** join-follow starts a load only
+  from a host publication less than 3 s old (`receivedAt`); the partner otherwise waits (`waiting_host_mission`).
+- **Result ([route-training-join-v1882b](../../work/natural-moveset/route-training-join-v1882b), 1214ju):** the same join
+  armed, and at the tutorial's end both games stayed on the main menu.
+
+### The stealth lessons with two players
+
+- **The 0.9.0 report:** on two accounts, the stealth lessons restarted again and again (campaign-training-vm-v1760a-d).
+  Any player the trainer sees fails a lesson, a failure in either game restarts both, and each restart put both
+  players back at the lesson start.
+- **In the lab on 1214ju (both players start the tutorial together; the partner stays idle; the host plays the route):**
+
+  | Take | Choke lesson | Key theft | Combat lessons |
+  |---|---|---|---|
+  | [route-training-pair-v1883a](../../work/natural-moveset/route-training-pair-v1883a) | 4 tries | 1 | Blocking stalled at 1/3 after 13 cycles (90 s); the route stopped there. |
+  | [route-training-pair-v1883b](../../work/natural-moveset/route-training-pair-v1883b) | 4 tries | 1 | Sword and blocking passed. The off-balance grab never came: in 406 presses over 7 minutes, the host's trainer never attacked. |
+  | Host alone before a join (v1882a/b) | 2 tries | 3 and 5 | Passed: the grab took 46-69 presses. |
+
+- **The stealth lessons:** no restart loop in the lab (confirmed runtime). The restart rate is close to the host's alone.
+  The two-account confirmation is part of the final campaign validation, and the release notes keep their advice (start
+  the tutorial together, keep out of the trainer's sight).
+- **The combat lessons with two players from the start (new, #206):**
+  - Both runs stalled in a combat lesson; after a mid-tutorial join (v1882a/b) they passed.
+  - In v1883b the partner stayed at the stealth lesson's end (706, -34) from the crossbow lesson on, while the host's
+    world moved on to the combat room, and the partner's world applied the host's script actions (kiscule mirror
+    27/18/10).
+  - Hypothesis: a lesson action mirrored between the worlds, or the trainer's attention on the partner, keeps the
+    host's trainer from attacking.
