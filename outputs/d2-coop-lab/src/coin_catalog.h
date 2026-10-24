@@ -9,12 +9,15 @@ inline bool coinCanonicalName(const std::string& name){
     if(name.empty()||name.size()>=192)return false;
     char text[192]{};std::memcpy(text,name.data(),name.size());return coopWorldName(text);
 }
+inline bool coinCatalogEligible(const NativeCoin& c){
+    return coinCanonicalName(c.name)&&coinCanonicalName(c.itemName)&&coinQuantityValid(c.quantity)&&pickupFamilyValid(c.type)&&!c.flags&&!(c.ownerFlags&1);
+}
 inline NativeCoinCatalog selectNativeCoinCatalog(std::vector<NativeCoin> coins){
     NativeCoinCatalog result{};std::sort(coins.begin(),coins.end(),[](const auto& a,const auto& b){return a.name<b.name;});
     for(std::size_t i=0;i<coins.size();){
         auto end=i+1;while(end<coins.size()&&coins[end].name==coins[i].name)++end;
         if(end-i!=1)result.ambiguous+=static_cast<unsigned>(end-i);
-        else if(!coinCanonicalName(coins[i].name)||!coinCanonicalName(coins[i].itemName)||!coinQuantityValid(coins[i].quantity)||!pickupFamilyValid(coins[i].type)||coins[i].flags||coins[i].ownerFlags&1)++result.ineligible;
+        else if(!coinCatalogEligible(coins[i]))++result.ineligible;
         else result.entries.push_back(std::move(coins[i]));
         i=end;
     }

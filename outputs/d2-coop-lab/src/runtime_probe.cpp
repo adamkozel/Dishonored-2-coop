@@ -1880,6 +1880,31 @@ int main(int argc, char** argv) {
                 <<",\"position\":["<<c.position[0]<<','<<c.position[1]<<','<<c.position[2]<<"]}";}
         std::cout<<"]}\n";return 0;
     }
+    if(argc==3 && std::strcmp(argv[2],"--pickup-census")==0) {
+        // 1214jq (#189): every actor with a pickup component, whatever its state; the shared catalog (--coin-catalog)
+        // reads only active components. Read-only.
+        std::uintptr_t game=0,list=0;unsigned count=0;
+        const auto reader=[&](std::uintptr_t at,void* data,std::size_t size){return read(process.value,at,data,size);};
+        if(!reader(base+0x39a5290,&game,8)||!game||!reader(game+0x601c0,&list,8)||!list||!reader(game+0x601c8,&count,4)||!(count&0xffffff)||(count&0xffffff)>16384)return 45;
+        std::vector<unsigned> handles(count&0xffffff);if(!reader(list,handles.data(),handles.size()*4))return 45;
+        std::cout<<"{\"pid\":"<<pid<<",\"entities\":"<<(count&0xffffff)<<",\"pickups\":[";
+        bool first=true;
+        for(auto h:handles){
+            const auto actor=worldIdentityEntity(reader,game,h);std::uintptr_t vt=0,p=0,members=0,component=0;unsigned n=0;std::string name;
+            if(!actor||!reader(actor,&vt,8)||vt!=base+0x1c5e258||!reader(actor+0x20,&p,8)||!worldIdentityString(reader,p,name)||
+               !reader(actor+0x268,&members,8)||!members||!reader(actor+0x270,&n,4)||!(n&0xffffff)||(n&0xffffff)>256)continue;
+            std::array<std::uintptr_t,256> m{};if(!reader(members,m.data(),(n&0xffffff)*8))continue;
+            for(unsigned i=0;i<(n&0xffffff)&&!component;++i)if(m[i]&&reader(m[i],&vt,8)&&vt==base+0x1c5a3b8)component=m[i];
+            if(!component)continue;
+            unsigned componentFlags=0;unsigned char flags=0,ownerFlags=0;float position[3]{};NativeCoin coin{};
+            reader(component+0x1c,&componentFlags,4);reader(component+0xd0,&flags,1);reader(actor+0xd0,&ownerFlags,1);reader(actor+0x300,position,12);
+            const bool readable=readNativeCoin(reader,base,game,h,coin,true);
+            if(!first)std::cout<<',';first=false;
+            std::cout<<"{\"name\":"<<jsonString(name)<<",\"handle\":"<<h<<",\"componentFlags\":"<<componentFlags<<",\"flags\":"<<unsigned(flags)<<",\"ownerFlags\":"<<unsigned(ownerFlags)
+                <<",\"readable\":"<<(readable?"true":"false")<<",\"position\":["<<position[0]<<','<<position[1]<<','<<position[2]<<"]}";
+        }
+        std::cout<<"]}\n";return 0;
+    }
     if(argc==3 && std::strcmp(argv[2],"--world-npcs")==0) {
         std::uintptr_t game=0;unsigned unbound=0;std::vector<NativeWorldNpc> catalog;
         const auto reader=[&](std::uintptr_t at,void* data,std::size_t size){return read(process.value,at,data,size);};

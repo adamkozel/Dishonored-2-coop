@@ -1,0 +1,143 @@
+{
+  "failure": null,
+  "passed": true,
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "healthHold": [
+      "from step step01-heal"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-heal",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step02-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step03-use",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step04-attack",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step05-save",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step06-load",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 disabled"
+      },
+      {
+        "step": "step07-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot67 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot61 phase0 armed"
+      }
+    ],
+    "npcPicks": [
+      "4 host worker_male_small_01 -> models/characters/def/generic/worker_male_small_01.def_10828 .?AVarkNPC@@ @ -39.4,165.8,3.4",
+      "4 host worker_male_small_01 -> models/characters/def/generic/worker_male_small_01.def_10828 .?AVarkNPC@@ @ -39.4,165.8,3.4"
+    ],
+    "saveSlot": {
+      "slot": "SLOT67",
+      "try": 1
+    },
+    "loadedEpoch": 21,
+    "join": {
+      "distance": 1.2,
+      "gameflowEqual": true,
+      "npcStateDiffs": 16
+    },
+    "joinAudit": {
+      "catchUp": "presence_received awarded 0/0 failed 0",
+      "pickupsOnlyClient": 1,
+      "pickupsOnlyHost": 73,
+      "doorDiffs": 0,
+      "usableDiffs": 6,
+      "flagDiffs": 0
+    },
+    "joinAudit60": {
+      "catchUp": "caught_up awarded 1/0 failed 0",
+      "pickupsOnlyClient": 0,
+      "pickupsOnlyHost": 73,
+      "doorDiffs": 0,
+      "usableDiffs": 6,
+      "flagDiffs": 0
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 10,
+        "pos": [
+          -36.018982,
+          164.817307,
+          3.045412
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 21,
+        "cine": 12,
+        "pos": [
+          -37.138546,
+          165.251129,
+          3.120649
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "gameflowEqual": true
+  }
+}

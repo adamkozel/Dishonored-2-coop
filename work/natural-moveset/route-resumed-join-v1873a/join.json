@@ -1,0 +1,182 @@
+{
+  "afterStep": 6,
+  "joinMs": 16591,
+  "distance": 27.79,
+  "host": {
+    "logic": 1,
+    "pending": 0,
+    "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+    "epoch": 36,
+    "cine": 27,
+    "pos": [
+      -37.172646,
+      165.263138,
+      3.122589
+    ],
+    "fresh": true,
+    "gameflow": [
+      241,
+      2,
+      5,
+      0,
+      0,
+      0,
+      0
+    ],
+    "gfMirror": "publishing",
+    "idHash": "bb242f74",
+    "gfApplied": 0,
+    "lt": "idle/0/0",
+    "hold": "idle/0",
+    "ka": "0/0/0",
+    "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+  },
+  "client": {
+    "logic": 1,
+    "pending": 0,
+    "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+    "epoch": 31,
+    "cine": 20,
+    "pos": [
+      -31.2209,
+      192.341003,
+      1.20571
+    ],
+    "fresh": true,
+    "gameflow": [
+      241,
+      2,
+      5,
+      0,
+      0,
+      0,
+      0
+    ],
+    "gfMirror": "equal",
+    "idHash": "bb242f74",
+    "gfApplied": 0,
+    "lt": "idle/0/0",
+    "hold": "idle/0",
+    "ka": "0/0/0",
+    "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+  },
+  "gameflowEqual": true,
+  "npcCounts": {
+    "host": 141,
+    "client": 141
+  },
+  "npcStateDiffs": [
+    {
+      "handle": "0x2f3d5924",
+      "name": "script_spawner_dead_civ",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x2f3e5925",
+      "name": "script_spawner_addermirestation_reinforcement_elite_01",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x2f3f5926",
+      "name": "script_spawner_addermirestation_reinforcement_guard_01",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x2f405927",
+      "name": "script_spawner_outpost_reinf_02",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x2f415928",
+      "name": "script_spawner_outpost_reinf_01",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x2f425929",
+      "name": "script_spawner_checkpoint_reinf_01",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x2f43592a",
+      "name": "script_spawner_checkpoint_reinf_02",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x2f44592b",
+      "name": "outsidershrine_spawner_outsider",
+      "host": "alive",
+      "client": "absent"
+    },
+    {
+      "handle": "0x2f525933",
+      "name": "script_spawner_checkpoint_reinf_02",
+      "host": "absent",
+      "client": "alive"
+    },
+    {
+      "handle": "0x2f535934",
+      "name": "script_spawner_checkpoint_reinf_01",
+      "host": "absent",
+      "client": "alive"
+    },
+    {
+      "handle": "0x2f545935",
+      "name": "script_spawner_outpost_reinf_02",
+      "host": "absent",
+      "client": "alive"
+    },
+    {
+      "handle": "0x2f555936",
+      "name": "outsidershrine_spawner_outsider",
+      "host": "absent",
+      "client": "alive"
+    },
+    {
+      "handle": "0x2f565937",
+      "name": "script_spawner_dead_civ",
+      "host": "absent",
+      "client": "alive"
+    },
+    {
+      "handle": "0x2f575938",
+      "name": "script_spawner_addermirestation_reinforcement_guard_01",
+      "host": "absent",
+      "client": "alive"
+    },
+    {
+      "handle": "0x2f585939",
+      "name": "script_spawner_outpost_reinf_01",
+      "host": "absent",
+      "client": "alive"
+    },
+    {
+      "handle": "0x2f59593a",
+      "name": "script_spawner_addermirestation_reinforcement_elite_01",
+      "host": "absent",
+      "client": "alive"
+    }
+  ],
+  "sync": {
+    "host": {
+      "door": "active",
+      "usable": "active",
+      "product": "armed",
+      "follow": "publishing",
+      "npc": "active"
+    },
+    "client": {
+      "door": "active",
+      "usable": "active",
+      "product": "armed",
+      "follow": "same_mission",
+      "npc": "active"
+    }
+  }
+}

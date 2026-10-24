@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-24T01:50:00+02:00",
+  "UpdatedAt": "2026-10-24T06:40:06+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22818,5 +22818,12 @@
     "Candidate": "candidate-npc-combat-v1214jn",
     "Evidence": "mission-simultaneous-v1869a (simultaneous deaths: one transaction each, the client's press a duplicate), v1870a (simultaneous autosaves: 2 saves each, settled, both back at their stands), v1870b (manual save during the other's autosave: paired as an origin, both back); v1869b fixture",
     "Status": "done, chapter 88"
+  },
+  "ResumedHostJoin": {
+    "Card": "#189",
+    "Candidate": "candidate-npc-combat-v1214js",
+    "Fix": "pickup census (every pickup actor, active or dormant; incremental slot-table scan) and the host presence D2PP v2, with the partner catch-up of eligible pickups absent from it (1214jr); the host Unlock for its unlocked doors when a door channel arms (1214js); regression fix: 1214jl's event trace hook on the pickedUp post 0x1408848a0 refused every shared pickup binding (native_api) until 1214jq, now kept off by a static_assert; coin-sync.json bindRefusal (1214jp)",
+    "Evidence": "route-resumed-join-v1871c (gap: the banana stayed), v1873a/v1874a (initial_binding_refused, native_api), v1875a (census, dormant pickups, wrong amber award by 1214jo), v1876a (the banana caught up, nothing else), v1879a (the door unlocked and opened before the save reaches the partner unlocked and open); mission-pickup-families-v1855c (shared pickups pass again on 1214jr); fixtures v1871a/b, v1877a, v1878a/b",
+    "Status": "done, chapter 106; follow-up #203"
   }
 }

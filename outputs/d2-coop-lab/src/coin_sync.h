@@ -2,6 +2,7 @@
 #include "coin_native_api.h"
 #include "coin_catalog.h"
 #include "door_session_scope.h"
+#include "pickup_catchup.h"
 struct CoinChannel {
     NativeCoin binding{};CoinAwardReceipt receipt{},exerciseReceipt{};
     std::uint64_t arm=0,peerArm=0,peerSequence=0,helloAt=0,helloSent=0,actionSent=0,deadline=0;
@@ -54,17 +55,26 @@ bool coinConnection(){return sockets&&connection&&connectionState==k_ESteamNetwo
 bool coinWorldContext(){const auto& s=coinSync;return s.enabled&&!s.reloadPending&&observedGame==s.game&&
     doorSessionWorldMatches(s.scope,outgoing,remote)&&!doorCheckpointBarrierActive();}
 bool coinReadyContext(ULONGLONG tick){return coinWorldContext()&&coinConnection()&&coopWorldPairReady(outgoing,remote)&&lastReceive&&tick-lastReceive<250;}
+// 1214jp (#189): why the last binding was refused, and the pickup it was refused on.
+const char* coinBindRefusal="none";std::string coinBindRefusalItem;std::uint64_t coinBindRefusals=0;
+bool refuseCoinBinding(const char* why,const std::string& item={}){coinBindRefusal=why;coinBindRefusalItem=item;++coinBindRefusals;return false;}
 bool bindSharedCoin(){
     auto& s=coinSync;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t list=0;unsigned count=0;
     // 1059: map-agnostic; both peers on the same native campaign map and world.
-    if(!nativeCoinApiAvailable()||!coopWorldPairReady(outgoing,remote)||
-       !memoryRead(observedGame+0x601c0,&list,8)||!list||!memoryRead(observedGame+0x601c8,&count,4)||!(count&0xffffff)||(count&0xffffff)>16384)return false;
-    std::vector<unsigned> handles(count&0xffffff);if(!memoryRead(list,handles.data(),handles.size()*4))return false;
+    if(!nativeCoinApiAvailable())return refuseCoinBinding("native_api");
+    if(!coopWorldPairReady(outgoing,remote))return refuseCoinBinding("world_pair");
+    if(!memoryRead(observedGame+0x601c0,&list,8)||!list||!memoryRead(observedGame+0x601c8,&count,4)||!(count&0xffffff)||(count&0xffffff)>16384)return refuseCoinBinding("entity_list");
+    std::vector<unsigned> handles(count&0xffffff);if(!memoryRead(list,handles.data(),handles.size()*4))return refuseCoinBinding("entity_list");
     std::vector<NativeCoin> coins;
     for(auto h:handles){NativeCoin n{};if(readNativeCoin(memoryRead,base,observedGame,h,n,true))coins.push_back(std::move(n));}
-    auto catalog=selectNativeCoinCatalog(std::move(coins));CoinPlayer player{};
-    if(catalog.ambiguous||!catalog.digest||catalog.entries.empty()||catalog.entries.size()>kCoinCatalogMax||!readCoinPlayer(player))return false;
-    for(const auto& n:catalog.entries){CoinOutcomeValue value{};if(!readCoinOutcome(player,n,value))return false;}
+    auto catalog=selectNativeCoinCatalog(coins);CoinPlayer player{};
+    if(catalog.ambiguous){std::vector<std::string> names;for(const auto& n:coins)names.push_back(n.name);std::sort(names.begin(),names.end());
+        const auto twin=std::adjacent_find(names.begin(),names.end());return refuseCoinBinding("ambiguous",twin!=names.end()?*twin:std::string{});}
+    if(!catalog.digest||catalog.entries.empty())return refuseCoinBinding("empty_catalog");
+    if(catalog.entries.size()>kCoinCatalogMax)return refuseCoinBinding("catalog_overflow");
+    if(!readCoinPlayer(player))return refuseCoinBinding("player");
+    for(const auto& n:catalog.entries){CoinOutcomeValue value{};if(!readCoinOutcome(player,n,value))return refuseCoinBinding("outcome",n.name+" "+n.itemName);}
+    coinBindRefusal="none";coinBindRefusalItem.clear();
     s.game=observedGame;s.scope=doorSessionScope(outgoing,remote);s.catalogId=catalog.digest;s.entries.clear();
     for(auto& n:catalog.entries){CoinChannel c{};c.identity=coinIdentity(n);c.binding=std::move(n);c.arm=++coinArmCounter;s.entries.push_back(std::move(c));}
     s.cursor=0;s.deadline=s.pauseAt=0;s.overflowBaseline=coinHookOverflow.load();
@@ -88,6 +98,78 @@ bool sendCoinPacket(CoinChannel& c,CoinMessage kind,ULONGLONG tick){
     if(kind==CoinMessage::Commit||kind==CoinMessage::Ack)p.revision=1;
     if(!validCoopCoin(p,remote,outgoing)||coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)!=k_EResultOK)return false;
     ++s.sent;if(kind==CoinMessage::Request||kind==CoinMessage::Commit)coinLastAction=p;return true;
+}
+// 1214jr (#189): the pickup census, every pickup actor in this world, active or dormant (route-resumed-join-v1875a:
+// about a fifth of the pickups are dormant in one world and active in the other). Each cycle (5 s) reads the entity slot
+// table (game+0x3130b0, worldIdentityEntity) in one call and each occupied slot's handle; only a slot whose entity or
+// handle changed is classified again, and a tick spends at most 256 reads.
+constexpr unsigned kPickupCensusSlots=16384,kPickupCensusReads=256;
+struct PickupCensusActor {std::uintptr_t entity=0;std::uint32_t handle=0;std::string name;ULONGLONG seenAt=0;};
+struct PickupCensus {
+    std::uintptr_t game=0;std::uint64_t epoch=0;std::vector<std::uintptr_t> table,entities;std::vector<std::uint32_t> handles;
+    std::unordered_map<unsigned,PickupCensusActor> actors;unsigned cursor=0;bool scanning=false;
+    ULONGLONG cycleAt=0,completedAt=0,lastCycleMs=0;std::uint64_t cycles=0,classifications=0,maxReads=0;
+} pickupCensus;
+bool classifyPickupActor(std::uintptr_t entity,std::uint32_t handle,PickupCensusActor& out,unsigned& reads){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t vt=0,p=0,list=0;unsigned count=0;
+    reads+=3;if(!memoryRead(entity,&vt,8)||vt!=base+0x1c5e258||!memoryRead(entity+0x268,&list,8)||!list||!memoryRead(entity+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return false;
+    std::array<std::uintptr_t,256> members{};++reads;if(!memoryRead(list,members.data(),(count&0xffffff)*8))return false;
+    bool pickup=false;for(unsigned i=0;i<(count&0xffffff)&&!pickup;++i){++reads;pickup=members[i]&&memoryRead(members[i],&vt,8)&&vt==base+0x1c5a3b8;}
+    std::string name;reads+=2;if(!pickup||!memoryRead(entity+0x20,&p,8)||!worldIdentityString(memoryRead,p,name))return false;
+    out.entity=entity;out.handle=handle;out.name=std::move(name);return true;
+}
+void servicePickupCensus(ULONGLONG tick){
+    auto& c=pickupCensus;if(!observedGame||!coopGameplayReady(outgoing))return;
+    if(c.game!=observedGame||c.epoch!=outgoing.worldEpoch){c=PickupCensus{};c.game=observedGame;c.epoch=outgoing.worldEpoch;}
+    if(!c.scanning){
+        if(c.cycleAt&&tick-c.cycleAt<5000)return;
+        c.table.resize(kPickupCensusSlots);if(!memoryRead(c.game+0x3130b0,c.table.data(),kPickupCensusSlots*8))return;
+        if(c.entities.size()!=kPickupCensusSlots){c.entities.assign(kPickupCensusSlots,0);c.handles.assign(kPickupCensusSlots,0);}
+        c.cursor=0;c.scanning=true;c.cycleAt=tick;
+    }
+    unsigned reads=0;
+    for(;c.cursor<kPickupCensusSlots&&reads<kPickupCensusReads;++c.cursor){
+        const auto slot=c.cursor;const auto entity=c.table[slot];std::uint32_t handle=0;
+        if(entity){++reads;if(!memoryRead(entity+0xa8,&handle,4)||(handle>>16)!=slot)handle=0;}
+        if(entity==c.entities[slot]&&handle==c.handles[slot])continue;
+        c.entities[slot]=entity;c.handles[slot]=handle;++c.classifications;
+        const auto known=c.actors.find(slot);PickupCensusActor a{};
+        if(entity&&handle&&classifyPickupActor(entity,handle,a,reads)){
+            a.seenAt=known!=c.actors.end()&&known->second.handle==handle&&known->second.name==a.name?known->second.seenAt:tick;c.actors[slot]=std::move(a);}
+        else if(known!=c.actors.end())c.actors.erase(known);
+    }
+    c.maxReads=(std::max)(c.maxReads,static_cast<std::uint64_t>(reads));
+    if(c.cursor>=kPickupCensusSlots){c.scanning=false;c.completedAt=tick;c.lastCycleMs=tick-c.cycleAt;++c.cycles;}
+}
+std::vector<PickupPresenceItem> pickupCensusItems(){
+    std::vector<PickupPresenceItem> items;
+    for(const auto& [slot,a]:pickupCensus.actors){PickupPresenceItem i{a.name,a.handle,{}};
+        if(pickupRuntimeNamed(a.name,a.handle)&&!memoryRead(a.entity+0x300,i.position,12))continue;items.push_back(std::move(i));}
+    return items;
+}
+struct PickupCatchUpTarget {std::string name;std::uint32_t handle=0;};
+struct PickupCatchUp {
+    std::uint64_t epoch=0,peerEpoch=0,map=0,presenceSent=0,presenceReceived=0,rejected=0,refusedSends=0,awarded=0,failed=0,deferrals=0,planned=0;
+    std::uint64_t sentCycle=0,plannedCycle=0,sentDigest=0,sentEpoch=0,sentPeerEpoch=0,sentMap=0;ULONGLONG sentAt=0,hostAt=0;std::uint32_t sentEntries=0;
+    std::vector<PickupPresenceEntry> host;std::vector<PickupCatchUpTarget> targets;std::size_t cursor=0;std::unordered_map<std::string,bool> attempted;
+    CoinAwardReceipt receipt{};unsigned calls=0;const char* result="idle";std::vector<std::string> awardedNames,failedNames;
+} pickupCatchUp;
+std::uint64_t pickupPresenceSequence=0;
+// The host's presence, after each completed census cycle when it changed (positions of runtime pickups included), or
+// at least every 15 s, or at once for a new pair of worlds.
+void sendPickupPresence(ULONGLONG tick){
+    auto& c=pickupCatchUp;const auto& census=pickupCensus;
+    if(localRole||!census.cycles||c.sentCycle==census.cycles||census.game!=observedGame||!coinConnection()||!coopWorldPairReady(outgoing,remote)||outgoing.mapId!=remote.mapId)return;
+    c.sentCycle=census.cycles;const auto entries=pickupPresenceEntries(pickupCensusItems());
+    if(entries.size()>kPickupPresenceMax){c.result="presence_overflow";return;}
+    std::uint64_t digest=1469598103934665603ull;
+    for(const auto& e:entries){const auto* b=reinterpret_cast<const unsigned char*>(&e);for(std::size_t i=0;i<sizeof(e);++i){digest^=b[i];digest*=1099511628211ull;}}
+    if(c.sentEpoch==outgoing.worldEpoch&&c.sentPeerEpoch==remote.worldEpoch&&c.sentMap==outgoing.mapId&&c.sentDigest==digest&&tick-c.sentAt<15000)return;
+    static PickupPresencePacket p;p=PickupPresencePacket{};auto& h=p.header;h.role=0;h.sequence=++pickupPresenceSequence;
+    h.sourceSession=outgoing.session;h.targetSession=remote.session;h.sourceEpoch=outgoing.worldEpoch;h.targetEpoch=remote.worldEpoch;h.mapId=outgoing.mapId;
+    h.count=static_cast<std::uint32_t>(entries.size());std::copy(entries.begin(),entries.end(),p.entries);const auto bytes=pickupPresenceBytes(h.count);
+    if(!validPickupPresence(p,bytes,remote,outgoing)||coopSendMessage(connection,&p,static_cast<std::uint32_t>(bytes),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)!=k_EResultOK){++c.refusedSends;return;}
+    ++c.presenceSent;c.sentAt=tick;c.sentDigest=digest;c.sentEpoch=outgoing.worldEpoch;c.sentPeerEpoch=remote.worldEpoch;c.sentMap=outgoing.mapId;c.sentEntries=h.count;c.result="presence_sent";
 }
 bool sendCoinCatalog(ULONGLONG tick){
     auto& s=coinSync;if(!coinReadyContext(tick)||s.entries.empty()||s.entries.size()>kCoinCatalogMax)return false;
@@ -206,6 +288,7 @@ void serviceCoinSync(ULONGLONG tick){
     std::string exercise;exercise.swap(coinExerciseRequest);
     if(coinEnableRequest>=0){const bool on=coinEnableRequest!=0;coinEnableRequest=-1;
         if(!on)stopCoinSync("disabled");else if(!s.enabled){s={};coinLastAction=coinRetiredAction={};coinReplayRequest=0;
+            if(!coinConnection())refuseCoinBinding("connection");else if(doorCheckpointBarrierActive())refuseCoinBinding("checkpoint_barrier");
             if(coinConnection()&&!doorCheckpointBarrierActive()&&bindSharedCoin())s.enabled=true;else s.result="initial_binding_refused";}}
     if(!s.enabled){if(!exercise.empty())++coinExerciseRefused;return;}
     consumeCoinHookEvents();if(!s.enabled)return;
@@ -274,9 +357,58 @@ void serviceCoinSync(ULONGLONG tick){
         if(GetTickCount64()-started>=3)break;
     }
 }
+void receivePickupPresence(const PickupPresencePacket& p,std::size_t bytes,ULONGLONG tick){
+    auto& c=pickupCatchUp;
+    if(localRole!=1||!validPickupPresence(p,bytes,outgoing,remote)){++c.rejected;return;}
+    if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.attempted.clear();c.targets.clear();c.cursor=0;c.receipt={};}
+    ++c.presenceReceived;c.host.assign(p.entries,p.entries+p.header.count);c.hostAt=tick;
+    c.epoch=outgoing.worldEpoch;c.peerEpoch=remote.worldEpoch;c.map=outgoing.mapId;c.result="presence_received";
+}
+// Engine thread, in the native mutation window, with the shared catalog ready: after each local census cycle, the
+// partner awards itself, one at a time through the shared pickup's native application, each eligible pickup that is
+// not a shared catalog entry and has been absent from the host's presence for 10 s since this world first had it.
+void servicePickupCatchUp(ULONGLONG tick){
+    servicePickupCensus(tick);
+    if(!localRole){sendPickupPresence(tick);return;}
+    auto& c=pickupCatchUp;if(!c.hostAt)return;
+    if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.host.clear();c.hostAt=0;c.targets.clear();c.cursor=0;c.receipt={};c.result="presence_out_of_scope";return;}
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!coinSync.ready||!coinReadyContext(tick))return;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    if(c.cursor>=c.targets.size()&&pickupCensus.cycles&&c.plannedCycle!=pickupCensus.cycles){
+        c.plannedCycle=pickupCensus.cycles;c.targets.clear();c.cursor=0;
+        std::unordered_map<std::string,bool> shared;for(const auto& e:coinSync.entries)shared[e.binding.name]=true;
+        for(const auto& item:pickupCensusItems()){
+            const auto at=pickupCensus.actors.find(item.handle>>16);
+            if(at==pickupCensus.actors.end()||c.hostAt<at->second.seenAt+10000||shared.count(item.name)||c.attempted.count(item.name)||!pickupCatchUpTarget(item,c.host))continue;
+            NativeCoin n{};if(readNativeCoin(memoryRead,base,observedGame,item.handle,n,true)&&coinCatalogEligible(n))c.targets.push_back({item.name,item.handle}); // dormant: a later cycle
+        }
+        c.planned+=c.targets.size();c.result=c.targets.empty()?"caught_up":"catching_up";
+    }
+    if(c.cursor>=c.targets.size())return;
+    const auto& t=c.targets[c.cursor];NativeCoin n{};
+    if(!readNativeCoin(memoryRead,base,observedGame,t.handle,n,true)||n.name!=t.name){++c.cursor;c.receipt={};return;} // taken here meanwhile
+    const auto r=applyNativeCoin(n,c.receipt,c.calls);
+    if(r==CoinApply::Deferred){++c.deferrals;return;}
+    c.attempted[t.name]=true;
+    auto& names=r==CoinApply::Complete?c.awardedNames:c.failedNames;++(r==CoinApply::Complete?c.awarded:c.failed);if(names.size()<64)names.push_back(t.name);
+    ++c.cursor;c.receipt={};
+}
+void writePickupCatchUp(){
+    char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.pickup-catchup.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
+    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& c=pickupCatchUp;const auto& s=pickupCensus;
+    std::fprintf(f,"{\"role\":%u,\"result\":\"%s\",\"census\":{\"cycles\":%llu,\"actors\":%zu,\"classifications\":%llu,\"maxReads\":%llu,\"lastCycleMs\":%llu,\"scanning\":%s},"
+        "\"map\":%llu,\"epoch\":%llu,\"peerEpoch\":%llu,\"presenceSent\":%llu,\"sentEntries\":%u,\"refusedSends\":%llu,\"presenceReceived\":%llu,\"rejected\":%llu,\"hostEntries\":%zu,"
+        "\"planned\":%llu,\"targets\":%zu,\"cursor\":%zu,\"awarded\":%llu,\"failed\":%llu,\"deferrals\":%llu,\"awardedNames\":[",
+        localRole,c.result,s.cycles,s.actors.size(),s.classifications,s.maxReads,s.lastCycleMs,s.scanning?"true":"false",
+        c.map,c.epoch,c.peerEpoch,c.presenceSent,c.sentEntries,c.refusedSends,c.presenceReceived,c.rejected,c.host.size(),c.planned,c.targets.size(),c.cursor,c.awarded,c.failed,c.deferrals);
+    const auto list=[&](const std::vector<std::string>& names){for(std::size_t i=0;i<names.size();++i){if(i)std::fputc(',',f);std::fputc('"',f);std::fputs(names[i].c_str(),f);std::fputc('"',f);}};
+    list(c.awardedNames);std::fputs("],\"failedNames\":[",f);list(c.failedNames);std::fputs("],\"targetNames\":[",f);
+    std::vector<std::string> targets;for(const auto& t:c.targets)targets.push_back(t.name);list(targets);
+    std::fputs("]}\n",f);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
+}
 void coinJsonString(FILE* f,const std::string& value){std::fputc('"',f);for(unsigned char c:value){if(c=='"'||c=='\\')std::fputc('\\',f);std::fputc(c,f);}std::fputc('"',f);}
 void writeCoinSync(){
-    writePickupCapacityFixture();
+    writePickupCapacityFixture();writePickupCatchUp();
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.coin-sync.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& s=coinSync;
     // Retain the original test coin's flat diagnostics for existing regressions;
@@ -284,8 +416,8 @@ void writeCoinSync(){
     CoinChannel empty{};const CoinChannel* primary=&empty;unsigned calls=0,awarded=0;
     for(const auto& c:s.entries){calls+=c.calls;awarded+=c.receipt.awarded;if(c.binding.name=="pickups_coin_emily_lowvalue_4")primary=&c;}
     const auto& c=*primary;
-    std::fprintf(f,"{\"enabled\":%s,\"ready\":%s,\"paused\":%s,\"reloadPending\":%s,\"reloadReady\":%s,\"observerInstalled\":%s,\"epoch\":%llu,\"peerEpoch\":%llu,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%u,\"ack\":%u,\"attempted\":%s,\"awarded\":%s,\"nativeSource\":%s,\"before\":%d,\"after\":%d,\"nativeCalls\":%u,\"observations\":%llu,\"commits\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"reloads\":%llu,\"rearms\":%llu,\"result\":\"%s\",\"settled\":%s,\"localOnly\":%u,\"peerOnly\":%llu,\"listsSent\":%llu,\"listsReceived\":%llu,\"sharedDigest\":\"%016llx\",\"peerDigest\":\"%016llx\",\"catalogCount\":%zu,\"catalogId\":\"%016llx\",\"awardedCount\":%u,\"entries\":[",
-        s.enabled?"true":"false",s.ready?"true":"false",s.paused?"true":"false",s.reloadPending?"true":"false",s.reloadReady?"true":"false",realCoinReward?"true":"false",
+    std::fprintf(f,"{\"bindRefusal\":\"%s\",\"bindRefusalItem\":\"%s\",\"bindRefusals\":%llu,\"enabled\":%s,\"ready\":%s,\"paused\":%s,\"reloadPending\":%s,\"reloadReady\":%s,\"observerInstalled\":%s,\"epoch\":%llu,\"peerEpoch\":%llu,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%u,\"ack\":%u,\"attempted\":%s,\"awarded\":%s,\"nativeSource\":%s,\"before\":%d,\"after\":%d,\"nativeCalls\":%u,\"observations\":%llu,\"commits\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"reloads\":%llu,\"rearms\":%llu,\"result\":\"%s\",\"settled\":%s,\"localOnly\":%u,\"peerOnly\":%llu,\"listsSent\":%llu,\"listsReceived\":%llu,\"sharedDigest\":\"%016llx\",\"peerDigest\":\"%016llx\",\"catalogCount\":%zu,\"catalogId\":\"%016llx\",\"awardedCount\":%u,\"entries\":[",
+        coinBindRefusal,coinBindRefusalItem.c_str(),coinBindRefusals,s.enabled?"true":"false",s.ready?"true":"false",s.paused?"true":"false",s.reloadPending?"true":"false",s.reloadReady?"true":"false",realCoinReward?"true":"false",
         s.scope.epoch,s.scope.peerEpoch,c.arm,c.peerArm,c.revision,c.ack,c.receipt.attempted?"true":"false",c.receipt.awarded?"true":"false",c.receipt.nativeSource?"true":"false",
         c.receipt.before,c.receipt.after,calls,s.observations,s.commits,s.sent,s.received,s.rejected,s.duplicates,s.reloads,s.rearms,s.result,s.settled?"true":"false",s.localOnly,s.peerOnly,s.listsSent,s.listsReceived,s.sharedDigest,s.peerDigest,s.entries.size(),s.catalogId,awarded);
     bool first=true;for(const auto& entry:s.entries){if(!first)std::fputc(',',f);first=false;std::fputs("{\"name\":",f);coinJsonString(f,entry.binding.name);std::fputs(",\"item\":",f);coinJsonString(f,entry.binding.itemName);

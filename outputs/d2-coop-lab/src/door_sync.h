@@ -17,6 +17,10 @@ struct DoorSync {
     // this world's unlock, unlockOrdered applies the peer's.
     bool unlockPending=false,unlockOrdered=false;unsigned char observedLocked=0;
     std::uint64_t unlocksSent=0,unlocksReceived=0,unlocksApplied=0;
+    // 1214js (#189): the host's unlocked door at arming, for a partner world where it is still locked (a host who used
+    // the key before saving). Sent before each first State until the partner acknowledges one: the partner accepts
+    // the State only once paired, and an Unlock needs the same pairing. A partner whose door is unlocked ignores it.
+    bool armUnlockDone=false;std::uint64_t armUnlocksSent=0;
     const char* result="disabled";
 };
 std::vector<DoorSync> doorChannels;
@@ -171,7 +175,7 @@ void receiveDoorChannel(DoorSync& s,const CoopDoorPacket& p,ULONGLONG tick){
         if(s.awaiting&&p.requestAck>=s.requestSequence){s.awaiting=false;s.requestSequence=0;}
         s.ack=0;return;
     }
-    if(p.revision==s.order.revision&&p.target==s.order.target&&p.side==s.order.side)s.ack=p.revision;
+    if(p.revision==s.order.revision&&p.target==s.order.target&&p.side==s.order.side){s.ack=p.revision;s.armUnlockDone=true;}
     else ++s.rejected;
 }
 void serviceDoorChannel(DoorSync& s,ULONGLONG tick){
@@ -216,6 +220,7 @@ void serviceDoorChannel(DoorSync& s,ULONGLONG tick){
         s.retryAfterMenu=false;
     }
     if(!localRole&&s.order.revision&&(s.ack!=s.order.revision||!s.stateSentAt)&&(!s.stateSentAt||tick-s.stateSentAt>=250)){
+        if(!s.armUnlockDone&&!s.observedLocked&&sendDoorPacket(s,DoorMessage::Unlock,tick))++s.armUnlocksSent;
         if(sendDoorPacket(s,DoorMessage::State,tick))s.stateSentAt=tick;
     }
     if(!s.order.revision||s.awaiting)return;
@@ -311,7 +316,7 @@ void writeDoorSync(){
     fprintf(f,"\"menu\":{\"suspended\":%s,\"since\":%llu,\"suspensions\":%llu,\"resumes\":%llu,\"pausedMs\":%llu,\"packetsIgnored\":%llu},",doorSession.menuSuspended?"true":"false",doorSession.menuSince,doorSession.menuSuspensions,doorSession.menuResumes,doorSession.menuPausedMs,doorSession.menuPacketsIgnored);
     fprintf(f,"\"experimental\":true,\"enabled\":%s,\"catalogCount\":%zu,\"ambiguous\":%u,\"ineligible\":%u,\"ignoredWhileDisabled\":%llu,\"unmatched\":%llu,\"rejected\":%llu,\"scanMs\":%u,\"serviceMs\":%u,\"serviceMaxMs\":%u,\"result\":\"%s\",\"entries\":[",doorCatalogEnabled?"true":"false",doorChannels.size(),doorCatalogAmbiguous,doorCatalogIneligible,doorCatalogIgnored,doorCatalogUnmatched,doorCatalogRejected,doorCatalogScanMs,doorServiceMs,doorServiceMaxMs,doorCatalogResult);
     bool first=true;for(const auto& s:doorChannels){if(!first)fputc(',',f);first=false;fputs("{\"name\":",f);writeWorldText(f,s.binding.name.c_str());fputs(",\"definition\":",f);writeWorldText(f,s.binding.definitionName.c_str());
-    fprintf(f,",\"role\":%u,\"enabled\":%s,\"ready\":%s,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%llu,\"target\":%u,\"side\":%u,\"applied\":%llu,\"ack\":%llu,\"awaiting\":%s,\"inFlight\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"requests\":%llu,\"commits\":%llu,\"nativeCalls\":%llu,\"converged\":%llu,\"sideCorrections\":%llu,\"locked\":%u,\"unlocksSent\":%llu,\"unlocksReceived\":%llu,\"unlocksApplied\":%llu,\"result\":\"%s\"}",localRole,s.enabled?"true":"false",s.ready?"true":"false",s.arm,s.peerArm,s.order.revision,s.order.target,s.order.side,s.applied,s.ack,s.awaiting?"true":"false",s.inFlight,s.sent,s.received,s.rejected,s.duplicates,s.requests,s.commits,s.calls,s.converged,s.sideCorrections,unsigned(s.observedLocked),s.unlocksSent,s.unlocksReceived,s.unlocksApplied,s.result);
+    fprintf(f,",\"role\":%u,\"enabled\":%s,\"ready\":%s,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%llu,\"target\":%u,\"side\":%u,\"applied\":%llu,\"ack\":%llu,\"awaiting\":%s,\"inFlight\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"requests\":%llu,\"commits\":%llu,\"nativeCalls\":%llu,\"converged\":%llu,\"sideCorrections\":%llu,\"locked\":%u,\"unlocksSent\":%llu,\"unlocksReceived\":%llu,\"unlocksApplied\":%llu,\"armUnlocksSent\":%llu,\"result\":\"%s\"}",localRole,s.enabled?"true":"false",s.ready?"true":"false",s.arm,s.peerArm,s.order.revision,s.order.target,s.order.side,s.applied,s.ack,s.awaiting?"true":"false",s.inFlight,s.sent,s.received,s.rejected,s.duplicates,s.requests,s.commits,s.calls,s.converged,s.sideCorrections,unsigned(s.observedLocked),s.unlocksSent,s.unlocksReceived,s.unlocksApplied,s.armUnlocksSent,s.result);
     }
     fputs("]}\n",f);const bool ok=!ferror(f);const auto closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

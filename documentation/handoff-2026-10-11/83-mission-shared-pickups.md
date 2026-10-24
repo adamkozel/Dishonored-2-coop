@@ -85,6 +85,22 @@ Each case must commit once in both worlds, leave both worlds and reach each play
 - **Stored items** go to each player's own inventory, within that player's native capacity.
 - **Currency** is credited to both players.
 
+## Regression: shared pickups off from 1214jl to 1214jp (fixed in 1214jq, #189)
+
+- **Found (confirmed runtime):** in [route-resumed-join-v1873a](../../work/natural-moveset/route-resumed-join-v1873a), neither world's pickup session ever bound (`initial_binding_refused`). 1214jp records why a binding is refused (`bindRefusal`, `bindRefusalItem` and `bindRefusals` in `coin-sync.json`). [v1874a](../../work/natural-moveset/route-resumed-join-v1874a) gave `native_api` in both worlds.
+- **Cause (confirmed static):** 1214jl's lab entity event trace (#187, [kiscule_action_mirror.h](../../outputs/d2-coop-lab/src/kiscule_action_mirror.h)) hooked three event posts, including the `pickedUp` post `0x1408848a0`. `nativeCoinApiAvailable()` requires the first 32 bytes of that function verbatim, so every binding was refused from 1214jl on. Pickups were silently unshared in the #187 and #188 candidates; #186's takes ran on 1214jg, before the hook.
+- **Fix (1214jq):**
+  - The trace hooks only `0x140883f80` and `0x140884920`; the use mirror needs only the latter.
+  - `kCoinVerbatimRvas` ([coin_native_api.h](../../outputs/d2-coop-lab/src/coin_native_api.h)) lists the code the pickup API requires verbatim. A `static_assert` keeps every entity event hook site off it.
+- **Verified:**
+  - [route-resumed-join-v1875a](../../work/natural-moveset/route-resumed-join-v1875a): bound in both worlds (`bindRefusal` none, 287 shared).
+  - [mission-pickup-families-v1855c](../../work/natural-moveset/mission-pickup-families-v1855c) (1214jr, the 1855 harness's default plan): the host's banana and her mana potion each committed once in both worlds.
+- **Dormant pickups (confirmed runtime, the probe's `--pickup-census`, 1214jq):**
+  - Both worlds hold the same pickup actors (about 458 on Edge of the World).
+  - A pickup whose component flag byte (`+0xd0`) has any of its high bits set (`0xf0`) is not read, so it is not cataloged. In a world fresh from the mission start, about 165 are in that state. In a world loaded from a save, about 90 are.
+  - After a join to a resumed host, 73 to 77 pickups readable in the host's world were dormant in the partner's, so the shared catalog left them out (`localOnly`).
+  - Since 1214jr, the host's taking of such a pickup still reaches the partner, through the pickup presence ([chapter 106](106-partner-led-story-and-mid-mission-join.md#a-partner-joining-a-resumed-host-189)). The partner's taking of one does not reach the host (#203).
+
 ## Open
 
 - **Pickup families on missions:** food, stored potions, pickpocket pouches, containers and Far Reach pickups are covered above (#186).

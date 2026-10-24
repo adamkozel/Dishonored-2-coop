@@ -1,0 +1,100 @@
+[
+ {
+  "do": "heal",
+  "on": true
+ },
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 3000
+ },
+ {
+  "do": "use",
+  "name": "pickups_fruit_banana_02_6",
+  "aim": true,
+  "gone": true,
+  "settle": 3000,
+  "offsets": [
+   [
+    1.1,
+    0
+   ],
+   [
+    -1.1,
+    0
+   ],
+   [
+    0,
+    1.1
+   ],
+   [
+    0,
+    -1.1
+   ],
+   [
+    0.8,
+    0.8
+   ],
+   [
+    -0.8,
+    -0.8
+   ]
+  ]
+ },
+ {
+  "do": "use",
+  "name": "env_interiors_door_interior_350cm_01_19",
+  "settle": 3000,
+  "yaws": [
+   0,
+   20,
+   -20,
+   40,
+   -40
+  ],
+  "offsets": [
+   [
+    1.4,
+    0
+   ],
+   [
+    -1.4,
+    0
+   ],
+   [
+    0,
+    1.4
+   ],
+   [
+    0,
+    -1.4
+   ]
+  ]
+ },
+ {
+  "do": "attack",
+  "name": "worker_male_small_01",
+  "near": [
+   -39.5,
+   165.7
+  ],
+  "max": 40,
+  "behind": true,
+  "settle": 3000
+ },
+ {
+  "do": "save",
+  "role": "host",
+  "settle": 3000
+ },
+ {
+  "do": "load",
+  "role": "host",
+  "settle": 5000
+ },
+ {
+  "do": "wait",
+  "ms": 3000,
+  "settle": 2000
+ }
+]

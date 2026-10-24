@@ -2079,6 +2079,7 @@ void mesmerizeTargetTests(){
 #include "door_protocol_tests.h"
 #include "usable_protocol_tests.h"
 #include "use_mirror_protocol_tests.h"
+#include "pickup_catchup_tests.h"
 #include "native_coin_tests.h"
 #include "coin_protocol_tests.h"
 #include "native_food_tests.h"
@@ -2112,7 +2113,7 @@ int main() {
     nativeNpcAuthorityTests();
     nativeUsableTests();
     nativeCoinTests();coinProtocolTests();nativeFoodTests();
-    nativeOpenableTests();doorProtocolTests();usableProtocolTests();useMirrorProtocolTests();
+    nativeOpenableTests();doorProtocolTests();usableProtocolTests();useMirrorProtocolTests();pickupCatchUpTests();
     nativeMaterialParamsTests();
     assassinationPartnerIdentityTests();
     interactionPartnerIdentityTests();
