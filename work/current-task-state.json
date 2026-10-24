@@ -22805,5 +22805,12 @@
     "Fix": "pickup rewards from any of the local player's own mode state slots confirmable (a theft carries fromGrapple, state 47); an unconfirmed reward is refused for that item only instead of stopping the whole pickup sync",
     "Evidence": "mission-pickup-families-v1850a (food, potion; pickpocket stopped the sync on 1214jf), v1852a (food both roles, potion host), v1853a (pickpocket client, Far Reach client), v1854a (pickpocket host, container client), v1855a (container host), v1855b (Far Reach host)",
     "Status": "done, chapter 83"
+  },
+  "MissionScriptedLevers": {
+    "Card": "#187",
+    "Candidate": "candidate-npc-combat-v1214jn",
+    "Fix": "the replica of a shared lever posts the native use event (_user, 0x1439aa130) with this world's player before the use method (1214jm); the use mirror D2UM shares one-state buttons and two-state levers outside the toggle family (1214jn); lab traces coop_kiscule_trace (Kiscule signals and posted entity events)",
+    "Evidence": "mission-usables-v1856a (survey); mission-lever-v1858a (gap); v1860a, v1861b (traces); v1862a, v1863a (turbine both roles); v1865a, v1866a (lift both roles); v1866b (Clockwork Mansion entrance lever); v1866c (escape button); audit scripted-levers-audit-v1868",
+    "Status": "done, chapter 87"
   }
 }
