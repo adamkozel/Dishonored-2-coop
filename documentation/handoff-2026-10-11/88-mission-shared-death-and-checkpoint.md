@@ -98,9 +98,28 @@ In the campaign takes, a death in Karnaca after arriving from the Dreadful Wale 
 
 Take route-eotw-boatdeath-v1302n (pass): the host falls in Karnaca after the boat. Both reach the death screens in 6.2 s, both restart together and are back in gameplay 7.0 s after the press, then the carriage takes both to the Good Doctor with equal objectives. The route harness's `die` step follows the 1151 press sequence, traces the session, and presses Restart again every 12 s while both stay on GameOver.
 
+## Simultaneous requests (candidate 1214jn, #188)
+
+Updated 2026-10-24. Harness: [`Test-MissionSimultaneous-v1870.ps1`](../../work/natural-moveset/Test-MissionSimultaneous-v1870.ps1), Edge of the World in product mode, with checkpoint sync in mission mode and paired autosaves. A case passes when:
+- each world ran exactly one transaction (one load, one completion, no abort);
+- the paired autosave counters settled equal before the restart;
+- each player came back within 1.5 m of where it stood at its last save.
+
+No code change was needed: the host-led transaction and the paired autosave counters already deduplicate (confirmed runtime).
+
+| Take | Case | Result |
+|---|---|---|
+| **1869a (pass)** | Both players die at the same moment, falling in the same instant, and both press restart together | Both GameOver screens in 5.8 s. One transaction in each world; the client counted its own press as a duplicate of the host's. Both back in gameplay in 6.9 s. |
+| 1869b (fixture) | Simultaneous autosaves | The settle check passed before the saves landed, and the moved players stood over the harbour water, where a fall does not kill. |
+| **1870a (pass)** | Both worlds autosave at the same moment (`coop_autosave_probe`, back to back), each player at its own docks-apartment stand | Each world originated one save and mirrored the other's (2 each), settled in 2.6 s. The host died from its mission start; one transaction each, and both players back at their own stands (0.0 m and 0.03 m). |
+| **1870b (pass)** | The client saves through the pause menu (Save Game, first slot) while the host autosaves | The pair counts the manual save as an originated save, because it watches the game's last-slot field, so the host mirrored it as an autosave and the client mirrored the host's: settled at 2 each. One transaction each, both back at their stands (0.0 m and 0.58 m). |
+
+- **A manual save pairs like an autosave:** the other world makes its own autosave at the same moment, so a shared restart brings both players back to the same point.
+- **Two restart requests at once:** the host's transaction wins and the other press is a duplicate (1869a). Two autosave origins at once become two pairs (1870a). Nothing is lost or run twice.
+
 ## Open
 
 - **Real script trigger (done, #136, [chapter 106](106-partner-led-story-and-mid-mission-join.md)).** A real mission-script autosave crossed by either player alone pairs both worlds, and one shared restart brings both back from it (confirmed runtime):
   - the host alone: route-dunwall-autosave-v1669a (the Dunwall street balcony; the partner mirrored it natively; both restarted from slot 62 in 6.7 s);
   - the partner alone: route-dunwall-autosave-v1687b (the same trigger; both worlds saved the pair; both restarted in 7.0 s with gameflow equal).
-- **Not started:** manual save and load selection, disconnect and rejoin. Transitions between and within missions are covered in [chapter 97](97-campaign-map-sequence.md).
+- **Manual saves:** a manual save pairs like an autosave (#188, above). Loading a chosen save from the menu is [chapter 107](107-coop-menu-and-saves.md); not started here: disconnect and rejoin. Transitions between and within missions are covered in [chapter 97](97-campaign-map-sequence.md).
