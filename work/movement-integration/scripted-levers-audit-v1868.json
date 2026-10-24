@@ -1,0 +1,160 @@
+{
+ "card": "#187",
+ "candidate": "candidate-npc-combat-v1214jn",
+ "scope": "Scripted levers, buttons and lifts on mission maps: offline evaluation of the Test-MissionLever takes (both worlds' lever state, scripted objects, Kiscule signals within 2 s of the press, posted entity events).",
+ "takes": [
+  {
+   "take": "mission-lever-v1858a",
+   "source": "client",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": false,
+   "failure": "52 changes in the client's world did not happen in the host's",
+   "movedHost": 5,
+   "movedClient": 8,
+   "sameMovedSet": false
+  },
+  {
+   "take": "mission-lever-v1858b",
+   "source": "client",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": false,
+   "failure": "49 changes in the client's world did not happen in the host's",
+   "movedHost": 5,
+   "movedClient": 9,
+   "sameMovedSet": false
+  },
+  {
+   "take": "mission-lever-v1858c",
+   "source": "client",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": false,
+   "failure": "51 changes in the client's world did not happen in the host's",
+   "movedHost": 5,
+   "movedClient": 9,
+   "sameMovedSet": false
+  },
+  {
+   "take": "mission-lever-v1860a",
+   "source": "client",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": false,
+   "failure": "3 changes in the client's world did not happen in the host's",
+   "movedHost": 0,
+   "movedClient": 3,
+   "sameMovedSet": false
+  },
+  {
+   "take": "mission-lever-v1861b",
+   "source": "client",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": false,
+   "failure": "3 changes in the client's world did not happen in the host's",
+   "movedHost": 0,
+   "movedClient": 3,
+   "sameMovedSet": false
+  },
+  {
+   "take": "mission-lever-v1861c",
+   "source": "client",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": false,
+   "failure": "3 changes in the client's world did not happen in the host's",
+   "movedHost": 2,
+   "movedClient": 5,
+   "sameMovedSet": false
+  },
+  {
+   "take": "mission-lever-v1862a",
+   "source": "client",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": true,
+   "failure": null,
+   "movedHost": 4,
+   "movedClient": 4,
+   "sameMovedSet": true
+  },
+  {
+   "take": "mission-lever-v1862b",
+   "source": "host",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": false,
+   "failure": "27 changes in the host's world did not happen in the client's",
+   "movedHost": 4,
+   "movedClient": 4,
+   "sameMovedSet": true
+  },
+  {
+   "take": "mission-lever-v1863a",
+   "source": "host",
+   "usable": "script_lever_windturbine_1_1_1",
+   "map": "campaign/edge_of_the_world/eotw.mapinfo",
+   "passed": true,
+   "failure": null,
+   "movedHost": 4,
+   "movedClient": 4,
+   "sameMovedSet": true
+  },
+  {
+   "take": "mission-lever-v1865a",
+   "source": "client",
+   "usable": "lift_01_button_1_6",
+   "map": "campaign/curator/curator.mapinfo",
+   "passed": true,
+   "failure": null,
+   "movedHost": 52,
+   "movedClient": 52,
+   "sameMovedSet": true
+  },
+  {
+   "take": "mission-lever-v1866a",
+   "source": "host",
+   "usable": "lift_01_button_1_6",
+   "map": "campaign/curator/curator.mapinfo",
+   "passed": true,
+   "failure": null,
+   "movedHost": 52,
+   "movedClient": 52,
+   "sameMovedSet": true
+  },
+  {
+   "take": "mission-lever-v1866b",
+   "source": "client",
+   "usable": "tr_entry_lever_2",
+   "map": "campaign/madinventor/house/madinventor.mapinfo",
+   "passed": true,
+   "failure": null,
+   "movedHost": 7,
+   "movedClient": 7,
+   "sameMovedSet": true
+  },
+  {
+   "take": "mission-lever-v1866c",
+   "source": "host",
+   "usable": "tr_priv_escape_button_06",
+   "map": "campaign/madinventor/house/madinventor.mapinfo",
+   "passed": false,
+   "failure": "1 changes in the host's world did not happen in the client's",
+   "movedHost": 34,
+   "movedClient": 34,
+   "sameMovedSet": true
+  }
+ ],
+ "v1866c": {
+  "verdict": "the button and its transformation are shared: the use mirror sent and the client applied (applied 1); the same 34 script entities moved in both worlds",
+  "onlyInHost": "script_jindosh_kiscule node 1608193524 input 2 (Gate) at 1640 ms",
+  "cause": "the host player touched the position trigger mark_trigger_lab at 875 ms (its own position in the lab, as the client did at 125 ms in its world); the Jindosh voice gate follows that trigger, not the button",
+  "source": "mission-lever-v1866c host/client kiscule-trace.json (events and signals)"
+ },
+ "v1862b": {
+  "verdict": "the lever chain and the turbine ran in both worlds; the 27 host-only signals at 3.5-4.3 s were host AI scripts (panic, NPC relation, barks, patrol) after a guard noticed the host placed by the lever; the partner world follows host NPC AI through the NPC stream",
+  "rerun": "mission-lever-v1863a with the 2 s window (pass)"
+ }
+}

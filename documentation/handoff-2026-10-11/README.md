@@ -149,7 +149,7 @@ Regeneration: [build_handoff.py](../../work/build_handoff.py). It refreshes gene
 - [Shared doors on mission maps (candidates 1059c, 1214jf)](84-mission-shared-doors.md): ordinary doors, and since #185 locked doors (a key unlock opens the door for both), side corrections and checkpoint renewal
 - [Partner equipment on missions and item-wheel robustness (candidates 1071–1074j)](85-mission-equipment-and-item-wheel.md)
 - [Shared NPC authority on mission maps (candidate 1091)](86-mission-npc-authority.md)
-- [Shared usables on mission maps (candidates 1123–1123e)](87-mission-shared-usables.md)
+- [Shared usables on mission maps (candidates 1123–1123e, 1214jh–1214jn)](87-mission-shared-usables.md): two-state toggles, and since #187 lever scripts in both worlds (the native `use` event) and the use mirror for buttons and lifts
 - [Shared death, checkpoint restart and paired autosaves on mission maps (candidates 1147–1153)](88-mission-shared-death-and-checkpoint.md)
 - [Mission progression: discovery and trigger mirroring (candidates 1163–1171)](89-mission-progression-discovery.md)
 - [Stage 7: release packaging, native Steam sessions, product mode, join-follow and soak (candidates 1171–1193)](90-release-packaging-and-steam-sessions.md)

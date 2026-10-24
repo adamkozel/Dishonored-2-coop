@@ -1,0 +1,474 @@
+{
+  "passed": false,
+  "failure": "49 changes in the client's world did not happen in the host's",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "client",
+    "usable": "script_lever_windturbine_1_1_1",
+    "radius": 40.0,
+    "pairing": "corvo-emily",
+    "channel": {
+      "host": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 0,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 9,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      },
+      "client": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 1,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 7,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      }
+    },
+    "tries": [
+      {
+        "bearing": 0,
+        "logic": {
+          "client": 12,
+          "settled": true,
+          "host": 12
+        },
+        "view": [
+          -40.7325,
+          120.845,
+          23.5783
+        ]
+      },
+      {
+        "bearing": 0,
+        "height": 0.0,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": 0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": -0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 45,
+        "logic": {
+          "client": 1,
+          "settled": true,
+          "host": 1
+        },
+        "view": [
+          -41.0644,
+          121.592,
+          23.2227
+        ]
+      },
+      {
+        "bearing": 45,
+        "height": 0.0,
+        "stand": [
+          -41.0279,
+          121.628,
+          21.5329
+        ],
+        "focus": {
+          "handle": "0x1cf61910",
+          "name": "script_lever_windturbine_1_1_1"
+        },
+        "current": 1
+      }
+    ],
+    "changes": {
+      "host": {
+        "moved": {
+          "gs_guard_sword_12203": [
+            -26.8105,
+            107.325,
+            11.5188
+          ],
+          "script_speaker_wol": [
+            -28.6786,
+            110.361,
+            20.579
+          ],
+          "pouch_small_01_12138": [
+            -26.4904,
+            107.312,
+            11.5993
+          ],
+          "script_kar_speaker_turnbuckle_01_1": [
+            -28.6779,
+            110.362,
+            20.5862
+          ],
+          "gs_helmet_12205": [
+            -26.6464,
+            107.524,
+            12.0757
+          ]
+        },
+        "appeared": [
+          "clone_emily_sword_12399",
+          "Cue_ARK_CUE_WITNESS_WOL_CASUALTY_0_0",
+          "Cue_ARK_CUE_WITNESS_DEATH_0_3"
+        ],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      },
+      "client": {
+        "moved": {
+          "gs_guard_sword_12176": [
+            -36.8571,
+            116.707,
+            16.71
+          ],
+          "gs_helmet_12205": [
+            -26.7018,
+            107.465,
+            12.0689
+          ],
+          "script_fx_target_blade_01": [
+            -45.0244,
+            122.73,
+            22.5669
+          ],
+          "script_fx_target_blade_02": [
+            -43.971,
+            119.598,
+            28.8574
+          ],
+          "animals_fishesswarm_ambient_2": [
+            -61.632,
+            109.64,
+            -2.90491
+          ],
+          "pouch_small_03_12137": [
+            -36.6473,
+            116.842,
+            16.7406
+          ],
+          "gs_guard_sword_12203": [
+            -26.7999,
+            107.331,
+            11.516
+          ],
+          "script_fx_target_blade_03": [
+            -42.8485,
+            116.394,
+            22.4693
+          ],
+          "pouch_small_01_12138": [
+            -26.4815,
+            107.315,
+            11.5895
+          ]
+        },
+        "appeared": [
+          "trout_9584",
+          "trout_9586",
+          "audiocard_player_1000",
+          "gamelogic_pause_fx_9420",
+          "trout_9590",
+          "trout_9598",
+          "trout_9585",
+          "trout_9595",
+          "trout_9579",
+          "crossbow_emily_4",
+          "trout_9596",
+          "trout_9583",
+          "knife_01_distraction_12397",
+          "trout_9576",
+          "gun_emily_accuracy_lvl0_12339",
+          "rat_9601",
+          "rat_9602",
+          "idEntity_12368",
+          "trout_9589",
+          "rat_9603",
+          "regular_grenade_equipment_6",
+          "trout_9587",
+          "trout_9593",
+          "trout_9599",
+          "trout_9575",
+          "heart_equipment_7",
+          "trout_9591",
+          "grapple_9",
+          "gun_emily_5",
+          "trout_9588",
+          "Cue_ARK_CUE_WITNESS_WOL_CASUALTY_0_0",
+          "trout_9582",
+          "rat_9600",
+          "trout_9594",
+          "trout_9592",
+          "trout_9597",
+          "trout_9578",
+          "ply_sword_3",
+          "trout_9577",
+          "trout_9581",
+          "trout_9580",
+          "Cue_ARK_CUE_WITNESS_DEATH_0_3"
+        ],
+        "vanished": [
+          "idEntity_12361",
+          "idEntity_12360",
+          "idEntity_12359"
+        ],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      }
+    },
+    "lever": {
+      "client": 1,
+      "from": 0,
+      "host": 1
+    },
+    "unshared": [
+      {
+        "entity": "gs_guard_sword_12176",
+        "source": [
+          -36.8571,
+          116.707,
+          16.71
+        ],
+        "peer": [
+          -36.3215,
+          116.921,
+          16.9358
+        ]
+      },
+      {
+        "entity": "script_fx_target_blade_01",
+        "source": [
+          -45.0244,
+          122.73,
+          22.5669
+        ],
+        "peer": [
+          -42.9823,
+          116.821,
+          22.1439
+        ]
+      },
+      {
+        "entity": "script_fx_target_blade_02",
+        "source": [
+          -43.971,
+          119.598,
+          28.8574
+        ],
+        "peer": [
+          -45.3171,
+          123.494,
+          22.8617
+        ]
+      },
+      {
+        "entity": "animals_fishesswarm_ambient_2",
+        "source": [
+          -61.632,
+          109.64,
+          -2.90491
+        ],
+        "peer": [
+          -59.7347,
+          111.497,
+          -2.03906
+        ]
+      },
+      {
+        "entity": "pouch_small_03_12137",
+        "source": [
+          -36.6473,
+          116.842,
+          16.7406
+        ],
+        "peer": [
+          -36.2594,
+          117.182,
+          16.8741
+        ]
+      },
+      {
+        "entity": "script_fx_target_blade_03",
+        "source": [
+          -42.8485,
+          116.394,
+          22.4693
+        ],
+        "peer": [
+          -43.7817,
+          119.095,
+          28.396
+        ]
+      },
+      {
+        "appeared": "trout_9584"
+      },
+      {
+        "appeared": "trout_9586"
+      },
+      {
+        "appeared": "audiocard_player_1000"
+      },
+      {
+        "appeared": "gamelogic_pause_fx_9420"
+      },
+      {
+        "appeared": "trout_9590"
+      },
+      {
+        "appeared": "trout_9598"
+      },
+      {
+        "appeared": "trout_9585"
+      },
+      {
+        "appeared": "trout_9595"
+      },
+      {
+        "appeared": "trout_9579"
+      },
+      {
+        "appeared": "crossbow_emily_4"
+      },
+      {
+        "appeared": "trout_9596"
+      },
+      {
+        "appeared": "trout_9583"
+      },
+      {
+        "appeared": "knife_01_distraction_12397"
+      },
+      {
+        "appeared": "trout_9576"
+      },
+      {
+        "appeared": "gun_emily_accuracy_lvl0_12339"
+      },
+      {
+        "appeared": "rat_9601"
+      },
+      {
+        "appeared": "rat_9602"
+      },
+      {
+        "appeared": "idEntity_12368"
+      },
+      {
+        "appeared": "trout_9589"
+      },
+      {
+        "appeared": "rat_9603"
+      },
+      {
+        "appeared": "regular_grenade_equipment_6"
+      },
+      {
+        "appeared": "trout_9587"
+      },
+      {
+        "appeared": "trout_9593"
+      },
+      {
+        "appeared": "trout_9599"
+      },
+      {
+        "appeared": "trout_9575"
+      },
+      {
+        "appeared": "heart_equipment_7"
+      },
+      {
+        "appeared": "trout_9591"
+      },
+      {
+        "appeared": "grapple_9"
+      },
+      {
+        "appeared": "gun_emily_5"
+      },
+      {
+        "appeared": "trout_9588"
+      },
+      {
+        "appeared": "trout_9582"
+      },
+      {
+        "appeared": "rat_9600"
+      },
+      {
+        "appeared": "trout_9594"
+      },
+      {
+        "appeared": "trout_9592"
+      },
+      {
+        "appeared": "trout_9597"
+      },
+      {
+        "appeared": "trout_9578"
+      },
+      {
+        "appeared": "ply_sword_3"
+      },
+      {
+        "appeared": "trout_9577"
+      },
+      {
+        "appeared": "trout_9581"
+      },
+      {
+        "appeared": "trout_9580"
+      },
+      {
+        "vanished": "idEntity_12361"
+      },
+      {
+        "vanished": "idEntity_12360"
+      },
+      {
+        "vanished": "idEntity_12359"
+      }
+    ]
+  },
+  "scope": "1858 (#187): the scripted lever script_lever_windturbine_1_1_1 used by the client on campaign/edge_of_the_world/eotw.mapinfo; the lever state and its consequences within 40 m in both worlds"
+}

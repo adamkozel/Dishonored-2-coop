@@ -1,0 +1,619 @@
+{
+  "passed": false,
+  "failure": "27 changes in the host's world did not happen in the client's",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "host",
+    "usable": "script_lever_windturbine_1_1_1",
+    "radius": 40.0,
+    "pairing": "corvo-emily",
+    "channel": {
+      "host": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 0,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 9,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      },
+      "client": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 1,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 7,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      }
+    },
+    "tries": [
+      {
+        "bearing": 0,
+        "logic": {
+          "client": 12,
+          "host": 12,
+          "settled": true
+        },
+        "view": [
+          -40.7325,
+          120.845,
+          23.5475
+        ]
+      },
+      {
+        "bearing": 0,
+        "height": 0.0,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": 0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": -0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 45,
+        "logic": {
+          "client": 1,
+          "host": 1,
+          "settled": true
+        },
+        "view": [
+          -41.1218,
+          121.604,
+          23.1522
+        ]
+      },
+      {
+        "bearing": 45,
+        "height": 0.0,
+        "stand": [
+          -41.0855,
+          121.641,
+          21.4594
+        ],
+        "focus": {
+          "handle": "0x1cf61910",
+          "name": "script_lever_windturbine_1_1_1"
+        },
+        "current": 1
+      }
+    ],
+    "trace": {
+      "host": {
+        "total": 896,
+        "kept": 896
+      },
+      "client": {
+        "total": 792,
+        "kept": 792
+      }
+    },
+    "signalsOnlyInSource": [
+      {
+        "signal": "script_kiscule_eotw_ai|5466|2|30199576",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|25|1|30194824",
+        "source": 6,
+        "peer": 5
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5453|2|30257864",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|12|2|30257144",
+        "source": 39,
+        "peer": 32
+      },
+      {
+        "signal": "|134|1|30164808",
+        "source": 35,
+        "peer": 33
+      },
+      {
+        "signal": "script_kiscule_eotw|578703988|1710935|30052904",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|1171286951|1|30020280",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|930260103|1049596498|30020280",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|121|2|30257144",
+        "source": 35,
+        "peer": 33
+      },
+      {
+        "signal": "|122|2|30257144",
+        "source": 35,
+        "peer": 33
+      },
+      {
+        "signal": "|139|4|30256664",
+        "source": 35,
+        "peer": 33
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6645|2|28822712",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|462523448|802821428|30228088",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|27|1|30194824",
+        "source": 33,
+        "peer": 27
+      },
+      {
+        "signal": "|1213425787|910182544|30109832",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|1466836816|910182544|30109832",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6647|2|28822712",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|629502647|1049596498|30020280",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5427|2|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6837|2|30228088",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6859|1|30279896",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|1754944900|1130711153|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5483|4|30257384",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|186434337|1582773737|30283224",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "script_kiscule_eotw|5515|1|30020280",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|13|1|30136392",
+        "source": 33,
+        "peer": 27
+      },
+      {
+        "signal": "|138|4|30256664",
+        "source": 35,
+        "peer": 33
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5445|2|30257864",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6864|2|30283512",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|397074466|910182544|30109832",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6643|2|28822712",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|431834367|1683619872|30283512",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "|375991567|910182544|30109832",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "|2057958289|1049596498|30020280",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6876|1|30283224",
+        "source": 2,
+        "peer": 1
+      },
+      {
+        "signal": "|152885526|1098592424|30020280",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6638|4|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6844|2|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5456|2|30257864",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|193|1|30228328",
+        "source": 35,
+        "peer": 33
+      },
+      {
+        "signal": "|634052596|910182544|30109832",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5449|2|30257864",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|564761098|523671399|30283512",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6873|1|30020280",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6646|2|28822712",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|1022053085|1860297249|30257144",
+        "source": 5,
+        "peer": 4
+      },
+      {
+        "signal": "|137|1|30283224",
+        "source": 35,
+        "peer": 33
+      },
+      {
+        "signal": "script_kiscule_eotw|5646|2|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "|141|1|30109832",
+        "source": 35,
+        "peer": 33
+      },
+      {
+        "signal": "|1778058138|1098592424|30020280",
+        "source": 30,
+        "peer": 24
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6850|1|30195096",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|7427|1|30109832",
+        "source": 1,
+        "peer": 0
+      }
+    ],
+    "signalsOnlyInPeer": [
+      {
+        "signal": "|23263009|0|29785976",
+        "peer": 168,
+        "source": 154
+      },
+      {
+        "signal": "|230|1|30164808",
+        "peer": 1,
+        "source": 0
+      },
+      {
+        "signal": "|236|1|28823304",
+        "peer": 1,
+        "source": 0
+      },
+      {
+        "signal": "|504087605|931356091|30138968",
+        "peer": 1,
+        "source": 0
+      }
+    ],
+    "activations": {
+      "host": [],
+      "client": []
+    },
+    "changes": {
+      "host": {
+        "moved": {
+          "script_fx_target_blade_03": [
+            -43.9765,
+            119.658,
+            28.4375
+          ],
+          "script_fx_target_blade_02": [
+            -45.2232,
+            123.222,
+            22.2664
+          ],
+          "script_scrollcase_overseer": [
+            -55.8383,
+            96.9678,
+            22.3613
+          ],
+          "script_fx_target_blade_01": [
+            -42.8794,
+            116.523,
+            22.6183
+          ]
+        },
+        "appeared": [],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      },
+      "client": {
+        "moved": {
+          "script_fx_target_blade_03": [
+            -43.96,
+            119.611,
+            28.4375
+          ],
+          "script_fx_target_blade_02": [
+            -45.2323,
+            123.248,
+            22.315
+          ],
+          "script_scrollcase_overseer": [
+            -55.5518,
+            96.9631,
+            22.3692
+          ],
+          "script_fx_target_blade_01": [
+            -42.8872,
+            116.546,
+            22.5763
+          ]
+        },
+        "appeared": [],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      }
+    },
+    "lever": {
+      "client": 1,
+      "host": 1,
+      "from": 0
+    },
+    "unshared": [
+      {
+        "signal": "script_kiscule_eotw_ai|5466|2|30199576",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5453|2|30257864",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|578703988|1710935|30052904",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|1171286951|1|30020280",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6645|2|28822712",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|462523448|802821428|30228088",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6647|2|28822712",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5427|2|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6837|2|30228088",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6859|1|30279896",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|1754944900|1130711153|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5483|4|30257384",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|5515|1|30020280",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5445|2|30257864",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6864|2|30283512",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6643|2|28822712",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6876|1|30283224",
+        "source": 2,
+        "peer": 1
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6638|4|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6844|2|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5456|2|30257864",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|5449|2|30257864",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_ai|564761098|523671399|30283512",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6873|1|30020280",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6646|2|28822712",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw|5646|2|30138968",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|6850|1|30195096",
+        "source": 1,
+        "peer": 0
+      },
+      {
+        "signal": "script_kiscule_eotw_script|7427|1|30109832",
+        "source": 1,
+        "peer": 0
+      }
+    ]
+  },
+  "scope": "1862 (#187): the scripted lever script_lever_windturbine_1_1_1 used by the host on campaign/edge_of_the_world/eotw.mapinfo; the lever state and its consequences within 40 m in both worlds"
+}

@@ -1,0 +1,207 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "source": "host",
+    "usable": "script_lever_windturbine_1_1_1",
+    "radius": 40.0,
+    "pairing": "corvo-emily",
+    "channel": {
+      "client": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 1,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 7,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      },
+      "host": {
+        "name": "script_lever_windturbine_1_1_1",
+        "definition": "script_lever_windturbine_1_1_1",
+        "role": 0,
+        "enabled": true,
+        "ready": true,
+        "arm": 102,
+        "peerArm": 102,
+        "revision": 1,
+        "target": 0,
+        "applied": 1,
+        "ack": 1,
+        "awaiting": false,
+        "inFlight": 0,
+        "sent": 8,
+        "received": 7,
+        "rejected": 0,
+        "duplicates": 0,
+        "requests": 0,
+        "commits": 1,
+        "nativeCalls": 0,
+        "converged": 1,
+        "result": "native_state_converged"
+      }
+    },
+    "tries": [
+      {
+        "bearing": 0,
+        "logic": {
+          "host": 12,
+          "settled": true,
+          "client": 12
+        },
+        "view": [
+          -40.7325,
+          120.845,
+          23.4642
+        ]
+      },
+      {
+        "bearing": 0,
+        "height": 0.0,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": 0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 0,
+        "height": -0.15,
+        "aim": "Measured native target aim did not settle"
+      },
+      {
+        "bearing": 45,
+        "logic": {
+          "host": 1,
+          "settled": true,
+          "client": 1
+        },
+        "view": [
+          -41.2017,
+          121.621,
+          23.0457
+        ]
+      },
+      {
+        "bearing": 45,
+        "height": 0.0,
+        "stand": [
+          -41.1654,
+          121.658,
+          21.3571
+        ],
+        "focus": {
+          "handle": "0x1cf61910",
+          "name": "script_lever_windturbine_1_1_1"
+        },
+        "current": 1
+      }
+    ],
+    "trace": {
+      "client": {
+        "total": 797,
+        "kept": 797
+      },
+      "host": {
+        "total": 881,
+        "kept": 881
+      }
+    },
+    "signalsOnlyInSource": [],
+    "signalsOnlyInPeer": [
+      {
+        "signal": "|23263009|0|29785976",
+        "peer": 76,
+        "source": 68
+      }
+    ],
+    "activations": {
+      "client": [],
+      "host": []
+    },
+    "changes": {
+      "client": {
+        "moved": {
+          "script_fx_target_blade_02": [
+            -45.237,
+            123.262,
+            22.3409
+          ],
+          "script_fx_target_blade_03": [
+            -43.9512,
+            119.585,
+            28.4372
+          ],
+          "script_fx_target_blade_01": [
+            -42.8914,
+            116.558,
+            22.5542
+          ],
+          "script_scrollcase_overseer": [
+            -56.4529,
+            96.8179,
+            22.3684
+          ]
+        },
+        "appeared": [],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      },
+      "host": {
+        "moved": {
+          "script_fx_target_blade_02": [
+            -42.7307,
+            116.009,
+            22.3274
+          ],
+          "script_fx_target_blade_03": [
+            -45.0795,
+            122.85,
+            22.4184
+          ],
+          "script_fx_target_blade_01": [
+            -43.9882,
+            119.732,
+            28.2477
+          ],
+          "script_scrollcase_overseer": [
+            -55.8736,
+            97.0391,
+            22.3869
+          ]
+        },
+        "appeared": [],
+        "vanished": [],
+        "usables": {
+          "script_lever_windturbine_1_1_1": 1
+        }
+      }
+    },
+    "lever": {
+      "host": 1,
+      "from": 0,
+      "client": 1
+    },
+    "unshared": []
+  },
+  "scope": "1863 (#187): the scripted lever script_lever_windturbine_1_1_1 used by the host on campaign/edge_of_the_world/eotw.mapinfo; the lever state and its consequences within 40 m in both worlds"
+}
