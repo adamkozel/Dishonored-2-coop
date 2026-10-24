@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-24T16:57:56+02:00",
+  "UpdatedAt": "2026-10-24T17:17:53+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22864,8 +22864,8 @@
     "Card": "#213",
     "Candidate": "candidate-npc-combat-v1214kb",
     "Fix": "with diagnostics off (an installed game) the product status set is written in turn every 160 ms: product (with follow and sends), online, missionend, reset, npc-combat, movement and difficulty",
-    "Evidence": "product-two-account-v1888a failed: VM product mode did not report (no product status) on 0.9.2 (1214jz wrote only the main status in product mode)",
-    "Status": "built; the 0.9.3 clean-PC proof checks it"
+    "Evidence": "product-two-account-v1888a failed: VM product mode did not report (no product status) on 0.9.2 (1214jz wrote only the main status in product mode); product-two-account-v1891a (0.9.3 from the GitHub download) passed: VM product mode reported, joined, walked, story, shared death, F8 leave, uninstall",
+    "Status": "done, release 0.9.3 (chapter 90)"
   },
   "Campaign093": {
     "Card": "#213",
@@ -22873,5 +22873,11 @@
     "Evidence": "two accounts (host Corvo, VM partner Emily), product mode, co-op saves, one passing take per mission: campaign-dunwall/eotw/institute/madinventor/dust/bunker/empress-vm-v1889a, campaign-curator-vm-v1889b, campaign-palace-vm-v1890a (on Easy via the difficulty sync, back to Medium at the end)",
     "Failures": "v1888a x9: CRLF steps path in the runner; curator-v1889a: note use not registered; palace-v1889a: closing talk not registered; palace-v1889b/c: host died in the Duke fight (shared GameOver); palace-v1889d: the attack step re-picked another luca_abele (fixed in Route-MissionVM-v1890)",
     "Status": "done, chapter 109 (The campaign on 0.9.3)"
+  },
+  "Release093": {
+    "Card": "#213",
+    "Candidate": "candidate-npc-combat-v1214kb",
+    "Evidence": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.3; d2coop-v0.9.3.zip SHA-256 F60D70B76AB992DB262DBD44FE48A621FC4CE4D2FA682A77D40A4A3333F82E04; release-install-v1889b 8/8; product-two-account-v1891a pass",
+    "Status": "published, chapter 90"
   }
 }

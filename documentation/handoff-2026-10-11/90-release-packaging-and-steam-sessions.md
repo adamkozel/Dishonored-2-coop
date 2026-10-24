@@ -341,6 +341,33 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
     - v1761c had stopped at its first check: the lab host was still on the pause menu after v1761b's restore.
   - Validating the missions on co-op saves, as installed players play them, is #175.
 
+- Release 0.9.2 (#213): smooth frame pacing (#195), shared pickups again and the resumed-host join (#189), pickups
+  both ways (#203) and the end of the tutorial (#174).
+  - Candidate 1214ka (version resources 0.9.2), setup tool v1888, builder build_release_v1888.py. Package SHA-256
+    634F52E1..., 13 files.
+  - Install test release-install-v1888a: 8/8.
+  - Clean-PC proof product-two-account-v1888a failed: "VM product mode did not report (no product status)". With
+    1214jz's diagnostics off, an installed game wrote only its main status file, and the proof reads the product
+    status.
+- Release 0.9.3 (#213): the partner plays the host's difficulty (#177, chapter 109), and an installed game writes its
+  product status set again.
+  - Candidate 1214kb (version resources 0.9.3), setup tool v1889, builder build_release_v1889.py. Package
+    `d2coop-v0.9.3.zip`, SHA-256 F60D70B7..., 13 files, no game files.
+  - Install test: release-install-v1889b, 8/8. Release-install-v1889a failed before testing: the package argument was
+    the zip, not the folder.
+  - The nine missions on two accounts with this binary pass (chapter 109, "The campaign on 0.9.3").
+  - Proof harness Test-ProductTwoAccount-v1891 stops the lab's idle local partner instance during the session and
+    relaunches the lab pair in its restoration.
+  - Clean-PC proof from the v0.9.3 download, product-two-account-v1891a: pass.
+    - The VM downloaded the published zip (SHA-256 F60D70B7..., 6.7 s) and installed it with Install.cmd alone:
+      receipt, DLL and the five built files. Defender's real-time protection was on, with no detections.
+    - Product mode reported, and the VM passed its title screen.
+    - The two accounts connected on the same mission, with the movement banks active on both.
+    - Each player walked about 8 m and the other saw it, and the story trigger started native melee.
+    - The host's death showed GameOver in both games, and both restarted on the same map.
+    - F8 left the session, and the uninstall restored the game (the executable and master.index hashes).
+    - The lab pair was relaunched and connected, and no SteamID was recorded.
+
 **Still open:**
 - Hosting starts with the F7 key once in a mission. Since 0.9.0 the main menu's Co-op entry opens the co-op saves
   ([chapter 107](107-coop-menu-and-saves.md)); the invite and join steps are Steam's native overlay and friends list.
