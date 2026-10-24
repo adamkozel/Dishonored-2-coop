@@ -87,3 +87,32 @@ non-lethal branches with the partner acting, and diff the story flags at each mi
     and [v1883c](../../work/natural-moveset/route-dunwall-nonlethal-v1883c)), dropped him and locked it.
   - Every gameflow task advanced identically in both worlds.
   - `ramsey_in_vault` is 1 in both worlds.
+
+### The partner's combat choke (#209)
+
+**Why her grab never starts (d2-ghidra, confirmed static):**
+- The player's choke rule handler (`components/characters/player/base/rules/choke.rulehandler`, chapter 100) ends with
+  the unaware, vulnerable or always-chokable targets (`choke_front/back/left/right`). An alerted NPC is chokable only
+  while it is vulnerable.
+- `TargetIsVulnerable` (`TIProvide_ProvideTargetIsVulnerable`, provider `0x1409e9e70` → `FUN_14082d2f0`) and
+  `IsVulnerable` (`0x1409e9ef0` → `FUN_1403b09d0`) both read bit 6 (`0x40`) of the target entity's flag byte `+0xd1`.
+- The only writer of that bit is a component handler for entity message `0xc4` (`0x14071bc20`, registered through
+  `FUN_140810810` at `0x14071ad05`). It flips the component's `+0x150` bit 0 and copies it into the entity's bit.
+- The only sender of `0xc4` is `0x14084e530`, handler 9 of the table at `0x1423263c0`, which runs a midnight event track's
+  events by type (`0x140850d70`). It sends the message to the entity playing the scene.
+- A timed parry that the attacker loses starts `arkCpntAICombatAttack::StartParryLose`
+  (`D2_AICombatAttack_StartParryLose`), which plays the slash type's parry-lose midnight on the NPC.
+- Hypothesis: that midnight's event track sends `0xc4` at the start and end of the window, which makes the NPC
+  vulnerable while it is off-balance.
+- In co-op the parry is resolved in the host's world (chapter 80), so the midnight plays only there. The partner's
+  replica follows the host's body stream and never plays it, so it is never vulnerable in her world, and her choke rule
+  finds no scene.
+
+**1214kc (built after the campaign run):**
+- A host NPC Pose carries `reserved` bit 1 while the NPC's `+0xd1` bit 6 is set; bit 0 is already "down" (1214en).
+  Pose validation accepts 0-3, and the unit tests cover 2, 3 and the refused 4.
+- The client keeps her replica's bit 6 set while host poses carry it (within 400 ms) and clears it afterwards. Host
+  poses get priority (every 50 ms) while the NPC is vulnerable, as they do while it is down.
+- Her grab then plays her native combat choke on the replica. The client-sourced choke relay (chapter 93) holds the
+  host's NPC and asks for the native knockout.
+- Status: `vulnerableSent`, `vulnerableReceived` and `vulnerableApplies` per NPC channel in the NPC stream status.

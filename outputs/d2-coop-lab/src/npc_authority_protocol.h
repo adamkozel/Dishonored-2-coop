@@ -120,8 +120,9 @@ constexpr std::uint32_t kNpcDeadAshed=0x31485341u; // 'ASH1'
 constexpr std::uint32_t kNpcDeadRemoved=0x31564d52u; // 'RMV1'
 inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& local,const CoopPosePacket& peer){
     const bool paired=h.kind==NpcAuthorityMessage::PairedHold||h.kind==NpcAuthorityMessage::PairedKnockout;
-    // 1214en: a host Pose may carry reserved bit 0 = the NPC is down (knocked down, native IsOnGround).
-    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.kind==NpcAuthorityMessage::Life?(h.reserved!=1&&h.reserved!=2):h.kind==NpcAuthorityMessage::Pose?h.reserved>1:h.kind==NpcAuthorityMessage::Dead?(h.reserved!=0&&h.reserved!=kNpcDeadAshed&&h.reserved!=kNpcDeadRemoved):h.reserved!=0)||h.reserved2||
+    // 1214en: a host Pose may carry reserved bit 0 = the NPC is down (knocked down, native IsOnGround); 1214kc (#209): bit 1 =
+    // the NPC is vulnerable (off-balance after a parry, native IsVulnerable).
+    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.kind==NpcAuthorityMessage::Life?(h.reserved!=1&&h.reserved!=2):h.kind==NpcAuthorityMessage::Pose?h.reserved>3:h.kind==NpcAuthorityMessage::Dead?(h.reserved!=0&&h.reserved!=kNpcDeadAshed&&h.reserved!=kNpcDeadRemoved):h.reserved!=0)||h.reserved2||
        !h.sequence||!h.sourceArm||!h.sourceHandle||!h.rig||!h.joints||h.joints>kNpcAuthorityMaxJoints||!coopWorldPairReady(local,peer)||
        h.sourceSession!=peer.session||h.targetSession!=local.session||h.sourceEpoch!=peer.worldEpoch||h.targetEpoch!=local.worldEpoch||h.map!=local.mapId)return false;
     switch(h.kind){

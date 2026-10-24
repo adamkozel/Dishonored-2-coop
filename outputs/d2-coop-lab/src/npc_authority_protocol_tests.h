@@ -91,7 +91,7 @@ void npcAuthorityProtocolTests(){
     for(unsigned j=0;j<pose.h.joints;++j)pose.local[j][0]=pose.local[j][4]=pose.local[j][8]=1;
     require(validNpcPose(pose,client,host),"host sends a224-joint50HP actor to a different client handle");
     {auto down=pose;down.h.reserved=1;require(validNpcPose(down,client,host),"1214en: a host pose may say the NPC is down");
-     down.h.reserved=2;require(!validNpcPose(down,client,host),"1214en: no other pose flag");}
+     down.h.reserved=2;require(validNpcPose(down,client,host),"1214kc: a host pose may say the NPC is vulnerable");down.h.reserved=3;require(validNpcPose(down,client,host),"1214kc: down and vulnerable together");down.h.reserved=4;require(!validNpcPose(down,client,host),"1214kc: no other pose flag");}
     {auto corpse=pose;corpse.health=0;require(validNpcPose(corpse,client,host),"corpse pose carries health0 after a shared death (1113)");corpse.health=-1;require(!validNpcPose(corpse,client,host),"negative health refused");}
     {auto original=pose;const float angle=.713f;original.local[37][0]=original.local[37][4]=std::cos(angle);original.local[37][1]=std::sin(angle);original.local[37][3]=-std::sin(angle);original.local[37][9]=-.123456f;
         NpcPoseWire wire{};CoopNpcPose decoded{};require(encodeNpcPose(original,wire)&&decodeNpcPose(wire.data(),original.h.size,decoded)&&validNpcPose(decoded,client,host),"compact full rig round-trips as a valid native pose");
