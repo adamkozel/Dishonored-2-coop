@@ -1,0 +1,155 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214kh",
+      "hostDll": "AEBE08AB22494D8AC113B47463630F436FFB8F2D7875B7326BF88189C3AAEF0A",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "killHost": {
+      "afterStep": 3,
+      "before": {
+        "channels": 6,
+        "readyChannels": 6,
+        "references": 12,
+        "boundHandles": [
+          190449526,
+          190252915,
+          189269860,
+          190973822,
+          190318452,
+          190777211
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 6,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -32.89,
+              -165.6,
+              66.4036
+            ]
+          }
+        ]
+      },
+      "pauseBefore": {
+        "190449526": 1,
+        "190252915": 1,
+        "189269860": 1,
+        "190973822": 1,
+        "190318452": 1,
+        "190777211": 1
+      },
+      "stopped": true,
+      "detectMs": 1563,
+      "partnerSeesHost": false,
+      "partnerLogic": 1,
+      "partnerMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "after": {
+        "channels": 0,
+        "readyChannels": 0,
+        "references": 0,
+        "boundHandles": [],
+        "streamResult": "session_pose_stale",
+        "attackEnabled": false,
+        "attackReady": 0,
+        "attackResult": "session_pose_stale",
+        "avatar": []
+      },
+      "pauseAfter": {
+        "190449526": 0,
+        "190252915": 0,
+        "189269860": 0,
+        "190973822": 0,
+        "190318452": 0,
+        "190777211": 0
+      },
+      "pausedStill": [],
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 6,
+        "result": "p2p_connection_ended",
+        "connectionState": 0,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 1
+      },
+      "product": "waiting_partner"
+    },
+    "stoppedAfterStep": 3
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
