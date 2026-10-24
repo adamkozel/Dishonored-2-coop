@@ -1,6 +1,6 @@
 # powers: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:39:06.380324+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-24T20:40:37.938648+02:00. All fields below retain the catalog wording.
 
 ## corvo_blink_aim_cancel_release_arrive
 
@@ -130,8 +130,8 @@ Exact native assets confirm Blink Assault. Full-body kick and slash sequences ar
     "corvo"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_runtime_completion_audit",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "Corvo Blink Assault kick and slash",
@@ -196,7 +196,9 @@ Exact native assets confirm Blink Assault. Full-body kick and slash sequences ar
   "evidence": [
     "coverage-v1359b/result.json",
     "coverage-v1359a/result.json"
-  ]
+  ],
+  "visual_validation_before": "not_accepted",
+  "runtime_binding_before": "not_verified"
 }
 ````
 
@@ -215,7 +217,7 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam",
-  "visual_validation": "bounded_actual_game_frames_inspected",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "corvo dark vision cast end",
@@ -312,7 +314,8 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "bounded_actual_game_frames_inspected"
 }
 ````
 
@@ -5353,8 +5356,8 @@ Full-body cast studies with native caster acting and D2 first-person phase timin
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_runtime_completion_audit",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "emily far reach pull variants",
@@ -5412,7 +5415,9 @@ Full-body cast studies with native caster acting and D2 first-person phase timin
   "complete": true,
   "evidence": [
     "object-carry-v1471b/result.json"
-  ]
+  ],
+  "visual_validation_before": "not_accepted",
+  "runtime_binding_before": "not_verified"
 }
 ````
 
@@ -5430,7 +5435,7 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam",
-  "visual_validation": "bounded_actual_game_frames_inspected",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "emily dark vision cast end",
@@ -5527,7 +5532,8 @@ Native Dark Vision casts now cover ordinary jumps as well as tested ground stanc
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "bounded_actual_game_frames_inspected"
 }
 ````
 
@@ -7465,7 +7471,7 @@ Native493/494 show standing/crouched Emily keeps the sword sheathed throughout t
   ],
   "authoring": "candidates",
   "runtime_binding": "grounded_armed_and_holstered_scoped",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "emily doppelganger cast",
@@ -7639,7 +7645,8 @@ Native493/494 show standing/crouched Emily keeps the sword sheathed throughout t
     "coverage-v1332c/result.json",
     "coverage-v1332e/result.json",
     "coverage-v1332d/result.json"
-  ]
+  ],
+  "visual_validation_before": "not_accepted"
 }
 ````
 
@@ -10266,8 +10273,8 @@ Blink Assault kick/slash body studies only. Other upgrades, transformed bodies, 
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_runtime_completion_audit",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 217,
   "priority": 3,
   "title": "power upgrade variants",
@@ -10410,7 +10417,9 @@ Blink Assault kick/slash body studies only. Other upgrades, transformed bodies, 
     "mission-coverage-v1492a/result.json",
     "coverage-v1332f/result.json",
     "coverage-v1359b/result.json"
-  ]
+  ],
+  "visual_validation_before": "not_accepted",
+  "runtime_binding_before": "not_verified"
 }
 ````
 

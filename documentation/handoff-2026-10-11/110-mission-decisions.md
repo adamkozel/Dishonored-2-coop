@@ -41,10 +41,10 @@ task) and the **story flags**. Labels follow the handoff rules: confirmed static
   v1674 route, held at the end), she kills and loots Ramsey, opens the vault and her locker. Both worlds then hold
   `ramsey_is_alive` 0, and the 22 flags show no difference (`storyflags-diff.json`, `storyflags-values.json`).
 
-**Open (#197):** the non-lethal outcomes end to end, with the partner completing them. Each needs its mission's
-non-lethal sequence (the Ramsey vault, the Hypatia cure, the Jindosh shock, the Breanna shrine, the Duke's double,
-Stilton, Delilah). The campaign routes take the lethal branches. The final two-account campaign validation will take
-non-lethal branches with the partner acting, and diff the story flags at each mission's end.
+**Status:** #197 was closed with Ramsey and Stilton completed by the partner in both worlds (below). The other
+branches (the Duke's double confrontation, Hypatia, Jindosh, Breanna and Delilah) and a story-flag diff at each campaign
+mission's end are [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) (the final audit, [chapter 112](112-final-stage-exit-audit.md)). The campaign
+routes take the lethal branches.
 
 ### Ramsey in the vault, partner-led (#197, in progress)
 
@@ -125,18 +125,18 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   - Hypothesis: the native key-target component sets the flag when he is knocked out.
   - Route: the partner travels to the past and chokes him before the ritual. A partner's choke already asks the host
     for the native knockout (chapter 93). Then diff the flags and load *The Dust District* return variant.
-- **Stilton, partner-made: blocked by #216 (confirmed runtime).** Route-Mission-v1895 lets the `choke` step act as the
-  partner while the host leads into the past.
-  - [route-bunker-stilton-v1895a](../../work/natural-moveset/route-bunker-stilton-v1895a): Stilton stood still at the
-    ritual circle, and `chase_hold` needs a walking NPC.
-  - [v1897a](../../work/natural-moveset/route-bunker-stilton-v1897a): the partner's choke found no target, and
-    `stilton_is_incapacited` stayed 0.
-  - [v1898a](../../work/natural-moveset/route-bunker-stilton-v1898a), authority report:
-    - Stilton and the other ritual characters are scripted actors with only `arkCpntAICombatAttack`, so the NPC stream
-      never binds them;
-    - each world runs its own copy: Stilton stood at (-26.2, 3.6) in the host's world and at (-21.9, 10.0) in the
-      partner's.
-  - A partner's knockout of such a character stays in her world (#216).
+- **Stilton, partner-made: done (confirmed runtime, [route-backyard-stilton-v1908a](../../work/natural-moveset/route-backyard-stilton-v1908a), 1214ke).**
+  - The flag's only writer is in the backyard map (`bunker_backyard_p`, `backyard_ld_kiscule_node_template`):
+    `stilton_is_incapacited` becomes true when `backyard_ld_spawner_stilton_1` dies or falls asleep (confirmed static).
+  - That Stilton uses the story definition `aramis_stilton.def`, a civilian with AI. He is streamed and stood at the same
+    place in both worlds.
+  - Route-Mission-v1907 (the choke step's task condition is optional, since the backyard has no active gameflow): the
+    partner choked him from behind. He was knocked out in both worlds (h10/10), and the flag is 1 in both.
+  - Earlier takes, in the past of the main map: route-bunker-stilton-v1895a/v1897a/v1898a. The past ritual characters
+    (`*_ritual.def`) are scripted actors that the NPC stream never binds, and each world runs its own copy, but they
+    are not the target of any decision. #216 recorded them as a gap and was closed with this correction.
+  - The next mission's variant follows the host's flag (map changes follow the host, chapter 97), and the flag is
+    equal in both worlds.
 - **The Duke's double, partner-made: the double now agrees between worlds (1214ke); his confrontation is not yet driven.**
   - Reconnaissance (route-palace-duke-v1899a/v1900a, confirmed runtime):
     - the Duke (`ld_spawner_duke`) is an AI NPC, unique and streamed;
@@ -148,6 +148,17 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   - Confirmed static: the confrontation (`brief_double_confront`) plays when the player is in the trigger of the
     double's room (`ld_trigger_dd_quarters/throneroom/office/garden/delilahroom`, `Entity_Double_TriggerListened`), the
     Duke is not there (`Entity_Duke_TriggerListened`), and no alarm has rung (`DEV_NLETH_ALARM_RINGED` closes it).
+  - **What starts the confrontation (confirmed static, `palace_p_lowchaos` `ld_kiscule_script`, read with
+    [d2_kiscule_graph.py](../../tools/diag/d2_kiscule_graph.py)):**
+    - It starts from the double's talk override (`AITalkNotification` on `ld_spawner_double`): the player talks to him.
+    - The talk passes a gate that `DEV_NLETH_ALARM_RINGED` closes.
+    - It then needs `player_is_in_standard_confront_loc`, which is (the player and the double both in the double's room
+      trigger, `Entity_Double_TriggerListened`) XOR (the player and the Duke both in the Duke's,
+      `Entity_Duke_TriggerListened`).
+    - Then `Bool_MissionEvent_DoubleConfrontedByPlayer` must still be false, and a once-only gate starts the scene.
+    - The room triggers filter on `arkPlayer`. In the host's world the partner's avatar is an NPC and never counts, so
+      a partner's confrontation can only play in her own world, and its outcome must reach the host from there.
+    - v1901a talked from outside the room. v1903a and v1904a entered the room but never talked.
   - Takes v1901a (the talk step teleported next to him; the identify task closed without the scene), v1902a (her double
     was elsewhere) and v1903a/v1904a (`enter_nearest`, the double alone in the quarters, six 30 s tries): no confrontation.
     The partner was undetected in the bedroom, so a remaining scene condition is not met (hypothesis: the standard
@@ -178,7 +189,7 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   4. Make the preparation (`creat_the_antidote_finished`).
   5. Use the syringe on Hypatia (`hypatia_cured`).
   Pickups and usables are shared (chapters 95 and 97, #187), so the partner can do every step.
-- **Ramsey:** the host-made outcome passes (above); the partner-made one waits for #209 (1214kc).
+- **Ramsey:** the host-made and the partner-made outcomes both pass (above; #209 was fixed on 1214kd).
 - **Breanna (The Royal Conservatory), a device chain** (`curator_p_lowchaos`, `ld_script_main`):
   1. `Task_CU_FindOutHow` (`NonlethalLearned`).
   2. `Task_CU_InvertLens`, gated by `Ashworth_Knocked_Out`.

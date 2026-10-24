@@ -1,0 +1,153 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214kf",
+      "hostDll": "A2F2CDEE42D64D2D15F6CECDC5CEEDD32FFDBA4AF58F1D429AD22D61D1ADE308",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "step11-flag": {
+      "variable": "player_has_seen_ritual",
+      "value": 1,
+      "ms": 22137
+    },
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 31,
+        "cine": 39,
+        "pos": [
+          -6.878981,
+          -14.348376,
+          0.093815
+        ],
+        "fresh": true,
+        "gameflow": [
+          229,
+          0,
+          3,
+          13,
+          0,
+          3,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4281",
+        "ka": "22/0/0",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 31,
+        "cine": 10,
+        "pos": [
+          -6.543534,
+          -15.203050,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          229,
+          0,
+          3,
+          13,
+          0,
+          3,
+          0
+        ],
+        "gfApplied": 23,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "3/19/3",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Deck"
+      }
+    },
+    "gameflowEqual": true,
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/bunker/bunker.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

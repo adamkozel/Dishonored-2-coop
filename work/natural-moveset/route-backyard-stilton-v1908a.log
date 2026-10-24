@@ -1,0 +1,162 @@
+{
+  "failure": null,
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      },
+      {
+        "step": "step02-heal",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      },
+      {
+        "step": "step03-command",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      },
+      {
+        "step": "step04-authority",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      },
+      {
+        "step": "step05-npcs",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      },
+      {
+        "step": "step06-choke",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      },
+      {
+        "step": "step07-authority",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      },
+      {
+        "step": "step08-flag",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      },
+      {
+        "step": "step09-flag",
+        "host": "disabled a0 s3/o2/m1/p0 slot62 phase0 enable_refused",
+        "client": "disabled a0 s3/o1/m2/p0 slot61 phase0 enable_refused"
+      }
+    ],
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "commands": [
+      "step03-command host coop_player_health_hold on"
+    ],
+    "commandResults": [
+      "step03-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}"
+    ],
+    "authority": [
+      {
+        "step": "step04-authority",
+        "host": [
+          "backyard_ld_spawner_stilton_1 h10/10 acq1 lease1 paused0 gp0 hs1"
+        ],
+        "client": [
+          "backyard_ld_spawner_stilton_1 h10/10 acq0 lease1 paused1 gp1 hs1"
+        ]
+      },
+      {
+        "step": "step07-authority",
+        "host": [
+          "backyard_ld_spawner_stilton_1 h10/10 acq0 lease0 paused0 gp0 hs0"
+        ],
+        "client": [
+          "backyard_ld_spawner_stilton_1 h10/10 acq0 lease0 paused0 gp0 hs0"
+        ]
+      }
+    ],
+    "npcPicks": [
+      "6 client aramis_stilton -> models/characters/def/story/aramis_stilton.def_1291 .?AVarkNPC@@ @ 1.3,60.5,298.5"
+    ],
+    "step08-flag": {
+      "variable": "stilton_is_incapacited",
+      "value": 1,
+      "ms": 389
+    },
+    "step09-flag": {
+      "variable": "stilton_is_incapacited",
+      "value": 1,
+      "ms": 368
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_backyard_p",
+        "epoch": 46,
+        "cine": 32,
+        "pos": [
+          0.412437,
+          61.573853,
+          298.460541
+        ],
+        "fresh": true,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/0/0",
+        "active": null
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/bunker/bunker_backyard_p",
+        "epoch": 46,
+        "cine": 19,
+        "pos": [
+          4.798447,
+          30.362438,
+          300.003632
+        ],
+        "fresh": true,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "2/0/0",
+        "active": null
+      }
+    },
+    "gameflowEqual": true
+  },
+  "passed": true,
+  "scope": "Campaign route steps for campaign/bunker/bunker_backyard.mapinfo in lab product mode; Dunwall fixture restored."
+}

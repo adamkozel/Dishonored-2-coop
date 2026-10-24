@@ -640,3 +640,25 @@ partner's fresh world lacks.
     27/18/10).
   - Hypothesis: a lesson action mirrored between the worlds, or the trainer's attention on the partner, keeps the
     host's trainer from attacking.
+
+### #206: what drives the trainer (2026-10-24)
+
+- **The script (confirmed static, `tutorial_p` `ld_kiscule`, read with
+  [d2_kiscule_graph.py](../../tools/diag/d2_kiscule_graph.py)):**
+  - In the combat lessons the trainer (`NPC_Corvo_Combat`) becomes an ENEMY of the `Player` entity one second after
+    `Bool_Corvo_Is_Attacking` turns true, and an ally again when it turns false. This is a per-entity relation with
+    the local player, not with the player faction.
+  - When he enters the search behaviour (`BH_SEARCH`), `NpcPsychicAwareness` forces his awareness of the `Player`.
+  - `Bool_Corvo_Is_Attacking` is set by the lesson events: `Combat_Next_Task`, the `corvo_combat_idle` scene,
+    `Combat_Choke_Success`, `Corvo_Asleep` and `Combat_Fatality_Success`. A check runs 7 s after each lesson task
+    (block, parry, off-balance choke, fatality) activates.
+- **Not the trigger mirror (confirmed runtime, v1883b):** from the crossbow's end through the parry lesson
+  (steps 13 to 16) the host's trigger mirror received nothing new from the partner (received 26 throughout).
+- **In the partner's world**, new entities keep entering the stealth area's audio volume about every 20 s while the
+  partner idles there. Hypothesis: the stealth lesson respawns its trainer in her world.
+- **Next:** the diagnostic routes
+  [training-pair-targets-v1909](../../work/natural-moveset/routes/training-pair-targets-v1909.json) (partner idle)
+  and [training-pair-follow-targets-v1909](../../work/natural-moveset/routes/training-pair-follow-targets-v1909.json)
+  (partner beside the host). Every few presses they record the trainer's native combat target, attention list and
+  AI pause state in both worlds (`d2_route_actions.py` `targets`), and each world's Kiscule trace through the grab
+  lesson.

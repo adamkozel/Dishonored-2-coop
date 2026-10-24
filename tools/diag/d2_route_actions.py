@@ -25,6 +25,8 @@ Usage: python -I d2_route_actions.py <repo> <action> '<json args>' | @<json file
               block in short RB presses; a press that becomes a grab (player state 41, the choke)
               is held on until the choke ends (choke an off-balance enemy)
 Every action takes "role": "host" (default) or "client" (#197: a partner completing a non-lethal outcome).
+cycle and grab take "targets": str (#206): every "targetsEvery" cycles or presses (3 and 8), print the native combat
+target and attention list of the nearest NPC matching it, in this world and, with "targetsRoles", the others.
 Task names come from the gameflow name cache (work/natural-moveset/gameflow-names.local.json).
 Pitch is set with Set-ObserverPitch.ps1 (setviewpos ignores its pitch argument).
 """
@@ -475,6 +477,8 @@ def cycle(a):
             packet([b] if isinstance(b, str) else b, item['ms'] + 50, rt=item.get('rt', 0))
             time.sleep(item['ms'] / 1000)
         n += 1
+        if a.get('targets') and n % a.get('targetsEvery', 3) == 1:
+            print_targets(a, start, n)
         if (a.get('untilLogic') and logic() != 1) or done(a['until']):
             print(json.dumps({'cycles': n, 'seconds': round(time.time() - start, 1), 'logic': logic(), 'active': active_tasks()}), flush=True)
             return 0
@@ -510,6 +514,8 @@ def grab(a):
         packet([], a.get('gap', 150))
         time.sleep(a.get('gap', 150) / 1000)
         n += 1
+        if a.get('targets') and n % a.get('targetsEvery', 8) == 1:
+            print_targets(a, start, n)
         if done(a['until']):
             print(json.dumps({'presses': n, 'grabs': grabs, 'seconds': round(time.time() - start, 1), 'active': active_tasks()}), flush=True)
             return 0
@@ -537,6 +543,44 @@ def target_handle(sub):
     me = status().get('localPosition') or [0, 0, 0]
     h = min(found, key=lambda e: math.hypot(e['position'][0] - me[0], e['position'][1] - me[1]))['handle']
     return int(h, 16) if isinstance(h, str) else int(h)
+
+
+def ai_targets(sub, role=None):
+    """#206: the native combat target and attention list (arkCpntAIKnowledge, native_ai_targets.h) of the nearest NPC
+    matching sub in role's world, each handle named: this player, the partner's avatar (d2coop_probe_*) or its name."""
+    global ROLE
+    saved, ROLE = ROLE, role or ROLE
+    try:
+        h = target_handle(sub)
+        if h is None:
+            return {'role': ROLE, 'npc': None}
+        try:
+            t = probe('--ai-targets', h)
+            ents = probe('--entities')['entities']
+            me = probe('--player').get('player')
+        except RuntimeError:
+            return {'role': ROLE, 'npc': h, 'read': False}
+        names = {int(e['handle'], 16): 'player' if e.get('pointer') == me else
+                 'partner' if e['name'].startswith('d2coop_probe_') else e['name'] for e in ents}
+
+        def who(r):
+            return {'who': 'none' if not r['handle'] else names.get(r['handle'], f'unresolved {r["handle"]:#x}'), 'flags': r['flags'],
+                    'perceived': r['perceived'], 'cached': r['cached']}
+        ai = {}
+        for kind in ('decision', 'reflex', 'attack'):
+            try:
+                s = probe(f'--ai-{kind}', h)
+                ai[kind] = [s['pauseReferences'], s['started'], s['activeCount']]
+            except (RuntimeError, KeyError):
+                ai[kind] = None
+        return {'role': ROLE, 'npc': h, 'combat': who(t['combat']), 'attention': [who(r) for r in t['attention']], 'ai': ai}
+    finally:
+        ROLE = saved
+
+
+def print_targets(a, start, n):
+    for role in [ROLE] + [r for r in a.get('targetsRoles', []) if r != ROLE]:
+        print(json.dumps({'targets': True, 'seconds': round(time.time() - start, 1), 'n': n, **ai_targets(a['targets'], role)}), flush=True)
 
 
 def grab_react(a):
@@ -650,6 +694,20 @@ def main():
     REPO = sys.argv[1]
     raw = sys.argv[3] if len(sys.argv) > 3 else '{}'
     args = json.load(open(raw[1:], encoding='utf-8-sig')) if raw.startswith('@') else json.loads(raw)
+    if raw.startswith('@') and args.get('kisculeTrace'):
+        # #206: keep each world's Kiscule trace (coop_kiscule_trace on, started by an earlier route step) beside the
+        # action's arguments in the take folder: <step>-kiscule-trace-<role>.json.
+        import atexit
+        stem = raw[1:][:-len('-action-args.json')] if raw.endswith('-action-args.json') else raw[1:]
+        def keep():
+            for role in ('host', 'client'):
+                src = f'{REPO}/work/lab-instances/{role}/coop-status.json.kiscule-trace.json'
+                try:
+                    with open(src, 'rb') as f, open(f'{stem}-kiscule-trace-{role}.json', 'wb') as g:
+                        g.write(f.read())
+                except OSError as e:
+                    print(json.dumps({'kisculeTrace': role, 'error': str(e)}), flush=True)
+        atexit.register(keep)
     ROLE = args.get('role', 'host')
     if ROLE not in ('host', 'client'):
         raise SystemExit('role must be host or client')

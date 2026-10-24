@@ -1,0 +1,68 @@
+[
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 20000
+ },
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_player_health_hold on",
+  "settle": 500
+ },
+ {
+  "do": "authority",
+  "match": "stilton",
+  "settle": 500
+ },
+ {
+  "do": "npcs",
+  "near": [
+   1.31,
+   60.46
+  ],
+  "settle": 500
+ },
+ {
+  "do": "choke",
+  "name": "aramis_stilton",
+  "near": [
+   1.31,
+   60.46
+  ],
+  "crouch": true,
+  "dist": 1.0,
+  "walkMs": 800,
+  "ms": 6000,
+  "max": 1,
+  "settle": 10000
+ },
+ {
+  "do": "authority",
+  "match": "stilton",
+  "settle": 500
+ },
+ {
+  "do": "flag",
+  "role": "client",
+  "entity": "storyflags",
+  "name": "stilton_is_incapacited",
+  "value": 1,
+  "ms": 30000,
+  "settle": 1000
+ },
+ {
+  "do": "flag",
+  "role": "host",
+  "entity": "storyflags",
+  "name": "stilton_is_incapacited",
+  "value": 1,
+  "ms": 30000,
+  "settle": 1000
+ }
+]

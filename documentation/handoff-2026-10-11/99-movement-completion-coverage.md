@@ -472,6 +472,16 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 
 [apply_completion_audit.py](../../work/natural-moveset/apply_completion_audit.py) checks two things: that every cited case passed in its take's `result.json`, and that every cited video exists. If anything fails, it refuses the whole audit. Otherwise it records the decision on the item (`phase_status`, `complete`, `completion`) and regenerates the requirements document.
 
+**Final audit reconciliation (2026-10-24, [reconcile_visual_validation_v1909.py](../../work/natural-moveset/reconcile_visual_validation_v1909.py)).**
+- The applier recorded each audit's reviewed videos and passing takes on the item, but never updated its
+  `visual_validation` or `runtime_binding` column. 23 complete items still showed a pre-audit visual value (16
+  `not_accepted`, 7 `bounded_actual_game_*`), and 8 showed `not_verified`.
+- The reconciliation re-checked each of them: every cited video exists and has a verdict, and every cited case passed
+  in its take. It set `accepted_completion_audit` and `native_runtime_completion_audit`, and kept the old values in
+  `visual_validation_before` and `runtime_binding_before`.
+- The checklist now reads 103 complete, 103 runtime-bound and 103 with accepted visuals of 105; the other 2 are not
+  applicable or excluded by policy. The applier now sets both columns itself.
+
 | Audit | Items complete |
 |---|---|
 | completion-audit-v1323-locomotion | 10 |

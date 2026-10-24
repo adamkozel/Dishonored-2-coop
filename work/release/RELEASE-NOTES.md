@@ -1,8 +1,18 @@
-# Dishonored 2 Corvo/Emily co-op 0.9.3
+# Dishonored 2 Corvo/Emily co-op 0.9.4
 
 Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## Fixed in 0.9.4
+
+- **The partner's combat choke.** After a timed parry leaves an enemy off-balance, the partner can now grab and choke
+  them, as the host always could. The enemy is knocked out in both worlds, so the partner can complete non-lethal
+  outcomes such as Ramsey's ([#209](https://github.com/adamkozel/Dishonored-2-coop/issues/209)).
+- **Story characters agree between the two worlds.** Civilians who belong to the story, such as the Duke's double, now
+  stand and move the same way in both games. Before, each game ran their routine on its own whenever neither player
+  was within 15 m of them.
+- Both players need 0.9.4.
 
 ## Fixed in 0.9.3
 
@@ -14,7 +24,7 @@ Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, 
   (`d2coop\coop-status.json.*`: the connection, the mission, checkpoints and difficulty) along with the diagnostics.
   They are written again, about once a second, so a bug report can include them. The full diagnostics stay off unless
   you turn them on.
-- Both players need 0.9.3.
+- Both players needed 0.9.3.
 
 ## Fixed in 0.9.2
 
@@ -111,7 +121,7 @@ Emily's powers now act on the host's characters as they do in single player ([#1
 ## Install (both players)
 
 1. Close Dishonored 2. If an earlier version of the mod is installed, run its `Uninstall.cmd` first.
-2. Download `d2coop-v0.9.1.zip` from the GitHub release and extract it anywhere.
+2. Download `d2coop-v0.9.4.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.
@@ -174,13 +184,16 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 ## Known limitations
 
 - Two players only.
-- A Corvo partner's *Blink Assault* kick staggers the host's guards rather than knocking them down, the host's side of her *Devouring Swarm* is always the base swarm (*Bigger Swarm* acts only in her game), and possessing corpses or rats happens only in her game ([#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)).
+- A Corvo partner's *Blink Assault* kick staggers the host's guards rather than knocking them down, possessing rats or fish happens only in her game, and possessing a corpse is unverified ([#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)).
 - In the first mission (*A Long Day in Dunwall*) the partner chooses Corvo or Emily on the game's own choice screen rather than the *Character* dialog.
 - *Memories of Training* (the tutorial): Corvo fails his stealth lessons when he notices either player, in either game, and a failed lesson restarts both games at the start of the lesson. Let one player do the stealth lessons while the other stays well out of his sight. When both players start the tutorial together, Corvo's combat lessons can stall (he stops attacking). A partner who joins after the stealth lessons avoids it ([#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206)).
-- The partner cannot grab an enemy that is off-balance after a parry (the non-lethal combat choke); stealth chokes from behind and all attacks work. The host can, so leave combat chokes, such as Ramsey's non-lethal outcome, to the host ([#209](https://github.com/adamkozel/Dishonored-2-coop/issues/209)).
 - After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
+- Enemies hurt the partner only with sword hits so far. Their guns, grenades and other attacks, and the attacks of
+  clockwork soldiers, hounds and witches, do not reach the partner ([#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219)).
+- Non-lethal eliminations completed by the partner are verified for Ramsey and Stilton. For the other targets, let the
+  host complete the non-lethal steps ([#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220)).
 - In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.
 - With **Deadly Shade**, the host's guards do not fight Emily's deadly shadow itself, although its kills happen in both games ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)).
 - The partner's movement banks are rebuilt from your game's animations. On a different CPU the values can differ from ours in their last digits, which is invisible.

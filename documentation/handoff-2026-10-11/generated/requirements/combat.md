@@ -1,6 +1,6 @@
 # combat: complete requirement records
 
-Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-19T15:39:06.380324+02:00. All fields below retain the catalog wording.
+Source [review-catalog.json](<../../../../work/natural-moveset/review-catalog.json>); captured 2026-10-24T20:40:37.938648+02:00. All fields below retain the catalog wording.
 
 ## sword_draw_holster
 
@@ -845,7 +845,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and 
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_block_impact_and_timed_parry_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "parry directions",
@@ -896,7 +896,8 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and 
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "not_accepted"
 }
 ````
 
@@ -918,7 +919,7 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and 
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_block_impact_and_timed_parry_both_roles",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "parry recovery",
@@ -965,7 +966,8 @@ Visual sweep 1260: accepted (corvo accept, emily accept). Block entry, hold and 
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "not_accepted"
 }
 ````
 
@@ -987,7 +989,7 @@ Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rare
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_counter_kill_finisher_shared_host_source",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "counterattack",
@@ -1045,7 +1047,8 @@ Audit 1285: Emily's counter-kill parked after takes 1258y-1258ak (the guard rare
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "not_accepted"
 }
 ````
 
@@ -1383,8 +1386,8 @@ Candidates require animation review and appropriate game-state/contact binding. 
     "emily"
   ],
   "authoring": "candidates",
-  "runtime_binding": "not_verified",
-  "visual_validation": "not_accepted",
+  "runtime_binding": "native_runtime_completion_audit",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "stagger knockdown recovery",
@@ -1459,7 +1462,9 @@ Candidates require animation review and appropriate game-state/contact binding. 
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "not_accepted",
+  "runtime_binding_before": "not_verified"
 }
 ````
 
@@ -1482,7 +1487,7 @@ Audit 1285: free-camera take coverage-v1284a produced no native kick in 8 close 
   ],
   "authoring": "candidates",
   "runtime_binding": "partial_native_steam_player_kick_outcome_host_source_mission_map",
-  "visual_validation": "not_accepted",
+  "visual_validation": "accepted_completion_audit",
   "native_reference_family_count": 195,
   "priority": 2,
   "title": "kick or shove if present",
@@ -1549,7 +1554,8 @@ Audit 1285: free-camera take coverage-v1284a produced no native kick in 8 close 
     ],
     "lifecycle": "See method."
   },
-  "complete": true
+  "complete": true,
+  "visual_validation_before": "not_accepted"
 }
 ````
 

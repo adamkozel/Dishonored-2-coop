@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-24T17:17:53+02:00",
+  "UpdatedAt": "2026-10-25T00:25:01+02:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Movement completion (#11, chapter 99): 101/105 on branch stage3/movement-completion-12 (power upgrades audited in v1511; 1214eh drains the receive queue every frame, 1214ej/ek add the upgrade effects, Double Swarm and product-scope rats and props). Open: wall_and_window_variants (1510 window takedown with Bend Time holding the overseer), enemy_body_size_variants (gravehound 1508, knockdown 1507, seated, clockwork). World outcomes of upgrades are #117 (stage 4).",
+  "NextAction": "Merge #218 (0.9.4). Then 1214kg (uncommitted source: #219 general enemy-hit relay, #222 auto-host, #220 probe --storyflags): build, deploy, and test with peer-loss-dunwall-vm-v1909 and host-loss-dunwall-vm-v1909 (#221), coop-autohost-v1909a (#222), powers-institute-vm-v1909 (cast step), the #206 tutorial diagnostics (training-pair-targets-v1909, training-pair-follow-targets-v1909) and a #219 enemy-hit take. Then #220 and the 0.9.5 nine-mission regression with casts and story-flag diffs.",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22879,5 +22879,29 @@
     "Candidate": "candidate-npc-combat-v1214kb",
     "Evidence": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.3; d2coop-v0.9.3.zip SHA-256 F60D70B76AB992DB262DBD44FE48A621FC4CE4D2FA682A77D40A4A3333F82E04; release-install-v1889b 8/8; product-two-account-v1891a pass",
     "Status": "published, chapter 90"
+  },
+  "Campaign094": {
+    "Card": "#218",
+    "Candidate": "candidate-npc-combat-v1214kf (0.9.4)",
+    "Evidence": "two accounts (host Corvo, VM partner Emily), product mode, co-op saves, one passing take per mission, all on the first attempt: campaign-dunwall/eotw/institute/madinventor/curator/dust/bunker/palace/empress-vm-v1906a (the Grand Palace on Easy through the difficulty sync)",
+    "Status": "done, chapter 109 (The campaign on 0.9.4)"
+  },
+  "Release094": {
+    "Card": "#218",
+    "Candidate": "candidate-npc-combat-v1214kf",
+    "Evidence": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.4; d2coop-v0.9.4.zip SHA-256 5250E17EC496FEFA223098A2BC949C06C96B41DFD816CABC42A4BF0E96CDE15B; release-install-v1906a 8/8; product-two-account-v1906a pass",
+    "Status": "published, chapter 90"
+  },
+  "FinalAudit": {
+    "Chapter": "112",
+    "Open": [
+      "#221 abrupt peer loss (stage 2)",
+      "#219 enemy hits other than swords on the partner (stage 4)",
+      "#220 partner non-lethal branches and story-flag diffs (stage 5)",
+      "#206 tutorial combat lessons (stage 6)",
+      "#222 hosting without F7 (stage 7)",
+      "campaign routes cast no power (goal criterion 2): cast steps in the next regression"
+    ],
+    "MovementChecklist": "103 of 105 complete, runtime-bound and visually accepted after the column reconciliation (chapter 99)"
   }
 }
