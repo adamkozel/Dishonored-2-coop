@@ -512,17 +512,35 @@ def grab(a):
     return 1
 
 
-def vulnerable_windows():
-    """Off-balance windows applied to this player's replicas so far (1214kc npc-stream vulnerableApplies, summed)."""
-    return sum(int(e.get('vulnerableApplies', 0)) for e in status('.npc-stream.json').get('entries', []))
+def vulnerable_windows(handle=None):
+    """Off-balance windows applied to this player's replicas so far (1214kc npc-stream vulnerableApplies): of the NPC
+    with this handle, or of all of them."""
+    return sum(int(e.get('vulnerableApplies', 0)) for e in status('.npc-stream.json').get('entries', [])
+               if handle is None or int(e.get('handle', 0)) == handle)
+
+
+def target_handle(sub):
+    """The handle (an int, as the npc-stream status has it) of the nearest NPC matching sub, the one face() turns to."""
+    try:
+        found = npcs(sub)
+    except RuntimeError:
+        return None
+    if not found:
+        return None
+    me = status().get('localPosition') or [0, 0, 0]
+    h = min(found, key=lambda e: math.hypot(e['position'][0] - me[0], e['position'][1] - me[1]))['handle']
+    return int(h, 16) if isinstance(h, str) else int(h)
 
 
 def grab_react(a):
     """Block in presses as grab does, but react to the stagger as a player would: when a new off-balance window reaches
     this player's replica (vulnerableApplies grows, 1214kc), release, face the target and tap grab until the choke
-    starts or the window passes (route-dunwall-partnergrab-v1890b: three windows, no press landed in one)."""
+    starts or the window passes (route-dunwall-partnergrab-v1890b: three windows, no press landed in one).
+    Only the target's own windows count (route-dunwall-nonlethal-v1894b: 28 of 30 windows were another NPC, and the one
+    grab caught a guard)."""
     start, n, grabs, windows, taps = time.time(), 0, 0, 0, 0
-    seen = vulnerable_applies_at_start = vulnerable_windows()
+    target = target_handle(a['face'])
+    seen = vulnerable_applies_at_start = vulnerable_windows(target)
     face(a['face'])
 
     def tap_window():
@@ -548,7 +566,7 @@ def grab_react(a):
             if player_state(a.get('state', 41)):
                 grabbed = True
                 break
-            now = vulnerable_windows()
+            now = vulnerable_windows(target)
             if now > seen:
                 seen = now
                 windows += 1
@@ -562,11 +580,11 @@ def grab_react(a):
         time.sleep(a.get('gap', 150) / 1000)
         n += 1
         if done(a['until']):
-            print(json.dumps({'presses': n, 'grabs': grabs, 'windows': windows, 'taps': taps, 'seconds': round(time.time() - start, 1), 'active': active_tasks()}), flush=True)
+            print(json.dumps({'presses': n, 'grabs': grabs, 'windows': windows, 'taps': taps, 'target': target, 'seconds': round(time.time() - start, 1), 'active': active_tasks()}), flush=True)
             return 0
         if n % a.get('faceEvery', 6) == 0:
             face(a['face'])
-    print(json.dumps({'presses': n, 'grabs': grabs, 'windows': windows, 'taps': taps, 'windowsBefore': vulnerable_applies_at_start, 'timeout': True, 'active': active_tasks()}), flush=True)
+    print(json.dumps({'presses': n, 'grabs': grabs, 'windows': windows, 'taps': taps, 'target': target, 'windowsBefore': vulnerable_applies_at_start, 'timeout': True, 'active': active_tasks()}), flush=True)
     return 1
 
 

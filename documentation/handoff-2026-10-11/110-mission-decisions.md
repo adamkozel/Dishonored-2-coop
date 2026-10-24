@@ -88,6 +88,24 @@ non-lethal branches with the partner acting, and diff the story flags at each mi
   - Every gameflow task advanced identically in both worlds.
   - `ramsey_in_vault` is 1 in both worlds.
 
+### Ramsey in the vault, partner-made, on 1214kd (#197, #209)
+
+With the combat choke fixed (#209, below), the partner can take Ramsey's whole non-lethal outcome. The lab routes
+`dunwall-nonlethal-partner-v1892/v1893/v1894` are partner-led (`-LeadRole client`) with the `grab_react` action.
+
+| Take | Change | Result |
+|---|---|---|
+| [route-dunwall-nonlethal-v1892a](../../work/natural-moveset/route-dunwall-nonlethal-v1892a) | the escape guards' AI held from the start (as v1883d) | Ramsey was never off-balance during the fight: no knockout. |
+| [v1893a](../../work/natural-moveset/route-dunwall-nonlethal-v1893a) | the guards held only after the knockout | She knocked him out (5 windows, 2 grabs, 158 s), took the ring, opened the safe room and carried him in. Arriving there completed the outcome in both worlds ("Place Mortimer Ramsey in the Safe Room" ticked, the objective updated, `Task_DW_LeaveTower` next). The route's drop and lock steps expected the host-made order, so the take failed. |
+| [v1894a](../../work/natural-moveset/route-dunwall-nonlethal-v1894a) | ends at the safe room with the story-flag checks | The host accepted her hold (`host_paired_released`), but the choke ended before the knockout (`client_paired_ended`): fight variance. |
+| [v1894b](../../work/natural-moveset/route-dunwall-nonlethal-v1894b) | | 28 of 30 windows belonged to another NPC, and her one grab caught a guard. `grab_react` now follows only its target's windows. |
+| [v1894c](../../work/natural-moveset/route-dunwall-nonlethal-v1894c) | target-only windows | Ramsey was not off-balance during the fight. |
+
+- **What the fight decides:** whether Ramsey ends up off-balance near her after a timed parry, with the guards out of
+  the way. Every mechanism the outcome needs worked in at least one take: the vulnerable bit, the forced hold, the
+  knockout in both worlds, the shared ring and safe-room door, and the carried body completing the task.
+- `Run-RamseyPartner-v1894.sh` repeats the take with new letters until one passes.
+
 ### The other non-lethal branches (#197): static plan
 
 Read with `tools/diag/d2_mission_route.py`, `d2_kiscule_graph.py` and `d2_resource_index.py` on the game copy (read-only;
