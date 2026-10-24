@@ -97,6 +97,39 @@ Release 0.9.0 left deaths and checkpoints unshared in real co-op sessions (fixed
   - v1765 confirms it in the use step and in Settle.
 - **Endings:** the stalled endings (Royal Conservatory v1762b, Grand Palace v1762a) were route-step misfires: the talk and use steps count any scene change as a hit. Both endings passed on the next attempts, as Meagan's endings did in four other missions.
 
+## The campaign on 0.9.3 (#213, 1214kb)
+
+The release binary of 0.9.3 (candidate 1214kb, with the difficulty sync of #177) plays the nine missions on two Steam
+accounts: the host is Corvo on this PC, and the partner is Emily in the lab VM. Both games are in product mode
+(`coop_product_auto`) on co-op saves. The runner is
+[Run-Campaign-v1889.sh](../../work/natural-moveset/Run-Campaign-v1889.sh), with the harness Route-MissionVM-v1889 and
+each mission's route from its last passing take; re-runs use Run-Campaign-v1889b.sh with a plan file.
+
+| Mission | Passing take | Earlier attempts |
+|---|---|---|
+| A Long Day in Dunwall (deaths) | [campaign-dunwall-vm-v1889a](../../work/natural-moveset/campaign-dunwall-vm-v1889a) | |
+| Edge of the World (death) | [campaign-eotw-vm-v1889a](../../work/natural-moveset/campaign-eotw-vm-v1889a) | |
+| The Good Doctor | [campaign-institute-vm-v1889a](../../work/natural-moveset/campaign-institute-vm-v1889a) | |
+| The Clockwork Mansion | [campaign-madinventor-vm-v1889a](../../work/natural-moveset/campaign-madinventor-vm-v1889a) | |
+| The Royal Conservatory | [campaign-curator-vm-v1889b](../../work/natural-moveset/campaign-curator-vm-v1889b) | v1889a: the archived-journals note use did not register (the host's focus never reached the note), as in v1750a and v1762a |
+| The Dust District | [campaign-dust-vm-v1889a](../../work/natural-moveset/campaign-dust-vm-v1889a) | |
+| A Crack in the Slab | [campaign-bunker-vm-v1889a](../../work/natural-moveset/campaign-bunker-vm-v1889a) | |
+| The Grand Palace | [campaign-palace-vm-v1890a](../../work/natural-moveset/campaign-palace-vm-v1890a), on Easy (see below) | v1889a: the closing talk with Meagan did not start the mission end, as in v1762a. v1889b and v1889c: the host died in the Duke fight; both worlds went to GameOver together. v1889d (Easy): the Duke died, then the attack step re-picked the nearest luca_abele by name and teleported the host into the guards (fixed in Route-MissionVM-v1890) |
+| Death to the Empress | [campaign-empress-vm-v1889a](../../work/natural-moveset/campaign-empress-vm-v1889a), through the credits to the menu | |
+
+- **Every passing take:**
+  - the right characters (host Corvo, partner Emily);
+  - equal gameflow in both worlds at every step;
+  - both games end on the next mission's map;
+  - restoration passed.
+- **Every failure was the route or combat, not a divergence:**
+  - two route-step misfires (a use and a talk that did not register);
+  - one host death in the Duke fight, where both worlds went to GameOver together (the shared death works as designed).
+- **The first run (campaign-*-vm-v1888a) failed before playing.** Its runner read the CRLF plan file's carriage return
+  into every steps path; Run-Campaign-v1889.sh strips it.
+- **The Grand Palace on Easy:** the route sets the host's difficulty to Easy with the native setter (`coop_difficulty_set 0`), and back to Medium at the end. The partner follows both changes through the difficulty sync (#177): both worlds ran the Easy preset through the mission and its level transitions, then Medium (`step03-difficulty`, `step26-difficulty`). On Medium a big hit in the Duke fight gets through the lab's health hold. Difficulty is a player's choice, and the other eight missions ran on Medium.
+- **Harness:** [Route-MissionVM-v1890](../../work/natural-moveset/Route-MissionVM-v1890.ps1) keeps the attacked NPC by its handle. [v1891](../../work/natural-moveset/Route-MissionVM-v1891.ps1) also stops the lab's idle local partner instance during two-account takes, since it rendered beside the host with about as much CPU as the host game.
+
 ## Difficulty sync (#177, 1214kb)
 
 **Native path (d2-ghidra, confirmed static):**
