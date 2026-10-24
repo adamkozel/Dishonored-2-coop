@@ -1,8 +1,27 @@
-# Dishonored 2 Corvo/Emily co-op 0.9.1
+# Dishonored 2 Corvo/Emily co-op 0.9.2
 
 Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## Fixed in 0.9.2
+
+- **Smoother frame pacing.** Co-op sessions stuttered: the mod spent most of each frame reading game memory the slow
+  way, and it also wrote diagnostic files. Native reads are now direct, and the diagnostic files are off unless you
+  turn them on ([#195](https://github.com/adamkozel/Dishonored-2-coop/issues/195)). In our tests the frame-time spikes
+  are as rare as with the mod off, on both PCs.
+- **Shared pickups work again.** A diagnostic hook added for levers had turned shared pickups off in every world, so
+  each player could take their own copy of everything
+  ([#189](https://github.com/adamkozel/Dishonored-2-coop/issues/189)).
+- **Joining a host who continued from a save.** The partner's world now loses the pickups the host already took, and
+  doors the host unlocked with a key are unlocked for the partner too. Characters the host already killed were already
+  handled ([#189](https://github.com/adamkozel/Dishonored-2-coop/issues/189)).
+- **Pickups outside the shared list.** A pickup that one player takes in an area the other has not visited yet leaves
+  the other player's world too, a little later ([#203](https://github.com/adamkozel/Dishonored-2-coop/issues/203)).
+- **The end of *Memories of Training*.** The partner's game no longer starts the tutorial again when both players
+  return to the main menu. A partner who joins midway starts co-op once they close the tutorial page
+  ([#174](https://github.com/adamkozel/Dishonored-2-coop/issues/174)).
+- Both players need 0.9.2.
 
 ## Fixed in 0.9.1
 
@@ -145,7 +164,9 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 - Two players only.
 - A Corvo partner's *Blink Assault* kick staggers the host's guards rather than knocking them down, the host's side of her *Devouring Swarm* is always the base swarm (*Bigger Swarm* acts only in her game), and possessing corpses or rats happens only in her game ([#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)).
 - In the first mission (*A Long Day in Dunwall*) the partner chooses Corvo or Emily on the game's own choice screen rather than the *Character* dialog.
-- *Memories of Training* (the tutorial): Corvo fails his stealth lessons when he notices either player, in either game, and a failed lesson restarts both games at the start of the lesson. Let one player do the stealth lessons while the other stays well out of his sight. Start the tutorial together: a partner who joins it midway is placed beside the host, but the co-op systems do not start.
+- *Memories of Training* (the tutorial): Corvo fails his stealth lessons when he notices either player, in either game, and a failed lesson restarts both games at the start of the lesson. Let one player do the stealth lessons while the other stays well out of his sight. When both players start the tutorial together, Corvo's combat lessons can stall (he stops attacking). A partner who joins after the stealth lessons avoids it ([#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206)).
+- Each player's game runs at its own difficulty. The partner's world uses the difficulty of the partner's own co-op profile (Medium in our tests), not the one the host chose, so enemies can be tougher or weaker in one of the two worlds ([#177](https://github.com/adamkozel/Dishonored-2-coop/issues/177)).
+- The partner cannot grab an enemy that is off-balance after a parry (the non-lethal combat choke); stealth chokes from behind and all attacks work. The host can, so leave combat chokes, such as Ramsey's non-lethal outcome, to the host ([#209](https://github.com/adamkozel/Dishonored-2-coop/issues/209)).
 - After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
