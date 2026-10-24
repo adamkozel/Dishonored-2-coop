@@ -45,3 +45,30 @@ task) and the **story flags**. Labels follow the handoff rules: confirmed static
 non-lethal sequence (the Ramsey vault, the Hypatia cure, the Jindosh shock, the Breanna shrine, the Duke's double,
 Stilton, Delilah). The campaign routes take the lethal branches. The final two-account campaign validation will take
 non-lethal branches with the partner acting, and diff the story flags at each mission's end.
+
+### Ramsey in the vault, partner-led (#197, in progress)
+
+- **The sequence (confirmed runtime, gameflow names):** `Task_DW_NonLethal_KnockoutRamsey`, then `_GetRing`, then
+  `_DropRamseyInVault`, then `_CloseTheSafeRoom`. The safe room is behind `ld_ring_locker_01_2_open`/`_lock`
+  (-36.2, -171.1), and `ld_target_vaultroom_1` (-47.3, -177.4) is inside it.
+- **Harness:**
+  - [Route-Mission-v1882.ps1](../../work/natural-moveset/Route-Mission-v1882.ps1) adds `choke` (hold RB behind the NPC,
+    optionally crouched and creeping in) and `drop` (put down a carried body), for a route led by the partner
+    (`-LeadRole client`).
+  - The route actions ([d2_route_actions.py](../../tools/diag/d2_route_actions.py)) take `"role": "client"`. `face` and
+    the walking heading pick the nearest matching NPC (the map has a second, audience Ramsey).
+- **Takes (1214jv, lab):**
+
+  | Take | Approach | Result |
+  |---|---|---|
+  | [route-dunwall-nonlethal-v1881a](../../work/natural-moveset/route-dunwall-nonlethal-v1881a) | choke from 0.8 m behind | His confrontation started at the first approach; RB only blocked. |
+  | [v1881b](../../work/natural-moveset/route-dunwall-nonlethal-v1881b) | block, then grab him off-balance | 235 presses in 4 minutes, no grab (#209). |
+  | [v1881c](../../work/natural-moveset/route-dunwall-nonlethal-v1881c) | `chase_hold` behind him while he walks | He never walks: he waits at his dialogue spot (-44.1, -120.1). |
+  | [v1882a](../../work/natural-moveset/route-dunwall-nonlethal-v1882a) | crouched, 2.5 m back, creeping in | The same confrontation, with his guards. |
+
+- **Finding:**
+  - Ramsey's encounter is a scripted fight, so his non-lethal outcome needs the combat choke: block him, then grab him
+    while he is off-balance.
+  - A partner cannot grab an off-balance host-owned NPC (#209): the parry is relayed, but her native grab never
+    starts on the replica.
+  - Until #209 is fixed, the host has to take Ramsey's non-lethal outcome.
