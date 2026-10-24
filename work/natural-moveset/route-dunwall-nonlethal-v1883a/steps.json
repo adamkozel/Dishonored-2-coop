@@ -1,0 +1,214 @@
+[
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_bedroom",
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_nearmayhew",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_mayhew",
+  "settle": 6000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_ai_pause ld_spawner_ramsey_escape 240",
+  "settle": 500
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_ai_pause ld_spawner_guard_escape_1 240",
+  "settle": 500
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_ai_pause ld_spawner_guard_escape_2 240",
+  "settle": 500
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 1000
+ },
+ {
+  "do": "choke",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "until": "Task_DW_NonLethal_GetRing",
+  "crouch": true,
+  "dist": 2.5,
+  "walkMs": 1400,
+  "ms": 5000,
+  "max": 6,
+  "settle": 4000
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "loot",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "settle": 6000
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_2_open",
+  "z": 68.0,
+  "settle": 8000,
+  "offsets": [
+   [
+    -0.8,
+    0
+   ],
+   [
+    -0.6,
+    0
+   ],
+   [
+    -1.0,
+    0
+   ],
+   [
+    -0.7,
+    0.3
+   ],
+   [
+    -0.7,
+    -0.3
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "carry",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "settle": 3000
+ },
+ {
+  "do": "at",
+  "pos": [
+   -46.3,
+   -176.6,
+   68.1
+  ],
+  "yaw": 210,
+  "settle": 2000
+ },
+ {
+  "do": "drop",
+  "until": "Task_DW_NonLethal_CloseTheSafeRoom",
+  "settle": 3000
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_2_lock",
+  "z": 68.0,
+  "settle": 8000,
+  "offsets": [
+   [
+    -0.8,
+    0
+   ],
+   [
+    0.8,
+    0
+   ],
+   [
+    -0.6,
+    0
+   ],
+   [
+    0.6,
+    0
+   ],
+   [
+    -0.7,
+    0.3
+   ],
+   [
+    0.7,
+    -0.3
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "flag",
+  "role": "client",
+  "entity": "storyflags",
+  "name": "ramsey_in_vault",
+  "value": 1,
+  "ms": 30000,
+  "settle": 1000
+ },
+ {
+  "do": "flag",
+  "role": "host",
+  "entity": "storyflags",
+  "name": "ramsey_in_vault",
+  "value": 1,
+  "ms": 30000,
+  "settle": 1000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_ai_pause off",
+  "settle": 500
+ }
+]
