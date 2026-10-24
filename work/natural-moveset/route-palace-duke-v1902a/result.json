@@ -1,0 +1,126 @@
+{
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot62 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step02-heal",
+        "host": "armed a1 s0/o0/m0/p0 slot62 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step03-trigger",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot61 phase0 armed",
+        "client": "mirrored_save_landed a1 s1/o0/m1/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step04-trigger",
+        "host": "mirrored_save_landed a1 s3/o2/m1/p0 slot61 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step05-authority",
+        "host": "mirrored_save_landed a1 s3/o2/m1/p0 slot61 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step06-at",
+        "host": "mirrored_save_landed a1 s3/o2/m1/p0 slot61 phase0 both_death_screens_ready",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot61 phase0 both_death_screens_ready"
+      }
+    ],
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "authority": [
+      {
+        "step": "step05-authority",
+        "host": [
+          "ld_spawner_double h10/10 acq0 lease1 paused1 gp1 hs1"
+        ],
+        "client": [
+          "ld_spawner_double h10/10 acq1 lease1 paused0 gp0 hs1"
+        ]
+      }
+    ],
+    "failureState": {
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 46,
+        "cine": 24,
+        "pos": [
+          54.668671,
+          47.421768,
+          -3.816175
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          1,
+          6,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+      },
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 46,
+        "cine": 26,
+        "pos": [
+          337.676239,
+          -5.083173,
+          -3.891682
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          1,
+          6,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "host: Final gameplay/health/transport not restored (logic 1, health 70, fresh True)",
+        "client: Final gameplay/health/transport not restored (logic 1, health 70, fresh True)"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  },
+  "failure": "host died during step07-wait (GameOver)",
+  "passed": false,
+  "scope": "Campaign route steps for campaign/palace/palace.mapinfo in lab product mode; Dunwall fixture restored."
+}

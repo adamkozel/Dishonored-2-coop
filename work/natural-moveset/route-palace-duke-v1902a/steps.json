@@ -1,0 +1,55 @@
+[
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 20000
+ },
+ {
+  "do": "heal",
+  "on": true,
+  "settle": 1000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_player_reach_palace",
+  "settle": 8000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_task_entering_palace",
+  "settle": 8000
+ },
+ {
+  "do": "authority",
+  "match": "double",
+  "settle": 500
+ },
+ {
+  "do": "at",
+  "pos": [
+   337.65,
+   -3.38,
+   -2.0
+  ],
+  "yaw": 90,
+  "settle": 3000
+ },
+ {
+  "do": "wait",
+  "ms": 40000,
+  "settle": 5000
+ },
+ {
+  "do": "authority",
+  "match": "double",
+  "settle": 500
+ },
+ {
+  "do": "npcs",
+  "near": [
+   337.65,
+   -3.38
+  ],
+  "settle": 500
+ }
+]

@@ -367,7 +367,7 @@ void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
     unsigned bound=npcEnabledChannels();
     catalog.erase(std::remove_if(catalog.begin(),catalog.end(),[&](const auto& n){
         if(npcNearestPlayerSq(n.npc.position)>kNpcRelevanceAdd*kNpcRelevanceAdd)return true;
-        if(npcCivilian(n)&&npcNearestPlayerSq(n.npc.position)>kNpcCivilianRelevanceAdd*kNpcCivilianRelevanceAdd)return true;
+        if(npcCivilian(n)&&!npcStoryDefinition(n.npc.definition)&&npcNearestPlayerSq(n.npc.position)>kNpcCivilianRelevanceAdd*kNpcCivilianRelevanceAdd)return true;
         return std::any_of(npcChannels.begin(),npcChannels.end(),[&](const auto& c){return c.enabled&&(c.lease.binding.npc.handle==n.npc.handle||
             (c.lease.binding.npc.spawnerName==n.npc.spawnerName&&c.lease.binding.npc.definition==n.npc.definition));});}),catalog.end());
     std::stable_sort(catalog.begin(),catalog.end(),[&](const auto& a,const auto& b){return npcNearestPlayerSq(a.npc.position)<npcNearestPlayerSq(b.npc.position);});
@@ -377,14 +377,14 @@ void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
     // 1214ag: bound NPCs are tracked by arm, never by pointer: bindNpcChannel appends to
     // npcChannels, and a reallocation left the pointers dangling (take 1279a: the host
     // crashed here with an access violation while many NPCs were bound in one scan).
-    std::vector<std::array<float,2>> dist;std::vector<std::uint64_t> owners;std::vector<bool> civilian;
+    std::vector<std::array<float,2>> dist;std::vector<std::uint64_t> owners;std::vector<bool> civilian,story;
     const auto channelByArm=[](std::uint64_t arm)->NpcAuthorityChannel*{for(auto& c:npcChannels)if(c.enabled&&c.arm==arm)return &c;return nullptr;};
-    for(const auto& n:catalog){dist.push_back({playerSq(n.npc.position,outgoing.position),playerSq(n.npc.position,remote.position)});owners.push_back(0);civilian.push_back(npcCivilian(n));}
+    for(const auto& n:catalog){dist.push_back({playerSq(n.npc.position,outgoing.position),playerSq(n.npc.position,remote.position)});owners.push_back(0);civilian.push_back(npcCivilian(n));story.push_back(npcStoryDefinition(n.npc.definition));}
     for(auto& c:npcChannels){if(!c.enabled)continue;NativeNpcAuthority f{};
         if(!readNativeNpcAuthority(memoryRead,base,observedGame,c.lease.binding.npc.handle,f))continue;
-        dist.push_back({playerSq(f.npc.position,outgoing.position),playerSq(f.npc.position,remote.position)});owners.push_back(c.arm);civilian.push_back(npcCivilian(c.lease.binding));}
+        dist.push_back({playerSq(f.npc.position,outgoing.position),playerSq(f.npc.position,remote.position)});owners.push_back(c.arm);civilian.push_back(npcCivilian(c.lease.binding));story.push_back(npcStoryDefinition(c.lease.binding.npc.definition));}
     auto priority=npcRelevancePriorities(dist,kNpcRelevanceAdd*kNpcRelevanceAdd);
-    for(unsigned i=0;i<priority.size();++i)if(civilian[i])priority[i]=npcRelevanceCivilianRank(priority[i]);
+    for(unsigned i=0;i<priority.size();++i){if(story[i])priority[i]=npcRelevanceStoryRank(priority[i]);else if(civilian[i])priority[i]=npcRelevanceCivilianRank(priority[i]);}
     std::vector<unsigned> order;for(unsigned i=0;i<catalog.size();++i)order.push_back(i);
     std::stable_sort(order.begin(),order.end(),[&](unsigned a,unsigned b){return priority[a]<priority[b];});
     for(unsigned i:order){const auto& n=catalog[i];NpcAuthorityChannel* evict=nullptr;
@@ -410,7 +410,7 @@ void refreshNpcRelevance(ULONGLONG tick){
     // Retire channels whose NPC is far from both players (corpses included).
     for(auto& c:npcChannels){if(!c.enabled)continue;NativeNpcAuthority fresh{};
         if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh))continue;
-        const float drop=npcCivilian(fresh)&&!c.localPaired&&!c.hostPairedLease&&!c.hostPairedFollow?kNpcCivilianRelevanceDrop:kNpcRelevanceDrop;
+        const float drop=npcCivilian(fresh)&&!npcStoryDefinition(fresh.npc.definition)&&!c.localPaired&&!c.hostPairedLease&&!c.hostPairedFollow?kNpcCivilianRelevanceDrop:kNpcRelevanceDrop;
         if(npcNearestPlayerSq(fresh.npc.position)>drop*drop){stopNpcChannel(c,"relevance_left");++npcRelevanceDropped;}}
     npcCatalogRequest(); // 1214aa: also at the cap, so a nearer NPC can displace a far one
 }

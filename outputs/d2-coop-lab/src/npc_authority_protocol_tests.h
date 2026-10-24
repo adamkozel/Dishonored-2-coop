@@ -48,6 +48,8 @@ void npcAuthorityProtocolTests(){
      require(pr[24]==0&&pr[0]==0&&pr[23]==23,"each player ranks its own nearest NPCs; the guard 5 m from the host has rank 0");
      require(npcRelevanceDisplaces(pr[24],pr[23])&&!npcRelevanceDisplaces(pr[24],pr[1]),"the host's guard displaces the client's 24th NPC, not its nearest");
      require(!npcRelevanceDisplaces(5,6)&&npcRelevanceDisplaces(3,6),"two-rank margin against churn");
+     require(npcStoryDefinition("models/characters/def/story/luca_abele_double.def")&&!npcStoryDefinition("models/characters/def/generic/guard_male_small_01.def"),"1214ke: story characters are those under def/story/");
+     require(npcRelevanceStoryRank(9)==0&&npcRelevanceStoryRank(kNpcRelevanceUnranked)==kNpcRelevanceUnranked&&!npcRelevanceDisplaces(npcRelevanceCivilianRank(0),npcRelevanceStoryRank(4)),"1214ke: a ranked story character is first and is not evicted for a civilian");
      require(!npcRelevanceDisplaces(kNpcRelevanceUnranked,kNpcRelevanceUnranked)&&npcRelevanceDisplaces(0,kNpcRelevanceUnranked),"unranked candidates never displace; unranked bound NPCs always give way");
      require(npcRelevanceCivilianRank(0)==8&&npcRelevanceCivilianRank(kNpcRelevanceUnranked)==kNpcRelevanceUnranked,"1214ey: civilians rank 8 places behind");
      require(!npcRelevanceDisplaces(npcRelevanceCivilianRank(2),9)&&npcRelevanceDisplaces(npcRelevanceCivilianRank(0),20),"1214ey: a nearby civilian displaces only a far combat NPC");}

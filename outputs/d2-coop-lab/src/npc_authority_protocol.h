@@ -55,6 +55,12 @@ inline std::vector<unsigned> npcRelevancePriorities(const std::vector<std::array
 // must be shared; they are only bound within 15 m of a player and dropped beyond 20 m (npc_authority_stream.h).
 constexpr unsigned kNpcCivilianRankOffset=8;
 inline unsigned npcRelevanceCivilianRank(unsigned priority){return priority==kNpcRelevanceUnranked?priority:priority+kNpcCivilianRankOffset;}
+// 1214ke (#197): story characters (definitions under models/characters/def/story/) rank first and use the combat
+// radii even when they are civilians. The Duke's double (a civilian) was bound only within 15 m of a player, so each
+// world ran his routine on its own and he stood in different rooms (route-palace-duke-v1900a/v1902a): the partner
+// could not confront the host's double. A story character is never evicted for a generic NPC.
+inline bool npcStoryDefinition(const std::string& definition){return definition.find("/def/story/")!=std::string::npos;}
+inline unsigned npcRelevanceStoryRank(unsigned priority){return priority==kNpcRelevanceUnranked?priority:0u;}
 inline bool npcRelevanceDisplaces(unsigned candidate,unsigned bound){
     return candidate!=kNpcRelevanceUnranked&&(bound==kNpcRelevanceUnranked||candidate+2<bound);
 }

@@ -1,0 +1,129 @@
+{
+  "scope": "Campaign route steps for campaign/palace/palace.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step02-heal",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step03-command",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step04-trigger",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s1/o0/m1/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step05-trigger",
+        "host": "mirrored_save_landed a1 s3/o2/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot61 phase0 armed"
+      },
+      {
+        "step": "step06-authority",
+        "host": "mirrored_save_landed a1 s3/o2/m1/p0 slot62 phase0 armed",
+        "client": "mirrored_save_landed a1 s3/o1/m2/p0 slot61 phase0 armed"
+      }
+    ],
+    "healthHold": [
+      "from step step02-heal"
+    ],
+    "commands": [
+      "step03-command host coop_player_health_hold on"
+    ],
+    "commandResults": [
+      "step03-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}"
+    ],
+    "authority": [
+      {
+        "step": "step06-authority",
+        "host": [
+          "ld_spawner_double h10/10 acq0 lease1 paused1 gp1 hs1"
+        ],
+        "client": [
+          "ld_spawner_double h10/10 acq0 lease1 paused1 gp1 hs1"
+        ]
+      }
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 26,
+        "cine": 10,
+        "pos": [
+          54.733101,
+          47.089687,
+          -3.749642
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          1,
+          6,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/palace/palace_p_lowchaos",
+        "epoch": 26,
+        "cine": 11,
+        "pos": [
+          258.549988,
+          -21.639999,
+          21.003462
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          1,
+          6,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 1,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_PA,Obj_PA_Capture_Delilah_Spirit,Obj_PA_Eliminate_The_Duke,Task_PA_Find_The_Vault,Task_PA_Kill_the_real_duke,Task_PA_NL_Identify_Talk_Double_title"
+      }
+    }
+  },
+  "passed": false,
+  "failure": "Action enter_nearest failed (exit 1)"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1895.ps1:480[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 480 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mAction enter_nearest failed (exit 1)[0m

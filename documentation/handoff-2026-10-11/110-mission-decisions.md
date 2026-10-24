@@ -125,6 +125,33 @@ the game-derived outputs stay local). All of this is confirmed static; the route
   - Hypothesis: the native key-target component sets the flag when he is knocked out.
   - Route: the partner travels to the past and chokes him before the ritual. A partner's choke already asks the host
     for the native knockout (chapter 93). Then diff the flags and load *The Dust District* return variant.
+- **Stilton, partner-made: blocked by #216 (confirmed runtime).** Route-Mission-v1895 lets the `choke` step act as the
+  partner while the host leads into the past.
+  - [route-bunker-stilton-v1895a](../../work/natural-moveset/route-bunker-stilton-v1895a): Stilton stood still at the
+    ritual circle, and `chase_hold` needs a walking NPC.
+  - [v1897a](../../work/natural-moveset/route-bunker-stilton-v1897a): the partner's choke found no target, and
+    `stilton_is_incapacited` stayed 0.
+  - [v1898a](../../work/natural-moveset/route-bunker-stilton-v1898a), authority report:
+    - Stilton and the other ritual characters are scripted actors with only `arkCpntAICombatAttack`, so the NPC stream
+      never binds them;
+    - each world runs its own copy: Stilton stood at (-26.2, 3.6) in the host's world and at (-21.9, 10.0) in the
+      partner's.
+  - A partner's knockout of such a character stays in her world (#216).
+- **The Duke's double, partner-made: the double now agrees between worlds (1214ke); his confrontation is not yet driven.**
+  - Reconnaissance (route-palace-duke-v1899a/v1900a, confirmed runtime):
+    - the Duke (`ld_spawner_duke`) is an AI NPC, unique and streamed;
+    - his double (`luca_abele_double`) is a civilian, bound only within 15 m of a player, so each world ran his routine on
+      its own: (242.4, 17.9) for the host and (341.9, 1.9) for the partner.
+  - **1214ke:** story characters (definitions under `def/story/`) rank first in NPC relevance and use the combat radii
+    even as civilians. In route-palace-duke-v1903a and v1904a the double stood at the same place in both worlds
+    (confirmed runtime).
+  - Confirmed static: the confrontation (`brief_double_confront`) plays when the player is in the trigger of the
+    double's room (`ld_trigger_dd_quarters/throneroom/office/garden/delilahroom`, `Entity_Double_TriggerListened`), the
+    Duke is not there (`Entity_Duke_TriggerListened`), and no alarm has rung (`DEV_NLETH_ALARM_RINGED` closes it).
+  - Takes v1901a (the talk step teleported next to him; the identify task closed without the scene), v1902a (her double
+    was elsewhere) and v1903a/v1904a (`enter_nearest`, the double alone in the quarters, six 30 s tries): no confrontation.
+    The partner was undetected in the bedroom, so a remaining scene condition is not met (hypothesis: the standard
+    confront location within the trigger).
 - **The Duke's double (The Grand Palace):** the tasks are `Task_PA_NL_Identify_Talk_Double_title`,
   `Task_PA_NL_Neutralise_The_Real_Duke` and `Task_PA_NL_Set_up_the_scene` (`palace_p_lowchaos`).
   1. The double's confrontation scene (`brief_double_confront`) sends `EVENT_DEV_MissionEvent_DoubleDealtWithPlayer`.
