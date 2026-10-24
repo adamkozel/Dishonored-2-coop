@@ -100,11 +100,16 @@ With the combat choke fixed (#209, below), the partner can take Ramsey's whole n
 | [v1894a](../../work/natural-moveset/route-dunwall-nonlethal-v1894a) | ends at the safe room with the story-flag checks | The host accepted her hold (`host_paired_released`), but the choke ended before the knockout (`client_paired_ended`): fight variance. |
 | [v1894b](../../work/natural-moveset/route-dunwall-nonlethal-v1894b) | | 28 of 30 windows belonged to another NPC, and her one grab caught a guard. `grab_react` now follows only its target's windows. |
 | [v1894c](../../work/natural-moveset/route-dunwall-nonlethal-v1894c) | target-only windows | Ramsey was not off-balance during the fight. |
+| v1894d, f, g (`Run-RamseyPartner-v1894.sh`) | | No knockout: fight variance. |
+| [v1894e](../../work/natural-moveset/route-dunwall-nonlethal-v1894e) | | Knockout in 33 s, ring, carry into the safe room, and the objective updated in both worlds. But `ramsey_in_vault` was still 0 at the check: it comes with the drop and the lock, which this route skipped. |
+| [v1896a](../../work/natural-moveset/route-dunwall-nonlethal-v1896a) | the drop (no task condition) and the lock before the flag checks | **Pass.** Knockout in 55 s (3 windows, 3 grabs), then the ring, the safe room opened, the carry, the drop and the lock. `ramsey_in_vault` is 1 in both worlds, the gameflow is equal (`Task_DW_LeaveTower` next), and restoration passed. |
 
 - **What the fight decides:** whether Ramsey ends up off-balance near her after a timed parry, with the guards out of
   the way. Every mechanism the outcome needs worked in at least one take: the vulnerable bit, the forced hold, the
   knockout in both worlds, the shared ring and safe-room door, and the carried body completing the task.
 - `Run-RamseyPartner-v1894.sh` repeats the take with new letters until one passes.
+- **Confirmed runtime: the partner-made Ramsey outcome reaches both worlds** (#197, Ramsey done for both roles: host-made
+  v1883d, partner-made v1896a). `Run-RamseyPartner-v1896.sh` is the repeat runner for this route.
 
 ### The other non-lethal branches (#197): static plan
 
