@@ -1,0 +1,76 @@
+[
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 2000
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   -42.6,
+   -143.0,
+   68.1
+  ],
+  "yaw": 180,
+  "settle": 1500
+ },
+ {
+  "do": "attack",
+  "role": "client",
+  "name": "dunwall_guard_male_small_01",
+  "near": [
+   -44.1,
+   -143.0
+  ],
+  "max": 6,
+  "settle": 1000
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 1000
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   -34.0,
+   -143.0,
+   68.1
+  ],
+  "yaw": 180,
+  "settle": 1000
+ },
+ {
+  "do": "wait",
+  "ms": 25000,
+  "settle": 1000
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   -36.0,
+   -158.0,
+   68.1
+  ],
+  "yaw": 120,
+  "settle": 1000
+ },
+ {
+  "do": "wait",
+  "ms": 25000,
+  "settle": 1000
+ },
+ {
+  "do": "attackstatus",
+  "expect": "any"
+ }
+]

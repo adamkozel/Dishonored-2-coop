@@ -1,0 +1,152 @@
+{
+  "passed": false,
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo in lab product mode; Dunwall fixture restored.",
+  "failure": "No relayed enemy hit of kind any at step09-attackstatus (sword 0, melee 0, other 0, applied 0)",
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step02-attackstatus",
+        "host": "armed a1 s0/o0/m0/p0 slot61 phase0 armed",
+        "client": "armed a1 s0/o0/m0/p0 slot62 phase0 armed"
+      },
+      {
+        "step": "step03-partner",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed",
+        "client": "mirror_requested a1 s0/o0/m0/p1 slot62 phase0 armed"
+      },
+      {
+        "step": "step04-press",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed",
+        "client": "mirror_requested a1 s0/o0/m0/p1 slot62 phase0 armed"
+      },
+      {
+        "step": "step05-wait",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed",
+        "client": "mirror_requested a1 s0/o0/m0/p1 slot62 phase0 armed"
+      },
+      {
+        "step": "step06-attackstatus",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed",
+        "client": "mirror_requested a1 s0/o0/m0/p1 slot62 phase0 armed"
+      },
+      {
+        "step": "step07-press",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed",
+        "client": "mirror_requested a1 s0/o0/m0/p1 slot62 phase0 armed"
+      },
+      {
+        "step": "step08-wait",
+        "host": "local_save_originated a1 s1/o1/m0/p0 slot62 phase0 armed",
+        "client": "mirror_requested a1 s0/o0/m0/p1 slot62 phase0 armed"
+      }
+    ],
+    "attack": [
+      {
+        "step": "step02-attackstatus",
+        "delta": {
+          "sword": 1,
+          "melee": 0,
+          "other": 0,
+          "applied": 0,
+          "missing": 0
+        },
+        "hostLast": "components/equipment/damage/npc_sword.damage",
+        "clientLast": "components/equipment/damage/npc_sword.damage"
+      },
+      {
+        "step": "step06-attackstatus",
+        "delta": {
+          "sword": 0,
+          "melee": 0,
+          "other": 0,
+          "applied": 0,
+          "missing": 0
+        },
+        "hostLast": "components/equipment/damage/npc_sword.damage",
+        "clientLast": "components/equipment/damage/npc_sword.damage"
+      },
+      {
+        "step": "step09-attackstatus",
+        "delta": {
+          "sword": 0,
+          "melee": 0,
+          "other": 0,
+          "applied": 0,
+          "missing": 0
+        },
+        "hostLast": "components/equipment/damage/npc_sword.damage",
+        "clientLast": "components/equipment/damage/npc_sword.damage"
+      }
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 41,
+        "cine": 121,
+        "pos": [
+          3.534938,
+          63.800808,
+          15.973129
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          1,
+          5,
+          0,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 41,
+        "cine": 33,
+        "pos": [
+          -30.606035,
+          192.956039,
+          1.25397
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          1,
+          5,
+          0,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    }
+  }
+}

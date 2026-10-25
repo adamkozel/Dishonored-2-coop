@@ -1,0 +1,1716 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        15.681601,
+        11.850847,
+        -4.825909
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 8,
+      "pos": [
+        16.444939,
+        12.306398,
+        -4.841838
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "idle",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        15.681601,
+        11.850847,
+        -4.825909
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 8,
+      "pos": [
+        16.444939,
+        12.306398,
+        -4.841838
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    }
+  },
+  {
+    "step": "step02-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        15.681601,
+        11.850847,
+        -4.825909
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 8,
+      "pos": [
+        16.444939,
+        12.306398,
+        -4.841838
+      ],
+      "fresh": true,
+      "gameflow": [
+        242,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_FollowCorvo"
+    }
+  },
+  {
+    "step": "step03-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_beforecrouch",
+      "settle": 4000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -23.04294,
+        -24.014549,
+        -0.52418
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_MobilityPractice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 8,
+      "pos": [
+        16.444939,
+        12.306398,
+        -4.841838
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_Intro,Obj_Intro_Mobility,Task_Intro_MobilityPractice"
+    }
+  },
+  {
+    "step": "step04-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_roof_3",
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        722.271179,
+        -32.291584,
+        3.520041
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        722.915527,
+        -31.972435,
+        3.691332
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/1/1",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    }
+  },
+  {
+    "step": "step05-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 3000,
+      "settle": 2000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        722.271179,
+        -32.291584,
+        3.520041
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 12,
+      "pos": [
+        722.915527,
+        -31.972435,
+        3.691332
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        2,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/1/1",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_ChokeCorvo"
+    }
+  },
+  {
+    "step": "step06-action",
+    "spec": {
+      "do": "action",
+      "name": "chase_hold",
+      "args": {
+        "npc": "corvo_attano_tutorial_stealth",
+        "dist": 0.85,
+        "up": 1.0,
+        "button": "RightShoulder",
+        "ms": 4500,
+        "ly": 12000,
+        "crouch": true,
+        "until": "Task_Intro_ChokeCorvo",
+        "tries": 10
+      },
+      "settle": 15000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 42,
+      "pos": [
+        706.309998,
+        -34.25,
+        -2.126407
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "6/0/0",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 14,
+      "pos": [
+        706.309998,
+        -34.25,
+        -2.126407
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/5/3",
+      "active": "Mission_Intro,Obj_Intro_Stealth,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step07-action",
+    "spec": {
+      "do": "action",
+      "name": "pickpocket_focus",
+      "args": {
+        "npc": "corvo_attano_tutorial_stealth",
+        "stand": [
+          698.84,
+          -22.7
+        ],
+        "radius": 0.9,
+        "dist": 0.7,
+        "up": 1.0,
+        "pitch": 0,
+        "until": "Task_Intro_StealKey",
+        "tries": 10,
+        "then": {
+          "stand": [
+            695.48,
+            -32.33,
+            -0.6
+          ],
+          "yaw": 45,
+          "until": "Task_Intro_UnlockDoor_02"
+        },
+        "next": "Task_Intro_UnlockDoor_02"
+      },
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 47,
+      "pos": [
+        538.725708,
+        -5.496657,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        6,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/0/0",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_GrabCrossbow,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        538.900024,
+        -4.799999,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        6,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/7/5",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_GrabCrossbow,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step08-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_invisible_usable_1",
+      "focus": true,
+      "offsets": [
+        [
+          1.2,
+          0.72
+        ],
+        [
+          1.0,
+          0.6
+        ]
+      ],
+      "z": 12.4,
+      "pitches": [
+        25,
+        35,
+        20,
+        45
+      ],
+      "yaws": [
+        0,
+        -8,
+        8
+      ],
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 47,
+      "pos": [
+        533.393005,
+        -8.145,
+        10.774017
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        7,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "10/0/0",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        538.900024,
+        -4.799999,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        7,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/9/5",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step09-action",
+    "spec": {
+      "do": "action",
+      "name": "shoot",
+      "args": {
+        "target": "ld_bottle_01_2",
+        "stand": [
+          530.5,
+          -8.6,
+          12.4
+        ]
+      },
+      "settle": 1500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 47,
+      "pos": [
+        530.5,
+        -8.6,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        7,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "10/0/0",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        538.900024,
+        -4.799999,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        7,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/9/5",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step10-action",
+    "spec": {
+      "do": "action",
+      "name": "shoot",
+      "args": {
+        "target": "ld_mulberry_mead_01_4",
+        "stand": [
+          530.5,
+          -8.6,
+          12.4
+        ]
+      },
+      "settle": 1500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 47,
+      "pos": [
+        530.5,
+        -8.6,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        7,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "10/0/0",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        538.900024,
+        -4.799999,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        7,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/9/5",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step11-action",
+    "spec": {
+      "do": "action",
+      "name": "shoot",
+      "args": {
+        "target": "ld_rivera_fig_wine_01",
+        "stand": [
+          530.5,
+          -8.6,
+          12.4
+        ]
+      },
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 47,
+      "pos": [
+        530.5,
+        -8.6,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        7,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "10/0/0",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        538.900024,
+        -4.799999,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        1,
+        4,
+        7,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/9/5",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ShootBottle,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step12-action",
+    "spec": {
+      "do": "action",
+      "name": "shoot",
+      "args": {
+        "target": "ld_turnbuckle_01_small",
+        "stand": [
+          530.5,
+          -8.6,
+          12.4
+        ],
+        "up": 0.0,
+        "until": "Task_Intro_ShootBottle"
+      },
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 47,
+      "pos": [
+        530.5,
+        -8.6,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        1,
+        4,
+        8,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "10/0/0",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ExitRoom,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 18,
+      "pos": [
+        538.900024,
+        -4.799999,
+        10.714069
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        1,
+        4,
+        8,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/9/5",
+      "active": "Mission_Intro,Obj_Intro_Crossbow,Task_Intro_ExitRoom,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step13-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_endcrossbow",
+      "settle": 12000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 50,
+      "pos": [
+        434.605011,
+        -30.341002,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        10,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "13/0/0",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_StealKey,Task_Intro_SwordAttack"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        435.11264,
+        -30.848646,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        10,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/9/5",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_StealKey,Task_Intro_SwordAttack"
+    }
+  },
+  {
+    "step": "step14-partner",
+    "spec": {
+      "do": "partner",
+      "pos": [
+        432.6,
+        -30.3,
+        0.2
+      ],
+      "yaw": 0,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 50,
+      "pos": [
+        434.605011,
+        -30.341002,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        10,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "13/0/0",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_StealKey,Task_Intro_SwordAttack"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        432.600006,
+        -30.299999,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        10,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/9/5",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_StealKey,Task_Intro_SwordAttack"
+    }
+  },
+  {
+    "step": "step15-action",
+    "spec": {
+      "do": "action",
+      "name": "cycle",
+      "args": {
+        "face": "corvo_attano_tutorial.def",
+        "seq": [
+          {
+            "rt": 255,
+            "ms": 200
+          },
+          {
+            "ms": 1000
+          }
+        ],
+        "until": "Task_Intro_SwordAttack",
+        "ms": 40000,
+        "targets": "corvo_attano_tutorial.def",
+        "targetsRoles": [
+          "client"
+        ]
+      },
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 50,
+      "pos": [
+        434.605011,
+        -30.341002,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        233,
+        1,
+        3,
+        11,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "14/0/0",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        432.600006,
+        -30.299999,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        233,
+        1,
+        3,
+        11,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 12,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/10/5",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step16-action",
+    "spec": {
+      "do": "action",
+      "name": "cycle",
+      "args": {
+        "face": "corvo_attano_tutorial.def",
+        "seq": [
+          {
+            "b": [
+              "RightShoulder"
+            ],
+            "ms": 6000
+          },
+          {
+            "ms": 300
+          }
+        ],
+        "until": "Task_Intro_BlockAttacks",
+        "ms": 90000,
+        "faceEvery": 1,
+        "targets": "corvo_attano_tutorial.def",
+        "targetsRoles": [
+          "client"
+        ]
+      },
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 50,
+      "pos": [
+        434.605011,
+        -30.341002,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        232,
+        0,
+        4,
+        12,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "16/0/0",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_ParryAttack,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        432.600006,
+        -30.299999,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        232,
+        1,
+        3,
+        12,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 15,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/12/7",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step17-action",
+    "spec": {
+      "do": "action",
+      "name": "cycle",
+      "args": {
+        "face": "corvo_attano_tutorial.def",
+        "seq": [
+          {
+            "b": [
+              "RightShoulder"
+            ],
+            "ms": 1200
+          },
+          {
+            "ms": 320
+          }
+        ],
+        "until": "Task_Intro_ParryAttack",
+        "ms": 240000,
+        "targets": "corvo_attano_tutorial.def",
+        "targetsRoles": [
+          "client"
+        ]
+      },
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 50,
+      "pos": [
+        434.605011,
+        -30.341002,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        231,
+        0,
+        4,
+        13,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "19/0/0",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_ChokeOffBalance,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        432.600006,
+        -30.299999,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        231,
+        0,
+        4,
+        13,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "applied",
+      "idHash": "bb242f74",
+      "gfApplied": 19,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/15/8",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_ChokeOffBalance,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step18-command",
+    "spec": {
+      "do": "command",
+      "role": "host",
+      "text": "coop_kiscule_trace on",
+      "settle": 300
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 50,
+      "pos": [
+        434.14679,
+        -31.497885,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        231,
+        0,
+        4,
+        13,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "19/0/0",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_ChokeOffBalance,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        432.600006,
+        -30.299999,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        231,
+        0,
+        4,
+        13,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 19,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/15/9",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_ChokeOffBalance,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step19-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_kiscule_trace on",
+      "settle": 300
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 50,
+      "pos": [
+        434.087769,
+        -32.454102,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        231,
+        0,
+        4,
+        13,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "19/0/0",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_ChokeOffBalance,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        432.600006,
+        -30.299999,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        231,
+        0,
+        4,
+        13,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 19,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/15/9",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_ChokeOffBalance,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step20-action",
+    "spec": {
+      "do": "action",
+      "name": "grab",
+      "args": {
+        "face": "corvo_attano_tutorial.def",
+        "until": "Task_Intro_ChokeOffBalance",
+        "ms": 240000,
+        "press": 700,
+        "gap": 150,
+        "hold": 5500,
+        "state": 41,
+        "targets": "corvo_attano_tutorial.def",
+        "targetsRoles": [
+          "client"
+        ],
+        "kisculeTrace": true
+      },
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 56,
+      "pos": [
+        434.41864,
+        -31.281536,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        0,
+        4,
+        14,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "21/0/0",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_FatalityCorvo,Task_Intro_StealKey"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/tutorial/tutorial_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        432.600006,
+        -30.299999,
+        -1.501541
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        0,
+        4,
+        14,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 22,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/17/10",
+      "active": "Mission_Intro,Obj_Intro_Combat,Task_Intro_FatalityCorvo,Task_Intro_StealKey"
+    }
+  },
+  {
+    "step": "step21-action",
+    "spec": {
+      "do": "action",
+      "name": "cycle",
+      "args": {
+        "face": "corvo_attano_tutorial.def",
+        "seq": [
+          {
+            "b": [
+              "RightShoulder"
+            ],
+            "ms": 1200
+          },
+          {
+            "ms": 100
+          },
+          {
+            "rt": 255,
+            "ms": 200
+          },
+          {
+            "ms": 400
+          }
+        ],
+        "until": "Task_Intro_FatalityCorvo",
+        "untilLogic": true,
+        "ms": 300000,
+        "targets": "corvo_attano_tutorial.def",
+        "targetsRoles": [
+          "client"
+        ]
+      },
+      "settle": 20000
+    },
+    "host": {
+      "logic": 6,
+      "pending": 0,
+      "map": "campaign/menu/menu_p",
+      "epoch": 21,
+      "cine": 77,
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "23/0/0",
+      "active": null
+    },
+    "client": {
+      "logic": 6,
+      "pending": 0,
+      "map": "campaign/menu/menu_p",
+      "epoch": 21,
+      "cine": 20,
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 22,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/19/11",
+      "active": null
+    }
+  },
+  {
+    "step": "step22-expect",
+    "spec": {
+      "do": "expect",
+      "map": "campaign/menu/menu_p",
+      "anyLogic": true,
+      "ms": 180000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 6,
+      "pending": 0,
+      "map": "campaign/menu/menu_p",
+      "epoch": 21,
+      "cine": 77,
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "23/0/0",
+      "active": null
+    },
+    "client": {
+      "logic": 6,
+      "pending": 0,
+      "map": "campaign/menu/menu_p",
+      "epoch": 21,
+      "cine": 20,
+      "pos": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "fresh": true,
+      "gameflow": [
+        248,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 22,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "4/19/11",
+      "active": null
+    }
+  }
+]

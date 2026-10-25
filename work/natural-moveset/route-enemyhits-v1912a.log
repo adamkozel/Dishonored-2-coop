@@ -1,0 +1,188 @@
+{
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "autosaves": [
+      {
+        "step": "step01-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-attackstatus",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-partner",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-attack",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step06-attackstatus",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step07-partner",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-attackstatus",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step10-partner",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step11-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      }
+    ],
+    "attack": [
+      {
+        "step": "step02-attackstatus",
+        "delta": {
+          "sword": 0,
+          "melee": 0,
+          "other": 0,
+          "applied": 0,
+          "missing": 0
+        },
+        "hostLast": "",
+        "clientLast": ""
+      },
+      {
+        "step": "step06-attackstatus",
+        "delta": {
+          "sword": 0,
+          "melee": 0,
+          "other": 0,
+          "applied": 0,
+          "missing": 0
+        },
+        "hostLast": "",
+        "clientLast": ""
+      },
+      {
+        "step": "step09-attackstatus",
+        "delta": {
+          "sword": 1,
+          "melee": 0,
+          "other": 0,
+          "applied": 1,
+          "missing": 0
+        },
+        "hostLast": "components/equipment/damage/npc_sword.damage",
+        "clientLast": "components/equipment/damage/npc_sword.damage"
+      },
+      {
+        "step": "step12-attackstatus",
+        "delta": {
+          "sword": 0,
+          "melee": 0,
+          "other": 0,
+          "applied": 0,
+          "missing": 0
+        },
+        "hostLast": "components/equipment/damage/npc_sword.damage",
+        "clientLast": "components/equipment/damage/npc_sword.damage"
+      }
+    ],
+    "npcPicks": [
+      "4 client dunwall_guard_male_small_01 -> models/characters/def/generic/dunwall_guard_male_small_01.def_1907 .?AVarkNPC@@ @ -43.4,-140.1,61",
+      "4 client dunwall_guard_male_small_01 -> models/characters/def/generic/dunwall_guard_male_small_01.def_1907 .?AVarkNPC@@ @ -43.4,-140.1,61"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 8,
+        "pos": [
+          -35.8139,
+          -158.406967,
+          66.921295
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 5,
+        "pos": [
+          -33.0,
+          -153.0,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      }
+    }
+  },
+  "failure": "No relayed enemy hit of kind any at step12-attackstatus (sword 0, melee 0, other 0, applied 0)"
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-Mission-v1912.ps1:497[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 497 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mNo relayed enemy hit of kind any at step12-attackstatus (sword 0, melee 0, other 0, applied 0)[0m

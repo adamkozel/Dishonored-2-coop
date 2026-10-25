@@ -2094,6 +2094,7 @@ void mesmerizeTargetTests(){
 #include "product_arm_tests.h"
 #include "join_warp_tests.h"
 #include "npc_attack_protocol_tests.h"
+#include "story_flag_protocol_tests.h"
 void mapPathTests(){
     char a[]="campaign\\dunwall\\return\\streets\\dunwall_return_streets_p.map";
     require(normalizeCampaignMapPath(a)&&!std::strcmp(a,"campaign/dunwall/return/streets/dunwall_return_streets_p.map"),"1214by a backslash level-transition map normalizes to a campaign path");
@@ -2110,6 +2111,7 @@ int main() {
     productArmTests();
     joinWarpTests();
     npcAttackProtocolTests();
+    storyFlagProtocolTests();
     nativeNpcAuthorityTests();
     nativeUsableTests();
     nativeCoinTests();coinProtocolTests();nativeFoodTests();

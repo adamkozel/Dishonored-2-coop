@@ -9,10 +9,10 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 | Card | Stage | Gap |
 |---|---|---|
 | [#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221) | 2 | Done on 1214kh (2026-10-25): an abrupt loss of either game leaves no stale ownership, and the partner rejoins. |
-| [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Enemy hits other than the guard sword never reach the partner (CS). |
+| [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Done on 1214kg-ki (2026-10-25): every enemy hit on the partner's clone reaches the partner. |
 | [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | The partner's non-lethal branches past Ramsey and Stilton are unproven, and there is no story-flag diff at each mission's end. |
-| [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | The tutorial's combat lessons stall when both players start it together. |
-| [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Hosting starts with the F7 key, not from the native Co-op menu. |
+| [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | Done (2026-10-25): both players from the start, the partner idle or beside the host, pass every combat lesson (route-training-pair-v1913a, route-training-follow-v1913a). |
+| [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Done on 1214kh (2026-10-25): a co-op game from the Co-op menu hosts its lobby by itself, and F7 opens the invite. |
 
 ## Stage 1: protected development lab
 
@@ -43,7 +43,7 @@ kick is not reproducible.
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Enemies perceive and fight both players | partial | Guards keep the partner's clone as their combat target and their sword hits reach the partner (audit 1122; the attack relay, [chapter 95](95-shared-combat-authority.md), 1214ah; counterattack-v1258l). Every other enemy hit on the clone is dropped (`suppressCloneWorldDamage`, CS): guns, grenades, clockwork soldiers, hounds, witches (#219). |
+| Enemies perceive and fight both players | met (CR) | Guards keep the partner's clone as their combat target (audit 1122). Every enemy damage declaration on the clone reaches the partner and applies natively (#219, [chapter 95](95-shared-combat-authority.md): route-enemyhits-v1912a, v1913a; 1214kg/ki). |
 | One authoritative damage and outcome path | met (CR) | Chapter 95: player hits and kills commit once and apply once (mission-multicombat-v1270e/f, clientnative-damage-v1275c, kill-unconscious-v1271m). |
 | Synchronized health | met (CR) | NPC health follows the host (hostworld-damage-v1272b). Each player's own health lives in their own world by design. |
 | Deaths | met (CR), with documented limitations | Chapter 95 and the life roster; [chapter 108](108-character-choice-and-pairings.md) #182. Rat and fish possession happen only in the partner's world, and corpse possession is unverified (release notes). |
@@ -71,13 +71,13 @@ kick is not reproducible.
 | Role restoration | met (CR) | Every campaign take checks both characters; the character choice is per save and per join ([chapter 108](108-character-choice-and-pairings.md)). |
 | Simultaneous request deduplication | met (CR) | Chapter 88 #188: mission-simultaneous-v1869a, v1870a, v1870b. |
 | Both-ready barriers | met (CR) | The transition hold (audit 1293) and every campaign take's mission starts and ends. |
-| Every map, load and scene boundary | met (CR), except #206 | The whole campaign on two Steam accounts, all nine missions on 0.9.3 ([chapter 109](109-pairing-validation.md)). The map sequence between missions is in [chapter 97](97-campaign-map-sequence.md). |
+| Every map, load and scene boundary | met (CR) | The whole campaign on two Steam accounts, all nine missions on 0.9.3 ([chapter 109](109-pairing-validation.md)). The map sequence between missions is in [chapter 97](97-campaign-map-sequence.md). |
 
 ## Stage 7: native UI and release
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Native host, join, character-choice and recovery flows | partial | The native Co-op menu, co-op saves and Leave co-op ([chapter 107](107-coop-menu-and-saves.md)), the Character dialog ([chapter 108](108-character-choice-and-pairings.md)), and Steam's own invite and join. Hosting still starts with F7 (#222). |
+| Native host, join, character-choice and recovery flows | met (CR) | The native Co-op menu, co-op saves and Leave co-op ([chapter 107](107-coop-menu-and-saves.md)), the Character dialog ([chapter 108](108-character-choice-and-pairings.md)), and Steam's own invite and join. A co-op game hosts by itself (#222, coop-autohost-v1909a, 1214kh). |
 | Packaging and rollback | met (CR) | The one-step installer and the byte-identical uninstaller (release-install-v1889b, 8/8; chapter 90). |
 | Sustained stability | met (CR) | 2-hour soaks (mission-soak-v1316a, v1698a). Frame pacing on both PCs ([chapter 111](111-frame-pacing.md), frame-timing-vm-v1887b). Nine-mission two-account runs of about 5 h on each release candidate. |
 | Online validation | met (CR) | The two-account campaign and the clean-PC proof from the GitHub download (product-two-account-v1891a). |

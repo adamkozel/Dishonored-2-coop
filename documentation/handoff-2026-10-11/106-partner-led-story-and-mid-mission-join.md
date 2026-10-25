@@ -663,6 +663,23 @@ partner's fresh world lacks.
   AI pause state in both worlds (`d2_route_actions.py` `targets`), and each world's Kiscule trace through the grab
   lesson.
 
+### #206: both combat scenarios pass (2026-10-25, confirmed runtime)
+
+| Take | Candidate | Partner | Result |
+|---|---|---|---|
+| [route-training-pair-v1913a](../../work/natural-moveset/route-training-pair-v1913a) | 1214ki | Idle at the stealth lesson's end | Pass: every combat lesson; the grab took 44 presses (2 grabs), then the fatality |
+| [route-training-follow-v1913a](../../work/natural-moveset/route-training-follow-v1913a) | 1214kj | Beside the host in the combat room | Pass: the grab took 45 presses (2 grabs), then the fatality |
+
+- **The trainer's target (`d2_route_actions.py` `targets`):**
+  - Partner idle: the host's trainer always targeted the host, his attention held only the host, and his decision,
+    reflex and attack AIs ran with no pause references. In the partner's world no combat trainer was found near her.
+  - Partner beside the host: the trainer targeted the partner's avatar, with both players in his attention, and the
+    lessons still completed.
+- **The stalls of v1883a/b (1214ju) did not recur.** Hypothesis: the partner's world kept forcing leases on its trainer
+  copy (v1883b: `bound_forced`, `acquire_count` every 500 ms). The lease and relevance work since then (1214kc-ke) stops
+  that, but the cause is not isolated.
+- The release notes no longer list the combat stall; the advice for the stealth lessons stays.
+
 ## An abrupt peer loss mid-mission (#221)
 
 The graceful leave (F8 and Leave co-op) and the rejoin were proven earlier (#135). This section covers a game that ends

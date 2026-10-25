@@ -1,0 +1,39 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             96 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "checks": {
+    "coopSaves": true,
+    "missionStartSaved": true,
+    "autoHosted": true,
+    "connected": true,
+    "manualSaveWritten": true,
+    "loaded": true,
+    "partnerAfterLoad": true,
+    "notHostedAgain": true,
+    "campaignSlotsUnchanged": true,
+    "campaignProfileUntouchedInCoop": true
+  },
+  "notes": {
+    "steps": [
+      {
+        "step": "00-start",
+        "host": {
+          "logic": 1,
+          "pending": 0,
+          "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+          "epoch": 11,
+          "fresh": true,
+          "saves": {
+            "result": "idle",
+            "active": false,
+            "phase": 0,
+            "switches": 0,

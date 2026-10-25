@@ -1,0 +1,47 @@
+[
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 2000
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_npc_attack probe 0",
+  "settle": 2500
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_npc_attack probe 1",
+  "settle": 2500
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_npc_attack probe 2",
+  "settle": 2500
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_npc_attack probe 3",
+  "settle": 2500
+ },
+ {
+  "do": "attackstatus",
+  "expect": "any"
+ }
+]

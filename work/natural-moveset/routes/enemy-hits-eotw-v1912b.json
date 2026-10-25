@@ -1,0 +1,51 @@
+[
+ {
+  "do": "wait",
+  "ms": 8000,
+  "settle": 5000
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   3.99,
+   61.83,
+   17.67
+  ],
+  "yaw": -80.4,
+  "settle": 1500
+ },
+ {
+  "do": "press",
+  "role": "client",
+  "leftY": 14000,
+  "ms": 700,
+  "settle": 500
+ },
+ {
+  "do": "wait",
+  "ms": 25000,
+  "settle": 1000
+ },
+ {
+  "do": "attackstatus"
+ },
+ {
+  "do": "press",
+  "role": "client",
+  "leftY": -14000,
+  "ms": 2500,
+  "settle": 500
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 1000
+ },
+ {
+  "do": "attackstatus",
+  "expect": "any"
+ }
+]

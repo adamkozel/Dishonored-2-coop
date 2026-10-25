@@ -1,0 +1,74 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "before": {
+      "host": {
+        "enabled": true,
+        "role": 0,
+        "result": "publishing",
+        "local": 23,
+        "host": 0,
+        "differing": 0,
+        "sent": 20,
+        "received": 0,
+        "refused": 0,
+        "writes": 0,
+        "unknown": 0,
+        "readFailures": 0,
+        "flips": 0
+      },
+      "client": {
+        "enabled": true,
+        "role": 1,
+        "result": "matched",
+        "local": 23,
+        "host": 23,
+        "differing": 0,
+        "sent": 0,
+        "received": 20,
+        "refused": 0,
+        "writes": 0,
+        "unknown": 0,
+        "readFailures": 0,
+        "flips": 0
+      }
+    },
+    "restoreMs": 263,
+    "after": {
+      "host": {
+        "enabled": true,
+        "role": 0,
+        "result": "publishing",
+        "local": 23,
+        "host": 0,
+        "differing": 0,
+        "sent": 21,
+        "received": 0,
+        "refused": 0,
+        "writes": 0,
+        "unknown": 0,
+        "readFailures": 0,
+        "flips": 0
+      },
+      "client": {
+        "enabled": true,
+        "role": 1,
+        "result": "matched",
+        "local": 23,
+        "host": 23,
+        "differing": 0,
+        "sent": 0,
+        "received": 21,
+        "refused": 0,
+        "writes": 1,
+        "unknown": 0,
+        "readFailures": 0,
+        "flips": 1
+      }
+    },
+    "flipped": 1,
+    "writtenBack": 1
+  },
+  "scope": "Story flag mirror write path (1214kk, lab pair, Dunwall fixture): the partner flips her first bool flag; the host value is written back"
+}

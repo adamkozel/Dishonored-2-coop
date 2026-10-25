@@ -227,3 +227,26 @@ Leaving co-op runs the same steps in reverse.
 - The switch rewrote the player's `profile.bin` with identical keys: only bytes 0-3 and 9-14 of its header differed
   (hypothesis: a checksum and a time). The writable profile accessor `140657ce0` sets the dirty byte at profile+8
   (confirmed static), so 1214hu saves the profile before a switch only while that byte is set.
+
+## Hosting without F7 (#222, 1214kg)
+
+- **The gap (final audit, chapter 112):** once in a mission, the host pressed F7 to create the friends-only lobby and open
+  Steam's invite window. F7 during a live session also restarted it and dropped the connected partner (confirmed
+  static, `startOnlineHost`).
+- **1214kg** ([session_product.h](../../outputs/d2-coop-lab/src/session_product.h)):
+  - Choosing CO-OP on the main menu arms auto-hosting. The co-op game then hosts its friends-only lobby by itself,
+    quietly, once it is in gameplay on a mission map.
+  - Leaving (F8) disarms it, and so does joining someone else's session, until CO-OP is chosen again. A live session is
+    never hosted again.
+  - Auto-hosting also runs under the lab product controller, so a lab take can test it.
+  - F7 on a live lobby (hosting or connected) opens Steam's invite window for it. It no longer restarts the session
+    (confirmed static; F7 reads the real keyboard, which the lab cannot drive).
+  - Product status: `autoHostArmed`, `autoHosts`, `inviteKeys`.
+- **[coop-autohost-v1909a](../../work/release/coop-autohost-v1909a) (pass, 1214kh, two accounts):** the path of
+  coop-hostsave-v1776a, but the host is never told to host.
+  - The host's game passes the title, opens CO-OP and starts a New Game.
+  - In the mission its lobby appeared by itself (autoHosts 1, `hosting_lobby`, no coop_session command), and the VM joined
+    it.
+  - The host saved and loaded through the pause menu. The partner was connected again, and the session was the same
+    one (autoHosts still 1, same lobby).
+  - The campaign slots and the campaign profile stayed unchanged.

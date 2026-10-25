@@ -251,3 +251,38 @@ non-lethal choke had no fallback (`npc_paired.h`, status `pairedResult` `host_vu
   (`vulnerableApplies` grows in its own npc-stream status) it releases, faces the target and taps grab for up to 1.6 s.
 - **Confirmed runtime: #209 is fixed on 1214kd.** A partner can now knock out an alerted host-owned enemy with the
   combat choke after a parry.
+
+## The host's decisions in both worlds: the story flag mirror (#220, 1214kj-kk)
+
+- **The gap (final audit):**
+  - Nothing kept the two worlds' story flags equal; each world's own scripts set them.
+  - A non-lethal outcome made in only one world, or a partner joining from a co-op save with other decisions, would
+    leave the next maps and the endings reading different decisions.
+  - Several non-lethal steps run only in the world of the player who does them (confirmed static):
+    - the double's confrontation needs the local player in the double's room trigger (`arkPlayer`, above);
+    - Hypatia's cure is her own GrimAlex component's native "Cure Finished", set off by the syringe;
+    - the blood sample is a scripted corpse scene.
+- **1214kj ([story_flag_mirror.h](../../outputs/d2-coop-lab/src/story_flag_mirror.h)):** the host's bool story flags are
+  the decisions of both worlds.
+  - Every 2 s in gameplay, and at once on a change, the host sends its flags by name hash (D2SF). The partner's world
+    writes each differing value to the host's.
+  - The raw write fires no script update; later reads (the next maps, the endings) see the host's decisions.
+  - Layout (confirmed runtime): the worldspawn (handle 0x3ffe0000, vtable RVA 0x1c89868) and its flag instances. Bool
+    variables have vtable RVA 0x1cc4388; ints (0x1c9f998) and lists (0x1cd9bc8) are never written.
+  - Status: `story-flags.json` (also in an installed game).
+- **Runtime (confirmed):**
+  - After the deploy the partner received the host's 23 Dunwall flags and matched all of them.
+  - [story-flag-mirror-v1914a](../../work/natural-moveset/story-flag-mirror-v1914a) (1214kk's test fixture
+    `coop_story_flags flip`): the partner's flipped flag was written back to the host's value within 263 ms, and both
+    worlds then matched on all 23 flags.
+  - The two-account take peer-loss-dunwall-vm-v1911a diffed both machines' flags at its start and end: 31 each, no
+    decision differing.
+- **Who decides, now:**
+  - The host's game records every decision, and the partner's world follows it.
+  - A partner-made outcome counts when it reaches the host's world: kills and knockouts (NPC outcome sync), carried
+    bodies, shared usables and story grants. That is proven for Ramsey (route-dunwall-nonlethal-v1896a) and Stilton
+    (route-backyard-stilton-v1908a).
+  - Steps that run only in her own world (the double's confrontation, Hypatia's cure) do not reach the host. Their
+    decision stays the host's, and the release notes ask the host to complete those non-lethal steps.
+- **Campaign evidence:** the 0.9.5 nine-mission regression diffs both worlds' flags at every mission's start and end
+  (Route-MissionVM `-StoryFlags`).
