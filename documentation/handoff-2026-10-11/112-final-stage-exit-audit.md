@@ -12,7 +12,7 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 | [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Enemy hits other than the guard sword never reach the partner (CS). |
 | [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | The partner's non-lethal branches past Ramsey and Stilton are unproven, and there is no story-flag diff at each mission's end. |
 | [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | The tutorial's combat lessons stall when both players start it together. |
-| [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Hosting starts with the F7 key, not from the native Co-op menu. |
+| [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Done on 1214kh (2026-10-25): a co-op game from the Co-op menu hosts its lobby by itself, and F7 opens the invite. |
 
 ## Stage 1: protected development lab
 
@@ -77,7 +77,7 @@ kick is not reproducible.
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Native host, join, character-choice and recovery flows | partial | The native Co-op menu, co-op saves and Leave co-op ([chapter 107](107-coop-menu-and-saves.md)), the Character dialog ([chapter 108](108-character-choice-and-pairings.md)), and Steam's own invite and join. Hosting still starts with F7 (#222). |
+| Native host, join, character-choice and recovery flows | met (CR) | The native Co-op menu, co-op saves and Leave co-op ([chapter 107](107-coop-menu-and-saves.md)), the Character dialog ([chapter 108](108-character-choice-and-pairings.md)), and Steam's own invite and join. A co-op game hosts by itself (#222, coop-autohost-v1909a, 1214kh). |
 | Packaging and rollback | met (CR) | The one-step installer and the byte-identical uninstaller (release-install-v1889b, 8/8; chapter 90). |
 | Sustained stability | met (CR) | 2-hour soaks (mission-soak-v1316a, v1698a). Frame pacing on both PCs ([chapter 111](111-frame-pacing.md), frame-timing-vm-v1887b). Nine-mission two-account runs of about 5 h on each release candidate. |
 | Online validation | met (CR) | The two-account campaign and the clean-PC proof from the GitHub download (product-two-account-v1891a). |
