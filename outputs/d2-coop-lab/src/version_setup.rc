@@ -1,8 +1,8 @@
 // #25 / #30: version resources for the installer tool (identifies the file; fewer heuristic false positives).
 #include <winver.h>
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,9,4,0
- PRODUCTVERSION 0,9,4,0
+ FILEVERSION 0,9,5,0
+ PRODUCTVERSION 0,9,5,0
  FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
  FILEFLAGS 0
  FILEOS VOS_NT_WINDOWS32
@@ -15,11 +15,11 @@ BEGIN
     BEGIN
       VALUE "CompanyName", "adamkozel"
       VALUE "FileDescription", "Dishonored 2 Corvo/Emily co-op installer: builds the mod files from your own game files"
-      VALUE "FileVersion", "0.9.4"
+      VALUE "FileVersion", "0.9.5"
       VALUE "InternalName", "d2coop_setup"
       VALUE "OriginalFilename", "d2coop_setup.exe"
       VALUE "ProductName", "Dishonored 2 Corvo/Emily co-op"
-      VALUE "ProductVersion", "0.9.4"
+      VALUE "ProductVersion", "0.9.5"
       VALUE "Comments", "https://github.com/adamkozel/Dishonored-2-coop"
     END
   END
