@@ -1,0 +1,51 @@
+{
+  "passed": false,
+  "failure": "Fixture restore failed after host-farreachcancel; restore: host did not reach a fresh native menu/gameplay state.",
+  "cases": [
+    {
+      "source": "host",
+      "case": "farreach",
+      "observer": "client",
+      "passed": true,
+      "failure": null,
+      "checks": [
+        "Partner presentation stayed live",
+        "farreach presented (13 samples, variants 4,5,6,7,8) and recovered"
+      ],
+      "hostSlot": 80,
+      "camera": [
+        -33.0,
+        -147.4,
+        68.4
+      ],
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 1,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 13,
+      "powerVariants": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "recovered": 9,
+      "restored": true
+    },
+    {
+      "source": "host",
+      "case": "farreachcancel",
+      "observer": "client",
+      "passed": false,
+      "failure": "Receipt unconfirmed for host command sequence 1923010389; it may still execute before its original expiry.; restore: host did not reach a fresh native menu/gameplay state.",
+      "checks": [],
+      "restoreRetried": "host did not reach a fresh native menu/gameplay state.",
+      "restored": false
+    }
+  ],
+  "scope": "Power cancellation and long Far Reach (1350, #11), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}
