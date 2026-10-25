@@ -490,6 +490,9 @@ void pumpConnections(ULONGLONG tick) {
         if(e.m_info.m_eState==k_ESteamNetworkingConnectionState_ClosedByPeer || e.m_info.m_eState==k_ESteamNetworkingConnectionState_ProblemDetectedLocally) {
             sockets->CloseConnection(connection,0,"Connection ended",false);connection=0;remote={};lastReceive=0;nextConnect=tick+2000;
             if(onlineSession.active&&!onlineSession.host){onlineSession.phase=OnlinePhase::Failed;onlineSession.result="p2p_connection_ended";}
+            // 1214kh (#221): the host goes back to hosting its lobby (it read "connected" with no partner, state 5).
+            if(onlineSession.active&&onlineSession.host&&onlineSession.phase==OnlinePhase::Connected){onlineSession.phase=OnlinePhase::Hosting;onlineSession.result="partner_connection_ended";}
+            connectionState=0;
         }
     }
 }

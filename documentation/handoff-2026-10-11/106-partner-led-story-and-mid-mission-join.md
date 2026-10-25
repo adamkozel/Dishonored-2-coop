@@ -662,3 +662,52 @@ partner's fresh world lacks.
   (partner beside the host). Every few presses they record the trainer's native combat target, attention list and
   AI pause state in both worlds (`d2_route_actions.py` `targets`), and each world's Kiscule trace through the grab
   lesson.
+
+## An abrupt peer loss mid-mission (#221)
+
+The graceful leave (F8 and Leave co-op) and the rejoin were proven earlier (#135). This section covers a game that ends
+abruptly in the middle of a mission, as a crash or a closed window does.
+[Route-MissionVM-v1911](../../work/natural-moveset/Route-MissionVM-v1911.ps1):
+- `-KillAfterStep` ends the VM's game with Stop-Process, and `-RelaunchAfterStep` starts it again and joins the same
+  lobby from its main menu.
+- `-KillHostAfterStep` ends the host's game instead.
+
+Two Steam accounts, the product controller, co-op saves, Dunwall.
+
+**The first take ([peer-loss-dunwall-vm-v1909a](../../work/natural-moveset/peer-loss-dunwall-vm-v1909a), 1214kg) found two
+gaps (confirmed runtime and static):**
+- **The host's game opened its pause menu.** Losing the partner fails the checkpoint sync (`session_peer_disconnected`).
+  For the 3 s before the sync re-arms, a lab-experiment rule forces the native pause on a failed session
+  (`checkpointEngineService`).
+- **The partner's avatar stayed in the host's world.** Nothing retired it when a session ended; it was only replaced
+  when the partner changed character.
+- The host's session also kept reading "connected" with no partner (connection state 5).
+
+**1214kh fixes them:**
+- the forced pause skips the peer-loss reasons;
+- the avatar is retired (the native removal of the character-change path) 5 s after the transport connection closes, in
+  product sessions, and the product controller spawns a fresh one when a partner arms again;
+- the host's session goes back to hosting its lobby.
+
+**Results on 1214kh (confirmed runtime):**
+
+| Take | Lost | Result |
+|---|---|---|
+| [peer-loss-dunwall-vm-v1911a](../../work/natural-moveset/peer-loss-dunwall-vm-v1911a) | The partner's game, then relaunched | Pass, below |
+| [host-loss-dunwall-vm-v1911a](../../work/natural-moveset/host-loss-dunwall-vm-v1911a) | The host's game | Pass, below |
+| [peer-loss-dunwall-vm-v1910a](../../work/natural-moveset/peer-loss-dunwall-vm-v1910a) | The partner's game | Fail, harness: the relaunch never turned on the host's mission publication (`coop_follow_host`); v1911 does |
+
+- **The partner lost (v1911a).**
+  - The host saw the loss in 1.8 s. 15 s later it was still in gameplay and moved 4.7 m.
+  - No NPC channel, lease reference or attack-relay binding was left, and no NPC kept extra AI pause references.
+  - The avatar was retired, and the host was still hosting its lobby.
+  - The relaunched game connected in 23.7 s and loaded the host's mission in 180 s. Gameflow was equal and both
+    products armed. Fresh bindings: 5 NPCs ready on each side, and both avatars present.
+- **The host lost (v1911a).**
+  - The partner saw the loss in 1.6 s and stayed in gameplay.
+  - Its six NPC copies each held one pause reference for the host-driven lease, and all six went back to 0: their own
+    AI runs again.
+  - No channel, reference or binding was left, the host's avatar was retired, and its session ended cleanly
+    (`p2p_connection_ended`).
+- **Story flags** (the probe's `--storyflags`, on both machines) at the start and the end of v1911a: 31 each, 0 decision
+  differences.

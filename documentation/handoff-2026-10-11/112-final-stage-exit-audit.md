@@ -8,7 +8,7 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 
 | Card | Stage | Gap |
 |---|---|---|
-| [#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221) | 2 | An abrupt peer loss mid-mission (a crash or a dropped network) is untested. Only the graceful leave and rejoin are proven. |
+| [#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221) | 2 | Done on 1214kh (2026-10-25): an abrupt loss of either game leaves no stale ownership, and the partner rejoins. |
 | [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Enemy hits other than the guard sword never reach the partner (CS). |
 | [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | The partner's non-lethal branches past Ramsey and Stilton are unproven, and there is no story-flag diff at each mission's end. |
 | [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | The tutorial's combat lessons stall when both players start it together. |
@@ -28,7 +28,7 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 |---|---|---|
 | Real two-account host and join | met (CR) | [Chapter 90](90-release-packaging-and-steam-sessions.md): two-account-session-v1221, product-two-account-v1225. The clean-PC proofs from the GitHub download, the newest being [product-two-account-v1891a](../../work/release/product-two-account-v1891a) (0.9.3). |
 | Invite | met, with a caveat | F7 opens Steam's native invite overlay (v1225). Lab joins use the lobby id, as Steam's own join does. The human playtest (#99) covers a clicked invite. |
-| Disconnect and reconnect with no stale ownership | partial | Graceful leave, rejoin and a mid-mission join on two accounts: [chapter 106](106-partner-led-story-and-mid-mission-join.md) (campaign-join-vm-v1703a, v1714b; #135). An abrupt loss is #221. |
+| Disconnect and reconnect with no stale ownership | met (CR) | Graceful leave, rejoin and a mid-mission join on two accounts: [chapter 106](106-partner-led-story-and-mid-mission-join.md) (campaign-join-vm-v1703a, v1714b; #135). An abrupt loss of either game, and a relaunch and rejoin, on 1214kh (#221): peer-loss-dunwall-vm-v1911a, host-loss-dunwall-vm-v1911a. |
 
 ## Stage 3: complete movement phase
 

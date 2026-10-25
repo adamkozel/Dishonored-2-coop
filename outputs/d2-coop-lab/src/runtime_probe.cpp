@@ -2161,6 +2161,66 @@ int main(int argc, char** argv) {
                 <<",\"broken\":"<<unsigned(o.broken)<<",\"linked\":"<<(o.linked?"true":"false")<<",\"position\":["<<at[0]<<","<<at[1]<<","<<at[2]<<"]}";first=false;}
         std::cout<<"]}\n";return 0;
     }
+    // 1214kg (#220): the story flags (storyflags/*.kiscule instances on the worldspawn), read as d2_kiscule_vars.py
+    // storyflags reads them, so the lab VM (which has no Python) can report its flags for a two-world diff. The
+    // Kiscule manager (game+0x1f6e48: buckets +0x18, mask +0x28; chain {entity handle, instance +8, next +0x10}) gives
+    // the worldspawn's instance; its table +0x88 (count +0x90) holds the flag instances (decl +0x68, name +8); each
+    // graph (+0x70) lists its variables at +0x40 (count +0x48), a name at +8 and a bool's default +0x18 and value
+    // +0x19 (confirmed static). Names are game-derived: keep the output local.
+    if(argc==3 && std::strcmp(argv[2],"--storyflags")==0) {
+        std::uintptr_t game=0,handles=0;std::uint32_t flags=0;
+        if(!read(process.value,base+0x39a5290,&game,8)||!game||!read(process.value,game+0x601c0,&handles,8)||!read(process.value,game+0x601c8,&flags,4))return 15;
+        const auto count=flags&0xffffff;if(count>16384)return 16;
+        std::uint32_t world=0;
+        for(std::uint32_t i=0;i<count&&!world;++i){
+            std::uint32_t handle=0,actual=0;std::uintptr_t actor=0;
+            if(!read(process.value,handles+i*4,&handle,4))continue;
+            const auto slot=static_cast<std::int32_t>(handle)>>16;
+            if(slot<0||slot>=16384||!read(process.value,game+0x3130b0+slot*8,&actor,8)||!actor||!read(process.value,actor+0xa8,&actual,4)||actual!=handle)continue;
+            if(objectType(process.value,base,actor)==".?AVidWorldspawn@@")world=handle;
+        }
+        if(!world)return 57;
+        std::uintptr_t buckets=0,instance=0;std::uint32_t mask=0;
+        if(!read(process.value,game+0x1f6e48+0x18,&buckets,8)||!read(process.value,game+0x1f6e48+0x28,&mask,4)||!buckets||mask>0xffff)return 58;
+        for(std::uint32_t b=0;b<=mask&&!instance;++b){
+            std::uintptr_t node=0;read(process.value,buckets+b*8,&node,8);
+            for(unsigned hops=0;node&&hops<256;++hops){
+                std::uint32_t key=0;std::uintptr_t next=0;
+                if(!read(process.value,node,&key,4))break;
+                if(key==world){read(process.value,node+8,&instance,8);break;}
+                if(!read(process.value,node+0x10,&next,8))break;
+                node=next;
+            }
+        }
+        if(!instance)return 59;
+        std::uintptr_t table=0;std::uint32_t buckets2=0;
+        if(!read(process.value,instance+0x88,&table,8)||!read(process.value,instance+0x90,&buckets2,4)||!table)return 60;
+        buckets2&=0xffffff;if(buckets2>4096)buckets2=4096;
+        std::cout<<"{\"tick\":"<<GetTickCount64()<<",\"flags\":[";bool first=true;
+        for(std::uint32_t b=0;b<buckets2;++b){
+            std::uintptr_t node=0;read(process.value,table+b*8,&node,8);
+            for(unsigned hops=0;node&&hops<64;++hops){
+                std::uintptr_t inst=0,decl=0,declName=0,graph=0,vars=0,next=0;std::uint32_t varCount=0;
+                if(!read(process.value,node+8,&inst,8)||!inst)break;
+                if(read(process.value,inst+0x68,&decl,8)&&decl)read(process.value,decl+8,&declName,8);
+                const auto label=declName?readString(process.value,declName):std::string();
+                if(read(process.value,inst+0x70,&graph,8)&&graph&&read(process.value,graph+0x40,&vars,8)&&vars&&read(process.value,graph+0x48,&varCount,4)){
+                    varCount&=0xffffff;if(varCount>512)varCount=512;
+                    for(std::uint32_t v=0;v<varCount;++v){
+                        std::uintptr_t var=0,name=0;unsigned char raw[16]{};
+                        if(!read(process.value,vars+v*8,&var,8)||!var||!read(process.value,var+8,&name,8)||!read(process.value,var+0x10,raw,16))continue;
+                        char hex[33]{};for(unsigned k=0;k<16;++k){hex[k*2]="0123456789abcdef"[raw[k]>>4];hex[k*2+1]="0123456789abcdef"[raw[k]&15];}
+                        std::cout<<(first?"":",")<<"{\"decl\":"<<jsonString(label)<<",\"name\":"<<jsonString(name?readString(process.value,name):std::string())
+                                 <<",\"default\":"<<static_cast<unsigned>(raw[8])<<",\"value\":"<<static_cast<unsigned>(raw[9])<<",\"bytes\":\""<<hex<<"\"}";
+                        first=false;
+                    }
+                }
+                if(!read(process.value,node+0x10,&next,8))break;
+                node=next;
+            }
+        }
+        std::cout<<"]}\n";return 0;
+    }
     if(argc==3 && std::strcmp(argv[2],"--entities")==0) {
         std::uintptr_t game=0,handles=0;std::uint32_t flags=0;
         if(!read(process.value,base+0x39a5290,&game,8)||!game||!read(process.value,game+0x601c0,&handles,8)||!read(process.value,game+0x601c8,&flags,4))return 15;

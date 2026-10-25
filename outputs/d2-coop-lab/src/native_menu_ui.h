@@ -230,6 +230,7 @@ void serviceCoopSaves(ULONGLONG tick){
 }
 bool coopSavesReadyForSession(){return !coopSavesEnabled||(coopSaves.active&&!coopSaves.phase);}
 void requestCoopSaves(){if(coopSavesEnabled&&!coopModeSelected.load()){coopModeSelected=true;++coopMenu.sessionRequests;}}
+std::uint64_t coopMenuCoopSelections(){return coopMenu.coopSelected;}bool coopModeChosen(){return coopModeSelected.load();} // 1214kg (#222)
 // 1214ht (#157): Leave co-op. During an online session the pause menu's Quit Game is LEAVE CO-OP and acts as F8.
 // The pause movie (corvo_pause_menu / emily_pause_menu, chapter 107, confirmed static) is the pause state's (logic 2)
 // arkIggyFile at state+0x20; its root PauseMenuScene exposes pauseData.quitEntry. Quit opens the native confirmation

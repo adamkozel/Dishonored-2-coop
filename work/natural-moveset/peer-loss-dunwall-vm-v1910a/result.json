@@ -1,0 +1,237 @@
+{
+  "passed": false,
+  "failure": "The relaunched VM did not load the host mission",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214kh",
+      "hostDll": "AEBE08AB22494D8AC113B47463630F436FFB8F2D7875B7326BF88189C3AAEF0A",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "kill": {
+      "afterStep": 3,
+      "lobbyKnown": true,
+      "before": {
+        "channels": 6,
+        "readyChannels": 6,
+        "references": 0,
+        "boundHandles": [
+          190449526,
+          190252915,
+          189269860,
+          190973822,
+          190318452,
+          190777211
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 6,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -27.7874,
+              -153.497,
+              66.4036
+            ]
+          }
+        ]
+      },
+      "pauseBefore": {
+        "190449526": 0,
+        "190252915": 0,
+        "189269860": 0,
+        "190973822": 0,
+        "190318452": 0,
+        "190777211": 0
+      },
+      "stop": "stopped pid 5292",
+      "detectMs": 1820,
+      "hostSeesPartner": false,
+      "hostLogic": 1,
+      "hostMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "after": {
+        "channels": 0,
+        "readyChannels": 0,
+        "references": 0,
+        "boundHandles": [],
+        "streamResult": "session_pose_stale",
+        "attackEnabled": false,
+        "attackReady": 0,
+        "attackResult": "session_pose_stale",
+        "avatar": []
+      },
+      "pauseAfter": {
+        "190449526": 0,
+        "190252915": 0,
+        "189269860": 0,
+        "190973822": 0,
+        "190318452": 0,
+        "190777211": 0
+      },
+      "pausedLonger": [],
+      "moved": 4.74,
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 2,
+        "result": "partner_connection_ended",
+        "connectionState": 0,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 1
+      },
+      "stillHosting": true,
+      "product": "waiting_partner"
+    },
+    "relaunch": {
+      "afterStep": 5,
+      "connected": true,
+      "connectMs": 23537,
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      }
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 28,
+        "pos": [
+          -39.193504,
+          -161.56044,
+          66.412735
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      },
+      "client": {
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p",
+        "epoch": 6,
+        "cine": 1,
+        "pos": [
+          0.000000,
+          0.000000,
+          0.000000
+        ],
+        "fresh": true,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": null
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

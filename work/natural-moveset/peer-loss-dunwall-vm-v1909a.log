@@ -1,0 +1,259 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+00:29:01 copying lab scripts, tooling and bin
+00:29:07 mod resources (voidmod, master.index) into the game copy
+00:29:10 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : 6CF2FCD5C6E29CC6
+probe           : 1AE55EB118762E62
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 96
+PSComputerName  : D2CoopVM
+RunspaceId      : e3af2ad4-de30-4335-b03e-abbeb2f676d5
+
+
+00:30:06 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             96 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The host left gameplay after the partner was lost (logic 2)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214kg",
+      "hostDll": "6CF2FCD5C6E29CC670F80979DB5CE7830683FD4BE2F1CAF6FAD32F24D4191F4C",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlagsError": "The term 'FlagsDiff' is not recognized as a name of a cmdlet, function, script file, or executable program.\r\nCheck the spelling of the name, or if a path was included, verify that the path is correct and try again.",
+    "kill": {
+      "afterStep": 3,
+      "lobbyKnown": true,
+      "before": {
+        "channels": 6,
+        "readyChannels": 6,
+        "references": 0,
+        "boundHandles": [
+          190449526,
+          190252915,
+          189269860,
+          190973822,
+          190318452,
+          190777211
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 6,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -27.7874,
+              -153.497,
+              66.4036
+            ]
+          }
+        ]
+      },
+      "pauseBefore": {
+        "190449526": 0,
+        "190252915": 0,
+        "189269860": 0,
+        "190973822": 0,
+        "190318452": 0,
+        "190777211": 0
+      },
+      "stop": "stopped pid 320",
+      "detectMs": 1826,
+      "hostSeesPartner": false,
+      "hostLogic": 2,
+      "hostMap": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "after": {
+        "channels": 0,
+        "readyChannels": 0,
+        "references": 0,
+        "boundHandles": [],
+        "streamResult": "session_pose_stale",
+        "attackEnabled": false,
+        "attackReady": 0,
+        "attackResult": "session_pose_stale",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -27.7859,
+              -153.623,
+              66.4
+            ]
+          }
+        ]
+      },
+      "pauseAfter": {
+        "190449526": 0,
+        "190252915": 0,
+        "189269860": 0,
+        "190973822": 0,
+        "190318452": 0,
+        "190777211": 0
+      },
+      "pausedLonger": [],
+      "moved": 0.0,
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 5,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 1
+      },
+      "stillHosting": true,
+      "product": "waiting_partner"
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 18,
+        "pos": [
+          -27.787413,
+          -153.496826,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          240,
+          4,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetCorvoSword"
+      },
+      "host": {
+        "logic": 2,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 24,
+        "pos": [
+          -32.889999,
+          -165.600006,
+          66.403648
+        ],
+        "fresh": false,
+        "gameflow": [
+          240,
+          4,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetCorvoSword"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1909.ps1:621[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 621 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe host left gameplay after the partner was lost (logic 2)[0m

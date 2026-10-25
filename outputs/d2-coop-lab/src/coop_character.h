@@ -64,27 +64,41 @@ int coopPartnerCharacterForJoin(ULONGLONG tick,std::uint64_t joinKey){
 // natively (the remove event 0x1439a6f30 posted by FUN_1408847f0(entity, args, event), then FUN_140882fc0(args), as
 // the engine's own Remove handler FUN_140876ff0 does; confirmed static) and its identity is cleared as a world change
 // clears it; the arm's repair then spawns the partner's rig (session_product.h).
-std::uint64_t coopAvatarReplacements=0;
-void replaceStaleAvatar(){
-    if(!probeActor||!probeSpawnedCharacter||!remoteCharacterKnown()||probeSpawnedCharacter==remoteCharacter())return;
-    if(!productMode&&!productAutoArm)return; // lab scripts spawn and keep their own avatars
+std::uint64_t coopAvatarReplacements=0,coopAvatarRetirements=0;
+// The partner avatar's native entity removal and the presentation state that follows it.
+void removePartnerAvatar(const char* reason){
     alignas(16) unsigned char args[32]{};
     reinterpret_cast<void(*)(void*,void*,const void*)>(gameImage+0x8847f0)(reinterpret_cast<void*>(probeActor),args,gameImage+0x39a6f30);
     reinterpret_cast<void(*)(void*)>(gameImage+0x882fc0)(args);
-    stopBodyProbe();mixamoResearch={};stopArmProbe("partner_character_changed");
+    stopBodyProbe();mixamoResearch={};stopArmProbe(reason);
     networkFrameOwned.store(false,std::memory_order_release);controlledFrame.store(nullptr);
     guardFrameUntil.store(0,std::memory_order_release);guardControlledFrame.store(nullptr,std::memory_order_release);
     retireShadowDamageIdentity();probeActor=probeGame=probeHandle=0;probeFollow=false;phaseFollowInvalidated=false;probeSpawnedCharacter=0;
-    ++coopAvatarReplacements;}
+}
+void replaceStaleAvatar(){
+    if(!probeActor||!probeSpawnedCharacter||!remoteCharacterKnown()||probeSpawnedCharacter==remoteCharacter())return;
+    if(!productMode&&!productAutoArm)return; // lab scripts spawn and keep their own avatars
+    removePartnerAvatar("partner_character_changed");++coopAvatarReplacements;}
+// 1214kh (#221): a partner gone for 5 s (left, crashed or dropped: the transport connection is closed) leaves no
+// avatar standing in this world; the product controller spawns a fresh one when a partner arms again
+// (peer-loss-dunwall-vm-v1909a: her avatar stood on in the host's world after her game was ended).
+ULONGLONG coopPartnerGoneSince=0;
+void retireLostPartnerAvatar(ULONGLONG tick){
+    if(connection){coopPartnerGoneSince=0;return;}
+    if(!coopPartnerGoneSince)coopPartnerGoneSince=tick;
+    if(!probeActor||tick-coopPartnerGoneSince<5000||(!productMode&&!productAutoArm))return; // lab scripts keep their own avatars
+    removePartnerAvatar("partner_lost");++coopAvatarRetirements;
+}
 void serviceCoopCharacter(ULONGLONG tick){
     replaceStaleAvatar();
     if(!connection)coopRemoteCharacter=0;
+    retireLostPartnerAvatar(tick);
     if(tick-coopCharacterSampledAt<500||outgoing.gameLogicState!=1||outgoing.pendingGameLogicState)return;coopCharacterSampledAt=tick;
     NativePlayerSword s{};if(readNativePlayerSword(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),s)&&(s.character==1||s.character==2))coopLocalCharacter=static_cast<int>(s.character);}
 void writeCoopCharacter(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.character.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& c=coopChoice;
-    fprintf(f,"{\"avatar\":%d,\"avatarReplacements\":%llu,",probeActor?probeSpawnedCharacter:0,static_cast<unsigned long long>(coopAvatarReplacements));
+    fprintf(f,"{\"avatar\":%d,\"avatarReplacements\":%llu,\"avatarRetirements\":%llu,",probeActor?probeSpawnedCharacter:0,static_cast<unsigned long long>(coopAvatarReplacements),static_cast<unsigned long long>(coopAvatarRetirements));
     fprintf(f,"\"local\":%d,\"remote\":%d,\"localUsed\":%d,\"remoteUsed\":%d,\"role\":%u,\"choiceEnabled\":%s,\"choice\":{\"state\":%d,\"result\":\"%s\",\"character\":%d,\"handle\":%d,\"lastResult\":%d,\"opens\":%llu,\"answers\":%llu,\"others\":%llu,\"failures\":%llu}}\n",
         coopLocalCharacter.load(),coopRemoteCharacter.load(),localCharacter(),remoteCharacter(),localRole,(productMode||coopCharacterChoiceEnabled)?"true":"false",
         c.state,c.result,c.character,c.handle,c.lastResult,static_cast<unsigned long long>(c.opens),static_cast<unsigned long long>(c.answers),
