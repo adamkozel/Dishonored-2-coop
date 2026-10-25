@@ -1689,7 +1689,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_player_health_hold on")||!std::strcmp(text,"coop_player_health_hold off"))return true;
     if(!std::strcmp(text,"coop_diagnostics on")||!std::strcmp(text,"coop_diagnostics off"))return true; // 1214jz (#195)
     if(!std::strcmp(text,"coop_difficulty_sync on")||!std::strcmp(text,"coop_difficulty_sync off"))return true; // 1214kb (#177)
-    if(!std::strcmp(text,"coop_story_flags on")||!std::strcmp(text,"coop_story_flags off"))return true; // 1214kj (#220)
+    if(!std::strcmp(text,"coop_story_flags on")||!std::strcmp(text,"coop_story_flags off")||!std::strcmp(text,"coop_story_flags flip"))return true; // 1214kj-kk (#220)
     if(!std::strncmp(text,"coop_difficulty_set ",20)){const char* v=text+20;return v[0]>='0'&&v[0]<='4'&&!v[1];}
     // 1214jt (#177, lab): the native difficulty override cvar, -1 (off) or a preset index 0-4.
     if(!std::strncmp(text,"ark_difficulty_level_override ",30)){const char* v=text+30;return !std::strcmp(v,"-1")||(v[0]>='0'&&v[0]<='4'&&!v[1]);}
@@ -1888,6 +1888,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_diagnostics on")||!std::strcmp(request.command,"coop_diagnostics off")){coopDiagnostics=!std::strcmp(request.command,"coop_diagnostics on");return;}
     if(!std::strcmp(request.command,"coop_difficulty_sync on")||!std::strcmp(request.command,"coop_difficulty_sync off")){difficultySync.enabled=!std::strcmp(request.command,"coop_difficulty_sync on");return;}
     if(!std::strcmp(request.command,"coop_story_flags on")||!std::strcmp(request.command,"coop_story_flags off")){storyFlagSync.enabled=!std::strcmp(request.command,"coop_story_flags on");return;}
+    if(!std::strcmp(request.command,"coop_story_flags flip")){storyFlagSync.flipRequest=true;return;} // 1214kk (#220, test fixture)
     if(!std::strncmp(request.command,"coop_difficulty_set ",20)){const char* v=request.command+20;if(v[0]>='0'&&v[0]<='4'&&!v[1])difficultySync.labSet=v[0]-'0';return;}
     if(!std::strncmp(request.command,"coop_lab_ai_pause ",18)&&labAiPauseAllowed(request.command+18,labAiPauseSpawner,&labAiPauseSeconds)){labAiPauseRequest=1;return;}
     if(!std::strcmp(request.command,"coop_grant_item pistol")){labGrantRequest=4;return;}

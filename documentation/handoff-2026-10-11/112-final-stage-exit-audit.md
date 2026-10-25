@@ -11,7 +11,7 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 | [#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221) | 2 | Done on 1214kh (2026-10-25): an abrupt loss of either game leaves no stale ownership, and the partner rejoins. |
 | [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Done on 1214kg-ki (2026-10-25): every enemy hit on the partner's clone reaches the partner. |
 | [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | The partner's non-lethal branches past Ramsey and Stilton are unproven, and there is no story-flag diff at each mission's end. |
-| [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | The tutorial's combat lessons stall when both players start it together. |
+| [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | Done (2026-10-25): both players from the start, the partner idle or beside the host, pass every combat lesson (route-training-pair-v1913a, route-training-follow-v1913a). |
 | [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Done on 1214kh (2026-10-25): a co-op game from the Co-op menu hosts its lobby by itself, and F7 opens the invite. |
 
 ## Stage 1: protected development lab
@@ -71,7 +71,7 @@ kick is not reproducible.
 | Role restoration | met (CR) | Every campaign take checks both characters; the character choice is per save and per join ([chapter 108](108-character-choice-and-pairings.md)). |
 | Simultaneous request deduplication | met (CR) | Chapter 88 #188: mission-simultaneous-v1869a, v1870a, v1870b. |
 | Both-ready barriers | met (CR) | The transition hold (audit 1293) and every campaign take's mission starts and ends. |
-| Every map, load and scene boundary | met (CR), except #206 | The whole campaign on two Steam accounts, all nine missions on 0.9.3 ([chapter 109](109-pairing-validation.md)). The map sequence between missions is in [chapter 97](97-campaign-map-sequence.md). |
+| Every map, load and scene boundary | met (CR) | The whole campaign on two Steam accounts, all nine missions on 0.9.3 ([chapter 109](109-pairing-validation.md)). The map sequence between missions is in [chapter 97](97-campaign-map-sequence.md). |
 
 ## Stage 7: native UI and release
 

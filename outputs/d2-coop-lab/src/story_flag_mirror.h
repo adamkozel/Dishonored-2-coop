@@ -10,7 +10,8 @@
 // writes each differing value byte to the host's. The raw write fires no script update; later reads see the host's
 // decisions. A partner-made outcome counts when it reaches the host's world (NPC outcomes, carried bodies, shared
 // usables, story grants); one that stays in her world is replaced by the host's value.
-// Lab: coop_story_flags on|off.
+// Lab: coop_story_flags on|off; coop_story_flags flip (1214kk, partner, test fixture) flips her first bool flag, which
+// the mirror must write back to the host's value.
 #include "story_flag_protocol.h"
 constexpr std::uintptr_t kWorldspawnVtableRva=0x1c89868,kKisculeBoolVariableVtableRva=0x1cc4388; // confirmed runtime (Dunwall: 23 bools; ints 0x1c9f998, lists 0x1cd9bc8)
 struct StoryFlag {std::uint32_t decl=0,name=0;std::uintptr_t var=0;std::uint8_t value=0;};
@@ -18,6 +19,7 @@ struct StoryFlagSync {
     bool enabled=true;std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,refused=0,writes=0,unknown=0,readFailures=0;
     ULONGLONG sentAt=0,receivedAt=0,appliedAt=0;std::uint32_t sentDigest=0;unsigned local=0,host=0,differing=0;const char* result="idle";
     StoryFlagPacket last{};bool lastValid=false;
+    bool flipRequest=false;std::uint64_t flips=0;
 };
 StoryFlagSync storyFlagSync{};
 // The local world's bool story flags. Reads only; false when the worldspawn or its flags are unreadable.
@@ -66,6 +68,8 @@ void serviceStoryFlags(ULONGLONG tick){
         if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_Reliable,nullptr)==k_EResultOK){++s.sent;s.sentAt=tick;s.sentDigest=digest;s.result="publishing";}
         return;
     }
+    if(s.flipRequest){s.flipRequest=false;std::vector<StoryFlag> own;
+        if(readStoryFlags(own)&&!own.empty()){*reinterpret_cast<std::uint8_t*>(own[0].var+0x19)=own[0].value?0:1;++s.flips;}}
     if(!s.lastValid||tick-s.receivedAt>10000){s.result="waiting_host";return;}
     if(tick-s.appliedAt<500)return;s.appliedAt=tick;
     std::vector<StoryFlag> flags;if(!readStoryFlags(flags)){++s.readFailures;s.result="unreadable";return;}
@@ -80,7 +84,7 @@ void writeStoryFlags(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.story-flags.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& s=storyFlagSync;
-    fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"local\":%u,\"host\":%u,\"differing\":%u,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"unknown\":%llu,\"readFailures\":%llu}\n",
-        s.enabled?"true":"false",localRole,s.result,s.local,s.host,s.differing,s.sent,s.received,s.refused,s.writes,s.unknown,s.readFailures);
+    fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"local\":%u,\"host\":%u,\"differing\":%u,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"unknown\":%llu,\"readFailures\":%llu,\"flips\":%llu}\n",
+        s.enabled?"true":"false",localRole,s.result,s.local,s.host,s.differing,s.sent,s.received,s.refused,s.writes,s.unknown,s.readFailures,s.flips);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

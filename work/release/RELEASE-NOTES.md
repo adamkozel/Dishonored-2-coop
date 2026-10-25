@@ -202,7 +202,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 - Two players only.
 - A Corvo partner's *Blink Assault* kick staggers the host's guards rather than knocking them down, possessing rats or fish happens only in her game, and possessing a corpse is unverified ([#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)).
 - In the first mission (*A Long Day in Dunwall*) the partner chooses Corvo or Emily on the game's own choice screen rather than the *Character* dialog.
-- *Memories of Training* (the tutorial): Corvo fails his stealth lessons when he notices either player, in either game, and a failed lesson restarts both games at the start of the lesson. Let one player do the stealth lessons while the other stays well out of his sight. When both players start the tutorial together, Corvo's combat lessons can stall (he stops attacking). A partner who joins after the stealth lessons avoids it ([#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206)).
+- *Memories of Training* (the tutorial): Corvo fails his stealth lessons when he notices either player, in either game, and a failed lesson restarts both games at the start of the lesson. Let one player do the stealth lessons while the other stays well out of his sight.
 - After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
