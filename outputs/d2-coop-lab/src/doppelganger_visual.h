@@ -69,9 +69,9 @@ void serviceDoppelgangerVisualSlot(ULONGLONG tick,unsigned slot){
                 (!avatarAiHeld?16u:0u)|(avatarAiTarget.actor!=probeActor?32u:0u)|(!locomotionEnabled?64u:0u)|(shadowStream.until<=tick?128u:0u);
             doppelgangerHideHistory[doppelgangerHideCount++%16]={tick,s.presented.sequence,s.presented.event,mask,pairMask,static_cast<long long>(tick)-static_cast<long long>(lastReceive),static_cast<long long>(s.lease)-static_cast<long long>(tick)};
         }
-        serviceDoppelgangerFx(tick,slot,p.target,p.game,p.epoch,false);clearDoppelgangerCloneLease(slot);if(p.visible&&currentDoppelgangerVisual(p.target,p.game)&&powerFixtureApiMatches()){
+        serviceDoppelgangerFx(tick,slot,p.target,p.game,p.epoch,false);clearDoppelgangerCloneLease(slot);if(p.visible&&currentDoppelgangerVisual(p.target,p.game)&&powerApiMatches()){
             reinterpret_cast<void(*)(void*)>(gameImage+0x8784b0)(reinterpret_cast<void*>(p.target.actor));p.visible=false;++doppelgangerVisualHidden;doppelgangerVisualResult="hidden";}return;}
-    if(!partnerAssetsEnabled||!coopWorldPairReady(outgoing,remote)||!powerFixtureApiMatches()||!rangedPropApiMatches()||!bodyNativeFunctions()){refuse("unsupported_scope");return;}
+    if(!partnerAssetsEnabled||!coopWorldPairReady(outgoing,remote)||!powerApiMatches()||!rangedPropApiMatches()||!bodyNativeFunctions()){refuse("unsupported_scope");return;}
     const auto* next=s.count?&s.pending[0].packet:nullptr;const double nextTime=s.count?s.pending[0].time:0;
     if(!doppelgangerWorldPresentation(s.presented,s.presentedTime,next,nextTime,presentationClock()-120.,p.transform,p.alpha)){refuse("no_presented_transform");return;}
     if(!p.target.actor){

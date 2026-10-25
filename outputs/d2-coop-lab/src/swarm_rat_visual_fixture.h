@@ -168,7 +168,7 @@ void serviceSwarmRatSlot(ULONGLONG tick,unsigned index,bool& mayCreate){
         }else if(!p.until&&!p.pendingHide){for(unsigned i=0;i<s.presented.count;++i)if(s.presented.agents[i].index==index)source=&s.presented.agents[i];}
     }
     if(p.until&&(!source||tick>=p.until)){p.pendingHide=true;p.wanted=0;}
-    if(!coopGameplayReady(outgoing)||!powerFixtureApiMatches()||!rangedPropApiMatches()||!carryVictimApis())return;
+    if(!coopGameplayReady(outgoing)||!powerApiMatches()||!rangedPropApiMatches()||!carryVictimApis())return;
     if(source&&!p.pendingHide){
         if(!p.target.actor){
             if(!mayCreate)return;mayCreate=false; // Bound allocation cost to one new model per engine frame.
