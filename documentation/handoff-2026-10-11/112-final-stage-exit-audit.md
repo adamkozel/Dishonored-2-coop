@@ -10,9 +10,10 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 |---|---|---|
 | [#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221) | 2 | Done on 1214kh (2026-10-25): an abrupt loss of either game leaves no stale ownership, and the partner rejoins. |
 | [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Done on 1214kg-ki (2026-10-25): every enemy hit on the partner's clone reaches the partner. |
-| [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | The partner's non-lethal branches past Ramsey and Stilton are unproven, and there is no story-flag diff at each mission's end. |
+| [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | The story flag mirror (1214kj-kk) makes the host's decisions those of both worlds (story-flag-mirror-v1914a); steps done only in the partner's world do not count, and the release notes say so. Open until the 0.9.5 regression diffs both worlds' flags at every mission's start and end (campaign-institute-vm-v1915a: 25 and 104 flags, none differing). |
 | [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | Done (2026-10-25): both players from the start, the partner idle or beside the host, pass every combat lesson (route-training-pair-v1913a, route-training-follow-v1913a). |
 | [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Done on 1214kh (2026-10-25): a co-op game from the Co-op menu hosts its lobby by itself, and F7 opens the invite. |
+| [#225](https://github.com/adamkozel/Dishonored-2-coop/issues/225) | 6 | Found by the 0.9.5 regression: the mod's autosave reader could make the game lose an autosave, so a player's checkpoint sync never armed (campaign-dunwall-vm-v1915a). Fixed in 1214km (save-share-v1916a, [chapter 88](88-mission-shared-death-and-checkpoint.md)); open until the regression on 1214km passes. |
 
 ## Stage 1: protected development lab
 

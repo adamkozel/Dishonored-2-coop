@@ -20,6 +20,9 @@ Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, 
 - **Every enemy attack hurts the partner.** Before, only guards' swords reached the partner. Guns, grenades, clockwork
   soldiers, hounds and witches now hurt the partner as they hurt the host, through the partner's own game, so
   blocking and the difficulty apply as usual ([#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219)).
+- **No lost autosaves.** Once your co-op save folder held autosaves, the game could lose a new autosave when it
+  overwrote the slot the mod was reading at that moment. The shared death screen and restart then failed for that
+  player ([#225](https://github.com/adamkozel/Dishonored-2-coop/issues/225)). The mod now reads a save's details without blocking the game.
 - Both players need 0.9.5.
 
 ## Fixed in 0.9.4
