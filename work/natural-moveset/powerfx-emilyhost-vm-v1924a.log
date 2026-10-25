@@ -1,0 +1,313 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             95 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "probe --world-npcs failed (45)",
+  "notes": {
+    "powerfx": [
+      {
+        "role": "client",
+        "power": "bendtime",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "stand": [
+          53.488739,
+          50.157444,
+          20.073788
+        ],
+        "standPos": [
+          48.305737,
+          54.397438,
+          19.642010
+        ],
+        "attempt": 3,
+        "facing": 270.0,
+        "attempts": [
+          {
+            "facing": 0.0,
+            "cast": 0,
+            "presented": false,
+            "effects": {
+              "./t": 0
+            }
+          },
+          {
+            "facing": 90.0,
+            "cast": 0,
+            "presented": false,
+            "effects": {
+              "./t": 0
+            }
+          },
+          {
+            "facing": 180.0,
+            "cast": 0,
+            "presented": false,
+            "effects": {
+              "./t": 0
+            }
+          },
+          {
+            "facing": 270.0,
+            "cast": 0,
+            "presented": false,
+            "effects": {
+              "./t": 0
+            }
+          }
+        ],
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "activeBefore": 0,
+        "activeDuring": 1,
+        "cast": 0,
+        "effects": {
+          "./t": 0
+        },
+        "otherFx": "idle",
+        "presented": false,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "client",
+        "power": "bendtime",
+        "upgrades": [
+          "bendtime_stoptime"
+        ],
+        "target": null,
+        "stand": [
+          53.488739,
+          50.157444,
+          20.073788
+        ],
+        "standPos": [
+          57.211391,
+          45.237839,
+          19.680801
+        ],
+        "attempt": 3,
+        "facing": 270.0,
+        "attempts": [
+          {
+            "facing": 0.0,
+            "cast": 0,
+            "presented": false,
+            "effects": {
+              "./t": 0
+            }
+          },
+          {
+            "facing": 90.0,
+            "cast": 0,
+            "presented": false,
+            "effects": {
+              "./t": 0
+            }
+          },
+          {
+            "facing": 180.0,
+            "cast": 0,
+            "presented": false,
+            "effects": {
+              "./t": 0
+            }
+          },
+          {
+            "facing": 270.0,
+            "cast": 0,
+            "presented": false,
+            "effects": {
+              "./t": 0
+            }
+          }
+        ],
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "activeBefore": 0,
+        "activeDuring": 1,
+        "cast": 0,
+        "effects": {
+          "./t": 0
+        },
+        "otherFx": "idle",
+        "presented": false,
+        "judgedOn": "the other world's status"
+      }
+    ],
+    "powerfxMisses": [
+      "client bendtime: cast 0, ./t=0, equipped models/powers/blink/blink.inventoryitem, grant named_power_equip_requested",
+      "client bendtime+bendtime_stoptime: cast 0, ./t=0, equipped models/powers/blink/blink.inventoryitem, grant named_power_equip_requested"
+    ],
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214kp",
+      "hostDll": "9BD850E190D94CB0700195F31E80456F4EB26AB2B4C4D5D42400222DA0E8F016",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "commands": [
+      "step14-command host coop_difficulty_set 0"
+    ],
+    "difficulty": [
+      {
+        "step": "step15-difficulty",
+        "expect": 0,
+        "host": 0,
+        "client": 0,
+        "clientResult": "matched",
+        "clientApplied": 0,
+        "hostPreset": "difficulty/preset/easy.difficultypreset",
+        "clientPreset": "difficulty/preset/easy.difficultypreset",
+        "ok": true
+      }
+    ],
+    "anchor": {
+      "host": [
+        48.696037,
+        51.846317,
+        19.64201
+      ],
+      "client": [
+        53.488739,
+        50.157444,
+        20.073788
+      ]
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 26,
+        "cine": 45,
+        "pos": [
+          46.755592,
+          52.077507,
+          19.64201
+        ],
+        "fresh": true,
+        "gameflow": [
+          223,
+          2,
+          4,
+          15,
+          0,
+          4,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4297",
+        "ka": "9/2/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 26,
+        "cine": 39,
+        "pos": [
+          63.773998,
+          59.678329,
+          20.611658
+        ],
+        "fresh": true,
+        "gameflow": [
+          223,
+          2,
+          4,
+          15,
+          0,
+          4,
+          0
+        ],
+        "gfApplied": 15,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "6/5/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1924.ps1:738[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 738 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mprobe --world-npcs failed (45)[0m
