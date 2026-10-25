@@ -14,6 +14,9 @@ Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, 
   middle of a mission, your game no longer opens its pause menu, and their character leaves your world after a few
   seconds. The enemies they were near act on their own again. The host keeps hosting, so the partner can start the
   game again and join the same session ([#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221)).
+- **Every enemy attack hurts the partner.** Before, only guards' swords reached the partner. Guns, grenades, clockwork
+  soldiers, hounds and witches now hurt the partner as they hurt the host, through the partner's own game, so
+  blocking and the difficulty apply as usual ([#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219)).
 - Both players need 0.9.5.
 
 ## Fixed in 0.9.4
@@ -203,8 +206,6 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 - After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
 - Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
 - Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
-- Enemies hurt the partner only with sword hits so far. Their guns, grenades and other attacks, and the attacks of
-  clockwork soldiers, hounds and witches, do not reach the partner ([#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219)).
 - Non-lethal eliminations completed by the partner are verified for Ramsey and Stilton. For the other targets, let the
   host complete the non-lethal steps ([#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220)).
 - In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.

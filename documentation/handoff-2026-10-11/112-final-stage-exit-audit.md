@@ -9,7 +9,7 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 | Card | Stage | Gap |
 |---|---|---|
 | [#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221) | 2 | Done on 1214kh (2026-10-25): an abrupt loss of either game leaves no stale ownership, and the partner rejoins. |
-| [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Enemy hits other than the guard sword never reach the partner (CS). |
+| [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Done on 1214kg-ki (2026-10-25): every enemy hit on the partner's clone reaches the partner. |
 | [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | The partner's non-lethal branches past Ramsey and Stilton are unproven, and there is no story-flag diff at each mission's end. |
 | [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | The tutorial's combat lessons stall when both players start it together. |
 | [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Done on 1214kh (2026-10-25): a co-op game from the Co-op menu hosts its lobby by itself, and F7 opens the invite. |
@@ -43,7 +43,7 @@ kick is not reproducible.
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Enemies perceive and fight both players | partial | Guards keep the partner's clone as their combat target and their sword hits reach the partner (audit 1122; the attack relay, [chapter 95](95-shared-combat-authority.md), 1214ah; counterattack-v1258l). Every other enemy hit on the clone is dropped (`suppressCloneWorldDamage`, CS): guns, grenades, clockwork soldiers, hounds, witches (#219). |
+| Enemies perceive and fight both players | met (CR) | Guards keep the partner's clone as their combat target (audit 1122). Every enemy damage declaration on the clone reaches the partner and applies natively (#219, [chapter 95](95-shared-combat-authority.md): route-enemyhits-v1912a, v1913a; 1214kg/ki). |
 | One authoritative damage and outcome path | met (CR) | Chapter 95: player hits and kills commit once and apply once (mission-multicombat-v1270e/f, clientnative-damage-v1275c, kill-unconscious-v1271m). |
 | Synchronized health | met (CR) | NPC health follows the host (hostworld-damage-v1272b). Each player's own health lives in their own world by design. |
 | Deaths | met (CR), with documented limitations | Chapter 95 and the life roster; [chapter 108](108-character-choice-and-pairings.md) #182. Rat and fish possession happen only in the partner's world, and corpse possession is unverified (release notes). |

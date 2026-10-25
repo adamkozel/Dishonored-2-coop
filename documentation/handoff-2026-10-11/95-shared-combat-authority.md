@@ -365,3 +365,35 @@ The lab-only `coop_grant_item grenade|health|mana` adds one native item in produ
 
 - Real grenades in both roles are verified in product mode (1273c, audit 1288); real sleep darts and chokes on a mission (1276i, 1276m). A real power on a guard and destroyed doors and props remain open.
 - Spawns: none on any mission map: every arkTrigger volume of the 14 mission maps was visited (#181, harnesses 1822-1829, see the census section). Thrown objects and other physics props are not covered by this chapter.
+
+## Every enemy hit reaches the partner (#219, 1214kg-1214ki)
+
+- **The gap (confirmed static, final audit):**
+  - The partner's clone in the host's world is never a gameplay victim: `suppressCloneWorldDamage` drops every native hit
+    on it.
+  - The NPC attack relay carried only the guard sword contact (`npc_sword.damage`).
+  - Bound enemies in the partner's own world are host-driven replicas.
+  - So guns, grenades, clockwork arms, close combat, hounds and witches never hurt the partner.
+- **1214kg ([npc_attack.h](../../outputs/d2-coop-lab/src/npc_attack.h)):**
+  - The relay captures any damage declaration a bound enemy deals to the clone, when its name is on the allowlist:
+    lower-case paths under `components/equipment/damage/`, `components/characters/npc/` or
+    `components/characters/animals/`. It never carries a player, base (falls, crushing, physics, kills) or
+    code-referenced declaration.
+  - The name goes in the Hit packet (npc attack packet 4, 272 bytes); no damage value is sent.
+  - The partner's world looks the declaration up natively and applies it to its own player through the native damage
+    entry, so its own modifiers and reactions apply. A melee weapon's contact keeps the native block and parry
+    resolution; shots, explosions and bites apply directly.
+  - A declaration the receiving world cannot name back is skipped (`damageMissing`), never a fault.
+  - The guard sword keeps its exact native shape.
+- **1214ki adds a lab fixture**, `coop_npc_attack probe N`: the first ready binding's NPC deals declaration N to the
+  clone through the native damage entry, its hook included.
+- **Takes (Route-Mission-v1912/v1913, lab):**
+
+  | Take | Result |
+  |---|---|
+  | [route-enemyhits-v1912a](../../work/natural-moveset/route-enemyhits-v1912a) | A guard's sword hit, relayed by name in the new packet, took the partner from 70 to 65. |
+  | [route-enemyhits-v1912b](../../work/natural-moveset/route-enemyhits-v1912b), [c](../../work/natural-moveset/route-enemyhits-v1912c), [d](../../work/natural-moveset/route-enemyhits-v1912d) | No enemy swung or fired at the partner in those windows (The Good Doctor's lobby; Edge of the World's checkpoint guard, drawn but not attacking). Combat AI is native. |
+  | [route-enemyhits-v1913a](../../work/natural-moveset/route-enemyhits-v1913a) (pass, 1214ki) | Each kind captured on the host and applied to the partner: guard pistol bullet 70 to 65; clockwork blade (`npc_sword_mech`) 70 to 63.75; close combat 0 (the declaration's own damage); grenade explosion 70 to 32.5. None missing. |
+
+- **Result (confirmed runtime):** every enemy declaration the host's world deals to the partner's clone reaches the
+  partner and is applied natively. Which enemies choose to fire at the partner is native AI, as for the host.

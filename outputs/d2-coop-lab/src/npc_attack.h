@@ -240,6 +240,7 @@ void clearNpcAttackCapture(){
     AcquireSRWLockExclusive(&npcAttackCaptureLock);npcAttackCaptureScope={};npcAttackContacts.clear();ReleaseSRWLockExclusive(&npcAttackCaptureLock);
 }
 void notifyNpcAttackStop();
+void serviceNpcAttackProbe(); // 1214ki (#219), defined after repeatNpcAttack
 void stopNpcAttack(const char* reason){
     clearNpcAttackCapture();
     const bool terminal=!strcmp(reason,"native_player_death")||!strcmp(reason,"peer_player_death");
@@ -526,6 +527,36 @@ void serviceNpcAttack(ULONGLONG tick){
     const bool any=std::any_of(npcAttack.bindings.begin(),npcAttack.bindings.end(),[](const auto& b){return b.ready;});
     npcAttack.result=any?"active_native_sword":npcAttack.bindings.empty()?"waiting_for_actors":"negotiating";
     if(any)publishNpcAttackCapture(tick,false);
+    serviceNpcAttackProbe();
+}
+// 1214ki (#219, lab test fixture): coop_npc_attack probe N has the first ready relay binding's NPC deal enemy
+// declaration N to the partner's clone through the native damage entry (its hook included), aimed from the NPC at
+// the clone's chest. The relay must capture it in this host world and the partner's world must apply it to its
+// player. Whether combat AI fires at the partner is native and outside the fixture (route-enemyhits-v1912b-d: no
+// guard swung or fired at her in those windows; route-enemyhits-v1912a relayed a guard's sword hit by name).
+constexpr const char* kNpcAttackProbeDecls[]={"components/equipment/damage/bullet_regular_npc.damage","components/equipment/damage/npc_sword_mech.damage",
+    "components/equipment/damage/npc_closecombat.damage","components/equipment/damage/explosion_grenade.damage"};
+int npcAttackProbeRequest=-1;std::uint64_t npcAttackProbes=0;const char* npcAttackProbeResult="none";
+void serviceNpcAttackProbe(){
+    const int n=npcAttackProbeRequest;if(n<0)return;npcAttackProbeRequest=-1;
+    if(localRole||!npcAttack.enabled||n>3||GetCurrentThreadId()!=engineThread.load()||!swordDamageApiMatches()){npcAttackProbeResult="probe_scope";return;}
+    NpcAuthorityChannel* c=nullptr;for(auto& b:npcAttack.bindings){auto* x=npcCombatActor(b.arm);if(b.ready&&x&&x->enabled&&x->ready){c=x;break;}}
+    if(!c){npcAttackProbeResult="probe_no_ready_binding";return;}
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeHealth clone{},source{};
+    if(!probeActor||!readNativeHealth(memoryRead,base,probeHandle,clone)||clone.actor!=probeActor||!npcCombatIdentity(*c,source)){npcAttackProbeResult="probe_identity";return;}
+    const auto decl=reinterpret_cast<std::uintptr_t(*)(void*,const char*,bool,bool)>(gameImage+0x1e030)(gameImage+0x3990b60,kNpcAttackProbeDecls[n],false,false);
+    char name[kNpcAttackDamageNameSize]{};if(!npcAttackDamageName(decl,name)){npcAttackProbeResult="probe_decl_missing";return;}
+    float at[3]{},from[3]{},dir[3]{};
+    if(!memoryRead(clone.actor+0x300,at,12)||!memoryRead(source.actor+0x300,from,12)){npcAttackProbeResult="probe_position";return;}
+    at[2]+=1.2f;from[2]+=1.5f;float len=0;for(unsigned i=0;i<3;++i){dir[i]=at[i]-from[i];len+=dir[i]*dir[i];}len=std::sqrt(len);
+    if(!(len>.01f)){dir[0]=dir[1]=0;dir[2]=-1;}else for(auto& d:dir)d/=len;
+    alignas(16) std::array<unsigned char,144> params{};alignas(16) std::array<unsigned char,32> result{};
+    reinterpret_cast<void(*)(void*,void*)>(gameImage+0x780260)(params.data(),reinterpret_cast<void*>(decl));
+    reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
+    const unsigned regionMask=1,region=0;std::memcpy(params.data()+0x20,&regionMask,4);std::memcpy(params.data()+0x4c,&region,4);
+    std::memcpy(params.data()+0x24,at,12);std::memcpy(params.data()+0x3c,dir,12);std::memcpy(params.data()+0x54,&c->lease.binding.npc.handle,4);
+    reinterpret_cast<NativeDamage>(gameImage+0x717950)(reinterpret_cast<void*>(clone.component),params.data(),result.data());
+    ++npcAttackProbes;npcAttackProbeResult="probe_dealt";
 }
 void repeatNpcAttack(){
     if(!localRole&&npcAttack.enabled&&npcAttack.lastHit.event){auto* c=npcCombatActor(npcAttack.lastHit.binding.sourceArm);if(c)sendNpcAttack(npcAttack.lastHit,*c);}
@@ -533,10 +564,10 @@ void repeatNpcAttack(){
 void writeNpcAttack(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.npc-attack.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    fprintf(f,"{\"experimental\":true,\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"event\":%llu,\"consumed\":%llu,\"acked\":%llu,\"pending\":%zu,\"captured\":%llu,\"replicaBlocked\":%llu,\"sent\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"before\":%.9g,\"after\":%.9g,\"inflicted\":%.9g,\"lastAttacker\":%u,\"blocked\":%llu,\"parryLose\":%llu,\"parryWin\":%llu,\"reactions\":%llu,\"reactionFailures\":%llu,\"lastDefense\":%u,\"captureMisses\":[%llu,%llu,%llu,%llu],\"lastMissAttacker\":%u,\"capturedKinds\":[%llu,%llu,%llu],\"geometryDefaulted\":%llu,\"damageMissing\":%llu,\"lastDamage\":\"%s\",\"entries\":[",
+    fprintf(f,"{\"experimental\":true,\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"event\":%llu,\"consumed\":%llu,\"acked\":%llu,\"pending\":%zu,\"captured\":%llu,\"replicaBlocked\":%llu,\"sent\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"before\":%.9g,\"after\":%.9g,\"inflicted\":%.9g,\"lastAttacker\":%u,\"blocked\":%llu,\"parryLose\":%llu,\"parryWin\":%llu,\"reactions\":%llu,\"reactionFailures\":%llu,\"lastDefense\":%u,\"captureMisses\":[%llu,%llu,%llu,%llu],\"lastMissAttacker\":%u,\"capturedKinds\":[%llu,%llu,%llu],\"geometryDefaulted\":%llu,\"damageMissing\":%llu,\"lastDamage\":\"%s\",\"probes\":%llu,\"probeResult\":\"%s\",\"entries\":[",
         npcAttack.enabled?"true":"false",npcAttack.result,npcAttack.nonce,npcAttack.event,npcAttack.consumed,npcAttack.acked,npcAttack.pending.size(),npcAttackCaptured.load(),npcAttackReplicaBlocked.load(),npcAttack.sent,npcAttack.applied,npcAttack.duplicates,npcAttack.rejected,npcAttack.before,npcAttack.after,npcAttack.inflicted,npcAttack.lastAttacker,npcAttack.blocked,npcAttack.parryLose,npcAttack.parryWin,npcAttack.reactions,npcAttack.reactionFailures,static_cast<unsigned>(npcAttack.lastDefense),
         npcAttackCaptureMisses[0].load(),npcAttackCaptureMisses[1].load(),npcAttackCaptureMisses[2].load(),npcAttackCaptureMisses[3].load(),npcAttackLastMissAttacker.load(),
-        npcAttackCapturedSword.load(),npcAttackCapturedMelee.load(),npcAttackCapturedOther.load(),npcAttackGeometryDefaulted.load(),npcAttackDamageMissing,npcAttackLastDamage);
+        npcAttackCapturedSword.load(),npcAttackCapturedMelee.load(),npcAttackCapturedOther.load(),npcAttackGeometryDefaulted.load(),npcAttackDamageMissing,npcAttackLastDamage,npcAttackProbes,npcAttackProbeResult);
     for(unsigned i=0;i<npcAttack.bindings.size();++i){const auto& b=npcAttack.bindings[i];fprintf(f,"%s{\"arm\":%llu,\"peerNonce\":%llu,\"ready\":%s}",i?",":"",b.arm,b.peerNonce,b.ready?"true":"false");}
     std::array<MeleeDefenseObservation,64> defense{};std::uint64_t defenseCount=0;
     AcquireSRWLockShared(&meleeDefenseObserveLock);defense=meleeDefenseObservations;defenseCount=meleeDefenseObservationCount;ReleaseSRWLockShared(&meleeDefenseObserveLock);

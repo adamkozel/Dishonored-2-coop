@@ -1,0 +1,396 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 15,
+      "pos": [
+        2.400522,
+        -28.165901,
+        12.642111
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 17,
+      "pos": [
+        2.400522,
+        -28.165901,
+        12.64211
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 8000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 15,
+      "pos": [
+        2.438351,
+        -27.951836,
+        12.642111
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 17,
+      "pos": [
+        2.329247,
+        -28.75071,
+        12.689919
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    }
+  },
+  {
+    "step": "step02-attackstatus",
+    "spec": {
+      "do": "attackstatus"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 15,
+      "pos": [
+        2.438351,
+        -27.951836,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 17,
+      "pos": [
+        2.329247,
+        -28.75071,
+        12.689919
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    }
+  },
+  {
+    "step": "step03-clear",
+    "spec": {
+      "do": "clear",
+      "role": "client",
+      "name": "guard|elite|officer",
+      "near": [
+        -2.0,
+        54.5
+      ],
+      "radius": 14,
+      "max": 3,
+      "settle": 2000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 15,
+      "pos": [
+        2.438351,
+        -27.951836,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 101,
+      "pos": [
+        2.999,
+        54.183998,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    }
+  },
+  {
+    "step": "step04-attackstatus",
+    "spec": {
+      "do": "attackstatus"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 15,
+      "pos": [
+        2.438351,
+        -27.951836,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 101,
+      "pos": [
+        2.999,
+        54.183998,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    }
+  },
+  {
+    "step": "step05-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 20000,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 15,
+      "pos": [
+        2.438351,
+        -27.951836,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 21,
+      "cine": 101,
+      "pos": [
+        2.999,
+        54.183998,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    }
+  }
+]
