@@ -97,12 +97,15 @@ void writeTimeBend(){
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& h=timeBendHost;std::uint32_t requests=0;const float world=timeBendWorldFactor(observedGame,&requests);
     unsigned char gtm[5]{};float unbentClock=-1;const std::uintptr_t avatar=probeGame==observedGame?probeActor:0;
     if(observedGame){memoryRead(observedGame+0x2e7428+0x1a0,gtm,5);memoryRead(observedGame+0x2e7428+0x24+4*0x50,&unbentClock,4);}
+    // 1214kp: floats read from game memory can be NaN or infinite, which JSON cannot carry (a host's file stopped parsing
+    // in powerfx-emilyhost-vm-v1921a); they are written as 0.
+    const auto fin=[](double v){return std::isfinite(v)?v:0.0;};
     fprintf(f,"{\"enabled\":%s,\"role\":%u,\"local\":{\"active\":%s,\"percent\":%u,\"request\":%d,\"blendIn\":%.3f,\"blendOut\":%.3f,\"flags\":%u},\"remote\":{\"active\":%s,\"percent\":%u},"
         "\"host\":{\"request\":%d,\"percent\":%u,\"avatar\":%s,\"unbentScale\":%.2f},\"clocks\":{\"player\":%d,\"avatar\":%d,\"playerExempt\":%.3g,\"avatarExempt\":%.3g,\"unbent\":%.3f,\"gtm\":[%u,%u,%u,%u,%u]},"
         "\"worldFactor\":%.3f,\"requests\":%u,\"ownActive\":%s,\"added\":%llu,\"removed\":%llu,\"gone\":%llu,\"exempted\":%llu,\"reexempted\":%llu,\"released\":%llu,\"result\":\"%s\"}\n",
-        timeBendEnabled?"true":"false",localRole,timeBendLocalActive?"true":"false",timeBendLocalPercent,timeBendLocalRequest,timeBendLocalBlend[0],timeBendLocalBlend[1],coopTimeBendFlags.load(),
-        timeBendRemoteActive?"true":"false",timeBendRemotePercent,h.request,h.percent,h.avatar?"true":"false",timeBendUnbentScale,
-        timeBendClock(observedPlayer),timeBendClock(avatar),timeBendExemptSeconds(observedPlayer),timeBendExemptSeconds(avatar),unbentClock,gtm[0],gtm[1],gtm[2],gtm[3],gtm[4],world,requests,timeBendOwnActive()?"true":"false",
+        timeBendEnabled?"true":"false",localRole,timeBendLocalActive?"true":"false",timeBendLocalPercent,timeBendLocalRequest,fin(timeBendLocalBlend[0]),fin(timeBendLocalBlend[1]),coopTimeBendFlags.load(),
+        timeBendRemoteActive?"true":"false",timeBendRemotePercent,h.request,h.percent,h.avatar?"true":"false",fin(timeBendUnbentScale),
+        timeBendClock(observedPlayer),timeBendClock(avatar),fin(timeBendExemptSeconds(observedPlayer)),fin(timeBendExemptSeconds(avatar)),fin(unbentClock),gtm[0],gtm[1],gtm[2],gtm[3],gtm[4],fin(world),requests,timeBendOwnActive()?"true":"false",
         static_cast<unsigned long long>(timeBendAdded),static_cast<unsigned long long>(timeBendRemoved),static_cast<unsigned long long>(timeBendGone),
         static_cast<unsigned long long>(timeBendExempted),static_cast<unsigned long long>(timeBendReexempted),static_cast<unsigned long long>(timeBendReleased),timeBendResult);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);}
