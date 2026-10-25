@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-25T07:59:30+01:00",
+  "UpdatedAt": "2026-10-25T08:23:29+01:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Merge PR #226 (closes #225 and #220). Then build release 0.9.5 (build_release_v1916.py candidate-npc-combat-v1214km setup-tool-v1916), run the install test release-install-v1916a, publish v0.9.5 and run the clean-PC proof product-two-account-v1916a from its GitHub download.",
+  "NextAction": "Release 0.9.5 is published and proven. Remaining items are Needs you: the human playtest with a friend (#99), the Defender false positive (#25), the account email setting (#69) and #98.",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22911,5 +22911,11 @@
     "Candidate": "candidate-npc-combat-v1214km (0.9.5)",
     "Evidence": "two accounts (host Corvo, VM partner Emily), product mode, co-op saves holding earlier autosaves, one passing take per mission: campaign-dunwall/eotw/madinventor/dust/bunker/palace/empress-vm-v1916a, campaign-curator-vm-v1916b, campaign-institute-vm-v1916c (The Good Doctor and the Grand Palace on Easy through the difficulty sync); story flags equal at every start and end; save-share-v1916a",
     "Status": "done, chapters 109 and 88"
+  },
+  "Release095": {
+    "Card": "#225, #220, #222, #221, #219",
+    "Candidate": "candidate-npc-combat-v1214km",
+    "Evidence": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.5; d2coop-v0.9.5.zip SHA-256 2898E07B3B47B5A89250F35DBC27BA870C23D4AA1115D6F72727EBEA9BDFE4D9; release-install-v1916a 8/8; product-two-account-v1916a pass",
+    "Status": "published, chapter 90"
   }
 }
