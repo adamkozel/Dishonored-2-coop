@@ -385,8 +385,25 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
     - F8 left the session, and the uninstall restored the game (13 added files removed, the original master.index
       restored).
     - The lab pair was relaunched and connected, and no SteamID was recorded.
+- Release 0.9.5 (2026-10-25): hosting by itself ([#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222)), a closed or crashed game ([#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221)), every enemy
+  attack on the partner ([#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219)), the same decisions in both games ([#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220)), and no lost autosaves
+  ([#225](https://github.com/adamkozel/Dishonored-2-coop/issues/225)).
+  - Candidate 1214km (version resources 0.9.5), setup tool v1916, builder build_release_v1916.py. Package
+    `d2coop-v0.9.5.zip`, SHA-256 2898E07B..., 13 files, no game files.
+  - Install test: [release-install-v1916a](../../work/release/release-install-v1916a), 8/8.
+  - The nine missions on two accounts with this binary pass (chapter 109, "The campaign on 0.9.5").
+  - Published: [v0.9.5](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.5) from commit abd75a5bf (the
+    tree squash-merged to main as 8c9c02575).
+  - Clean-PC proof from the v0.9.5 download, [product-two-account-v1916a](../../work/release/product-two-account-v1916a): pass.
+    - The VM downloaded the published zip (SHA-256 2898E07B..., 2.3 s) and installed it with Install.cmd alone in 74 s.
+    - Product mode reported, and the host hosted its lobby by itself. The two accounts connected on the same mission,
+      with the movement banks active on both.
+    - Each player walked about 8 m and the other saw it. A story trigger advanced both worlds' objectives equally,
+      with native melee active.
+    - The host's death showed GameOver in both games, and both restarted on the same map with new world epochs.
+    - F8 left the session, and the uninstall restored the game (13 added files removed, the original master.index
+      restored).
+    - The lab pair was relaunched and connected, and no SteamID was recorded.
 
 **Still open:**
-- Hosting starts with the F7 key once in a mission (#222). Since 0.9.0 the main menu's Co-op entry opens the co-op saves
-  ([chapter 107](107-coop-menu-and-saves.md)); the invite and join steps are Steam's native overlay and friends list.
 - Needs you: the human playtest with a friend (#99), and the Defender false positive (#25).
