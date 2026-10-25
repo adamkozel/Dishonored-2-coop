@@ -284,5 +284,7 @@ non-lethal choke had no fallback (`npc_paired.h`, status `pairedResult` `host_vu
     (route-backyard-stilton-v1908a).
   - Steps that run only in her own world (the double's confrontation, Hypatia's cure) do not reach the host. Their
     decision stays the host's, and the release notes ask the host to complete those non-lethal steps.
-- **Campaign evidence:** the 0.9.5 nine-mission regression diffs both worlds' flags at every mission's start and end
-  (Route-MissionVM `-StoryFlags`).
+- **Campaign evidence (confirmed runtime):** the 0.9.5 nine-mission regression on 1214km diffed both worlds' bool story
+  flags at every mission's start and end (Route-MissionVM `-StoryFlags`). No flag differed in any mission, from 25 flags at
+  The Good Doctor's start to 140 at Death to the Empress's ([chapter 109](109-pairing-validation.md)). The campaign's last
+  end is the main menu after the credits, where no world is left to read.

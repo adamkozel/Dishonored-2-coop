@@ -144,6 +144,7 @@ Updated 2026-10-25.
   - It opens `game.details` once per new write (the listing's write time and size), with delete sharing.
   - The reset status reports `autosaveDetailsReads` and `autosaveDetailsBusy`.
 - **Players:** without the fix, an autosave could be lost whenever the game overwrote the autosave slot that the mod was reading. That happens in the normal rotation once a co-op folder holds autosaves.
+- **Campaign proof (confirmed runtime):** [campaign-dunwall-vm-v1916a](../../work/natural-moveset/campaign-dunwall-vm-v1916a) (1214km, the same co-op folders). Both players armed (host slot 2, partner slot 21), the host's reader opened `game.details` once, and the shared death screens worked. All nine missions passed on 1214km ([chapter 109](109-pairing-validation.md)).
 
 ## Open
 
