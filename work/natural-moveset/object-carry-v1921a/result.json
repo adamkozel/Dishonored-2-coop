@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "failure": "Fixture restore failed after host-farreachbottle; restore: host did not reach a fresh native menu/gameplay state.",
+  "cases": [
+    {
+      "source": "host",
+      "case": "farreachbottle",
+      "observer": "client",
+      "passed": false,
+      "failure": "Receipt unconfirmed for host command sequence 1947907846; it may still execute before its original expiry.; restore: host did not reach a fresh native menu/gameplay state.",
+      "checks": [],
+      "restored": false
+    }
+  ],
+  "scope": "Pickup, food and held-object gestures (1214j, 1214ea): native LootObject47 drives the partner use reach toward the item; a held movable (HoldObject 49) is pinned to the partner hand and its throw or placement followed; both source roles, product controller; fixture restored after every case."
+}

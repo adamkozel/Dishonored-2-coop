@@ -1,0 +1,62 @@
+{
+  "passed": false,
+  "failure": "Host lab instance not in gameplay",
+  "notes": {
+    "powerfx": [],
+    "powerfxMisses": [],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 26,
+        "cine": 25,
+        "pos": [
+          -31.438976,
+          192.419159,
+          1.205706
+        ],
+        "fresh": false,
+        "gameflow": [
+          223,
+          2,
+          5,
+          14,
+          0,
+          4,
+          0
+        ],
+        "gfApplied": 15,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "6/5/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 15,
+        "pending": 0,
+        "map": "",
+        "epoch": 15,
+        "cine": 6,
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fresh": true,
+        "gameflow": null,
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": null
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1921.ps1:714[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 714 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mHost lab instance not in gameplay[0m
