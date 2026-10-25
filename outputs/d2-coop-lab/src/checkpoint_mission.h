@@ -34,6 +34,34 @@ inline bool missionDetailsField(const char* text,const char* key,char* out,std::
 // fixed checkpoint directory (the isolated fs_savepath profile). No packet
 // controls a path or slot.
 struct MissionAutosaveDetails {int slot=-1;std::uint64_t stamp=0;char map[192]{},chapter[16]{},mission[32]{};};
+// 1214km (#225): the native save thread writes a slot's game.details.temp and renames it over game.details. The rename
+// fails while another handle holds game.details without delete sharing: the save is lost and the native slot falls to
+// -1. In campaign-dunwall-vm-v1915a the host's first Dunwall autosave stopped at SLOT02\game.details.temp (the slot of
+// its earlier Institute autosave, which this reader opened at every enable attempt), and its checkpoint sync never armed
+// (enable_refused, slot -1). The reader now lists the slot's directory entries, which opens neither file, skips a slot
+// whose game.details.temp is there (a save in progress), and opens game.details once per new write, with delete sharing.
+struct MissionAutosaveCache {char path[MAX_PATH]{};std::uint64_t stamp=0,size=0;bool parsed=false;MissionAutosaveDetails d{};};
+MissionAutosaveCache missionAutosaveCache{};
+std::uint64_t missionAutosaveReads=0,missionAutosaveBusy=0;
+bool missionDetailsEntry(const char* path,std::uint64_t& stamp,std::uint64_t& size,bool& busy) {
+    stamp=size=0;busy=false;char pattern[MAX_PATH]{};
+    const int n=std::snprintf(pattern,sizeof(pattern),"%s*",path);if(n<=0||n>=static_cast<int>(sizeof(pattern)))return false;
+    WIN32_FIND_DATAA found{};const HANDLE find=FindFirstFileA(pattern,&found);if(find==INVALID_HANDLE_VALUE)return false;
+    bool present=false;
+    do {
+        if(!_stricmp(found.cFileName,"game.details")) {
+            present=true;stamp=(static_cast<std::uint64_t>(found.ftLastWriteTime.dwHighDateTime)<<32)|found.ftLastWriteTime.dwLowDateTime;
+            size=(static_cast<std::uint64_t>(found.nFileSizeHigh)<<32)|found.nFileSizeLow;
+        } else if(!_stricmp(found.cFileName,"game.details.temp")) {
+            // A save in progress has just written it; one left by a lost save (the take above) is old and not waited on.
+            FILETIME now{};GetSystemTimeAsFileTime(&now);
+            const auto at=(static_cast<std::uint64_t>(found.ftLastWriteTime.dwHighDateTime)<<32)|found.ftLastWriteTime.dwLowDateTime;
+            const auto current=(static_cast<std::uint64_t>(now.dwHighDateTime)<<32)|now.dwLowDateTime;
+            busy=current<at+300000000ull;
+        }
+    } while(FindNextFileA(find,&found));
+    FindClose(find);return present;
+}
 bool readMissionAutosave(MissionAutosaveDetails& d) {
     const auto& m=checkpointMission;
     if(!*checkpointDirectory)return false;
@@ -46,24 +74,34 @@ bool readMissionAutosave(MissionAutosaveDetails& d) {
     if(!memoryRead(base+0x2286f40,&rootName,8)||!worldIdentityString(memoryRead,rootName,rootText)||rootText.size()>=32||
        !missionSaveFolder(root,sizeof(root),rootText.c_str()))return false;
     char path[MAX_PATH]{};if(std::snprintf(path,sizeof(path),"%s\\SLOT%02d\\game.details",root,d.slot)>=static_cast<int>(sizeof(path)))return false;
-    HANDLE file=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,nullptr,OPEN_EXISTING,0,nullptr);
-    if(file==INVALID_HANDLE_VALUE)return false;
-    FILETIME write{};char text[1024]{};DWORD count=0;
-    const bool read=GetFileTime(file,nullptr,nullptr,&write)&&ReadFile(file,text,sizeof(text)-1,&count,nullptr)&&count>0;CloseHandle(file);
-    if(!read)return false;text[count]=0;
-    char type[8]{};
-    if(!missionDetailsField(text,"mapName",d.map,sizeof(d.map))||!missionDetailsField(text,"chapter",d.chapter,sizeof(d.chapter))||
-       !missionDetailsField(text,"mission",d.mission,sizeof(d.mission))||!missionDetailsField(text,"slotType",type,sizeof(type))||
-       (std::strcmp(type,"3")&&std::strcmp(type,"2")))return false;
-    // 1214im (#171): slot type 2 is the native mission-start save (FUN_140464e40: slot campaign*30+21 on the first map,
-    // campaign*30+20+mission at a mission start; confirmed static), type 3 an autosave. A fresh co-op save folder holds
-    // only the mission-start save until the first autosave, so the installed partner never armed on the tower
-    // (product-two-account-v1761a: savegame_coop held SLOT21, slotType 2, and enable was refused 205 times).
+    std::uint64_t stamp=0,size=0;bool busy=false;
+    if(!missionDetailsEntry(path,stamp,size,busy))return false;
+    if(busy){++missionAutosaveBusy;return false;}
+    auto& c=missionAutosaveCache;
+    if(std::strcmp(c.path,path)||c.stamp!=stamp||c.size!=size) {
+        c={};++missionAutosaveReads;
+        HANDLE file=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,0,nullptr);
+        if(file==INVALID_HANDLE_VALUE)return false;
+        char text[1024]{};DWORD count=0;
+        const bool read=ReadFile(file,text,sizeof(text)-1,&count,nullptr)&&count>0;CloseHandle(file);
+        if(!read)return false;text[count]=0;
+        char type[8]{};
+        // 1214im (#171): slot type 2 is the native mission-start save (FUN_140464e40: slot campaign*30+21 on the first map,
+        // campaign*30+20+mission at a mission start; confirmed static), type 3 an autosave. A fresh co-op save folder holds
+        // only the mission-start save until the first autosave, so the installed partner never armed on the tower
+        // (product-two-account-v1761a: savegame_coop held SLOT21, slotType 2, and enable was refused 205 times).
+        c.parsed=missionDetailsField(text,"mapName",c.d.map,sizeof(c.d.map))&&missionDetailsField(text,"chapter",c.d.chapter,sizeof(c.d.chapter))&&
+                 missionDetailsField(text,"mission",c.d.mission,sizeof(c.d.mission))&&missionDetailsField(text,"slotType",type,sizeof(type))&&
+                 (!std::strcmp(type,"3")||!std::strcmp(type,"2"));
+        std::snprintf(c.path,sizeof(c.path),"%s",path);c.stamp=stamp;c.size=size;
+    }
+    if(!c.parsed)return false;
     // 1147b: the peer's last autosave must belong to the current map; right
     // after a load it may still be the previous map until the mission-start
     // autosave lands (1148: client still on its Dunwall autosave).
-    if(std::strcmp(d.map,m.map))return false;
-    d.stamp=(static_cast<std::uint64_t>(write.dwHighDateTime)<<32)|write.dwLowDateTime;
+    if(std::strcmp(c.d.map,m.map))return false;
+    std::memcpy(d.map,c.d.map,sizeof(d.map));std::memcpy(d.chapter,c.d.chapter,sizeof(d.chapter));std::memcpy(d.mission,c.d.mission,sizeof(d.mission));
+    d.stamp=stamp;
     return true;
 }
 // 1153: the autosave observer for paired saves uses the same native reader.

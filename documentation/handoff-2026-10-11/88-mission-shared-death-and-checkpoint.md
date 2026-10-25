@@ -117,6 +117,34 @@ No code change was needed: the host-led transaction and the paired autosave coun
 - **A manual save pairs like an autosave:** the other world makes its own autosave at the same moment, so a shared restart brings both players back to the same point.
 - **Two restart requests at once:** the host's transaction wins and the other press is a duplicate (1869a). Two autosave origins at once become two pairs (1870a). Nothing is lost or run twice.
 
+## A native save lost to the autosave reader ([#225](https://github.com/adamkozel/Dishonored-2-coop/issues/225), candidate 1214km)
+
+Updated 2026-10-25.
+
+- **The failure:** in the 0.9.5 regression take [campaign-dunwall-vm-v1915a](../../work/natural-moveset/campaign-dunwall-vm-v1915a) (1214kl), the host's checkpoint sync never armed (`enable_refused`, native slot -1). The host fell alone and the shared death screens never came.
+  - The host's co-op save folder already held autosaves of earlier takes, as a player's does.
+  - The host's first Dunwall autosave went to `SLOT02`, the slot of its earlier Institute autosave. It wrote `checkpoint.dat` and `screenshot.png`, but `game.details.temp` was never renamed over `game.details`, so the save was lost.
+- **The save path:** the native save writes `game.details` as `game.details.temp` and then renames it over the old file. That is confirmed runtime by the leftover `.temp` of a lost save. In the binary, the format string `%s.temp` lies beside the `idSaveGameThread` name; its code references are not analyzed.
+- **The cause:** the mod's mission autosave reader (`readMissionAutosave`, [checkpoint_mission.h](../../outputs/d2-coop-lab/src/checkpoint_mission.h)) opened the slot's `game.details` without delete sharing. It did so at every checkpoint enable attempt (several a second while refused) and every 250 ms in the paired autosaves.
+  - A rename over a file that another handle holds without delete sharing fails.
+  - So a save into the slot being read can be lost: hypothesis for the take above; the mechanism itself is confirmed runtime (below).
+- **Take [save-share-v1916a](../../work/natural-moveset/save-share-v1916a)** ([Test-SaveShare-v1916.ps1](../../work/natural-moveset/Test-SaveShare-v1916.ps1), 1214km, confirmed runtime). The lab host, on its own saves and the Dunwall fixture, requested native autosaves with the lab fixture `coop_autosave_probe force` while the take held every slot's `game.details` open:
+
+  | Phase | `game.details` held | Result |
+  |---|---|---|
+  | Control before | no | Landed in SLOT62 |
+  | Held without delete sharing (the reader of 1214kl and earlier) | 22 files | Lost: SLOT61's `checkpoint.dat` was rewritten, `game.details` was not, and a fresh `game.details.temp` stayed |
+  | Held with delete sharing | 22 files | Landed in SLOT62 |
+  | Control after (twice) | no | Landed in SLOT61, then SLOT62 |
+
+  - In this lab take the native slot moved to the lost slot (62 to 61). In the Dunwall take it stayed -1 (hypothesis: it was the first save of a new game).
+- **1214km:**
+  - The reader lists the slot's folder, which opens neither file.
+  - It skips a slot whose `game.details.temp` is less than 30 s old (a save in progress).
+  - It opens `game.details` once per new write (the listing's write time and size), with delete sharing.
+  - The reset status reports `autosaveDetailsReads` and `autosaveDetailsBusy`.
+- **Players:** without the fix, an autosave could be lost whenever the game overwrote the autosave slot that the mod was reading. That happens in the normal rotation once a co-op folder holds autosaves.
+
 ## Open
 
 - **Real script trigger (done, #136, [chapter 106](106-partner-led-story-and-mid-mission-join.md)).** A real mission-script autosave crossed by either player alone pairs both worlds, and one shared restart brings both back from it (confirmed runtime):

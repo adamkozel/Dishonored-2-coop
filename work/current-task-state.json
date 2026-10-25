@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-25T00:25:01+02:00",
+  "UpdatedAt": "2026-10-25T03:18:47+01:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Merge #218 (0.9.4). Then 1214kg (uncommitted source: #219 general enemy-hit relay, #222 auto-host, #220 probe --storyflags): build, deploy, and test with peer-loss-dunwall-vm-v1909 and host-loss-dunwall-vm-v1909 (#221), coop-autohost-v1909a (#222), powers-institute-vm-v1909 (cast step), the #206 tutorial diagnostics (training-pair-targets-v1909, training-pair-follow-targets-v1909) and a #219 enemy-hit take. Then #220 and the 0.9.5 nine-mission regression with casts and story-flag diffs.",
+  "NextAction": "Run the nine-mission 0.9.5 regression on 1214km (Run-Campaign-v1916.sh a: casts, story-flag diffs, co-op saves that already hold autosaves). Re-run any failed mission with the next letter. Then close #225 and #220, build release 0.9.5 (build_release_v1916.py candidate-npc-combat-v1214km setup-tool-v1916), run the install test, publish v0.9.5 and run the clean-PC proof from its GitHub download.",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22895,13 +22895,27 @@
   "FinalAudit": {
     "Chapter": "112",
     "Open": [
-      "#221 abrupt peer loss (stage 2)",
-      "#219 enemy hits other than swords on the partner (stage 4)",
-      "#220 partner non-lethal branches and story-flag diffs (stage 5)",
-      "#206 tutorial combat lessons (stage 6)",
-      "#222 hosting without F7 (stage 7)",
-      "campaign routes cast no power (goal criterion 2): cast steps in the next regression"
+      "#220 partner non-lethal branches: campaign story-flag diffs in the 0.9.5 regression (stage 5)",
+      "#225 a native save lost to the autosave reader: fixed in 1214km, campaign proof in the 0.9.5 regression (stage 6)"
+    ],
+    "Done": [
+      "#221 (stage 2)",
+      "#219 (stage 4)",
+      "#206 (stage 6)",
+      "#222 (stage 7)",
+      "power casts in campaign routes: campaign-institute-vm-v1915a (host Blink 3.55 m, partner Far Reach 14.59 m, in both worlds)"
     ],
     "MovementChecklist": "103 of 105 complete, runtime-bound and visually accepted after the column reconciliation (chapter 99)"
+  },
+  "Campaign095": {
+    "Card": "#225",
+    "Candidate": "candidate-npc-combat-v1214km (0.9.5)",
+    "Evidence": [
+      "campaign-dunwall-vm-v1915a (1214kl) failed: the host checkpoint sync never armed (enable_refused, slot -1); its first Dunwall autosave stayed at SLOT02/game.details.temp",
+      "campaign-eotw-vm-v1915a failed in the harness (no console after the runner wrapper was stopped), not in the game",
+      "campaign-institute-vm-v1915a (1214kl) passed: casts moved both casters in both worlds, story flags equal at start (25) and end (104)",
+      "save-share-v1916a (1214km) passed: a game.details held without delete sharing loses the native save; held with delete sharing, or not held, it lands"
+    ],
+    "Status": "regression on 1214km next (Run-Campaign-v1916.sh), chapter 88"
   }
 }
