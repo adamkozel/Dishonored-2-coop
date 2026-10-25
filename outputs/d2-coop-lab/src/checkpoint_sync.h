@@ -331,14 +331,17 @@ void checkpointService(std::uint64_t tick) {
     }
 }
 bool autosaveProbeRequested=false;std::uint64_t autosaveProbeCalls=0,autosaveProbeRefused=0;
+// 1214km (#225): coop_autosave_probe force (lab only) requests the native autosave without a mission checkpoint
+// session, for the save-share take (the lab pair plays the Dunwall fixture, where the sync keeps its fixed slot).
+bool autosaveProbeForced=false;
 std::uint64_t checkpointRemaps=0;
 void checkpointEngineService(void* system) {
     serviceAutosavePair(GetTickCount64(),checkpointSync.enabled&&checkpointMission.mission);
     if(autosaveProbeRequested) {
         // Developer fixture: a native autosave on this peer only, standing in
         // for a mission-script autosave trigger crossed by one player.
-        autosaveProbeRequested=false;
-        if(checkpointSync.enabled&&checkpointMission.mission&&outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState&&requestNativeAutosave())++autosaveProbeCalls;
+        autosaveProbeRequested=false;const bool forced=autosaveProbeForced&&!productMode;autosaveProbeForced=false;
+        if((forced||(checkpointSync.enabled&&checkpointMission.mission))&&outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState&&requestNativeAutosave())++autosaveProbeCalls;
         else ++autosaveProbeRefused;
     }
     auto& s=checkpointSync;if(!s.enabled)return;
@@ -473,7 +476,7 @@ void writeCheckpointSync() {
     {int nativeSlot=-1;std::uintptr_t game=0,rootName=0;std::string rootText;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
      if(memoryRead(base+0x39a5290,&game,8)&&game)memoryRead(game+0x2e75d8+0x1c,&nativeSlot,4);
      if(!memoryRead(base+0x2286f40,&rootName,8)||!worldIdentityString(memoryRead,rootName,rootText)||rootText.size()>=32)rootText.clear();
-     fprintf(f,"\"nativeAutosaveSlot\":%d,\"saveRoot\":\"%s\",",nativeSlot,rootText.c_str());}
+     fprintf(f,"\"nativeAutosaveSlot\":%d,\"saveRoot\":\"%s\",\"autosaveDetailsReads\":%llu,\"autosaveDetailsBusy\":%llu,",nativeSlot,rootText.c_str(),missionAutosaveReads,missionAutosaveBusy);}
     fprintf(f,"\"slotRetryCalls\":%llu,\"continuationCalls\":%llu,\"continuationDeferred\":%llu,\"continuationAccepted\":%llu,",s.slotRetryCalls,s.continuationCalls,s.continuationDeferred,s.continuationAccepted);
     fprintf(f,"\"retryProbeUntil\":%llu,\"retryProbeInjected\":%llu,",s.retryProbeUntil,s.retryProbeInjected);
     fprintf(f,"\"avatarRequested\":%s,\"avatarPending\":%s,\"avatarReady\":%s,\"avatarRestored\":%llu,\"avatarRefused\":%llu,",

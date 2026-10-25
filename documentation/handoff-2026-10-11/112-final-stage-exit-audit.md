@@ -4,15 +4,16 @@ This audit checks each exit criterion of the [roadmap](02-roadmap.md) and its ad
 evidence takes. A read-only survey of all chapters mapped each criterion to its evidence; the gaps below were then
 checked in the source and the takes. Labels: confirmed runtime (CR), confirmed static (CS), hypothesis.
 
-**Result:** stages 1 and 3 are met. In stages 2, 4, 5, 6 and 7 the criteria are met except for the open cards below.
+**Result (updated 2026-10-25):** every stage's criteria are met. The cards the audit opened are done, and so is #225, which the 0.9.5 regression found.
 
 | Card | Stage | Gap |
 |---|---|---|
 | [#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221) | 2 | Done on 1214kh (2026-10-25): an abrupt loss of either game leaves no stale ownership, and the partner rejoins. |
 | [#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219) | 4 | Done on 1214kg-ki (2026-10-25): every enemy hit on the partner's clone reaches the partner. |
-| [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | The partner's non-lethal branches past Ramsey and Stilton are unproven, and there is no story-flag diff at each mission's end. |
+| [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220) | 5 | Done on 1214km (2026-10-25): the story flag mirror makes the host's decisions those of both worlds (story-flag-mirror-v1914a), and the 0.9.5 regression found no flag differing between the worlds at any mission's start or end ([chapter 109](109-pairing-validation.md)). Steps done only in the partner's world do not count; the release notes say so. |
 | [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | Done (2026-10-25): both players from the start, the partner idle or beside the host, pass every combat lesson (route-training-pair-v1913a, route-training-follow-v1913a). |
 | [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Done on 1214kh (2026-10-25): a co-op game from the Co-op menu hosts its lobby by itself, and F7 opens the invite. |
+| [#225](https://github.com/adamkozel/Dishonored-2-coop/issues/225) | 6 | Done on 1214km (2026-10-25): the autosave reader no longer makes the game lose a save (save-share-v1916a); Dunwall's shared death passes again on co-op saves that hold autosaves (campaign-dunwall-vm-v1916a), and all nine missions pass ([chapter 109](109-pairing-validation.md)). |
 
 ## Stage 1: protected development lab
 

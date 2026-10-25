@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-25T00:25:01+02:00",
+  "UpdatedAt": "2026-10-25T07:59:30+01:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Merge #218 (0.9.4). Then 1214kg (uncommitted source: #219 general enemy-hit relay, #222 auto-host, #220 probe --storyflags): build, deploy, and test with peer-loss-dunwall-vm-v1909 and host-loss-dunwall-vm-v1909 (#221), coop-autohost-v1909a (#222), powers-institute-vm-v1909 (cast step), the #206 tutorial diagnostics (training-pair-targets-v1909, training-pair-follow-targets-v1909) and a #219 enemy-hit take. Then #220 and the 0.9.5 nine-mission regression with casts and story-flag diffs.",
+  "NextAction": "Merge PR #226 (closes #225 and #220). Then build release 0.9.5 (build_release_v1916.py candidate-npc-combat-v1214km setup-tool-v1916), run the install test release-install-v1916a, publish v0.9.5 and run the clean-PC proof product-two-account-v1916a from its GitHub download.",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
@@ -22894,14 +22894,22 @@
   },
   "FinalAudit": {
     "Chapter": "112",
-    "Open": [
-      "#221 abrupt peer loss (stage 2)",
-      "#219 enemy hits other than swords on the partner (stage 4)",
-      "#220 partner non-lethal branches and story-flag diffs (stage 5)",
-      "#206 tutorial combat lessons (stage 6)",
-      "#222 hosting without F7 (stage 7)",
-      "campaign routes cast no power (goal criterion 2): cast steps in the next regression"
+    "Open": [],
+    "Done": [
+      "#221 (stage 2)",
+      "#219 (stage 4)",
+      "#220 (stage 5)",
+      "#206 (stage 6)",
+      "#225 (stage 6)",
+      "#222 (stage 7)",
+      "power casts in campaign takes: The Good Doctor, The Clockwork Mansion, The Dust District, Death to the Empress"
     ],
     "MovementChecklist": "103 of 105 complete, runtime-bound and visually accepted after the column reconciliation (chapter 99)"
+  },
+  "Campaign095": {
+    "Card": "#225, #220",
+    "Candidate": "candidate-npc-combat-v1214km (0.9.5)",
+    "Evidence": "two accounts (host Corvo, VM partner Emily), product mode, co-op saves holding earlier autosaves, one passing take per mission: campaign-dunwall/eotw/madinventor/dust/bunker/palace/empress-vm-v1916a, campaign-curator-vm-v1916b, campaign-institute-vm-v1916c (The Good Doctor and the Grand Palace on Easy through the difficulty sync); story flags equal at every start and end; save-share-v1916a",
+    "Status": "done, chapters 109 and 88"
   }
 }

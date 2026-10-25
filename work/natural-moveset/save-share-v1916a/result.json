@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "phases": [
+      {
+        "phase": "control-before",
+        "share": "",
+        "held": 0,
+        "probeCalls": 1,
+        "probeRefused": 0,
+        "slots": [
+          {
+            "slot": "SLOT62",
+            "checkpoint": true,
+            "details": true,
+            "temp": false
+          }
+        ],
+        "landed": true,
+        "lost": false,
+        "nativeSlotBefore": 61,
+        "nativeSlot": 62,
+        "saveRoot": "savegame",
+        "detailsReads": 0,
+        "detailsBusy": 0
+      },
+      {
+        "phase": "held-without-delete-sharing",
+        "share": "Read, Write",
+        "held": 22,
+        "probeCalls": 1,
+        "probeRefused": 0,
+        "slots": [
+          {
+            "slot": "SLOT61",
+            "checkpoint": true,
+            "details": false,
+            "temp": true
+          }
+        ],
+        "landed": false,
+        "lost": true,
+        "nativeSlotBefore": 62,
+        "nativeSlot": 61,
+        "saveRoot": "savegame",
+        "detailsReads": 0,
+        "detailsBusy": 0
+      },
+      {
+        "phase": "held-with-delete-sharing",
+        "share": "Read, Write, Delete",
+        "held": 22,
+        "probeCalls": 1,
+        "probeRefused": 0,
+        "slots": [
+          {
+            "slot": "SLOT62",
+            "checkpoint": true,
+            "details": true,
+            "temp": false
+          }
+        ],
+        "landed": true,
+        "lost": false,
+        "nativeSlotBefore": 61,
+        "nativeSlot": 62,
+        "saveRoot": "savegame",
+        "detailsReads": 0,
+        "detailsBusy": 0
+      },
+      {
+        "phase": "control-after-1",
+        "share": "",
+        "held": 0,
+        "probeCalls": 1,
+        "probeRefused": 0,
+        "slots": [
+          {
+            "slot": "SLOT61",
+            "checkpoint": true,
+            "details": true,
+            "temp": false
+          }
+        ],
+        "landed": true,
+        "lost": false,
+        "nativeSlotBefore": 62,
+        "nativeSlot": 61,
+        "saveRoot": "savegame",
+        "detailsReads": 0,
+        "detailsBusy": 0
+      },
+      {
+        "phase": "control-after-2",
+        "share": "",
+        "held": 0,
+        "probeCalls": 1,
+        "probeRefused": 0,
+        "slots": [
+          {
+            "slot": "SLOT62",
+            "checkpoint": true,
+            "details": true,
+            "temp": false
+          }
+        ],
+        "landed": true,
+        "lost": false,
+        "nativeSlotBefore": 61,
+        "nativeSlot": 62,
+        "saveRoot": "savegame",
+        "detailsReads": 0,
+        "detailsBusy": 0
+      }
+    ],
+    "candidate": "candidate-npc-combat-v1214km",
+    "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p"
+  },
+  "scope": "Native save and a held game.details (#225, 1214km, lab host on its own savegame, Dunwall fixture): unheld, held without and with delete sharing, unheld twice"
+}

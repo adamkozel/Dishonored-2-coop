@@ -1548,7 +1548,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_gameover_probe")||!std::strcmp(text,"coop_gameover_retry"))return true;
     if(!std::strcmp(text,"coop_product_auto on")||!std::strcmp(text,"coop_product_auto off")||!std::strcmp(text,"coop_follow_host on")||!std::strcmp(text,"coop_follow_host off"))return true;
     if(!std::strcmp(text,"coop_session host")||!std::strcmp(text,"coop_session host_quiet")||!std::strcmp(text,"coop_session off")||!std::strncmp(text,"coop_session join ",18))return true;
-    if(!std::strcmp(text,"coop_autosave_probe")||!std::strcmp(text,"coop_trigger_mirror on")||!std::strcmp(text,"coop_trigger_mirror off"))return true;
+    if(!std::strcmp(text,"coop_autosave_probe")||!std::strcmp(text,"coop_autosave_probe force")||!std::strcmp(text,"coop_trigger_mirror on")||!std::strcmp(text,"coop_trigger_mirror off"))return true;
     if(!std::strcmp(text,"coop_use_mirror on")||!std::strcmp(text,"coop_use_mirror off"))return true; // 1214jn (#187)
     if(!std::strcmp(text,"coop_mission_end_mirror on")||!std::strcmp(text,"coop_mission_end_mirror off"))return true;
     if(!std::strcmp(text,"coop_gameflow_mirror on")||!std::strcmp(text,"coop_gameflow_mirror off"))return true;
@@ -1753,6 +1753,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_session off")){stopOnlineSession("disabled");return;}
     if(!std::strncmp(request.command,"coop_session join ",18)){startOnlineJoin(std::strtoull(request.command+18,nullptr,10));return;}
     if(!std::strcmp(request.command,"coop_autosave_probe")){autosaveProbeRequested=true;return;}
+    if(!std::strcmp(request.command,"coop_autosave_probe force")){autosaveProbeRequested=autosaveProbeForced=true;return;}
     if(!std::strcmp(request.command,"coop_trigger_mirror on")){triggerMirrorEnabled=true;triggerPeerSequence=0;triggerMirrorResult="armed";return;}
     if(!std::strcmp(request.command,"coop_trigger_mirror off")){triggerMirrorEnabled=false;triggerMirrorResult="disabled";return;}
     if(!std::strcmp(request.command,"coop_use_mirror on")){if(!useMirrorEnabled){useMirrorEnabled=true;useMirrorPeerSequence=0;useMirrorResult="armed";}return;} // 1214jn (#187)

@@ -97,6 +97,56 @@ Release 0.9.0 left deaths and checkpoints unshared in real co-op sessions (fixed
   - v1765 confirms it in the use step and in Settle.
 - **Endings:** the stalled endings (Royal Conservatory v1762b, Grand Palace v1762a) were route-step misfires: the talk and use steps count any scene change as a hit. Both endings passed on the next attempts, as Meagan's endings did in four other missions.
 
+## The campaign on 0.9.5 (1214km)
+
+The release binary of 0.9.5 (candidate 1214km) plays the nine missions on two Steam accounts: the host is Corvo on this
+PC, and the partner is Emily in the lab VM. Both games run in product mode on co-op saves, which already hold the
+autosaves of earlier takes, as a player's do.
+- **Runner:** [Run-Campaign-v1916.sh](../../work/natural-moveset/Run-Campaign-v1916.sh) on the harness
+  Route-MissionVM-v1915.
+- **Added since 0.9.4:**
+  - Both players cast their power near the start of each mission from The Good Doctor on. The step records how far
+    each caster moved in its own world and how far its avatar moved in the other world.
+  - Both worlds' bool story flags are compared at every mission's start and end, for the story flag mirror of
+    [#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220).
+
+| Mission | Passing take | Casts (host / partner, own world = other world) | Story flags differing (start / end) |
+|---|---|---|---|
+| A Long Day in Dunwall (deaths) | [campaign-dunwall-vm-v1916a](../../work/natural-moveset/campaign-dunwall-vm-v1916a) | before the powers | 0 / 0 |
+| Edge of the World (death) | [campaign-eotw-vm-v1916a](../../work/natural-moveset/campaign-eotw-vm-v1916a) | before the powers | 0 / 0 |
+| The Good Doctor (on Easy) | [campaign-institute-vm-v1916c](../../work/natural-moveset/campaign-institute-vm-v1916c) | Blink 3.57 m / Far Reach 14.35 m | 0 / 0 (25 and 104 flags) |
+| The Clockwork Mansion | [campaign-madinventor-vm-v1916a](../../work/natural-moveset/campaign-madinventor-vm-v1916a) | Blink 2.26 m / Far Reach 2.27 m | 0 / 0 |
+| The Royal Conservatory | [campaign-curator-vm-v1916b](../../work/natural-moveset/campaign-curator-vm-v1916b) | none: both stand still in the Dreadful Wale's arrival scene | 0 / 0 |
+| The Dust District | [campaign-dust-vm-v1916a](../../work/natural-moveset/campaign-dust-vm-v1916a) | 2.26 m / 0.43 m | 0 / 0 |
+| A Crack in the Slab | [campaign-bunker-vm-v1916a](../../work/natural-moveset/campaign-bunker-vm-v1916a) | none: both stand still in the opening scene | 0 / 0 |
+| The Grand Palace (on Easy) | [campaign-palace-vm-v1916a](../../work/natural-moveset/campaign-palace-vm-v1916a) | none: both stand still in the Dreadful Wale's opening scene | 0 / 0 |
+| Death to the Empress, through the credits to the menu | [campaign-empress-vm-v1916a](../../work/natural-moveset/campaign-empress-vm-v1916a) | 2.28 m / 0.39 m | 0 (140 flags) / none: the campaign ends at the main menu, where no world is left to read |
+
+- **The Good Doctor:**
+  - [campaign-institute-vm-v1915a](../../work/natural-moveset/campaign-institute-vm-v1915a) (1214kl) passed: Blink 3.55 m and Far Reach 14.59 m; 25 and 104 flags,
+    none differing.
+  - On 1214km, [campaign-institute-vm-v1916a](../../work/natural-moveset/campaign-institute-vm-v1916a) and [campaign-institute-vm-v1916b](../../work/natural-moveset/campaign-institute-vm-v1916b) failed in route
+    combat. Their casts moved 3.58 m / 14.35 m and 3.63 m / 13.89 m.
+    - In v1916a, the clear before the whale oil tank spent its presses on a blocking elite, and the guard it never
+      reached killed the host.
+    - In v1916b, three watchtower guards killed the host through the health hold, which is not god mode.
+  - [campaign-institute-vm-v1916c](../../work/natural-moveset/campaign-institute-vm-v1916c) plays the mission on Easy through the host's difficulty sync, as the Grand Palace route does
+    ([routes/campaign-institute-vm-v1916c.json](../../work/natural-moveset/routes/campaign-institute-vm-v1916c.json)).
+- **Other failed takes, kept:**
+  - [campaign-curator-vm-v1916a](../../work/natural-moveset/campaign-curator-vm-v1916a): a witch held the host in a sword clash at the archived journals after
+    Breanna died. The retake route clears witches and gravehounds first.
+  - On 1214kl: [campaign-dunwall-vm-v1915a](../../work/natural-moveset/campaign-dunwall-vm-v1915a) lost the host's autosave
+    ([#225](https://github.com/adamkozel/Dishonored-2-coop/issues/225), [chapter 88](88-mission-shared-death-and-checkpoint.md)).
+  - [campaign-eotw-vm-v1915a](../../work/natural-moveset/campaign-eotw-vm-v1915a) failed in the harness: its console closed when the runner's wrapper was stopped.
+- **Powers:** a cast moves the caster in both worlds by the same distance in four missions (The Good Doctor, The
+  Clockwork Mansion, The Dust District, Death to the Empress).
+  - The partner's Far Reach moves her less where it stops short on the Dreadful Wale.
+  - Three missions start in a scene where neither player can move, so their casts at the start move no one.
+- **Story flags:** in every mission both worlds held the same decisions at the start and, until the credits, at the
+  end ([#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220)).
+- **Every passing take:** the right characters, equal gameflow at every step, both games on the next mission's map (the
+  main menu after the credits), and restoration passed.
+
 ## The campaign on 0.9.4 (1214kf)
 
 The release binary of 0.9.4 (candidate 1214kf: the partner's combat choke of #209, story characters agree between
