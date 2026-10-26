@@ -14632,6 +14632,24 @@
             "cases": [
               "client-farreachfar"
             ]
+          },
+          {
+            "take": "coverage-v1921-farreachcancel",
+            "cases": [
+              "host-farreachcancel"
+            ]
+          },
+          {
+            "take": "coverage-v1921-farreachfar",
+            "cases": [
+              "host-farreachfar"
+            ]
+          },
+          {
+            "take": "coverage-v1917a",
+            "cases": [
+              "host-farreach"
+            ]
           }
         ],
         "visual": [
@@ -14642,9 +14660,25 @@
           {
             "video": "coverage-v1353a/client-farreachcancel-observer.mp4",
             "verdict": "Emily reaches out with her left hand and holds it, lowers it again without moving when the aim is cancelled, then reaches once more and is pulled away down the lane; the scene is dim but the poses read."
+          },
+          {
+            "video": "coverage-v1921-farreachcancel/host-farreachcancel-observer.mp4",
+            "verdict": "Host role, Corvo's window: Emily raises her left arm into the Far Reach aim beside the hall wall and holds it, lowers it on the X cancel with no release and stays put (0 m), then a second cast carries her down the hall to the desk. Accepted."
+          },
+          {
+            "video": "coverage-v1921-farreachfar/host-farreachfar-observer.mp4",
+            "verdict": "Host role, Corvo's window: Emily aims down the hall, releases, and is carried 9.3 m to the far end by the desk, where she lands and stands. Accepted."
+          },
+          {
+            "video": "coverage-v1917a/host-farreach-observer.mp4",
+            "verdict": "Host role, Corvo's window: Emily, masked and armed, extends her left arm, reaches across the room and lands on the rug with her sword out. Accepted."
           }
         ],
-        "lifecycle": "See method."
+        "lifecycle": "See method.",
+        "hostRole": {
+          "audit": "completion-audit-v1932-emily-host-role.json",
+          "scope": "Host role (1921, #228): the same aim, X cancel (no release, 0 m), release and travel with Emily hosting on her SLOT80 pairing fixture, presented on Corvo as partner (variants 4-8; the long reach travelled 9.3 m)."
+        }
       },
       "complete": true
     },
@@ -14701,15 +14735,29 @@
             "cases": [
               "client-farreachbottle"
             ]
+          },
+          {
+            "take": "coverage-v1935-farreachpull",
+            "cases": [
+              "host-farreachpull"
+            ]
           }
         ],
         "visual": [
           {
             "video": "object-carry-v1471b/client-farreachbottle-observer.mp4",
             "verdict": "Corvo's window: Emily raises her left arm and holds the Far Reach aim in a braced stance, the tendril lashes out from her hand, then she draws the arm back sharply with her body leaning into the pull and recovers to her stance. Natural full-body pull. Accepted (the pulled bottle moves only in her world, #115)."
+          },
+          {
+            "video": "coverage-v1935-farreachpull/host-farreachpull-observer.mp4",
+            "verdict": "Host role, Corvo's window from behind Emily on the gallery: she raises her left arm and the tendril locks onto the guard 4.5 m ahead; the guard is yanked off his feet and flies toward her as she draws the arm back and leans into the pull, then she recovers to her stance. Natural full-body pull. Accepted."
           }
         ],
-        "lifecycle": "See method."
+        "lifecycle": "See method.",
+        "hostRole": {
+          "audit": "completion-audit-v1932-emily-host-role.json",
+          "scope": "Host role (1935, #228): Emily hosting on her SLOT80 pairing fixture pulls the upper-floor guard with Far Reach and grapple_pull_npcs; the native pull state (84) ran and Corvo as partner presented pullIn (7) with the loop (8) or pullOut (9)."
+        }
       },
       "complete": true,
       "evidence": [
@@ -14813,15 +14861,29 @@
             "cases": [
               "client-darkvision"
             ]
+          },
+          {
+            "take": "coverage-v1921-darkvision",
+            "cases": [
+              "host-darkvision"
+            ]
           }
         ],
         "visual": [
           {
             "video": "coverage-v1332d/client-darkvision-observer.mp4",
             "verdict": "Emily lifts her hand to her face to cast and again to end Dark Vision, sword held low, then settles."
+          },
+          {
+            "video": "coverage-v1921-darkvision/host-darkvision-observer.mp4",
+            "verdict": "Host role, Corvo's window: Emily, masked, lifts her left hand to her face to cast Dark Vision and again about 3.5 s later to end it, sword low, then settles. The reveal stays with her. Accepted."
           }
         ],
-        "lifecycle": "See method."
+        "lifecycle": "See method.",
+        "hostRole": {
+          "audit": "completion-audit-v1932-emily-host-role.json",
+          "scope": "Host role (1921, #228): Emily hosting on her SLOT80 pairing fixture casts and ends Dark Vision (variant 10, 15 samples); Corvo as partner presents both gestures and her recovery."
+        }
       },
       "complete": true,
       "visual_validation_before": "bounded_actual_game_frames_inspected"
@@ -16784,15 +16846,29 @@
             "cases": [
               "client-doppelganger"
             ]
+          },
+          {
+            "take": "coverage-v1921-doppelganger",
+            "cases": [
+              "host-doppelganger"
+            ]
           }
         ],
         "visual": [
           {
             "video": "coverage-v1332e/client-doppelganger-observer.mp4",
             "verdict": "A bright summon burst rises beside Emily; a second Emily appears next to her, runs off, and is gone about two seconds later while Emily stands armed."
+          },
+          {
+            "video": "coverage-v1921-doppelganger/host-doppelganger-observer.mp4",
+            "verdict": "Host role, Corvo's window: Emily casts; a bright summon burst rises across the room and a second Emily stands there, then is gone, while Emily stands armed. Accepted."
           }
         ],
-        "lifecycle": "See method."
+        "lifecycle": "See method.",
+        "hostRole": {
+          "audit": "completion-audit-v1932-emily-host-role.json",
+          "scope": "Host role (1921, #228): Emily hosting on her SLOT80 pairing fixture casts Doppelganger (variants 29-31); Corvo as partner presents the cast, the summon effect and the clone (the clone is created in the partner world since 1214ko, #230)."
+        }
       },
       "evidence": [
         "coverage-v1332c/result.json",
@@ -19005,15 +19081,29 @@
             "cases": [
               "client-mesmerize"
             ]
+          },
+          {
+            "take": "coverage-v1921-mesmerize",
+            "cases": [
+              "host-mesmerize"
+            ]
           }
         ],
         "visual": [
           {
             "video": "coverage-v1332e/client-mesmerize-observer.mp4",
             "verdict": "Emily thrusts her hand forward; a dark, tendrilled spirit forms a few metres ahead of her and hovers there for the rest of the cast."
+          },
+          {
+            "video": "coverage-v1921-mesmerize/host-mesmerize-observer.mp4",
+            "verdict": "Host role, Corvo's window: Emily thrusts her hand forward and a dark, tendrilled spirit forms across the room and hovers there for the rest of the cast. Accepted."
           }
         ],
-        "lifecycle": "See method."
+        "lifecycle": "See method.",
+        "hostRole": {
+          "audit": "completion-audit-v1932-emily-host-role.json",
+          "scope": "Host role (1921, #228): Emily hosting on her SLOT80 pairing fixture casts Mesmerize (variants 16-18); Corvo as partner presents the gestures and the spirit (created in the partner world since 1214ko, #230)."
+        }
       },
       "complete": true
     },

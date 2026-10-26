@@ -57,7 +57,7 @@ void serviceTrapProp(ULONGLONG tick){
     if(request!=1)return;
     const auto refuse=[&](const char* why){++trapPropRefused;trapPropResult=why;};
     if(p.until||p.pendingHide||rangedProp.until||rangedProp.pendingHide||!partnerAssetsEnabled||!probeDoppelganger||
-       !powerFixtureApiMatches()||!rangedPropApiMatches()||!coopGameplayReady(outgoing)||
+       !powerApiMatches()||!rangedPropApiMatches()||!coopGameplayReady(outgoing)||
        !coopGameplayReady(remote)||!coopWorldPairReady(outgoing,remote)||!shadowEquipmentAiReady()||
        (!automatic&&(!observerIsolation.ready||!observerIsolation.movementFixture||observerIsolation.until<tick+16000))){refuse("unsupported_isolated_scope");return;}
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);

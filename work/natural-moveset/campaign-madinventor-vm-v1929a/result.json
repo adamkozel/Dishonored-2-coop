@@ -1,0 +1,231 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214kq",
+      "hostDll": "66026C2EEAB794F87FB284588ED92CCF59C1090E237F235F246A186EB3601430",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 4,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 104,
+        "client": 104,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 27,
+        "client": 27,
+        "decisionDifferences": 0
+      }
+    ],
+    "casts": [
+      {
+        "role": "host",
+        "power": "models/powers/blink/blink.inventoryitem",
+        "moved": 0.98,
+        "avatarMoved": 0.98,
+        "sent": 2,
+        "received": 2,
+        "applied": 2,
+        "fxPresented": true,
+        "walks": [
+          1.87
+        ],
+        "tries": [
+          {
+            "moved": 0.98,
+            "avatarMoved": 0.98,
+            "sent": 2,
+            "received": 2,
+            "applied": 2,
+            "fxStarted": 2,
+            "fxRefused": 0,
+            "fxResult": "owned_effect_stopped",
+            "beams": 0,
+            "impacts": 0
+          }
+        ]
+      },
+      {
+        "role": "client",
+        "power": "models/powers/grapple/grapple.inventoryitem",
+        "moved": 0.9,
+        "avatarMoved": 0.9,
+        "sent": 0,
+        "received": 0,
+        "applied": 0,
+        "fxPresented": true,
+        "walks": [
+          0.74
+        ],
+        "tries": [
+          {
+            "moved": 0.9,
+            "avatarMoved": 0.9,
+            "sent": 0,
+            "received": 0,
+            "applied": 0,
+            "fxStarted": 2,
+            "fxRefused": 0,
+            "fxResult": "owned_effect_stopped",
+            "beams": 1,
+            "impacts": 1
+          }
+        ]
+      }
+    ],
+    "healthHold": [
+      "from step step11-heal",
+      "from step step19-heal",
+      "from step step21-heal",
+      "from step step27-heal"
+    ],
+    "transitionConfirms": [
+      "step14-use pending 0",
+      "step14-use pending 0"
+    ],
+    "skipped": [
+      "step30-wait",
+      "step31-use",
+      "step32-heal",
+      "step33-wait"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 36,
+        "cine": 27,
+        "pos": [
+          -6.830149,
+          -14.982274,
+          0.020914
+        ],
+        "fresh": true,
+        "gameflow": [
+          216,
+          1,
+          1,
+          15,
+          1,
+          14,
+          0
+        ],
+        "gfApplied": 26,
+        "lt": "applied/0/3",
+        "hold": "released/844",
+        "ka": "3/8/0",
+        "active": "Mission_Void02"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 36,
+        "cine": 94,
+        "pos": [
+          -6.933902,
+          -15.84349,
+          0.004261
+        ],
+        "fresh": true,
+        "gameflow": [
+          216,
+          1,
+          1,
+          15,
+          1,
+          14,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "released/0",
+        "ka": "11/0/0",
+        "active": "Mission_Void02"
+      }
+    },
+    "gameflowEqual": true,
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

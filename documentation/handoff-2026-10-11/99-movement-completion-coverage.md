@@ -538,3 +538,26 @@ An audit (`completion-audit-v13xx-<family>.json`) records the following for each
 `sit_stand` is not applicable and `incapacitation_and_rescue_if_supported` is excluded by policy.
 
 Visual review uses contact sheets of the observer videos, cropped to the partner and brightened when dark, at 3–15 fps around each action. The sheets are working files and are not committed.
+
+## Independent recheck (1917, 1935)
+
+[recheck_movement_completion_v1917.py](../../work/natural-moveset/recheck_movement_completion_v1917.py) checks every
+item against the evidence on disk rather than the catalog's own flags. It checks:
+- the decision and its audit file;
+- every completion take;
+- every video (ffprobe: at least 1 s and 320 px wide) and its reviewer verdict;
+- both roles;
+- the runtime binding and the visual acceptance.
+
+- **1917** ([movement-completion-recheck-v1917](../../work/natural-moveset/movement-completion-recheck-v1917)): 98 of
+  103 applicable items passed. Five Emily power items named only the partner role in their completion evidence. All 39
+  contact sheets of the completion videos were reviewed (`review-2.json`).
+- **Emily in the host role (#228):** each of the five items gained a host-role take filmed from the partner's game,
+  with Emily hosting on her SLOT80 pairing fixture: coverage-v1921-farreachcancel, farreachfar, darkvision,
+  doppelganger and mesmerize, coverage-v1917a (Far Reach), and coverage-v1935-farreachpull (a guard pulled with
+  `grapple_pull_npcs`). The verdicts are in the catalog and in
+  [completion-audit-v1932-emily-host-role.json](../../work/natural-moveset/completion-audit-v1932-emily-host-role.json)
+  ([chapter 113](113-power-effects-on-every-install.md)).
+- **1935c** ([movement-completion-recheck-v1935c](../../work/natural-moveset/movement-completion-recheck-v1935c)): 103 of
+  103 applicable items pass every check, and all 1586 videos are valid. The seven new videos are reviewed in its
+  `review.json`. Runs v1935 and v1935b drew no frames: ffmpeg's drawtext lacked a font file here. Both are kept.

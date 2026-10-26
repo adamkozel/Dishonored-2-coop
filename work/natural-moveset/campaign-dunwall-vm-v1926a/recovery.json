@@ -1,0 +1,13 @@
+{
+  "interrupted": true,
+  "reason": "stopped in its VM sync: the regression moved to candidate 1214kq (1214kp with the version resources 0.9.6), so the release binary is the one tested",
+  "steps": [
+    "host coop_product_auto off",
+    "host coop_player_health_hold off",
+    "host coop_session off",
+    "vm role stopped",
+    "lab pair relaunched"
+  ],
+  "passed": true,
+  "errors": []
+}

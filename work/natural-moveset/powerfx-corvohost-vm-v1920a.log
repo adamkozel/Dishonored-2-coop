@@ -1,0 +1,302 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+17:47:23 copying lab scripts, tooling and bin
+17:47:30 mod resources (voidmod, master.index) into the game copy
+17:47:34 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : EA09B44FE7AD1C9F
+probe           : 9157E1A4F0241DA0
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 95
+PSComputerName  : D2CoopVM
+RunspaceId      : 54af12a2-c695-4220-966e-447152dd12d1
+
+
+17:48:36 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             95 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The host's bendtime showed no effect in the other world (cast 0, .time-bend.json/added=0, .time-bend.json/requests=0, other power-fx owned_effect_stopped)",
+  "notes": {
+    "powerfx": [
+      {
+        "role": "host",
+        "power": "blink",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 2,
+        "effects": {
+          ".power-fx.json/started": 2,
+          ".power-fx-stream.json/applied": 2
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "blink",
+        "upgrades": [
+          "blink_assault"
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 2,
+        "effects": {
+          ".power-fx.json/started": 2,
+          ".power-fx-stream.json/applied": 2
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "windblast",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 1,
+        "effects": {
+          ".windblast-fx.json/waves": 0,
+          ".windblast-fx.json/applied": 1
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "windblast",
+        "upgrades": [
+          "windblast_greater"
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 1,
+        "effects": {
+          ".windblast-fx.json/waves": 0,
+          ".windblast-fx.json/applied": 1
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "swarm",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 105,
+        "effects": {
+          ".swarm-world.json/presented": 89,
+          ".swarm-rat-visual.json/created": 25,
+          ".swarm-spawn-fx.json/applied": 1
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "swarm",
+        "upgrades": [
+          "devouring_swarm_double"
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 172,
+        "effects": {
+          ".swarm-world.json/presented": 155,
+          ".swarm-rat-visual.json/created": 10,
+          ".swarm-spawn-fx.json/applied": 1
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "bendtime",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 0,
+        "effects": {
+          ".time-bend.json/added": 0,
+          ".time-bend.json/requests": 0
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": false,
+        "judgedOn": "the other world's status"
+      }
+    ],
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ko",
+      "hostDll": "EA09B44FE7AD1C9FCF239A83BC1CECDE6ED5139CC43B4A1FE2504592D19421D5",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 26,
+        "cine": 25,
+        "pos": [
+          -30.619690,
+          192.553589,
+          1.253970
+        ],
+        "fresh": true,
+        "gameflow": [
+          223,
+          2,
+          5,
+          14,
+          0,
+          4,
+          0
+        ],
+        "gfApplied": 12,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "6/5/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 26,
+        "cine": 44,
+        "pos": [
+          -31.243828,
+          172.93042,
+          1.7658
+        ],
+        "fresh": true,
+        "gameflow": [
+          223,
+          2,
+          5,
+          14,
+          0,
+          4,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4281",
+        "ka": "9/2/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1920.ps1:704[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 704 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe host's bendtime showed no effect in the other world (cast 0, .time-bend.json/added=0,[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1m.time-bend.json/requests=0, other power-fx owned_effect_stopped)[0m

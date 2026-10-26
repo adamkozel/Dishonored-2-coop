@@ -1,8 +1,27 @@
-# Dishonored 2 Corvo/Emily co-op 0.9.5
+# Dishonored 2 Corvo/Emily co-op 0.9.6
 
 Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
+
+## Fixed in 0.9.6
+
+- **Your partner sees your powers.** On every install but our test machine, the other player's game never showed the
+  native effects of your powers ([#230](https://github.com/adamkozel/Dishonored-2-coop/issues/230)). This covered:
+  - Blink's burst and Blink Assault;
+  - Windblast's wave and Greater Windblast;
+  - Devouring Swarm's rats;
+  - Possession;
+  - Far Reach's beam;
+  - Domino's links;
+  - the Doppelganger and Twin Shade;
+  - the Mesmerize spirit;
+  - Shadow Walk's form;
+  - the grenade, Heart and trap you hold.
+
+  They now show for both characters, whether you host or join. Dark Vision's glow is still yours alone, as in the
+  single-player game; your partner sees the gesture.
+- Both players need 0.9.6.
 
 ## New in 0.9.5
 
@@ -142,7 +161,7 @@ Emily's powers now act on the host's characters as they do in single player ([#1
 ## Install (both players)
 
 1. Close Dishonored 2. If an earlier version of the mod is installed, run its `Uninstall.cmd` first.
-2. Download `d2coop-v0.9.5.zip` from the GitHub release and extract it anywhere.
+2. Download `d2coop-v0.9.6.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.

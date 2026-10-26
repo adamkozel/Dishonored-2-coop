@@ -1,0 +1,190 @@
+{
+  "passed": false,
+  "failure": "Use of ld_note_archived_journals not registered",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214km",
+      "hostDll": "9207FD06D5645C65492B2C001A30989AE2B36058304E0C93E2E6A49DFE8E3E3D",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 27,
+        "client": 27,
+        "decisionDifferences": 0
+      }
+    ],
+    "casts": [
+      {
+        "role": "host",
+        "power": "models/powers/blink/blink.inventoryitem",
+        "moved": 2.57,
+        "avatarMoved": 2.57,
+        "sent": 2,
+        "received": 2,
+        "applied": 0,
+        "walks": [
+          1.93
+        ],
+        "tries": [
+          {
+            "moved": 2.57,
+            "avatarMoved": 2.57,
+            "sent": 2,
+            "received": 2,
+            "applied": 0
+          }
+        ]
+      },
+      {
+        "role": "client",
+        "power": "models/powers/grapple/grapple.inventoryitem",
+        "moved": 6.77,
+        "avatarMoved": 6.77,
+        "sent": 0,
+        "received": 0,
+        "applied": 0,
+        "walks": [
+          2.08
+        ],
+        "tries": [
+          {
+            "moved": 6.77,
+            "avatarMoved": 6.77,
+            "sent": 0,
+            "received": 0,
+            "applied": 0
+          }
+        ]
+      }
+    ],
+    "healthHold": [
+      "from step step22-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/curator/curator_p_lowchaos",
+        "epoch": 26,
+        "cine": 158,
+        "pos": [
+          -5.366002,
+          53.035439,
+          8.503679
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          2,
+          3,
+          11,
+          0,
+          6,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4188",
+        "ka": "6/0/0",
+        "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_SearchOffice"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/curator/curator_p_lowchaos",
+        "epoch": 26,
+        "cine": 34,
+        "pos": [
+          -117.697121,
+          -125.921036,
+          -29.901525
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          2,
+          3,
+          11,
+          0,
+          6,
+          0
+        ],
+        "gfApplied": 17,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "3/3/2",
+        "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_SearchOffice"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/void/void_02/void_02.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

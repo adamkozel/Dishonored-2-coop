@@ -1,0 +1,6260 @@
+{
+ "catalog": "review-catalog.json",
+ "items": 105,
+ "applicable": 103,
+ "notApplicable": [
+  {
+   "id": "sit_stand",
+   "reason": "not_applicable"
+  },
+  {
+   "id": "incapacitation_and_rescue_if_supported",
+   "reason": "excluded_by_policy"
+  }
+ ],
+ "applicableOk": 98,
+ "failing": [
+  {
+   "id": "emily_far_reach_aim_cancel_release_arrive",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ]
+  },
+  {
+   "id": "emily_far_reach_pull_variants",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ]
+  },
+  {
+   "id": "emily_dark_vision_cast_end",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ]
+  },
+  {
+   "id": "emily_doppelganger_cast",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ]
+  },
+  {
+   "id": "emily_mesmerize_cast",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ]
+  }
+ ],
+ "videosChecked": 1579,
+ "videosValid": 1579,
+ "completionVisualFrames": 0,
+ "sheets": [],
+ "itemsDetail": [
+  {
+   "id": "stand_idle",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1320b/host-gait-observer.mp4",
+     "exists": true,
+     "seconds": 29.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo stands planted, armed and then holstered (upright, arms down); the holster ends and the redraw starts without a pop at 15 fps."
+    },
+    {
+     "path": "coverage-v1320b/client-gait-observer.mp4",
+     "exists": true,
+     "seconds": 29.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily holds her idle unarmed, then draws into her wide armed stance continuously at 15 fps."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "armed_idle",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1320b/host-gait-observer.mp4",
+     "exists": true,
+     "seconds": 29.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo's armed idle holds the sword low and settles after each stop."
+    },
+    {
+     "path": "coverage-v1320b/client-gait-observer.mp4",
+     "exists": true,
+     "seconds": 29.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily's armed idle keeps her wide ready stance after the redraw."
+    }
+   ],
+   "recordings": {
+    "count": 6,
+    "valid": 6,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "walk_8_directions",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318a/host-walk8-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo walks with alternating strides in every heading."
+    },
+    {
+     "path": "coverage-v1318a/client-walk8-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily walks with alternating strides, coat swinging, sword in hand, in every heading."
+    }
+   ],
+   "recordings": {
+    "count": 5,
+    "valid": 5,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "run_8_directions",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1320a/client-run8-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily runs with extended strides in each heading and changes direction without pops."
+    },
+    {
+     "path": "coverage-v1320b/host-run8-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo runs in each heading with a distinct run stride."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "sprint_forward_and_diagonals",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318c/client-sprint3-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily sprints with long forward-leaning strides and pumping arms, ending close to the observer."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "start_stop_each_gait",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318c/client-startstop-observer.mp4",
+     "exists": true,
+     "seconds": 20.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily starts into stride and stops planted between segments."
+    }
+   ],
+   "recordings": {
+    "count": 10,
+    "valid": 10,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "gait_speed_changes",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318c/client-startstop-observer.mp4",
+     "exists": true,
+     "seconds": 20.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "The ramp blends walk into run into sprint without a pop."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "turn_in_place_90_180",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318b/host-turns-observer.mp4",
+     "exists": true,
+     "seconds": 26.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo steps his feet through the 180 degree turns and faces about."
+    },
+    {
+     "path": "coverage-v1318c/host-turns-observer.mp4",
+     "exists": true,
+     "seconds": 26.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo's crouched turns stay low with stepping feet, no upright flashes."
+    },
+    {
+     "path": "coverage-v1318c/client-turns-observer.mp4",
+     "exists": true,
+     "seconds": 26.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily's crouched turns stay low with stepping feet, no upright flashes."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_stance_turns_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "moving_turns",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1321e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321e/host-arcs-observer.mp4",
+     "exists": true,
+     "seconds": 14.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo walks, runs and sprints through right-hand arcs with the body following the curve; the run arc ends close to the camera in a planted stop."
+    },
+    {
+     "path": "coverage-v1320c/host-gait-observer.mp4",
+     "exists": true,
+     "seconds": 28.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo walks forward and backward through the moving turns with his body following the curve and legs in stride."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "reverse_and_direction_changes",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1323-locomotion.json",
+   "takes": [
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1320d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1320a/client-run8-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily's direction changes at run speed blend without pops."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "slopes_and_stairs",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1349-slopes.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328zk",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328zk/host-slope-observer.mp4",
+     "exists": true,
+     "seconds": 29.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo walks away up the sloped cobbled street beside the tram rails, then turns and walks back down toward the camera."
+    },
+    {
+     "path": "mission-coverage-v1328zk/client-slope-observer.mp4",
+     "exists": true,
+     "seconds": 29.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily walks away up the same street, then comes back down toward the camera, stepping on the incline throughout."
+    },
+    {
+     "path": "coverage-v1318a/host-stairs-observer.mp4",
+     "exists": true,
+     "seconds": 15.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo steps down the staircase with alternating feet, sword in hand."
+    },
+    {
+     "path": "coverage-v1318c/client-stairs-observer.mp4",
+     "exists": true,
+     "seconds": 20.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily climbs the staircase stepping, upright."
+    }
+   ],
+   "recordings": {
+    "count": 10,
+    "valid": 10,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_dunwall_stairs_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouch_idle",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318c/host-crouch8-observer.mp4",
+     "exists": true,
+     "seconds": 16.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo holds a low crouch between crouched moves."
+    },
+    {
+     "path": "coverage-v1319c/client-stance-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily holds a planted crouch while still."
+    }
+   ],
+   "recordings": {
+    "count": 18,
+    "valid": 18,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_manual_and_automatic_crouch_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouch_8_directions",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318c/host-crouch8-observer.mp4",
+     "exists": true,
+     "seconds": 16.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo crouch-walks in a low stepping posture in every heading."
+    }
+   ],
+   "recordings": {
+    "count": 5,
+    "valid": 5,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "stand_to_crouch",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1319c/client-stance-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's crouches blend continuously, still and moving."
+    }
+   ],
+   "recordings": {
+    "count": 26,
+    "valid": 26,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_manual_and_automatic_crouch_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouch_to_stand",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1319c/client-stance-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily rises continuously into a planted stand."
+    }
+   ],
+   "recordings": {
+    "count": 28,
+    "valid": 28,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_manual_and_automatic_crouch_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouched_turns",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318c/host-turns-observer.mp4",
+     "exists": true,
+     "seconds": 26.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo's crouched turns stay low with stepping feet."
+    },
+    {
+     "path": "coverage-v1318c/client-turns-observer.mp4",
+     "exists": true,
+     "seconds": 26.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Emily's crouched turns stay low with stepping feet."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_stance_turns_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouch_stop_start",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1318e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318c/host-crouch8-observer.mp4",
+     "exists": true,
+     "seconds": 16.0,
+     "width": 628,
+     "height": 360,
+     "valid": true,
+     "verdict": "Corvo's crouched starts and stops are clean into a held crouch."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "stand_lean_left_right",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1319c/host-lean-observer.mp4",
+     "exists": true,
+     "seconds": 24.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's standing leans shift the whole body sideways over planted feet and recover (modest amplitude)."
+    },
+    {
+     "path": "coverage-v1319c/client-lean-observer.mp4",
+     "exists": true,
+     "seconds": 25.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's standing leans shift visibly each way and recover."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouch_lean_left_right",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1319c/host-lean-observer.mp4",
+     "exists": true,
+     "seconds": 24.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's crouched leans are clear both ways and recover."
+    },
+    {
+     "path": "coverage-v1319c/client-lean-observer.mp4",
+     "exists": true,
+     "seconds": 25.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's crouched leans are clear both ways and recover."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "ledge_peek",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1319c/host-lean-observer.mp4",
+     "exists": true,
+     "seconds": 24.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's crouched peek rises clearly; the standing peek is a subtle tiptoe rise."
+    },
+    {
+     "path": "coverage-v1319c/client-lean-observer.mp4",
+     "exists": true,
+     "seconds": 25.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's crouched peek rises clearly; the standing peek is a subtle tiptoe rise."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "keyhole_enter_look_exit",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1325-stance.json",
+   "takes": [
+    {
+     "take": "coverage-v1319e",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1319e/host-keyhole-observer.mp4",
+     "exists": true,
+     "seconds": 16.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo bends to the keyhole at the door, holds, and rises back on exit, standing and crouched."
+    },
+    {
+     "path": "coverage-v1319e/client-keyhole-observer.mp4",
+     "exists": true,
+     "seconds": 16.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily bends to the keyhole, holds, and rises back on exit, standing and crouched."
+    }
+   ],
+   "recordings": {
+    "count": 12,
+    "valid": 12,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_keyhole_phases_through_Steam",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "standing_jump_takeoff",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/host-jumps-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo takes off from a planted idle, tucks, lands with a compression and recovers, armed and holstered."
+    }
+   ],
+   "recordings": {
+    "count": 6,
+    "valid": 6,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "running_jump_takeoff",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/client-runjump-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily runs into the jump, carries through the air toward the camera and keeps running."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouch_jump_transition",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/host-jumps-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo jumps from the crouch, tucks and lands back into the crouch."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "double_jump",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1336-double-jump.json",
+   "takes": [
+    {
+     "take": "coverage-v1333b",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1333b/host-doublejump-observer.mp4",
+     "exists": true,
+     "seconds": 19.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo springs from a crouched take-off, tucks, kicks into a second tuck near the top and comes down arms spread into a compressed crouched landing, then recovers."
+    },
+    {
+     "path": "coverage-v1333b/client-doublejump-observer.mp4",
+     "exists": true,
+     "seconds": 19.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily takes off, tucks with her coat flaring, tucks again for the second impulse and lands in a crouch before standing."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_double_jump_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "rising_airborne",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/host-jumps-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "The ascent pose extends, then tucks with height."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "fall_loop",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/host-fall-observer.mp4",
+     "exists": true,
+     "seconds": 9.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo drops from height in the falling pose and lands."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_functional_both_roles_long_fall",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "soft_landing",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/host-jumps-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Each landing compresses and recovers to a planted idle."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "hard_landing",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1344-traversal-2.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328q",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328q/host-hardfall-observer.mp4",
+     "exists": true,
+     "seconds": 10.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo drops onto the dock and lands in a deep crouch with one hand on the planks, holds it a moment, rises and walks on."
+    },
+    {
+     "path": "mission-coverage-v1328q/client-hardfall-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lands from the fall in the same braced crouch, pushes up and walks away along the dock."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_light_landing_standing_and_crouched_verified_dunwall",
+   "visual_validation": "accepted_functional_both_roles_long_fall_landing",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "moving_landing",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/client-runjump-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lands from the run jump into a continuing stride."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "vault_low_obstacle",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1326d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1326d/host-vault-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Seen side-on, Corvo runs in, goes over the obstacle airborne with legs tucked and carries on."
+    },
+    {
+     "path": "coverage-v1326d/client-vault-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Seen side-on, Emily vaults the obstacle the same way."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_isolated_Dunwall_native_vault",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "climb_high_ledge",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1326d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1326c/client-highmantle-observer.mp4",
+     "exists": true,
+     "seconds": 12.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily jumps, reaches up and pulls onto the canopy, then stands on top."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_isolated_Dunwall_native_high_mantle",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "ledge_hang_and_pull_up",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1326d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1326c/client-highmantle-observer.mp4",
+     "exists": true,
+     "seconds": 12.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "The grab and pull-up read as a reach and climb onto the ledge."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_isolated_Dunwall_low_mantle",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "window_enter_exit",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1344-traversal-2.json",
+   "takes": [
+    {
+     "take": "window-traversal-v1235i",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "window-traversal-v1235i/cross-client-observed.mp4",
+     "exists": true,
+     "seconds": 8.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily steps up to the window, plants her hands on the sill, swings through the opening and drops out of sight on the far side."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_confined_low_mantle_through_climbable_eotw_window_both_roles",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "slide_enter_loop_exit",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/client-slideexit-observer.mp4",
+     "exists": true,
+     "seconds": 14.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily sprints, drops into the slide and jumps out of it; the second slide enters low."
+    }
+   ],
+   "recordings": {
+    "count": 26,
+    "valid": 26,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "slide_to_crouch_or_stand",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1331-traversal.json",
+   "takes": [
+    {
+     "take": "coverage-v1321h",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1321h/client-slideexit-observer.mp4",
+     "exists": true,
+     "seconds": 14.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "The slide recovers into a crouch, and the jump exit lands standing."
+    }
+   ],
+   "recordings": {
+    "count": 24,
+    "valid": 24,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "ladder_up_down_entry_exit",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1347-climb.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328v",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328v/client-climbtop-observer.mp4",
+     "exists": true,
+     "seconds": 14.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily enters the climb from the street, ascends to the top and exits by letting go."
+    }
+   ],
+   "recordings": {
+    "count": 9,
+    "valid": 9,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_chain_climb_both_roles_mission_map",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "chain_rope_climb",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1347-climb.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328v",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328v/host-climb-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo grabs the chain at the street, pulls himself up hand over hand, then climbs back down and steps off."
+    },
+    {
+     "path": "mission-coverage-v1328v/client-climbtop-observer.mp4",
+     "exists": true,
+     "seconds": 14.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily climbs the chain all the way up, hangs at the top and lets go."
+    }
+   ],
+   "recordings": {
+    "count": 1,
+    "valid": 1,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "blocked_native_fixture_missing_components",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "swim_idle_directions",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1344-traversal-2.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328o",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1328h",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328o/client-swim-observer.mp4",
+     "exists": true,
+     "seconds": 19.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From behind, Emily strokes away through the murky water, slips under and surfaces again, then treads water with her arms out."
+    }
+   ],
+   "recordings": {
+    "count": 19,
+    "valid": 19,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_swimming_both_roles_mission_map",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "dive_surface_water_exit",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1344-traversal-2.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328h",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328h/host-waterexit-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo swims up to the dock edge, pulls himself up onto it in one movement, stands and steps forward."
+    }
+   ],
+   "recordings": {
+    "count": 35,
+    "valid": 35,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_water_exit_both_roles_mission_map",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "sword_draw_holster",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1335-combat.json",
+   "takes": [
+    {
+     "take": "coverage-v1324g",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1324g/host-sheathe-observer.mp4",
+     "exists": true,
+     "seconds": 19.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo, crouched, takes the hand to the hip and puts the sword away, holds an unarmed crouched idle, then draws it again; walking, he holsters into an unarmed arm swing and later walks on with the sword drawn."
+    }
+   ],
+   "recordings": {
+    "count": 14,
+    "valid": 14,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_batched_locomotion_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "sword_ready_idle",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1335-combat.json",
+   "takes": [
+    {
+     "take": "coverage-v1324g",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1324g/client-airattack-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lands from each jump strike and settles into the standing sword-ready idle, blade low at her side, before the next jump."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "light_attack_variants",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1335-combat.json",
+   "takes": [
+    {
+     "take": "coverage-v1324g",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1324f/host-swing-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo throws the single slash and the three-hit combo from the armed stance, his torso turning into each cut, then settles."
+    }
+   ],
+   "recordings": {
+    "count": 12,
+    "valid": 12,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_target_bearing_standing_slash",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "heavy_attack_variants",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1335-combat.json",
+   "takes": [
+    {
+     "take": "coverage-v1324g",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1324f/host-swing-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo winds the heavy attack back and lunges with a wide step; crouched, the heavy stays low through the lunge and he recovers crouched."
+    }
+   ],
+   "recordings": {
+    "count": 10,
+    "valid": 10,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_standing_and_crouched_combat",
+   "visual_validation": "accepted_functional_both_roles_crouched_heavy_retake",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "moving_attack",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1335-combat.json",
+   "takes": [
+    {
+     "take": "coverage-v1324g",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1324g/host-moveattack-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo slashes while stepping forward, sidestepping right past the camera and backing away, and swings in a running stride; the legs keep the gait under each strike."
+    }
+   ],
+   "recordings": {
+    "count": 6,
+    "valid": 6,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_moving_combat_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouched_attack",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1335-combat.json",
+   "takes": [
+    {
+     "take": "coverage-v1324g",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1324f/host-swing-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo strikes from the crouch with the arm extended and lunges low for the crouched heavy, staying crouched, then stands."
+    }
+   ],
+   "recordings": {
+    "count": 28,
+    "valid": 28,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_standing_and_crouched_combat",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "airborne_attack",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1335-combat.json",
+   "takes": [
+    {
+     "take": "coverage-v1324g",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1324g/client-airattack-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily leaps with her legs tucked and slashes at the top of the jump, lands with the blade still out and recovers to the ready idle."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_airborne_combat_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "block_enter_hold_exit",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1335-combat.json",
+   "takes": [
+    {
+     "take": "coverage-v1324g",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1324g/client-block-observer.mp4",
+     "exists": true,
+     "seconds": 12.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily raises the guard standing, again from the crouch (staying crouched), and once more at the top of a jump, lowering it on landing."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "isolated_Dunwall_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "parry_directions",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1348-parry.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328zh",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "mission-coverage-v1328h",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328zh/host-guardfight-observer.mp4",
+     "exists": true,
+     "seconds": 57.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Backed against the wall, Corvo snaps his sword up overhead to meet the guard's swing; the guard is thrown off balance and stumbles back."
+    },
+    {
+     "path": "mission-coverage-v1328h/client-guardfight-observer.mp4",
+     "exists": true,
+     "seconds": 32.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily raises her blade across her body each time the guard swings and holds her ground."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_block_impact_and_timed_parry_both_roles",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "parry_recovery",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1348-parry.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328zh",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "mission-coverage-v1328h",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328zh/host-guardfight-observer.mp4",
+     "exists": true,
+     "seconds": 57.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "After the parry Corvo lowers the blade back to his guard stance and steps in to attack again."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_block_impact_and_timed_parry_both_roles",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "counterattack",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1443-counterattack.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1418a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1418l",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1418a/client-guardfight-observer.mp4",
+     "exists": true,
+     "seconds": 57.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From above the street: the guard lunges, Emily catches him and the two lock together through the finisher, and he drops as other guards close in."
+    },
+    {
+     "path": "mission-coverage-v1418l/host-guardfight-observer.mp4",
+     "exists": true,
+     "seconds": 57.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From above the street: Corvo parries the guard's swing, steps in and drives his sword forward into him with the arm fully extended, and the guard falls back onto the street."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_counter_kill_finisher_shared_host_source",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "hit_reactions_directions",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1414-hit-reactions.json",
+   "takes": [
+    {
+     "take": "coverage-v1403c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1407a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1403e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1407b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1407e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1407c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1403i",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1407d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1403c/client-labblastleft-observer.mp4",
+     "exists": true,
+     "seconds": 12.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Left (variant 3): the blast from her left flings Emily away from the camera; she staggers with her arms out and recovers upright."
+    },
+    {
+     "path": "coverage-v1407a/client-labblastfront-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Front (variant 2): facing the camera, Emily reels back from the blast in front of her with her arms flung out, then steadies and stands."
+    },
+    {
+     "path": "coverage-v1403e/client-labblastright-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Right (variant 1): thrown toward the camera, she staggers, drops low with one arm out and recovers."
+    },
+    {
+     "path": "coverage-v1407b/client-labblastback-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Back (variant 4): the blast behind her throws Emily toward the camera; she stumbles forward and recovers standing."
+    },
+    {
+     "path": "coverage-v1407e/host-labblastleft-observer.mp4",
+     "exists": true,
+     "seconds": 12.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Left (variant 3): the blast from his left flings Corvo away from the camera; he lands in a crouched stagger with his arms out and straightens up."
+    },
+    {
+     "path": "coverage-v1407c/host-labblastfront-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Front (variant 2): facing the camera, Corvo is thrown back, staggers with his arms out and recovers his stance."
+    },
+    {
+     "path": "coverage-v1403i/host-labblastright-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Right (variant 1): thrown toward the camera, Corvo staggers low with his arms out and straightens up."
+    },
+    {
+     "path": "coverage-v1407d/host-labblastback-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Back (variant 4): the blast behind him pitches Corvo forward toward the camera; he stumbles bent over and recovers."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_network_standing_stun_partial_verified",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "stagger_knockdown_recovery",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1441-stagger-knockdown.json",
+   "takes": [
+    {
+     "take": "coverage-v1403a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1403b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1435b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1440a",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1403a/client-labknock-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily recoils, drops to her knees, lies face down, pushes up to a crouch and rises to her guard."
+    },
+    {
+     "path": "coverage-v1403b/host-labknock-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo drops to his knees, lies face down, pushes up to a crouch and rises to standing."
+    },
+    {
+     "path": "coverage-v1440a/client-wallswing-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From behind her inside the room: Emily swings at the wall, her arms fly out wide and her body is thrown back off the blow, then she recovers to her guard."
+    },
+    {
+     "path": "coverage-v1440a/host-wallswing-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From behind him inside the room: Corvo swings at the wall, his sword arm is flung back, his body twists and he stumbles back a step before recovering."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_runtime_completion_audit",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "kick_or_shove_if_present",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1453-kick.json",
+   "takes": [
+    {
+     "take": "coverage-v1445a",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "coverage-v1445b",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "coverage-v1359a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1359b",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1445a/client-kickn-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window, from the walkway west of the railing: Emily, crouched in front of the guard, rises into a high kick to his chest; he reels back against the railing, then draws and fights her. Natural full-body kick. Accepted."
+    },
+    {
+     "path": "coverage-v1359b/host-blinkkick-observer.mp4",
+     "exists": true,
+     "seconds": 8.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "(Reviewed for audit v1356.) Corvo bursts out of the blink right at the guard with his arms flung wide and one leg driving forward in the kick, then lands and straightens in the dispersing smoke."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_player_kick_outcome_host_source_mission_map",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "death_variants",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1357-death.json",
+   "takes": [
+    {
+     "take": "player-death-probe-v1361j",
+     "exists": true,
+     "passed": null
+    },
+    {
+     "take": "player-death-probe-v1361i",
+     "exists": true,
+     "passed": null
+    },
+    {
+     "take": "player-death-probe-v1361q",
+     "exists": true,
+     "passed": null
+    },
+    {
+     "take": "player-death-probe-v1361s",
+     "exists": true,
+     "passed": null
+    },
+    {
+     "take": "player-death-probe-v1361o",
+     "exists": true,
+     "passed": null
+    },
+    {
+     "take": "takedown-variants-v1254k",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "player-death-probe-v1361j/observer.mp4",
+     "exists": true,
+     "seconds": 33.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo reels back from the guard's blow against the bookshelf and drops onto his back across the book stacks, staying down."
+    },
+    {
+     "path": "player-death-probe-v1361i/observer.mp4",
+     "exists": true,
+     "seconds": 34.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily is struck, staggers back and folds to the floor beside the book stacks while the guard stands over her."
+    },
+    {
+     "path": "player-death-probe-v1361q/observer.mp4",
+     "exists": true,
+     "seconds": 34.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "The guard seizes Corvo and stabs him while he stands held; Corvo sinks to his knees, falls forward and lies face down before GameOver."
+    },
+    {
+     "path": "player-death-probe-v1361o/observer.mp4",
+     "exists": true,
+     "seconds": 34.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "The guard grabs Emily, who stands held while he strikes, then staggers and sinks to her knees; on 1214cw GameOver removed her before she lay down. 1214cx starts the finisher collapse 0.4 s earlier, which 1361q and 1361s verify on Corvo (down before GameOver); the timing path is the same for both roles. On 1214cy the guard in the joiner world is a host-driven replica, so her deaths arrive as relayed hits (plain death, 1361t-v)."
+    },
+    {
+     "path": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+    },
+    {
+     "path": "takedown-variants-v1254k/drop-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lands behind the guard from above and he crumples forward onto the floor; she straightens over the body."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_npc_death_and_corpse_both_peers_mission_map",
+   "visual_validation": "accepted_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "ragdoll_handoff",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1368-ragdoll.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254o",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "takedown-variants-v1254u",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254o/drop-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 23.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo drops onto the guard; the body slumps out of the takedown into a sprawl on the floorboards and lies still, ending 2 cm from the host body."
+    },
+    {
+     "path": "takedown-variants-v1254u/drop-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 23.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lands on the guard and drives him face down at her feet; the body then slackens and rolls into a sprawl beside her and stays down, ending 0.37 m from the same body in the joiner world."
+    }
+   ],
+   "recordings": {
+    "count": 11,
+    "valid": 11,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_npc_corpse_authority_mission_map",
+   "visual_validation": "accepted_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "pistol_draw_aim_fire_reload_holster",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1338-ranged-items.json",
+   "takes": [
+    {
+     "take": "coverage-v1330e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1330e/host-pistol-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo raises the pistol at arm's length for each shot, lowers it to reload, puts it away and draws it again."
+    }
+   ],
+   "recordings": {
+    "count": 24,
+    "valid": 24,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_ranged_five_phase_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crossbow_draw_aim_fire_reload_holster",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1338-ranged-items.json",
+   "takes": [
+    {
+     "take": "coverage-v1330e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1330e/host-crossbow-observer.mp4",
+     "exists": true,
+     "seconds": 17.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo extends the wrist crossbow and holds it level for each bolt, recocks between shots, then lowers the arm to holster and raises it again."
+    }
+   ],
+   "recordings": {
+    "count": 20,
+    "valid": 20,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_ranged_five_phase_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "bolt_or_ammo_switch",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1340-switching.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328j",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328j/host-boltswitch-observer.mp4",
+     "exists": true,
+     "seconds": 17.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo holds the crossbow aimed through the dart selection, raises it to fire a dart, re-aims after switching back and finally lowers his arm to holster."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_runtime_completion_audit",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "grenade_equip_aim_throw",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1338-ranged-items.json",
+   "takes": [
+    {
+     "take": "coverage-v1330e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1330e/client-grenade-observer.mp4",
+     "exists": true,
+     "seconds": 11.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily draws her arm back over her shoulder with the grenade, steps into the throw with her coat swinging, and recovers to the armed stance."
+    }
+   ],
+   "recordings": {
+    "count": 77,
+    "valid": 77,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_network_ground_grenade_partial_verified",
+   "visual_validation": "accepted_functional_both_roles_bank_1266",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "mine_or_razor_place",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1338-ranged-items.json",
+   "takes": [
+    {
+     "take": "coverage-v1330e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1330e/host-stunmine-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo looks down, bends and reaches toward the floor to set the mine, then straightens."
+    }
+   ],
+   "recordings": {
+    "count": 14,
+    "valid": 14,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_trap_body_and_held_prop",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "heart_equip_use_holster",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1338-ranged-items.json",
+   "takes": [
+    {
+     "take": "coverage-v1330e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1330e/host-heart-observer.mp4",
+     "exists": true,
+     "seconds": 11.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo lifts the Heart in his left hand in front of his chest, holds it there, and lowers it again."
+    }
+   ],
+   "recordings": {
+    "count": 6,
+    "valid": 6,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_ground_heart_body_prop",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "health_elixir",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1338-ranged-items.json",
+   "takes": [
+    {
+     "take": "coverage-v1330e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1330e/client-health-observer.mp4",
+     "exists": true,
+     "seconds": 10.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily brings her hand up to her mouth to drink, holds it briefly and lowers it."
+    }
+   ],
+   "recordings": {
+    "count": 16,
+    "valid": 16,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_health_elixir_drink_reach_presented_both_roles",
+   "visual_validation": "accepted_functional_both_roles_hand_to_mouth",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "mana_elixir",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1346-mana.json",
+   "takes": [
+    {
+     "take": "coverage-v1330i",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1330i/client-manaelixir-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily thrusts her hand out to cast Mesmerize, the spirit forms above her, then she turns and lifts her hand to her mouth to drink before lowering it."
+    }
+   ],
+   "recordings": {
+    "count": 5,
+    "valid": 5,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_network_movement_during_mana_use_partial_verified",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "item_switch_interruptions",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1340-switching.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1328j",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1328j/client-itemswitch-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily raises the pistol, swaps to the wrist crossbow without lowering her arm fully, drops the arm when Blink is selected, then raises the crossbow again and puts it away."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_wheel_interruption_and_quickslot_switch_both_roles_mission_map",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "lethal_takedown_front_back_sides",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1369-lethal.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254i",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "takedown-variants-v1254h",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "takedown-variants-v1254w",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254i/back-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo seizes the guard from behind and stabs; the guard arches, drops to his knees and slumps at Corvo's feet."
+    },
+    {
+     "path": "takedown-variants-v1254i/back-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily takes the guard from behind and drives the blade in; he crumples to the floor while she crouches over him with the sword raised."
+    },
+    {
+     "path": "takedown-variants-v1254h/left-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo comes in at the guard's left, grabs him and brings him down; the guard ends kneeling and slumped beside him."
+    },
+    {
+     "path": "takedown-variants-v1254h/left-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily strikes at the guard's left side and he slumps to the floor beside her."
+    },
+    {
+     "path": "takedown-variants-v1254h/right-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo lunges at the guard's right side and hauls him over; the body falls away out of frame behind the railing while Corvo straightens."
+    },
+    {
+     "path": "takedown-variants-v1254h/right-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily grabs the guard from his right; he folds and drops to the floor at her feet."
+    },
+    {
+     "path": "takedown-variants-v1254h/front-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo walks up to the guard face to face, grabs him and drives him down; the guard sinks at his feet and Corvo straightens with the sword raised."
+    },
+    {
+     "path": "takedown-variants-v1254w/front-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily steps in to the guard standing and drives into him from the front; he goes down at her feet and she stands over the body."
+    }
+   ],
+   "recordings": {
+    "count": 17,
+    "valid": 17,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_census_lethals_back_drop_slide_finishers_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "nonlethal_takedown_front_back_sides",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1354-chokes.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254i",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "takedown-variants-v1254h",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "takedown-variants-v1254j",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "takedown-variants-v1254l",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254i/back-client-choke-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily takes the guard from behind, holds him in the choke while he struggles and lowers him to the floor."
+    },
+    {
+     "path": "takedown-variants-v1254h/left-client-choke-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily comes in at the guard's left side, wraps him in the choke and lowers him unconscious."
+    },
+    {
+     "path": "takedown-variants-v1254h/left-host-choke-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo seizes the guard from his left side, holds him through the struggle and lets him sag to the floor."
+    },
+    {
+     "path": "takedown-variants-v1254h/right-host-choke-observer.mp4",
+     "exists": true,
+     "seconds": 12.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo grabs the guard from the right, holds the choke while the guard kicks, and lowers him."
+    },
+    {
+     "path": "takedown-variants-v1254j/right-client-choke-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily steps in from the guard's right and chokes him; he folds to the floor beside her."
+    },
+    {
+     "path": "takedown-variants-v1254h/front-host-choke-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo seizes the guard face to face; the guard sinks to the floor in front of him (partly hidden behind Corvo)."
+    },
+    {
+     "path": "takedown-variants-v1254l/front-client-choke-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily faces the guard, seizes him and holds the choke, then lowers him to the floor."
+    }
+   ],
+   "recordings": {
+    "count": 28,
+    "valid": 28,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_census_chokes_back_both_roles_sides_emily_front_corvo",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "crouched_takedown",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1345-paired.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254g",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254g/left-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo comes in low from the guard's side, drives the blade in and the guard folds to the floor of the walkway."
+    },
+    {
+     "path": "takedown-variants-v1254f/right-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily closes on the guard from the side on the balcony and stabs him; he drops and she straightens over the body."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_crouched_rear_choke_and_fast_back_lethal_presented_both_roles",
+   "visual_validation": "accepted_client_choke_client_lethal_host_choke_host_lethal",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "aerial_drop_kill",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1353-aerial.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254k",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+    },
+    {
+     "path": "takedown-variants-v1254k/drop-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lands behind the guard from above and he crumples forward onto the floor; she straightens over the body."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_drop_lethal_presented_and_shared_both_roles_product",
+   "visual_validation": "accepted_functional_both_roles_fast_back_donor",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "aerial_nonlethal_takedown",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1353-aerial.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254k",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254k/drop-host-choke-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo drops onto the guard, forces him to his knees and holds him in the choke until he slumps to the floor."
+    },
+    {
+     "path": "takedown-variants-v1254k/drop-client-choke-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lands on the guard from above and takes him down; he lies unconscious at her feet."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_drop_choke_presented_and_knockout_shared_both_roles_product",
+   "visual_validation": "accepted_functional_both_roles_choke_donor",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "sliding_takedown",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1355-slide.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254k",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "takedown-variants-v1254h",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254h/slide-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo slides in behind the guard and strikes as he rises; the guard falls and Corvo stands over the body."
+    },
+    {
+     "path": "takedown-variants-v1254k/slide-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily slides in low behind the guard and strikes; he pitches forward onto the floor and she straightens behind him."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_slide_choke_and_lethal_presented_and_shared_both_roles_product",
+   "visual_validation": "accepted_functional_both_roles_choke_and_lethal",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "wall_and_window_variants",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1571-window.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1560a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1562f",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1573a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1573c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1576c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1574b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1564c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1545a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1545b",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1560a/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's outside camera: Emily's replica reaches out through the open window, chokes the overseer and he folds down against the wall under the sill (choke_window_back). Accepted."
+    },
+    {
+     "path": "mission-coverage-v1560a/client-takedown-source.mp4",
+     "exists": true,
+     "seconds": 13.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's own view: she reaches out of the window, chokes the overseer and holds his body over the sill. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1562f/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's outside camera: Emily's replica reaches out through the window, grabs the overseer and stabs him; he slumps below the sill (assassination_window_back). Accepted."
+    },
+    {
+     "path": "mission-coverage-v1573a/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's outside camera: the calm overseer stands with his back to the open window, Corvo's replica in the room behind him; Corvo hauls him backward over the sill and in through the window (choke_window_back). Accepted."
+    },
+    {
+     "path": "mission-coverage-v1573c/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's outside camera: Corvo seizes the overseer from behind through the window, hauls him back over the sill and drives the blade in (assassination_window_back). Accepted."
+    },
+    {
+     "path": "mission-coverage-v1576c/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's outside camera: the overseer stands side-on at the open window; Corvo yanks him backward over the sill and in through the window (choke_window_left). Accepted."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_runtime_completion_audit",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "enemy_body_size_variants",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1572-body-sizes.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254i",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1426b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1426c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1426d",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1426e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1488a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1496a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1562a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1562c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1550a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1550b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1541a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1541b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1577a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1578e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1579a",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254i/back-client-choke-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily takes the small Dunwall guard from behind, holds him in the choke while he struggles and lowers him to the floor (audit v1354). Accepted."
+    },
+    {
+     "path": "mission-coverage-v1426b/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo grabs the tall overseer from behind; the overseer struggles with a hand raised, sinks and lies unconscious at Corvo's feet. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1426c/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily grabs the tall overseer from behind, holds him while he struggles and he goes down behind the stone block. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1426d/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: the overseer is turned toward Emily as she drives the blade in, and he drops at the left edge. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1426e/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo takes the overseer from behind, holds him through the stab and the overseer drops behind the stone block. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1488a/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily creeps up behind the witch at the balustrade, pulls her back against her shoulder, holds her while she arches and struggles, and lowers her to the ground. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1496a/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.9,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo creeps up, grabs the witch and pulls her back against him, holds her while she struggles and lowers her to the ground. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1562a/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo grabs the red-coated armored elite from behind, holds the choke and lowers him by the railing. The held choke press then starts the native body pickup, and the body jumps half up beside the railing in both worlds (incidental, after the takedown). Accepted."
+    },
+    {
+     "path": "mission-coverage-v1562c/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily grabs the armored elite from behind, holds him and lowers him. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1550a/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo comes down off the planter, seizes the wolfhound from behind and drives his blade in; the hound rears in his grip and he kneels over it as it dies. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1550b/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily drops beside the wolfhound and stabs it, and it collapses dead at her feet. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1541b/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: the knocked-down overseer gets up on hands and knees and Corvo bends over him reaching down with his left arm while he goes unconscious (the partner's body is the standing choke clip bent toward the victim, the presentation standard for every takedown). Accepted."
+    },
+    {
+     "path": "mission-coverage-v1541a/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily stands over the kneeling overseer, steps back and crouches at the edge of the frame while he collapses. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1578e/host-takedown-source.mp4",
+     "exists": true,
+     "seconds": 13.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's own view: he grabs the Conservatory servant in her armchair from behind her left shoulder and chokes her where she sits (choke_sit_left, loop, win), ending on 'Civilian (unconscious), Carry'. Accepted (native seated choke)."
+    },
+    {
+     "path": "mission-coverage-v1578e/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo's replica stands beside the armchair in the choke posture for the scene and steps away. The servant is a scripted civilian that neither side streams (#113), so she stays seated until the unconscious outcome. Accepted for the source's presentation; the seated victim's pose in the partner's world is #113 (stage 4)."
+    },
+    {
+     "path": "mission-coverage-v1579a/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily's replica stands beside the armchair in the choke posture through her native choke_sit_left; the unstreamed servant stays seated, her head dropping with the unconscious outcome. Accepted for the source's presentation; the victim's pose is #113 (stage 4)."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_runtime_completion_audit",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "paired_victim_alignment",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1345-paired.json",
+   "takes": [
+    {
+     "take": "takedown-variants-v1254g",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "takedown-variants-v1254g/back-host-choke-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo grabs the guard from behind and holds the choke while the guard struggles; the guard sags and collapses at his feet in the same place."
+    }
+   ],
+   "recordings": {
+    "count": 3,
+    "valid": 3,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "shared_victim_and_outcome_both_roles_choke_and_lethal_product",
+   "visual_validation": "accepted_host_and_client_sourced_rear_choke_and_lethal_victims",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "struggle_and_escape",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1447-struggle-escape.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1448a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1448b",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1448a/client-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.9,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's rear choke of the tall overseer on Edge of the World, Corvo's window: Emily grabs him from behind and he struggles in the hold; after the lab hit he elbows free, Emily stumbles back and recovers standing, and he turns on her alive and alert (sword drawn), matching choke_combat_lose in the scene watch. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1448b/host-takedown-observer.mp4",
+     "exists": true,
+     "seconds": 13.83,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's rear choke of the tall overseer, Emily's window: Corvo grabs him from behind, the overseer flails his arms in the hold, then elbows Corvo in the face; Corvo doubles over and straightens while the overseer walks off alive and later attacks him. Natural full-body breakout matching choke_combat_lose. Accepted."
+    }
+   ],
+   "recordings": {
+    "count": 8,
+    "valid": 8,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_rear_choke_actor_and_breakout",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "carry_body_lift_idle_move_drop_throw",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1431-carry-body.json",
+   "takes": [
+    {
+     "take": "carry-body-v1277y",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "carry-body-v1277z",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "carry-body-v1423b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "carry-body-v1423c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "carry-body-v1428a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "carry-body-v1428b",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "carry-body-v1428a/client-choke-pickup-observer.mp4",
+     "exists": true,
+     "seconds": 11.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily bends over the choked guard, reaches down and rises with him over her shoulder, then stands with him (backlit, silhouette)."
+    },
+    {
+     "path": "carry-body-v1428b/host-choke-pickup-observer.mp4",
+     "exists": true,
+     "seconds": 12.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo bends over the guard lying at his feet, gathers him up and rises with him on his shoulder, then stands with the body on the shoulder."
+    },
+    {
+     "path": "carry-body-v1277y/host-choke-carry-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo walks with the guard over his shoulder, then lowers him to the floor at his left side and stands beside the body."
+    },
+    {
+     "path": "carry-body-v1277z/client-choke-carry-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily walks with the guard draped over her shoulder, his legs hanging in front, then drops him."
+    },
+    {
+     "path": "carry-body-v1423b/host-choke-carry-observer.mp4",
+     "exists": true,
+     "seconds": 17.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo walks with the guard over his shoulder, then the body leaves his shoulder to the left and drops past the railing while his left arm swings out."
+    },
+    {
+     "path": "carry-body-v1423c/client-choke-carry-observer.mp4",
+     "exists": true,
+     "seconds": 17.67,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily carries the guard over her shoulder, then the body slides off to her left and falls past the railing while her arm follows."
+    }
+   ],
+   "recordings": {
+    "count": 96,
+    "valid": 96,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "bounded_native_source_paired_pickup_both_roles",
+   "visual_validation": "accepted_functional_both_roles_v38",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "corvo_blink_aim_cancel_release_arrive",
+   "phase_status": "complete",
+   "characters": [
+    "corvo"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1350-blink.json",
+   "takes": [
+    {
+     "take": "coverage-v1350a",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "coverage-v1332c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1350a/host-blinkcancel-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo throws his left arm out to aim, drops it again at the cancel and stays where he stands; a few seconds later he aims again and vanishes in a blue burst."
+    },
+    {
+     "path": "coverage-v1332d/host-blink-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo holds the aim with his arm out; a blue burst marks the departure as he vanishes forward."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_Blink_body_and_world_FX",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "corvo_blink_pull_and_kick_variants",
+   "phase_status": "complete",
+   "characters": [
+    "corvo"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1356-blink-assault.json",
+   "takes": [
+    {
+     "take": "coverage-v1359b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1359a",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1359b/host-blinkkick-observer.mp4",
+     "exists": true,
+     "seconds": 8.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo bursts out of the blink right at the guard with his arms flung wide and one leg driving forward in the kick, then lands and straightens in the dispersing smoke."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": false
+   },
+   "runtime_binding": "native_runtime_completion_audit",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "corvo_dark_vision_cast_end",
+   "phase_status": "complete",
+   "characters": [
+    "corvo"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1337-powers.json",
+   "takes": [
+    {
+     "take": "coverage-v1332c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1332d/host-darkvision-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo raises his left hand to his eye to cast, holds the armed stance, and repeats the gesture to end it; no effect appears in the observer world."
+    }
+   ],
+   "recordings": {
+    "count": 22,
+    "valid": 22,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": false
+   },
+   "runtime_binding": "partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "corvo_possession_enter_loop_exit",
+   "phase_status": "complete",
+   "characters": [
+    "corvo"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1341-possession.json",
+   "takes": [
+    {
+     "take": "coverage-v1332f",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1332f/host-possesshuman-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo thrusts his arm toward the guard and vanishes; for about three seconds only the guard is seen, then Corvo reappears beside him and stands."
+    }
+   ],
+   "recordings": {
+    "count": 70,
+    "valid": 70,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": false
+   },
+   "runtime_binding": "native_empty_target_entry_aim_remote_body_verified_target_pending",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "corvo_bend_time_cast_end",
+   "phase_status": "complete",
+   "characters": [
+    "corvo"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1370-bend-time.json",
+   "takes": [
+    {
+     "take": "coverage-v1359d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1359d/host-bendtime-observer.mp4",
+     "exists": true,
+     "seconds": 12.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo raises his left hand palm-out for the cast, holds it for about half a second and lowers it with the sword still in his right hand; the second press ends the power with the same gesture, and he settles back into his standing idle each time."
+    }
+   ],
+   "recordings": {
+    "count": 80,
+    "valid": 80,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": false
+   },
+   "runtime_binding": "partial_native_Bend_Time_stance_equipment_air_and_pause_through_Steam",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "corvo_windblast_cast",
+   "phase_status": "complete",
+   "characters": [
+    "corvo"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1337-powers.json",
+   "takes": [
+    {
+     "take": "coverage-v1332c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1332d/host-windblast-observer.mp4",
+     "exists": true,
+     "seconds": 10.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo braces and thrusts his left arm; a single wind streak sweeps out in front of him on the observer, then he returns to the armed stance."
+    },
+    {
+     "path": "coverage-v1332c/host-windblast-observer.mp4",
+     "exists": true,
+     "seconds": 9.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From a distance the streak fans out ahead of Corvo and clears within about a second."
+    }
+   ],
+   "recordings": {
+    "count": 14,
+    "valid": 14,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": false
+   },
+   "runtime_binding": "partial_native_steam_windblast_body_and_finite_world_fx",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "corvo_devouring_swarm_cast",
+   "phase_status": "complete",
+   "characters": [
+    "corvo"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1337-powers.json",
+   "takes": [
+    {
+     "take": "coverage-v1332c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1332d/host-swarm-observer.mp4",
+     "exists": true,
+     "seconds": 10.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo lunges and throws his left hand forward to summon the swarm, then recovers."
+    },
+    {
+     "path": "coverage-v1332c/host-swarm-observer.mp4",
+     "exists": true,
+     "seconds": 10.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "A dark mass of rats spreads over the floor ahead of Corvo for about a second and disperses."
+    }
+   ],
+   "recordings": {
+    "count": 50,
+    "valid": 50,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": false
+   },
+   "runtime_binding": "native_swarm_grounded_contexts_incrementally_verified_world_pending",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "emily_far_reach_aim_cancel_release_arrive",
+   "phase_status": "complete",
+   "characters": [
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1351-far-reach.json",
+   "takes": [
+    {
+     "take": "coverage-v1353a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1350a",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1350a/client-farreachfar-observer.mp4",
+     "exists": true,
+     "seconds": 12.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From behind, Emily reaches her left hand down the lane, is pulled off her feet with the tether light at her hand, flies about ten metres and lands at the far end."
+    },
+    {
+     "path": "coverage-v1353a/client-farreachcancel-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily reaches out with her left hand and holds it, lowers it again without moving when the aim is cancelled, then reaches once more and is pulled away down the lane; the scene is dim but the poses read."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": false,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "singleRoleScope": false,
+   "runtime_binding": "partial_native_Far_Reach_body_and_world_FX",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ],
+   "ok": false
+  },
+  {
+   "id": "emily_far_reach_pull_variants",
+   "phase_status": "complete",
+   "characters": [
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1479-far-reach-pull.json",
+   "takes": [
+    {
+     "take": "object-carry-v1471b",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "object-carry-v1471b/client-farreachbottle-observer.mp4",
+     "exists": true,
+     "seconds": 9.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily raises her left arm and holds the Far Reach aim in a braced stance, the tendril lashes out from her hand, then she draws the arm back sharply with her body leaning into the pull and recovers to her stance. Natural full-body pull. Accepted (the pulled bottle moves only in her world, #115)."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": false,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "singleRoleScope": false,
+   "runtime_binding": "native_runtime_completion_audit",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ],
+   "ok": false
+  },
+  {
+   "id": "emily_dark_vision_cast_end",
+   "phase_status": "complete",
+   "characters": [
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1337-powers.json",
+   "takes": [
+    {
+     "take": "coverage-v1332c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1332d/client-darkvision-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lifts her hand to her face to cast and again to end Dark Vision, sword held low, then settles."
+    }
+   ],
+   "recordings": {
+    "count": 22,
+    "valid": 22,
+    "invalid": []
+   },
+   "roles": {
+    "host": false,
+    "client": true,
+    "corvo": false,
+    "emily": true
+   },
+   "singleRoleScope": false,
+   "runtime_binding": "partial_native_Dark_Vision_stance_equipment_and_travel_through_Steam",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ],
+   "ok": false
+  },
+  {
+   "id": "emily_domino_mark_link_cancel",
+   "phase_status": "complete",
+   "characters": [
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1352-domino.json",
+   "takes": [
+    {
+     "take": "coverage-v1354a",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1354a/client-dominolink-observer.mp4",
+     "exists": true,
+     "seconds": 21.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "On the upper floor Emily throws her hand toward the guard and a golden mark flares on him; downstairs she casts at the second guard and a bright golden link beam runs up to the first, staying in place while she aims once more and lowers her hand."
+    }
+   ],
+   "recordings": {
+    "count": 86,
+    "valid": 86,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": false,
+    "emily": true
+   },
+   "runtime_binding": "native_domino_standing_armed_body_and_mark_partial_verified",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "emily_doppelganger_cast",
+   "phase_status": "complete",
+   "characters": [
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1339-emily-clone-spirit.json",
+   "takes": [
+    {
+     "take": "coverage-v1332e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1332e/client-doppelganger-observer.mp4",
+     "exists": true,
+     "seconds": 11.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "A bright summon burst rises beside Emily; a second Emily appears next to her, runs off, and is gone about two seconds later while Emily stands armed."
+    }
+   ],
+   "recordings": {
+    "count": 94,
+    "valid": 94,
+    "invalid": []
+   },
+   "roles": {
+    "host": false,
+    "client": true,
+    "corvo": false,
+    "emily": true
+   },
+   "singleRoleScope": false,
+   "runtime_binding": "grounded_armed_and_holstered_scoped",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ],
+   "ok": false
+  },
+  {
+   "id": "emily_mesmerize_cast",
+   "phase_status": "complete",
+   "characters": [
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1339-emily-clone-spirit.json",
+   "takes": [
+    {
+     "take": "coverage-v1332e",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1332e/client-mesmerize-observer.mp4",
+     "exists": true,
+     "seconds": 11.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily thrusts her hand forward; a dark, tendrilled spirit forms a few metres ahead of her and hovers there for the rest of the cast."
+    }
+   ],
+   "recordings": {
+    "count": 107,
+    "valid": 107,
+    "invalid": []
+   },
+   "roles": {
+    "host": false,
+    "client": true,
+    "corvo": false,
+    "emily": true
+   },
+   "singleRoleScope": false,
+   "runtime_binding": "native_observed_mesmerize_body_and_cosmetic_world_contexts_partial_verified",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [
+    "both roles not named in the completion evidence"
+   ],
+   "ok": false
+  },
+  {
+   "id": "emily_shadow_walk_enter_move_attack_exit",
+   "phase_status": "complete",
+   "characters": [
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1393-shadow-walk.json",
+   "takes": [
+    {
+     "take": "coverage-v1359e",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "takedown-variants-v1254zd",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1359e/client-shadowwalk-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily drops from standing into the Shadow Walk crawl and becomes a matte black silhouette with the native smoke around her, crawls forward on all fours, then rises and is back in her ordinary colours as the form ends."
+    },
+    {
+     "path": "takedown-variants-v1254zd/swback-client-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From the form behind the guard, Emily as a black silhouette seizes him and throws him overhead; he crashes down dead and she straightens in her ordinary colours. Her sword's ring guard stays lit in her hand during the throw (the sword is a separate entity outside the material)."
+    },
+    {
+     "path": "takedown-variants-v1254zd/swback-client-choke-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "From the form, Emily as a black silhouette pulls the guard down to his knees from behind, then holds him down in her ordinary colours until he goes limp."
+    }
+   ],
+   "recordings": {
+    "count": 27,
+    "valid": 27,
+    "invalid": []
+   },
+   "roles": {
+    "host": false,
+    "client": true,
+    "corvo": false,
+    "emily": true
+   },
+   "singleRoleScope": true,
+   "runtime_binding": "partial_native_standing_sneaking_entry_crawl_exit_through_Steam",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "power_upgrade_variants",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1511-power-upgrades.json",
+   "takes": [
+    {
+     "take": "coverage-v1503a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1503b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1503c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1504a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1506a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1497a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1487a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1492a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1332f",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1359b",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1503a/host-upgshockwave2-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo drops in and lands crouched inside a large swirling wind blast while a wave runs along the floor around him. Accepted."
+    },
+    {
+     "path": "coverage-v1503b/host-upgwbgreater-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo thrusts his hand out and heavy white wind streaks fly from it, wider than the plain blast. Accepted."
+    },
+    {
+     "path": "coverage-v1503c/host-upgswarmfollow-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window (product session): Corvo summons the swarm and the rats run after him as he walks off. Accepted."
+    },
+    {
+     "path": "coverage-v1506a/host-upgswarmdouble2-observer.mp4",
+     "exists": true,
+     "seconds": 16.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: each cast throws a smoke burst and a pack of rats; after the second both packs, about thirty rats, swarm around Corvo's feet. Accepted."
+    },
+    {
+     "path": "coverage-v1497a/client-upgtwinshade2-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily casts, the first shade appears beside her and walks off, she turns and casts again and the second shade rises in smoke; both are shown at once (status). Accepted."
+    },
+    {
+     "path": "coverage-v1487a/client-upgtransposition-observer.mp4",
+     "exists": true,
+     "seconds": 15.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily casts, the shade rises, and she reappears at the shade's place. Accepted."
+    },
+    {
+     "path": "mission-coverage-v1492a/host-takedown-source.mp4",
+     "exists": true,
+     "seconds": 13.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's own film on Edge of the World: the possession cast, the vortex, the possessed walk and the overseer staggering with a hand to his head after the exit; the partner side of possessing a human is coverage-v1332f. Accepted."
+    },
+    {
+     "path": "coverage-v1332f/host-possesshuman-observer.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo thrusts his arm toward the guard and vanishes; only the guard is seen, then Corvo reappears beside him (audit v1341). Accepted."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_runtime_completion_audit",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "power_interruptions_and_no_mana",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1439-power-interruptions.json",
+   "takes": [
+    {
+     "take": "coverage-v1417a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1425c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1434a",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "coverage-v1438a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1350a",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "coverage-v1353a",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1332d",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1417a/client-nomana3-observer.mp4",
+     "exists": true,
+     "seconds": 16.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily twists slightly and flicks her left hand at the hip, the native out-of-mana response, then settles."
+    },
+    {
+     "path": "coverage-v1425c/host-nomana4-observer.mp4",
+     "exists": true,
+     "seconds": 18.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo flicks his left hand out at the hip with the native out-of-mana wisps curling around it, then the hand drops back."
+    },
+    {
+     "path": "coverage-v1434a/client-labpowerblast-observer.mp4",
+     "exists": true,
+     "seconds": 15.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily holds her left hand out aiming Far Reach; the blast throws her back toward the pillar and she recovers with no Far Reach effect left."
+    },
+    {
+     "path": "coverage-v1438a/host-labpowerblast-observer.mp4",
+     "exists": true,
+     "seconds": 15.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo holds his left arm out aiming Blink; the blast throws him back against the pillar, he recovers standing, and no Blink follows."
+    },
+    {
+     "path": "coverage-v1350a/host-blinkcancel-observer.mp4",
+     "exists": true,
+     "seconds": 13.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo throws his left arm out to aim, drops it again at the cancel and stays where he stands; a few seconds later he aims again and vanishes in a blue burst."
+    },
+    {
+     "path": "coverage-v1353a/client-farreachcancel-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily reaches out with her left hand and holds it, lowers it again without moving when the aim is cancelled, then reaches once more and is pulled away."
+    },
+    {
+     "path": "coverage-v1332d/host-possession-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo raises his left arm up and out to aim Possession at nothing, holds it, then lowers it and stands; nothing is possessed."
+    },
+    {
+     "path": "coverage-v1332d/client-domino-observer.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily makes the Domino cast with no target: a short gesture of her left hand at her side and a shift of stance, then she settles (dark, small at this distance)."
+    }
+   ],
+   "recordings": {
+    "count": 45,
+    "valid": 45,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_Corvo_Bend_Time_failure_and_same_world_pause",
+   "visual_validation": "accepted_sweep_1260_functional_owner",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "door_open_close_locked",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1378-doors.json",
+   "takes": [
+    {
+     "take": "use-variants-dunwall-v1228zf",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "use-variants-dunwall-v1228zg",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "use-variants-dunwall-v1228zj",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "use-variants-dunwall-v1228zk",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "use-variants-dunwall-v1228zf/use-host-ld_door_350cm_int_rich_wood_01-observed.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Locked door: Corvo reaches his right hand forward to the handle of the office door, which stays shut, and lowers it again."
+    },
+    {
+     "path": "use-variants-dunwall-v1228zg/use-client-ld_door_350cm_int_rich_wood_01-observed.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Locked door: Emily steps to the office door, reaches her right hand to the handle and returns to stand when it does not open."
+    },
+    {
+     "path": "use-variants-dunwall-v1228zj/use-host-ld_door_350cm_int_rich_wood_01_3-observed.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Unlocked door: the leaf swings open toward the camera and Corvo stands in the doorway, his right hand out at the door edge; he lowers it, and the leaf closes on the second tap."
+    },
+    {
+     "path": "use-variants-dunwall-v1228zk/use-client-ld_door_350cm_int_rich_wood_01_3-observed.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Unlocked door: the leaf swings open and Emily stands in the doorway with her right hand out at the door edge, lowers it and stands while the leaf closes on the second tap."
+    }
+   ],
+   "recordings": {
+    "count": 128,
+    "valid": 128,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_ordinary_door_continuous_manual_and_death_checkpoint_recovery",
+   "visual_validation": "accepted_functional_both_roles_crouched_rise",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "lever_button_crank_wheel",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1343-lever.json",
+   "takes": [
+    {
+     "take": "use-variants-eotw-v1228v",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "use-variants-eotw-v1228w",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "use-variants-dunwall-v1228v",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "use-variants-eotw-v1228v/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+     "exists": true,
+     "seconds": 10.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo raises his arm to the lever on the turbine platform, pulls it down and stands back as the blades turn."
+    },
+    {
+     "path": "use-variants-eotw-v1228w/use-client-script_lever_windturbine_1_1_1-observed.mp4",
+     "exists": true,
+     "seconds": 10.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily turns to the lever post, works it with her hand and returns to standing."
+    },
+    {
+     "path": "use-variants-dunwall-v1228v/use-client-esc_env_rich_sink_tap_01_1-observed.mp4",
+     "exists": true,
+     "seconds": 10.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily reaches up to the tap on the wall and turns it, then lowers her arm."
+    }
+   ],
+   "recordings": {
+    "count": 4,
+    "valid": 4,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_use_state75_real_mechanisms_generic_lever_crank_wheel_valve_both_roles",
+   "visual_validation": "accepted_sweep_1260_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "pickup_loot_steal",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1413-pickup-loot-steal.json",
+   "takes": [
+    {
+     "take": "gestures-v1261b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1398c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1398d",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1398h",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1398i",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "gestures-v1261b/host-coin-observer.mp4",
+     "exists": true,
+     "seconds": 9.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo, seen from behind, reaches his right hand out to the coin on the lectern and draws it back as the coin is taken."
+    },
+    {
+     "path": "gestures-v1261b/client-food-observer.mp4",
+     "exists": true,
+     "seconds": 9.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily reaches her hand to the grapes on the table and lowers it; the grapes are gone from the plate."
+    },
+    {
+     "path": "coverage-v1398c/host-pickpocket-observer.mp4",
+     "exists": true,
+     "seconds": 10.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Seen from the guard's side, Corvo crouches behind him, reaches to his belt and takes the key; the guard reacts."
+    },
+    {
+     "path": "coverage-v1398d/client-pickpocket-observer.mp4",
+     "exists": true,
+     "seconds": 10.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Seen from the guard's side, Emily crouches behind him, reaches to his belt and takes the key; the guard reacts."
+    },
+    {
+     "path": "coverage-v1398h/host-bodyloot-observer.mp4",
+     "exists": true,
+     "seconds": 24.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo stands over the choked guard, bends down and reaches into the body at the belt; the key then hangs at his hip."
+    },
+    {
+     "path": "coverage-v1398i/client-bodyloot-observer.mp4",
+     "exists": true,
+     "seconds": 23.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily bends over the choked guard and reaches to his belt, then straightens up as another guard arrives."
+    }
+   ],
+   "recordings": {
+    "count": 97,
+    "valid": 97,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_pickup_reach_presented_both_roles_product",
+   "visual_validation": "accepted_functional_both_roles_generic_reach",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "key_use",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1366-key-use.json",
+   "takes": [
+    {
+     "take": "use-variants-dunwall-v1228zd",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "use-variants-dunwall-v1228ze",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "use-variants-dunwall-v1228zd/use-host-ld_ring_locker_01_1_lock-observed.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo stands at the locker, raises his right forearm to the lock plate on the bookcase, holds the hand at the lock for about two seconds and lowers it back to his side."
+    },
+    {
+     "path": "use-variants-dunwall-v1228ze/use-client-ld_ring_locker_01_1_lock-observed.mp4",
+     "exists": true,
+     "seconds": 11.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily steps to the locker, reaches her right hand to the lock plate, keeps it there through the use and lets the arm fall back as she settles."
+    }
+   ],
+   "recordings": {
+    "count": 1,
+    "valid": 1,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_use_state75_real_lock_both_roles",
+   "visual_validation": "accepted_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "read_object_or_note",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1342-interactions.json",
+   "takes": [
+    {
+     "take": "coverage-v1318i",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "coverage-v1318i/client-note-observer.mp4",
+     "exists": true,
+     "seconds": 11.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily lifts her left hand and holds the note out in front of her while she reads, then lowers it and stands at ease."
+    }
+   ],
+   "recordings": {
+    "count": 16,
+    "valid": 16,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_note_visible_root_hold_and_resume_both_roles",
+   "visual_validation": "accepted_functional_both_roles_held_reach_reading",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "eat_drink",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1342-interactions.json",
+   "takes": [
+    {
+     "take": "gestures-v1261d",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    }
+   ],
+   "visuals": [
+    {
+     "path": "gestures-v1261d/client-food-observer.mp4",
+     "exists": true,
+     "seconds": 8.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily steps to the table and reaches down to the plate, then straightens."
+    }
+   ],
+   "recordings": {
+    "count": 10,
+    "valid": 10,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_food_reach_presented_both_roles_product",
+   "visual_validation": "accepted_functional_both_roles_generic_reach",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "carry_object_place_throw",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1470-object-carry.json",
+   "takes": [
+    {
+     "take": "object-carry-v1478a",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "object-carry-v1478a/client-heldbottle-observer.mp4",
+     "exists": true,
+     "seconds": 9.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily carries the bottle in her right hand at her side with her fingers around its body; on the throw her arm rises and swings over, the bottle leaves her hand and she draws her sword; the bottle breaks where it lands in both worlds. Accepted."
+    },
+    {
+     "path": "object-carry-v1478a/host-heldbottle-observer.mp4",
+     "exists": true,
+     "seconds": 9.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo holds the bottle in his right hand, swings the arm forward in the throw and the bottle flies off; it breaks in both worlds. Accepted."
+    },
+    {
+     "path": "object-carry-v1478a/client-placebottle-observer.mp4",
+     "exists": true,
+     "seconds": 9.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo's window: Emily holds the bottle, tips it down as she lowers her arm and lets it go, and the bottle rests where hers did (0 m apart). Accepted."
+    },
+    {
+     "path": "object-carry-v1478a/host-placebottle-observer.mp4",
+     "exists": true,
+     "seconds": 9.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily's window: Corvo lowers the bottle and lets it go with his hand opening, and it rests where his did (0 m apart). Accepted."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_hold_object_gesture_both_roles_product",
+   "visual_validation": "accepted_functional_both_roles_held_reach",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "shop_dialogue_gestures",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1422-shop.json",
+   "takes": [
+    {
+     "take": "mission-coverage-v1416b",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "mission-coverage-v1416c",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1402b",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1402c",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-coverage-v1402b/host-shop-observer.mp4",
+     "exists": true,
+     "seconds": 16.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo walks up to the counter and stands at it; his hand goes to his chin and then out toward the shopkeeper while the shop is open."
+    },
+    {
+     "path": "mission-coverage-v1416b/host-shop-observer.mp4",
+     "exists": true,
+     "seconds": 23.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo stays at the counter in his own body through the end of the menu and the seconds after it (9.5 to 18.5 s), with no fall back to the actor pose."
+    },
+    {
+     "path": "mission-coverage-v1416c/client-shop-observer.mp4",
+     "exists": true,
+     "seconds": 24.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily walks up to the counter, puts a hand to her chin, then opens it toward the shopkeeper, and stays at the counter through and after the menu."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_runtime_completion_audit",
+   "visual_validation": "accepted_completion_audit",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "sit_stand",
+   "phase_status": "not_applicable",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": false,
+   "ok": true,
+   "reason": "not_applicable"
+  },
+  {
+   "id": "scripted_scene_pose_handoff",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1359-scene-handoff.json",
+   "takes": [
+    {
+     "take": "use-variants-eotw-v1228v",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "use-variants-eotw-v1228w",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "coverage-v1326d",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "mission-coverage-v1328q",
+     "exists": true,
+     "passed": true
+    },
+    {
+     "take": "takedown-variants-v1254k",
+     "exists": true,
+     "passed": false,
+     "note": "result.json passed is false"
+    },
+    {
+     "take": "cutscene-transition-v1236c",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "use-variants-eotw-v1228v/use-host-script_lever_windturbine_1_1_1-observed.mp4",
+     "exists": true,
+     "seconds": 10.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo reaches up, pulls the lever down and lets his arm fall back as he settles into his standing idle; no pop at the hand-back."
+    },
+    {
+     "path": "use-variants-eotw-v1228w/use-client-script_lever_windturbine_1_1_1-observed.mp4",
+     "exists": true,
+     "seconds": 10.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily steps to the lever, pulls it and returns smoothly to standing beside it."
+    },
+    {
+     "path": "coverage-v1326c/client-highmantle-observer.mp4",
+     "exists": true,
+     "seconds": 12.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily hauls herself up the high ledge and straightens into a stand on top without a jump between the climb and the idle."
+    },
+    {
+     "path": "mission-coverage-v1328q/host-hardfall-observer.mp4",
+     "exists": true,
+     "seconds": 10.93,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo lands from the long fall in a deep crouch, rises and walks straight on along the dock."
+    },
+    {
+     "path": "takedown-variants-v1254k/drop-host-lethal-observer.mp4",
+     "exists": true,
+     "seconds": 12.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Corvo falls from above onto the guard, drives him down and rises with the sword raised over the body."
+    },
+    {
+     "path": "cutscene-transition-v1236c/after-scene-host.mp4",
+     "exists": true,
+     "seconds": 8.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "After the Mayhew cinematic Emily stands in the hall again, sword in hand, in her standing idle and steady from the first frame she reappears; no pop."
+    }
+   ],
+   "recordings": {
+    "count": 0,
+    "valid": 0,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_scene_exit_blend_to_locomotion_measured_window_mantle_both_roles",
+   "visual_validation": "accepted_functional_both_roles_use_scene_handback",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "cutscene_enter_exit",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1359-scene-handoff.json",
+   "takes": [
+    {
+     "take": "cutscene-transition-v1236c",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "cutscene-transition-v1236c/scene-host.mp4",
+     "exists": true,
+     "seconds": 39.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "The host window shows only the native Mayhew cinematic for its 30 s; no partner body is drawn into the scene, and the room is empty at the cut back to gameplay."
+    },
+    {
+     "path": "cutscene-transition-v1236c/after-scene-host.mp4",
+     "exists": true,
+     "seconds": 8.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "Emily reappears 1.9 s after the scene, standing at the panelled wall with her sword, and stays steady in her idle."
+    },
+    {
+     "path": "cutscene-transition-v1236c/after-scene-client.mp4",
+     "exists": true,
+     "seconds": 8.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "In the client window Corvo stands with his sword lowered in the dark hall after the scene, steady in his idle."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "native_cinematic5_partner_retired_and_restored_both_roles",
+   "visual_validation": "accepted_mayhew_scene_both_windows",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "map_load_checkpoint_recovery",
+   "phase_status": "complete",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": true,
+   "audit": "completion-audit-v1358-lifecycle.json",
+   "takes": [
+    {
+     "take": "mission-lifecycle-v1199i",
+     "exists": true,
+     "passed": true
+    }
+   ],
+   "visuals": [
+    {
+     "path": "mission-lifecycle-v1199i/load-client.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "After the map load Corvo stands upright and whole on the dock in front of the wall posters, idling naturally."
+    },
+    {
+     "path": "mission-lifecycle-v1199i/load-host.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "After the map load Emily stands upright and whole on the boat deck beside the pilot, idling naturally."
+    },
+    {
+     "path": "mission-lifecycle-v1199i/restart-client.mp4",
+     "exists": true,
+     "seconds": 14.0,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "After the checkpoint restart Corvo is back, upright at the left edge of the frame by the same wall."
+    },
+    {
+     "path": "mission-lifecycle-v1199i/restart-host.mp4",
+     "exists": true,
+     "seconds": 13.97,
+     "width": 800,
+     "height": 540,
+     "valid": true,
+     "verdict": "After the checkpoint restart Emily is back, upright at the left edge of the frame on the boat."
+    }
+   ],
+   "recordings": {
+    "count": 2,
+    "valid": 2,
+    "invalid": []
+   },
+   "roles": {
+    "host": true,
+    "client": true,
+    "corvo": true,
+    "emily": true
+   },
+   "runtime_binding": "partial_native_steam_map_load_and_checkpoint_restart_both_peers",
+   "visual_validation": "accepted_functional_both_roles",
+   "problems": [],
+   "ok": true
+  },
+  {
+   "id": "incapacitation_and_rescue_if_supported",
+   "phase_status": "excluded_by_policy",
+   "characters": [
+    "corvo",
+    "emily"
+   ],
+   "applicable": false,
+   "ok": true,
+   "reason": "excluded_by_policy"
+  }
+ ]
+}

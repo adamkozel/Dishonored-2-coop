@@ -97,6 +97,49 @@ Release 0.9.0 left deaths and checkpoints unshared in real co-op sessions (fixed
   - v1765 confirms it in the use step and in Settle.
 - **Endings:** the stalled endings (Royal Conservatory v1762b, Grand Palace v1762a) were route-step misfires: the talk and use steps count any scene change as a hit. Both endings passed on the next attempts, as Meagan's endings did in four other missions.
 
+## The campaign on 0.9.6 (1214kq)
+
+The release binary of 0.9.6 (candidate 1214kq: power effects on any install,
+[#230](https://github.com/adamkozel/Dishonored-2-coop/issues/230), [chapter 113](113-power-effects-on-every-install.md))
+plays the nine missions on two Steam accounts. The host is Corvo on this PC, and the partner is Emily in the lab VM.
+Both games run in product mode on co-op saves that already hold the autosaves of earlier takes, as a player's do.
+- **Runner:** [Run-Campaign-v1929.sh](../../work/natural-moveset/Run-Campaign-v1929.sh) (plan campaign-v1926-plan.txt),
+  with the retakes in [Run-Campaign-v1931.sh](../../work/natural-moveset/Run-Campaign-v1931.sh) (plan
+  campaign-v1931-plan.txt). Both run the harness Route-MissionVM-v1918.
+- **Added since 0.9.5:**
+  - After Dunwall, each cast selects the power first. It must move the caster in its own world, move its
+    avatar by the same distance in the other world, and show its native effect in the other world: the Blink burst,
+    and the Far Reach beam.
+  - Every mission after Dunwall has a cast pair where both players can move.
+- **Every mission has one evidence take below.** Each one passed with the right characters and equal gameflow at every
+  step. Both games ended on the next mission's map, or at the main menu after the credits, and restoration passed.
+
+| Mission | Evidence take | Casts: host Blink / partner Far Reach (own world = other world; effect shown) | Story flags differing (start / end) |
+|---|---|---|---|
+| A Long Day in Dunwall (deaths, checkpoints) | [campaign-dunwall-vm-v1929a](../../work/natural-moveset/campaign-dunwall-vm-v1929a) | none: before the Outsider's Mark | 0 / 0 (31 and 26 flags) |
+| Edge of the World (death) | [campaign-eotw-vm-v1931a](../../work/natural-moveset/campaign-eotw-vm-v1931a) | 4.78 m / 14.89 m, both shown | 0 / 0 |
+| The Good Doctor (on Easy) | [campaign-institute-vm-v1929a](../../work/natural-moveset/campaign-institute-vm-v1929a) | 2.59 m / 2.25 m, both shown | 0 / 0 (25 and 104 flags) |
+| The Clockwork Mansion | [campaign-madinventor-vm-v1929a](../../work/natural-moveset/campaign-madinventor-vm-v1929a) | 0.98 m / 0.90 m, both shown | 0 / 0 |
+| The Royal Conservatory (on Easy) | [campaign-curator-vm-v1929a](../../work/natural-moveset/campaign-curator-vm-v1929a) | 4.70 m / 0.88 m, both shown | 0 / 0 |
+| The Dust District | [campaign-dust-vm-v1931a](../../work/natural-moveset/campaign-dust-vm-v1931a) | 0.98 m / 0.36 m inside the Dreadful Wale, both shown | 0 / 0 |
+| A Crack in the Slab | [campaign-bunker-vm-v1929a](../../work/natural-moveset/campaign-bunker-vm-v1929a) | 5.09 m / 14.68 m on the mansion grounds, both shown (the casts in the opening scene move no one) | 0 / 0 |
+| The Grand Palace (on Easy) | [campaign-palace-vm-v1929a](../../work/natural-moveset/campaign-palace-vm-v1929a) | 3.04 m / 3.05 m, both shown | 0 / 0 |
+| Death to the Empress, through the credits to the menu | [campaign-empress-vm-v1931a](../../work/natural-moveset/campaign-empress-vm-v1931a) | 0.93 m / 0.98 m inside the Dreadful Wale, both shown | 0 (140 flags) / none: the campaign ends at the main menu |
+
+- **The Dreadful Wale:** the partner's Far Reach stops short inside the boat. Her casts there must move her 0.1 m
+  (0.3 m elsewhere); the beam shows in the host's world either way.
+- **Easy:** three routes play on Easy, set through the host's difficulty sync, because route combat there had killed
+  the host through the health hold on normal (the watchtower, the journals, the palace).
+- **Powers beyond the casts:** every power of both characters in both roles shows in the other world on two accounts
+  ([chapter 113](113-power-effects-on-every-install.md)).
+- **Failed takes on 1214kq, kept as evidence but not the mission's evidence take:**
+  - [campaign-eotw-vm-v1929a](../../work/natural-moveset/campaign-eotw-vm-v1929a): the cable car did not reach the
+    Institute (route variance). Its casts moved 4.71 m / 14.82 m with both effects shown.
+  - [campaign-dust-vm-v1929a](../../work/natural-moveset/campaign-dust-vm-v1929a) and
+    [campaign-empress-vm-v1929a](../../work/natural-moveset/campaign-empress-vm-v1929a): the partner's Far Reach moved
+    0.21 m inside the Wale, below the 0.3 m then required. The beam was shown in both.
+  - campaign-dunwall-vm-v1926a (1214kp): stopped in its first take to build 1214kq with the version 0.9.6; recovered.
+
 ## The campaign on 0.9.5 (1214km)
 
 The release binary of 0.9.5 (candidate 1214km) plays the nine missions on two Steam accounts: the host is Corvo on this

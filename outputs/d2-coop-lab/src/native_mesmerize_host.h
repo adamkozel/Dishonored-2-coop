@@ -127,7 +127,7 @@ void serviceMesmerizeHostFollow(ULONGLONG tick){
     if((s.presented.event==f.event&&s.presented.state==2)||tick-f.seen>1500){stop();return;}
     if(!f.begun){
         const auto refuse=[&](const char* why){mesmerizeHostFollowResult=why;++mesmerizeHostFollowRefused;f.ended=true;};
-        if(!mesmerizeHostApis()||!powerFixtureApiMatches()){refuse("api_mismatch");return;}
+        if(!mesmerizeHostApis()||!powerApiMatches()){refuse("api_mismatch");return;}
         const float* at=s.presented.transform.data();const float* axis=at+3;
         if(!h.actor){if(!mesmerizeHostSpawn(tick,at,axis))refuse("spawn_refused");else mesmerizeHostFollowResult="spawned";return;}
         if(!h.component){if(tick-h.createdAt>=10000)refuse("component_missing");return;}
@@ -162,7 +162,7 @@ void serviceMesmerizeHost(ULONGLONG tick){
     if(GetCurrentThreadId()!=engineThread.load()||!nativeMutationAllowed||!coopGameplayReady(outgoing)){refuse("not_ready");return;}
     // Lab host on the guard map only (live AI: the movement fixture's isolation pauses the office guards).
     if(productMode||localRole||std::strcmp(mapName,kGuardMap)){refuse("lab_host_guard_map_only");return;}
-    if(!mesmerizeHostApis()||!powerFixtureApiMatches()){refuse("api_mismatch");return;}
+    if(!mesmerizeHostApis()||!powerApiMatches()){refuse("api_mismatch");return;}
     if(request==1){++mesmerizeHostProbes;mesmerizeHostProbeDefinition=lookupEntityDefinition(kMesmerizeObjectDefinition);mesmerizeHostResult=mesmerizeHostProbeDefinition?"definition_found":"definition_missing";return;}
     if(request==2){
         if(h.actor){refuse("already_spawned");return;}

@@ -1,0 +1,312 @@
+[
+  {
+    "do": "trigger",
+    "name": "ld_trigger_23",
+    "settle": 4000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_19",
+    "settle": 30000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_15",
+    "bounce": true,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_28",
+    "bounce": true,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_34",
+    "settle": 6000
+  },
+  {
+    "do": "use",
+    "name": "ld_outsider_rune_pickup",
+    "pitches": [
+      0,
+      25,
+      45
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 500,
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "midnights_trigger_eotw_brief_meagan",
+    "settle": 20000
+  },
+  {
+    "do": "talk",
+    "name": "meagan",
+    "near": [
+      -5.8,
+      -31.6
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "pitches": [
+      0,
+      20,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 5000
+  },
+  {
+    "do": "powerfx",
+    "role": "host",
+    "power": "farreach",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "host",
+    "power": "domino",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "host",
+    "power": "doppelganger",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "host",
+    "power": "doppelganger",
+    "settle": 2000,
+    "upgrades": [
+      "doppelganger_twinshade"
+    ],
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "host",
+    "power": "mesmerize",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "host",
+    "power": "shadowwalk",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "host",
+    "power": "darkvision",
+    "settle": 2000
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "blink",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "blink",
+    "settle": 2000,
+    "upgrades": [
+      "blink_assault"
+    ],
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "windblast",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "windblast",
+    "settle": 2000,
+    "upgrades": [
+      "windblast_greater"
+    ],
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "swarm",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "swarm",
+    "settle": 2000,
+    "upgrades": [
+      "devouring_swarm_double"
+    ],
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "bendtime",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "bendtime",
+    "settle": 2000,
+    "upgrades": [
+      "bendtime_stoptime"
+    ],
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "possession",
+    "settle": 2000,
+    "expect": true
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "powerfx",
+    "role": "client",
+    "power": "darkvision",
+    "settle": 2000
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  }
+]

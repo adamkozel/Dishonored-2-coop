@@ -102,7 +102,7 @@ void serviceMesmerizeVisual(ULONGLONG tick){
     // 1214cp (#104): the networked spirit also runs in an armed product session; the local experiment stays lab-only.
     const bool productScope=automatic&&productSessionArmed(),fixtureScope=observerIsolation.ready&&observerIsolation.movementFixture;
     if(request==4||(p.until&&tick>=p.until)||!(fixtureScope||productScope)){p.wanted=0;if(p.until)p.pendingHide=true;}
-    if(!coopGameplayReady(outgoing)||!powerFixtureApiMatches()||!rangedPropApiMatches()||!carryVictimApis())return;
+    if(!coopGameplayReady(outgoing)||!powerApiMatches()||!rangedPropApiMatches()||!carryVictimApis())return;
     if(request>=1&&request<=3){
         const bool labScope=!std::strcmp(mapName,kGuardMap)&&fixtureScope&&observerIsolation.until>=tick+14000;
         if(!partnerAssetsEnabled||!(labScope||productScope)){refuse("unsupported_scope");return;}

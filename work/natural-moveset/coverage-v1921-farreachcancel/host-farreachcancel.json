@@ -1,0 +1,42 @@
+{
+  "source": "host",
+  "case": "farreachcancel",
+  "observer": "client",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Partner presentation stayed live",
+    "farreachcancel presented (24 samples, variants 4,5,6,7,8) and recovered",
+    "Aim presented (8 samples), cancelled with X: no release, source moved 0 m, locomotion returned (13 samples); second cast released (1 samples)"
+  ],
+  "hostSlot": 80,
+  "camera": [
+    -34.0,
+    -155.6,
+    68.4
+  ],
+  "lowWeightSamples": 0,
+  "teleports": [],
+  "grant": {
+    "grants": 1,
+    "refused": 0,
+    "result": "named_power_equip_requested"
+  },
+  "powerSamples": 24,
+  "powerVariants": [
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "recovered": 9,
+  "cancel": {
+    "aimSamples": 8,
+    "releaseAfterCancel": 0,
+    "idleAfterCancel": 13,
+    "sourceMovedAfterCancel": 0.0,
+    "releaseSecondCast": 1
+  },
+  "restored": true
+}

@@ -1,0 +1,403 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             96 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Status unavailable host",
+  "notes": {
+    "powerfx": [
+      {
+        "role": "host",
+        "power": "farreach",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/grapple/grapple.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 25,
+        "effects": {
+          ".grapple-fx.json/impacts": 1,
+          ".grapple-fx.json/beams": 1
+        },
+        "otherFx": "native_effect_owned",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "domino",
+        "upgrades": [
+          null
+        ],
+        "target": {
+          "name": null,
+          "handle": "0x2e052a28",
+          "at": [
+            -32.6978,
+            176.353,
+            1.20206
+          ],
+          "stand": [
+            -28.15110275267263,
+            180.26804075855486
+          ]
+        },
+        "equipped": "models/powers/grapple/grapple.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 82,
+        "effects": {
+          ".domino-world.json/presented": 70,
+          ".domino-world.json/started": 0
+        },
+        "otherFx": "native_effect_owned",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "doppelganger",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/grapple/grapple.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 0,
+        "effects": {
+          ".doppelganger-world.json/presented": 0,
+          ".doppelganger-visual.json/created": 0
+        },
+        "otherFx": "native_effect_owned",
+        "presented": false,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "doppelganger",
+        "upgrades": [
+          "doppelganger_twinshade"
+        ],
+        "target": null,
+        "equipped": "models/powers/grapple/grapple.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 0,
+        "effects": {
+          ".doppelganger-world.json/presented": 0,
+          ".doppelganger-visual.json/created": 0
+        },
+        "otherFx": "native_effect_owned",
+        "presented": false,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "mesmerize",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/grapple/grapple.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 0,
+        "effects": {
+          ".mesmerize-visual.json/created": 0,
+          ".mesmerize-world-stream.json/presented": 0
+        },
+        "otherFx": "native_effect_owned",
+        "presented": false,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "shadowwalk",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/grapple/grapple.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 0,
+        "effects": {
+          ".shadowwalk-fx.json/started": 0,
+          ".shadowwalk-material.json/starts": 0
+        },
+        "otherFx": "native_effect_owned",
+        "presented": false,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "host",
+        "power": "darkvision",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/grapple/grapple.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 0,
+        "effects": {},
+        "otherFx": "native_effect_owned",
+        "presented": null,
+        "judgedOn": "frames (viewer-only effect, gesture only)"
+      },
+      {
+        "role": "client",
+        "power": "blink",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 2,
+        "effects": {
+          ".power-fx-stream.json/applied": 2,
+          ".power-fx.json/started": 2
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "client",
+        "power": "blink",
+        "upgrades": [
+          "blink_assault"
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 0,
+        "effects": {
+          ".power-fx-stream.json/applied": 0,
+          ".power-fx.json/started": 0
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": false,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "client",
+        "power": "windblast",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 1,
+        "effects": {
+          ".windblast-fx.json/waves": 0,
+          ".windblast-fx.json/applied": 1
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "client",
+        "power": "windblast",
+        "upgrades": [
+          "windblast_greater"
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 1,
+        "effects": {
+          ".windblast-fx.json/waves": 0,
+          ".windblast-fx.json/applied": 1
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "client",
+        "power": "swarm",
+        "upgrades": [
+          null
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 97,
+        "effects": {
+          ".swarm-rat-visual.json/created": 0,
+          ".swarm-spawn-fx.json/applied": 1,
+          ".swarm-world.json/presented": 97
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      },
+      {
+        "role": "client",
+        "power": "swarm",
+        "upgrades": [
+          "devouring_swarm_double"
+        ],
+        "target": null,
+        "equipped": "models/powers/blink/blink.inventoryitem",
+        "grant": "named_power_equip_requested",
+        "cast": 95,
+        "effects": {
+          ".swarm-rat-visual.json/created": 0,
+          ".swarm-spawn-fx.json/applied": 1,
+          ".swarm-world.json/presented": 91
+        },
+        "otherFx": "owned_effect_stopped",
+        "presented": true,
+        "judgedOn": "the other world's status"
+      }
+    ],
+    "powerfxMisses": [
+      "host doppelganger: cast 0, .doppelganger-world.json/presented=0, .doppelganger-visual.json/created=0, equipped models/powers/grapple/grapple.inventoryitem, grant named_power_equip_requested",
+      "host doppelganger+doppelganger_twinshade: cast 0, .doppelganger-world.json/presented=0, .doppelganger-visual.json/created=0, equipped models/powers/grapple/grapple.inventoryitem, grant named_power_equip_requested",
+      "host mesmerize: cast 0, .mesmerize-visual.json/created=0, .mesmerize-world-stream.json/presented=0, equipped models/powers/grapple/grapple.inventoryitem, grant named_power_equip_requested",
+      "host shadowwalk: cast 0, .shadowwalk-fx.json/started=0, .shadowwalk-material.json/starts=0, equipped models/powers/grapple/grapple.inventoryitem, grant named_power_equip_requested",
+      "client blink+blink_assault: cast 0, .power-fx-stream.json/applied=0, .power-fx.json/started=0, equipped models/powers/blink/blink.inventoryitem, grant named_power_equip_requested"
+    ],
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-npc-combat-v1214ko",
+      "hostDll": "EA09B44FE7AD1C9FCF239A83BC1CECDE6ED5139CC43B4A1FE2504592D19421D5",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 26,
+        "cine": 44,
+        "pos": [
+          -28.150999,
+          180.268005,
+          -2.691858
+        ],
+        "fresh": true,
+        "gameflow": [
+          223,
+          2,
+          5,
+          14,
+          0,
+          4,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4063",
+        "ka": "9/2/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 26,
+        "cine": 25,
+        "pos": [
+          -31.092537,
+          183.129913,
+          1.205707
+        ],
+        "fresh": true,
+        "gameflow": [
+          223,
+          2,
+          5,
+          14,
+          0,
+          4,
+          0
+        ],
+        "gfApplied": 15,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "6/5/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v1921.ps1:714[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 714 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mStatus unavailable host[0m

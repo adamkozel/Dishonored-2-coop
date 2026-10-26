@@ -1,0 +1,72 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-farreachpull: No native pull (state 84)",
+  "cases": [
+    {
+      "source": "host",
+      "case": "farreachpull",
+      "observer": "client",
+      "passed": false,
+      "failure": "No native pull (state 84)",
+      "checks": [
+        "Partner presentation stayed live",
+        "farreachpull presented (11 samples, variants 4,5) and recovered"
+      ],
+      "hostSlot": 80,
+      "camera": [
+        -49.055009000000005,
+        -144.65670219999998,
+        68.30000000000001
+      ],
+      "guardBefore": {
+        "stand": [
+          -49.175267000000005,
+          -147.12764199999998
+        ],
+        "host": [
+          -48.59,
+          -150.07,
+          66.4
+        ]
+      },
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "powerSamples": 11,
+      "powerVariants": [
+        4,
+        5
+      ],
+      "recovered": 9,
+      "pullVariants": [
+        4,
+        5
+      ],
+      "pullState": 0,
+      "guardAfter": {
+        "client": {
+          "position": [
+            -47.7898,
+            -143.863,
+            66.4
+          ],
+          "alive": null
+        },
+        "host": {
+          "position": [
+            -47.2311,
+            -144.085,
+            66.4
+          ],
+          "alive": null
+        }
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Power cancellation and long Far Reach (1350, #11), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}

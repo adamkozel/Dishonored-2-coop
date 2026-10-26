@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-10-25T08:23:29+01:00",
+  "UpdatedAt": "2026-10-26T05:30:00+01:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22902,9 +22902,11 @@
       "#206 (stage 6)",
       "#225 (stage 6)",
       "#222 (stage 7)",
-      "power casts in campaign takes: The Good Doctor, The Clockwork Mansion, The Dust District, Death to the Empress"
+      "power casts in campaign takes: The Good Doctor, The Clockwork Mansion, The Dust District, Death to the Empress",
+      "#230 (stage 3: power effects on any install, 0.9.6)",
+      "#228 (stage 6: powers in every mission, the campaign on 0.9.6)"
     ],
-    "MovementChecklist": "103 of 105 complete, runtime-bound and visually accepted after the column reconciliation (chapter 99)"
+    "MovementChecklist": "103 of 105 complete, runtime-bound and visually accepted; the independent recheck movement-completion-recheck-v1935c confirms all 103 applicable items with both roles (chapter 99)"
   },
   "Campaign095": {
     "Card": "#225, #220",
@@ -22917,5 +22919,22 @@
     "Candidate": "candidate-npc-combat-v1214km",
     "Evidence": "https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.5; d2coop-v0.9.5.zip SHA-256 2898E07B3B47B5A89250F35DBC27BA870C23D4AA1115D6F72727EBEA9BDFE4D9; release-install-v1916a 8/8; product-two-account-v1916a pass",
     "Status": "published, chapter 90"
+  },
+  "PowerFx230": {
+    "Card": "#230, #228",
+    "Candidate": "candidate-npc-combat-v1214kq (0.9.6; 1214ko powerApiMatches without the lab path, 1214kp time-bend status finite)",
+    "Evidence": "two accounts, both pairings: powerfx-corvohost-vm-v1923a and v1924a, powerfx-emilyhost-vm-v1923a and v1929a (every power of both characters in both roles shows its native effect in the other world; Dark Vision viewer-only), farreachpull-emilyhost-vm-v1931a and farreachpull-corvohost-vm-v1931a (the Far Reach NPC pull in both roles), itemprops-*-vm-v1930a and itemprops-{heart,trap}-*-vm-v1933a (held grenade, Heart and stun mine of both characters in both roles)",
+    "Status": "done, chapter 113"
+  },
+  "EmilyHostRole228": {
+    "Card": "#228",
+    "Evidence": "coverage-v1921-farreachcancel/farreachfar/darkvision/doppelganger/mesmerize, coverage-v1917a host-farreach and coverage-v1935-farreachpull (Emily hosting on SLOT80, filmed from the partner, verdicts in review-catalog.json and completion-audit-v1932-emily-host-role.json); movement-completion-recheck-v1935c: 103 of 103 applicable items pass, 1586 videos valid, the 7 new videos reviewed (review.json); failed and kept: coverage-v1932/v1934-farreachpull, recheck v1935/v1935b (no frames drawn)",
+    "Status": "done, chapters 99 and 113"
+  },
+  "Campaign096": {
+    "Card": "#228, #230",
+    "Candidate": "candidate-npc-combat-v1214kq (0.9.6)",
+    "Evidence": "two accounts (host Corvo, VM partner Emily), product mode, co-op saves holding earlier autosaves, one evidence take per mission: campaign-dunwall/institute/madinventor/curator/bunker/palace-vm-v1929a, campaign-eotw/dust/empress-vm-v1931a (The Good Doctor, the Royal Conservatory and the Grand Palace on Easy through the difficulty sync); after Dunwall both players cast near the start, and every cast moved the caster in both worlds and showed its native effect in the other world; story flags equal at every start and end",
+    "Status": "done, chapter 109"
   }
 }

@@ -57,7 +57,7 @@ bool nativePowerFxApi(){
     const unsigned char lookup[]={0x89,0x54,0x24,0x10,0x57,0x48,0x83,0xec,0x30,0x48,0xc7,0x44,0x24,0x20,0xfe,0xff,0xff,0xff,0x48,0x89,0x5c,0x24,0x40,0x48};
     const unsigned char stop[]={0x48,0x89,0x5c,0x24,0x08,0x89,0x54,0x24,0x10,0x57,0x48,0x83,0xec,0x20,0x48,0x8b,0xd9,0xe8,0x9a,0xd2,0xff,0xff,0x48,0x8b};
     const unsigned char getter[]={0x48,0x8d,0x81,0x30,0x84,0x1f,0x00,0xc3};
-    return nativeMutationAllowed&&GetCurrentThreadId()==engineThread.load()&&powerFixtureApiMatches()&&
+    return nativeMutationAllowed&&GetCurrentThreadId()==engineThread.load()&&powerApiMatches()&&
         !std::memcmp(gameImage+0x87cb90,start,sizeof(start))&&!std::memcmp(gameImage+0x1a04a0,lookup,sizeof(lookup))&&
         !std::memcmp(gameImage+0x1a31f0,stop,sizeof(stop))&&!std::memcmp(gameImage+0x8a8a70,getter,sizeof(getter));
 }
@@ -112,9 +112,17 @@ bool startNativePowerFx(unsigned kind,const float* origin,ULONGLONG tick,bool ne
     if(createdId)*createdId=~0u;
     const auto reject=[&](const char* reason){++powerFxRefused;powerFxResult=reason;return false;};
     if(network&&(kind==6||kind==7||kind==10))return reject("unscoped_viewer_effect_network_refused");
-    if(!nativePowerFxApi()||(!network&&std::strcmp(mapName,kGuardMap))||!nativePowerFxIsolation(kind,network,tick)||
-       !coopGameplayReady(outgoing)||!coopGameplayReady(remote)||!probeDoppelganger||!avatarAiHeld||!probeFollowExact||
-       avatarAiTarget.actor!=probeActor)return reject("unsupported_scope");
+    // 1214kn: each scope condition names its refusal (all were unsupported_scope; two-account takes refused the host's
+    // Blink effects in the partner's game, campaign-palace-vm-v1917b).
+    if(!nativePowerFxApi())return reject("scope_native_api");
+    if(!network&&std::strcmp(mapName,kGuardMap))return reject("scope_local_cast_off_fixture_map");
+    if(!nativePowerFxIsolation(kind,network,tick))return reject("scope_isolation");
+    if(!coopGameplayReady(outgoing))return reject("scope_local_not_gameplay");
+    if(!coopGameplayReady(remote))return reject("scope_peer_not_gameplay");
+    if(!probeDoppelganger)return reject("scope_avatar_not_doppelganger");
+    if(!avatarAiHeld)return reject("scope_avatar_ai_not_held");
+    if(!probeFollowExact)return reject("scope_avatar_follow_not_exact");
+    if(avatarAiTarget.actor!=probeActor)return reject("scope_avatar_ai_target_stale");
     NativeSwordEquipment sword{};const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(!readNativeSwordEquipment(memoryRead,base,probeHandle,sword,remoteIsCorvo()?NativeSwordScope::DoppelgangerCorvo:NativeSwordScope::DoppelgangerEmily)||
        sword.actor!=probeActor||sword.game!=observedGame)return reject("avatar_identity_changed");

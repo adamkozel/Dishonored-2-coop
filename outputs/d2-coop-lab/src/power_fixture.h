@@ -11,11 +11,16 @@ PowerFixture powerFixture{};
 int powerFixtureRequest=0;
 std::uint64_t powerFixtureStarted=0,powerFixtureObserved=0,powerFixtureRestored=0,powerFixtureRefused=0,powerFixtureRetired=0,powerFixtureLost=0;
 const char* powerFixtureResult="idle";
-bool powerFixtureApiMatches(){
+// 1214ko (#230): the native API identity alone, for presentation on any install. powerFixtureApiMatches() adds the lab
+// game copy's path for the lab-only fixtures; the partner presentation paths used it and so refused every native
+// power effect and partner prop on a player's install (powerfx-corvohost-vm-v1919a: scope_native_api in the VM).
+bool powerApiMatches(){
     const unsigned char setQuantity[]={0x4c,0x8b,0xdc,0x57,0x48,0x83,0xec,0x60,0x49,0xc7,0x43,0xb8,0xfe,0xff,0xff,0xff,0x49,0x89,0x5b,0x10,0x49,0x89,0x6b,0x18};
+    return gameImage&&guardEquipmentApiMatches()&&!std::memcmp(gameImage+0x618de0,setQuantity,sizeof(setQuantity));
+}
+bool powerFixtureApiMatches(){
     char path[MAX_PATH]{};
-    return gameImage&&guardEquipmentApiMatches()&&!std::memcmp(gameImage+0x618de0,setQuantity,sizeof(setQuantity))&&
-        GetModuleFileNameA(nullptr,path,sizeof(path))&&
+    return powerApiMatches()&&GetModuleFileNameA(nullptr,path,sizeof(path))&&
         !_stricmp(path,"C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\asset-game\\Dishonored2.exe");
 }
 bool powerFixtureSame(const NativePlayerPowerItem& p){

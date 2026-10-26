@@ -1,0 +1,143 @@
+[
+  {
+    "do": "trigger",
+    "name": "ld_trigger_23",
+    "settle": 4000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_19",
+    "settle": 30000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_15",
+    "bounce": true,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_28",
+    "bounce": true,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_34",
+    "settle": 6000
+  },
+  {
+    "do": "use",
+    "name": "ld_outsider_rune_pickup",
+    "pitches": [
+      0,
+      25,
+      45
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 500,
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "midnights_trigger_eotw_brief_meagan",
+    "settle": 20000
+  },
+  {
+    "do": "talk",
+    "name": "meagan",
+    "near": [
+      -5.8,
+      -31.6
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "pitches": [
+      0,
+      20,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 5000
+  },
+  {
+    "do": "command",
+    "role": "host",
+    "text": "coop_difficulty_set 0"
+  },
+  {
+    "do": "difficulty",
+    "expect": 0,
+    "ms": 20000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_addermirestation_inside_area",
+    "settle": 8000
+  },
+  {
+    "do": "anchor",
+    "beside": true,
+    "yaw": 0
+  },
+  {
+    "do": "powerfx",
+    "role": "host",
+    "power": "possession",
+    "settle": 2000,
+    "expect": true,
+    "upgrades": [
+      "possession_parasite"
+    ]
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "command",
+    "role": "host",
+    "text": "coop_difficulty_set 1"
+  },
+  {
+    "do": "difficulty",
+    "expect": 1,
+    "ms": 20000
+  },
+  {
+    "do": "powerfxcheck"
+  }
+]

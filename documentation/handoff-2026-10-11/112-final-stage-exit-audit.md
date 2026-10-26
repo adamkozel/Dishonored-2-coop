@@ -4,7 +4,7 @@ This audit checks each exit criterion of the [roadmap](02-roadmap.md) and its ad
 evidence takes. A read-only survey of all chapters mapped each criterion to its evidence; the gaps below were then
 checked in the source and the takes. Labels: confirmed runtime (CR), confirmed static (CS), hypothesis.
 
-**Result (updated 2026-10-25):** every stage's criteria are met. The cards the audit opened are done, and so is #225, which the 0.9.5 regression found.
+**Result (updated 2026-10-26):** every stage's criteria are met. The cards the audit opened are done, and so are #225, which the 0.9.5 regression found, and #230 and #228, which the power checks after 0.9.5 found.
 
 | Card | Stage | Gap |
 |---|---|---|
@@ -14,6 +14,8 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 | [#206](https://github.com/adamkozel/Dishonored-2-coop/issues/206) | 6 | Done (2026-10-25): both players from the start, the partner idle or beside the host, pass every combat lesson (route-training-pair-v1913a, route-training-follow-v1913a). |
 | [#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222) | 7 | Done on 1214kh (2026-10-25): a co-op game from the Co-op menu hosts its lobby by itself, and F7 opens the invite. |
 | [#225](https://github.com/adamkozel/Dishonored-2-coop/issues/225) | 6 | Done on 1214km (2026-10-25): the autosave reader no longer makes the game lose a save (save-share-v1916a); Dunwall's shared death passes again on co-op saves that hold autosaves (campaign-dunwall-vm-v1916a), and all nine missions pass ([chapter 109](109-pairing-validation.md)). |
+| [#230](https://github.com/adamkozel/Dishonored-2-coop/issues/230) | 3 | Done on 1214ko-kq (2026-10-26): 0.9.5 showed the partner no power effects on a player's install, because the effect and presentation paths required the lab's game path. Every power of both characters in both roles, the Far Reach pull, and the held grenade, Heart and stun mine now show in the other game on two accounts ([chapter 113](113-power-effects-on-every-install.md)). |
+| [#228](https://github.com/adamkozel/Dishonored-2-coop/issues/228) | 6 | Done on 1214kq (2026-10-26): both players cast their powers in every mission after Dunwall, each cast moving the caster in both worlds with its native effect in the other world (the campaign on 0.9.6, [chapter 109](109-pairing-validation.md)). Emily's power items have host-role evidence ([chapter 113](113-power-effects-on-every-install.md)). |
 
 ## Stage 1: protected development lab
 
@@ -35,7 +37,7 @@ checked in the source and the takes. Labels: confirmed runtime (CR), confirmed s
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| Every applicable motion bound to native state, natural full-body quality, transitions, contacts, equipment and VFX, both roles, reviewed real-game videos | met (CR) | [Chapter 99](99-movement-completion-coverage.md): 49 completion audits. Each item has passing coverage cases and reviewed observer videos with verdicts. The [checklist](generated/movement-requirements.md) reads 103 of 105 complete, runtime-bound and visually accepted. `sit_stand` is not applicable (CS, audit 1240) and incapacitation is excluded by policy. The final reconciliation (chapter 99) corrected 23 stale visual columns and 8 stale binding columns after re-checking every video and case. |
+| Every applicable motion bound to native state, natural full-body quality, transitions, contacts, equipment and VFX, both roles, reviewed real-game videos | met (CR) | [Chapter 99](99-movement-completion-coverage.md): 49 completion audits. Each item has passing coverage cases and reviewed observer videos with verdicts. The [checklist](generated/movement-requirements.md) reads 103 of 105 complete, runtime-bound and visually accepted. `sit_stand` is not applicable (CS, audit 1240) and incapacitation is excluded by policy. The final reconciliation (chapter 99) corrected 23 stale visual columns and 8 stale binding columns after re-checking every video and case. Power effects and held items reach the other player on any install since 0.9.6, on two accounts in both roles ([chapter 113](113-power-effects-on-every-install.md), #230). |
 
 Scoped limits are recorded in the audits: window front and right variants are not reachable, and Corvo's plain crouched
 kick is not reproducible.
@@ -72,7 +74,7 @@ kick is not reproducible.
 | Role restoration | met (CR) | Every campaign take checks both characters; the character choice is per save and per join ([chapter 108](108-character-choice-and-pairings.md)). |
 | Simultaneous request deduplication | met (CR) | Chapter 88 #188: mission-simultaneous-v1869a, v1870a, v1870b. |
 | Both-ready barriers | met (CR) | The transition hold (audit 1293) and every campaign take's mission starts and ends. |
-| Every map, load and scene boundary | met (CR) | The whole campaign on two Steam accounts, all nine missions on 0.9.3 ([chapter 109](109-pairing-validation.md)). The map sequence between missions is in [chapter 97](97-campaign-map-sequence.md). |
+| Every map, load and scene boundary | met (CR) | The whole campaign on two Steam accounts, all nine missions on each release since 0.9.3, the latest on 0.9.6 with powers cast in every mission ([chapter 109](109-pairing-validation.md)). The map sequence between missions is in [chapter 97](97-campaign-map-sequence.md). |
 
 ## Stage 7: native UI and release
 
