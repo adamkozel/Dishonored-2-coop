@@ -69,6 +69,9 @@ Every power of both characters, in both roles, shows its native effect in the ot
 | [powerfx-emilyhost-vm-v1923a](../../work/natural-moveset/powerfx-emilyhost-vm-v1923a) (1214kp) | Emily host, Corvo partner | The host's Far Reach, Domino (66), Doppelganger and Twin Shade, Mesmerize and Shadow Walk. The partner's Blink and Blink Assault, Windblast and Greater Windblast, and Swarm and Double Swarm (123 presented). |
 | [powerfx-emilyhost-vm-v1929a](../../work/natural-moveset/powerfx-emilyhost-vm-v1929a) (1214kq) | Emily host | The partner's Bend Time and Stop Time (the host's world bent: 1 and 3 added) and Possession (15 presented). |
 
+| [farreachpull-emilyhost-vm-v1931a](../../work/natural-moveset/farreachpull-emilyhost-vm-v1931a) (1214kq) | Emily host | The host's Far Reach with `grapple_pull_npcs` pulling a guard: beam and impact. |
+| [farreachpull-corvohost-vm-v1931a](../../work/natural-moveset/farreachpull-corvohost-vm-v1931a) (1214kq) | Corvo host | The partner's Far Reach pulling a guard: beam and impact. The take then failed: the host died at the closing difficulty step, after the pull. |
+
 - 1214kq differs from 1214kp only in its version resources, so the 1214kp takes stand for 0.9.6.
 - In the Emily-host takes the swarm's rats are the host's own native rats, so no rat visual is created there (the
   world shows the swarm 123 times).
@@ -84,6 +87,23 @@ Every power of both characters, in both roles, shows its native effect in the ot
 | powerfx-corvohost-vm-v1922a, powerfx-emilyhost-vm-v1922a | Both ended in GameOver to the dock guards. Emily's anchor was Meagan's skiff, with no floor in reach. |
 | powerfx-corvohost-vm-v1923a, powerfx-emilyhost-vm-v1923a | Possession needs the parasite upgrade for a human. The partner's Bend Time file was read through a flattened list (`$(...)` unrolls a nested list). Fixed in v1924 and v1925. |
 | powerfx-emilyhost-vm-v1924a | The VM's `--world-npcs` probe failed once (exit 45); v1925 retries it. |
+
+## Held items
+
+The grenade, the Heart and the stun mine a player holds are presented in the other world as props (`grenade-prop`,
+`heart-prop`, `trap-prop`), which 0.9.5 also refused on a player's install. The `itemprop` step
+([Route-MissionVM-v1930](../../work/natural-moveset/Route-MissionVM-v1930.ps1)) equips the item with
+`coop_grant_item` at the anchor. It then samples the other world's prop status for 6 s; the prop must be created or
+attached there.
+
+| Take (1214kq) | Shown in the other world | Not equipped |
+|---|---|---|
+| [itemprops-corvohost-vm-v1930a](../../work/natural-moveset/itemprops-corvohost-vm-v1930a) | Corvo's grenade (host), Emily's grenade (partner) | both Hearts and both stun mines |
+| [itemprops-emilyhost-vm-v1930a](../../work/natural-moveset/itemprops-emilyhost-vm-v1930a) | Emily's grenade (host), Corvo's grenade and Heart (partner) | the host's Heart and both stun mines |
+
+The lab item grant equips only into a free left hand (`serviceLabItemGrant`, `grant_slot_occupied`), and the grenade
+still held it. [Route-MissionVM-v1933](../../work/natural-moveset/Route-MissionVM-v1933.ps1) gives each player one
+item per take and records the grant status: itemprops-{heart,trap}-{corvohost,emilyhost}-vm-v1933a.
 
 ## Emily's powers in the host role (#228)
 

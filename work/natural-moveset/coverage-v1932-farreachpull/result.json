@@ -1,0 +1,42 @@
+{
+  "passed": false,
+  "failure": "1 case(s) failed: host-farreachpull: Observer pitch did not settle",
+  "cases": [
+    {
+      "source": "host",
+      "case": "farreachpull",
+      "observer": "client",
+      "passed": false,
+      "failure": "Observer pitch did not settle",
+      "checks": [
+        "Partner presentation stayed live"
+      ],
+      "hostSlot": 80,
+      "camera": [
+        -52.2173025,
+        -149.2621251,
+        68.10000000000001
+      ],
+      "guardBefore": {
+        "stand": [
+          -49.175267000000005,
+          -147.127645
+        ],
+        "host": [
+          -48.59,
+          -150.07,
+          66.4
+        ]
+      },
+      "lowWeightSamples": 0,
+      "teleports": [],
+      "grant": {
+        "grants": 2,
+        "refused": 0,
+        "result": "named_power_equip_requested"
+      },
+      "restored": true
+    }
+  ],
+  "scope": "Power cancellation and long Far Reach (1350, #11), on the powers coverage (1332): Corvo (blink, dark vision, bend time, windblast, possession, swarm) and Emily (far reach, domino, doppelganger, mesmerize, shadow walk, dark vision) granted by name in product mode (lab only) and cast natively; checked from the partner presentation state; fixture restored after every case."
+}
