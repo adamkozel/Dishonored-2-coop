@@ -103,7 +103,18 @@ attached there.
 
 The lab item grant equips only into a free left hand (`serviceLabItemGrant`, `grant_slot_occupied`), and the grenade
 still held it. [Route-MissionVM-v1933](../../work/natural-moveset/Route-MissionVM-v1933.ps1) gives each player one
-item per take and records the grant status: itemprops-{heart,trap}-{corvohost,emilyhost}-vm-v1933a.
+item per take and records the grant status. Every case passed (CR): each item was equipped (`granted_item_equipped`),
+and its prop was created and attached in the other world.
+
+| Take (1214kq) | Shown in the other world |
+|---|---|
+| [itemprops-heart-corvohost-vm-v1933a](../../work/natural-moveset/itemprops-heart-corvohost-vm-v1933a) | Corvo's Heart (host), Emily's Heart (partner) |
+| [itemprops-trap-corvohost-vm-v1933a](../../work/natural-moveset/itemprops-trap-corvohost-vm-v1933a) | Corvo's stun mine (host), Emily's stun mine (partner) |
+| [itemprops-heart-emilyhost-vm-v1933a](../../work/natural-moveset/itemprops-heart-emilyhost-vm-v1933a) | Emily's Heart (host), Corvo's Heart (partner) |
+| [itemprops-trap-emilyhost-vm-v1933a](../../work/natural-moveset/itemprops-trap-emilyhost-vm-v1933a) | Emily's stun mine (host), Corvo's stun mine (partner) |
+
+So the grenade, the Heart and the stun mine each player holds show in the other game, for both characters in both
+roles.
 
 ## Emily's powers in the host role (#228)
 
@@ -117,7 +128,7 @@ SLOT80 pairing fixture) and filmed from the partner's game, one case per take af
 | `emily_dark_vision_cast_end` | [coverage-v1921-darkvision](../../work/natural-moveset/coverage-v1921-darkvision) |
 | `emily_doppelganger_cast` | [coverage-v1921-doppelganger](../../work/natural-moveset/coverage-v1921-doppelganger) |
 | `emily_mesmerize_cast` | [coverage-v1921-mesmerize](../../work/natural-moveset/coverage-v1921-mesmerize) |
-| `emily_far_reach_pull_variants` | pending: coverage-v1932-farreachpull (Record-Coverage-v1932, a guard pulled with `grapple_pull_npcs`) |
+| `emily_far_reach_pull_variants` | pending: coverage-v1934-farreachpull (Record-Coverage-v1934, a guard pulled with `grapple_pull_npcs`). [coverage-v1932-farreachpull](../../work/natural-moveset/coverage-v1932-farreachpull) pulled the guard natively (state 84; the partner presented variants 4-7 and 9), but its camera stood inside the gallery wall. On two accounts, the pull's beam shows in the other world in both roles (farreachpull-*-vm-v1931a, above). |
 
 The host-role bottle pull ([Probe-ObjectCarry-v1917](../../work/natural-moveset/Probe-ObjectCarry-v1917.ps1)) failed
 three times on a lost host command receipt after the SLOT80 load: object-carry-v1917a, v1921a and v1929a.
