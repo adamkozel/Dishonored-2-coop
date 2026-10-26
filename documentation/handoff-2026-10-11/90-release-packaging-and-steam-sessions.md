@@ -413,6 +413,19 @@ Updated 2026-10-20. Stage 7's exit criteria (roadmap and #17): native host, join
     instead of the package folder.
   - The nine missions on two accounts with this binary pass, with powers cast in every mission after Dunwall (chapter
     109, "The campaign on 0.9.6").
+  - Published: [v0.9.6](https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v0.9.6) from commit 73202cb (the
+    tree squash-merged to main as 7b0d93b16).
+  - Clean-PC proof from the v0.9.6 download, [product-two-account-v1929a](../../work/release/product-two-account-v1929a): pass.
+    - The VM downloaded the published zip (SHA-256 C5B3B6C4..., 2.7 s) and installed it with Install.cmd alone in
+      69 s. Defender was on and reported no detection.
+    - Product mode reported, and the host hosted its lobby by itself. The two accounts connected on the same mission,
+      with the movement banks active on both.
+    - Each player walked about 8 m and the other saw it. A story trigger advanced both worlds' objectives equally,
+      with native melee active.
+    - The host's death showed GameOver in both games, and both restarted on the same map with new world epochs.
+    - F8 left the session, and the uninstall restored the game (13 added files removed, the original master.index
+      restored).
+    - The lab pair was relaunched and connected, and no SteamID was recorded.
 
 **Still open:**
 - Needs you: the human playtest with a friend (#99), and the Defender false positive (#25).
