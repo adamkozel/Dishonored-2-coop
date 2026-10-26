@@ -128,7 +128,13 @@ SLOT80 pairing fixture) and filmed from the partner's game, one case per take af
 | `emily_dark_vision_cast_end` | [coverage-v1921-darkvision](../../work/natural-moveset/coverage-v1921-darkvision) |
 | `emily_doppelganger_cast` | [coverage-v1921-doppelganger](../../work/natural-moveset/coverage-v1921-doppelganger) |
 | `emily_mesmerize_cast` | [coverage-v1921-mesmerize](../../work/natural-moveset/coverage-v1921-mesmerize) |
-| `emily_far_reach_pull_variants` | pending: coverage-v1934-farreachpull (Record-Coverage-v1934, a guard pulled with `grapple_pull_npcs`). [coverage-v1932-farreachpull](../../work/natural-moveset/coverage-v1932-farreachpull) pulled the guard natively (state 84; the partner presented variants 4-7 and 9), but its camera stood inside the gallery wall. On two accounts, the pull's beam shows in the other world in both roles (farreachpull-*-vm-v1931a, above). |
+| `emily_far_reach_pull_variants` | [coverage-v1935-farreachpull](../../work/natural-moveset/coverage-v1935-farreachpull) ([Record-Coverage-v1935](../../work/natural-moveset/Record-Coverage-v1935.ps1)): Far Reach with `grapple_pull_npcs` pulls the upper-floor guard from 4.5 m. The native pull ran (state 84), and the partner presented the aim, release, pullIn and pullOut (variants 4-7 and 9). |
+
+Failed pull takes, kept:
+- [coverage-v1932-farreachpull](../../work/natural-moveset/coverage-v1932-farreachpull): the native pull ran, but the camera stood inside the gallery wall.
+- [coverage-v1934-farreachpull](../../work/natural-moveset/coverage-v1934-farreachpull): the hostile guard reached Emily and knocked her down while she was still aiming.
+
+The recheck [movement-completion-recheck-v1935c](../../work/natural-moveset/movement-completion-recheck-v1935c) now reads 103 of 103 applicable items passing every check, with all 1586 videos valid. The seven new host-role videos are reviewed in its `review.json`.
 
 The host-role bottle pull ([Probe-ObjectCarry-v1917](../../work/natural-moveset/Probe-ObjectCarry-v1917.ps1)) failed
 three times on a lost host command receipt after the SLOT80 load: object-carry-v1917a, v1921a and v1929a.

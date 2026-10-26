@@ -14735,15 +14735,29 @@
             "cases": [
               "client-farreachbottle"
             ]
+          },
+          {
+            "take": "coverage-v1935-farreachpull",
+            "cases": [
+              "host-farreachpull"
+            ]
           }
         ],
         "visual": [
           {
             "video": "object-carry-v1471b/client-farreachbottle-observer.mp4",
             "verdict": "Corvo's window: Emily raises her left arm and holds the Far Reach aim in a braced stance, the tendril lashes out from her hand, then she draws the arm back sharply with her body leaning into the pull and recovers to her stance. Natural full-body pull. Accepted (the pulled bottle moves only in her world, #115)."
+          },
+          {
+            "video": "coverage-v1935-farreachpull/host-farreachpull-observer.mp4",
+            "verdict": "Host role, Corvo's window from behind Emily on the gallery: she raises her left arm and the tendril locks onto the guard 4.5 m ahead; the guard is yanked off his feet and flies toward her as she draws the arm back and leans into the pull, then she recovers to her stance. Natural full-body pull. Accepted."
           }
         ],
-        "lifecycle": "See method."
+        "lifecycle": "See method.",
+        "hostRole": {
+          "audit": "completion-audit-v1932-emily-host-role.json",
+          "scope": "Host role (1935, #228): Emily hosting on her SLOT80 pairing fixture pulls the upper-floor guard with Far Reach and grapple_pull_npcs; the native pull state (84) ran and Corvo as partner presented pullIn (7) with the loop (8) or pullOut (9)."
+        }
       },
       "complete": true,
       "evidence": [
