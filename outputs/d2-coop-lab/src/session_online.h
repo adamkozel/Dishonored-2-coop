@@ -87,7 +87,8 @@ bool acquireOnlineSteam(){
     return s.ready;
 }
 void closeOnlineTransport(const char* reason){
-    if(sockets){if(connection)sockets->CloseConnection(connection,0,reason,false);if(onlineSession.listener)sockets->CloseListenSocket(onlineSession.listener);}
+    // Stage 8.3 (#236): the leave notice first, and a lingering close so it is delivered.
+    if(sockets){if(connection){sendCoopLeave();sockets->CloseConnection(connection,0,reason,true);}if(onlineSession.listener)sockets->CloseListenSocket(onlineSession.listener);}
     connection=0;connectionState=0;lastReceive=0;remote={};onlineSession.listener=0;
 }
 void stopOnlineSession(const char* reason){
@@ -136,9 +137,10 @@ void serviceOnlineSession(ULONGLONG tick){
         o.lobby=r.lobby;o.owner=o.self;char id[32]{};std::snprintf(id,sizeof(id),"%llu",r.lobby);char connect[64]{};std::snprintf(connect,sizeof(connect),"+connect_lobby %llu",r.lobby);
         onlineSteam.setLobbyData(onlineSteam.matchmaking,o.lobby,"d2coop","1171");onlineSteam.setLobbyData(onlineSteam.matchmaking,o.lobby,"role_host","corvo");
         onlineSteam.setRichPresence(onlineSteam.friends,"connect",connect);onlineSteam.setRichPresence(onlineSteam.friends,"status","Dishonored 2 co-op host (Corvo)");
-        SteamNetworkingConfigValue_t options[3];options[0].SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged,reinterpret_cast<void*>(&statusCallback));
+        SteamNetworkingConfigValue_t options[5];options[0].SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged,reinterpret_cast<void*>(&statusCallback));
         options[1].SetInt32(k_ESteamNetworkingConfig_SendRateMin,512*1024);options[2].SetInt32(k_ESteamNetworkingConfig_SendRateMax,512*1024);
-        o.listener=sockets->CreateListenSocketP2P(0,3,options);
+        options[3].SetInt32(k_ESteamNetworkingConfig_TimeoutInitial,kCoopTransportTimeoutMs);options[4].SetInt32(k_ESteamNetworkingConfig_TimeoutConnected,kCoopTransportTimeoutMs);
+        o.listener=sockets->CreateListenSocketP2P(0,5,options);
         o.phase=OnlinePhase::Hosting;o.result=o.listener?"hosting_lobby":"p2p_listen_failed";
         if(!o.listener){o.phase=OnlinePhase::Failed;return;}
         if(!o.quiet){onlineSteam.inviteDialog(onlineSteam.friends,o.lobby);o.inviteOpened=true;}
@@ -151,9 +153,10 @@ void serviceOnlineSession(ULONGLONG tick){
         if(!tag||std::strcmp(tag,"1171")){o.phase=OnlinePhase::Failed;o.result="lobby_version_mismatch";return;}
         if(!o.owner||o.owner==o.self){o.phase=OnlinePhase::Failed;o.result="lobby_owner_is_self";return;}
         SteamNetworkingIdentity identity{};identity.SetSteamID64(o.owner);
-        SteamNetworkingConfigValue_t options[3];options[0].SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged,reinterpret_cast<void*>(&statusCallback));
+        SteamNetworkingConfigValue_t options[5];options[0].SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged,reinterpret_cast<void*>(&statusCallback));
         options[1].SetInt32(k_ESteamNetworkingConfig_SendRateMin,512*1024);options[2].SetInt32(k_ESteamNetworkingConfig_SendRateMax,512*1024);
-        connection=sockets->ConnectP2P(identity,0,3,options);o.phase=connection?OnlinePhase::Connecting:OnlinePhase::Failed;o.result=connection?"connecting_p2p":"connect_p2p_refused";
+        options[3].SetInt32(k_ESteamNetworkingConfig_TimeoutInitial,kCoopTransportTimeoutMs);options[4].SetInt32(k_ESteamNetworkingConfig_TimeoutConnected,kCoopTransportTimeoutMs);
+        connection=sockets->ConnectP2P(identity,0,5,options);o.phase=connection?OnlinePhase::Connecting:OnlinePhase::Failed;o.result=connection?"connecting_p2p":"connect_p2p_refused";
     }
     if(o.lobby)o.lobbyMembers=static_cast<std::uint64_t>(onlineSteam.lobbyMembers(onlineSteam.matchmaking,o.lobby));
     if((o.phase==OnlinePhase::Connecting||o.phase==OnlinePhase::Hosting)&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected){o.phase=OnlinePhase::Connected;o.result="connected";}
