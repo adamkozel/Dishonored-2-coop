@@ -206,6 +206,7 @@ void bufferPresentation(const CoopPosePacket& p){
 struct PoseCadenceSample {double time;std::uint32_t sequence;float remote[3],target[3],native[3],render[3];};
 PoseCadenceSample poseCadence[2048]{};unsigned poseCadenceCount=0;double poseCadenceUntil=0,poseCadenceStart=0;
 std::uint64_t sent=0,received=0,rejected=0;
+bool flightEnabled=true;std::string flightLastDump; // stage 8.2 (#235): flight_recorder.h
 std::uint64_t receivedPlayerMotions[4]{};
 ISteamNetworkingSockets* sockets=nullptr;
 HSteamListenSocket listener=0;
@@ -215,7 +216,11 @@ HSteamNetConnection connection=0;
 // ~456 KB pending reliable on the host). Diagnostics only; sends unchanged.
 struct CoopSendTally {std::uint32_t magic=0;std::uint64_t messages=0,reliableBytes=0,unreliableBytes=0,windowBytes=0,windowPeak=0;};
 std::array<CoopSendTally,96> coopSendTally{};ULONGLONG coopSendWindowAt=0;
+}
+#include "flight_recorder.h" // stage 8.2 (#235)
+namespace {
 EResult coopSendMessage(HSteamNetConnection target,const void* data,std::uint32_t size,int flags,std::int64_t* number){
+    if(flightEnabled)flightOut(data,size,flags);
     std::uint32_t magic=0;if(data&&size>=4)std::memcpy(&magic,data,4);
     unsigned i=0;while(i<coopSendTally.size()&&coopSendTally[i].magic&&coopSendTally[i].magic!=magic)++i;
     if(i<coopSendTally.size()){auto& s=coopSendTally[i];s.magic=magic;++s.messages;s.windowBytes+=size;
@@ -928,6 +933,7 @@ void exchangePoses(ULONGLONG tick) {
     for(int batch=0;batch<32;++batch){
     const int count=sockets->ReceiveMessagesOnConnection(connection,messages,16);
     for(int i=0;i<count;++i) {
+        if(flightEnabled)flightIn(messages[i]->m_pData,static_cast<std::uint32_t>(messages[i]->m_cbSize));
         std::uint32_t magic=0;if(messages[i]->m_cbSize>=4)std::memcpy(&magic,messages[i]->m_pData,4);
         if(magic==0x484e3244){
             if(messages[i]->m_cbSize==sizeof(CoopNpcAttack)){CoopNpcAttack p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveNpcAttack(p,tick);}else ++npcAttack.rejected;
@@ -1571,6 +1577,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_npc_combat hostworld_test")||!std::strcmp(text,"coop_npc_combat hostnative_test"))return true;
     if(!std::strcmp(text,"coop_npc_combat on")||!std::strcmp(text,"coop_npc_combat off")||!std::strcmp(text,"coop_npc_combat duplicate"))return true;
     if(!std::strcmp(text,"coop_npc_stream on")||!std::strcmp(text,"coop_npc_stream off"))return true;
+    if(!std::strcmp(text,"coop_flight dump")||!std::strcmp(text,"coop_flight on")||!std::strcmp(text,"coop_flight off"))return true;
     if(!std::strcmp(text,"coop_guard_body on")||!std::strcmp(text,"coop_guard_body off"))return true;
     if(!std::strcmp(text,"coop_guard_equipment 2000")||!std::strcmp(text,"coop_guard_equipment off"))return true;
     if(!std::strcmp(text,"coop_guard_weapon on")||!std::strcmp(text,"coop_guard_weapon off"))return true;
@@ -1864,6 +1871,9 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_npc_combat off")){npcCombatRequest=0;return;}
     if(!std::strcmp(request.command,"coop_npc_combat duplicate")){repeatNpcCombat();return;}
     if(!std::strcmp(request.command,"coop_npc_stream on")){npcStreamRequest=1;return;}
+    if(!std::strcmp(request.command,"coop_flight on")){flightEnabled=true;return;}
+    if(!std::strcmp(request.command,"coop_flight off")){flightEnabled=false;return;}
+    if(!std::strcmp(request.command,"coop_flight dump")){flightLastDump=flightDump();return;}
     if(!std::strcmp(request.command,"coop_npc_stream off")){npcStreamRequest=0;return;}
     if(!std::strcmp(request.command,"coop_guard_link escape 60000")){beginGuardLink(GetTickCount64(),true);return;}
     if(!std::strcmp(request.command,"coop_guard_body on")||!std::strcmp(request.command,"coop_guard_body off")){
