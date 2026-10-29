@@ -180,8 +180,17 @@ void traceKisculeSignal(const unsigned char* signal){
     std::string entity;if(kisculeNodeEntity(node,entity))std::snprintf(e.entity,sizeof(e.entity),"%s",entity.c_str());
     AcquireSRWLockExclusive(&kisculeLock);if(kisculeTraceCount<kisculeTrace.size())kisculeTrace[kisculeTraceCount++]=e;++kisculeTraceTotal;ReleaseSRWLockExclusive(&kisculeLock);
 }
+// Stage 8.4.1 (#237, lab diagnostic): with coop_kiscule_census on, every dispatched signal is counted by node class
+// (node vtable RVA) for the whole session, written to <status>.kiscule-census.json with the trace files. It shows which
+// script node classes run in each game; the partner must run none that write the shared world.
+bool kisculeCensusOn=false;std::unordered_map<std::uint32_t,std::uint64_t> kisculeCensus;std::uint64_t kisculeCensusTotal=0,kisculeCensusStarted=0;
+void countKisculeSignal(const unsigned char* signal){
+    const auto node=*reinterpret_cast<const std::uintptr_t*>(reinterpret_cast<std::uintptr_t>(signal)+0x18);if(!node)return;
+    std::uintptr_t vt=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);if(!memoryRead(node,&vt,8)||vt<=base)return;
+    AcquireSRWLockExclusive(&kisculeLock);++kisculeCensus[static_cast<std::uint32_t>(vt-base)];++kisculeCensusTotal;ReleaseSRWLockExclusive(&kisculeLock);
+}
 unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned char* signal){
-    if(kisculeTraceOn)traceKisculeSignal(signal);
+    if(kisculeTraceOn)traceKisculeSignal(signal);if(kisculeCensusOn)countKisculeSignal(signal);
     if(!kisculeMirrorActive()||applyingKiscule)return realKisculeDispatch(self,out,signal);
     // Hot path: the native dispatcher dereferences the same pointers next.
     const auto s=reinterpret_cast<std::uintptr_t>(signal);const auto node=*reinterpret_cast<const std::uintptr_t*>(s+0x18);
@@ -329,6 +338,18 @@ bool installEntityEventTrace(){
     return hookEventPost(0x883f80,p883,20,reinterpret_cast<void*>(&eventPost883),realEventPost883)&&
         hookEventPost(0x884920,p884,15,reinterpret_cast<void*>(&eventPost884),realEventPost884);
 }
+void writeKisculeCensus(){
+    if(!kisculeCensusStarted)return;
+    char path[MAX_PATH]{},temp[MAX_PATH]{};
+    if(std::snprintf(path,sizeof(path),"%s.kiscule-census.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
+    FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
+    AcquireSRWLockShared(&kisculeLock);
+    fprintf(f,"{\"on\":%s,\"role\":%u,\"started\":%llu,\"total\":%llu,\"classes\":{",kisculeCensusOn?"true":"false",localRole,kisculeCensusStarted,kisculeCensusTotal);
+    bool first=true;for(const auto& c:kisculeCensus){fprintf(f,"%s\"%u\":%llu",first?"":",",c.first,c.second);first=false;}
+    fprintf(f,"}}\n");
+    ReleaseSRWLockShared(&kisculeLock);
+    const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
+}
 void writeKisculeTrace(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.kiscule-trace.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
@@ -345,7 +366,7 @@ void writeKisculeTrace(){
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
 void writeKisculeMirror(){
-    writeKisculeTrace();
+    writeKisculeTrace();writeKisculeCensus();
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.kiscule.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;

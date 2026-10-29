@@ -1579,6 +1579,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_gameflow_mirror on")||!std::strcmp(text,"coop_gameflow_mirror off"))return true;
     if(!std::strcmp(text,"coop_kiscule_mirror on")||!std::strcmp(text,"coop_kiscule_mirror off"))return true;
     if(!std::strcmp(text,"coop_kiscule_trace on")||!std::strcmp(text,"coop_kiscule_trace off"))return true;
+    if(!std::strcmp(text,"coop_kiscule_census on")||!std::strcmp(text,"coop_kiscule_census off"))return true;
     if(!std::strncmp(text,"coop_chaos_points ",18)&&std::strlen(text)<=24&&std::strspn(text+18,"0123456789")==std::strlen(text+18)&&text[18])return true;
     if(!std::strcmp(text,"coop_checkpoint_sync on")||!std::strcmp(text,"coop_checkpoint_sync off")||!std::strcmp(text,"coop_checkpoint_sync retry_probe")||
        !std::strcmp(text,"coop_checkpoint_delay 0")||!std::strcmp(text,"coop_checkpoint_delay 1500")||
@@ -1793,6 +1794,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_kiscule_mirror on")){AcquireSRWLockExclusive(&kisculeLock);if(!kisculeMirrorEnabled){kisculeMirrorEnabled=true;kisculeMirror={};kisculeMirror.result="armed";}ReleaseSRWLockExclusive(&kisculeLock);return;}
     // 1214jj (#187, lab diagnostic): the dispatched Kiscule signal trace.
     if(!std::strcmp(request.command,"coop_kiscule_trace on")){AcquireSRWLockExclusive(&kisculeLock);kisculeTraceCount=0;kisculeTraceTotal=0;eventTraceCount=0;eventTraceTotal=0;kisculeTraceStarted=GetTickCount64();kisculeTraceOn=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(!std::strcmp(request.command,"coop_kiscule_census on")){AcquireSRWLockExclusive(&kisculeLock);kisculeCensus.clear();kisculeCensusTotal=0;kisculeCensusStarted=GetTickCount64();kisculeCensusOn=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(!std::strcmp(request.command,"coop_kiscule_census off")){AcquireSRWLockExclusive(&kisculeLock);kisculeCensusOn=false;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_kiscule_trace off")){AcquireSRWLockExclusive(&kisculeLock);kisculeTraceOn=false;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_kiscule_mirror off")){AcquireSRWLockExclusive(&kisculeLock);kisculeMirrorEnabled=false;kisculeMirror={};kisculeMirror.result="disabled";ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_checkpoint_sync on")){checkpointEnable(true);return;}
