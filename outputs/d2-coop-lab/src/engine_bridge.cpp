@@ -479,6 +479,11 @@ void pumpConnections(ULONGLONG tick) {
         if(e.m_info.m_eState==k_ESteamNetworkingConnectionState_Connecting && onlineSession.active && onlineSession.host && onlineSession.listener && e.m_info.m_hListenSocket==onlineSession.listener) {
             // 1178: accept exactly one P2P peer (not ourselves) for the lobby.
             const auto peer=e.m_info.m_identityRemote.GetSteamID64();
+            // Stage 8.3 (#236): a partner rejoining after a crash or blackout replaces a connection that has been silent
+            // for 5 s (as the lab does), instead of being refused until the old one times out; a live one is kept.
+            if(connection&&connection!=e.m_hConn&&peer&&peer!=onlineSession.self&&lastReceive&&tick-lastReceive>=5000){
+                sockets->CloseConnection(connection,0,"Silent partner replaced",false);connection=0;connectionState=0;lastReceive=0;remote={};
+            }
             if(connection||!peer||peer==onlineSession.self){sockets->CloseConnection(e.m_hConn,0,"Co-op session accepts one partner",false);continue;}
             if(sockets->AcceptConnection(e.m_hConn)==k_EResultOK){connection=e.m_hConn;onlineSession.owner=onlineSession.self;onlineSession.result="partner_connecting";}
         }

@@ -114,6 +114,8 @@ void startOnlineHost(bool quiet=false){
 }
 void startOnlineJoin(std::uint64_t lobby){
     if(!acquireOnlineSteam()||!lobby){onlineSession.result="join_refused";return;}
+    // Stage 8.3 (#236): a repeated join request or invite for the lobby we are already in keeps the live session.
+    if(onlineSession.active&&!onlineSession.host&&onlineSession.lobby==lobby&&onlineSession.phase!=OnlinePhase::Failed)return;
     stopOnlineSession("restart");closeOnlineTransport("online session replaces the lab link");
     if(listener){sockets->CloseListenSocket(listener);listener=0;}
     auto& o=onlineSession;o.active=true;o.host=false;o.phase=OnlinePhase::Joining;o.self=onlineSteam.getSteamID(onlineSteam.user);
