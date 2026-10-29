@@ -121,6 +121,9 @@ KisculeMirror kisculeMirror{};SRWLOCK kisculeLock=SRWLOCK_INIT;bool kisculeMirro
 // A node the host has not run yet is requested once (partner-first), so a step the partner reaches first still
 // happens, in the host's world. Class indices from kKisculeHostStoryBase are policy-table indices.
 bool kisculeHostStory=false;constexpr int kKisculeHostStoryBase=100;
+// Mutation twin (lab only, coop_host_story twin_no_block): the partner runs its own story nodes again while the
+// host's replays still arrive. Takes must catch it (the partner's own story-node runs must be zero).
+bool kisculeHostStoryTwinNoBlock=false;
 bool kisculeClassIndexMirrored(std::uint32_t cls){
     if(cls<static_cast<std::uint32_t>(kisculeMirrorClassCount))return kisculeMirrorClasses[cls].mirrored;
     return kisculeHostStory&&cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&cls<kKisculeHostStoryBase+kKisculePolicyCount;}
@@ -223,7 +226,7 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     else if(cls<kKisculeHostStoryBase&&!kisculeMirrorClasses[cls].mirrored){++kisculeMirror.personal;kisculeEvent("personal",cls,entity,nodeId,input,0);}
     else if(std::string item;cls==0&&kisculePlayerScopedItem(node,item)){++kisculeMirror.personal;kisculeEvent("personal",cls,entity,nodeId,input,0);}
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
-        if(cls>=kKisculeHostStoryBase&&localRole==1){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
+        if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
             if(!c.executed&&!c.askedHost&&kisculePartnerScope()){c.askedHost=true;++kisculeMirror.hostStoryAsked;
                 KisculeActionPacket p{};p.role=1;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=1;p.reserved=kKisculePartnerFirst;
                 std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}

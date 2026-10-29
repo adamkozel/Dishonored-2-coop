@@ -1580,7 +1580,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_kiscule_mirror on")||!std::strcmp(text,"coop_kiscule_mirror off"))return true;
     if(!std::strcmp(text,"coop_kiscule_trace on")||!std::strcmp(text,"coop_kiscule_trace off"))return true;
     if(!std::strcmp(text,"coop_kiscule_census on")||!std::strcmp(text,"coop_kiscule_census off"))return true;
-    if(!std::strcmp(text,"coop_host_story on")||!std::strcmp(text,"coop_host_story off"))return true;
+    if(!std::strcmp(text,"coop_host_story on")||!std::strcmp(text,"coop_host_story off")||!std::strcmp(text,"coop_host_story twin_no_block"))return true;
     if(!std::strncmp(text,"coop_chaos_points ",18)&&std::strlen(text)<=24&&std::strspn(text+18,"0123456789")==std::strlen(text+18)&&text[18])return true;
     if(!std::strcmp(text,"coop_checkpoint_sync on")||!std::strcmp(text,"coop_checkpoint_sync off")||!std::strcmp(text,"coop_checkpoint_sync retry_probe")||
        !std::strcmp(text,"coop_checkpoint_delay 0")||!std::strcmp(text,"coop_checkpoint_delay 1500")||
@@ -1796,6 +1796,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     // 1214jj (#187, lab diagnostic): the dispatched Kiscule signal trace.
     if(!std::strcmp(request.command,"coop_kiscule_trace on")){AcquireSRWLockExclusive(&kisculeLock);kisculeTraceCount=0;kisculeTraceTotal=0;eventTraceCount=0;eventTraceTotal=0;kisculeTraceStarted=GetTickCount64();kisculeTraceOn=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_host_story on")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(!std::strcmp(request.command,"coop_host_story twin_no_block")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStoryTwinNoBlock=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_host_story off")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=false;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_kiscule_census on")){AcquireSRWLockExclusive(&kisculeLock);kisculeCensus.clear();kisculeCensusTotal=0;kisculeOwnWorld=kisculeOwnLocalPlayer=kisculeReplayed=0;kisculeOwnByClass.clear();kisculeCensusStarted=GetTickCount64();kisculeCensusOn=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_kiscule_census off")){AcquireSRWLockExclusive(&kisculeLock);kisculeCensusOn=false;ReleaseSRWLockExclusive(&kisculeLock);return;}
