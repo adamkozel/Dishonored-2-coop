@@ -37,7 +37,7 @@ OnlineSteam onlineSteam{};
 enum class OnlinePhase:unsigned {Off,Creating,Hosting,Joining,Connecting,Connected,Failed};
 struct OnlineSession {
     bool active=false,host=false,inviteOpened=false,quiet=false;OnlinePhase phase=OnlinePhase::Off;
-    std::uint64_t self=0,lobby=0,owner=0,call=0,requestedLobby=0,joinRequests=0,lobbyMembers=0;
+    std::uint64_t self=0,lobby=0,owner=0,call=0,requestedLobby=0,joinRequests=0,lobbyMembers=0,lobbyRecreated=0;ULONGLONG emptySince=0;
     HSteamListenSocket listener=0;
     const char* result="off";
 };
@@ -161,14 +161,25 @@ void serviceOnlineSession(ULONGLONG tick){
         connection=sockets->ConnectP2P(identity,0,5,options);o.phase=connection?OnlinePhase::Connecting:OnlinePhase::Failed;o.result=connection?"connecting_p2p":"connect_p2p_refused";
     }
     if(o.lobby)o.lobbyMembers=static_cast<std::uint64_t>(onlineSteam.lobbyMembers(onlineSteam.matchmaking,o.lobby));
+    // Stage 8.3 (#236): a host that has dropped out of its own lobby (Steam reports 0 members; leave-dunwall-vm-v2008c,
+    // where the partner's rejoin then failed with lobby_enter_failed) can no longer be joined. With no partner connected
+    // for 10 s of that, it creates a new lobby quietly (no invite overlay); the friends list's Join follows the new id.
+    if(o.host&&o.phase==OnlinePhase::Hosting&&o.lobby&&!connection&&o.lobbyMembers==0){
+        if(!o.emptySince)o.emptySince=tick;
+        else if(tick-o.emptySince>=10000){
+            onlineSteam.leaveLobby(onlineSteam.matchmaking,o.lobby);if(o.listener){sockets->CloseListenSocket(o.listener);o.listener=0;}
+            o.lobby=0;o.emptySince=0;++o.lobbyRecreated;o.quiet=true;
+            o.call=onlineSteam.createLobby(onlineSteam.matchmaking,1/*friends only*/,2);
+            o.phase=o.call?OnlinePhase::Creating:OnlinePhase::Failed;o.result=o.call?"lobby_recreated":"create_lobby_refused";
+        }
+    }else o.emptySince=0;
     if((o.phase==OnlinePhase::Connecting||o.phase==OnlinePhase::Hosting)&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected){o.phase=OnlinePhase::Connected;o.result="connected";}
-    (void)tick;
 }
 void writeOnlineSession(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.online.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& o=onlineSession;
-    fprintf(f,"{\"steamReady\":%s,\"active\":%s,\"host\":%s,\"phase\":%u,\"result\":\"%s\",\"self\":\"%llu\",\"lobby\":\"%llu\",\"owner\":\"%llu\",\"lobbyMembers\":%llu,\"listener\":%u,\"connection\":%u,\"connectionState\":%d,\"inviteOpened\":%s,\"joinRequests\":%llu,\"launchLobby\":\"%llu\",\"role\":%u}\n",
-        onlineSteam.ready?"true":"false",o.active?"true":"false",o.host?"true":"false",static_cast<unsigned>(o.phase),o.result,o.self,o.lobby,o.owner,o.lobbyMembers,o.listener,connection,connectionState,o.inviteOpened?"true":"false",o.joinRequests,onlineLaunchLobby(),localRole);
+    fprintf(f,"{\"steamReady\":%s,\"active\":%s,\"host\":%s,\"phase\":%u,\"result\":\"%s\",\"self\":\"%llu\",\"lobby\":\"%llu\",\"owner\":\"%llu\",\"lobbyMembers\":%llu,\"lobbyRecreated\":%llu,\"listener\":%u,\"connection\":%u,\"connectionState\":%d,\"inviteOpened\":%s,\"joinRequests\":%llu,\"launchLobby\":\"%llu\",\"role\":%u}\n",
+        onlineSteam.ready?"true":"false",o.active?"true":"false",o.host?"true":"false",static_cast<unsigned>(o.phase),o.result,o.self,o.lobby,o.owner,o.lobbyMembers,o.lobbyRecreated,o.listener,connection,connectionState,o.inviteOpened?"true":"false",o.joinRequests,onlineLaunchLobby(),localRole);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

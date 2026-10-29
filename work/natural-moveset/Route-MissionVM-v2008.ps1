@@ -178,7 +178,8 @@ try{
  C host 'coop_session host_quiet'
  $d=(Get-Date).AddSeconds(30);do{Start-Sleep 2;$ho=HO}while((Get-Date)-lt$d-and!($ho.lobby-and"$($ho.lobby)"-ne'0'))
  if(!$ho.lobby-or"$($ho.lobby)"-eq'0'){throw 'Host did not create a lobby'}
- C client "coop_session join $($ho.lobby)"
+ $script:lobby="$($ho.lobby)" # 2008: the leave check compares with it (it was set only by -JoinAfterStep; leave-dunwall-vm-v2008a)
+ C client "coop_session join $lobby"
  $d=(Get-Date).AddSeconds(60);do{Start-Sleep 3;$hs=S host;$gs=S client}while((Get-Date)-lt$d-and!($hs.remoteFresh-and$gs.remoteFresh-and$gs.connectionState-eq3))
  $notes.join=[ordered]@{hostOnline=Safe (HO);guestOnline=Safe (Get-D2LabVMStatus -Sidecar online);connected=($hs.remoteFresh-and$gs.remoteFresh)}
  if(!$notes.join.connected){throw 'Two-account join did not connect'}
@@ -284,8 +285,11 @@ function LeaveNow(){
  foreach($r in 'host','client'){Frame $r 'leave'}
  if($hs.remoteFresh-or$go.active){throw 'The VM did not leave the session'}
  if("$($notes.leave.hostControl.result)"-ne'partner_left'){throw "The host did not read the leave notice (control result: $($notes.leave.hostControl.result))"}
- if(!$ho.active-or"$($ho.lobby)"-ne$lobby){throw 'The host stopped hosting its lobby when the partner left'}}
+ # 2008: a host that lost its lobby recreates it (lobbyRecreated), so the check is "still hosting a lobby", not "the same id".
+ if(!$ho.active-or!$ho.host-or!$ho.lobby-or"$($ho.lobby)"-eq'0'){throw 'The host stopped hosting a lobby when the partner left'}}
 function RejoinNow(){
+ # 2008: join the host's current lobby, as the friends list's Join would (the host may have recreated it).
+ $hq=HO;if($hq.lobby-and"$($hq.lobby)"-ne'0'){$script:lobby="$($hq.lobby)"}
  $c0=Snap client;$h0=Snap host;$rw=[Diagnostics.Stopwatch]::StartNew();C client "coop_session join $lobby"
  $d=(Get-Date).AddSeconds(90);do{Start-Sleep 3;$hs=S host;$gs=S client}while((Get-Date)-lt$d-and!($hs.remoteFresh-and$gs.remoteFresh-and$gs.connectionState-eq3))
  $r=[ordered]@{afterStep=$RejoinAfterStep;connected=($hs.remoteFresh-and$gs.remoteFresh);connectMs=$rw.ElapsedMilliseconds;gameflowBefore=[ordered]@{host="$($h0.gameflow)";client="$($c0.gameflow)"};guestOnline=Safe (Get-D2LabVMStatus -Sidecar online)}
@@ -297,7 +301,9 @@ function RejoinNow(){
  $r.armed=Armed;foreach($x in 'host','client'){Frame $x 'rejoin'}
  if(!$r.gameflow.equal){throw "Gameflow did not converge after the rejoin (host $($r.gameflow.host), VM $($r.gameflow.client))"}
  if(!$r.armed.ok){throw 'The co-op systems did not rearm after the rejoin'}
- if($null-eq$r.distance-or$r.distance-gt3){throw "The rejoined partner was not placed beside the host ($($r.distance) m, warps $($f.warps))"}}
+ # 2008: as the relaunch check: a partner who stayed on the map (it did not follow the host in, so no join-warp is due)
+ # may stay where it was, within 25 m (leave-dunwall-vm-v2008b: 13.14 m, warps 0).
+ if($null-eq$r.distance-or($r.distance-gt3-and!([int]$f.warps-eq0-and$r.distance-lt25))){throw "The rejoined partner was not placed beside the host ($($r.distance) m, warps $($f.warps))"}}
 function FlagsDiff($label){
  $h=Q host '--storyflags';$c=Q client '--storyflags'
  $hm=@{};foreach($f in @($h.flags)){$hm["$($f.decl)|$($f.name)"]=$f};$cm=@{};foreach($f in @($c.flags)){$cm["$($f.decl)|$($f.name)"]=$f}
