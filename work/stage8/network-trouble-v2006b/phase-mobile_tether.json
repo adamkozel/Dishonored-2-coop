@@ -1,0 +1,61 @@
+{
+  "differences": 0,
+  "relayBefore": {
+    "c2s": {
+      "seen": 6949,
+      "forwarded": 6866,
+      "dropped": 83,
+      "duplicated": 13,
+      "bytes_in": 7068617,
+      "bytes_out": 6999986,
+      "reasons": {
+        "loss": 41,
+        "burst": 42
+      }
+    },
+    "s2c": {
+      "seen": 36833,
+      "forwarded": 36427,
+      "dropped": 406,
+      "duplicated": 29,
+      "bytes_in": 44508967,
+      "bytes_out": 44058079,
+      "reasons": {
+        "loss": 211,
+        "burst": 195
+      }
+    }
+  },
+  "samples": 40,
+  "diffStatus": "EQUAL",
+  "freshSamples": 40,
+  "profile": "mobile_tether",
+  "compared": 554,
+  "relayAfter": {
+    "c2s": {
+      "seen": 8872,
+      "forwarded": 8738,
+      "dropped": 134,
+      "duplicated": 13,
+      "bytes_in": 8710761,
+      "bytes_out": 8598412,
+      "reasons": {
+        "loss": 61,
+        "burst": 73
+      }
+    },
+    "s2c": {
+      "seen": 45639,
+      "forwarded": 44921,
+      "dropped": 718,
+      "duplicated": 29,
+      "bytes_in": 55058141,
+      "bytes_out": 54234079,
+      "reasons": {
+        "loss": 289,
+        "burst": 413,
+        "bandwidth": 16
+      }
+    }
+  }
+}

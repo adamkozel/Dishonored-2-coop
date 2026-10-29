@@ -3,6 +3,8 @@ param(
     [ValidateSet('host','client')][string]$Role = 'host',
     [string]$GameDirectory = 'C:\Program Files (x86)\Steam\steamapps\common\Dishonored2',
     [switch]$AssetExperiment,
+    [ValidateRange(1025,65535)][int]$PeerPort = 31426,
+    [int]$TestControlProtocol = 0,
     [switch]$PrepareOnly
 )
 $ErrorActionPreference = 'Stop'
@@ -120,7 +122,7 @@ if (-not $PrepareOnly) {
     $staleCommand = Join-Path $instanceRoot 'command.bin'
     if(Test-Path -LiteralPath $staleCommand){Remove-Item -LiteralPath $staleCommand}
     # These are interactive, windowed game instances requested by the user.
-    $gameProcess = Start-Process -FilePath $executable -WorkingDirectory $labGameDirectory -ArgumentList $argumentLine -Environment @{D2COOP_PARTNER_ASSETS=$(if($AssetExperiment){'1'}else{'0'});SteamAppId='403640';SteamGameId='403640';D2COOP_LAB_ROLE=$Role;D2COOP_LAB_POLICY='1';D2COOP_LAB_INPUT=(Join-Path $instanceRoot 'input.bin');D2COOP_LAB_LOG=(Join-Path $instanceRoot 'loader.log');D2COOP_ENGINE_BRIDGE='1';D2COOP_CHECKPOINT_DIR=(Join-Path $instanceRoot 'base/savegame/SLOT82');D2COOP_COMMAND_FILE=(Join-Path $instanceRoot 'command.bin');D2COOP_STATUS_FILE=(Join-Path $instanceRoot 'coop-status.json');D2COOP_ENGINE_LOG=(Join-Path $instanceRoot 'engine.log')} -WindowStyle Normal -PassThru
+    $gameProcess = Start-Process -FilePath $executable -WorkingDirectory $labGameDirectory -ArgumentList $argumentLine -Environment @{D2COOP_PARTNER_ASSETS=$(if($AssetExperiment){'1'}else{'0'});SteamAppId='403640';SteamGameId='403640';D2COOP_LAB_ROLE=$Role;D2COOP_LAB_PEER_PORT=[string]$PeerPort;D2COOP_TEST_CONTROL_PROTOCOL=$(if($TestControlProtocol){[string]$TestControlProtocol}else{''});D2COOP_LAB_POLICY='1';D2COOP_LAB_INPUT=(Join-Path $instanceRoot 'input.bin');D2COOP_LAB_LOG=(Join-Path $instanceRoot 'loader.log');D2COOP_ENGINE_BRIDGE='1';D2COOP_CHECKPOINT_DIR=(Join-Path $instanceRoot 'base/savegame/SLOT82');D2COOP_COMMAND_FILE=(Join-Path $instanceRoot 'command.bin');D2COOP_STATUS_FILE=(Join-Path $instanceRoot 'coop-status.json');D2COOP_ENGINE_LOG=(Join-Path $instanceRoot 'engine.log')} -WindowStyle Normal -PassThru
     $launch.pid = $gameProcess.Id
     $launch.startedAt = [DateTimeOffset]::Now.ToString('o')
 }

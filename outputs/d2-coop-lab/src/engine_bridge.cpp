@@ -207,6 +207,7 @@ struct PoseCadenceSample {double time;std::uint32_t sequence;float remote[3],tar
 PoseCadenceSample poseCadence[2048]{};unsigned poseCadenceCount=0;double poseCadenceUntil=0,poseCadenceStart=0;
 std::uint64_t sent=0,received=0,rejected=0;
 bool flightEnabled=true;std::string flightLastDump; // stage 8.2 (#235): flight_recorder.h
+std::uint16_t labPeerPort=31426; // stage 8.3 (#236): D2COOP_LAB_PEER_PORT, the lab client's peer (a relay port)
 std::uint64_t receivedPlayerMotions[4]{};
 ISteamNetworkingSockets* sockets=nullptr;
 HSteamListenSocket listener=0;
@@ -439,14 +440,16 @@ void initializeSteam(ULONGLONG tick) {
     sockets=client?static_cast<ISteamNetworkingSockets*>(generic(client,user(),pipe(),STEAMNETWORKINGSOCKETS_INTERFACE_VERSION)):nullptr;
     if(sockets)consoleOutput("COOP: acquired current native %s on engine thread %lu\n",STEAMNETWORKINGSOCKETS_INTERFACE_VERSION,engineThread.load());
 }
+#include "control_channel.h" // stage 8.3 (#236)
 #include "session_online.h"
 #include "session_product.h"
 #include "difficulty_sync.h" // 1214kb (#177)
 void pumpConnections(ULONGLONG tick) {
     if(!sockets)return;
     serviceOnlineSession(tick);
-    SteamNetworkingConfigValue_t options[3];
+    SteamNetworkingConfigValue_t options[5];
     options[0].SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged,reinterpret_cast<void*>(&statusCallback));
+    options[3].SetInt32(k_ESteamNetworkingConfig_TimeoutInitial,kCoopTransportTimeoutMs);options[4].SetInt32(k_ESteamNetworkingConfig_TimeoutConnected,kCoopTransportTimeoutMs);
     // Native per-connection budget: compact five-NPC bodies plus player/action
     // streams exceed the SDK's default256KiB/s. This changes no Steam DLL.
     options[1].SetInt32(k_ESteamNetworkingConfig_SendRateMin,512*1024);
@@ -457,10 +460,13 @@ void pumpConnections(ULONGLONG tick) {
     // Steam session (F7 host, Steam Join/invite or +connect_lobby).
     if(onlineSession.active||productMode){}
     else if(localRole==0&&!listener&&tick>=nextConnect) {
-        listener=sockets->CreateListenSocketIP(address,3,options);nextConnect=tick+2000;
+        listener=sockets->CreateListenSocketIP(address,5,options);nextConnect=tick+2000;
         consoleOutput("COOP: native loopback listener %u\n",listener);
     }else if(localRole==1&&!connection&&tick>=nextConnect) {
-        connection=sockets->ConnectByIPAddress(address,3,options);nextConnect=tick+2000;
+        // Stage 8.3 (#236): the lab client may reach the host through a relay (the network-trouble relay listens on
+        // another loopback port and forwards to 31426), set by D2COOP_LAB_PEER_PORT; the host always listens on 31426.
+        address.SetIPv4(0x7f000001,labPeerPort);
+        connection=sockets->ConnectByIPAddress(address,5,options);nextConnect=tick+2000;
         consoleOutput("COOP: native loopback connection attempt %u\n",connection);
     }
     // The game also dispatches Steam callbacks. This pumps the interface queue
@@ -473,6 +479,11 @@ void pumpConnections(ULONGLONG tick) {
         if(e.m_info.m_eState==k_ESteamNetworkingConnectionState_Connecting && onlineSession.active && onlineSession.host && onlineSession.listener && e.m_info.m_hListenSocket==onlineSession.listener) {
             // 1178: accept exactly one P2P peer (not ourselves) for the lobby.
             const auto peer=e.m_info.m_identityRemote.GetSteamID64();
+            // Stage 8.3 (#236): a partner rejoining after a crash or blackout replaces a connection that has been silent
+            // for 5 s (as the lab does), instead of being refused until the old one times out; a live one is kept.
+            if(connection&&connection!=e.m_hConn&&peer&&peer!=onlineSession.self&&lastReceive&&tick-lastReceive>=5000){
+                sockets->CloseConnection(connection,0,"Silent partner replaced",false);connection=0;connectionState=0;lastReceive=0;remote={};
+            }
             if(connection||!peer||peer==onlineSession.self){sockets->CloseConnection(e.m_hConn,0,"Co-op session accepts one partner",false);continue;}
             if(sockets->AcceptConnection(e.m_hConn)==k_EResultOK){connection=e.m_hConn;onlineSession.owner=onlineSession.self;onlineSession.result="partner_connecting";}
         }
@@ -493,13 +504,20 @@ void pumpConnections(ULONGLONG tick) {
         connectionState=e.m_info.m_eState;
         consoleOutput("COOP: connection %u state %d (%s)\n",connection,connectionState,e.m_info.m_szEndDebug);
         if(e.m_info.m_eState==k_ESteamNetworkingConnectionState_ClosedByPeer || e.m_info.m_eState==k_ESteamNetworkingConnectionState_ProblemDetectedLocally) {
-            sockets->CloseConnection(connection,0,"Connection ended",false);connection=0;remote={};lastReceive=0;nextConnect=tick+2000;
-            if(onlineSession.active&&!onlineSession.host){onlineSession.phase=OnlinePhase::Failed;onlineSession.result="p2p_connection_ended";}
-            // 1214kh (#221): the host goes back to hosting its lobby (it read "connected" with no partner, state 5).
-            if(onlineSession.active&&onlineSession.host&&onlineSession.phase==OnlinePhase::Connected){onlineSession.phase=OnlinePhase::Hosting;onlineSession.result="partner_connection_ended";}
-            connectionState=0;
+            // Stage 8.3 (#236): a partner who sent the leave notice first ended the session on purpose.
+            endCoopConnection(tick,"Connection ended",coopControl.peerLeft?"partner_left":(onlineSession.host?"partner_connection_ended":"p2p_connection_ended"));
         }
     }
+}
+// Ends the current connection: transport, remote state, and the online session's phase. 1214kh (#221): the host goes
+// back to hosting its lobby (it read "connected" with no partner, state 5). Stage 8.3 (#236): one path for a peer close,
+// a keep-alive timeout and a version mismatch.
+void endCoopConnection(ULONGLONG tick,const char* reason,const char* sessionResult){
+    if(sockets&&connection)sockets->CloseConnection(connection,0,reason,true);
+    connection=0;remote={};lastReceive=0;nextConnect=tick+2000;
+    if(onlineSession.active&&!onlineSession.host){onlineSession.phase=OnlinePhase::Failed;onlineSession.result=sessionResult;}
+    if(onlineSession.active&&onlineSession.host&&onlineSession.phase==OnlinePhase::Connected){onlineSession.phase=OnlinePhase::Hosting;onlineSession.result=sessionResult;}
+    connectionState=0;
 }
 void sampleCinematicIdentity(std::uintptr_t game) {
     outgoing.cinematicSignature=0;outgoing.cinematicNodeCount=0;outgoing.cinematicMetadataValid=0;
@@ -935,6 +953,7 @@ void exchangePoses(ULONGLONG tick) {
     for(int i=0;i<count;++i) {
         if(flightEnabled)flightIn(messages[i]->m_pData,static_cast<std::uint32_t>(messages[i]->m_cbSize));
         std::uint32_t magic=0;if(messages[i]->m_cbSize>=4)std::memcpy(&magic,messages[i]->m_pData,4);
+        if(magic==0x54433244){receiveCoopControl(messages[i]->m_pData,static_cast<std::uint32_t>(messages[i]->m_cbSize),tick);messages[i]->Release();if(!connection)break;continue;}
         if(magic==0x484e3244){
             if(messages[i]->m_cbSize==sizeof(CoopNpcAttack)){CoopNpcAttack p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveNpcAttack(p,tick);}else ++npcAttack.rejected;
             messages[i]->Release();continue;
@@ -2368,7 +2387,8 @@ void pumpTransport(ULONGLONG tick) {
     if(tick-lastTransportPump<10)return;
     lastTransportPump=tick;NativeServiceTimer scope("transport_all");timedNativeService("initializeSteam",[&]{initializeSteam(tick);});timedNativeService("pumpConnections",[&]{pumpConnections(tick);});timedNativeService("sampleLocalPlayer",[&]{sampleLocalPlayer();});
     if(nativeMutationAllowed){finishCinematicHold(tick);serviceCinematicBarrier(tick);}
-    timedNativeService("prepareWorldObservation",[&]{prepareWorldObservation(tick);});serviceMissionEndSender(tick);relayConfirmedSkip(tick);timedNativeService("exchangePoses",[&]{exchangePoses(tick);});timedNativeService("checkpointService",[&]{checkpointService(tick);});timedNativeService("sendWorldObservation",[&]{sendWorldObservation(tick);});timedNativeService("sendArmStream",[&]{sendArmStream(tick);});timedNativeService("sendAvatarWeapon",[&]{sendAvatarWeapon(tick);});timedNativeService("sendShadowStream",[&]{sendShadowStream(tick);});timedNativeService("sampleNativeBlinkFx",[&]{sampleNativeBlinkFx(tick);});timedNativeService("sampleNativeGrappleFx",[&]{sampleNativeGrappleFx(tick);});
+    timedNativeService("prepareWorldObservation",[&]{prepareWorldObservation(tick);});serviceMissionEndSender(tick);relayConfirmedSkip(tick);timedNativeService("exchangePoses",[&]{exchangePoses(tick);});serviceCoopControl(tick);writeCoopControlStatus(tick); // stage 8.3 (#236)
+   timedNativeService("checkpointService",[&]{checkpointService(tick);});timedNativeService("sendWorldObservation",[&]{sendWorldObservation(tick);});timedNativeService("sendArmStream",[&]{sendArmStream(tick);});timedNativeService("sendAvatarWeapon",[&]{sendAvatarWeapon(tick);});timedNativeService("sendShadowStream",[&]{sendShadowStream(tick);});timedNativeService("sampleNativeBlinkFx",[&]{sampleNativeBlinkFx(tick);});timedNativeService("sampleNativeGrappleFx",[&]{sampleNativeGrappleFx(tick);});
     timedNativeService("sampleNativeWindblastFx",[&]{sampleNativeWindblastFx(tick);});
     if(probeFollow&&(!coopPresentationReady(outgoing)||!coopPresentationReady(remote))) {
         if(!phaseFollowInvalidated)consoleOutput("COOP: follow phase invalidated local=%u/%u/%u/%u/%u remote=%u/%u/%u/%u/%u\n",
@@ -2456,6 +2476,8 @@ bool installEngineBridge(unsigned char* image,const char* role) {
         modImageSize=reinterpret_cast<IMAGE_NT_HEADERS64*>(modImage+dos->e_lfanew)->OptionalHeader.SizeOfImage;
     }
     outgoing.session=(GetTickCount64()<<32)|GetCurrentProcessId();
+    {char test[12]{};if(GetEnvironmentVariableA("D2COOP_TEST_CONTROL_PROTOCOL",test,sizeof(test)))coopAnnouncedProtocol=static_cast<std::uint32_t>(std::strtoul(test,nullptr,10));}
+    {char port[8]{};if(GetEnvironmentVariableA("D2COOP_LAB_PEER_PORT",port,sizeof(port))){const long v=std::strtol(port,nullptr,10);if(v>1024&&v<65536)labPeerPort=static_cast<std::uint16_t>(v);}}
     GetEnvironmentVariableA("D2COOP_COMMAND_FILE",commandPath,sizeof(commandPath));
     GetEnvironmentVariableA("D2COOP_STATUS_FILE",statusPath,sizeof(statusPath));
     {char product[8]{},diagnostics[8]{};GetEnvironmentVariableA("D2COOP_PRODUCT",product,sizeof(product));GetEnvironmentVariableA("D2COOP_DIAGNOSTICS",diagnostics,sizeof(diagnostics));

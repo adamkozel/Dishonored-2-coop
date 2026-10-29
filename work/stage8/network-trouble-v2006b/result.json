@@ -1,0 +1,360 @@
+{
+  "passed": true,
+  "scope": "Network trouble on the lab leg through the coop-anything chaos relay; lab redeployed.",
+  "phases": [
+    {
+      "differences": 0,
+      "relayBefore": {
+        "c2s": {
+          "seen": 884,
+          "forwarded": 884,
+          "dropped": 0,
+          "duplicated": 0,
+          "bytes_in": 1012248,
+          "bytes_out": 1012248,
+          "reasons": {}
+        },
+        "s2c": {
+          "seen": 2704,
+          "forwarded": 2704,
+          "dropped": 0,
+          "duplicated": 0,
+          "bytes_in": 3251241,
+          "bytes_out": 3251241,
+          "reasons": {}
+        }
+      },
+      "samples": 40,
+      "diffStatus": "EQUAL",
+      "freshSamples": 40,
+      "profile": "lan",
+      "compared": 554,
+      "relayAfter": {
+        "c2s": {
+          "seen": 2267,
+          "forwarded": 2267,
+          "dropped": 0,
+          "duplicated": 0,
+          "bytes_in": 2487260,
+          "bytes_out": 2487260,
+          "reasons": {}
+        },
+        "s2c": {
+          "seen": 11308,
+          "forwarded": 11308,
+          "dropped": 0,
+          "duplicated": 0,
+          "bytes_in": 13680134,
+          "bytes_out": 13680134,
+          "reasons": {}
+        }
+      }
+    },
+    {
+      "differences": 0,
+      "relayBefore": {
+        "c2s": {
+          "seen": 2703,
+          "forwarded": 2703,
+          "dropped": 0,
+          "duplicated": 0,
+          "bytes_in": 2951701,
+          "bytes_out": 2951701,
+          "reasons": {}
+        },
+        "s2c": {
+          "seen": 14029,
+          "forwarded": 14029,
+          "dropped": 0,
+          "duplicated": 0,
+          "bytes_in": 16975396,
+          "bytes_out": 16975396,
+          "reasons": {}
+        }
+      },
+      "samples": 40,
+      "diffStatus": "EQUAL",
+      "freshSamples": 40,
+      "profile": "good_wifi",
+      "compared": 554,
+      "relayAfter": {
+        "c2s": {
+          "seen": 4089,
+          "forwarded": 4082,
+          "dropped": 7,
+          "duplicated": 0,
+          "bytes_in": 4423971,
+          "bytes_out": 4417284,
+          "reasons": {
+            "loss": 7
+          }
+        },
+        "s2c": {
+          "seen": 22617,
+          "forwarded": 22579,
+          "dropped": 38,
+          "duplicated": 0,
+          "bytes_in": 27388109,
+          "bytes_out": 27341801,
+          "reasons": {
+            "loss": 38
+          }
+        }
+      }
+    },
+    {
+      "differences": 0,
+      "relayBefore": {
+        "c2s": {
+          "seen": 4526,
+          "forwarded": 4519,
+          "dropped": 7,
+          "duplicated": 0,
+          "bytes_in": 4889565,
+          "bytes_out": 4882878,
+          "reasons": {
+            "loss": 7
+          }
+        },
+        "s2c": {
+          "seen": 25331,
+          "forwarded": 25293,
+          "dropped": 38,
+          "duplicated": 0,
+          "bytes_in": 30681782,
+          "bytes_out": 30635474,
+          "reasons": {
+            "loss": 38
+          }
+        }
+      },
+      "samples": 40,
+      "diffStatus": "EQUAL",
+      "freshSamples": 40,
+      "profile": "bad_wifi",
+      "compared": 554,
+      "relayAfter": {
+        "c2s": {
+          "seen": 6513,
+          "forwarded": 6430,
+          "dropped": 83,
+          "duplicated": 13,
+          "bytes_in": 6603067,
+          "bytes_out": 6534436,
+          "reasons": {
+            "loss": 41,
+            "burst": 42
+          }
+        },
+        "s2c": {
+          "seen": 34111,
+          "forwarded": 33705,
+          "dropped": 406,
+          "duplicated": 29,
+          "bytes_in": 41215053,
+          "bytes_out": 40764165,
+          "reasons": {
+            "loss": 211,
+            "burst": 195
+          }
+        }
+      }
+    },
+    {
+      "differences": 0,
+      "relayBefore": {
+        "c2s": {
+          "seen": 6949,
+          "forwarded": 6866,
+          "dropped": 83,
+          "duplicated": 13,
+          "bytes_in": 7068617,
+          "bytes_out": 6999986,
+          "reasons": {
+            "loss": 41,
+            "burst": 42
+          }
+        },
+        "s2c": {
+          "seen": 36833,
+          "forwarded": 36427,
+          "dropped": 406,
+          "duplicated": 29,
+          "bytes_in": 44508967,
+          "bytes_out": 44058079,
+          "reasons": {
+            "loss": 211,
+            "burst": 195
+          }
+        }
+      },
+      "samples": 40,
+      "diffStatus": "EQUAL",
+      "freshSamples": 40,
+      "profile": "mobile_tether",
+      "compared": 554,
+      "relayAfter": {
+        "c2s": {
+          "seen": 8872,
+          "forwarded": 8738,
+          "dropped": 134,
+          "duplicated": 13,
+          "bytes_in": 8710761,
+          "bytes_out": 8598412,
+          "reasons": {
+            "loss": 61,
+            "burst": 73
+          }
+        },
+        "s2c": {
+          "seen": 45639,
+          "forwarded": 44921,
+          "dropped": 718,
+          "duplicated": 29,
+          "bytes_in": 55058141,
+          "bytes_out": 54234079,
+          "reasons": {
+            "loss": 289,
+            "burst": 413,
+            "bandwidth": 16
+          }
+        }
+      }
+    },
+    {
+      "differences": 0,
+      "relayBefore": {
+        "c2s": {
+          "seen": 9311,
+          "forwarded": 9177,
+          "dropped": 134,
+          "duplicated": 13,
+          "bytes_in": 9177789,
+          "bytes_out": 9065440,
+          "reasons": {
+            "loss": 61,
+            "burst": 73
+          }
+        },
+        "s2c": {
+          "seen": 48363,
+          "forwarded": 47642,
+          "dropped": 721,
+          "duplicated": 29,
+          "bytes_in": 58359795,
+          "bytes_out": 57531968,
+          "reasons": {
+            "loss": 290,
+            "burst": 415,
+            "bandwidth": 16
+          }
+        }
+      },
+      "samples": 40,
+      "diffStatus": "EQUAL",
+      "freshSamples": 40,
+      "profile": "transatlantic",
+      "compared": 554,
+      "relayAfter": {
+        "c2s": {
+          "seen": 10902,
+          "forwarded": 10765,
+          "dropped": 137,
+          "duplicated": 13,
+          "bytes_in": 10704233,
+          "bytes_out": 10588231,
+          "reasons": {
+            "loss": 64,
+            "burst": 73
+          }
+        },
+        "s2c": {
+          "seen": 56989,
+          "forwarded": 56241,
+          "dropped": 748,
+          "duplicated": 29,
+          "bytes_in": 68802972,
+          "bytes_out": 67941372,
+          "reasons": {
+            "loss": 317,
+            "burst": 415,
+            "bandwidth": 16
+          }
+        }
+      }
+    },
+    {
+      "differences": 0,
+      "relayBefore": {
+        "c2s": {
+          "seen": 11338,
+          "forwarded": 11201,
+          "dropped": 137,
+          "duplicated": 13,
+          "bytes_in": 11169803,
+          "bytes_out": 11053801,
+          "reasons": {
+            "loss": 64,
+            "burst": 73
+          }
+        },
+        "s2c": {
+          "seen": 59712,
+          "forwarded": 58964,
+          "dropped": 748,
+          "duplicated": 29,
+          "bytes_in": 72100613,
+          "bytes_out": 71239013,
+          "reasons": {
+            "loss": 317,
+            "burst": 415,
+            "bandwidth": 16
+          }
+        }
+      },
+      "samples": 40,
+      "diffStatus": "EQUAL",
+      "freshSamples": 40,
+      "profile": "hell",
+      "compared": 554,
+      "relayAfter": {
+        "c2s": {
+          "seen": 13272,
+          "forwarded": 12603,
+          "dropped": 669,
+          "duplicated": 82,
+          "bytes_in": 12996285,
+          "bytes_out": 12449382,
+          "reasons": {
+            "loss": 169,
+            "burst": 500
+          }
+        },
+        "s2c": {
+          "seen": 64874,
+          "forwarded": 61391,
+          "dropped": 3483,
+          "duplicated": 144,
+          "bytes_in": 77877242,
+          "bytes_out": 73971137,
+          "reasons": {
+            "loss": 660,
+            "burst": 1473,
+            "bandwidth": 1350
+          }
+        }
+      }
+    },
+    {
+      "differences": 0,
+      "hostConnection": 3,
+      "diffStatus": "EQUAL",
+      "blackoutMs": 5000,
+      "profile": "blackout",
+      "compared": 554,
+      "clientConnection": 3,
+      "freshAfterMs": 281
+    }
+  ],
+  "failure": null
+}
