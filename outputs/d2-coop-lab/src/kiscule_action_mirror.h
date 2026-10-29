@@ -130,15 +130,12 @@ bool kisculeHostStoryTwinNoBlock=false;
 // opening cinematic twice while running such requests (hoststory-lead-dunwall-v2014c, v2016c).
 bool kisculeHostStoryAsk=true;
 bool kisculePlainGameplay(){return outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState;}
-// Only story-critical World classes are requested: objectives and tasks, story flags and level transitions. Requests
-// for every World class would let the partner's own ambient loops (midnight scenes, candles, fires) drive the host's
-// world. A node is requested whenever the partner reached it more times than the host has run it: the host had
-// already run the loot's task nodes (2899, 2973) earlier on the route, so a one-time request never went out
-// (loot-trace-on-v2018e).
-bool kisculeHostStoryAskable(int cls){
-    if(cls<kKisculeHostStoryBase||cls>=kKisculeHostStoryBase+static_cast<int>(kKisculePolicyCount))return false;
-    const char* n=kKisculePolicy[cls-kKisculeHostStoryBase].name;
-    return !std::strncmp(n,"ActionGameflow",14)||!std::strncmp(n,"StoryFlag",9)||!std::strcmp(n,"LevelTransition");}
+// Any World class may be requested, by count: a node is requested whenever the partner reached it more often than the
+// host has run it (the host had already run the loot's task nodes 2899 and 2973 earlier on the route, so a one-time
+// request never went out, loot-trace-on-v2018e). A story-only list was too narrow: Ramsey's ring task follows an
+// ActionUsable in the partner's flow (hoststory-lead-dunwall-v2019a). Ambient loops run in both worlds at the same
+// pace, so the partner is rarely ahead on them and their requests stay rare.
+bool kisculeHostStoryAskable(int cls){return cls>=kKisculeHostStoryBase&&cls<kKisculeHostStoryBase+static_cast<int>(kKisculePolicyCount);}
 bool kisculeClassIndexMirrored(std::uint32_t cls){
     if(cls<static_cast<std::uint32_t>(kisculeMirrorClassCount))return kisculeMirrorClasses[cls].mirrored;
     return kisculeHostStory&&cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&cls<kKisculeHostStoryBase+kKisculePolicyCount;}
