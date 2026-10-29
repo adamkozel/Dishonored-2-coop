@@ -210,6 +210,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 
 | Problem | What to do |
 |---|---|
+| The game says **Free Trial** | Start Dishonored 2 from your Steam library (or the Steam shortcut), not by opening `Dishonored2.exe` in the game folder: started directly, the game cannot confirm you own it. |
 | "Unsupported Dishonored2.exe build" | Update the game in Steam. The mod supports only the version above. |
 | "base/master.index is not the original" | Another mod or an old install changed it. Verify the game files in Steam, then install again. |
 | "Dishonored 2 was not found" | Pass your game folder to `Install.cmd` (see Install). |
