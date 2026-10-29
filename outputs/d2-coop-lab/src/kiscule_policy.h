@@ -5,6 +5,7 @@
 // (local-player actions such as cinematics, teleports, grants and the diary; presentation; control flow; values)
 // runs in both worlds. LocalPlayer stays in the enum for a class a later area may route.
 #include <cstdint>
+#include <cstring>
 enum class KisculePolicy : std::uint8_t {Allow, World, LocalPlayer};
 struct KisculePolicyClass {std::uint32_t vtable; const char* name; KisculePolicy policy;};
 constexpr KisculePolicyClass kKisculePolicy[] = {
@@ -76,4 +77,8 @@ inline int kisculePolicyIndex(std::uint32_t rva) {
     unsigned lo = 0, hi = kKisculePolicyCount;
     while (lo < hi) { const unsigned mid = (lo + hi) / 2; if (kKisculePolicy[mid].vtable < rva) lo = mid + 1; else hi = mid; }
     return lo < kKisculePolicyCount && kKisculePolicy[lo].vtable == rva ? static_cast<int>(lo) : -1;
+}
+inline int kisculePolicyIndexByName(const char* name) {
+    for (unsigned i = 0; i < kKisculePolicyCount; ++i) if (!std::strcmp(kKisculePolicy[i].name, name)) return static_cast<int>(i);
+    return -1;
 }

@@ -121,6 +121,10 @@ KisculeMirror kisculeMirror{};SRWLOCK kisculeLock=SRWLOCK_INIT;bool kisculeMirro
 // A node the host has not run yet is requested once (partner-first), so a step the partner reaches first still
 // happens, in the host's world. Class indices from kKisculeHostStoryBase are policy-table indices.
 bool kisculeHostStory=false;constexpr int kKisculeHostStoryBase=100;
+// Lab bisection (coop_host_story exempt <Class>): a World class taken out of host story runs in both worlds again.
+// Character-specific story items (Ramsey's ring is ld_imperial_ring_pickup_corvo or _emily) are suspected to suffer
+// when the host's branch is replayed into the partner's world (hoststory-lead-dunwall-v2017d to v2021a).
+std::array<bool,kKisculePolicyCount> kisculeHostStoryExempt{};
 // Mutation twin (lab only, coop_host_story twin_no_block): the partner runs its own story nodes again while the
 // host's replays still arrive. Takes must catch it (the partner's own story-node runs must be zero).
 bool kisculeHostStoryTwinNoBlock=false;
@@ -148,7 +152,7 @@ void kisculeEvent(const char* what,std::uint32_t cls,const std::string& entity,s
 int kisculeClassOfVtable(std::uintptr_t vt){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     for(int i=0;i<kisculeMirrorClassCount;++i)if(vt==base+kisculeMirrorClasses[i].vtable)return i;
-    if(kisculeHostStory&&vt>base){const int i=kisculePolicyIndex(static_cast<std::uint32_t>(vt-base));if(i>=0)return kKisculeHostStoryBase+i;}
+    if(kisculeHostStory&&vt>base){const int i=kisculePolicyIndex(static_cast<std::uint32_t>(vt-base));if(i>=0&&!kisculeHostStoryExempt[i])return kKisculeHostStoryBase+i;}
     return -1;
 }
 int kisculeClassOf(std::uintptr_t node){std::uintptr_t vt=0;return node&&memoryRead(node,&vt,8)?kisculeClassOfVtable(vt):-1;}
