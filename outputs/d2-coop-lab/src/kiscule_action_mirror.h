@@ -111,7 +111,7 @@ struct KisculePending{KisculeActionPacket packet{};std::uint64_t at=0;};
 struct KisculeMirror {
     std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
     std::uint32_t dispatchThread=0;const char* result="idle";
-    std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue;std::vector<KisculePending> pending;
+    std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue,deferredAsks;std::vector<KisculePending> pending;
     KisculeActionEvent events[256]{};std::uint64_t eventCount=0;
 };
 KisculeMirror kisculeMirror{};SRWLOCK kisculeLock=SRWLOCK_INIT;bool kisculeMirrorEnabled=false;bool applyingKiscule=false;
@@ -244,9 +244,12 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
         if(cls>=kKisculeHostStoryBase&&localRole==1&&kisculeHostStoryTwinNoBlock)++kisculeMirror.hostStoryLeaked; // the twin: a World node runs on the partner's own
         if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
-            if(kisculeHostStoryAsk&&kisculeHostStoryAskable(cls)&&kisculePlainGameplay()&&c.requests>c.executed&&c.requests>c.asked&&kisculePartnerScope()){c.asked=c.requests;++kisculeMirror.hostStoryAsked;
+            // A request made in a cinematic or a load waits for plain gameplay: Ramsey's ring task nodes run in the same
+            // instant the loot scene ends, while the partner's game is still in its cinematic state (onlytask-v2022e).
+            if(kisculeHostStoryAsk&&kisculeHostStoryAskable(cls)&&c.requests>c.executed&&c.requests>c.asked&&kisculePartnerScope()){c.asked=c.requests;++kisculeMirror.hostStoryAsked;
                 KisculeActionPacket p{};p.role=1;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.requests;p.reserved=kKisculePartnerFirst;
-                std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
+                std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());
+                auto& q=kisculePlainGameplay()?kisculeMirror.outgoingQueue:kisculeMirror.deferredAsks;if(q.size()<1024)q.push_back(p);else ++kisculeMirror.dropped;}}
         else if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
         else{++c.executed;++kisculeMirror.local;kisculeEvent("local",cls,entity,nodeId,input,c.executed);
             const bool partnerFirst=localRole==1&&c.executed==1&&kisculePartnerScope(); // 1214jc (#183)
@@ -303,7 +306,9 @@ void serviceKisculeMirror(std::uint64_t tick){
     auto& k=kisculeMirror;
     if(!kisculeMirrorActive()){AcquireSRWLockExclusive(&kisculeLock);k.outgoingQueue.clear();k.pending.clear();ReleaseSRWLockExclusive(&kisculeLock);return;}
     std::vector<KisculeActionPacket> send;std::vector<KisculePending> work;
-    AcquireSRWLockExclusive(&kisculeLock);send.swap(k.outgoingQueue);work.swap(k.pending);ReleaseSRWLockExclusive(&kisculeLock);
+    AcquireSRWLockExclusive(&kisculeLock);send.swap(k.outgoingQueue);work.swap(k.pending);
+    if(!k.deferredAsks.empty()&&kisculePlainGameplay()){for(auto& p:k.deferredAsks)send.push_back(p);k.deferredAsks.clear();}
+    ReleaseSRWLockExclusive(&kisculeLock);
     const bool connected=sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected;
     std::vector<KisculeActionPacket> later;
     for(auto& p:send){
