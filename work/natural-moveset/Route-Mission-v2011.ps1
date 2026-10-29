@@ -460,6 +460,9 @@ function JoinAudit($label){
  if($JoinAfterStep-and$i-le$JoinAfterStep){JoinNow}
  $notes.final=@{host=(Snap host);client=(Snap client)}
  $notes.gameflowEqual=("$($notes.final.host.gameflow)"-eq"$($notes.final.client.gameflow)")
+ # 2011: the difference detector and both games' Kiscule and census status at the end of the route.
+ try{$wd=& "$root/tools/diag/Invoke-D2WorldDiff.ps1" -A host -B client -OutDir $out -Tag final;$notes.worldDiff=[ordered]@{status=$wd.status;compared=$wd.comparedKeys;differences=$wd.differences}}catch{$notes.worldDiff=[ordered]@{status='ERROR';error=$_.Exception.Message}}
+ foreach($r in 'host','client'){foreach($sfx in '.kiscule.json','.kiscule-census.json'){$src="$root/work/lab-instances/$r/coop-status.json$sfx";if(Test-Path $src){Copy-Item $src "$out/final-$r$sfx"}}}
  # Both worlds must end on the same map (a mission end the partner did not follow fails the take).
  if($notes.final.host.map-ne$notes.final.client.map){throw "Worlds ended on different maps: host $($notes.final.host.map), client $($notes.final.client.map)"}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace};foreach($r2 in 'host','client'){try{Save "$out/failure-npcstream-$r2.json" (S $r2 '.npc-stream.json')}catch{}};try{foreach($r in 'host','client'){Frame $r 'failure'}}catch{};try{$notes.failureState=@{host=(Snap host);client=(Snap client)}}catch{}}
