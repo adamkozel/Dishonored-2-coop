@@ -465,13 +465,15 @@ function JoinAudit($label){
  foreach($r in 'host','client'){foreach($sfx in '.kiscule.json','.kiscule-census.json'){$src="$root/work/lab-instances/$r/coop-status.json$sfx";if(Test-Path $src){Copy-Item $src "$out/final-$r$sfx"}}}
  # 2011 (#237): with host story on, the partner must run none of its own story nodes (the twin twin_no_block must fail here).
  $pk=try{Get-Content "$out/final-client.kiscule.json" -Raw|ConvertFrom-Json}catch{$null}
- if($pk-and$pk.hostStory){$notes.hostStory=[ordered]@{partnerOwnRuns=$pk.local;blocked=$pk.hostStoryBlocked;asked=$pk.hostStoryAsked;replayed=$pk.applied;fallback=$pk.suppressFallback}
-  if([int]$pk.local-gt0-or[int]$pk.suppressFallback-gt0){throw "The partner ran $($pk.local) story nodes of its own (fallback $($pk.suppressFallback))"}}
+ if($pk-and$pk.hostStory){$notes.hostStory=[ordered]@{partnerWorldRuns=$pk.hostStoryLeaked;blocked=$pk.hostStoryBlocked;asked=$pk.hostStoryAsked;replayed=$pk.applied;fallback=$pk.suppressFallback;mirrorLocal=$pk.local}
+  if([int]$pk.hostStoryLeaked-gt0-or[int]$pk.suppressFallback-gt0){throw "The partner ran $($pk.hostStoryLeaked) world story nodes of its own (fallback $($pk.suppressFallback))"}}
  if($notes.worldDiff.status-eq'DIFFERENT'){throw "The worlds differ at the end: $($notes.worldDiff.differences) values"}
  # Both worlds must end on the same map (a mission end the partner did not follow fails the take).
  if($notes.final.host.map-ne$notes.final.client.map){throw "Worlds ended on different maps: host $($notes.final.host.map), client $($notes.final.client.map)"}
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace};foreach($r2 in 'host','client'){try{Save "$out/failure-npcstream-$r2.json" (S $r2 '.npc-stream.json')}catch{}};try{foreach($r in 'host','client'){Frame $r 'failure'}}catch{};try{$notes.failureState=@{host=(Snap host);client=(Snap client)}}catch{}}
 finally{
+ # 2011 (#237): host story, its twin and the census never outlive a take (the lab restore keeps the game processes).
+ foreach($r in 'host','client'){try{C $r 'coop_host_story off';C $r 'coop_kiscule_census off'}catch{}}
  if($owned){
   $errors=[Collections.Generic.List[string]]::new()
   if($captures){foreach($c in @($captures)){try{if(!$c.HasExited){Stop-Process -Id $c.Id}}catch{}}}

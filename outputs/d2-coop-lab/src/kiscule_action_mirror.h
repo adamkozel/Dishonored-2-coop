@@ -124,11 +124,12 @@ bool kisculeHostStory=false;constexpr int kKisculeHostStoryBase=100;
 // Mutation twin (lab only, coop_host_story twin_no_block): the partner runs its own story nodes again while the
 // host's replays still arrive. Takes must catch it (the partner's own story-node runs must be zero).
 bool kisculeHostStoryTwinNoBlock=false;
-// Partner-first requests for World nodes are off: the host would run a node's handler outside its own flow, and with
-// host story on through a mission intro the host's game vanished in the opening cinematic twice
-// (hoststory-lead-dunwall-v2014c, v2016c). Partner-led steps reach the host through the trigger and use mirrors, which
-// run the host's own flow natively.
-bool kisculeHostStoryAsk=false;
+// Partner-first requests for World nodes: a story step only the partner reaches (searching Ramsey's body in the
+// partner-led route, hoststory-lead-dunwall-v2017d) must still happen in the host's world. They are asked and run only
+// while both games are in plain gameplay: with host story on through a mission intro, the host's game vanished in the
+// opening cinematic twice while running such requests (hoststory-lead-dunwall-v2014c, v2016c).
+bool kisculeHostStoryAsk=true;
+bool kisculePlainGameplay(){return outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState;}
 bool kisculeClassIndexMirrored(std::uint32_t cls){
     if(cls<static_cast<std::uint32_t>(kisculeMirrorClassCount))return kisculeMirrorClasses[cls].mirrored;
     return kisculeHostStory&&cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&cls<kKisculeHostStoryBase+kKisculePolicyCount;}
@@ -233,7 +234,7 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
         if(cls>=kKisculeHostStoryBase&&localRole==1&&kisculeHostStoryTwinNoBlock)++kisculeMirror.hostStoryLeaked; // the twin: a World node runs on the partner's own
         if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
-            if(kisculeHostStoryAsk&&!c.executed&&!c.askedHost&&kisculePartnerScope()){c.askedHost=true;++kisculeMirror.hostStoryAsked;
+            if(kisculeHostStoryAsk&&kisculePlainGameplay()&&!c.executed&&!c.askedHost&&kisculePartnerScope()){c.askedHost=true;++kisculeMirror.hostStoryAsked;
                 KisculeActionPacket p{};p.role=1;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=1;p.reserved=kKisculePartnerFirst;
                 std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
         else if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
@@ -305,6 +306,7 @@ void serviceKisculeMirror(std::uint64_t tick){
     const bool loading=outgoing.gameLogicState==15||outgoing.pendingGameLogicState==15||outgoing.gameLogicState==0||!observedPlayer;
     for(auto& w:work){const auto& p=w.packet;
         if(tick-w.at>60000){++k.expired;k.result="expired";continue;}
+        if(p.role==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&!kisculePlainGameplay()){keep.push_back(w);continue;} // stage 8.4.1: a partner's request waits for plain gameplay
         if(loading||p.mapId!=outgoing.mapId){if(!loading&&outgoing.gameLogicState==1&&tick-w.at>20000){++k.otherMap;k.result="other_map";continue;}keep.push_back(w);continue;}
         if(k.dispatchThread&&k.dispatchThread!=GetCurrentThreadId()){++k.threadMismatch;k.result="thread_mismatch";continue;}
         std::uint32_t nodeId=p.node,inputId=p.input;kisculeCharacterCounterpart(p.entity,nodeId,inputId);
