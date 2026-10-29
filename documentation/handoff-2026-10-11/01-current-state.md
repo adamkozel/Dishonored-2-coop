@@ -5,6 +5,8 @@
 <!-- GRENADE-LIVE-V55 -->
 ## Current measured co-op continuation
 
+**Latest (stage 8, host authority and 1.0), 2026-10-29:** the user approved the [stage 8 brief](115-stage8-plan-brief.md): moving the shared world to the host, with the partner sending requests and items per player (cards #234 to #244). Step 1 ([chapter 116](116-stage8-measure-before-changing.md)) measured the activation range: the engine pauses an NPC's AI when it is not rendered and more than 50 m from the camera (confirmed runtime, take activation-range-v2001a), so guards near a partner far from the host freeze under today's NPC authority. That is a 0.9.6 defect, and area 4.5 starts with the native LOD keep-awake request. Next: step 2, the difference detector and flight recorder (#235).
+
 **Final stage-exit audit ([chapter 112](112-final-stage-exit-audit.md)), updated 2026-10-26:** every stage's criteria
 are met. The cards the audit opened (#221, #219, #220, #206, #222) are done, and so are #225, which the 0.9.5 regression
 found, and #230 and #228, which the power checks after 0.9.5 found.

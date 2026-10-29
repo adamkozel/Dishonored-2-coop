@@ -459,6 +459,45 @@ int main(int argc, char** argv) {
         }
         std::cout<<"]}\n";return 0;
     }
+    // Stage 8.1 (#234, research): the activation range. Every world NPC with its entity LOD (effective +0x294,
+    // computed +0x298, clamp +0x29c), each AI component's pause refs, scheduler membership and decl auto-pause
+    // level (decl+0x64; 8 = never), the LOD reference view (top of game+0x1f52b8, +0x10: positions +0xa8 and
+    // +0xc0, FOV +0x9c) and the local player's position (+0x300). Read-only.
+    if(argc==3&&!std::strcmp(argv[2],"--npc-activity")){
+        std::uintptr_t game=0;std::vector<NativeWorldNpc> catalog;unsigned unbound=0;
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        const auto begin=GetTickCount64();
+        if(!reader(base+0x39a5290,&game,8)||!game||!readWorldNpcCatalog(reader,base,game,catalog,unbound))return 59;
+        float view[3]{},viewSecond[3]{},fov=0,player[3]{};bool haveView=false,havePlayer=false;
+        {std::uintptr_t views=0,top=0;unsigned count=0;
+         if(reader(game+0x1f52b8,&views,8)&&views&&reader(game+0x1f52c0,&count,4)&&(count&0xffffff)&&(count&0xffffff)<=64&&
+            reader(views+((count&0xffffff)-1)*8,&top,8)&&top)
+             haveView=reader(top+0x10+0xa8,view,12)&&reader(top+0x10+0xc0,viewSecond,12)&&reader(top+0x10+0x9c,&fov,4);}
+        {const auto local=worldIdentityEntity(reader,game,1u);havePlayer=local&&reader(local+0x300,player,12);}
+        std::cout<<"{\"readOnly\":true,\"research\":true,\"pid\":"<<pid<<",\"tick\":"<<GetTickCount64()<<",\"unbound\":"<<unbound;
+        if(haveView)std::cout<<",\"view\":["<<view[0]<<","<<view[1]<<","<<view[2]<<"],\"viewSecond\":["<<viewSecond[0]<<","<<viewSecond[1]<<","<<viewSecond[2]<<"],\"fov\":"<<fov;
+        if(havePlayer)std::cout<<",\"player\":["<<player[0]<<","<<player[1]<<","<<player[2]<<"]";
+        std::cout<<",\"entries\":[";bool first=true;
+        for(const auto& n:catalog){
+            int lod[3]{-1,-1,-1};if(n.actor){reader(n.actor+0x294,&lod[0],4);reader(n.actor+0x298,&lod[1],4);reader(n.actor+0x29c,&lod[2],4);}
+            float position[3]{};const bool live=n.actor&&reader(n.actor+0x300,position,12);
+            NativeHealth h{};const bool health=readNativeHealth(reader,base,n.handle,h)&&h.game==game&&h.actor==n.actor;
+            NativeNpcAuthority s{};const bool authority=health&&readNativeNpcAuthority(reader,base,game,n.handle,s);
+            std::cout<<(first?"":",")<<"{\"handle\":"<<n.handle<<",\"name\":"<<jsonString(n.spawnerName)<<",\"definition\":"<<jsonString(n.definition);first=false;
+            if(live)std::cout<<",\"position\":["<<position[0]<<","<<position[1]<<","<<position[2]<<"]";
+            std::cout<<",\"lod\":"<<lod[0]<<",\"lodComputed\":"<<lod[1]<<",\"lodClamp\":"<<lod[2];
+            if(health)std::cout<<",\"health\":"<<h.current<<",\"logic\":"<<h.logic;
+            std::cout<<",\"authority\":"<<(authority?"true":"false");
+            if(authority){std::cout<<",\"civilian\":"<<(s.ai[0].kind==NativeAiKind::DecisionCivilian?"true":"false")<<",\"ai\":[";
+                for(unsigned i=0;i<3;++i){const auto& a=s.ai[i];std::uintptr_t decl=0;int autoPause=-1;
+                    if(a.component&&reader(a.component+8,&decl,8)&&decl)reader(decl+0x64,&autoPause,4);
+                    std::cout<<(i?",":"")<<"{\"flags\":"<<a.flags<<",\"pauseRefs\":"<<((a.flags>>6)&0x1fffff)<<",\"scheduler\":"<<(a.schedulerActive?"true":"false")
+                        <<",\"live\":"<<a.liveCount<<",\"activeCount\":"<<a.activeCount<<",\"autoPauseLod\":"<<autoPause<<"}";}
+                std::cout<<"]";}
+            std::cout<<"}";
+        }
+        std::cout<<"],\"scanMs\":"<<(GetTickCount64()-begin)<<"}\n";return 0;
+    }
     if(argc==4&&!std::strcmp(argv[2],"--usable")){
         const auto handle=static_cast<unsigned>(std::strtoul(argv[3],nullptr,0));std::uintptr_t game=0;NativeUsable u{};unsigned stage=0;
         const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
