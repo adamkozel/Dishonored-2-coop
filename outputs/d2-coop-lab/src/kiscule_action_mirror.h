@@ -124,6 +124,11 @@ bool kisculeHostStory=false;constexpr int kKisculeHostStoryBase=100;
 // Mutation twin (lab only, coop_host_story twin_no_block): the partner runs its own story nodes again while the
 // host's replays still arrive. Takes must catch it (the partner's own story-node runs must be zero).
 bool kisculeHostStoryTwinNoBlock=false;
+// Partner-first requests for World nodes are off: the host would run a node's handler outside its own flow, and with
+// host story on through a mission intro the host's game vanished in the opening cinematic twice
+// (hoststory-lead-dunwall-v2014c, v2016c). Partner-led steps reach the host through the trigger and use mirrors, which
+// run the host's own flow natively.
+bool kisculeHostStoryAsk=false;
 bool kisculeClassIndexMirrored(std::uint32_t cls){
     if(cls<static_cast<std::uint32_t>(kisculeMirrorClassCount))return kisculeMirrorClasses[cls].mirrored;
     return kisculeHostStory&&cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&cls<kKisculeHostStoryBase+kKisculePolicyCount;}
@@ -228,7 +233,7 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
         if(cls>=kKisculeHostStoryBase&&localRole==1&&kisculeHostStoryTwinNoBlock)++kisculeMirror.hostStoryLeaked; // the twin: a World node runs on the partner's own
         if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
-            if(!c.executed&&!c.askedHost&&kisculePartnerScope()){c.askedHost=true;++kisculeMirror.hostStoryAsked;
+            if(kisculeHostStoryAsk&&!c.executed&&!c.askedHost&&kisculePartnerScope()){c.askedHost=true;++kisculeMirror.hostStoryAsked;
                 KisculeActionPacket p{};p.role=1;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=1;p.reserved=kKisculePartnerFirst;
                 std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
         else if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
