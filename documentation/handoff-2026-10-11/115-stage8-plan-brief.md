@@ -1,6 +1,6 @@
 # 115. Stage 8 brief: from 0.9.6 to a flawless 1.0
 
-Status: **proposed, waiting for the user's approval** (2026-10-29). Once approved, this becomes stage 8 of [the roadmap](02-roadmap.md) and its cards go on the board.
+Status: **approved by the user on 2026-10-29** and set as the active goal. It is stage 8 of [the roadmap](02-roadmap.md); its cards are on the board. The user's decisions are in section 8.
 
 ## 1. The goal in one sentence
 
@@ -28,7 +28,7 @@ Two notes stay true by design: co-op is for **two players**, and partners still 
 
 Both players still run the full game on their own PC, and that doesn't change. What changes is **who is allowed to decide**.
 
-- **The host's game decides** everything about the shared world: story, items, doors, safes, guards, chaos.
+- **The host's game decides** everything about the shared world: story, doors, safes, guards, chaos, and which items exist.
 - **The partner's game shows** what the host decided. It never runs a story script by itself.
 - **When the partner does something to the world** (opens a door, picks something up, turns a safe dial, walks into a trigger), their game sends a request. The host's game does it with the partner's character as the one acting, and sends the result back. Both games then show the same result.
 - **Each player stays in charge of their own character:** movement, camera, aiming and casting stay instant on your own PC.
@@ -36,7 +36,7 @@ Both players still run the full game on their own PC, and that doesn't change. W
 | What | Today (0.9.6) | In 1.0 |
 |---|---|---|
 | Story, objectives, mission decisions, ending | Both games run it, events are copied | **Host** runs it, partner shows the result |
-| Items and pickups | Both games, copied | **Host** decides who got it |
+| Items and pickups | Both games, copied; what one player takes is gone for both | **Per player:** every item can be taken once by each player. Taking it removes it only from your own world. Story items (keys, the Heart, mission items) go to both |
 | Doors, levers, lifts, switches | Both games, copied | **Host** |
 | Safes and their codes | Each game has its own | **Host**: one safe, one code |
 | Guards near the host (within 55 m) | Host | Host (unchanged) |
@@ -46,7 +46,7 @@ Both players still run the full game on their own PC, and that doesn't change. W
 | Chaos level | Each game keeps its own | **Host**: one shared level |
 | Joining mid-mission | Partner's game rebuilds from its own start | Partner gets the host's world, then follows along |
 | Your movement, camera, aim, casting | Your own game | Your own game (unchanged) |
-| Your coins, runes, bonecharms | Your own | Your own (decision 3 below) |
+| Your coins, runes, bonecharms, ammunition, elixirs | Your own | Your own: each player picks up their own copy |
 
 ## 4. The steps
 
@@ -82,7 +82,7 @@ Each area follows the same recipe:
 Every area also has an **off-switch** back to today's behaviour, so a problem in one area never blocks the rest of the game. The areas:
 
 1. **Story, objectives, mission decisions, the ending.** The partner's story scripts run zero times, and a test counts this. Fixes #220 and #94, and the tutorial trainer.
-2. **Items and pickups.** One owner per item, decided by the host. No duplicates, nothing lost.
+2. **Items and pickups, per player.** The host decides which items exist (including random loot, rolled once), and each player can take each item once: taking it removes it only from your own world, and story items reach both. No item is lost or doubled for either player.
 3. **Doors, levers, lifts, switches and safes.** One safe code for both players.
 4. **Joining mid-mission and quickload.** The partner receives the host's world, then the live updates. A host quickload rewinds both games together, and stale messages from before the load are dropped. No leftover characters.
 5. **Guards far from the host,** built on what step 1 measured: either the host runs them, or the player closer to them does, with clean handoffs between players and no guard ever created twice.
@@ -137,17 +137,9 @@ Every area also has an **off-switch** back to today's behaviour, so a problem in
 - Other co-op mods' code for Dishonored 2: we never open them.
 - The human playtest: that's yours, as the last step.
 
-## 8. Decisions for you
+## 8. The user's decisions (2026-10-29)
 
-1. **The test tools' code.** coop-anything's sync test tools are MIT-licensed, but their code was generalised from fnv-coop, a co-op mod for another game.
-   - **(a)** use it, with its license notice in `third_party/coop-anything/`. This is faster.
-   - **(b)** write our own versions from the designs. This is slower.
-   - Recommended: **(a)**. These are generic test tools, not Dishonored 2 game code.
-2. **REA.** Change "Ghidra only through d2-ghidra" to "d2-ghidra first, REA as a read-only second opinion". Recommended: **yes**.
-3. **Shared or per player.**
-   - **Shared:** items in the world (what one of you takes is gone for both) and the chaos level, decided by the host.
-   - **Per player:** coins, runes, bonecharms and notes.
-   - Recommended: **as listed**.
-4. **The final playtest with your friend** stays the last step before 1.0, as a Needs-you card. Recommended: **yes**.
-
-Reply **"approved"** to take all four recommendations, or "approved" with your own answers.
+1. **The test tools' code:** use coop-anything's MIT tools and acknowledge them. They go in `third_party/coop-anything/` with the license notice and a note that they were generalised from fnv-coop.
+2. **REA:** allowed as a read-only second opinion. d2-ghidra stays the first tool (CLAUDE.md updated).
+3. **Items are per player:** both players can pick up each item. Taking one removes it only from your own world, and story items reach both. Coins, runes, bonecharms, ammunition and elixirs are each player's own. The chaos level stays shared and is decided by the host.
+4. **The final playtest with your friend** stays the last step before 1.0, as a Needs-you card.

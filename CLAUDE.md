@@ -1,6 +1,6 @@
 # Dishonored 2 Corvo/Emily co-op
 
-This mod makes the Dishonored 2 campaign playable cooperatively, with Corvo and Emily. Work follows [the roadmap](documentation/handoff-2026-10-11/02-roadmap.md) in stage order. Stages 3 to 5 closed and stage 6 is active; [the final audit](documentation/handoff-2026-10-11/112-final-stage-exit-audit.md) reopened cards in stages 2, 4, 5 and 7.
+This mod makes the Dishonored 2 campaign playable cooperatively, with Corvo and Emily. Work follows [the roadmap](documentation/handoff-2026-10-11/02-roadmap.md) in stage order. Stage 8 is active: [the brief](documentation/handoff-2026-10-11/115-stage8-plan-brief.md) takes 0.9.6 to a flawless 1.0, with the host deciding the shared world and the partner sending requests. It was approved on 2026-10-29 as the active goal. [Chapter 114](documentation/handoff-2026-10-11/114-coop-anything-playbook.md) has the coop-anything rules it follows.
 
 Read these first:
 - [handoff README](documentation/handoff-2026-10-11/README.md);
@@ -20,8 +20,8 @@ Under an active goal, keep working until its exit criteria are met. There are no
   - Label findings as confirmed static, confirmed runtime or hypothesis. Visual acceptance is recorded separately.
 - **Tools:**
   - Lab scripts run under the pinned pwsh 7: `C:\Users\adako\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe`.
-  - Use Ghidra only through the d2-ghidra MCP.
-  - No ZikQ or third-party co-op mods.
+  - Use Ghidra through the d2-ghidra MCP first. The local `rea` MCP (REA) is allowed as a read-only second opinion.
+  - No ZikQ or third-party co-op mods. The one exception: coop-anything's MIT sync test tools, which were generalised from fnv-coop, may be vendored under `third_party/coop-anything/` with their notice (user, 2026-10-29).
   - Cutscenes may be skipped.
   - Downloading or running untrusted files needs the user's explicit permission.
 - **Privacy:**
@@ -123,6 +123,7 @@ The user has fully delegated GitHub. Branch, commit, push, open PRs, merge and m
   | 5 | `cc49928c` |
   | 6 | `c7ca9fa4` |
   | 7 | `1566a025` |
+  | 8 | `2880ec75` |
 
 - **Set a field:** `gh project item-edit --id <item> --project-id <project> --field-id <field> --single-select-option-id <option>`.
 - Merged PRs and closed issues move to Done automatically. The project index can lag a minute or two behind item-add.
