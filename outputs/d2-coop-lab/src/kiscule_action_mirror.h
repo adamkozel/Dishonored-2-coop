@@ -105,7 +105,7 @@ struct KisculeActionPacket {
 };
 #pragma pack(pop)
 static_assert(sizeof(KisculeActionPacket)==152);
-struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;std::uintptr_t instanceNode=0;std::uint32_t requests=0,executed=0;bool askedHost=false;};
+struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;std::uintptr_t instanceNode=0;std::uint32_t requests=0,executed=0,asked=0;};
 struct KisculeActionEvent{std::uint64_t tick=0;std::uint32_t cls=0,node=0,input=0,count=0;char entity[64]{};const char* what="";};
 struct KisculePending{KisculeActionPacket packet{};std::uint64_t at=0;};
 struct KisculeMirror {
@@ -130,6 +130,15 @@ bool kisculeHostStoryTwinNoBlock=false;
 // opening cinematic twice while running such requests (hoststory-lead-dunwall-v2014c, v2016c).
 bool kisculeHostStoryAsk=true;
 bool kisculePlainGameplay(){return outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState;}
+// Only story-critical World classes are requested: objectives and tasks, story flags and level transitions. Requests
+// for every World class would let the partner's own ambient loops (midnight scenes, candles, fires) drive the host's
+// world. A node is requested whenever the partner reached it more times than the host has run it: the host had
+// already run the loot's task nodes (2899, 2973) earlier on the route, so a one-time request never went out
+// (loot-trace-on-v2018e).
+bool kisculeHostStoryAskable(int cls){
+    if(cls<kKisculeHostStoryBase||cls>=kKisculeHostStoryBase+static_cast<int>(kKisculePolicyCount))return false;
+    const char* n=kKisculePolicy[cls-kKisculeHostStoryBase].name;
+    return !std::strncmp(n,"ActionGameflow",14)||!std::strncmp(n,"StoryFlag",9)||!std::strcmp(n,"LevelTransition");}
 bool kisculeClassIndexMirrored(std::uint32_t cls){
     if(cls<static_cast<std::uint32_t>(kisculeMirrorClassCount))return kisculeMirrorClasses[cls].mirrored;
     return kisculeHostStory&&cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&cls<kKisculeHostStoryBase+kKisculePolicyCount;}
@@ -234,8 +243,8 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
         if(cls>=kKisculeHostStoryBase&&localRole==1&&kisculeHostStoryTwinNoBlock)++kisculeMirror.hostStoryLeaked; // the twin: a World node runs on the partner's own
         if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
-            if(kisculeHostStoryAsk&&kisculePlainGameplay()&&!c.executed&&!c.askedHost&&kisculePartnerScope()){c.askedHost=true;++kisculeMirror.hostStoryAsked;
-                KisculeActionPacket p{};p.role=1;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=1;p.reserved=kKisculePartnerFirst;
+            if(kisculeHostStoryAsk&&kisculeHostStoryAskable(cls)&&kisculePlainGameplay()&&c.requests>c.executed&&c.requests>c.asked&&kisculePartnerScope()){c.asked=c.requests;++kisculeMirror.hostStoryAsked;
+                KisculeActionPacket p{};p.role=1;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.requests;p.reserved=kKisculePartnerFirst;
                 std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
         else if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
         else{++c.executed;++kisculeMirror.local;kisculeEvent("local",cls,entity,nodeId,input,c.executed);
@@ -273,7 +282,7 @@ bool installKisculeDispatchObserver(){
 }
 void receiveKisculeAction(const KisculeActionPacket& p){
     AcquireSRWLockExclusive(&kisculeLock);auto& k=kisculeMirror;++k.received;
-    const bool hostCount=p.role==0&&localRole==1,partnerFirst=p.role==1&&localRole==0&&p.count==1&&p.reserved==kKisculePartnerFirst&&kisculePartnerScope(); // 1214jc
+    const bool hostCount=p.role==0&&localRole==1,partnerFirst=p.role==1&&localRole==0&&(p.count==1||p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase))&&p.reserved==kKisculePartnerFirst&&kisculePartnerScope(); // 1214jc
     if(!kisculeMirrorActive()||p.magic!=0x414B3244||p.version!=1||p.size!=sizeof(p)||!(hostCount||partnerFirst)||p.session!=remote.session||
        p.sequence<=k.peerSequence||!kisculeClassIndexMirrored(p.classIndex)||!p.count||!p.mapId||!std::memchr(p.entity,0,sizeof(p.entity))||!p.entity[0]){++k.refused;k.result="refused";}
     else{k.peerSequence=p.sequence;if(k.pending.size()<1024)k.pending.push_back({p,GetTickCount64()});else ++k.dropped;k.result="received";}
