@@ -1,6 +1,6 @@
 # Complete roadmap and completion gates
 
-The requested product is a single-player campaign played cooperatively by Corvo and Emily, with shared cutscenes, native game UI, native Steam sessions and consistent gameplay outcomes. Stages 3 to 5 are complete (their umbrella cards are closed); the current priority is stage 6, campaign and recovery. On 2026-10-11 the user explicitly authorized an active goal of finished playable co-op and asked development to continue beyond movement without milestone approval pauses while they sleep. Finishing movement is a transition to the next development work, not a stop condition.
+The requested product is a single-player campaign played cooperatively by Corvo and Emily, with shared cutscenes, native game UI, native Steam sessions and consistent gameplay outcomes. Stages 3 to 5 are complete (their umbrella cards are closed). Releases up to 0.9.6 covered stages 6 and 7; the current priority is stage 8, host authority and 1.0 ([brief](115-stage8-plan-brief.md)). On 2026-10-11 the user explicitly authorized an active goal of finished playable co-op and asked development to continue beyond movement without milestone approval pauses while they sleep. Finishing movement is a transition to the next development work, not a stop condition.
 
 The exact 105-item movement checklist, role applicability, motion candidates, evidence links, power requirements and remaining notes is generated in [movement requirements](generated/movement-requirements.md). That document is the detailed moveset list; do not replace it with a short selection of locomotion clips.
 
@@ -15,6 +15,7 @@ The exact 105-item movement checklist, role applicability, motion candidates, ev
 | 5. Interactions and progression | Native state/resource investigations, contextual animation candidates | Doors, pickups, inventory, objectives, dialogue, mission decisions and scripted interactions remain consistent |
 | 6. Campaign and recovery — active | Fixed Dunwall shared reload/death and cinematic experiments | General checkpoint/save transfer, role restoration, simultaneous request deduplication, both-ready barriers, every relevant map/load/scene boundary |
 | 7. Native UI and release | Existing pause/death/character/menu assets identified | Native host/join/choice/recovery flows, packaging, rollback, sustained stability and online validation |
+| 8. Host authority and 1.0 — active | Release 0.9.6: the full campaign on two Steam accounts; host-authoritative combat and nearby guards; story, items, doors, safes and far guards run in both worlds and are mirrored | The host decides the shared world and the partner sends requests; items per player; a difference detector, flight recorder and network-trouble tests; zero differences through the campaign in all four pairings; release 1.0 |
 
 Stages overlap where dependencies demand it. A new animation must not independently apply combat damage or invent world authority merely to look correct.
 
@@ -38,6 +39,25 @@ The user added these to the goal's "done". They come after #140 and release 0.8.
    - A mission sample in each other pairing, per-character power checks on the partner side, and the menu and Leave
      co-op in the same sessions.
    - Then a release and the clean-PC proof.
+
+## Stage 8: host authority and 1.0 (2026-10-29)
+
+The user approved [the stage 8 brief](115-stage8-plan-brief.md) as the active goal. It applies the coop-anything playbook ([chapter 114](114-coop-anything-playbook.md)). The steps, in order:
+
+1. **Measure before changing:** the activation range, every one-player assumption, the functions that write shared state, and a check of the video capture.
+2. **The difference detector and flight recorder,** plus honest tests that assert their mode first.
+3. **Bad connections, crashes and rejoining:** a network-trouble relay on the lab leg, Steam keep-alive and timeout, and a versioned hello.
+4. **The host takes control,** one area at a time, each with an off-switch and a mutation twin:
+   1. story, objectives, mission decisions and the ending;
+   2. items, per player;
+   3. doors, levers, lifts, switches and safes;
+   4. joining mid-mission and quickload;
+   5. guards far from the host;
+   6. partner powers that touch the world.
+5. **Partner quality:** movement measured in numbers (animcheck), and polish.
+6. **Proof and release 1.0;** the final playtest with the user's friend stays Needs-you.
+
+The user's decisions are in the brief's section 8. Items are per player: each player can take every item once.
 
 ## Movement families
 
