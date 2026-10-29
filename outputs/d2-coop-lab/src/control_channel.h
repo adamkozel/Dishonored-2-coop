@@ -6,14 +6,17 @@
 // - kind 2, leave: sent before a deliberate close (F8, Leave co-op), so the peer can tell a leave from a crash.
 // Liveness: Steam gives no reliable disconnect event, so a peer with no control packet for 20 s (120 s while it says it
 // is loading, or before its first hello) is dropped by the application ("keepalive_timeout"). The transport timeout is
-// raised to match (kCoopTransportTimeoutMs). Status: <status>.control.json once a second.
+// set explicitly (kCoopTransportTimeoutMs). Status: <status>.control.json once a second.
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
 
 constexpr std::uint32_t kCoopControlProtocol=1;   // bump with any packet format change between builds
 constexpr ULONGLONG kCoopKeepAliveMs=1000,kCoopPeerSilentMs=20000,kCoopPeerLoadingMs=120000;
-constexpr int kCoopTransportTimeoutMs=20000;
+// The transport timeout stays at Steam's 10 s default, set explicitly: at 20 s a crashed partner was retired too late
+// (peer-loss-dunwall-vm-v2009a), while a 5 s blackout survives 10 s (network-trouble-v2006b). The 20 s application
+// drop is the backstop for a hung game whose Steam client still answers.
+constexpr int kCoopTransportTimeoutMs=10000;
 // Lab test only: D2COOP_TEST_CONTROL_PROTOCOL makes this game announce another protocol, to prove the mismatch refusal.
 std::uint32_t coopAnnouncedProtocol=kCoopControlProtocol;
 
