@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include <map>
 #include <cmath>
 
 // Read-only research tool: no injection, patches, hooks, or game function calls.
@@ -497,6 +498,88 @@ int main(int argc, char** argv) {
             std::cout<<"}";
         }
         std::cout<<"],\"scanMs\":"<<(GetTickCount64()-begin)<<"}\n";return 0;
+    }
+    // Stage 8.2 (#235, difference detector): one compact snapshot of this world's SHARED state, keyed by names that are
+    // the same in both games, for tools/diag/d2_world_diff.py. Categories: doors (current, pending, locked, broken),
+    // usables (current, enabled; safe dials included on purpose: they are the known per-world drift), storyflags
+    // (bool +0x19 / int +0x1c by variable vtable), gameflow (node id -> state), chaos (points), npcs (alive /
+    // unconscious / dead per unique spawner; packs as counts), breakables (step) and pickups (taken, hidden; per
+    // player by design). A name seen twice in one category is dropped (not a stable key). Mod entities (d2coop_*)
+    // and the local player are excluded. Read-only; names are game-derived, keep output local.
+    if(argc==3&&!std::strcmp(argv[2],"--world-digest")){
+        std::uintptr_t game=0,list=0,vt=0;unsigned count=0;
+        const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
+        if(!reader(base+0x39a5290,&game,8)||!game||!reader(game,&vt,8)||vt!=base+0x1c940a8||!reader(game+0x601c0,&list,8)||!list||
+           !reader(game+0x601c8,&count,4)||!(count&0xffffff)||(count&0xffffff)>16384)return 45;
+        std::vector<unsigned> handles(count&0xffffff);if(!reader(list,handles.data(),handles.size()*4))return 45;
+        std::string map;std::uint32_t worldState=0;
+        {std::uintptr_t session=0,mapName=0;read(process.value,base+0x25af110+0x19a8,&session,8);
+         if(session){read(process.value,session+0x337128+0x10,&mapName,8);read(process.value,session+0x341058,&worldState,4);if(mapName)map=readString(process.value,mapName);}}
+        std::map<std::string,std::map<std::string,std::string>> cats;std::map<std::string,std::unordered_set<std::string>> dups;
+        const auto put=[&](const std::string& cat,const std::string& key,const std::string& value){
+            if(key.empty()||key.rfind("d2coop",0)==0)return;auto& c=cats[cat];
+            if(dups[cat].count(key))return;if(c.count(key)){c.erase(key);dups[cat].insert(key);return;}c[key]=value;};
+        const auto actorName=[&](std::uintptr_t actor){std::uintptr_t p=0;std::string s;if(actor&&reader(actor+0x20,&p,8))worldIdentityString(reader,p,s);return s;};
+        cats["doors"];cats["usables"];cats["storyflags"];cats["gameflow"];cats["chaos"];cats["npcs"];cats["breakables"];cats["pickups"];
+        for(auto h:handles){
+            if(h==1u)continue;
+            NativeOpenable o{};if(readNativeOpenable(reader,base,game,h,o)){
+                put("doors",o.name,"["+std::to_string(o.current)+","+std::to_string(o.pending)+","+std::to_string(unsigned(o.locked))+","+std::to_string(unsigned(o.broken))+"]");continue;}
+            NativeUsable u{};if(readNativeUsable(reader,base,game,h,u)){
+                put("usables",u.name,"["+std::to_string(u.current)+","+std::to_string(unsigned(u.enabled))+"]");continue;}
+            NativeBreakable br{};if(readNativeBreakable(reader,base,game,h,br,true)){put("breakables",br.name,std::to_string(br.step));continue;}
+            const auto actor=worldIdentityEntity(reader,game,h);std::uintptr_t avt=0,members=0,component=0;unsigned n=0;
+            if(actor&&reader(actor,&avt,8)&&avt==base+0x1c5e258&&reader(actor+0x268,&members,8)&&members&&reader(actor+0x270,&n,4)&&(n&0xffffff)&&(n&0xffffff)<=256){
+                std::array<std::uintptr_t,256> m{};if(!reader(members,m.data(),(n&0xffffff)*8))continue;
+                for(unsigned i=0;i<(n&0xffffff)&&!component;++i){std::uintptr_t cvt=0;if(m[i]&&reader(m[i],&cvt,8)&&cvt==base+0x1c5a3b8)component=m[i];}
+                if(!component)continue;unsigned char flags=0,ownerFlags=0;reader(component+0xd0,&flags,1);reader(actor+0xd0,&ownerFlags,1);
+                put("pickups",actorName(actor),"["+std::to_string((flags>>3)&1)+","+std::to_string(ownerFlags&1)+"]");}
+        }
+        {std::vector<NativeWorldNpc> catalog;unsigned unbound=0;std::map<std::string,std::array<unsigned,3>> packs;
+         if(readWorldNpcCatalog(reader,base,game,catalog,unbound))for(const auto& n:catalog){
+            if(actorName(n.actor).rfind("d2coop",0)==0)continue;
+            NativeHealth hp{};if(!readNativeHealth(reader,base,n.handle,hp)||hp.game!=game||hp.actor!=n.actor)continue;
+            const unsigned state=hp.current<=0?2u:((hp.ownerFlags&0x20)?1u:0u);
+            if(n.unique)put("npcs",n.spawnerName,state==2?"\"dead\"":state==1?"\"unconscious\"":"\"alive\"");else packs[n.spawnerName][state]++;}
+         for(const auto& p:packs)put("npcs",p.first,"["+std::to_string(p.second[0])+","+std::to_string(p.second[1])+","+std::to_string(p.second[2])+"]");}
+        {std::uintptr_t buckets=0;std::uint32_t mask=0;
+         if(reader(game+0x1f7780+0x18,&buckets,8)&&buckets&&reader(game+0x1f7780+0x28,&mask,4)&&mask<=0xffff)
+            for(std::uint32_t k=0;k<=mask;++k){std::uintptr_t e=0;reader(buckets+k*8,&e,8);
+                for(unsigned hops=0;e&&hops<256;++hops){std::uintptr_t node=0,next=0;std::uint32_t id=0;int state=0;
+                    if(reader(e+8,&node,8)&&node&&reader(node+8,&id,4)&&reader(node+0xc,&state,4)){char key[12];std::snprintf(key,sizeof(key),"%08x",id);put("gameflow",key,std::to_string(state));}
+                    if(!reader(e+0x10,&next,8))break;e=next;}}}
+        {const auto local=worldIdentityEntity(reader,game,1u);std::uintptr_t members=0;unsigned n=0;
+         if(local&&reader(local+0x268,&members,8)&&members&&reader(local+0x270,&n,4)&&(n&0xffffff)<=256)
+            for(unsigned i=0;i<(n&0xffffff);++i){std::uintptr_t c=0,cvt=0,owner=0;int points=0;
+                if(reader(members+i*8,&c,8)&&c&&reader(c,&cvt,8)&&cvt==base+0x1b63248&&reader(c+0x10,&owner,8)&&owner==local&&reader(c+0x24,&points,4)){put("chaos","points",std::to_string(points));break;}}}
+        {std::uint32_t world=0;
+         for(auto h:handles){const auto a=worldIdentityEntity(reader,game,h);if(a&&objectType(process.value,base,a)==".?AVidWorldspawn@@"){world=h;break;}}
+         std::uintptr_t buckets=0,instance=0;std::uint32_t mask=0;
+         if(world&&reader(game+0x1f6e48+0x18,&buckets,8)&&buckets&&reader(game+0x1f6e48+0x28,&mask,4)&&mask<=0xffff)
+            for(std::uint32_t k=0;k<=mask&&!instance;++k){std::uintptr_t e=0;reader(buckets+k*8,&e,8);
+                for(unsigned hops=0;e&&hops<256;++hops){std::uint32_t key=0;std::uintptr_t next=0;if(!reader(e,&key,4))break;
+                    if(key==world){reader(e+8,&instance,8);break;}if(!reader(e+0x10,&next,8))break;e=next;}}
+         std::uintptr_t table=0;std::uint32_t tableCount=0;
+         if(instance&&reader(instance+0x88,&table,8)&&table&&reader(instance+0x90,&tableCount,4)){tableCount&=0xffffff;if(tableCount>4096)tableCount=4096;
+            for(std::uint32_t k=0;k<tableCount;++k){std::uintptr_t e=0;reader(table+k*8,&e,8);
+                for(unsigned hops=0;e&&hops<64;++hops){std::uintptr_t inst=0,decl=0,declName=0,graph=0,vars=0,next=0;std::uint32_t varCount=0;
+                    if(!reader(e+8,&inst,8)||!inst)break;
+                    if(reader(inst+0x68,&decl,8)&&decl)reader(decl+8,&declName,8);const auto label=declName?readString(process.value,declName):std::string();
+                    if(reader(inst+0x70,&graph,8)&&graph&&reader(graph+0x40,&vars,8)&&vars&&reader(graph+0x48,&varCount,4)){varCount&=0xffffff;if(varCount>512)varCount=512;
+                        for(std::uint32_t v=0;v<varCount;++v){std::uintptr_t var=0,name=0,vvt=0;
+                            if(!reader(vars+v*8,&var,8)||!var||!reader(var,&vvt,8)||!reader(var+8,&name,8))continue;
+                            const auto key=label+"|"+(name?readString(process.value,name):std::string());
+                            if(vvt==base+0x1cc4388){unsigned char value=0;if(reader(var+0x19,&value,1))put("storyflags",key,std::to_string(unsigned(value)));}
+                            else if(vvt==base+0x1c9f998){std::int32_t value=0;if(reader(var+0x1c,&value,4))put("storyflags",key,std::to_string(value));}}}
+                    if(!reader(e+0x10,&next,8))break;e=next;}}}}
+        std::cout<<"{\"readOnly\":true,\"pid\":"<<pid<<",\"tick\":"<<GetTickCount64()<<",\"map\":"<<jsonString(map)<<",\"worldState\":"<<worldState<<",\"categories\":{";
+        bool firstCat=true;
+        for(const auto& c:cats){std::cout<<(firstCat?"":",")<<jsonString(c.first)<<":{";firstCat=false;bool first=true;
+            for(const auto& kv:c.second){std::cout<<(first?"":",")<<jsonString(kv.first)<<":"<<kv.second;first=false;}
+            std::cout<<"}";}
+        std::cout<<"},\"dropped\":{";firstCat=true;
+        for(const auto& d:dups){std::cout<<(firstCat?"":",")<<jsonString(d.first)<<":"<<d.second.size();firstCat=false;}
+        std::cout<<"}}\n";return 0;
     }
     if(argc==4&&!std::strcmp(argv[2],"--usable")){
         const auto handle=static_cast<unsigned>(std::strtoul(argv[3],nullptr,0));std::uintptr_t game=0;NativeUsable u{};unsigned stage=0;
