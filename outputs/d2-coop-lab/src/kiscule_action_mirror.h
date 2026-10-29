@@ -112,7 +112,7 @@ struct KisculeMirror {
     std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
     std::uint32_t dispatchThread=0;const char* result="idle";
     std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue;std::vector<KisculePending> pending;
-    KisculeActionEvent events[24]{};std::uint64_t eventCount=0;
+    KisculeActionEvent events[256]{};std::uint64_t eventCount=0;
 };
 KisculeMirror kisculeMirror{};SRWLOCK kisculeLock=SRWLOCK_INIT;bool kisculeMirrorEnabled=false;bool applyingKiscule=false;
 // Stage 8.4.1 (#237): host story. With coop_host_story on, every World and LocalPlayer class of kiscule_policy.h is
@@ -142,7 +142,7 @@ bool kisculeClassIndexMirrored(std::uint32_t cls){
 bool kisculeMirrorActive(){return kisculeMirrorEnabled||productMode;}
 // Caller holds kisculeLock.
 void kisculeEvent(const char* what,std::uint32_t cls,const std::string& entity,std::uint32_t node,std::uint32_t input,std::uint32_t count){
-    auto& e=kisculeMirror.events[kisculeMirror.eventCount++%24];e={};e.tick=GetTickCount64();e.what=what;e.cls=cls;e.node=node;e.input=input;e.count=count;
+    auto& e=kisculeMirror.events[kisculeMirror.eventCount++%256];e={};e.tick=GetTickCount64();e.what=what;e.cls=cls;e.node=node;e.input=input;e.count=count;
     std::snprintf(e.entity,sizeof(e.entity),"%s",entity.c_str());
 }
 int kisculeClassOfVtable(std::uintptr_t vt){
@@ -414,8 +414,8 @@ void writeKisculeMirror(){
     fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked);
     fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
         kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
-    const auto first=k.eventCount>24?k.eventCount-24:0;
-    for(auto i=first;i<k.eventCount;++i){const auto& e=k.events[i%24];
+    const auto first=k.eventCount>256?k.eventCount-256:0;
+    for(auto i=first;i<k.eventCount;++i){const auto& e=k.events[i%256];
         fprintf(f,"%s{\"tick\":%llu,\"what\":\"%s\",\"class\":\"%s\",\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"count\":%u}",i==first?"":",",e.tick,e.what,e.cls<static_cast<std::uint32_t>(kisculeMirrorClassCount)?kisculeMirrorClasses[e.cls].name:"?",e.entity,e.node,e.input,e.count);}
     fprintf(f,"]}\n");
     ReleaseSRWLockShared(&kisculeLock);
