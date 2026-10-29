@@ -1,0 +1,14 @@
+{
+ "date": "2026-10-29",
+ "reason": "The user's own play: the original Steam install of Dishonored 2 was launched from Steam on 2026-10-28 (PIDs at 18:36, 18:46 and 19:20, until 19:27; Steam gameprocess_log, plain executable, no lab arguments). The game wrote its own profile.bin at 19:21:16 during the third run. No lab process ran then: the lab was stopped, and its next start, the stage 8 activation-range deploy on 2026-10-29, was refused.",
+ "action": "Only the guard baseline is re-recorded, for this one file. The protected file itself was not modified, restored or copied. The previous baseline is kept as protected-save-hashes-before-v4-pre-2026-10-29.json; the other 13 protected files are unchanged.",
+ "detectedBy": "Deploy-SourceClock.ps1 refused the stage 8 lab start: 'Protected save differs'",
+ "changed": [
+  {
+   "file": "base/savegame/profile.bin",
+   "previousHash": "C539A78E99C36FB8D1DCD478A0BD7ADEE75D55DD510B775DE0AB6CAF9692815C",
+   "hash": "7947D6B91B28AB762787E091452BF5A6E91CD3863DA8D4A6B9FD8125C293B9AA",
+   "modified": "2026-10-28T19:21:16"
+  }
+ ]
+}
