@@ -473,6 +473,7 @@ function JoinAudit($label){
 }catch{$failure=$_.Exception.Message;Save "$out/failure.json" @{message=$failure;stack=$_.ScriptStackTrace};foreach($r2 in 'host','client'){try{Save "$out/failure-npcstream-$r2.json" (S $r2 '.npc-stream.json')}catch{}};try{foreach($r in 'host','client'){Frame $r 'failure'}}catch{};try{$notes.failureState=@{host=(Snap host);client=(Snap client)}}catch{}}
 finally{
  # 2011 (#237): host story, its twin and the census never outlive a take (the lab restore keeps the game processes).
+ foreach($r in 'host','client'){foreach($sfx in '.kiscule.json','.kiscule-census.json','.gameflow-mirror.json','.kiscule-trace.json'){$src="$root/work/lab-instances/$r/coop-status.json$sfx";if((Test-Path $src)-and!(Test-Path "$out/end-$r$sfx")){try{Copy-Item $src "$out/end-$r$sfx"}catch{}}}} # 2011: kept for failed takes too
  foreach($r in 'host','client'){try{C $r 'coop_host_story off';C $r 'coop_kiscule_census off'}catch{}}
  if($owned){
   $errors=[Collections.Generic.List[string]]::new()
