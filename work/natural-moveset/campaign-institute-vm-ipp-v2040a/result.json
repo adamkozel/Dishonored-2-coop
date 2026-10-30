@@ -1,0 +1,309 @@
+{
+  "passed": false,
+  "failure": "The worlds differ at the end: 2 values",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-safecodes-v2039",
+      "hostDll": "5202C400735189D2CF19BB9C83E2C92F5403C540F9CB036882FC47910B34CD7C",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 25,
+        "client": 25,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 104,
+        "client": 104,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "commands": [
+      "step05-command host coop_difficulty_set 0",
+      "step29-command host coop_difficulty_set 1"
+    ],
+    "difficulty": [
+      {
+        "step": "step06-difficulty",
+        "expect": 0,
+        "host": 0,
+        "client": 0,
+        "clientResult": "matched",
+        "clientApplied": 0,
+        "hostPreset": "difficulty/preset/easy.difficultypreset",
+        "clientPreset": "difficulty/preset/easy.difficultypreset",
+        "ok": true
+      },
+      {
+        "step": "step30-difficulty",
+        "expect": 1,
+        "host": 1,
+        "client": 1,
+        "clientResult": "matched",
+        "clientApplied": 1,
+        "hostPreset": "difficulty/preset/medium.difficultypreset",
+        "clientPreset": "difficulty/preset/medium.difficultypreset",
+        "ok": true
+      }
+    ],
+    "healthHold": [
+      "clear guard|elite|officer",
+      "clear guard|elite|officer",
+      "ld_kar_whaleoil_tank_01_3"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/madinventor/boat_madinventor_p",
+        "epoch": 21,
+        "cine": 13,
+        "pos": [
+          -6.512882,
+          -15.240320,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          225,
+          2,
+          3,
+          13,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 21,
+        "lt": "idle/0/0",
+        "hold": "released/0",
+        "ka": "1/534/0",
+        "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/madinventor/boat_madinventor_p",
+        "epoch": 21,
+        "cine": 96,
+        "pos": [
+          -6.874374,
+          -14.327239,
+          0.093843
+        ],
+        "fresh": true,
+        "gameflow": [
+          225,
+          2,
+          3,
+          13,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "released/23953",
+        "ka": "564/7/4",
+        "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+      }
+    },
+    "gameflowEqual": true,
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 528,
+      "differences": 2
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "1b43eebe422365ef",
+        "connection": 2346739584,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "1b43eebe422365ef",
+        "sent": 1051,
+        "received": 1044,
+        "refused": 0,
+        "silentMs": 532
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "1b43eebe422365ef",
+        "connection": 3726424982,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "1b43eebe422365ef",
+        "sent": 1045,
+        "received": 1051,
+        "refused": 0,
+        "silentMs": 438
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 104,
+      "asked": 91,
+      "inFlow": 35,
+      "replayed": 534,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 64
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/madinventor/boat_madinventor_p",
+        "epoch": 21,
+        "cine": 13,
+        "pos": [
+          -6.512882,
+          -15.240320,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          225,
+          2,
+          3,
+          13,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 21,
+        "lt": "idle/0/0",
+        "hold": "released/0",
+        "ka": "1/534/0",
+        "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/madinventor/boat_madinventor_p",
+        "epoch": 21,
+        "cine": 96,
+        "pos": [
+          -6.874374,
+          -14.327239,
+          0.093843
+        ],
+        "fresh": true,
+        "gameflow": [
+          225,
+          2,
+          3,
+          13,
+          0,
+          5,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "released/23953",
+        "ka": "564/7/4",
+        "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Ally"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

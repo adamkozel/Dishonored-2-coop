@@ -34,9 +34,29 @@ All on The Good Doctor (`campaign/institute/institute.mapinfo`), two lab games, 
 
 The int value at +0x1c and the journal layout (`+0xd8` lists parallel to the decl's text ids) are now confirmed runtime by these takes: the partner's reads and writes agree with the host's values, and the world diff is equal.
 
+## The campaign on two accounts (v2040a)
+
+`Run-Campaign-v2040.sh a`: all nine missions, harness `Route-MissionVM-v2016`, candidate safecodes-v2039 (host story, items per player and safe codes on), host Corvo on this PC, VM partner Emily. Results in `work/natural-moveset/campaign-<mission>-vm-ipp-v2040a/`.
+
+| Mission | Result |
+|---|---|
+| Dunwall | **Equal** (286). The take sat 1 h 45 min at one screenshot: the host game window was minimized, and gfxcapture gets no frame from a minimized window, so the single-frame ffmpeg grab never ended (confirmed runtime: grabs resumed once the window was restored). Harness v2017 kills a grab after 15 s and restores a minimized window first |
+| Edge of the World | **Equal** (2103). In v2036a the safe dials differed; the safe codes fix it (confirmed runtime) |
+| The Good Doctor | 2 values differ: `b_hyp_arrived_lab_graduated_cylinder_01` and `b_hyp_arrived_lab_retort_01` (host 0, partner absent), the same lab glass as v2036a |
+| The Clockwork Mansion | Partner GameOver "You have lost a critical ally: Anton Sokolov" on the streets after the host carried him out; the host showed the copied plain GameOver. The streets map has its own Sokolov-loss script (`script_kiscule_gameover`, confirmed static), and the partner ran its `ActionGameOver` itself although it is a World class. The route fixes of v2038 and v2016 worked: the run passed Jindosh, the carry and the exterior door. Candidate gameover-v2041 blocks the partner's own `ActionGameOver` under host story (below) |
+| The Royal Conservatory | The host died ("You Have Perished") at the last audiograph: the route switches the health hold off before the exit use while an enemy was still near. Route v2041 keeps the hold on until `boat_dust` has loaded. Not a sync fault |
+| Dust District | **Equal** (2325). Differed in v2036a; the safe codes fix it (confirmed runtime) |
+| A Crack in the Slab | The host's co-op saves switch stayed in `profile_saving` (phase 2, no switch), the second time after palace v2036a. Under study |
+| Death to the Duke | **Equal** (608). Failed in v2036a and v2036b (skiff scene) |
+| Death to the Empress | The host loaded `campaign/end/end_p` alone: its transition hold timed out after 90 s, and the partner stayed on `dunwall_return_tower_p`. Under study |
+
+Four missions are now equal that the 0.9.6 rules also passed, plus Edge of the World and Dust District, which needed the safe codes.
+
+**Candidate gameover-v2041** (`kiscule_action_mirror.h`): under host story the partner never runs its own `ActionGameOver` node (vtable RVA 0x1b79cc8). It reaches GameOver only from the host's `Death` message (`checkpoint_sync.h`), so the host decides. Counted as `hostStoryGameOverBlocked` in `<status>.kiscule.json`. What harmed the partner's Sokolov is still a hypothesis (his spawn is a replay of the host's run, out of the partner's own flow order). `Run-Campaign-v2041.sh a` reruns The Clockwork Mansion, Dunwall, The Royal Conservatory and A Crack in the Slab on it with harness v2017.
+
 ## Still to do in area 4.3
 
-- **The campaign on two accounts:** `Run-Campaign-v2040.sh`, harness v2016, candidate safecodes-v2039. Edge of the World and Dust District must end equal.
+- **The campaign on two accounts:** the v2041 reruns, then The Good Doctor glass and the Death to the Empress ending.
 - **Note text on screen:** check that the partner's note shows the host's digits. This is visual acceptance, recorded separately.
 - **A partner opens a safe with the host's code** (a route step on Edge of the World).
 - **Codes outside `3_digits_lock`:** the Jindosh lock (chapter 110) and other lock decls, if any.

@@ -1,0 +1,163 @@
+[
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 15000
+  },
+  {
+    "do": "cast",
+    "role": "host",
+    "ms": 1200,
+    "settle": 3000,
+    "grant": "models/powers/blink/blink.inventoryitem",
+    "expectMoved": true,
+    "expectFx": true
+  },
+  {
+    "do": "wait",
+    "ms": 2000,
+    "settle": 1000
+  },
+  {
+    "do": "cast",
+    "role": "client",
+    "ms": 1200,
+    "settle": 3000,
+    "grant": "models/powers/grapple/grapple.inventoryitem",
+    "expectMoved": true,
+    "expectFx": true,
+    "minMove": 0.1
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_1",
+    "settle": 10000
+  },
+  {
+    "do": "talk",
+    "name": "sokolov",
+    "near": [
+      1.1,
+      12.1
+    ],
+    "settle": 30000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 10000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "focus": true,
+    "offsets": [
+      [
+        1.2,
+        0
+      ]
+    ],
+    "z": 9.15,
+    "pitches": [
+      25,
+      15,
+      35,
+      25
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 90000
+  },
+  {
+    "do": "expect",
+    "map": "dust/dust_p",
+    "ms": 300000,
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 20000
+  },
+  {
+    "do": "use",
+    "match": "meagan_foster",
+    "near": [
+      -31.0,
+      -81.1
+    ],
+    "focus": true,
+    "offsets": [
+      [
+        0,
+        1.6
+      ]
+    ],
+    "z": -20.05,
+    "pitches": [
+      10,
+      0,
+      20,
+      10
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 300,
+    "expect": "logic",
+    "settle": 120000
+  },
+  {
+    "do": "heal",
+    "on": true,
+    "settle": 1000
+  },
+  {
+    "do": "jindosh",
+    "settle": 20000
+  },
+  {
+    "do": "use",
+    "name": "ld_jindosh_door_unlocked",
+    "focus": true,
+    "offsets": [
+      [
+        -1.0,
+        0
+      ]
+    ],
+    "z": -24.15,
+    "pitches": [
+      0,
+      10,
+      -10,
+      0
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 150000,
+    "unlessMap": "bunker"
+  },
+  {
+    "do": "heal",
+    "on": false,
+    "unlessMap": "bunker",
+    "settle": 1000
+  },
+  {
+    "do": "expect",
+    "map": "bunker/bunker_p",
+    "ms": 300000,
+    "settle": 5000
+  }
+]
