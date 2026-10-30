@@ -1,0 +1,1047 @@
+{
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "commands": [
+      "step01-command host coop_host_story on",
+      "step02-command client coop_host_story on",
+      "step03-command host coop_host_story exempt ActionBendTime",
+      "step04-command client coop_host_story exempt ActionBendTime",
+      "step05-command host coop_host_story exempt ActionDistractionControl",
+      "step06-command client coop_host_story exempt ActionDistractionControl",
+      "step07-command host coop_host_story exempt ActionGameOver",
+      "step08-command client coop_host_story exempt ActionGameOver",
+      "step09-command host coop_host_story exempt ActionPhysicsConstraintControl",
+      "step10-command client coop_host_story exempt ActionPhysicsConstraintControl",
+      "step11-command host coop_host_story exempt ActionPhysicsImpactControl",
+      "step12-command client coop_host_story exempt ActionPhysicsImpactControl",
+      "step13-command host coop_host_story exempt ActionSpecialLoot",
+      "step14-command client coop_host_story exempt ActionSpecialLoot",
+      "step15-command host coop_host_story exempt ActionTripwireControl",
+      "step16-command client coop_host_story exempt ActionTripwireControl",
+      "step17-command host coop_host_story exempt ActionTutorialEnd",
+      "step18-command client coop_host_story exempt ActionTutorialEnd",
+      "step19-command host coop_host_story exempt BlackMarketControl",
+      "step20-command client coop_host_story exempt BlackMarketControl",
+      "step21-command host coop_host_story exempt ActionInteractable",
+      "step22-command client coop_host_story exempt ActionInteractable",
+      "step23-command host coop_host_story exempt ActionAutosave",
+      "step24-command client coop_host_story exempt ActionAutosave",
+      "step25-command host coop_host_story exempt ActionAngularPhysicsMotorControl",
+      "step26-command client coop_host_story exempt ActionAngularPhysicsMotorControl",
+      "step27-command host coop_host_story exempt ActionDustStormControl",
+      "step28-command client coop_host_story exempt ActionDustStormControl",
+      "step29-command host coop_host_story exempt ActionPositionControl",
+      "step30-command client coop_host_story exempt ActionPositionControl",
+      "step31-command host coop_host_story exempt SwarmControl",
+      "step32-command client coop_host_story exempt SwarmControl",
+      "step33-command host coop_host_story exempt WitchTetheringControl",
+      "step34-command client coop_host_story exempt WitchTetheringControl",
+      "step35-command host coop_host_story exempt ActionAICrew",
+      "step36-command client coop_host_story exempt ActionAICrew",
+      "step37-command host coop_host_story exempt ActionUsable",
+      "step38-command client coop_host_story exempt ActionUsable",
+      "step39-command host coop_host_story exempt EntitySpawnerControl",
+      "step40-command client coop_host_story exempt EntitySpawnerControl",
+      "step41-command host coop_host_story exempt Health",
+      "step42-command client coop_host_story exempt Health",
+      "step43-command host coop_host_story exempt ActionOilTankHolder",
+      "step44-command client coop_host_story exempt ActionOilTankHolder",
+      "step45-command host coop_host_story exempt NpcPsychicAwareness",
+      "step46-command client coop_host_story exempt NpcPsychicAwareness",
+      "step47-command host coop_host_story exempt ActionDoor",
+      "step48-command client coop_host_story exempt ActionDoor",
+      "step49-command host coop_host_story exempt LevelTransition",
+      "step50-command client coop_host_story exempt LevelTransition",
+      "step51-command host coop_host_story exempt ActionMidnightControl",
+      "step52-command client coop_host_story exempt ActionMidnightControl",
+      "step53-command host coop_host_story exempt ActionContactDamageControl",
+      "step54-command client coop_host_story exempt ActionContactDamageControl",
+      "step55-command host coop_host_story exempt ActionGameflowMarkerControl",
+      "step56-command client coop_host_story exempt ActionGameflowMarkerControl",
+      "step57-command host coop_host_story exempt ActionNpcKnowledgeControl",
+      "step58-command client coop_host_story exempt ActionNpcKnowledgeControl",
+      "step59-command host coop_host_story exempt Goto",
+      "step60-command client coop_host_story exempt Goto",
+      "step61-command host coop_host_story exempt ActionOilTank",
+      "step62-command client coop_host_story exempt ActionOilTank",
+      "step63-command host coop_host_story exempt ActionGameflowMission",
+      "step64-command client coop_host_story exempt ActionGameflowMission",
+      "step65-command host coop_host_story exempt ActionMidnightKeyframeControl",
+      "step66-command client coop_host_story exempt ActionMidnightKeyframeControl",
+      "step67-command host coop_host_story exempt ActionSemiStaticStateControl",
+      "step68-command client coop_host_story exempt ActionSemiStaticStateControl",
+      "step69-command host coop_host_story exempt ActionControlTalk",
+      "step70-command client coop_host_story exempt ActionControlTalk",
+      "step71-command host coop_host_story exempt ActionDamage",
+      "step72-command client coop_host_story exempt ActionDamage",
+      "step73-command host coop_host_story exempt ActionPlayDistraction",
+      "step74-command client coop_host_story exempt ActionPlayDistraction",
+      "step75-command host coop_host_story exempt ActionBind",
+      "step76-command client coop_host_story exempt ActionBind",
+      "step77-command host coop_host_story exempt ActionGameflowObjective",
+      "step78-command client coop_host_story exempt ActionGameflowObjective",
+      "step79-command host coop_host_story exempt Senses",
+      "step80-command client coop_host_story exempt Senses",
+      "step81-command host coop_host_story exempt Collision",
+      "step82-command client coop_host_story exempt Collision",
+      "step83-command host coop_host_story exempt MidnightLink",
+      "step84-command client coop_host_story exempt MidnightLink",
+      "step85-command host coop_host_story exempt StoryFlagInt",
+      "step86-command client coop_host_story exempt StoryFlagInt",
+      "step87-command host coop_host_story exempt EntityStateControl",
+      "step88-command client coop_host_story exempt EntityStateControl",
+      "step89-command host coop_host_story exempt ActionDestroy",
+      "step90-command client coop_host_story exempt ActionDestroy",
+      "step91-command host coop_host_story exempt ActionGameflowTask",
+      "step92-command client coop_host_story exempt ActionGameflowTask",
+      "step93-command host coop_host_story exempt ActionPanicControl",
+      "step94-command client coop_host_story exempt ActionPanicControl",
+      "step95-command host coop_host_story exempt ActionSleepControl",
+      "step96-command client coop_host_story exempt ActionSleepControl",
+      "step97-command host coop_host_story exempt ActionSpawner",
+      "step98-command client coop_host_story exempt ActionSpawner",
+      "step99-command host coop_host_story exempt ActionPatrol",
+      "step100-command client coop_host_story exempt ActionPatrol",
+      "step101-command host coop_host_story exempt ActionFactionRelation",
+      "step102-command client coop_host_story exempt ActionFactionRelation",
+      "step103-command host coop_host_story exempt ActionNPCRelation",
+      "step104-command client coop_host_story exempt ActionNPCRelation",
+      "step105-command host coop_host_story exempt StoryFlagBool",
+      "step106-command client coop_host_story exempt StoryFlagBool",
+      "step107-command host coop_host_story exempt ChangePhysicsBehavior",
+      "step108-command client coop_host_story exempt ChangePhysicsBehavior",
+      "step109-command host coop_host_story exempt AlarmBellControl",
+      "step110-command client coop_host_story exempt AlarmBellControl",
+      "step111-command host coop_host_story exempt MainMenu",
+      "step112-command client coop_host_story exempt MainMenu",
+      "step113-command host coop_host_story exempt ConstraintBreak",
+      "step114-command client coop_host_story exempt ConstraintBreak",
+      "step115-command host coop_host_story exempt Command",
+      "step116-command client coop_host_story exempt Command",
+      "step117-command host coop_host_story exempt Visibility",
+      "step118-command client coop_host_story exempt Visibility",
+      "step119-command host coop_host_story exempt ActionNavBlocker",
+      "step120-command client coop_host_story exempt ActionNavBlocker",
+      "step121-command host coop_host_story exempt StoryFlagListInt",
+      "step122-command client coop_host_story exempt StoryFlagListInt",
+      "step123-command host coop_kiscule_census on",
+      "step124-command client coop_kiscule_census on",
+      "step132-command client coop_kiscule_trace on",
+      "step133-command host coop_kiscule_trace on"
+    ],
+    "commandResults": [
+      "step01-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step02-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step03-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step04-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step05-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step06-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step07-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step08-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step09-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step10-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step11-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step12-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step13-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step14-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step15-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step16-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step17-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step18-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step19-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step20-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step21-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step22-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step23-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step24-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step25-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step26-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step27-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step28-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step29-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step30-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step31-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step32-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step33-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step34-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step35-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step36-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step37-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step38-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step39-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step40-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step41-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step42-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step43-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step44-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step45-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step46-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step47-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step48-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step49-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step50-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step51-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step52-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step53-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step54-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step55-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step56-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step57-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step58-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step59-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step60-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step61-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step62-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step63-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step64-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step65-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step66-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step67-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step68-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step69-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step70-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step71-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step72-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step73-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step74-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step75-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step76-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step77-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step78-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step79-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step80-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step81-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step82-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step83-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step84-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step85-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step86-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step87-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step88-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step89-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step90-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step91-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step92-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step93-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step94-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step95-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step96-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step97-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step98-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step99-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step100-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step101-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step102-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step103-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step104-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step105-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step106-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step107-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step108-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step109-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step110-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step111-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step112-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step113-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step114-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step115-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step116-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step117-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step118-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step119-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step120-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step121-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step122-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step123-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step124-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step132-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step133-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step06-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step07-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step10-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step11-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step12-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step13-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step14-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step15-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step16-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step17-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step18-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step19-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step20-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step21-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step22-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step23-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step24-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step25-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step26-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step27-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step28-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step29-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step30-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step31-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step32-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step33-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step34-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step35-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step36-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step37-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step38-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step39-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step40-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step41-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step42-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step43-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step44-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step45-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step46-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step47-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step48-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step49-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step50-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step51-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step52-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step53-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step54-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step55-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step56-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step57-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step58-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step59-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step60-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step61-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step62-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step63-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step64-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step65-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step66-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step67-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step68-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step69-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step70-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step71-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step72-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step73-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step74-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step75-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step76-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step77-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step78-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step79-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step80-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step81-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step82-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step83-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step84-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step85-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step86-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step87-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step88-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step89-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step90-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step91-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step92-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step93-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step94-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step95-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step96-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step97-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step98-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step99-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step100-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step101-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step102-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step103-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step104-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step105-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step106-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step107-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step108-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step109-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step110-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step111-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step112-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step113-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step114-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step115-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step116-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step117-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step118-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step119-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step120-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step121-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step122-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step123-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step124-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step125-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step126-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step127-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step128-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step129-authority",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step130-attack",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step131-authority",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step132-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step133-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step134-loot",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step135-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      }
+    ],
+    "authority": [
+      {
+        "step": "step129-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h50/50 acq1 lease1 paused0 gp0 hs1"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h50/50 acq0 lease1 paused1 gp1 hs1"
+        ]
+      },
+      {
+        "step": "step131-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h0/50 acq0 lease0 paused0 gp0 hs0"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h0/50 acq0 lease0 paused0 gp0 hs0"
+        ]
+      }
+    ],
+    "npcPicks": [
+      "130 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "130 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "134 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.3,-119.1,61.2"
+    ],
+    "lootStands": [
+      "134 client d=1 at -43.127335,-120.508141,61.003677"
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 56,
+        "cine": 155,
+        "pos": [
+          -39.589989,
+          -121.238586,
+          61.471622
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/1/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 56,
+        "cine": 137,
+        "pos": [
+          -39.510132,
+          -161.669434,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "3/1/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      }
+    },
+    "gameflowEqual": true,
+    "worldDiff": {
+      "status": "EQUAL",
+      "compared": 535,
+      "differences": 0
+    },
+    "hostStory": {
+      "partnerWorldRuns": 0,
+      "blocked": 2,
+      "asked": 1,
+      "replayed": 1,
+      "fallback": 0,
+      "mirrorLocal": 1
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": true,
+  "failure": null
+}
