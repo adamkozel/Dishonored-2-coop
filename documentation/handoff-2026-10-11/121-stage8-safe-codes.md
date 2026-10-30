@@ -58,7 +58,7 @@ Four missions are now equal that the 0.9.6 rules also passed, plus Edge of the W
 
 | Mission | Result |
 |---|---|
-| The Clockwork Mansion | The partner blocked its own GameOver 23 times (`hostStoryGameOverBlocked`) and showed only the copied plain GameOver, so the v2041 block works (confirmed runtime). This time the host died on arrival in the streets ("Your Death Is Upon You"). Under study |
+| The Clockwork Mansion | The host died on arrival in the streets ("Your Death Is Upon You"); the partner showed a plain copied GameOver. The last per-step status (step 23, before the door) has `hostStoryGameOverBlocked` 0 in both games, and nothing later was saved, so whether the partner blocked its own GameOver is not shown. A GameOver with no reason picks a random line from `ui_gameover_01`-`09`, so the host's text does not tell which game ended first (confirmed static). Hypothesis (a helper's reading of the streets script): the partner fell into `script_trigger_falldeath`, whose `ActionDamage` "Kill" (node 244843386, target Player, `DAMAGETYPE_INSTANTKILL`) is a World class; under host story the partner asked the host for it, and the host ran it on its own player. In v2040a and hoststory-v2031a the partner's own Sokolov GameOver came first. Harness v2018 saves both games' `.kiscule.json`, `.missionend.json` and `.checkpoint.json` at a failure to settle it |
 | Dunwall | `mortimer_ramsey still alive after 40 attacks`. Under study |
 | The Royal Conservatory | **Equal** (519) with route v2041 (health hold kept until `boat_dust`) |
 | A Crack in the Slab | The co-op saves switch worked this time. At the end the partner loaded `boat_palace` after its 90 s hold, while the host stayed on `dust_p_lowchaos` in logic 11. Under study |
