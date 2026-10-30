@@ -1,0 +1,277 @@
+{
+  "passed": false,
+  "failure": "pickups_key_blackmarket_assistant: The client never took pickups_key_blackmarket_assistant (8 tries); pickups_note_safecontest: The host never took pickups_note_safecontest (8 tries)",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "plan": [
+      {
+        "name": "pickups_key_blackmarket_assistant",
+        "role": "client",
+        "mode": "story"
+      },
+      {
+        "name": "pickups_note_safecontest",
+        "role": "host",
+        "mode": "story"
+      }
+    ],
+    "shared": false,
+    "cases": [
+      {
+        "case": {
+          "name": "pickups_key_blackmarket_assistant",
+          "role": "client",
+          "mode": "story"
+        },
+        "item": {
+          "handle": "0x1f031b1d",
+          "position": [
+            5.77646,
+            87.0961,
+            32.5595
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "client": 1,
+          "host": 1
+        },
+        "tries": [
+          {
+            "role": "client",
+            "bearing": 0,
+            "stand": [
+              6.876,
+              87.096,
+              31.5537
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 45,
+            "stand": [
+              6.554,
+              87.874,
+              31.5537
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 90,
+            "stand": [
+              5.776,
+              88.196,
+              32.0533
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 135,
+            "stand": [
+              4.99908,
+              87.8738,
+              32.1812
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 180,
+            "stand": [
+              4.05759,
+              86.6828,
+              31.5537
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 225,
+            "stand": [
+              4.68057,
+              86.0489,
+              33.2767
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 270,
+            "aim": "Ground vantage produces unsupported steep pitch"
+          },
+          {
+            "role": "client",
+            "bearing": 315,
+            "stand": [
+              6.69391,
+              86.4247,
+              33.2838
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          }
+        ],
+        "failure": "The client never took pickups_key_blackmarket_assistant (8 tries)"
+      },
+      {
+        "case": {
+          "name": "pickups_note_safecontest",
+          "role": "host",
+          "mode": "story"
+        },
+        "item": {
+          "handle": "0x1f321b4c",
+          "position": [
+            61.297,
+            9.54562,
+            20.1909
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "client": 1,
+          "host": 1
+        },
+        "tries": [
+          {
+            "role": "host",
+            "bearing": 0,
+            "stand": [
+              62.4107,
+              9.54327,
+              19.55
+            ],
+            "focus": {
+              "handle": "0x202b1c45",
+              "name": "pickups_cash_machine_2_4"
+            }
+          },
+          {
+            "role": "host",
+            "bearing": 45,
+            "stand": [
+              62.0969,
+              10.3186,
+              20.0147
+            ],
+            "focus": {
+              "handle": "0x202b1c45",
+              "name": "pickups_cash_machine_2_4"
+            }
+          },
+          {
+            "role": "host",
+            "bearing": 90,
+            "stand": [
+              61.2969,
+              10.646,
+              20.1329
+            ],
+            "focus": {
+              "handle": "0x202b1c45",
+              "name": "pickups_cash_machine_2_4"
+            }
+          },
+          {
+            "role": "host",
+            "bearing": 135,
+            "stand": [
+              60.5314,
+              10.1683,
+              19.6505
+            ],
+            "focus": {
+              "handle": "0x202b1c45",
+              "name": "pickups_cash_machine_2_4"
+            }
+          },
+          {
+            "role": "host",
+            "bearing": 180,
+            "aim": "Ground vantage produces unsupported steep pitch"
+          },
+          {
+            "role": "host",
+            "bearing": 225,
+            "stand": [
+              60.1051,
+              5.76521,
+              18.9376
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "host",
+            "bearing": 270,
+            "stand": [
+              63.7394,
+              6.27205,
+              19.0543
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "host",
+            "bearing": 315,
+            "stand": [
+              63.3562,
+              11.0405,
+              19.4148
+            ],
+            "focus": {
+              "handle": "0x202b1c45",
+              "name": "pickups_cash_machine_2_4"
+            }
+          }
+        ],
+        "failure": "The host never took pickups_note_safecontest (8 tries)"
+      }
+    ],
+    "coinSync": {
+      "client": {
+        "itemsPerPlayer": true,
+        "enabled": false,
+        "ready": false,
+        "result": "disabled",
+        "refusals": 3
+      },
+      "host": {
+        "itemsPerPlayer": true,
+        "enabled": false,
+        "ready": false,
+        "result": "disabled",
+        "refusals": 3
+      }
+    }
+  },
+  "scope": "2035 (#238): items per player, story items to both on a mission map (pickups_key_blackmarket_assistant:client:story,pickups_note_safecontest:host:story); each player takes each item once in their own world"
+}
