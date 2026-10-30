@@ -1,0 +1,247 @@
+[
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_host_story on"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_host_story on"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_kiscule_census on"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_kiscule_census on"
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_bedroom",
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_nearmayhew",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_mayhew",
+  "settle": 6000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "attack",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "max": 40,
+  "settle": 4000
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "loot",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "settle": 6000,
+  "expect": 6
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_2_open",
+  "z": 68.0,
+  "settle": 8000,
+  "offsets": [
+   [
+    -0.8,
+    0
+   ],
+   [
+    -0.6,
+    0
+   ],
+   [
+    -1.0,
+    0
+   ],
+   [
+    -0.7,
+    0.3
+   ],
+   [
+    -0.7,
+    -0.3
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_saferoom_enter",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_saferoom",
+  "settle": 4000
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_3",
+  "z": 65.0,
+  "settle": 15000,
+  "offsets": [
+   [
+    0,
+    0.9
+   ],
+   [
+    0.3,
+    0.85
+   ],
+   [
+    -0.3,
+    0.85
+   ],
+   [
+    0,
+    0.7
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "use",
+  "name": "ld_ring_locker_01_3",
+  "z": 65.0,
+  "settle": 20000,
+  "offsets": [
+   [
+    0,
+    0.9
+   ],
+   [
+    0.3,
+    0.85
+   ],
+   [
+    -0.3,
+    0.85
+   ],
+   [
+    0,
+    0.7
+   ]
+  ],
+  "hold": 600,
+  "pitches": [
+   0,
+   15,
+   30
+  ],
+  "yaws": [
+   0,
+   -15,
+   15
+  ]
+ },
+ {
+  "do": "wait",
+  "ms": 10000,
+  "settle": 5000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_kiscule_trace on"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_kiscule_trace on"
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_balcony",
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_reachstreets",
+  "settle": 5000,
+  "bounce": true
+ },
+ {
+  "do": "at",
+  "pos": [
+   94.0,
+   -18.0,
+   -2.7
+  ],
+  "yaw": 150,
+  "settle": 6000
+ },
+ {
+  "do": "talk",
+  "name": "meagan",
+  "near": [
+   92.0,
+   -16.4
+  ],
+  "settle": 20000,
+  "optional": true
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 5000
+ }
+]

@@ -16,11 +16,21 @@ OUT = os.path.join(os.path.dirname(os.path.dirname(HERE)), "outputs", "d2-coop-l
 # (hoststory-dunwall-v2015a: a host-replayed Cinematic left the partner stuck in the Mayhew scene). Only World classes
 # are host-only; the five grant classes keep the older count mirror (kiscule_action_mirror.h).
 MODES = {"WORLD": "World", "UNKNOWN": "World"}
-# World classes that place per-player items run in both worlds (items are per player, stage 8 brief). ActionSpecialLoot
-# attaches an item entity to an NPC's loot, and Ramsey's ring is a different entity for Corvo and for Emily: blocked on
-# the partner, the partner's Ramsey never got the partner's ring (ring-onlyloot-v2023c failed, ring-onlyhealth-v2023c
-# passed).
-PER_PLAYER = {"arkKisculeNodeActionSpecialLoot"}
+# World classes that run in both worlds anyway:
+# - ActionSpecialLoot places per-player items (items are per player, stage 8 brief). It attaches an item entity to an
+#   NPC's loot, and Ramsey's ring is a different entity for Corvo and for Emily: blocked on the partner, the partner's
+#   Ramsey never got the partner's ring (ring-onlyloot-v2023c failed, ring-onlyhealth-v2023c passed).
+# - LevelTransition is coordinated by the mission-end mirror. Blocked on the partner, the request waited for plain
+#   gameplay that the partner's ending cinematic never reached, and the partner sat in a black screen (boat-trace-v2024c).
+# - Three classes do their work in their own vtable+0x38 step, which the native dispatcher (0x1407c0e30) calls after an
+#   input handler that returns nonzero, as the host-story stub does: stubbing the handler never blocked them, and the
+#   host's replay ran them a second time. ActionMidnightControl starts a midnight scene and Goto an NPC goto; a scene
+#   that cannot start yet re-signals the node with input 0 (boat-trace-v2024c: 76 such retries, no input descriptor to
+#   stub). Both are ambient NPC activity, which the host's NPC authority already decides, and a request would make the
+#   host run the partner's ambient scene. EntitySpawnerControl spawns an entity in its step; running it host-only needs
+#   the step skipped too (chapter 119, still to do).
+BOTH_WORLDS = {"arkKisculeNodeActionSpecialLoot", "arkKisculeNodeLevelTransition", "arkKisculeNodeActionMidnightControl",
+               "arkKisculeNodeGoto", "arkKisculeNodeEntitySpawnerControl"}
 
 
 def main(path):
@@ -29,7 +39,7 @@ def main(path):
     for c in data["classes"]:
         mode = MODES.get(c["category"])
         policy = c.get("partner_policy", "")
-        if c["category"] == "LOCAL-PLAYER" and policy.startswith("allow") or c["class"] in PER_PLAYER:
+        if c["category"] == "LOCAL-PLAYER" and policy.startswith("allow") or c["class"] in BOTH_WORLDS:
             mode = None
         if not mode or not c.get("vtable_rva"):
             continue

@@ -10,7 +10,7 @@ Card [#237](https://github.com/adamkozel/Dishonored-2-coop/issues/237), from [th
 
 ## Host story (`coop_host_story on|off`, off by default)
 
-For each of the 60 World classes (61 until v2024, when ActionSpecialLoot became per player; `PER_PLAYER` in the generator lists such classes):
+For each of the 56 World classes (61 at first; `BOTH_WORLDS` in the generator lists the five that run in both worlds, with the reasons in the table below):
 - **The host** runs the node and sends its count (the existing D2KA count mirror, generalised from its 5 grant classes).
 - **The partner** never runs the node on its own: the handler is stubbed, so the partner's flow and presentation continue. It runs the node only as a replay of the host's run.
 - **Requests:** when the partner reaches a node more often than the host has run it, it asks the host to run it. Requests are asked and run only while both games are in plain gameplay.
@@ -26,6 +26,8 @@ What the takes taught (each failed take is kept in `work/natural-moveset/`):
 | A story-only request list misses the ActionUsable before Ramsey's ring task; any World class may be requested | `hoststory-lead-dunwall-v2019a` |
 | A request made while the partner's game is in a cinematic was skipped. Requests now wait in a queue and go out once the partner is in plain gameplay (candidate hoststory-v2023) | `hoststory-lead-onlytask-v2022e` |
 | ActionSpecialLoot attaches an item entity to an NPC's loot (confirmed static: its Attach and Detach handlers add the item to the target's loot component). Ramsey's ring is a different entity for Corvo and for Emily, so the class places per-player items and runs in both worlds (candidate hoststory-v2024) | `ring-onlyloot-v2023c` failed, `ring-onlyhealth-v2023c` passed |
+| A blocked LevelTransition deadlocks the partner-led ending: the partner's request waits for plain gameplay, which its ending cinematic never reaches, and the partner sits in a black screen. The mission-end mirror coordinates transitions, so LevelTransition runs in both worlds (v2025) | `boat-trace-v2024c` |
+| The native dispatcher (0x1407c0e30) calls the node's vtable+0x38 step after any input handler that returns nonzero, as the stub does (confirmed static). ActionMidnightControl, Goto and EntitySpawnerControl do their work in that step (a midnight scene, an NPC goto, a spawn), so the stub never blocked them and the host's replay ran them a second time. A midnight scene that cannot start yet re-signals its node with input 0, which has no input descriptor to stub: 76 such retries were counted as fallbacks. The three classes run in both worlds (v2025) | `boat-trace-v2024c` |
 
 ## Results so far (confirmed runtime)
 
@@ -46,3 +48,5 @@ What the takes taught (each failed take is kept in `work/natural-moveset/`):
 - Chaos and kill credit for partner kills.
 - Story items reaching both inventories.
 - Turning host story on in the product controller with an off-switch.
+- EntitySpawnerControl host-only: the partner must skip the node's vtable+0x38 step as well as its input handler, and the host's spawn must reach the partner through the NPC streams.
+- Meagan was not seen at her spot in the partner's world in `hoststory-lead-dunwall-v2024a` ("Talk to meagan not registered"), but was in `boat-trace-v2024c`. Check again with v2025, where Goto and midnight scenes run in both worlds.
