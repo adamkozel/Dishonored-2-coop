@@ -1,0 +1,290 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             94 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The worlds differ at the end: 4 values",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-itemsperplayer-v2036",
+      "hostDll": "8DB7D54F3B52321BE94EE65F412008E1A01BDEEC03F2A3562B496E287CCDE5D4",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 26,
+        "client": 26,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 25,
+        "client": 25,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 57,
+        "pos": [
+          2.369002,
+          -28.165901,
+          12.663255
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4468",
+        "ka": "325/42/1",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 31,
+        "pos": [
+          1.670215,
+          -27.989979,
+          13.037640
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 16,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "6/260/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      }
+    },
+    "gameflowEqual": true,
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 2158,
+      "differences": 4
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "8188242eeac37d98",
+        "connection": 3318352623,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "8188242eeac37d98",
+        "sent": 838,
+        "received": 833,
+        "refused": 0,
+        "silentMs": 156
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "8188242eeac37d98",
+        "connection": 1537415557,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "8188242eeac37d98",
+        "sent": 833,
+        "received": 837,
+        "refused": 0,
+        "silentMs": 796
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 222,
+      "asked": 207,
+      "inFlow": 118,
+      "replayed": 260,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 30
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 57,
+        "pos": [
+          2.369002,
+          -28.165901,
+          12.663255
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4468",
+        "ka": "325/42/1",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 31,
+        "pos": [
+          1.670215,
+          -27.989979,
+          13.037640
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 16,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "6/260/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2015.ps1:673[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 673 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe worlds differ at the end: 4 values[0m

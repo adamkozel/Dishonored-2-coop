@@ -67,6 +67,22 @@ Bonecharms did not appear on this map's ground; they are treated as own.
 - **The world diff:** the probe's world digest now puts story pickups in their own `storypickups` category, which the diff compares strictly. Other pickups stay per player.
 - **Two accounts:** `Route-MissionVM-v2015 -ItemsPerPlayer` (with `-HostStory`) runs all nine missions on v2036 (`campaign-<mission>-vm-ipp-v2036a`).
 
+### Two-account campaign with host story and items per player (candidate itemsperplayer-v2036, confirmed runtime)
+
+Host Corvo on this PC, VM partner Emily on the second Steam account, co-op saves, story flags, host story and items per player on (`Run-Campaign-v2036.sh`). In every mission that reached its end the VM partner had items per player on, the shared catalog off, and 0 World runs of its own.
+
+| Mission | Result | World diff at the end | Partner: blocked / asked / in flow / replayed |
+|---|---|---|---|
+| A Long Day in Dunwall | pass | equal (286) | 86 / 77 / 36 / 119 |
+| Edge of the World | differ | 4 safe-dial values on the next map (area 4.3) | 222 / 207 / 118 / 260 |
+| The Good Doctor | differ | the same 2 boat lab glass breakables as in v2031, absent in the VM world | 68 / 59 / 41 / 453 |
+| The Clockwork Mansion | stopped | the host died at `step19-heal` (game over), as in v2031 | - |
+| The Royal Conservatory | pass | equal (519). The result-screen hold (`resultScreenHeld`) fixes the v2031 VM exit | 148 / 131 / 114 / 205 |
+| Dust District | differ | 5 safe-dial values on the next map (area 4.3) | 142 / 139 / 96 / 189 |
+| The Dreadful Wale (bunker) | pass | equal (480) | 275 / 235 / 168 / 305 |
+| The Grand Palace | stopped | before the mission: the host's co-op saves switch stayed in `profile_saving` for 90 s (its 15 s timeout never reported). Re-run as `campaign-palace-vm-ipp-v2036b` | - |
+| Death to the Empress | pass | equal (249) | 586 / 575 / 402 / 679 |
+
 ## Still to do in area 4.2
 - The old pickup tests (`pickup_catchup_tests.h`, `coin_protocol_tests.h`, `Test-MissionPickupFamilies-v1855.ps1`, the join audit) run with items per player off. Their per-player versions are the tests above.
 - Containers, pickpockets and NPC loot under items per player.
