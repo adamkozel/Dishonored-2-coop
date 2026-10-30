@@ -39,7 +39,12 @@ What the takes taught (each failed take is kept in `work/natural-moveset/`):
   - The worlds were equal (538 values) and the gameflow was equal. Objectives advanced together at every step.
   - The partner's native HUD showed the replayed objective update and mission clue.
 - **Mutation twin** (`coop_host_story twin_no_block`): the take goes red ("the partner ran 22 World story nodes of its own"; `hoststory-twin-dunwall-v2017b`). A clean take right after it passes.
-- **Partner-led Dunwall route:** failed at the loot of Ramsey's body (`v2017d` to `v2023a`): the worlds agreed, but the ring task never completed. Two causes were found by bisection, with exemptions (`coop_host_story exempt <Class>`):
+- **Partner-led Dunwall route, passed with candidate hoststory-v2027** (`hoststory-lead-dunwall-v2027a`):
+  - Both games ended the mission into the Void, and the worlds there were equal.
+  - The partner ran no World node of its own, with 0 fallbacks; 140 runs were blocked, 120 requested and 148 replayed.
+  - The host-led take on the same candidate passed too (`hoststory-dunwall-v2027b`, 538 values equal).
+  - Still open: the mid-route diff after the safe room shows the three tower safe-room doors open on the host and closed on the partner, though every requested safe-room node now reaches the partner. A traced take follows (`saferoom-trace-v2028a`).
+- **Partner-led Dunwall route before v2027:** failed at the loot of Ramsey's body (`v2017d` to `v2023a`): the worlds agreed, but the ring task never completed. Two causes were found by bisection, with exemptions (`coop_host_story exempt <Class>`):
   - Host story on with every class exempt passed (`allexempt-v2022d`), and host story off passed (`lead-off-v2022c`).
   - **Request timing:** blocking only ActionGameflowTask failed. The ring task nodes 2899/7 and 2973/7 run in the instant the loot scene ends, while the partner's game is still in its cinematic state, so the request was skipped. Fixed in v2023 by deferring requests.
   - **The ring on the partner's Ramsey:** blocking Health and ActionSpecialLoot together failed. Blocking ActionInteractable, ActionUsable or ActionNPCInteraction alone passed (`ring-only*-v2023c`). The split put it on ActionSpecialLoot (`ring-onlyloot-v2023c` failed, `ring-onlyhealth-v2023c` passed). With it blocked, the partner's loot showed one `interactWith` and `moneyAdded` but no `itemAdded`: the partner's ring was never attached. Fixed in v2024: the class now runs in both worlds.

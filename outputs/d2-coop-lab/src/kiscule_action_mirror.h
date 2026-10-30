@@ -434,7 +434,7 @@ void writeKisculeMirror(){
         kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
     const auto first=k.eventCount>256?k.eventCount-256:0;
     for(auto i=first;i<k.eventCount;++i){const auto& e=k.events[i%256];
-        fprintf(f,"%s{\"tick\":%llu,\"what\":\"%s\",\"class\":\"%s\",\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"count\":%u}",i==first?"":",",e.tick,e.what,e.cls<static_cast<std::uint32_t>(kisculeMirrorClassCount)?kisculeMirrorClasses[e.cls].name:"?",e.entity,e.node,e.input,e.count);}
+        fprintf(f,"%s{\"tick\":%llu,\"what\":\"%s\",\"class\":\"%s\",\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"count\":%u}",i==first?"":",",e.tick,e.what,e.cls<static_cast<std::uint32_t>(kisculeMirrorClassCount)?kisculeMirrorClasses[e.cls].name:e.cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&e.cls<kKisculeHostStoryBase+kKisculePolicyCount?kKisculePolicy[e.cls-kKisculeHostStoryBase].name:"?",e.entity,e.node,e.input,e.count);}
     fprintf(f,"]}\n");
     ReleaseSRWLockShared(&kisculeLock);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
