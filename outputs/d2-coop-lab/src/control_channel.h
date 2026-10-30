@@ -23,7 +23,7 @@ std::uint32_t coopAnnouncedProtocol=kCoopControlProtocol;
 struct CoopControlPacket {
     std::uint32_t magic=0x54433244;   // "D2CT"
     std::uint16_t version=1;
-    std::uint8_t kind=1,flags=0;      // flags: 1 loading, 2 host, 4 host story (the host's setting, stage 8.4.1)
+    std::uint8_t kind=1,flags=0;      // flags: 1 loading, 2 host, 4 host story (the host's setting, stage 8.4.1), 8 items per player (the host's setting, stage 8.4.2)
     std::uint32_t protocol=kCoopControlProtocol,build=0x67a50cde;
     std::uint64_t dllHash=0,session=0;
     std::uint32_t sequence=0,reserved=0;
@@ -35,7 +35,7 @@ struct CoopControlState {
     ULONGLONG connectedAt=0,lastSent=0,lastReceived=0;
     std::uint32_t sequence=0,sentCount=0,receivedCount=0,refusedCount=0;
     std::uint32_t peerProtocol=0;std::uint64_t peerDll=0;
-    bool peerLoading=false,peerLeft=false,helloOk=false,peerHostStory=false;
+    bool peerLoading=false,peerLeft=false,helloOk=false,peerHostStory=false,peerItemsPerPlayer=false;
     char result[160]="idle";
 } coopControl;
 
@@ -51,9 +51,10 @@ inline std::uint64_t coopDllHash(){
 }
 inline bool coopLocalLoading(){return outgoing.pendingGameLogicState!=0;}
 bool coopHostStoryFlag(); // kiscule_action_mirror.h
+bool coopItemsPerPlayerFlag(); // coin_sync.h (stage 8.4.2, #238)
 inline bool sendCoopControl(std::uint8_t kind){
     if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected)return false;
-    CoopControlPacket p{};p.kind=kind;p.flags=static_cast<std::uint8_t>((coopLocalLoading()?1:0)|(localRole==0?2:0)|(coopHostStoryFlag()?4:0));
+    CoopControlPacket p{};p.kind=kind;p.flags=static_cast<std::uint8_t>((coopLocalLoading()?1:0)|(localRole==0?2:0)|(coopHostStoryFlag()?4:0)|(coopItemsPerPlayerFlag()?8:0));
     p.protocol=coopAnnouncedProtocol;p.dllHash=coopDllHash();p.session=outgoing.session;p.sequence=++coopControl.sequence;
     const bool ok=coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_Reliable,nullptr)==k_EResultOK;
     if(ok)++coopControl.sentCount;return ok;
@@ -69,7 +70,7 @@ inline void receiveCoopControl(const void* data,std::uint32_t size,ULONGLONG tic
     std::memcpy(&p,data,sizeof(p));
     if(p.version!=1||p.reserved){++coopControl.refusedCount;return;}
     ++coopControl.receivedCount;coopControl.lastReceived=tick;coopControl.peerProtocol=p.protocol;coopControl.peerDll=p.dllHash;
-    coopControl.peerLoading=(p.flags&1)!=0;coopControl.peerHostStory=(p.flags&4)!=0;
+    coopControl.peerLoading=(p.flags&1)!=0;coopControl.peerHostStory=(p.flags&4)!=0;coopControl.peerItemsPerPlayer=(p.flags&8)!=0;
     if(p.kind==2){coopControl.peerLeft=true;std::snprintf(coopControl.result,sizeof(coopControl.result),"partner_left");return;}
     if(p.protocol!=kCoopControlProtocol||p.build!=0x67a50cde||p.dllHash!=coopDllHash()){
         char reason[160]{};

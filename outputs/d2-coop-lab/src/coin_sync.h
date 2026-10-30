@@ -25,6 +25,12 @@ struct CoinSync {
     std::uint64_t sent=0,received=0,rejected=0,duplicates=0,observations=0,commits=0,reloads=0,rearms=0;
     const char* result="disabled";
 } coinSync;
+// Stage 8.4.2 (#238): items per player. Each player takes each pickup once, in their own world: the shared catalog
+// (request, commit and apply) and the pickup catch-up stay off, so a pickup leaves only the taker's world. In the
+// product it is on unless the host's d2coop.cfg sets items_per_player=0 (D2COOP_ITEMS_PER_PLAYER=0); the partner
+// follows the host's setting from its hello (control flag 8). The lab sets it with coop_items_per_player on|off.
+bool itemsPerPlayer=false,productItemsPerPlayer=true;std::uint64_t itemsPerPlayerRefusals=0;
+bool coopItemsPerPlayerFlag(){return localRole==0&&itemsPerPlayer;}
 std::uint64_t coinArmCounter=0,coinSequence=0;
 int coinEnableRequest=-1,coinReplayRequest=0;
 std::string coinExerciseRequest;
@@ -284,6 +290,8 @@ void serviceCoinSync(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     servicePickupCapacityFixture(tick);
     auto& s=coinSync;
+    if((productMode||productAutoArm)&&localRole==1||productMode&&localRole==0)itemsPerPlayer=localRole==0?productItemsPerPlayer:coopControl.helloOk&&coopControl.peerItemsPerPlayer;
+    if(itemsPerPlayer){if(coinEnableRequest>0){coinEnableRequest=-1;++itemsPerPlayerRefusals;}if(s.enabled)stopCoinSync("items_per_player");}
     // A developer command is consumed once even when the session cannot run.
     std::string exercise;exercise.swap(coinExerciseRequest);
     if(coinEnableRequest>=0){const bool on=coinEnableRequest!=0;coinEnableRequest=-1;
@@ -417,8 +425,8 @@ void writeCoinSync(){
     CoinChannel empty{};const CoinChannel* primary=&empty;unsigned calls=0,awarded=0;
     for(const auto& c:s.entries){calls+=c.calls;awarded+=c.receipt.awarded;if(c.binding.name=="pickups_coin_emily_lowvalue_4")primary=&c;}
     const auto& c=*primary;
-    std::fprintf(f,"{\"bindRefusal\":\"%s\",\"bindRefusalItem\":\"%s\",\"bindRefusals\":%llu,\"enabled\":%s,\"ready\":%s,\"paused\":%s,\"reloadPending\":%s,\"reloadReady\":%s,\"observerInstalled\":%s,\"epoch\":%llu,\"peerEpoch\":%llu,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%u,\"ack\":%u,\"attempted\":%s,\"awarded\":%s,\"nativeSource\":%s,\"before\":%d,\"after\":%d,\"nativeCalls\":%u,\"observations\":%llu,\"commits\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"reloads\":%llu,\"rearms\":%llu,\"result\":\"%s\",\"settled\":%s,\"localOnly\":%u,\"peerOnly\":%llu,\"listsSent\":%llu,\"listsReceived\":%llu,\"sharedDigest\":\"%016llx\",\"peerDigest\":\"%016llx\",\"catalogCount\":%zu,\"catalogId\":\"%016llx\",\"awardedCount\":%u,\"entries\":[",
-        coinBindRefusal,coinBindRefusalItem.c_str(),coinBindRefusals,s.enabled?"true":"false",s.ready?"true":"false",s.paused?"true":"false",s.reloadPending?"true":"false",s.reloadReady?"true":"false",realCoinReward?"true":"false",
+    std::fprintf(f,"{\"itemsPerPlayer\":%s,\"itemsPerPlayerRefusals\":%llu,\"bindRefusal\":\"%s\",\"bindRefusalItem\":\"%s\",\"bindRefusals\":%llu,\"enabled\":%s,\"ready\":%s,\"paused\":%s,\"reloadPending\":%s,\"reloadReady\":%s,\"observerInstalled\":%s,\"epoch\":%llu,\"peerEpoch\":%llu,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%u,\"ack\":%u,\"attempted\":%s,\"awarded\":%s,\"nativeSource\":%s,\"before\":%d,\"after\":%d,\"nativeCalls\":%u,\"observations\":%llu,\"commits\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"reloads\":%llu,\"rearms\":%llu,\"result\":\"%s\",\"settled\":%s,\"localOnly\":%u,\"peerOnly\":%llu,\"listsSent\":%llu,\"listsReceived\":%llu,\"sharedDigest\":\"%016llx\",\"peerDigest\":\"%016llx\",\"catalogCount\":%zu,\"catalogId\":\"%016llx\",\"awardedCount\":%u,\"entries\":[",
+        itemsPerPlayer?"true":"false",itemsPerPlayerRefusals,coinBindRefusal,coinBindRefusalItem.c_str(),coinBindRefusals,s.enabled?"true":"false",s.ready?"true":"false",s.paused?"true":"false",s.reloadPending?"true":"false",s.reloadReady?"true":"false",realCoinReward?"true":"false",
         s.scope.epoch,s.scope.peerEpoch,c.arm,c.peerArm,c.revision,c.ack,c.receipt.attempted?"true":"false",c.receipt.awarded?"true":"false",c.receipt.nativeSource?"true":"false",
         c.receipt.before,c.receipt.after,calls,s.observations,s.commits,s.sent,s.received,s.rejected,s.duplicates,s.reloads,s.rearms,s.result,s.settled?"true":"false",s.localOnly,s.peerOnly,s.listsSent,s.listsReceived,s.sharedDigest,s.peerDigest,s.entries.size(),s.catalogId,awarded);
     bool first=true;for(const auto& entry:s.entries){if(!first)std::fputc(',',f);first=false;std::fputs("{\"name\":",f);coinJsonString(f,entry.binding.name);std::fputs(",\"item\":",f);coinJsonString(f,entry.binding.itemName);
