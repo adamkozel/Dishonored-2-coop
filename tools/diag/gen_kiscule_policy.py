@@ -16,6 +16,11 @@ OUT = os.path.join(os.path.dirname(os.path.dirname(HERE)), "outputs", "d2-coop-l
 # (hoststory-dunwall-v2015a: a host-replayed Cinematic left the partner stuck in the Mayhew scene). Only World classes
 # are host-only; the five grant classes keep the older count mirror (kiscule_action_mirror.h).
 MODES = {"WORLD": "World", "UNKNOWN": "World"}
+# World classes that place per-player items run in both worlds (items are per player, stage 8 brief). ActionSpecialLoot
+# attaches an item entity to an NPC's loot, and Ramsey's ring is a different entity for Corvo and for Emily: blocked on
+# the partner, the partner's Ramsey never got the partner's ring (ring-onlyloot-v2023c failed, ring-onlyhealth-v2023c
+# passed).
+PER_PLAYER = {"arkKisculeNodeActionSpecialLoot"}
 
 
 def main(path):
@@ -24,7 +29,7 @@ def main(path):
     for c in data["classes"]:
         mode = MODES.get(c["category"])
         policy = c.get("partner_policy", "")
-        if c["category"] == "LOCAL-PLAYER" and policy.startswith("allow"):
+        if c["category"] == "LOCAL-PLAYER" and policy.startswith("allow") or c["class"] in PER_PLAYER:
             mode = None
         if not mode or not c.get("vtable_rva"):
             continue

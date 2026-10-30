@@ -15,7 +15,6 @@ constexpr KisculePolicyClass kKisculePolicy[] = {
     {0x1b7a768, "ActionNPCInteraction", KisculePolicy::World},
     {0x1b7aa18, "ActionPhysicsConstraintControl", KisculePolicy::World},
     {0x1b7abd8, "ActionPhysicsImpactControl", KisculePolicy::World},
-    {0x1b7afc8, "ActionSpecialLoot", KisculePolicy::World},
     {0x1b7b4b8, "ActionTripwireControl", KisculePolicy::World},
     {0x1b7b628, "ActionTutorialEnd", KisculePolicy::World},
     {0x1b7bc48, "BlackMarketControl", KisculePolicy::World},

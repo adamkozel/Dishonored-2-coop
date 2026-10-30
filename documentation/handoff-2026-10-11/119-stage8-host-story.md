@@ -10,7 +10,7 @@ Card [#237](https://github.com/adamkozel/Dishonored-2-coop/issues/237), from [th
 
 ## Host story (`coop_host_story on|off`, off by default)
 
-For each of the 61 World classes:
+For each of the 60 World classes (61 until v2024, when ActionSpecialLoot became per player; `PER_PLAYER` in the generator lists such classes):
 - **The host** runs the node and sends its count (the existing D2KA count mirror, generalised from its 5 grant classes).
 - **The partner** never runs the node on its own: the handler is stubbed, so the partner's flow and presentation continue. It runs the node only as a replay of the host's run.
 - **Requests:** when the partner reaches a node more often than the host has run it, it asks the host to run it. Requests are asked and run only while both games are in plain gameplay.
@@ -24,6 +24,8 @@ What the takes taught (each failed take is kept in `work/natural-moveset/`):
 | With host story on through a mission intro, the host's game vanished in the opening cinematic while running requests out of flow (hypothesis for the cause). Requests now wait for plain gameplay | `hoststory-lead-dunwall-v2014c`, `v2016c` |
 | A one-time request misses nodes the host already ran earlier; requests go by count | `loot-trace-on-v2018e` |
 | A story-only request list misses the ActionUsable before Ramsey's ring task; any World class may be requested | `hoststory-lead-dunwall-v2019a` |
+| A request made while the partner's game is in a cinematic was skipped. Requests now wait in a queue and go out once the partner is in plain gameplay (candidate hoststory-v2023) | `hoststory-lead-onlytask-v2022e` |
+| ActionSpecialLoot attaches an item entity to an NPC's loot (confirmed static: its Attach and Detach handlers add the item to the target's loot component). Ramsey's ring is a different entity for Corvo and for Emily, so the class places per-player items and runs in both worlds (candidate hoststory-v2024) | `ring-onlyloot-v2023c` failed, `ring-onlyhealth-v2023c` passed |
 
 ## Results so far (confirmed runtime)
 
@@ -32,9 +34,10 @@ What the takes taught (each failed take is kept in `work/natural-moveset/`):
   - The worlds were equal (538 values) and the gameflow was equal. Objectives advanced together at every step.
   - The partner's native HUD showed the replayed objective update and mission clue.
 - **Mutation twin** (`coop_host_story twin_no_block`): the take goes red ("the partner ran 22 World story nodes of its own"; `hoststory-twin-dunwall-v2017b`). A clean take right after it passes.
-- **Partner-led Dunwall route:** still failing at the loot of Ramsey's body (`v2017d` to `v2020a`).
-  - The worlds agree, but the ring task never completes.
-  - Traces (`loot-trace-off-v2018d`, `loot-trace-on-v2018e`) show the partner's flow is identical with host story on or off up to the ring task nodes 2899/7 and 2973/7. The open question is why no request completed them on the host; take `loot-trace-on-v2021a` keeps a 256-entry event log to answer it.
+- **Partner-led Dunwall route:** failed at the loot of Ramsey's body (`v2017d` to `v2023a`): the worlds agreed, but the ring task never completed. Two causes were found by bisection, with exemptions (`coop_host_story exempt <Class>`):
+  - Host story on with every class exempt passed (`allexempt-v2022d`), and host story off passed (`lead-off-v2022c`).
+  - **Request timing:** blocking only ActionGameflowTask failed. The ring task nodes 2899/7 and 2973/7 run in the instant the loot scene ends, while the partner's game is still in its cinematic state, so the request was skipped. Fixed in v2023 by deferring requests.
+  - **The ring on the partner's Ramsey:** blocking Health and ActionSpecialLoot together failed. Blocking ActionInteractable, ActionUsable or ActionNPCInteraction alone passed (`ring-only*-v2023c`). The split put it on ActionSpecialLoot (`ring-onlyloot-v2023c` failed, `ring-onlyhealth-v2023c` passed). With it blocked, the partner's loot showed one `interactWith` and `moneyAdded` but no `itemAdded`: the partner's ring was never attached. Fixed in v2024: the class now runs in both worlds.
 
 ## Still to do in area 4.1
 
