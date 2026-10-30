@@ -62,12 +62,37 @@ What the takes taught (each failed take is kept in `work/natural-moveset/`):
   - **Request timing:** blocking only ActionGameflowTask failed. The ring task nodes 2899/7 and 2973/7 run in the instant the loot scene ends, while the partner's game is still in its cinematic state, so the request was skipped. Fixed in v2023 by deferring requests.
   - **The ring on the partner's Ramsey:** blocking Health and ActionSpecialLoot together failed. Blocking ActionInteractable, ActionUsable or ActionNPCInteraction alone passed (`ring-only*-v2023c`). The split put it on ActionSpecialLoot (`ring-onlyloot-v2023c` failed, `ring-onlyhealth-v2023c` passed). With it blocked, the partner's loot showed one `interactWith` and `moneyAdded` but no `itemAdded`: the partner's ring was never attached. Fixed in v2024: the class now runs in both worlds.
 
+## The product switch (candidates hoststory-v2030 and v2031)
+
+- **On by default in the product.** `d2coop.cfg` `host_story=0` turns it off: the proxy then sets `D2COOP_HOST_STORY=0` and the host never turns it on. The 1.0 README must document this off-switch.
+- **The host decides.** It sends its setting as control flag 4 in its D2CT hello. The partner follows the host's flag once the hello is valid, so both games always agree.
+- **Who follows what:** in the product (`productMode`) the host takes `d2coop.cfg` and the partner follows the host. Under the lab product controller (`coop_product_auto`, as the VM takes use), the partner follows the host too, and the host keeps the lab's `coop_host_story` commands.
+- **v2030's lesson** (`campaign-dunwall-vm-hoststory-v2030a`, confirmed runtime): the VM partner runs under the lab product controller, not `productMode`, so the follow rule never ran. It refused 145 host-story runs, yet the worlds still ended equal. v2031 lets the partner follow under the lab controller too.
+- **The two-account harness** `Route-MissionVM-v2013 -HostStory` turns host story on in the host's game, diffs mid-route, and fails when the VM did not follow, when the VM ran a World node of its own or fell back, or when the final world diff differs. v2014 also keeps the last 400 lines of both games' logs on a failure.
+
+## Two-account campaign under host story (candidate hoststory-v2031, confirmed runtime)
+
+Host Corvo on this PC and VM partner Emily on the second Steam account, both on co-op saves, with story flags diffed. Takes `campaign-<mission>-vm-hoststory-v2031a`. In every mission that reached its end, the VM followed host story with 0 World runs of its own and 0 fallbacks, and the story flags and gameflow were equal.
+
+| Mission | Result | World diff at the end | Partner: blocked / asked / in flow / replayed |
+|---|---|---|---|
+| A Long Day in Dunwall | pass | equal (286) | 84 / 75 / 34 / 116 |
+| Edge of the World | differ | 6 safe-dial values (area 4.3) | 217 / 205 / 97 / 256 |
+| The Good Doctor | differ | 2 lab glass breakables on the boat, absent in the VM world (`b_hyp_arrived_lab_graduated_cylinder_01`, `b_hyp_arrived_lab_retort_01`) | 67 / 62 / 39 / 557 |
+| The Clockwork Mansion | stopped | the host died in the streets after its health hold went off (game over) | - |
+| The Royal Conservatory | stopped | the VM game vanished during the Meagan exit, with no application error or WER report | - |
+| Dust District | differ | 4 safe-dial values (area 4.3) | 172 / 139 / 66 / 224 |
+| The Grand Palace | pass | equal (608) | 239 / 202 / 75 / 305 |
+| The Dreadful Wale (bunker) | pass | equal (480) | 304 / 250 / 141 / 336 |
+| Death to the Empress | pass | equal (249, main menu after the credits) | 668 / 583 / 318 / 650 |
+
+- **#94 (credits):** at the Empress ending both worlds showed the same gameflow counts `[226,0,0,14,0,8,0]` (`step33-talk` and `step34-expect` mission-end snapshots). The partner no longer keeps the two end-game nodes active that #94 recorded (`[226,2,2,12,0,6,0]`).
+- **Re-runs** of The Good Doctor, The Clockwork Mansion and The Royal Conservatory with harness v2014: `campaign-<mission>-vm-hoststory-v2031b`.
+
 ## Still to do in area 4.1
 
-- Partner-led steps (the loot, #220's partner-only steps), then the other missions.
+- #220's partner-only steps under host story: the partner cures Hypatia (no route yet) and confronts the Duke's double.
 - Player-scoped script actions reaching the partner's own player, now that LocalPlayer classes run in both worlds.
-- Chaos and kill credit for partner kills.
-- Story items reaching both inventories.
-- Turning host story on in the product controller with an off-switch.
+- Story items reaching both inventories (with area 4.2).
+- The tutorial trainer watching both players.
 - EntitySpawnerControl host-only: the partner must skip the node's vtable+0x38 step as well as its input handler, and the host's spawn must reach the partner through the NPC streams.
-- Meagan was not seen at her spot in the partner's world in `hoststory-lead-dunwall-v2024a` ("Talk to meagan not registered"), but was in `boat-trace-v2024c`. Check again with v2025, where Goto and midnight scenes run in both worlds.

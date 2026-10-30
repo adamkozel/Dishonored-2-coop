@@ -1,0 +1,269 @@
+{
+  "passed": false,
+  "failure": "The worlds differ at the end: 6 values",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-hoststory-v2031",
+      "hostDll": "C89ACC6FAE5AF92F18ADE04164BDF770150E7A22FBE986F0CAC72EE7B91A58EA",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 26,
+        "client": 26,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 25,
+        "client": 25,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 54,
+        "pos": [
+          1.883215,
+          -28.034014,
+          12.987877
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4563",
+        "ka": "326/37/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 31,
+        "pos": [
+          2.774631,
+          -28.231869,
+          12.642112
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 12,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "6/256/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      }
+    },
+    "gameflowEqual": true,
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 2158,
+      "differences": 6
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "8534a842d6089c28",
+        "connection": 2543647966,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "8534a842d6089c28",
+        "sent": 829,
+        "received": 824,
+        "refused": 0,
+        "silentMs": 250
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "8534a842d6089c28",
+        "connection": 1663738131,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "8534a842d6089c28",
+        "sent": 825,
+        "received": 829,
+        "refused": 0,
+        "silentMs": 719
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 217,
+      "asked": 205,
+      "inFlow": 97,
+      "replayed": 256,
+      "fallback": 0
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 54,
+        "pos": [
+          1.883215,
+          -28.034014,
+          12.987877
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/4563",
+        "ka": "326/37/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 36,
+        "cine": 31,
+        "pos": [
+          2.774631,
+          -28.231869,
+          12.642112
+        ],
+        "fresh": true,
+        "gameflow": [
+          213,
+          3,
+          6,
+          18,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 12,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "6/256/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

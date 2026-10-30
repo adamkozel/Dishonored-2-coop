@@ -227,6 +227,8 @@ BOOL WINAPI DllMain(HINSTANCE dll, DWORD reason, LPVOID) {
         SetEnvironmentVariableA("D2COOP_PARTNER_ASSETS",GetFileAttributesA(assets)!=INVALID_FILE_ATTRIBUTES?"1":"0");
         // 1214jz (#195): the diagnostic status files are opt-in for players (troubleshooting).
         if(GetPrivateProfileIntA("d2coop","diagnostics",0,cfg)==1)SetEnvironmentVariableA("D2COOP_DIAGNOSTICS","1");
+        // Stage 8.4.1 (#237): host_story=0 turns host story off; the host's setting holds for both players.
+        if(GetPrivateProfileIntA("d2coop","host_story",1,cfg)==0)SetEnvironmentVariableA("D2COOP_HOST_STORY","0");
         // Mission checkpoints read the game's own autosave details (read only).
         char savegame[MAX_PATH]{};
         if(!GetPrivateProfileStringA("d2coop","savegame","",savegame,sizeof(savegame),cfg)){

@@ -1,0 +1,270 @@
+{
+  "passed": false,
+  "failure": "The VM partner did not follow the host into host story (control flag 4)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-hoststory-v2030",
+      "hostDll": "44B72738C2BAC8B5ED946BDBE5BD00D3F38AB3A14F2228038390E40365AA7227",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 26,
+        "client": 26,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "step23-talk": "skipped: npc gone (scene already ran)",
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 29,
+        "pos": [
+          -6.503371,
+          -15.214307,
+          -99.996407
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 12,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "2/5/1",
+        "active": "Mission_Void01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 62,
+        "pos": [
+          -7.011043,
+          -14.706364,
+          -99.890862
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/2735",
+        "ka": "152/0/0",
+        "active": "Mission_Void01"
+      }
+    },
+    "gameflowEqual": true,
+    "worldDiff": {
+      "status": "EQUAL",
+      "compared": 286,
+      "differences": 0
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "71e5e9b6936be966",
+        "connection": 2128391994,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "71e5e9b6936be966",
+        "sent": 696,
+        "received": 693,
+        "refused": 0,
+        "silentMs": 297
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "71e5e9b6936be966",
+        "connection": 1052991708,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "71e5e9b6936be966",
+        "sent": 693,
+        "received": 697,
+        "refused": 0,
+        "silentMs": 0
+      }
+    },
+    "hostStory": {
+      "vmHostStory": false,
+      "partnerWorldRuns": 0,
+      "blocked": 0,
+      "asked": 0,
+      "inFlow": 0,
+      "replayed": 5,
+      "fallback": 0
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 29,
+        "pos": [
+          -6.503371,
+          -15.214307,
+          -99.996407
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 12,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "2/5/1",
+        "active": "Mission_Void01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 62,
+        "pos": [
+          -7.011043,
+          -14.706364,
+          -99.890862
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/2735",
+        "ka": "152/0/0",
+        "active": "Mission_Void01"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
