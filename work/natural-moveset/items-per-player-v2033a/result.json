@@ -1,0 +1,217 @@
+{
+  "passed": false,
+  "failure": "pickups_fruit_banana_02_6: The client gained nothing from pickups_fruit_banana_02_6",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "plan": [
+      {
+        "name": "pickups_fruit_banana_02_6",
+        "role": "client"
+      },
+      {
+        "name": "pickups_mana_potion_01_17",
+        "role": "host"
+      }
+    ],
+    "shared": false,
+    "cases": [
+      {
+        "case": {
+          "name": "pickups_fruit_banana_02_6",
+          "role": "client"
+        },
+        "item": {
+          "handle": "0x1f881ba2",
+          "position": [
+            -39.99,
+            189.49,
+            3.27
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "client": 1,
+          "host": 1
+        },
+        "tries": [
+          {
+            "role": "client",
+            "bearing": 0,
+            "stand": [
+              -38.89,
+              189.49,
+              3.21011
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 45,
+            "stand": [
+              -39.212,
+              190.268,
+              3.21011
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 90,
+            "stand": [
+              -39.99,
+              190.59,
+              3.21011
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 135,
+            "stand": [
+              -40.768,
+              190.268,
+              3.32934
+            ],
+            "focus": {
+              "handle": "0x1f881ba2",
+              "name": "pickups_fruit_banana_02_6"
+            },
+            "goneLocally": true
+          }
+        ],
+        "presentAfterFirst": {
+          "client": 0,
+          "host": 1
+        },
+        "first": {
+          "taker": "client",
+          "takerGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          }
+        },
+        "failure": "The client gained nothing from pickups_fruit_banana_02_6"
+      },
+      {
+        "case": {
+          "name": "pickups_mana_potion_01_17",
+          "role": "host"
+        },
+        "item": {
+          "handle": "0x1f421b5c",
+          "position": [
+            -34.24,
+            213.74,
+            5.26
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "client": 1,
+          "host": 1
+        },
+        "tries": [
+          {
+            "role": "host",
+            "bearing": 0,
+            "stand": [
+              -33.14,
+              213.74,
+              4.37758
+            ],
+            "focus": {
+              "handle": "0x1f421b5c",
+              "name": "pickups_mana_potion_01_17"
+            },
+            "goneLocally": true
+          },
+          {
+            "role": "client",
+            "bearing": 0,
+            "stand": [
+              -34.4857,
+              212.389,
+              4.45514
+            ],
+            "focus": {
+              "handle": "0x1f421b5c",
+              "name": "pickups_mana_potion_01_17"
+            },
+            "goneLocally": true
+          }
+        ],
+        "presentAfterFirst": {
+          "client": 1,
+          "host": 0
+        },
+        "first": {
+          "taker": "host",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "components/interactive/mana_potion.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          }
+        },
+        "presentAfterSecond": {
+          "client": 0,
+          "host": 0
+        },
+        "second": {
+          "taker": "client",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "components/interactive/mana_potion.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          }
+        },
+        "passed": true
+      }
+    ],
+    "coinSync": {
+      "client": {
+        "itemsPerPlayer": true,
+        "enabled": false,
+        "ready": false,
+        "result": "disabled",
+        "refusals": 3
+      },
+      "host": {
+        "itemsPerPlayer": true,
+        "enabled": false,
+        "ready": false,
+        "result": "disabled",
+        "refusals": 3
+      }
+    }
+  },
+  "scope": "2033 (#238): items per player on a mission map (pickups_fruit_banana_02_6:client,pickups_mana_potion_01_17:host); each player takes each item once in their own world"
+}

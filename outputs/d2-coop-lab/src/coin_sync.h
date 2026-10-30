@@ -381,7 +381,10 @@ void servicePickupCatchUp(ULONGLONG tick){
     servicePickupCensus(tick);sendPickupPresence(tick);
     auto& c=pickupCatchUp;if(!c.peerAt||!c.previousAt)return;
     if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.peer.clear();c.previous.clear();c.peerAt=c.previousAt=0;c.targets.clear();c.cursor=0;c.receipt={};c.result="presence_out_of_scope";return;}
-    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!coinSync.ready||!coinReadyContext(tick))return;
+    // Stage 8.4.2 (#238): with items per player, only story pickups are caught up, without the shared catalog.
+    const bool story=itemsPerPlayer;
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    if(story?!(coinConnection()&&coopWorldPairReady(outgoing,remote)&&coopGameplayReady(outgoing)&&!doorCheckpointBarrierActive()&&lastReceive&&tick-lastReceive<250):(!coinSync.ready||!coinReadyContext(tick)))return;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(c.cursor>=c.targets.size()&&pickupCensus.cycles&&c.plannedCycle!=pickupCensus.cycles){
         c.plannedCycle=pickupCensus.cycles;c.targets.clear();c.cursor=0;
@@ -389,14 +392,14 @@ void servicePickupCatchUp(ULONGLONG tick){
         for(const auto& item:pickupCensusItems()){
             const auto at=pickupCensus.actors.find(item.handle>>16);
             if(at==pickupCensus.actors.end()||c.previousAt<at->second.seenAt+10000||shared.count(item.name)||c.attempted.count(item.name)||!pickupCatchUpTarget(item,c.peer,c.previous,!localRole))continue;
-            NativeCoin n{};if(readNativeCoin(memoryRead,base,observedGame,item.handle,n,true)&&coinCatalogEligible(n))c.targets.push_back({item.name,item.handle}); // dormant: a later cycle
+            NativeCoin n{};if(story?readNativeStoryPickup(memoryRead,base,observedGame,item.handle,n):readNativeCoin(memoryRead,base,observedGame,item.handle,n,true)&&coinCatalogEligible(n))c.targets.push_back({item.name,item.handle}); // dormant: a later cycle
         }
         c.planned+=c.targets.size();c.result=c.targets.empty()?"caught_up":"catching_up";
     }
     if(c.cursor>=c.targets.size())return;
     const auto& t=c.targets[c.cursor];NativeCoin n{};
-    if(!readNativeCoin(memoryRead,base,observedGame,t.handle,n,true)||n.name!=t.name){++c.cursor;c.receipt={};return;} // taken here meanwhile
-    const auto r=applyNativeCoin(n,c.receipt,c.calls);
+    if(!(story?readNativeStoryPickup(memoryRead,base,observedGame,t.handle,n):readNativeCoin(memoryRead,base,observedGame,t.handle,n,true))||n.name!=t.name){++c.cursor;c.receipt={};return;} // taken here meanwhile
+    const auto r=story?applyNativeStoryPickup(n,c.calls):applyNativeCoin(n,c.receipt,c.calls);
     if(r==CoinApply::Deferred){++c.deferrals;return;}
     c.attempted[t.name]=true;
     auto& names=r==CoinApply::Complete?c.awardedNames:c.failedNames;++(r==CoinApply::Complete?c.awarded:c.failed);if(names.size()<64)names.push_back(t.name);

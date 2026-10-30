@@ -94,3 +94,48 @@ CoinApply applyNativeCoin(const NativeCoin& binding,CoinAwardReceipt& receipt,un
     if(!memoryRead(n.component+0xd0,&flags,1)||!(flags&8)||flags&2)return CoinApply::Failed;
     return (n.type==6?receipt.finishFood(afterValue.food.value):receipt.finish(after))?CoinApply::Complete:CoinApply::Failed;
 }
+// Stage 8.4.2 (#238): story items reach both players. A story pickup is a key (item family 17), a note (12), the rewire
+// tool (22) or a map (24, 27); every other family (money and valuables, ammunition, food, runes, elixirs, paintings,
+// blueprints, books, whalebone) is each player's own (pickup census, edge of the world, items-per-player-v2033a time).
+inline bool storyPickupFamily(unsigned family){return family==12||family==17||family==22||family==24||family==27;}
+// The same exact pickup declaration as readNativeCoin, for a story family (any special index; quantity 1 to 1000).
+template<class Read> bool readNativeStoryPickup(Read read,std::uintptr_t base,std::uintptr_t game,unsigned handle,NativeCoin& out){
+    NativeCoin s{};s.game=game;s.handle=handle;std::uintptr_t vt=0,p=0,list=0;unsigned count=0;
+    const auto eq=[&](std::uintptr_t at,std::uintptr_t value){return read(at,&vt,8)&&vt==value;};
+    if(!game||!eq(game,base+0x1c940a8)||!(s.actor=worldIdentityEntity(read,game,handle))||!eq(s.actor,base+0x1c5e258)||
+       !read(s.actor+0x20,&p,8)||!worldIdentityString(read,p,s.name)||
+       !read(s.actor+0x268,&list,8)||!list||!read(s.actor+0x270,&count,4)||!(count&0xffffff)||(count&0xffffff)>256)return false;
+    std::array<std::uintptr_t,256> members{};if(!read(list,members.data(),(count&0xffffff)*8))return false;
+    for(unsigned i=0;i<(count&0xffffff);++i){if(!members[i]||!read(members[i],&vt,8))return false;if(vt==base+0x1c5a3b8){if(s.component)return false;s.component=members[i];}}
+    unsigned char carried=0;
+    if(!s.component||!eq(s.component+0x10,s.actor)||!read(s.component+0x18,&s.generation,4)||s.generation==~0u||
+       !read(s.component+0x1c,&s.componentFlags,4)||(s.componentFlags&12)!=8||
+       !read(s.component+8,&s.declaration,8)||!s.declaration||!eq(s.declaration,base+0x1c5a278)||
+       !read(s.declaration+0xa0,&carried,1)||carried||!read(s.declaration+0xf8,&s.item,8)||!s.item||!eq(s.item,base+0x1b9ea48)||
+       !read(s.item+8,&p,8)||!worldIdentityString(read,p,s.itemName)||!read(s.item+0x60,&s.type,4)||!storyPickupFamily(s.type)||
+       !read(s.declaration+0x100,&s.quantity,4)||s.quantity<1||s.quantity>1000||
+       !read(s.component+0xd0,&s.flags,1)||s.flags&0xf0||!read(s.actor+0xd0,&s.ownerFlags,1)||
+       !read(s.actor+0x300,s.position.data(),12))return false;
+    for(float f:s.position)if(!std::isfinite(f))return false;
+    out=std::move(s);return true;
+}
+// The story pickup taken natively by this world's player, as the peer's player took it: claim, native reward, the
+// pickedUp event and finish, the steps applyNativeCoin takes. A story item has no wallet outcome to check; the pickup's
+// own flags must show the claim and then the finish.
+CoinApply applyNativeStoryPickup(const NativeCoin& binding,unsigned& calls){
+    CoinWalletGuard wallet(true);if(!wallet.acquired)return CoinApply::Deferred;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeCoin n{};CoinPlayer p{};
+    if(!nativeCoinApiAvailable()||!readNativeStoryPickup(memoryRead,base,observedGame,binding.handle,n)||!sameNativeCoin(n,binding)||n.ownerFlags&1||n.flags&8)return CoinApply::Failed;
+    if(n.flags&2)return CoinApply::Deferred;
+    if(n.flags)return CoinApply::Failed;
+    if(!readCoinPlayer(p)||!nativePlayerGroundIdleStates(p.states,base))return CoinApply::Deferred;
+    ++calls;reinterpret_cast<void(*)(void*)>(gameImage+0x76e2b0)(reinterpret_cast<void*>(n.component));
+    unsigned char flags=0;if(!memoryRead(n.component+0xd0,&flags,1)||!(flags&2)||flags&8)return CoinApply::Failed;
+    ++calls;realCoinReward(reinterpret_cast<void*>(p.loot),reinterpret_cast<void*>(n.component),0);
+    struct EventValue {unsigned char bytes[24]{};};EventValue success{},grapple{},result{};success.bytes[0]=grapple.bytes[0]=0x69;const int yes=1;std::memcpy(success.bytes+8,&yes,4);
+    ++calls;reinterpret_cast<void*(*)(void*,void*,void*,void*,void*)>(gameImage+0x8848a0)(reinterpret_cast<void*>(n.actor),&result,gameImage+0x39acd40,&success,&grapple);
+    ++calls;reinterpret_cast<void(*)(void*)>(gameImage+0x882fc0)(&result);
+    ++calls;reinterpret_cast<void(*)(void*,unsigned char)>(gameImage+0x76ec20)(reinterpret_cast<void*>(n.component),1);
+    if(!memoryRead(n.component+0xd0,&flags,1)||!(flags&8)||flags&2)return CoinApply::Failed;
+    return CoinApply::Complete;
+}

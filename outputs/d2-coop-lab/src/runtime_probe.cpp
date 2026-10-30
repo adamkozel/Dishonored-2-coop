@@ -2035,9 +2035,13 @@ int main(int argc, char** argv) {
             unsigned componentFlags=0;unsigned char flags=0,ownerFlags=0;float position[3]{};NativeCoin coin{};
             reader(component+0x1c,&componentFlags,4);reader(component+0xd0,&flags,1);reader(actor+0xd0,&ownerFlags,1);reader(actor+0x300,position,12);
             const bool readable=readNativeCoin(reader,base,game,h,coin,true);
+            // Stage 8.4.2 (#238): the item declaration of every pickup, whatever its family, to classify story items.
+            std::uintptr_t decl=0,item=0,ip=0;std::string itemName;unsigned type=0;int special=0,quantity=0;unsigned char carried=0;
+            if(reader(component+8,&decl,8)&&decl&&reader(decl,&vt,8)&&vt==base+0x1c5a278){reader(decl+0xa0,&carried,1);reader(decl+0x100,&quantity,4);
+                if(reader(decl+0xf8,&item,8)&&item&&reader(item,&vt,8)&&vt==base+0x1b9ea48){if(reader(item+8,&ip,8))worldIdentityString(reader,ip,itemName);reader(item+0x60,&type,4);reader(item+0xc4,&special,4);}}
             if(!first)std::cout<<',';first=false;
             std::cout<<"{\"name\":"<<jsonString(name)<<",\"handle\":"<<h<<",\"componentFlags\":"<<componentFlags<<",\"flags\":"<<unsigned(flags)<<",\"ownerFlags\":"<<unsigned(ownerFlags)
-                <<",\"readable\":"<<(readable?"true":"false")<<",\"position\":["<<position[0]<<','<<position[1]<<','<<position[2]<<"]}";
+                <<",\"readable\":"<<(readable?"true":"false")<<",\"item\":"<<jsonString(itemName)<<",\"type\":"<<type<<",\"special\":"<<special<<",\"carried\":"<<unsigned(carried)<<",\"quantity\":"<<quantity<<",\"position\":["<<position[0]<<','<<position[1]<<','<<position[2]<<"]}";
         }
         std::cout<<"]}\n";return 0;
     }
