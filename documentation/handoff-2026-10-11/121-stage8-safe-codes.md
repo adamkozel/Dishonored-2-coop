@@ -54,9 +54,26 @@ Four missions are now equal that the 0.9.6 rules also passed, plus Edge of the W
 
 **Candidate gameover-v2041** (`kiscule_action_mirror.h`): under host story the partner never runs its own `ActionGameOver` node (vtable RVA 0x1b79cc8). It reaches GameOver only from the host's `Death` message (`checkpoint_sync.h`), so the host decides. Counted as `hostStoryGameOverBlocked` in `<status>.kiscule.json`. What harmed the partner's Sokolov is still a hypothesis (his spawn is a replay of the host's run, out of the partner's own flow order). `Run-Campaign-v2041.sh a` reruns The Clockwork Mansion, Dunwall, The Royal Conservatory and A Crack in the Slab on it with harness v2017.
 
+### Reruns on gameover-v2041 (v2041a, harness v2017)
+
+| Mission | Result |
+|---|---|
+| The Clockwork Mansion | The partner blocked its own GameOver 23 times (`hostStoryGameOverBlocked`) and showed only the copied plain GameOver, so the v2041 block works (confirmed runtime). This time the host died on arrival in the streets ("Your Death Is Upon You"). Under study |
+| Dunwall | `mortimer_ramsey still alive after 40 attacks`. Under study |
+| The Royal Conservatory | **Equal** (519) with route v2041 (health hold kept until `boat_dust`) |
+| A Crack in the Slab | The co-op saves switch worked this time. At the end the partner loaded `boat_palace` after its 90 s hold, while the host stayed on `dust_p_lowchaos` in logic 11. Under study |
+
+No screenshot grab timed out in harness v2017.
+
+**Candidate gameover-v2041b** (from a helper's reading of `campaign-empress-vm-ipp-v2040a`):
+- **Death to the Empress:** `Mission_DTTE` was 2 on the host and 0 on the partner from step 9 to the end (confirmed runtime). The partner's own `ActionGameflowMission` (node 1281) was blocked by host story during its load, and the host's run of it expired (`expired` 0 to 58 in that step). At the end the mission-end message found no active mission on the partner (`no_active_mission`), and the host loaded `end_p` alone. Why the host's load-time runs expired is a hypothesis (the partner's long arrival scene). v2041b: the host's gameflow mirror also sends missions in state 2, and the partner activates a mission that is 0 there (`missionActivated`). Completion stays with the mission-end message.
+- **Co-op saves:** a host stuck in `profile_saving` with no timeout means `serviceCoopSaves` stopped running for at least 15 s (its 15 s deadline never fired; confirmed static). v2041b writes `serviceAgeMs` and `serviceGapMaxMs` in the saves status, so the next occurrence shows the gap.
+
+`Run-Campaign-v2041b.sh a` reruns Death to the Empress on it.
+
 ## Still to do in area 4.3
 
-- **The campaign on two accounts:** the v2041 reruns, then The Good Doctor glass and the Death to the Empress ending.
+- **The campaign on two accounts:** the v2041b Death to the Empress rerun; The Clockwork Mansion host death, the Dunwall Ramsey fight and the A Crack in the Slab ending; The Good Doctor glass.
 - **Note text on screen:** check that the partner's note shows the host's digits. This is visual acceptance, recorded separately.
 - **A partner opens a safe with the host's code** (a route step on Edge of the World).
 - **Codes outside `3_digits_lock`:** the Jindosh lock (chapter 110) and other lock decls, if any.
