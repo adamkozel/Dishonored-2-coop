@@ -316,7 +316,10 @@ void serviceKisculeMirror(std::uint64_t tick){
     if(GetCurrentThreadId()!=engineThread.load())return;
     auto& k=kisculeMirror;
     if(!kisculeMirrorActive()){AcquireSRWLockExclusive(&kisculeLock);k.outgoingQueue.clear();k.pending.clear();ReleaseSRWLockExclusive(&kisculeLock);return;}
-    if(productMode){const bool want=localRole==0?productHostStory:coopControl.helloOk&&coopControl.peerHostStory;
+    // The partner follows the host's setting in the product and under the lab's product controller (coop_product_auto),
+    // which VM takes run (campaign-dunwall-vm-hoststory-v2030a: the VM partner stayed off); the host's own setting comes
+    // from d2coop.cfg only in the product, so lab commands still decide it.
+    if((productMode||productAutoArm)&&localRole==1||productMode&&localRole==0){const bool want=localRole==0?productHostStory:coopControl.helloOk&&coopControl.peerHostStory;
         if(want!=kisculeHostStory){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=want;ReleaseSRWLockExclusive(&kisculeLock);}}
     std::vector<KisculeActionPacket> send;std::vector<KisculePending> work;
     AcquireSRWLockExclusive(&kisculeLock);send.swap(k.outgoingQueue);work.swap(k.pending);
