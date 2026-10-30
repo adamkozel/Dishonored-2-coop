@@ -43,7 +43,16 @@ What the takes taught (each failed take is kept in `work/natural-moveset/`):
   - Both games ended the mission into the Void, and the worlds there were equal.
   - The partner ran no World node of its own, with 0 fallbacks; 140 runs were blocked, 120 requested and 148 replayed.
   - The host-led take on the same candidate passed too (`hoststory-dunwall-v2027b`, 538 values equal).
-  - Still open: the mid-route diff after the safe room shows the three tower safe-room doors open on the host and closed on the partner, though every requested safe-room node now reaches the partner. A traced take follows (`saferoom-trace-v2028a`).
+  - Still open: the mid-route diff after the safe room shows the three tower safe-room doors open on the host and closed on the partner, though every requested safe-room node now reaches the partner.
+- **The safe-room doors** (`saferoom-trace-v2028a`, confirmed runtime):
+  - When the safe opens, both games run the same burst of about 45 World nodes within 50 ms. It includes ActionUsable 1511628513 four times, once per safe door.
+  - The host opens all four doors (`env_interiors_safe_door`, `_5`, `_6`, `_9`). The partner blocks the burst, and the host's runs arrive 13 s later as direct handler calls.
+  - By then the node's target input holds its last value, so all four replays hit `_5`, the only door that opened in the partner's world.
+  - Replaying a node out of flow cannot rebuild data inputs that changed in between. Door and safe states need a result-level sync, which is area 4.3 ([#239](https://github.com/adamkozel/Dishonored-2-coop/issues/239)).
+- **Meagan's talk** registered in 2 of the 5 partner-led takes from v2024 to v2028 (confirmed runtime, ordering):
+  - When the partner's own flow reached ActionControlTalk 1340523551 before the host's run arrived, the scene went on (`hoststory-lead-dunwall-v2027a`).
+  - When the host's run arrived 16 ms first, the handler ran out of flow. The partner's own run was then stubbed, and the flow never reached task 1429/7 (`saferoom-trace-v2028a`).
+  - Candidate hoststory-v2029 holds such a host run for up to 750 ms. If the partner's flow reaches the node in that window, it runs in flow, counted as the host's run (`in_flow`, `hostStoryInFlow`).
 - **Partner-led Dunwall route before v2027:** failed at the loot of Ramsey's body (`v2017d` to `v2023a`): the worlds agreed, but the ring task never completed. Two causes were found by bisection, with exemptions (`coop_host_story exempt <Class>`):
   - Host story on with every class exempt passed (`allexempt-v2022d`), and host story off passed (`lead-off-v2022c`).
   - **Request timing:** blocking only ActionGameflowTask failed. The ring task nodes 2899/7 and 2973/7 run in the instant the loot scene ends, while the partner's game is still in its cinematic state, so the request was skipped. Fixed in v2023 by deferring requests.
