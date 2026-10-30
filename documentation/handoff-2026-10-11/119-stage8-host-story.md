@@ -53,6 +53,10 @@ What the takes taught (each failed take is kept in `work/natural-moveset/`):
   - When the partner's own flow reached ActionControlTalk 1340523551 before the host's run arrived, the scene went on (`hoststory-lead-dunwall-v2027a`).
   - When the host's run arrived 16 ms first, the handler ran out of flow. The partner's own run was then stubbed, and the flow never reached task 1429/7 (`saferoom-trace-v2028a`).
   - Candidate hoststory-v2029 holds such a host run for up to 750 ms. If the partner's flow reaches the node in that window, it runs in flow, counted as the host's run (`in_flow`, `hostStoryInFlow`).
+- **Checkpoint, candidate hoststory-v2029** (confirmed runtime):
+  - **Partner-led:** `hoststory-lead-dunwall-v2029a` and `v2029b` both passed. Meagan's scene started by itself, as with host story off. The worlds in the Void were equal. The partner ran no World node of its own: 128 blocked, 125 requested, 136 replayed and 12 run in flow.
+  - **Host-led:** `hoststory-dunwall-v2029c` passed with 538 values equal. The partner's World nodes now almost all run in flow on the host's count: 19 in flow, 1 blocked.
+  - **Remaining difference:** only the safe-room doors mid-route, which go to area 4.3.
 - **Partner-led Dunwall route before v2027:** failed at the loot of Ramsey's body (`v2017d` to `v2023a`): the worlds agreed, but the ring task never completed. Two causes were found by bisection, with exemptions (`coop_host_story exempt <Class>`):
   - Host story on with every class exempt passed (`allexempt-v2022d`), and host story off passed (`lead-off-v2022c`).
   - **Request timing:** blocking only ActionGameflowTask failed. The ring task nodes 2899/7 and 2973/7 run in the instant the loot scene ends, while the partner's game is still in its cinematic state, so the request was skipped. Fixed in v2023 by deferring requests.
