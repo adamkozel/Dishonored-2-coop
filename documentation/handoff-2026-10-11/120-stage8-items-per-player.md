@@ -57,10 +57,17 @@ Bonecharms did not appear on this map's ground; they are treated as own.
   - As in 0.9.6, a story pickup the peer's world never had would also be given (hypothesis: rare on authored maps).
 - **Test:** `Test-ItemsPerPlayer-v2035.ps1` adds `name:role:story` cases. The other world's copy must be gone within 30 s, and the other player must hold the same item.
 
-## Still to do in area 4.2
+### Story item results (confirmed runtime)
 
-- The story-item take on v2035, with a key and a note.
-- The world diff: split story pickups out of the per-player `pickups` category so their differences fail.
+- **`items-per-player-v2035a` and `v2035b` failed in the route.** The black-market key, the safe contest note and a newspaper never took the native use focus from the ground stands (the note's stands focused a cash machine), so nothing was taken.
+- **Candidate itemsperplayer-v2036 adds a lab command,** `coop_items_per_player take <name>`. It takes a story pickup natively in this world through the same steps, and `pickup-catchup.json` reports `storyTake`. `Test-ItemsPerPlayer-v2036.ps1` uses it for story cases; own cases still take through input.
+- **`items-per-player-v2036a` passed all four cases:**
+  - Each story item (the partner's newspaper `pickups_news_kg_dunwallcoup`, the host's street map `script_eotw_street_map_5`, the partner's key `pickups_key_blackmarket_assistant`) left the other world within 6 to 16 s. The other player received the same item.
+  - The host's mana potion `pickups_mana_potion_01_13` reached only the host.
+- **The world diff:** the probe's world digest now puts story pickups in their own `storypickups` category, which the diff compares strictly. Other pickups stay per player.
+- **Two accounts:** `Route-MissionVM-v2015 -ItemsPerPlayer` (with `-HostStory`) runs all nine missions on v2036 (`campaign-<mission>-vm-ipp-v2036a`).
+
+## Still to do in area 4.2
 - The old pickup tests (`pickup_catchup_tests.h`, `coin_protocol_tests.h`, `Test-MissionPickupFamilies-v1855.ps1`, the join audit) run with items per player off. Their per-player versions are the tests above.
 - Containers, pickpockets and NPC loot under items per player.
 - Review the partner-first locker grants (#183) for doubled ammunition or money.

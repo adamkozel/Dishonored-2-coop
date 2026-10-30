@@ -31,6 +31,9 @@ struct CoinSync {
 // follows the host's setting from its hello (control flag 8). The lab sets it with coop_items_per_player on|off.
 bool itemsPerPlayer=false,productItemsPerPlayer=true;std::uint64_t itemsPerPlayerRefusals=0;
 bool coopItemsPerPlayerFlag(){return localRole==0&&itemsPerPlayer;}
+// Lab only (coop_items_per_player take <name>): this world's player takes the named story pickup natively, through the
+// same native steps as the story catch-up, so a test can check that the peer's world follows (Test-ItemsPerPlayer).
+std::string storyTakeRequest;const char* storyTakeResult="idle";std::uint64_t storyTakes=0;
 std::uint64_t coinArmCounter=0,coinSequence=0;
 int coinEnableRequest=-1,coinReplayRequest=0;
 std::string coinExerciseRequest;
@@ -379,6 +382,11 @@ void receivePickupPresence(const PickupPresencePacket& p,std::size_t bytes,ULONG
 // this world first had the pickup. Since 1214jv (#203) the host does too, for authored pickups only.
 void servicePickupCatchUp(ULONGLONG tick){
     servicePickupCensus(tick);sendPickupPresence(tick);
+    if(!storyTakeRequest.empty()&&nativeMutationAllowed&&GetCurrentThreadId()==engineThread.load()){std::string name;name.swap(storyTakeRequest);storyTakeResult="not_found";
+        for(const auto& [slot,a]:pickupCensus.actors)if(a.name==name){NativeCoin n{};
+            if(!readNativeStoryPickup(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,a.handle,n)){storyTakeResult="not_story";break;}
+            unsigned calls=0;const auto r=applyNativeStoryPickup(n,calls);storyTakeResult=r==CoinApply::Complete?"taken":r==CoinApply::Deferred?"deferred":"failed";
+            if(r==CoinApply::Deferred)storyTakeRequest=name;else ++storyTakes;break;}}
     auto& c=pickupCatchUp;if(!c.peerAt||!c.previousAt)return;
     if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.peer.clear();c.previous.clear();c.peerAt=c.previousAt=0;c.targets.clear();c.cursor=0;c.receipt={};c.result="presence_out_of_scope";return;}
     // Stage 8.4.2 (#238): with items per player, only story pickups are caught up, without the shared catalog.
@@ -408,10 +416,10 @@ void servicePickupCatchUp(ULONGLONG tick){
 void writePickupCatchUp(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.pickup-catchup.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& c=pickupCatchUp;const auto& s=pickupCensus;
-    std::fprintf(f,"{\"role\":%u,\"result\":\"%s\",\"census\":{\"cycles\":%llu,\"actors\":%zu,\"classifications\":%llu,\"maxReads\":%llu,\"lastCycleMs\":%llu,\"scanning\":%s},"
+    std::fprintf(f,"{\"storyTake\":\"%s\",\"storyTakes\":%llu,\"role\":%u,\"result\":\"%s\",\"census\":{\"cycles\":%llu,\"actors\":%zu,\"classifications\":%llu,\"maxReads\":%llu,\"lastCycleMs\":%llu,\"scanning\":%s},"
         "\"map\":%llu,\"epoch\":%llu,\"peerEpoch\":%llu,\"presenceSent\":%llu,\"sentEntries\":%u,\"refusedSends\":%llu,\"presenceReceived\":%llu,\"rejected\":%llu,\"peerEntries\":%zu,"
         "\"planned\":%llu,\"targets\":%zu,\"cursor\":%zu,\"awarded\":%llu,\"failed\":%llu,\"deferrals\":%llu,\"awardedNames\":[",
-        localRole,c.result,s.cycles,s.actors.size(),s.classifications,s.maxReads,s.lastCycleMs,s.scanning?"true":"false",
+        storyTakeResult,storyTakes,localRole,c.result,s.cycles,s.actors.size(),s.classifications,s.maxReads,s.lastCycleMs,s.scanning?"true":"false",
         c.map,c.epoch,c.peerEpoch,c.presenceSent,c.sentEntries,c.refusedSends,c.presenceReceived,c.rejected,c.peer.size(),c.planned,c.targets.size(),c.cursor,c.awarded,c.failed,c.deferrals);
     const auto list=[&](const std::vector<std::string>& names){for(std::size_t i=0;i<names.size();++i){if(i)std::fputc(',',f);std::fputc('"',f);std::fputs(names[i].c_str(),f);std::fputc('"',f);}};
     list(c.awardedNames);std::fputs("],\"failedNames\":[",f);list(c.failedNames);std::fputs("],\"targetNames\":[",f);

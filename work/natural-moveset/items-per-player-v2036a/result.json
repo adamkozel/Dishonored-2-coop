@@ -1,0 +1,313 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "plan": [
+      {
+        "name": "pickups_news_kg_dunwallcoup",
+        "role": "client",
+        "mode": "story"
+      },
+      {
+        "name": "script_eotw_street_map_5",
+        "role": "host",
+        "mode": "story"
+      },
+      {
+        "name": "pickups_key_blackmarket_assistant",
+        "role": "client",
+        "mode": "story"
+      },
+      {
+        "name": "pickups_mana_potion_01_13",
+        "role": "host",
+        "mode": "own"
+      }
+    ],
+    "shared": false,
+    "cases": [
+      {
+        "case": {
+          "name": "pickups_news_kg_dunwallcoup",
+          "role": "client",
+          "mode": "story"
+        },
+        "item": {
+          "handle": "0x1f511b6b",
+          "position": [
+            11.8126,
+            42.4585,
+            18.326
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "host": 1,
+          "client": 1
+        },
+        "tries": [],
+        "take": "taken",
+        "presentAfterFirst": {
+          "host": 1,
+          "client": 0
+        },
+        "first": {
+          "taker": "client",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "models/interactive/newspapers/news_kg_dunwallcoup.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          }
+        },
+        "story": {
+          "item": "models/interactive/newspapers/news_kg_dunwallcoup.inventoryitem",
+          "goneMs": 13383,
+          "gone": true,
+          "otherGain": {
+            "money": 0,
+            "items": {
+              "models/interactive/newspapers/news_kg_dunwallcoup.inventoryitem": 1
+            },
+            "any": true
+          }
+        },
+        "passed": true
+      },
+      {
+        "case": {
+          "name": "script_eotw_street_map_5",
+          "role": "host",
+          "mode": "story"
+        },
+        "item": {
+          "handle": "0x21091d23",
+          "position": [
+            28.3785,
+            40.2698,
+            18.94
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "host": 1,
+          "client": 1
+        },
+        "tries": [],
+        "take": "taken",
+        "presentAfterFirst": {
+          "host": 0,
+          "client": 1
+        },
+        "first": {
+          "taker": "host",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "models/environment/gameplay/minimaps/inv_item/minimap_eotw_street.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          }
+        },
+        "story": {
+          "item": "models/environment/gameplay/minimaps/inv_item/minimap_eotw_street.inventoryitem",
+          "goneMs": 5560,
+          "gone": true,
+          "otherGain": {
+            "money": 0,
+            "items": {
+              "models/environment/gameplay/minimaps/inv_item/minimap_eotw_street.inventoryitem": 1
+            },
+            "any": true
+          }
+        },
+        "passed": true
+      },
+      {
+        "case": {
+          "name": "pickups_key_blackmarket_assistant",
+          "role": "client",
+          "mode": "story"
+        },
+        "item": {
+          "handle": "0x1f031b1d",
+          "position": [
+            5.77646,
+            87.0961,
+            32.5595
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "host": 1,
+          "client": 1
+        },
+        "tries": [],
+        "take": "taken",
+        "presentAfterFirst": {
+          "host": 1,
+          "client": 0
+        },
+        "first": {
+          "taker": "client",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "models/interactive/keys/eotw/key_blackmarket.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          }
+        },
+        "story": {
+          "item": "models/interactive/keys/eotw/key_blackmarket.inventoryitem",
+          "goneMs": 15980,
+          "gone": true,
+          "otherGain": {
+            "money": 0,
+            "items": {
+              "models/interactive/keys/eotw/key_blackmarket.inventoryitem": 1
+            },
+            "any": true
+          }
+        },
+        "passed": true
+      },
+      {
+        "case": {
+          "name": "pickups_mana_potion_01_13",
+          "role": "host",
+          "mode": "own"
+        },
+        "item": {
+          "handle": "0x1f461b60",
+          "position": [
+            -12.97,
+            141.71,
+            13.7
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "host": 1,
+          "client": 1
+        },
+        "tries": [
+          {
+            "role": "host",
+            "bearing": 0,
+            "stand": [
+              -11.8433,
+              141.737,
+              13.3553
+            ],
+            "focus": {
+              "handle": "0x1f461b60",
+              "name": "pickups_mana_potion_01_13"
+            },
+            "goneLocally": true
+          },
+          {
+            "role": "client",
+            "bearing": 0,
+            "stand": [
+              -12.7009,
+              140.797,
+              13.9106
+            ],
+            "focus": {
+              "handle": "0x3fff0010",
+              "name": null
+            }
+          },
+          {
+            "role": "client",
+            "bearing": 45,
+            "stand": [
+              -13.0386,
+              143.189,
+              13.3531
+            ],
+            "focus": {
+              "handle": "0x1f461b60",
+              "name": "pickups_mana_potion_01_13"
+            },
+            "goneLocally": true
+          }
+        ],
+        "presentAfterFirst": {
+          "host": 0,
+          "client": 1
+        },
+        "first": {
+          "taker": "host",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "components/interactive/mana_potion.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          }
+        },
+        "presentAfterSecond": {
+          "host": 0,
+          "client": 0
+        },
+        "second": {
+          "taker": "client",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "components/interactive/mana_potion.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {},
+            "any": false
+          }
+        },
+        "passed": true
+      }
+    ],
+    "coinSync": {
+      "host": {
+        "itemsPerPlayer": true,
+        "enabled": false,
+        "ready": false,
+        "result": "disabled",
+        "refusals": 3
+      },
+      "client": {
+        "itemsPerPlayer": true,
+        "enabled": false,
+        "ready": false,
+        "result": "disabled",
+        "refusals": 3
+      }
+    }
+  },
+  "scope": "2036 (#238): items per player, story items to both on a mission map (pickups_news_kg_dunwallcoup:client:story,script_eotw_street_map_5:host:story,pickups_key_blackmarket_assistant:client:story,pickups_mana_potion_01_13:host); each player takes each item once in their own world"
+}
