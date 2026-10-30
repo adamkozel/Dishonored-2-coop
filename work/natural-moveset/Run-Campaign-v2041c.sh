@@ -6,7 +6,7 @@
 # 2041b: candidate gameover-v2041b (active missions reach the partner through the gameflow mirror; co-op saves
 # service gap in the status). Takes campaign-<mission>-vm-ipp-v2041b<letter>/.
 # 2041c: harness v2018 (a replay prompt that opens from the result screen is answered No; bunker v2041a replayed
-# the mission), Dunwall route v2041 (Ramsey from behind). Takes campaign-<mission>-vm-ipp-v2041c<letter>/.
+# the mission), Dunwall route v2041 (Ramsey from behind), candidate playerdamage-v2041d (player damage stays in its own world). Takes campaign-<mission>-vm-ipp-v2041c<letter>/.
 # Usage: Run-Campaign-v2041c.sh <letter> <plan>. Results: campaign-<mission>-vm-ipp-v2041c<letter>/
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
@@ -17,6 +17,6 @@ while read -r m mapinfo steps; do
   [ -z "$m" ] && continue
   take="campaign-$m-vm-ipp-v2041c$L"
   if [ -e "$take" ]; then echo "$m: $take exists, skipped"; continue; fi
-  "$P" -NoProfile -File Route-MissionVM-v2018.ps1 -Take "$take" -MapInfo "$mapinfo" -Candidate candidate-gameover-v2041b -StepsFile "$steps" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+  "$P" -NoProfile -File Route-MissionVM-v2018.ps1 -Take "$take" -MapInfo "$mapinfo" -Candidate candidate-playerdamage-v2041d -StepsFile "$steps" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
   echo "$m: exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'),n.get('hostStory'),n.get('worldDiff'),n.get('frameTimeouts'))" 2>&1 | head -c 600)"
 done < "$PLAN"

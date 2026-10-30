@@ -109,7 +109,7 @@ struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;
 struct KisculeActionEvent{std::uint64_t tick=0;std::uint32_t cls=0,node=0,input=0,count=0;char entity[64]{};const char* what="";};
 struct KisculePending{KisculeActionPacket packet{};std::uint64_t at=0;};
 struct KisculeMirror {
-    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
+    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,playerDamageLocal=0,playerDamageRefused=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
     std::uint32_t dispatchThread=0;const char* result="idle";
     std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue;std::vector<KisculePending> pending;
     KisculeActionEvent events[256]{};std::uint64_t eventCount=0;
@@ -194,6 +194,28 @@ std::uintptr_t kisculeInputDescriptor(std::uintptr_t node,std::uint32_t input){
     return 0;
 }
 bool kisculeCodePointer(std::uintptr_t p){const auto base=reinterpret_cast<std::uintptr_t>(gameImage);return p>base+0x1000&&p<base+0x1a00000;}
+// player-damage-v2041d: an ActionDamage (RVA 0x1cbe348) Hurt (input 2) or Kill (input 4) whose target is this world's own
+// player belongs to that player: each world runs its own, and none is mirrored or asked of the host. A Player node
+// (arkKisculeNodePlayer, vtable 0x1cda848) resolves to the player of the world that runs it, so the partner's fall
+// death on the Clockwork Mansion streets (script_kiscule_gameover node 244843386 "Kill", script_trigger_falldeath),
+// asked of the host under host story, would kill the host (campaign-madinventor-vm-ipp-v2041a, hypothesis).
+// (A) reads the target input's link (as 0x7be020 walks it); (B) resolves it as the handlers do (0x528040 with the
+// target key at 0x3984148, then the entity handle against this world's player, entity +0xa8). Engine thread only.
+bool kisculeDamageTargetsLocalPlayer(std::uintptr_t node,std::uint32_t input){
+    if(input!=2&&input!=4)return false;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t key=0,decl=0,inputs=0,instance=0;std::uint32_t count=0;
+    if(memoryRead(base+0x3984148,&key,8)&&key&&memoryRead(node+0x20,&instance,8)&&instance&&memoryRead(node+0x28,&decl,8)&&decl&&
+       memoryRead(decl+0x40,&inputs,8)&&inputs&&memoryRead(decl+0x48,&count,4)&&(count&0xffffff)<=256)
+        for(std::uint32_t i=0;i<(count&0xffffff);++i){const auto e=inputs+i*0x48ull;std::uintptr_t desc=0,name=0,conn=0,src=0,vt=0;std::int32_t type=0;std::uint32_t links=0,srcId=0;
+            if(!memoryRead(e+0x20,&desc,8)||!desc||!memoryRead(desc,&type,4)||static_cast<std::uint32_t>(type-2)>=3||!memoryRead(e+0x10,&name,8)||name!=key)continue;
+            if(memoryRead(e+0x38,&links,4)&&(links&0xffffff)&&memoryRead(e+0x30,&conn,8)&&conn&&memoryRead(conn+0x20,&srcId,4)&&
+               (src=kisculeNodeIn(instance,srcId))&&memoryRead(src,&vt,8)&&vt==base+0x1cda848)return true;
+            break;}
+    if(std::memcmp(gameImage+0x528040,kisculeVariableAccessorPrefix,sizeof(kisculeVariableAccessorPrefix))||!observedPlayer)return false;
+    const auto* h=reinterpret_cast<const std::uint32_t*(*)(void*,const void*)>(gameImage+0x528040)(reinterpret_cast<void*>(node),gameImage+0x3984148);
+    std::uint32_t mine=0,target=0;return h&&memoryRead(reinterpret_cast<std::uintptr_t>(h),&target,4)&&memoryRead(observedPlayer+0xa8,&mine,4)&&mine!=0x3fff0010&&target==mine;
+}
+int kisculeDamageClass(){static const int i=kisculePolicyIndex(0x1cbe348);return i<0?-1:kKisculeHostStoryBase+i;}
 // Caller holds kisculeLock. A new node instance means a new world: counts restart.
 KisculeActionCount& kisculeCount(const std::string& entity,std::uint32_t node,std::uint32_t input,std::uint32_t cls,std::uintptr_t instanceNode){
     for(auto& c:kisculeMirror.counts)if(c.node==node&&c.input==input&&c.cls==cls&&c.entity==entity){
@@ -238,6 +260,7 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     const int cls=kisculeClassOfVtable(*reinterpret_cast<const std::uintptr_t*>(node));if(cls<0)return realKisculeDispatch(self,out,signal);
     std::uint32_t nodeId=0,input=0;std::memcpy(&nodeId,signal+0xc,4);std::memcpy(&input,signal+0x10,4);
     std::string entity;bool skip=false;
+    const bool playerDamage=!kisculeHostStoryTwinNoBlock&&cls==kisculeDamageClass()&&kisculeDamageTargetsLocalPlayer(node,input);
     AcquireSRWLockExclusive(&kisculeLock);
     kisculeMirror.dispatchThread=GetCurrentThreadId();
     // hoststory-gameover-v2041: under host story the partner never ends the game on its own. Its GameOver comes from
@@ -245,6 +268,7 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     // script_kiscule_gameover ("Sokolov dead") ran natively and ended both games while the host's Sokolov was fine.
     if(localRole==1&&!kisculeHostStoryTwinNoBlock&&cls==kKisculeHostStoryBase+kisculePolicyIndex(0x1b79cc8)){
         kisculeNodeEntity(node,entity);skip=true;++kisculeMirror.hostStoryGameOverBlocked;kisculeEvent("gameover_blocked",cls,entity,nodeId,input,0);}
+    else if(playerDamage){kisculeNodeEntity(node,entity);++kisculeMirror.playerDamageLocal;kisculeEvent("player_damage_local",cls,entity,nodeId,input,0);}
     // 1214bj: an action during a load or an intro may run before the map id is
     // known; it is counted now and sent once the map id is (service).
     else if(!kisculeNodeEntity(node,entity)){++kisculeMirror.identity;kisculeEvent("unidentified",cls,entity,nodeId,input,0);}
@@ -355,6 +379,8 @@ void serviceKisculeMirror(std::uint64_t tick){
            !(h1?kisculeCodePointer(h1):kisculeCodePointer(h0))){
             if(tick-w.at<10000){keep.push_back(w);continue;}
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
+        if(p.role==1&&static_cast<int>(p.classIndex)==kisculeDamageClass()&&kisculeDamageTargetsLocalPlayer(node,inputId)){
+            AcquireSRWLockExclusive(&kisculeLock);++k.playerDamageRefused;++k.refused;kisculeEvent("player_damage_refused",p.classIndex,p.entity,nodeId,inputId,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
         std::uint32_t ranTo=0;
         for(unsigned guard=0;guard<4;++guard){
             AcquireSRWLockExclusive(&kisculeLock);auto& c=kisculeCount(p.entity,nodeId,inputId,p.classIndex,node);
@@ -456,7 +482,7 @@ void writeKisculeMirror(){
     if(std::snprintf(path,sizeof(path),"%s.kiscule.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
     AcquireSRWLockShared(&kisculeLock);const auto& k=kisculeMirror;
-    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryGameOverBlocked\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryGameOverBlocked,k.hostStoryInFlow,k.resultScreenHeld);
+    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryGameOverBlocked\":%llu,\"playerDamageLocal\":%llu,\"playerDamageRefused\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryGameOverBlocked,k.playerDamageLocal,k.playerDamageRefused,k.hostStoryInFlow,k.resultScreenHeld);
     fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
         kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
     const auto first=k.eventCount>256?k.eventCount-256:0;
