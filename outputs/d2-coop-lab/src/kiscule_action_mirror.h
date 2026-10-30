@@ -332,15 +332,23 @@ void serviceKisculeMirror(std::uint64_t tick){
            !(h1?kisculeCodePointer(h1):kisculeCodePointer(h0))){
             if(tick-w.at<10000){keep.push_back(w);continue;}
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
+        std::uint32_t ranTo=0;
         for(unsigned guard=0;guard<4;++guard){
             AcquireSRWLockExclusive(&kisculeLock);auto& c=kisculeCount(p.entity,nodeId,inputId,p.classIndex,node);
-            const bool run=c.executed<p.count;if(run){++c.executed;++k.applied;k.result="applied";kisculeEvent(p.role==1?(nodeId==p.node?"applied_partner":"applied_partner_counterpart"):(nodeId==p.node?"applied":"applied_counterpart"),p.classIndex,p.entity,nodeId,inputId,c.executed);}
+            const bool run=c.executed<p.count;if(run){++c.executed;ranTo=c.executed;++k.applied;k.result="applied";kisculeEvent(p.role==1?(nodeId==p.node?"applied_partner":"applied_partner_counterpart"):(nodeId==p.node?"applied":"applied_counterpart"),p.classIndex,p.entity,nodeId,inputId,c.executed);}
             ReleaseSRWLockExclusive(&kisculeLock);if(!run)break;
             alignas(16) unsigned char signal[32]{};std::memcpy(signal+0xc,&nodeId,4);std::memcpy(signal+0x10,&inputId,4);std::memcpy(signal+0x18,&node,8);
             applyingKiscule=true;
             if(h1)reinterpret_cast<NativeKisculeHandlerEx>(h1)(reinterpret_cast<void*>(node),reinterpret_cast<void*>(desc),signal);
             else reinterpret_cast<NativeKisculeHandler>(h0)(reinterpret_cast<void*>(node));
             applyingKiscule=false;}
+        // A host-story request the host ran goes back to the partner as a host run, so the partner's world gets it
+        // too: the partner stubbed its own run, and the host calls the handler directly, which queues nothing
+        // (hoststory-lead-dunwall-v2026b: the safe-room doors opened only in the host's world).
+        if(ranTo&&p.role==1&&localRole==0&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase)){
+            KisculeActionPacket back{};back.role=0;back.classIndex=p.classIndex;back.mapId=outgoing.mapId;back.node=nodeId;back.input=inputId;back.count=ranTo;
+            std::memcpy(back.entity,p.entity,sizeof(back.entity));
+            AcquireSRWLockExclusive(&kisculeLock);if(k.outgoingQueue.size()<1024)k.outgoingQueue.push_back(back);else ++k.dropped;kisculeEvent("sent_back",p.classIndex,p.entity,nodeId,inputId,ranTo);ReleaseSRWLockExclusive(&kisculeLock);}
     }
     if(!keep.empty()){AcquireSRWLockExclusive(&kisculeLock);for(auto& w:keep)if(k.pending.size()<1024)k.pending.push_back(w);ReleaseSRWLockExclusive(&kisculeLock);}
 }
