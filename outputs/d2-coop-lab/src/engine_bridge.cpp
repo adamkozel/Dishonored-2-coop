@@ -2477,6 +2477,7 @@ bool installEngineBridge(unsigned char* image,const char* role) {
     gameImage=image;localRole=std::strcmp(role,"host")?1:0;outgoing.role=localRole;
     {char product[8]{};productMode=GetEnvironmentVariableA("D2COOP_PRODUCT",product,sizeof(product))==1&&product[0]=='1';
      GetEnvironmentVariableA("D2COOP_DATA_DIR",productDataDir,sizeof(productDataDir));if(!*productDataDir)productMode=false;}
+    {char hostStory[4]{};productHostStory=!(GetEnvironmentVariableA("D2COOP_HOST_STORY",hostStory,sizeof(hostStory))==1&&hostStory[0]=='0');}
     char partnerFlag[8]{};partnerAssetsEnabled=GetEnvironmentVariableA("D2COOP_PARTNER_ASSETS",partnerFlag,sizeof(partnerFlag))==1&&partnerFlag[0]=='1';
     HMODULE module=nullptr;
     if(GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCSTR>(&installEngineBridge),&module)) {

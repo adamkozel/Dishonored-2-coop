@@ -121,6 +121,10 @@ KisculeMirror kisculeMirror{};SRWLOCK kisculeLock=SRWLOCK_INIT;bool kisculeMirro
 // A node the host has not run yet is requested once (partner-first), so a step the partner reaches first still
 // happens, in the host's world. Class indices from kKisculeHostStoryBase are policy-table indices.
 bool kisculeHostStory=false;constexpr int kKisculeHostStoryBase=100;
+// In the product, host story is on unless the host's d2coop.cfg sets host_story=0 (D2COOP_HOST_STORY=0); the partner
+// follows the host's setting from its hello (control flag 4). The lab sets it with coop_host_story instead.
+bool productHostStory=true;
+bool coopHostStoryFlag(){return localRole==0&&kisculeHostStory;}
 // Lab bisection (coop_host_story exempt <Class>): a World class taken out of host story runs in both worlds again.
 // Character-specific story items (Ramsey's ring is ld_imperial_ring_pickup_corvo or _emily) are suspected to suffer
 // when the host's branch is replayed into the partner's world (hoststory-lead-dunwall-v2017d to v2021a).
@@ -312,6 +316,8 @@ void serviceKisculeMirror(std::uint64_t tick){
     if(GetCurrentThreadId()!=engineThread.load())return;
     auto& k=kisculeMirror;
     if(!kisculeMirrorActive()){AcquireSRWLockExclusive(&kisculeLock);k.outgoingQueue.clear();k.pending.clear();ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(productMode){const bool want=localRole==0?productHostStory:coopControl.helloOk&&coopControl.peerHostStory;
+        if(want!=kisculeHostStory){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=want;ReleaseSRWLockExclusive(&kisculeLock);}}
     std::vector<KisculeActionPacket> send;std::vector<KisculePending> work;
     AcquireSRWLockExclusive(&kisculeLock);send.swap(k.outgoingQueue);work.swap(k.pending);
     ReleaseSRWLockExclusive(&kisculeLock);
