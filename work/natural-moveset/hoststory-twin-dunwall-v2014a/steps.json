@@ -1,0 +1,72 @@
+[
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_host_story on"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_host_story on"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_host_story twin_no_block"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_kiscule_census on"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_kiscule_census on"
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_bedroom",
+  "settle": 5000
+ },
+ {
+  "do": "wait",
+  "ms": 10000,
+  "settle": 3000
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_nearmayhew",
+  "settle": 4000
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_mayhew",
+  "settle": 6000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 1000
+ }
+]

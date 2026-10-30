@@ -1,0 +1,76 @@
+{
+  "notes": {
+    "failureState": {
+      "client": {
+        "logic": 14,
+        "pending": 5,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 36,
+        "cine": 65,
+        "pos": [
+          -43.896,
+          20.8745,
+          61.0
+        ],
+        "fresh": false,
+        "gameflow": [
+          244,
+          3,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "disabled",
+        "idHash": "00000000",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/60/0",
+        "active": "Mission_DW"
+      },
+      "host": {
+        "logic": 5,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 36,
+        "cine": 64,
+        "pos": [
+          -42.248463,
+          19.903137,
+          61.027252
+        ],
+        "fresh": true,
+        "gameflow": [
+          244,
+          3,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "disabled",
+        "idHash": "00000000",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "60/4/0",
+        "active": "Mission_DW"
+      }
+    },
+    "restoreRecovery": {
+      "before": [
+        "Cannot find a process with the process identifier 25596.",
+        "host: Native query failed host --health",
+        "client: Final gameplay/health/transport not restored (logic 1, health 56, fresh False)"
+      ],
+      "after": [],
+      "method": "Deploy-SourceClock (relaunch of both roles, Dunwall fixture)"
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "passed": false,
+  "failure": "Cannot find a process with the process identifier 25596."
+}

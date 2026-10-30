@@ -1,0 +1,794 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 130,
+      "pos": [
+        -28.092138,
+        -153.962173,
+        66.403633
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        4,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 137,
+      "pos": [
+        -28.092138,
+        -153.962173,
+        66.403633
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        4,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "disabled",
+      "idHash": "00000000",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+    }
+  },
+  {
+    "step": "step01-command",
+    "spec": {
+      "do": "command",
+      "role": "host",
+      "text": "coop_host_story on"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 130,
+      "pos": [
+        -28.339941,
+        -154.165527,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        4,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 137,
+      "pos": [
+        -27.78706,
+        -153.496552,
+        66.40493
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        4,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+    }
+  },
+  {
+    "step": "step02-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_host_story on"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 130,
+      "pos": [
+        -28.339941,
+        -154.165527,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        4,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 137,
+      "pos": [
+        -27.78706,
+        -153.496552,
+        66.40493
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        4,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+    }
+  },
+  {
+    "step": "step03-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_bedroom",
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 130,
+      "pos": [
+        -28.339941,
+        -154.165527,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        4,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/1/1",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetCorvoSword"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 137,
+      "pos": [
+        -32.889999,
+        -165.600006,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        4,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetCorvoSword"
+    }
+  },
+  {
+    "step": "step04-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_nearmayhew",
+      "settle": 4000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 134,
+      "pos": [
+        -39.43536,
+        -161.362091,
+        66.412735
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "23/1/1",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 142,
+      "pos": [
+        -38.866714,
+        -161.82872,
+        66.412735
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/21/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step05-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_mayhew",
+      "settle": 6000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 134,
+      "pos": [
+        -39.518539,
+        -161.281555,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "23/1/1",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 142,
+      "pos": [
+        -38.183231,
+        -162.471466,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/21/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step06-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 134,
+      "pos": [
+        -39.518539,
+        -161.281555,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "23/1/1",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 142,
+      "pos": [
+        -38.183231,
+        -162.471466,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/21/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step07-authority",
+    "spec": {
+      "do": "authority",
+      "match": "ramsey",
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 134,
+      "pos": [
+        -39.518539,
+        -161.281555,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "23/1/1",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 142,
+      "pos": [
+        -38.183231,
+        -162.471466,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        2,
+        5,
+        2,
+        0,
+        0,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/21/0",
+      "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step08-attack",
+    "spec": {
+      "do": "attack",
+      "name": "mortimer_ramsey",
+      "near": [
+        -44.1,
+        -120.1
+      ],
+      "max": 40,
+      "settle": 4000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 134,
+      "pos": [
+        -39.518539,
+        -161.281555,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        5,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "35/2/1",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_OpenVault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 145,
+      "pos": [
+        -46.119171,
+        -123.688911,
+        61.003677
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        5,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/33/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step09-authority",
+    "spec": {
+      "do": "authority",
+      "match": "ramsey",
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 134,
+      "pos": [
+        -39.518539,
+        -161.281555,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        5,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "35/2/1",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_OpenVault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 145,
+      "pos": [
+        -45.763348,
+        -125.489998,
+        61.003677
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        5,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/33/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step10-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_kiscule_trace on"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 134,
+      "pos": [
+        -39.518539,
+        -161.281555,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        5,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "38/3/1",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_OpenVault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 145,
+      "pos": [
+        -46.760281,
+        -128.277252,
+        61.003677
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        5,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/36/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_OpenVault"
+    }
+  },
+  {
+    "step": "step11-command",
+    "spec": {
+      "do": "command",
+      "role": "host",
+      "text": "coop_kiscule_trace on"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 134,
+      "pos": [
+        -39.518539,
+        -161.281555,
+        66.403648
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        5,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "publishing",
+      "idHash": "bb242f74",
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "38/3/1",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_OpenVault"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+      "epoch": 56,
+      "cine": 145,
+      "pos": [
+        -46.883072,
+        -130.561874,
+        61.01754
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        1,
+        4,
+        5,
+        0,
+        1,
+        0
+      ],
+      "gfMirror": "equal",
+      "idHash": "bb242f74",
+      "gfApplied": 6,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/36/0",
+      "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_GetRing,Task_DW_OpenVault"
+    }
+  }
+]

@@ -1,0 +1,77 @@
+[
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_host_story on"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_host_story on"
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_bedroom",
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_nearmayhew",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_mayhew",
+  "settle": 6000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "attack",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "max": 40,
+  "settle": 4000
+ },
+ {
+  "do": "authority",
+  "match": "ramsey",
+  "settle": 500
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_kiscule_trace on"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_kiscule_trace on"
+ },
+ {
+  "do": "loot",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "settle": 6000,
+  "expect": 6
+ },
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 1000
+ }
+]

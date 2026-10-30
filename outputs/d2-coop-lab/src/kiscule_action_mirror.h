@@ -1,4 +1,5 @@
 #pragma once
+#include "kiscule_policy.h" // stage 8.4.1 (#237)
 // 1214bi: player-scoped script actions run in both worlds (chapter 97).
 // Story grants are Kiscule action nodes that act on the player of the world
 // that runs them: the Outsider's Mark, Blink, the Heart and the mana pool in
@@ -104,25 +105,54 @@ struct KisculeActionPacket {
 };
 #pragma pack(pop)
 static_assert(sizeof(KisculeActionPacket)==152);
-struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;std::uintptr_t instanceNode=0;std::uint32_t requests=0,executed=0;};
+struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;std::uintptr_t instanceNode=0;std::uint32_t requests=0,executed=0,asked=0,hostCount=0;};
 struct KisculeActionEvent{std::uint64_t tick=0;std::uint32_t cls=0,node=0,input=0,count=0;char entity[64]{};const char* what="";};
 struct KisculePending{KisculeActionPacket packet{};std::uint64_t at=0;};
 struct KisculeMirror {
-    std::uint64_t sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
+    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryInFlow=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
     std::uint32_t dispatchThread=0;const char* result="idle";
     std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue;std::vector<KisculePending> pending;
-    KisculeActionEvent events[24]{};std::uint64_t eventCount=0;
+    KisculeActionEvent events[256]{};std::uint64_t eventCount=0;
 };
 KisculeMirror kisculeMirror{};SRWLOCK kisculeLock=SRWLOCK_INIT;bool kisculeMirrorEnabled=false;bool applyingKiscule=false;
+// Stage 8.4.1 (#237): host story. With coop_host_story on, every World and LocalPlayer class of kiscule_policy.h is
+// mirrored host-authoritatively: the host runs it and sends its count; the partner never runs it on its own (the
+// handler is stubbed, so the partner's own flow and presentation continue) and runs it only as the host's replay.
+// A node the host has not run yet is requested once (partner-first), so a step the partner reaches first still
+// happens, in the host's world. Class indices from kKisculeHostStoryBase are policy-table indices.
+bool kisculeHostStory=false;constexpr int kKisculeHostStoryBase=100;
+// Lab bisection (coop_host_story exempt <Class>): a World class taken out of host story runs in both worlds again.
+// Character-specific story items (Ramsey's ring is ld_imperial_ring_pickup_corvo or _emily) are suspected to suffer
+// when the host's branch is replayed into the partner's world (hoststory-lead-dunwall-v2017d to v2021a).
+std::array<bool,kKisculePolicyCount> kisculeHostStoryExempt{};
+// Mutation twin (lab only, coop_host_story twin_no_block): the partner runs its own story nodes again while the
+// host's replays still arrive. Takes must catch it (the partner's own story-node runs must be zero).
+bool kisculeHostStoryTwinNoBlock=false;
+// Partner-first requests for World nodes: a story step only the partner reaches (searching Ramsey's body in the
+// partner-led route, hoststory-lead-dunwall-v2017d) must still happen in the host's world. They are asked and run only
+// while both games are in plain gameplay: with host story on through a mission intro, the host's game vanished in the
+// opening cinematic twice while running such requests (hoststory-lead-dunwall-v2014c, v2016c).
+bool kisculeHostStoryAsk=true;
+bool kisculePlainGameplay(){return outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState;}
+// Any World class may be requested, by count: a node is requested whenever the partner reached it more often than the
+// host has run it (the host had already run the loot's task nodes 2899 and 2973 earlier on the route, so a one-time
+// request never went out, loot-trace-on-v2018e). A story-only list was too narrow: Ramsey's ring task follows an
+// ActionUsable in the partner's flow (hoststory-lead-dunwall-v2019a). Ambient loops run in both worlds at the same
+// pace, so the partner is rarely ahead on them and their requests stay rare.
+bool kisculeHostStoryAskable(int cls){return cls>=kKisculeHostStoryBase&&cls<kKisculeHostStoryBase+static_cast<int>(kKisculePolicyCount);}
+bool kisculeClassIndexMirrored(std::uint32_t cls){
+    if(cls<static_cast<std::uint32_t>(kisculeMirrorClassCount))return kisculeMirrorClasses[cls].mirrored;
+    return kisculeHostStory&&cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&cls<kKisculeHostStoryBase+kKisculePolicyCount;}
 bool kisculeMirrorActive(){return kisculeMirrorEnabled||productMode;}
 // Caller holds kisculeLock.
 void kisculeEvent(const char* what,std::uint32_t cls,const std::string& entity,std::uint32_t node,std::uint32_t input,std::uint32_t count){
-    auto& e=kisculeMirror.events[kisculeMirror.eventCount++%24];e={};e.tick=GetTickCount64();e.what=what;e.cls=cls;e.node=node;e.input=input;e.count=count;
+    auto& e=kisculeMirror.events[kisculeMirror.eventCount++%256];e={};e.tick=GetTickCount64();e.what=what;e.cls=cls;e.node=node;e.input=input;e.count=count;
     std::snprintf(e.entity,sizeof(e.entity),"%s",entity.c_str());
 }
 int kisculeClassOfVtable(std::uintptr_t vt){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     for(int i=0;i<kisculeMirrorClassCount;++i)if(vt==base+kisculeMirrorClasses[i].vtable)return i;
+    if(kisculeHostStory&&vt>base){const int i=kisculePolicyIndex(static_cast<std::uint32_t>(vt-base));if(i>=0&&!kisculeHostStoryExempt[i])return kKisculeHostStoryBase+i;}
     return -1;
 }
 int kisculeClassOf(std::uintptr_t node){std::uintptr_t vt=0;return node&&memoryRead(node,&vt,8)?kisculeClassOfVtable(vt):-1;}
@@ -165,7 +195,7 @@ KisculeActionCount& kisculeCount(const std::string& entity,std::uint32_t node,st
     for(auto& c:kisculeMirror.counts)if(c.node==node&&c.input==input&&c.cls==cls&&c.entity==entity){
         if(c.instanceNode!=instanceNode){c.instanceNode=instanceNode;c.requests=c.executed=0;}
         return c;}
-    if(kisculeMirror.counts.size()>=512)kisculeMirror.counts.erase(kisculeMirror.counts.begin());
+    if(kisculeMirror.counts.size()>=8192)kisculeMirror.counts.erase(kisculeMirror.counts.begin());
     KisculeActionCount c{};c.entity=entity;c.node=node;c.input=input;c.cls=cls;c.instanceNode=instanceNode;kisculeMirror.counts.push_back(c);return kisculeMirror.counts.back();
 }
 char kisculeHandlerSkipped(void*){return 1;}
@@ -180,8 +210,23 @@ void traceKisculeSignal(const unsigned char* signal){
     std::string entity;if(kisculeNodeEntity(node,entity))std::snprintf(e.entity,sizeof(e.entity),"%s",entity.c_str());
     AcquireSRWLockExclusive(&kisculeLock);if(kisculeTraceCount<kisculeTrace.size())kisculeTrace[kisculeTraceCount++]=e;++kisculeTraceTotal;ReleaseSRWLockExclusive(&kisculeLock);
 }
+// Stage 8.4.1 (#237, lab diagnostic): with coop_kiscule_census on, every dispatched signal is counted by node class
+// (node vtable RVA) for the whole session, written to <status>.kiscule-census.json with the trace files. It shows which
+// script node classes run in each game; the partner must run none that write the shared world.
+bool kisculeCensusOn=false;std::unordered_map<std::uint32_t,std::uint64_t> kisculeCensus;std::uint64_t kisculeCensusTotal=0,kisculeCensusStarted=0;
+// Dry run of the partner policy (kiscule_policy.h): signals of World and LocalPlayer classes this game ran on its own
+// (not as a replay of the peer's run). On the partner both must reach zero once area 4.1 is enforced.
+std::uint64_t kisculeOwnWorld=0,kisculeOwnLocalPlayer=0,kisculeReplayed=0;std::unordered_map<std::uint32_t,std::uint64_t> kisculeOwnByClass;
+void countKisculeSignal(const unsigned char* signal){
+    const auto node=*reinterpret_cast<const std::uintptr_t*>(reinterpret_cast<std::uintptr_t>(signal)+0x18);if(!node)return;
+    std::uintptr_t vt=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);if(!memoryRead(node,&vt,8)||vt<=base)return;
+    const auto rva=static_cast<std::uint32_t>(vt-base);const int policy=kisculePolicyIndex(rva);
+    AcquireSRWLockExclusive(&kisculeLock);++kisculeCensus[rva];++kisculeCensusTotal;
+    if(policy>=0){if(applyingKiscule)++kisculeReplayed;else{++kisculeOwnByClass[rva];if(kKisculePolicy[policy].policy==KisculePolicy::World)++kisculeOwnWorld;else ++kisculeOwnLocalPlayer;}}
+    ReleaseSRWLockExclusive(&kisculeLock);
+}
 unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned char* signal){
-    if(kisculeTraceOn)traceKisculeSignal(signal);
+    if(kisculeTraceOn)traceKisculeSignal(signal);if(kisculeCensusOn)countKisculeSignal(signal);
     if(!kisculeMirrorActive()||applyingKiscule)return realKisculeDispatch(self,out,signal);
     // Hot path: the native dispatcher dereferences the same pointers next.
     const auto s=reinterpret_cast<std::uintptr_t>(signal);const auto node=*reinterpret_cast<const std::uintptr_t*>(s+0x18);
@@ -194,16 +239,31 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     // 1214bj: an action during a load or an intro may run before the map id is
     // known; it is counted now and sent once the map id is (service).
     if(!kisculeNodeEntity(node,entity)){++kisculeMirror.identity;kisculeEvent("unidentified",cls,entity,nodeId,input,0);}
-    else if(!kisculeMirrorClasses[cls].mirrored){++kisculeMirror.personal;kisculeEvent("personal",cls,entity,nodeId,input,0);}
+    else if(cls<kKisculeHostStoryBase&&!kisculeMirrorClasses[cls].mirrored){++kisculeMirror.personal;kisculeEvent("personal",cls,entity,nodeId,input,0);}
     else if(std::string item;cls==0&&kisculePlayerScopedItem(node,item)){++kisculeMirror.personal;kisculeEvent("personal",cls,entity,nodeId,input,0);}
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
-        if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
+        if(cls>=kKisculeHostStoryBase&&localRole==1&&kisculeHostStoryTwinNoBlock)++kisculeMirror.hostStoryLeaked; // the twin: a World node runs on the partner's own
+        // A run the host already made (its count arrived first) runs here, in the partner's own flow: applied out of
+        // flow before the flow reached it, Meagan's talk setup left the partner's boat scene stalled
+        // (saferoom-trace-v2028a; hoststory-lead-dunwall-v2027a reached the node first and passed).
+        if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&c.executed<c.requests&&c.requests<=c.hostCount){
+            ++c.executed;++kisculeMirror.hostStoryInFlow;kisculeEvent("in_flow",cls,entity,nodeId,input,c.executed);}
+        else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
+            // A request goes out at once, whatever state the partner's game is in: the host runs it only in its own plain
+            // gameplay. Ramsey's ring task nodes run in the instant the loot scene ends, while the partner is still in its
+            // cinematic state (onlytask-v2022e), and the task that ends Dunwall runs inside the partner's ending
+            // cinematic: held until plain gameplay, it never went out (hoststory-lead-dunwall-v2025a).
+            if(kisculeHostStoryAsk&&kisculeHostStoryAskable(cls)&&c.requests>c.executed&&c.requests>c.asked&&kisculePartnerScope()){c.asked=c.requests;++kisculeMirror.hostStoryAsked;
+                KisculeActionPacket p{};p.role=1;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.requests;p.reserved=kKisculePartnerFirst;
+                std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());
+                if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
+        else if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
         else{++c.executed;++kisculeMirror.local;kisculeEvent("local",cls,entity,nodeId,input,c.executed);
             const bool partnerFirst=localRole==1&&c.executed==1&&kisculePartnerScope(); // 1214jc (#183)
             if(localRole==0||partnerFirst){KisculeActionPacket p{};p.role=localRole;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.executed;
             if(partnerFirst){p.reserved=kKisculePartnerFirst;kisculeEvent("partner_first",cls,entity,nodeId,input,1);}
             std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());
-            if(kisculeMirror.outgoingQueue.size()<128)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}}
+            if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}}
     ReleaseSRWLockExclusive(&kisculeLock);
     if(!skip)return realKisculeDispatch(self,out,signal);
     // The mirror already ran this handler here: dispatch with the handler
@@ -233,10 +293,10 @@ bool installKisculeDispatchObserver(){
 }
 void receiveKisculeAction(const KisculeActionPacket& p){
     AcquireSRWLockExclusive(&kisculeLock);auto& k=kisculeMirror;++k.received;
-    const bool hostCount=p.role==0&&localRole==1,partnerFirst=p.role==1&&localRole==0&&p.count==1&&p.reserved==kKisculePartnerFirst&&kisculePartnerScope(); // 1214jc
+    const bool hostCount=p.role==0&&localRole==1,partnerFirst=p.role==1&&localRole==0&&(p.count==1||p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase))&&p.reserved==kKisculePartnerFirst&&kisculePartnerScope(); // 1214jc
     if(!kisculeMirrorActive()||p.magic!=0x414B3244||p.version!=1||p.size!=sizeof(p)||!(hostCount||partnerFirst)||p.session!=remote.session||
-       p.sequence<=k.peerSequence||p.classIndex>=static_cast<std::uint32_t>(kisculeMirrorClassCount)||!kisculeMirrorClasses[p.classIndex].mirrored||!p.count||!p.mapId||!std::memchr(p.entity,0,sizeof(p.entity))||!p.entity[0]){++k.refused;k.result="refused";}
-    else{k.peerSequence=p.sequence;if(k.pending.size()<128)k.pending.push_back({p,GetTickCount64()});else ++k.dropped;k.result="received";}
+       p.sequence<=k.peerSequence||!kisculeClassIndexMirrored(p.classIndex)||!p.count||!p.mapId||!std::memchr(p.entity,0,sizeof(p.entity))||!p.entity[0]){++k.refused;k.result="refused";}
+    else{k.peerSequence=p.sequence;if(k.pending.size()<1024)k.pending.push_back({p,GetTickCount64()});else ++k.dropped;k.result="received";}
     ReleaseSRWLockExclusive(&kisculeLock);
 }
 // The named entity's top-level instance in this world.
@@ -253,19 +313,21 @@ void serviceKisculeMirror(std::uint64_t tick){
     auto& k=kisculeMirror;
     if(!kisculeMirrorActive()){AcquireSRWLockExclusive(&kisculeLock);k.outgoingQueue.clear();k.pending.clear();ReleaseSRWLockExclusive(&kisculeLock);return;}
     std::vector<KisculeActionPacket> send;std::vector<KisculePending> work;
-    AcquireSRWLockExclusive(&kisculeLock);send.swap(k.outgoingQueue);work.swap(k.pending);ReleaseSRWLockExclusive(&kisculeLock);
+    AcquireSRWLockExclusive(&kisculeLock);send.swap(k.outgoingQueue);work.swap(k.pending);
+    ReleaseSRWLockExclusive(&kisculeLock);
     const bool connected=sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected;
     std::vector<KisculeActionPacket> later;
     for(auto& p:send){
         if(!p.mapId)p.mapId=outgoing.mapId;
-        if(!p.mapId||!connected){if(later.size()<128)later.push_back(p);else ++k.dropped;continue;}
+        if(!p.mapId||!connected){if(later.size()<1024)later.push_back(p);else ++k.dropped;continue;}
         p.session=outgoing.session;p.sequence=++k.sequence;
         if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){++k.sent;k.result="sent";}else ++k.dropped;}
-    if(!later.empty()){AcquireSRWLockExclusive(&kisculeLock);for(auto& p:later)if(k.outgoingQueue.size()<128)k.outgoingQueue.push_back(p);ReleaseSRWLockExclusive(&kisculeLock);}
+    if(!later.empty()){AcquireSRWLockExclusive(&kisculeLock);for(auto& p:later)if(k.outgoingQueue.size()<1024)k.outgoingQueue.push_back(p);ReleaseSRWLockExclusive(&kisculeLock);}
     std::vector<KisculePending> keep;
     const bool loading=outgoing.gameLogicState==15||outgoing.pendingGameLogicState==15||outgoing.gameLogicState==0||!observedPlayer;
     for(auto& w:work){const auto& p=w.packet;
         if(tick-w.at>60000){++k.expired;k.result="expired";continue;}
+        if(p.role==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&!kisculePlainGameplay()){keep.push_back(w);continue;} // stage 8.4.1: a partner's request waits for plain gameplay
         if(loading||p.mapId!=outgoing.mapId){if(!loading&&outgoing.gameLogicState==1&&tick-w.at>20000){++k.otherMap;k.result="other_map";continue;}keep.push_back(w);continue;}
         if(k.dispatchThread&&k.dispatchThread!=GetCurrentThreadId()){++k.threadMismatch;k.result="thread_mismatch";continue;}
         std::uint32_t nodeId=p.node,inputId=p.input;kisculeCharacterCounterpart(p.entity,nodeId,inputId);
@@ -275,17 +337,29 @@ void serviceKisculeMirror(std::uint64_t tick){
            !(h1?kisculeCodePointer(h1):kisculeCodePointer(h0))){
             if(tick-w.at<10000){keep.push_back(w);continue;}
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
+        std::uint32_t ranTo=0;
         for(unsigned guard=0;guard<4;++guard){
             AcquireSRWLockExclusive(&kisculeLock);auto& c=kisculeCount(p.entity,nodeId,inputId,p.classIndex,node);
-            const bool run=c.executed<p.count;if(run){++c.executed;++k.applied;k.result="applied";kisculeEvent(p.role==1?(nodeId==p.node?"applied_partner":"applied_partner_counterpart"):(nodeId==p.node?"applied":"applied_counterpart"),p.classIndex,p.entity,nodeId,inputId,c.executed);}
+            const bool hostStoryRun=p.role==0&&localRole==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase);
+            if(hostStoryRun&&p.count>c.hostCount)c.hostCount=p.count;
+            // Up to 750 ms for the partner's own flow to reach the node and run it in flow; then it is applied here.
+            if(hostStoryRun&&c.requests<p.count&&c.executed<p.count&&tick-w.at<750){ReleaseSRWLockExclusive(&kisculeLock);keep.push_back(w);break;}
+            const bool run=c.executed<p.count;if(run){++c.executed;ranTo=c.executed;++k.applied;k.result="applied";kisculeEvent(p.role==1?(nodeId==p.node?"applied_partner":"applied_partner_counterpart"):(nodeId==p.node?"applied":"applied_counterpart"),p.classIndex,p.entity,nodeId,inputId,c.executed);}
             ReleaseSRWLockExclusive(&kisculeLock);if(!run)break;
             alignas(16) unsigned char signal[32]{};std::memcpy(signal+0xc,&nodeId,4);std::memcpy(signal+0x10,&inputId,4);std::memcpy(signal+0x18,&node,8);
             applyingKiscule=true;
             if(h1)reinterpret_cast<NativeKisculeHandlerEx>(h1)(reinterpret_cast<void*>(node),reinterpret_cast<void*>(desc),signal);
             else reinterpret_cast<NativeKisculeHandler>(h0)(reinterpret_cast<void*>(node));
             applyingKiscule=false;}
+        // A host-story request the host ran goes back to the partner as a host run, so the partner's world gets it
+        // too: the partner stubbed its own run, and the host calls the handler directly, which queues nothing
+        // (hoststory-lead-dunwall-v2026b: the safe-room doors opened only in the host's world).
+        if(ranTo&&p.role==1&&localRole==0&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase)){
+            KisculeActionPacket back{};back.role=0;back.classIndex=p.classIndex;back.mapId=outgoing.mapId;back.node=nodeId;back.input=inputId;back.count=ranTo;
+            std::memcpy(back.entity,p.entity,sizeof(back.entity));
+            AcquireSRWLockExclusive(&kisculeLock);if(k.outgoingQueue.size()<1024)k.outgoingQueue.push_back(back);else ++k.dropped;kisculeEvent("sent_back",p.classIndex,p.entity,nodeId,inputId,ranTo);ReleaseSRWLockExclusive(&kisculeLock);}
     }
-    if(!keep.empty()){AcquireSRWLockExclusive(&kisculeLock);for(auto& w:keep)if(k.pending.size()<128)k.pending.push_back(w);ReleaseSRWLockExclusive(&kisculeLock);}
+    if(!keep.empty()){AcquireSRWLockExclusive(&kisculeLock);for(auto& w:keep)if(k.pending.size()<1024)k.pending.push_back(w);ReleaseSRWLockExclusive(&kisculeLock);}
 }
 // 1214jl (#187, lab diagnostic): entity events posted while the trace is on. Each post variant is hooked with a jump to
 // a pass-through wrapper (the original always runs); the prologue copies are complete instructions without branches or
@@ -329,6 +403,20 @@ bool installEntityEventTrace(){
     return hookEventPost(0x883f80,p883,20,reinterpret_cast<void*>(&eventPost883),realEventPost883)&&
         hookEventPost(0x884920,p884,15,reinterpret_cast<void*>(&eventPost884),realEventPost884);
 }
+void writeKisculeCensus(){
+    if(!kisculeCensusStarted)return;
+    char path[MAX_PATH]{},temp[MAX_PATH]{};
+    if(std::snprintf(path,sizeof(path),"%s.kiscule-census.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
+    FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
+    AcquireSRWLockShared(&kisculeLock);
+    fprintf(f,"{\"on\":%s,\"role\":%u,\"started\":%llu,\"total\":%llu,\"classes\":{",kisculeCensusOn?"true":"false",localRole,kisculeCensusStarted,kisculeCensusTotal);
+    bool first=true;for(const auto& c:kisculeCensus){fprintf(f,"%s\"%u\":%llu",first?"":",",c.first,c.second);first=false;}
+    fprintf(f,"},\"ownWorld\":%llu,\"ownLocalPlayer\":%llu,\"replayed\":%llu,\"own\":{",kisculeOwnWorld,kisculeOwnLocalPlayer,kisculeReplayed);
+    first=true;for(const auto& c:kisculeOwnByClass){const int i=kisculePolicyIndex(c.first);fprintf(f,"%s\"%s\":%llu",first?"":",",i>=0?kKisculePolicy[i].name:"?",c.second);first=false;}
+    fprintf(f,"}}\n");
+    ReleaseSRWLockShared(&kisculeLock);
+    const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
+}
 void writeKisculeTrace(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.kiscule-trace.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
@@ -345,16 +433,17 @@ void writeKisculeTrace(){
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
 void writeKisculeMirror(){
-    writeKisculeTrace();
+    writeKisculeTrace();writeKisculeCensus();
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.kiscule.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
     AcquireSRWLockShared(&kisculeLock);const auto& k=kisculeMirror;
-    fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
+    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryInFlow\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryInFlow);
+    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
         kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
-    const auto first=k.eventCount>24?k.eventCount-24:0;
-    for(auto i=first;i<k.eventCount;++i){const auto& e=k.events[i%24];
-        fprintf(f,"%s{\"tick\":%llu,\"what\":\"%s\",\"class\":\"%s\",\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"count\":%u}",i==first?"":",",e.tick,e.what,e.cls<static_cast<std::uint32_t>(kisculeMirrorClassCount)?kisculeMirrorClasses[e.cls].name:"?",e.entity,e.node,e.input,e.count);}
+    const auto first=k.eventCount>256?k.eventCount-256:0;
+    for(auto i=first;i<k.eventCount;++i){const auto& e=k.events[i%256];
+        fprintf(f,"%s{\"tick\":%llu,\"what\":\"%s\",\"class\":\"%s\",\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"count\":%u}",i==first?"":",",e.tick,e.what,e.cls<static_cast<std::uint32_t>(kisculeMirrorClassCount)?kisculeMirrorClasses[e.cls].name:e.cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&e.cls<kKisculeHostStoryBase+kKisculePolicyCount?kKisculePolicy[e.cls-kKisculeHostStoryBase].name:"?",e.entity,e.node,e.input,e.count);}
     fprintf(f,"]}\n");
     ReleaseSRWLockShared(&kisculeLock);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);

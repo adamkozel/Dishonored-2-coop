@@ -1,0 +1,155 @@
+{
+  "failure": "mortimer_ramsey still alive after 40 attacks",
+  "passed": false,
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "commands": [
+      "step01-command host coop_host_story on",
+      "step02-command client coop_host_story on",
+      "step03-command host coop_kiscule_census on",
+      "step04-command client coop_kiscule_census on"
+    ],
+    "commandResults": [
+      "step01-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step02-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step03-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step04-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-command",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-command",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-command",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-command",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step06-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step07-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-authority",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      }
+    ],
+    "authority": [
+      {
+        "step": "step09-authority",
+        "host": [
+          "ld_spawner_ramsey_escape h50/50 acq1 lease1 paused0 gp0 hs1"
+        ],
+        "client": [
+          "ld_spawner_ramsey_escape h50/50 acq0 lease1 paused1 gp1 hs1"
+        ]
+      }
+    ],
+    "npcPicks": [
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.1,-120.1,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.8,-119.6,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -45.1,-121.4,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -45.6,-122.4,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.9,-122.1,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -45.1,-121.2,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -44.4,-124,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -47.1,-124.6,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -47.6,-123.8,61",
+      "10 client mortimer_ramsey -> models/characters/def/story/mortimer_ramsey.def_1908 .?AVarkNPC@@ @ -48.1,-122.3,61"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 23,
+        "pos": [
+          -48.556087,
+          -125.864914,
+          61.475361
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          2,
+          6,
+          3,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 7,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/30/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_KillRamsey,Task_DW_NonLethal_KnockoutRamsey,Task_DW_OpenVault"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 29,
+        "pos": [
+          -39.194336,
+          -161.536682,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          2,
+          6,
+          3,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "31/3/2",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_KillRamsey,Task_DW_NonLethal_KnockoutRamsey,Task_DW_OpenVault"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored."
+}

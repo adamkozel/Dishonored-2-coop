@@ -1,0 +1,224 @@
+{
+  "passed": false,
+  "failure": "The partner ran 192 story nodes of its own (fallback 0)",
+  "notes": {
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "clientCommands": [],
+    "commands": [
+      "step01-command host coop_host_story on",
+      "step02-command client coop_host_story on",
+      "step03-command host coop_kiscule_census on",
+      "step04-command client coop_kiscule_census on"
+    ],
+    "commandResults": [
+      "step01-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step02-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step03-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step04-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-command",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step06-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step07-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step10-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step11-trigger",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step12-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step13-wait",
+        "host": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "disabled a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      }
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 26,
+        "cine": 57,
+        "pos": [
+          -40.644497,
+          -160.451538,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "163/46/28",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 26,
+        "cine": 48,
+        "pos": [
+          -38.887634,
+          -161.811401,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "192/38/19",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      }
+    },
+    "gameflowEqual": true,
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 537,
+      "differences": 2
+    },
+    "hostStory": {
+      "partnerOwnRuns": 192,
+      "blocked": 0,
+      "asked": 0,
+      "replayed": 38,
+      "fallback": 0
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 26,
+        "cine": 57,
+        "pos": [
+          -40.644497,
+          -160.451538,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "163/46/28",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 26,
+        "cine": 48,
+        "pos": [
+          -38.887634,
+          -161.811401,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "192/38/19",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored."
+}

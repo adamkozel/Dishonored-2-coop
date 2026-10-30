@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo in lab product mode; Dunwall fixture restored.",
+  "notes": {
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "clientCommands": [],
+    "commands": [
+      "step01-command host coop_kiscule_census on",
+      "step02-command client coop_kiscule_census on"
+    ],
+    "commandResults": [
+      "step01-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}",
+      "step02-command {\"held\":0,\"holds\":0,\"refused\":0,\"released\":0,\"result\":\"idle\"}"
+    ],
+    "autosaves": [
+      {
+        "step": "step01-command",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step02-command",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step03-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step04-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step05-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step06-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step07-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step08-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step09-trigger",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step10-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      },
+      {
+        "step": "step11-wait",
+        "host": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer",
+        "client": "idle a0 s0/o0/m0/p0 slot-1 phase0 awaiting_peer"
+      }
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 26,
+        "pos": [
+          -38.859913,
+          -161.101227,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "equal",
+        "idHash": "bb242f74",
+        "gfApplied": 2,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 29,
+        "pos": [
+          -39.764336,
+          -162.705215,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfMirror": "publishing",
+        "idHash": "bb242f74",
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      }
+    },
+    "gameflowEqual": true
+  },
+  "failure": null
+}

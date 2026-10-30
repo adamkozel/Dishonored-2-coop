@@ -1579,6 +1579,9 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_gameflow_mirror on")||!std::strcmp(text,"coop_gameflow_mirror off"))return true;
     if(!std::strcmp(text,"coop_kiscule_mirror on")||!std::strcmp(text,"coop_kiscule_mirror off"))return true;
     if(!std::strcmp(text,"coop_kiscule_trace on")||!std::strcmp(text,"coop_kiscule_trace off"))return true;
+    if(!std::strcmp(text,"coop_kiscule_census on")||!std::strcmp(text,"coop_kiscule_census off"))return true;
+    if(!std::strcmp(text,"coop_host_story on")||!std::strcmp(text,"coop_host_story off")||!std::strcmp(text,"coop_host_story twin_no_block"))return true;
+    if(!std::strncmp(text,"coop_host_story exempt ",23)&&kisculePolicyIndexByName(text+23)>=0)return true;
     if(!std::strncmp(text,"coop_chaos_points ",18)&&std::strlen(text)<=24&&std::strspn(text+18,"0123456789")==std::strlen(text+18)&&text[18])return true;
     if(!std::strcmp(text,"coop_checkpoint_sync on")||!std::strcmp(text,"coop_checkpoint_sync off")||!std::strcmp(text,"coop_checkpoint_sync retry_probe")||
        !std::strcmp(text,"coop_checkpoint_delay 0")||!std::strcmp(text,"coop_checkpoint_delay 1500")||
@@ -1793,6 +1796,12 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_kiscule_mirror on")){AcquireSRWLockExclusive(&kisculeLock);if(!kisculeMirrorEnabled){kisculeMirrorEnabled=true;kisculeMirror={};kisculeMirror.result="armed";}ReleaseSRWLockExclusive(&kisculeLock);return;}
     // 1214jj (#187, lab diagnostic): the dispatched Kiscule signal trace.
     if(!std::strcmp(request.command,"coop_kiscule_trace on")){AcquireSRWLockExclusive(&kisculeLock);kisculeTraceCount=0;kisculeTraceTotal=0;eventTraceCount=0;eventTraceTotal=0;kisculeTraceStarted=GetTickCount64();kisculeTraceOn=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(!std::strcmp(request.command,"coop_host_story on")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=true;kisculeHostStoryTwinNoBlock=false;kisculeHostStoryExempt.fill(false);kisculeMirror.hostStoryBlocked=kisculeMirror.hostStoryAsked=kisculeMirror.hostStoryLeaked=kisculeMirror.hostStoryInFlow=0;ReleaseSRWLockExclusive(&kisculeLock);return;} // the twin never outlives a take (hoststory-dunwall-v2014b)
+    if(!std::strncmp(request.command,"coop_host_story exempt ",23)){const int i=kisculePolicyIndexByName(request.command+23);if(i>=0){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStoryExempt[i]=true;ReleaseSRWLockExclusive(&kisculeLock);}return;}
+    if(!std::strcmp(request.command,"coop_host_story twin_no_block")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStoryTwinNoBlock=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(!std::strcmp(request.command,"coop_host_story off")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=false;kisculeHostStoryTwinNoBlock=false;kisculeHostStoryExempt.fill(false);ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(!std::strcmp(request.command,"coop_kiscule_census on")){AcquireSRWLockExclusive(&kisculeLock);kisculeCensus.clear();kisculeCensusTotal=0;kisculeOwnWorld=kisculeOwnLocalPlayer=kisculeReplayed=0;kisculeOwnByClass.clear();kisculeCensusStarted=GetTickCount64();kisculeCensusOn=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
+    if(!std::strcmp(request.command,"coop_kiscule_census off")){AcquireSRWLockExclusive(&kisculeLock);kisculeCensusOn=false;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_kiscule_trace off")){AcquireSRWLockExclusive(&kisculeLock);kisculeTraceOn=false;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_kiscule_mirror off")){AcquireSRWLockExclusive(&kisculeLock);kisculeMirrorEnabled=false;kisculeMirror={};kisculeMirror.result="disabled";ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_checkpoint_sync on")){checkpointEnable(true);return;}
