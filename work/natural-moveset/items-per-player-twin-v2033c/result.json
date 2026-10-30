@@ -1,0 +1,151 @@
+{
+  "passed": false,
+  "failure": "Items per player not on in both games (host False, partner False); Shared pickups armed (host True, partner True); pickups_mana_potion_01_13: The host gained from the client's take of pickups_mana_potion_01_13: money 0, items {\"components/interactive/mana_potion.inventoryitem\":1}; pickups_mana_potion_01_17: The client gained from the host's take of pickups_mana_potion_01_17: money 0, items {\"components/interactive/mana_potion.inventoryitem\":1}",
+  "notes": {
+    "mapInfo": "campaign/edge_of_the_world/eotw.mapinfo",
+    "plan": [
+      {
+        "name": "pickups_mana_potion_01_13",
+        "role": "client"
+      },
+      {
+        "name": "pickups_mana_potion_01_17",
+        "role": "host"
+      }
+    ],
+    "shared": true,
+    "cases": [
+      {
+        "case": {
+          "name": "pickups_mana_potion_01_13",
+          "role": "client"
+        },
+        "item": {
+          "handle": "0x1f461b60",
+          "position": [
+            -12.97,
+            141.71,
+            13.7
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "host": 1,
+          "client": 1
+        },
+        "tries": [
+          {
+            "role": "client",
+            "bearing": 0,
+            "stand": [
+              -11.8394,
+              141.741,
+              13.3493
+            ],
+            "focus": {
+              "handle": "0x1f461b60",
+              "name": "pickups_mana_potion_01_13"
+            },
+            "goneLocally": true
+          }
+        ],
+        "presentAfterFirst": {
+          "host": 0,
+          "client": 0
+        },
+        "first": {
+          "taker": "client",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "components/interactive/mana_potion.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {
+              "components/interactive/mana_potion.inventoryitem": 1
+            },
+            "any": true
+          }
+        },
+        "failure": "The host gained from the client's take of pickups_mana_potion_01_13: money 0, items {\"components/interactive/mana_potion.inventoryitem\":1}"
+      },
+      {
+        "case": {
+          "name": "pickups_mana_potion_01_17",
+          "role": "host"
+        },
+        "item": {
+          "handle": "0x1f421b5c",
+          "position": [
+            -34.24,
+            213.74,
+            5.26
+          ],
+          "type": ".?AVarkPickup@@"
+        },
+        "presentBefore": {
+          "host": 1,
+          "client": 1
+        },
+        "tries": [
+          {
+            "role": "host",
+            "bearing": 0,
+            "stand": [
+              -33.14,
+              213.74,
+              4.37758
+            ],
+            "focus": {
+              "handle": "0x1f421b5c",
+              "name": "pickups_mana_potion_01_17"
+            },
+            "goneLocally": true
+          }
+        ],
+        "presentAfterFirst": {
+          "host": 0,
+          "client": 0
+        },
+        "first": {
+          "taker": "host",
+          "takerGain": {
+            "money": 0,
+            "items": {
+              "components/interactive/mana_potion.inventoryitem": 1
+            },
+            "any": true
+          },
+          "otherGain": {
+            "money": 0,
+            "items": {
+              "components/interactive/mana_potion.inventoryitem": 1
+            },
+            "any": true
+          }
+        },
+        "failure": "The client gained from the host's take of pickups_mana_potion_01_17: money 0, items {\"components/interactive/mana_potion.inventoryitem\":1}"
+      }
+    ],
+    "coinSync": {
+      "host": {
+        "itemsPerPlayer": false,
+        "enabled": true,
+        "ready": true,
+        "result": "awaiting_catalog_peer",
+        "refusals": 0
+      },
+      "client": {
+        "itemsPerPlayer": false,
+        "enabled": true,
+        "ready": true,
+        "result": "awaiting_catalog_peer",
+        "refusals": 0
+      }
+    }
+  },
+  "scope": "2033 (#238): items per player on a mission map (pickups_mana_potion_01_13:client,pickups_mana_potion_01_17:host, mutation twin: shared pickups); each player takes each item once in their own world"
+}

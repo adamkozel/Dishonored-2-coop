@@ -25,6 +25,15 @@ struct CoinSync {
     std::uint64_t sent=0,received=0,rejected=0,duplicates=0,observations=0,commits=0,reloads=0,rearms=0;
     const char* result="disabled";
 } coinSync;
+// Stage 8.4.2 (#238): items per player. Each player takes each pickup once, in their own world: the shared catalog
+// (request, commit and apply) and the pickup catch-up stay off, so a pickup leaves only the taker's world. In the
+// product it is on unless the host's d2coop.cfg sets items_per_player=0 (D2COOP_ITEMS_PER_PLAYER=0); the partner
+// follows the host's setting from its hello (control flag 8). The lab sets it with coop_items_per_player on|off.
+bool itemsPerPlayer=false,productItemsPerPlayer=true;std::uint64_t itemsPerPlayerRefusals=0;
+bool coopItemsPerPlayerFlag(){return localRole==0&&itemsPerPlayer;}
+// Lab only (coop_items_per_player take <name>): this world's player takes the named story pickup natively, through the
+// same native steps as the story catch-up, so a test can check that the peer's world follows (Test-ItemsPerPlayer).
+std::string storyTakeRequest;const char* storyTakeResult="idle";std::uint64_t storyTakes=0;
 std::uint64_t coinArmCounter=0,coinSequence=0;
 int coinEnableRequest=-1,coinReplayRequest=0;
 std::string coinExerciseRequest;
@@ -284,6 +293,8 @@ void serviceCoinSync(ULONGLONG tick){
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     servicePickupCapacityFixture(tick);
     auto& s=coinSync;
+    if((productMode||productAutoArm)&&localRole==1||productMode&&localRole==0)itemsPerPlayer=localRole==0?productItemsPerPlayer:coopControl.helloOk&&coopControl.peerItemsPerPlayer;
+    if(itemsPerPlayer){if(coinEnableRequest>0){coinEnableRequest=-1;++itemsPerPlayerRefusals;}if(s.enabled)stopCoinSync("items_per_player");}
     // A developer command is consumed once even when the session cannot run.
     std::string exercise;exercise.swap(coinExerciseRequest);
     if(coinEnableRequest>=0){const bool on=coinEnableRequest!=0;coinEnableRequest=-1;
@@ -371,9 +382,17 @@ void receivePickupPresence(const PickupPresencePacket& p,std::size_t bytes,ULONG
 // this world first had the pickup. Since 1214jv (#203) the host does too, for authored pickups only.
 void servicePickupCatchUp(ULONGLONG tick){
     servicePickupCensus(tick);sendPickupPresence(tick);
+    if(!storyTakeRequest.empty()&&nativeMutationAllowed&&GetCurrentThreadId()==engineThread.load()){std::string name;name.swap(storyTakeRequest);storyTakeResult="not_found";
+        for(const auto& [slot,a]:pickupCensus.actors)if(a.name==name){NativeCoin n{};
+            if(!readNativeStoryPickup(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,a.handle,n)){storyTakeResult="not_story";break;}
+            unsigned calls=0;const auto r=applyNativeStoryPickup(n,calls);storyTakeResult=r==CoinApply::Complete?"taken":r==CoinApply::Deferred?"deferred":"failed";
+            if(r==CoinApply::Deferred)storyTakeRequest=name;else ++storyTakes;break;}}
     auto& c=pickupCatchUp;if(!c.peerAt||!c.previousAt)return;
     if(c.epoch!=outgoing.worldEpoch||c.peerEpoch!=remote.worldEpoch||c.map!=outgoing.mapId){c.peer.clear();c.previous.clear();c.peerAt=c.previousAt=0;c.targets.clear();c.cursor=0;c.receipt={};c.result="presence_out_of_scope";return;}
-    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!coinSync.ready||!coinReadyContext(tick))return;
+    // Stage 8.4.2 (#238): with items per player, only story pickups are caught up, without the shared catalog.
+    const bool story=itemsPerPlayer;
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    if(story?!(coinConnection()&&coopWorldPairReady(outgoing,remote)&&coopGameplayReady(outgoing)&&!doorCheckpointBarrierActive()&&lastReceive&&tick-lastReceive<250):(!coinSync.ready||!coinReadyContext(tick)))return;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(c.cursor>=c.targets.size()&&pickupCensus.cycles&&c.plannedCycle!=pickupCensus.cycles){
         c.plannedCycle=pickupCensus.cycles;c.targets.clear();c.cursor=0;
@@ -381,14 +400,14 @@ void servicePickupCatchUp(ULONGLONG tick){
         for(const auto& item:pickupCensusItems()){
             const auto at=pickupCensus.actors.find(item.handle>>16);
             if(at==pickupCensus.actors.end()||c.previousAt<at->second.seenAt+10000||shared.count(item.name)||c.attempted.count(item.name)||!pickupCatchUpTarget(item,c.peer,c.previous,!localRole))continue;
-            NativeCoin n{};if(readNativeCoin(memoryRead,base,observedGame,item.handle,n,true)&&coinCatalogEligible(n))c.targets.push_back({item.name,item.handle}); // dormant: a later cycle
+            NativeCoin n{};if(story?readNativeStoryPickup(memoryRead,base,observedGame,item.handle,n):readNativeCoin(memoryRead,base,observedGame,item.handle,n,true)&&coinCatalogEligible(n))c.targets.push_back({item.name,item.handle}); // dormant: a later cycle
         }
         c.planned+=c.targets.size();c.result=c.targets.empty()?"caught_up":"catching_up";
     }
     if(c.cursor>=c.targets.size())return;
     const auto& t=c.targets[c.cursor];NativeCoin n{};
-    if(!readNativeCoin(memoryRead,base,observedGame,t.handle,n,true)||n.name!=t.name){++c.cursor;c.receipt={};return;} // taken here meanwhile
-    const auto r=applyNativeCoin(n,c.receipt,c.calls);
+    if(!(story?readNativeStoryPickup(memoryRead,base,observedGame,t.handle,n):readNativeCoin(memoryRead,base,observedGame,t.handle,n,true))||n.name!=t.name){++c.cursor;c.receipt={};return;} // taken here meanwhile
+    const auto r=story?applyNativeStoryPickup(n,c.calls):applyNativeCoin(n,c.receipt,c.calls);
     if(r==CoinApply::Deferred){++c.deferrals;return;}
     c.attempted[t.name]=true;
     auto& names=r==CoinApply::Complete?c.awardedNames:c.failedNames;++(r==CoinApply::Complete?c.awarded:c.failed);if(names.size()<64)names.push_back(t.name);
@@ -397,10 +416,10 @@ void servicePickupCatchUp(ULONGLONG tick){
 void writePickupCatchUp(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.pickup-catchup.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& c=pickupCatchUp;const auto& s=pickupCensus;
-    std::fprintf(f,"{\"role\":%u,\"result\":\"%s\",\"census\":{\"cycles\":%llu,\"actors\":%zu,\"classifications\":%llu,\"maxReads\":%llu,\"lastCycleMs\":%llu,\"scanning\":%s},"
+    std::fprintf(f,"{\"storyTake\":\"%s\",\"storyTakes\":%llu,\"role\":%u,\"result\":\"%s\",\"census\":{\"cycles\":%llu,\"actors\":%zu,\"classifications\":%llu,\"maxReads\":%llu,\"lastCycleMs\":%llu,\"scanning\":%s},"
         "\"map\":%llu,\"epoch\":%llu,\"peerEpoch\":%llu,\"presenceSent\":%llu,\"sentEntries\":%u,\"refusedSends\":%llu,\"presenceReceived\":%llu,\"rejected\":%llu,\"peerEntries\":%zu,"
         "\"planned\":%llu,\"targets\":%zu,\"cursor\":%zu,\"awarded\":%llu,\"failed\":%llu,\"deferrals\":%llu,\"awardedNames\":[",
-        localRole,c.result,s.cycles,s.actors.size(),s.classifications,s.maxReads,s.lastCycleMs,s.scanning?"true":"false",
+        storyTakeResult,storyTakes,localRole,c.result,s.cycles,s.actors.size(),s.classifications,s.maxReads,s.lastCycleMs,s.scanning?"true":"false",
         c.map,c.epoch,c.peerEpoch,c.presenceSent,c.sentEntries,c.refusedSends,c.presenceReceived,c.rejected,c.peer.size(),c.planned,c.targets.size(),c.cursor,c.awarded,c.failed,c.deferrals);
     const auto list=[&](const std::vector<std::string>& names){for(std::size_t i=0;i<names.size();++i){if(i)std::fputc(',',f);std::fputc('"',f);std::fputs(names[i].c_str(),f);std::fputc('"',f);}};
     list(c.awardedNames);std::fputs("],\"failedNames\":[",f);list(c.failedNames);std::fputs("],\"targetNames\":[",f);
@@ -417,8 +436,8 @@ void writeCoinSync(){
     CoinChannel empty{};const CoinChannel* primary=&empty;unsigned calls=0,awarded=0;
     for(const auto& c:s.entries){calls+=c.calls;awarded+=c.receipt.awarded;if(c.binding.name=="pickups_coin_emily_lowvalue_4")primary=&c;}
     const auto& c=*primary;
-    std::fprintf(f,"{\"bindRefusal\":\"%s\",\"bindRefusalItem\":\"%s\",\"bindRefusals\":%llu,\"enabled\":%s,\"ready\":%s,\"paused\":%s,\"reloadPending\":%s,\"reloadReady\":%s,\"observerInstalled\":%s,\"epoch\":%llu,\"peerEpoch\":%llu,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%u,\"ack\":%u,\"attempted\":%s,\"awarded\":%s,\"nativeSource\":%s,\"before\":%d,\"after\":%d,\"nativeCalls\":%u,\"observations\":%llu,\"commits\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"reloads\":%llu,\"rearms\":%llu,\"result\":\"%s\",\"settled\":%s,\"localOnly\":%u,\"peerOnly\":%llu,\"listsSent\":%llu,\"listsReceived\":%llu,\"sharedDigest\":\"%016llx\",\"peerDigest\":\"%016llx\",\"catalogCount\":%zu,\"catalogId\":\"%016llx\",\"awardedCount\":%u,\"entries\":[",
-        coinBindRefusal,coinBindRefusalItem.c_str(),coinBindRefusals,s.enabled?"true":"false",s.ready?"true":"false",s.paused?"true":"false",s.reloadPending?"true":"false",s.reloadReady?"true":"false",realCoinReward?"true":"false",
+    std::fprintf(f,"{\"itemsPerPlayer\":%s,\"itemsPerPlayerRefusals\":%llu,\"bindRefusal\":\"%s\",\"bindRefusalItem\":\"%s\",\"bindRefusals\":%llu,\"enabled\":%s,\"ready\":%s,\"paused\":%s,\"reloadPending\":%s,\"reloadReady\":%s,\"observerInstalled\":%s,\"epoch\":%llu,\"peerEpoch\":%llu,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%u,\"ack\":%u,\"attempted\":%s,\"awarded\":%s,\"nativeSource\":%s,\"before\":%d,\"after\":%d,\"nativeCalls\":%u,\"observations\":%llu,\"commits\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"reloads\":%llu,\"rearms\":%llu,\"result\":\"%s\",\"settled\":%s,\"localOnly\":%u,\"peerOnly\":%llu,\"listsSent\":%llu,\"listsReceived\":%llu,\"sharedDigest\":\"%016llx\",\"peerDigest\":\"%016llx\",\"catalogCount\":%zu,\"catalogId\":\"%016llx\",\"awardedCount\":%u,\"entries\":[",
+        itemsPerPlayer?"true":"false",itemsPerPlayerRefusals,coinBindRefusal,coinBindRefusalItem.c_str(),coinBindRefusals,s.enabled?"true":"false",s.ready?"true":"false",s.paused?"true":"false",s.reloadPending?"true":"false",s.reloadReady?"true":"false",realCoinReward?"true":"false",
         s.scope.epoch,s.scope.peerEpoch,c.arm,c.peerArm,c.revision,c.ack,c.receipt.attempted?"true":"false",c.receipt.awarded?"true":"false",c.receipt.nativeSource?"true":"false",
         c.receipt.before,c.receipt.after,calls,s.observations,s.commits,s.sent,s.received,s.rejected,s.duplicates,s.reloads,s.rearms,s.result,s.settled?"true":"false",s.localOnly,s.peerOnly,s.listsSent,s.listsReceived,s.sharedDigest,s.peerDigest,s.entries.size(),s.catalogId,awarded);
     bool first=true;for(const auto& entry:s.entries){if(!first)std::fputc(',',f);first=false;std::fputs("{\"name\":",f);coinJsonString(f,entry.binding.name);std::fputs(",\"item\":",f);coinJsonString(f,entry.binding.itemName);

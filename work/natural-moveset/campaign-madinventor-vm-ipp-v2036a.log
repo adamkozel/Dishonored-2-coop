@@ -1,0 +1,184 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             94 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "host died during step19-heal (GameOver)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-itemsperplayer-v2036",
+      "hostDll": "8DB7D54F3B52321BE94EE65F412008E1A01BDEEC03F2A3562B496E287CCDE5D4",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 104,
+        "client": 104,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "healthHold": [
+      "from step step11-heal",
+      "from step step19-heal"
+    ],
+    "transitionConfirms": [
+      "step14-use pending 0",
+      "step14-use pending 0"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 26,
+        "cine": 13,
+        "pos": [
+          45.146946,
+          -44.984104,
+          -6.196373
+        ],
+        "fresh": true,
+        "gameflow": [
+          222,
+          4,
+          6,
+          8,
+          1,
+          7,
+          0
+        ],
+        "gfApplied": 24,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "1/329/0",
+        "active": "Mission_MI,Obj_MI_Jindosh,Obj_MI_Sokolov,Task_MI_Find_Sokolov,Task_MI_Kill_Jindosh,Task_MI_NonLethal"
+      },
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 26,
+        "cine": 39,
+        "pos": [
+          40.115402,
+          88.703804,
+          2.661795
+        ],
+        "fresh": true,
+        "gameflow": [
+          222,
+          4,
+          6,
+          8,
+          1,
+          7,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/2609",
+        "ka": "612/30/2",
+        "active": "Mission_MI,Obj_MI_Jindosh,Obj_MI_Sokolov,Task_MI_Find_Sokolov,Task_MI_Kill_Jindosh,Task_MI_NonLethal"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2015.ps1:673[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 673 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mhost died during step19-heal (GameOver)[0m

@@ -520,7 +520,7 @@ int main(int argc, char** argv) {
             if(key.empty()||key.rfind("d2coop",0)==0)return;auto& c=cats[cat];
             if(dups[cat].count(key))return;if(c.count(key)){c.erase(key);dups[cat].insert(key);return;}c[key]=value;};
         const auto actorName=[&](std::uintptr_t actor){std::uintptr_t p=0;std::string s;if(actor&&reader(actor+0x20,&p,8))worldIdentityString(reader,p,s);return s;};
-        cats["doors"];cats["usables"];cats["storyflags"];cats["gameflow"];cats["chaos"];cats["npcs"];cats["breakables"];cats["pickups"];
+        cats["doors"];cats["usables"];cats["storyflags"];cats["gameflow"];cats["chaos"];cats["npcs"];cats["breakables"];cats["pickups"];cats["storypickups"];
         for(auto h:handles){
             if(h==1u)continue;
             NativeOpenable o{};if(readNativeOpenable(reader,base,game,h,o)){
@@ -533,7 +533,12 @@ int main(int argc, char** argv) {
                 std::array<std::uintptr_t,256> m{};if(!reader(members,m.data(),(n&0xffffff)*8))continue;
                 for(unsigned i=0;i<(n&0xffffff)&&!component;++i){std::uintptr_t cvt=0;if(m[i]&&reader(m[i],&cvt,8)&&cvt==base+0x1c5a3b8)component=m[i];}
                 if(!component)continue;unsigned char flags=0,ownerFlags=0;reader(component+0xd0,&flags,1);reader(actor+0xd0,&ownerFlags,1);
-                put("pickups",actorName(actor),"["+std::to_string((flags>>3)&1)+","+std::to_string(ownerFlags&1)+"]");}
+                // Stage 8.4.2 (#238): story pickups (keys, notes, the rewire tool, maps) reach both players, so they are compared
+                // strictly; every other pickup is each player's own.
+                std::uintptr_t decl=0,item=0,dvt=0;unsigned family=0;
+                const bool story=reader(component+8,&decl,8)&&decl&&reader(decl,&dvt,8)&&dvt==base+0x1c5a278&&reader(decl+0xf8,&item,8)&&item&&
+                    reader(item,&dvt,8)&&dvt==base+0x1b9ea48&&reader(item+0x60,&family,4)&&(family==12||family==17||family==22||family==24||family==27);
+                put(story?"storypickups":"pickups",actorName(actor),"["+std::to_string((flags>>3)&1)+","+std::to_string(ownerFlags&1)+"]");}
         }
         {std::vector<NativeWorldNpc> catalog;unsigned unbound=0;std::map<std::string,std::array<unsigned,3>> packs;
          if(readWorldNpcCatalog(reader,base,game,catalog,unbound))for(const auto& n:catalog){
@@ -2035,9 +2040,13 @@ int main(int argc, char** argv) {
             unsigned componentFlags=0;unsigned char flags=0,ownerFlags=0;float position[3]{};NativeCoin coin{};
             reader(component+0x1c,&componentFlags,4);reader(component+0xd0,&flags,1);reader(actor+0xd0,&ownerFlags,1);reader(actor+0x300,position,12);
             const bool readable=readNativeCoin(reader,base,game,h,coin,true);
+            // Stage 8.4.2 (#238): the item declaration of every pickup, whatever its family, to classify story items.
+            std::uintptr_t decl=0,item=0,ip=0;std::string itemName;unsigned type=0;int special=0,quantity=0;unsigned char carried=0;
+            if(reader(component+8,&decl,8)&&decl&&reader(decl,&vt,8)&&vt==base+0x1c5a278){reader(decl+0xa0,&carried,1);reader(decl+0x100,&quantity,4);
+                if(reader(decl+0xf8,&item,8)&&item&&reader(item,&vt,8)&&vt==base+0x1b9ea48){if(reader(item+8,&ip,8))worldIdentityString(reader,ip,itemName);reader(item+0x60,&type,4);reader(item+0xc4,&special,4);}}
             if(!first)std::cout<<',';first=false;
             std::cout<<"{\"name\":"<<jsonString(name)<<",\"handle\":"<<h<<",\"componentFlags\":"<<componentFlags<<",\"flags\":"<<unsigned(flags)<<",\"ownerFlags\":"<<unsigned(ownerFlags)
-                <<",\"readable\":"<<(readable?"true":"false")<<",\"position\":["<<position[0]<<','<<position[1]<<','<<position[2]<<"]}";
+                <<",\"readable\":"<<(readable?"true":"false")<<",\"item\":"<<jsonString(itemName)<<",\"type\":"<<type<<",\"special\":"<<special<<",\"carried\":"<<unsigned(carried)<<",\"quantity\":"<<quantity<<",\"position\":["<<position[0]<<','<<position[1]<<','<<position[2]<<"]}";
         }
         std::cout<<"]}\n";return 0;
     }
