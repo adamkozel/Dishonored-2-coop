@@ -1,0 +1,179 @@
+{
+  "passed": false,
+  "failure": "Guest Send-D2Input failed (1): \u001b[31;1mGet-Process: \u001b[0mC:\\D2Lab\\ws\\outputs\\d2-coop-lab\\Send-D2Input.ps1:18\u001b[0m \u001b[31;1m\u001b[0m\u001b[36;1mLine |\u001b[0m \u001b[31;1m\u001b[0m\u001b[36;1m\u001b[36;1m  18 | \u001b[0m $process=\u001b[36;1mGet-Process -Id $launch.pid -ErrorAction Stop\u001b[0m \u001b[31;1m\u001b[0m\u001b[36;1m\u001b[36;1m\u001b[0m\u001b[36;1m\u001b[0m\u001b[36;1m     | \u001b[31;1m          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\u001b[0m \u001b[31;1m\u001b[0m\u001b[36;1m\u001b[36;1m\u001b[0m\u001b[36;1m\u001b[0m\u001b[36;1m\u001b[31;1m\u001b[31;1m\u001b[36;1m     | \u001b[31;1mCannot find a process with the process identifier 5652.\u001b[0m",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-hoststory-v2031",
+      "hostDll": "C89ACC6FAE5AF92F18ADE04164BDF770150E7A22FBE986F0CAC72EE7B91A58EA",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 27,
+        "client": 27,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "commands": [
+      "step21-command host coop_difficulty_set 0"
+    ],
+    "difficulty": [
+      {
+        "step": "step22-difficulty",
+        "expect": 0,
+        "host": 0,
+        "client": 0,
+        "clientResult": "matched",
+        "clientApplied": 0,
+        "hostPreset": "difficulty/preset/easy.difficultypreset",
+        "clientPreset": "difficulty/preset/easy.difficultypreset",
+        "ok": true
+      }
+    ],
+    "healthHold": [
+      "from step step24-heal"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 11,
+        "pending": 0,
+        "map": "campaign/curator/curator_p_lowchaos",
+        "epoch": 26,
+        "cine": 241,
+        "pos": [
+          -118.025642,
+          -131.634781,
+          -29.910751
+        ],
+        "fresh": false,
+        "gameflow": [
+          224,
+          0,
+          0,
+          17,
+          0,
+          7,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "expecting/3937",
+        "ka": "313/3/0",
+        "active": ""
+      },
+      "client": {
+        "logic": 11,
+        "pending": 0,
+        "map": "campaign/curator/curator_p_lowchaos",
+        "epoch": 26,
+        "cine": 39,
+        "pos": [
+          -119.287102,
+          -124.634315,
+          -29.284044
+        ],
+        "fresh": true,
+        "gameflow": [
+          224,
+          0,
+          0,
+          17,
+          0,
+          7,
+          0
+        ],
+        "gfApplied": 16,
+        "lt": "applied/0/2",
+        "hold": "expecting/0",
+        "ka": "3/188/2",
+        "active": ""
+      }
+    }
+  },
+  "scope": "Campaign route steps for campaign/void/void_02/void_02.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
