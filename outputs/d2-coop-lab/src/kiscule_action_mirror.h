@@ -216,6 +216,18 @@ bool kisculeDamageTargetsLocalPlayer(std::uintptr_t node,std::uint32_t input){
     std::uint32_t mine=0,target=0;return h&&memoryRead(reinterpret_cast<std::uintptr_t>(h),&target,4)&&memoryRead(observedPlayer+0xa8,&mine,4)&&mine!=0x3fff0010&&target==mine;
 }
 int kisculeDamageClass(){static const int i=kisculePolicyIndex(0x1cbe348);return i<0?-1:kKisculeHostStoryBase+i;}
+// damage-target-v2041e (diagnostic): the entity an ActionDamage Hurt or Kill resolves to in this world, as the handlers
+// resolve it. The streets cable car (script_kiscule_cablecar node 609, Hurt) ran in both worlds right before the host
+// died and the partner lost Sokolov (campaign-madinventor-vm-ipp-v2041ca); its target was not recorded. Engine thread only.
+bool kisculeDamageTarget(std::uintptr_t node,std::uint32_t& handle,std::string& name){
+    handle=0;name.clear();
+    if(std::memcmp(gameImage+0x528040,kisculeVariableAccessorPrefix,sizeof(kisculeVariableAccessorPrefix))||!observedGame)return false;
+    const auto* h=reinterpret_cast<const std::uint32_t*(*)(void*,const void*)>(gameImage+0x528040)(reinterpret_cast<void*>(node),gameImage+0x3984148);
+    if(!h||!memoryRead(reinterpret_cast<std::uintptr_t>(h),&handle,4))return false;
+    std::uint32_t mine=0;if(observedPlayer&&memoryRead(observedPlayer+0xa8,&mine,4)&&mine==handle){name="<local player>";return true;}
+    std::uintptr_t actor=worldIdentityEntity(memoryRead,observedGame,handle),n=0;
+    return actor&&memoryRead(actor+0x20,&n,8)&&worldIdentityString(memoryRead,n,name);
+}
 // Caller holds kisculeLock. A new node instance means a new world: counts restart.
 KisculeActionCount& kisculeCount(const std::string& entity,std::uint32_t node,std::uint32_t input,std::uint32_t cls,std::uintptr_t instanceNode){
     for(auto& c:kisculeMirror.counts)if(c.node==node&&c.input==input&&c.cls==cls&&c.entity==entity){
@@ -261,8 +273,11 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     std::uint32_t nodeId=0,input=0;std::memcpy(&nodeId,signal+0xc,4);std::memcpy(&input,signal+0x10,4);
     std::string entity;bool skip=false;
     const bool playerDamage=!kisculeHostStoryTwinNoBlock&&cls==kisculeDamageClass()&&kisculeDamageTargetsLocalPlayer(node,input);
+    std::uint32_t damageHandle=0;std::string damageName;
+    const bool damageSeen=cls==kisculeDamageClass()&&(input==2||input==4)&&(kisculeDamageTarget(node,damageHandle,damageName),true);
     AcquireSRWLockExclusive(&kisculeLock);
     kisculeMirror.dispatchThread=GetCurrentThreadId();
+    if(damageSeen)kisculeEvent("damage_target",cls,damageName,nodeId,input,damageHandle);
     // hoststory-gameover-v2041: under host story the partner never ends the game on its own. Its GameOver comes from
     // the host's Death message (checkpoint_sync.h). In campaign-madinventor-vm-ipp-v2040a the partner's streets
     // script_kiscule_gameover ("Sokolov dead") ran natively and ended both games while the host's Sokolov was fine.
@@ -379,6 +394,8 @@ void serviceKisculeMirror(std::uint64_t tick){
            !(h1?kisculeCodePointer(h1):kisculeCodePointer(h0))){
             if(tick-w.at<10000){keep.push_back(w);continue;}
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
+        if(static_cast<int>(p.classIndex)==kisculeDamageClass()&&(inputId==2||inputId==4)){std::uint32_t th=0;std::string tn;kisculeDamageTarget(node,th,tn);
+            AcquireSRWLockExclusive(&kisculeLock);kisculeEvent("apply_damage_target",p.classIndex,tn,nodeId,inputId,th);ReleaseSRWLockExclusive(&kisculeLock);}
         if(p.role==1&&static_cast<int>(p.classIndex)==kisculeDamageClass()&&kisculeDamageTargetsLocalPlayer(node,inputId)){
             AcquireSRWLockExclusive(&kisculeLock);++k.playerDamageRefused;++k.refused;kisculeEvent("player_damage_refused",p.classIndex,p.entity,nodeId,inputId,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
         std::uint32_t ranTo=0;

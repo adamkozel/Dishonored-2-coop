@@ -73,9 +73,25 @@ No screenshot grab timed out in harness v2017.
 
 **Candidate playerdamage-v2041d** (from a Ghidra reading of ActionDamage): an `ActionDamage` Hurt (input 2) or Kill (input 4) whose target is this world's own player runs in that world only. It is never blocked, mirrored or asked of the host (`playerDamageLocal`), and the host refuses a partner request for one (`playerDamageRefused`). The check reads the target input's link to a Player node (`arkKisculeNodePlayer`, vtable RVA 0x1cda848), or resolves the target as the handlers do (0x528040 with key 0x3984148, against the player entity's handle at +0xa8). A Player node resolves to the player of the world that runs it, so a Player-targeted Kill run on the host's behalf hits the host (confirmed static). `Run-Campaign-v2041c.sh a` (harness v2018) runs Dunwall (route v2041), A Crack in the Slab and The Clockwork Mansion on it.
 
+### Reruns on playerdamage-v2041d (v2041ca, harness v2018)
+
+| Mission | Result |
+|---|---|
+| Dunwall | **Equal** (286) with route v2041 (Ramsey attacked from behind) |
+| A Crack in the Slab | **Equal** (480). The co-op saves switch worked, and no Replay Mission prompt opened |
+| The Clockwork Mansion | The host died again on arrival in the streets ("You Have Perished"); the partner shows "You have lost a critical ally: Anton Sokolov". Details below |
+
+The Clockwork Mansion, from the failure status that harness v2018 now saves (confirmed runtime):
+- **Who ended first:** the host. Its logic transition is `sent`, the partner's is `applied` (3 transitions from the host), and the partner blocked its own `ActionGameOver` once (`hostStoryGameOverBlocked` 1, `script_kiscule_gameover` node 1399851223). Neither game ran a `playerDamageLocal` or `playerDamageRefused`, so the fall-death hypothesis of v2041a does not explain this death.
+- **What ran first:** about 12.6 s after the streets loaded, the host's `script_kiscule_cablecar` ran keyframes 250 and 258, a `Collision` (node 1457201474), and 2.8 s later `ActionDamage` node 609, Hurt. The host died after it. The partner applied the host's run of the same nodes, then its own run of them was blocked by host story; its own GameOver came 0.4 s after its blocked Damage.
+- **Where:** the host died on the streets spawn point (243.05, 184.58, 0.81), as in hoststory-v2031a, ipp-v2040a and ipp-v2041a. Before host story, v1929a stood at the same point and passed. The partner stood on exactly the same point.
+- **Also seen:** the partner's world chose two different `ActionSpawner` nodes on the streets load (791556406 and 1248112637, where the host ran 1200362106 and 391263537). It asked the host for them, and the host ran them (`applied_partner`), so the host world gets the partner's choices as well as its own. This is a separate host-story fault (hypothesis: these spawners pick at random).
+
+What node 609 hurts is not recorded. **Candidate damagetarget-v2041e** (diagnostic only) records, for every `ActionDamage` Hurt or Kill that runs or is applied, the entity its target resolves to in that world (`damage_target` and `apply_damage_target` events; `count` is the handle, and the local player shows as `<local player>`). `Run-Campaign-v2041e.sh a` reruns The Clockwork Mansion on it.
+
 ## Still to do in area 4.3
 
-- **The campaign on two accounts:** the v2041b Death to the Empress rerun; The Clockwork Mansion host death, the Dunwall Ramsey fight and the A Crack in the Slab ending; The Good Doctor glass.
+- **The campaign on two accounts:** The Clockwork Mansion streets death (cable car damage) and the partner's own spawner choices reaching the host; The Good Doctor glass; then one full run of all nine missions on one candidate.
 - **Note text on screen:** check that the partner's note shows the host's digits. This is visual acceptance, recorded separately.
 - **A partner opens a safe with the host's code** (a route step on Edge of the World).
 - **Codes outside `3_digits_lock`:** the Jindosh lock (chapter 110) and other lock decls, if any.
