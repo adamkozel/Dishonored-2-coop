@@ -134,9 +134,15 @@ The host's own GameOver came 11.4 s after its 609, with no other script action a
 
 **Candidate damageinflow-v2041j:** a host run of an `ActionDamage` waits up to 8 s for the partner's own flow to reach it (750 ms for other classes), so 609 runs in the partner's own pull-out scene. `Run-Campaign-v2041j.sh a` reruns The Clockwork Mansion.
 
+**The Clockwork Mansion on damageinflow-v2041j (v2041ja): equal** (281, no differences), the first pass under the stage 8 rules. With it, eight of the nine missions have passed on two accounts with host story, items per player and safe codes. The Good Doctor's lab glass is the one left.
+
+A source read found how a partner-world NPC death can reach the host (confirmed static): the NPC Life roster sends each game's unconscious or dead NPCs every 2 s, and the receiver applies the state with native damage. Nothing gates it by role, host story or story NPC. That fits the host's Sokolov loss 8 to 13 s after the partner's in v2041ha and v2041ia (hypothesis). With v2041j the partner's Sokolov no longer falls, so the path is not exercised; issue #254 tracks the host-story rule for it.
+
+`Run-Campaign-v2042.sh a` runs all nine missions on v2041j with harness v2021, with Dunwall and Royal Conservatory routes v2041.
+
 ## Still to do in area 4.3
 
-- **The campaign on two accounts:** The Clockwork Mansion streets death (cable car damage) and the partner's own spawner choices reaching the host; The Good Doctor glass; then one full run of all nine missions on one candidate.
+- **The campaign on two accounts:** the full run v2042a on one candidate; The Good Doctor glass; the NPC Life roster under host story (issue #254).
 - **Note text on screen:** check that the partner's note shows the host's digits. This is visual acceptance, recorded separately.
 - **A partner opens a safe with the host's code** (a route step on Edge of the World).
 - **Codes outside `3_digits_lock`:** the Jindosh lock (chapter 110) and other lock decls, if any.
