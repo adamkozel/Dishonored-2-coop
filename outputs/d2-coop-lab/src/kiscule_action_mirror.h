@@ -104,6 +104,24 @@ const KisculeCharacterBranch kisculeCharacterBranches[]={
     {"campaign/madinventor/streets/madinv_streets_p_","script_kiscule_return_main",1200362106,791556406}, // deadbody_8 / deadbody_7
     {"campaign/madinventor/streets/madinv_streets_p_","script_kiscule_return_main",391263537,1248112637},  // deadbody_10 / deadbody_9
 };
+// load-dressing-v2041k: load-time set dressing that a story flag both worlds share decides (LevelLoadedFirstTime, then a
+// story flag test, then EntityStateControl or ActionDestroy on a list of props). The partner runs it in its own flow at its
+// own load; the host's run, when it comes, finds it executed. Blocked, it waited for the host's run, which came 69 s
+// later when the host loaded later: meanwhile the partner's hyp_arrived lab set on the Dreadful Wale stayed live, and two
+// glass props bound to its teapot cup broke and left the world (campaign-institute-vm-ipp-v2031a to v2040a; nodes read from
+// the map data, confirmed static: hypatia_is_alive true 21792515, false 508102253 and 424070462).
+struct KisculeLoadDressing{const char* map;const char* entity;std::uint32_t node;};
+const KisculeLoadDressing kisculeLoadDressings[]={
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",21792515},  // hypatia alive: hide the b_hyp_absent set
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",508102253}, // hypatia not alive: hide the b_hyp_arrived set
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",424070462}, // and destroy script_book_02
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",79209850},  // the second load-time state and destroy pair
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",1393111919},
+};
+bool kisculeLoadDressing(const std::string& entity,std::uint32_t node){
+    for(const auto& d:kisculeLoadDressings)if(node==d.node&&entity==d.entity&&!std::strcmp(d.map,mapName))return true;
+    return false;
+}
 bool kisculeOtherCharacterBranch(const char* entity,std::uint32_t node){
     const int character=kisculeLocalCharacter();if(!character)return false;
     for(const auto& c:kisculeCharacterBranches){
@@ -126,7 +144,7 @@ struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;
 struct KisculeActionEvent{std::uint64_t tick=0;std::uint32_t cls=0,node=0,input=0,count=0;char entity[64]{};const char* what="";};
 struct KisculePending{KisculeActionPacket packet{};std::uint64_t at=0;};
 struct KisculeMirror {
-    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,hostStoryGameOverUpdateBlocked=0,playerDamageLocal=0,playerDamageRefused=0,characterBranchRefused=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
+    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,hostStoryGameOverUpdateBlocked=0,playerDamageLocal=0,playerDamageRefused=0,characterBranchRefused=0,hostStoryDressing=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
     std::uint32_t dispatchThread=0;const char* result="idle";
     std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue;std::vector<KisculePending> pending;
     KisculeActionEvent events[256]{};std::uint64_t eventCount=0;
@@ -313,6 +331,8 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
         // (saferoom-trace-v2028a; hoststory-lead-dunwall-v2027a reached the node first and passed).
         if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&c.executed<c.requests&&c.requests<=c.hostCount){
             ++c.executed;++kisculeMirror.hostStoryInFlow;kisculeEvent("in_flow",cls,entity,nodeId,input,c.executed);}
+        else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&kisculeLoadDressing(entity,nodeId)){
+            ++c.executed;++kisculeMirror.hostStoryDressing;kisculeEvent("load_dressing",cls,entity,nodeId,input,c.executed);}
         else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
             // A request goes out at once, whatever state the partner's game is in: the host runs it only in its own plain
             // gameplay. Ramsey's ring task nodes run in the instant the loot scene ends, while the partner is still in its
@@ -548,7 +568,7 @@ void writeKisculeMirror(){
     if(std::snprintf(path,sizeof(path),"%s.kiscule.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
     AcquireSRWLockShared(&kisculeLock);const auto& k=kisculeMirror;
-    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryGameOverBlocked\":%llu,\"hostStoryGameOverUpdateBlocked\":%llu,\"playerDamageLocal\":%llu,\"playerDamageRefused\":%llu,\"characterBranchRefused\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryGameOverBlocked,k.hostStoryGameOverUpdateBlocked,k.playerDamageLocal,k.playerDamageRefused,k.characterBranchRefused,k.hostStoryInFlow,k.resultScreenHeld);
+    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryGameOverBlocked\":%llu,\"hostStoryGameOverUpdateBlocked\":%llu,\"playerDamageLocal\":%llu,\"playerDamageRefused\":%llu,\"characterBranchRefused\":%llu,\"hostStoryDressing\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryGameOverBlocked,k.hostStoryGameOverUpdateBlocked,k.playerDamageLocal,k.playerDamageRefused,k.characterBranchRefused,k.hostStoryDressing,k.hostStoryInFlow,k.resultScreenHeld);
     fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
         kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
     const auto first=k.eventCount>256?k.eventCount-256:0;

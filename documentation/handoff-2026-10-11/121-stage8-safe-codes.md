@@ -140,6 +140,13 @@ A source read found how a partner-world NPC death can reach the host (confirmed 
 
 `Run-Campaign-v2042.sh a` runs all nine missions on v2041j with harness v2021, with Dunwall and Royal Conservatory routes v2041.
 
+**The Good Doctor's two glass props** (a helper's reading of the take files and the map data):
+- **Where:** `b_hyp_arrived_lab_graduated_cylinder_01` and `b_hyp_arrived_lab_retort_01` are on the Dreadful Wale after the mission (`boat_madinventor_p`), not in the institute (confirmed static).
+- **What the diff means:** they are `arkMovable` breakables with one step. The digest value 0 means intact. A smashed movable leaves the world, so "absent" on the partner means broken (confirmed static and runtime, chapter 105). The host has 132 breakables, the partner 130, in v2031a, v2031b, v2036a and v2040a.
+- **Why they break:** both are bound to `b_hyp_arrived_teapot_set_cup_01`, a debris body 6.5 m away. On the boat's load, `script_kiscule` tests `storyflags/institute.kiscule/hypatia_is_alive`. If false, it hides the `b_hyp_arrived` list with `EntityStateControl` 508102253 and destroys `script_book_02` (424070462). If true, it hides the `b_hyp_absent` list (21792515) (confirmed static). The host runs these at its load. On the partner they were blocked by host story, and the host's runs were applied 69 s later because the host loaded later (confirmed runtime). For those 69 s the partner's set stayed live with physics. The two glass children of the cup broke, and since bound props are left out of the rest-sync, the host never heard (hypothesis on the mechanism).
+
+**Candidate loaddressing-v2041k:** a table of load-time dressing nodes that a shared story flag decides. Under host story the partner runs them in its own flow at its own load (`hostStoryDressing`). The host's later run finds them executed. First entries: the boat's 21792515, 508102253, 424070462, 79209850 and 1393111919. It is archived and goes to the lab after the full run (`Run-Campaign-v2041k.sh a`, The Good Doctor).
+
 ## Still to do in area 4.3
 
 - **The campaign on two accounts:** the full run v2042a on one candidate; The Good Doctor glass; the NPC Life roster under host story (issue #254).
