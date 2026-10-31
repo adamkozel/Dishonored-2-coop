@@ -94,6 +94,23 @@ void kisculeCharacterCounterpart(const char* entity,std::uint32_t& node,std::uin
         if(character==1&&node==g.emilyNode&&input==g.emilyInput){node=g.corvoNode;input=g.corvoInput;return;}
     }
 }
+// character-branch-v2041f: World nodes behind a player-character test (test_player.kiscule) that pick a different
+// node per character. Each world takes its own player's branch, so under host story the partner asked the host for
+// its Emily nodes and the host ran both branches (campaign-madinventor-vm-ipp-v2041ca: the streets witch ambush
+// dead bodies 7 and 9 next to the host's 8 and 10; branch read from the map data, confirmed static). The host decides:
+// it refuses a partner request for the other character's branch, and the partner gets the host's own nodes as they are.
+struct KisculeCharacterBranch{const char* mapPrefix;const char* entity;std::uint32_t corvoNode,emilyNode;};
+const KisculeCharacterBranch kisculeCharacterBranches[]={
+    {"campaign/madinventor/streets/madinv_streets_p_","script_kiscule_return_main",1200362106,791556406}, // deadbody_8 / deadbody_7
+    {"campaign/madinventor/streets/madinv_streets_p_","script_kiscule_return_main",391263537,1248112637},  // deadbody_10 / deadbody_9
+};
+bool kisculeOtherCharacterBranch(const char* entity,std::uint32_t node){
+    const int character=kisculeLocalCharacter();if(!character)return false;
+    for(const auto& c:kisculeCharacterBranches){
+        if(std::strcmp(c.entity,entity)||std::strncmp(c.mapPrefix,mapName,std::strlen(c.mapPrefix)))continue;
+        if((character==1&&node==c.emilyNode)||(character==2&&node==c.corvoNode))return true;}
+    return false;
+}
 #pragma pack(push,1)
 struct KisculeActionPacket {
     std::uint32_t magic=0x414B3244; // "D2KA"
@@ -109,7 +126,7 @@ struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;
 struct KisculeActionEvent{std::uint64_t tick=0;std::uint32_t cls=0,node=0,input=0,count=0;char entity[64]{};const char* what="";};
 struct KisculePending{KisculeActionPacket packet{};std::uint64_t at=0;};
 struct KisculeMirror {
-    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,playerDamageLocal=0,playerDamageRefused=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
+    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,playerDamageLocal=0,playerDamageRefused=0,characterBranchRefused=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
     std::uint32_t dispatchThread=0;const char* result="idle";
     std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue;std::vector<KisculePending> pending;
     KisculeActionEvent events[256]{};std::uint64_t eventCount=0;
@@ -394,6 +411,8 @@ void serviceKisculeMirror(std::uint64_t tick){
            !(h1?kisculeCodePointer(h1):kisculeCodePointer(h0))){
             if(tick-w.at<10000){keep.push_back(w);continue;}
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
+        if(p.role==1&&localRole==0&&kisculeOtherCharacterBranch(p.entity,nodeId)){
+            AcquireSRWLockExclusive(&kisculeLock);++k.characterBranchRefused;++k.refused;kisculeEvent("character_branch_refused",p.classIndex,p.entity,nodeId,inputId,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
         if(static_cast<int>(p.classIndex)==kisculeDamageClass()&&(inputId==2||inputId==4)){std::uint32_t th=0;std::string tn;kisculeDamageTarget(node,th,tn);
             AcquireSRWLockExclusive(&kisculeLock);kisculeEvent("apply_damage_target",p.classIndex,tn,nodeId,inputId,th);ReleaseSRWLockExclusive(&kisculeLock);}
         if(p.role==1&&static_cast<int>(p.classIndex)==kisculeDamageClass()&&kisculeDamageTargetsLocalPlayer(node,inputId)){
@@ -499,7 +518,7 @@ void writeKisculeMirror(){
     if(std::snprintf(path,sizeof(path),"%s.kiscule.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
     AcquireSRWLockShared(&kisculeLock);const auto& k=kisculeMirror;
-    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryGameOverBlocked\":%llu,\"playerDamageLocal\":%llu,\"playerDamageRefused\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryGameOverBlocked,k.playerDamageLocal,k.playerDamageRefused,k.hostStoryInFlow,k.resultScreenHeld);
+    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryGameOverBlocked\":%llu,\"playerDamageLocal\":%llu,\"playerDamageRefused\":%llu,\"characterBranchRefused\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryGameOverBlocked,k.playerDamageLocal,k.playerDamageRefused,k.characterBranchRefused,k.hostStoryInFlow,k.resultScreenHeld);
     fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
         kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
     const auto first=k.eventCount>256?k.eventCount-256:0;

@@ -89,6 +89,15 @@ The Clockwork Mansion, from the failure status that harness v2018 now saves (con
 
 What node 609 hurts is not recorded. **Candidate damagetarget-v2041e** (diagnostic only) records, for every `ActionDamage` Hurt or Kill that runs or is applied, the entity its target resolves to in that world (`damage_target` and `apply_damage_target` events; `count` is the handle, and the local player shows as `<local player>`). `Run-Campaign-v2041e.sh a` reruns The Clockwork Mansion on it.
 
+**The streets scripts** (a helper's reading of `madinv_streets_p_lowchaos.entities`; confirmed static):
+- `ActionDamage` 609 is `sleep_no_reaction_damage` (amount 1) on the Sokolov that `script_spawner_sokolov` spawns in the cable car carriage. It runs from the `player_pull_sok_out_of_carriage` scene ("Player Leave With Sokolov"), after the ride from the mansion reaches the lower station, where both players stand.
+- `Collision` 1457201474 is a fake collision under the carriage at the lower station, with no link to 609.
+- The witch ambush dead bodies come from `test_player.kiscule`: Corvo runs spawners 1200362106 and 391263537 (dead bodies 8 and 10), Emily runs 791556406 and 1248112637 (7 and 9). Nothing is random. Each world takes its own player's branch.
+
+**Clockwork Mansion on damagetarget-v2041e (v2041ea):** the same death on arrival. The diagnostic shows both damage nodes hit Sokolov in both worlds, never a player (confirmed runtime): 746122563 in the house (`anton_sokolov.def_11756` on the host, `_11731` on the partner) and 609 in the carriage (`_14696` and `_14683`). The partner applied each of the host's runs once; the repeated `apply_damage_target` lines are the 750 ms wait for the partner's own flow, logged on every retry. The partner's own `ActionGameOver` was blocked 3.4 s after it applied 609. Its screen still shows the Sokolov reason, while the host shows "You Have Perished". A GameOver without a reason picks a random line, and "host died" only names the first game the harness found in logic 13. Hypothesis: Sokolov dies in the partner's world, the partner reaches GameOver with that reason by a path other than the blocked node, and the host copies it. Harness v2019 also saves both games' `.reset.json` (`deathCount`, `deathReceived`) at a failure to settle the order.
+
+**Candidate charbranch-v2041f:** the host refuses a partner request for the other character's branch of a World node behind a character test (`characterBranchRefused`, a table in `kiscule_action_mirror.h`; first entries: the streets dead body spawners above). The partner gets the host's own spawners as they are. `Run-Campaign-v2041f.sh a` reruns The Clockwork Mansion on it with harness v2019.
+
 ## Still to do in area 4.3
 
 - **The campaign on two accounts:** The Clockwork Mansion streets death (cable car damage) and the partner's own spawner choices reaching the host; The Good Doctor glass; then one full run of all nine missions on one candidate.
