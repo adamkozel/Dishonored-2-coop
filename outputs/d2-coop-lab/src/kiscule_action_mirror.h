@@ -449,7 +449,11 @@ void serviceKisculeMirror(std::uint64_t tick){
             const bool hostStoryRun=p.role==0&&localRole==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase);
             if(hostStoryRun&&p.count>c.hostCount)c.hostCount=p.count;
             // Up to 750 ms for the partner's own flow to reach the node and run it in flow; then it is applied here.
-            if(hostStoryRun&&c.requests<p.count&&c.executed<p.count&&tick-w.at<750){ReleaseSRWLockExclusive(&kisculeLock);keep.push_back(w);break;}
+            // damage-inflow-v2041j: an ActionDamage waits up to 8 s. The carriage Sokolov's sleep damage (609) runs from the
+            // pull-out scene; applied after 750 ms while the partner's own cable car ride was 3.8 s behind, it made him a
+            // ragdoll in a moving car, and he fell 190 m and died (campaign-madinventor-vm-ipp-v2041ia, confirmed runtime).
+            const std::uint64_t inFlowWait=static_cast<int>(p.classIndex)==kisculeDamageClass()?8000:750;
+            if(hostStoryRun&&c.requests<p.count&&c.executed<p.count&&tick-w.at<inFlowWait){ReleaseSRWLockExclusive(&kisculeLock);keep.push_back(w);break;}
             const bool run=c.executed<p.count;if(run){++c.executed;ranTo=c.executed;++k.applied;k.result="applied";kisculeEvent(p.role==1?(nodeId==p.node?"applied_partner":"applied_partner_counterpart"):(nodeId==p.node?"applied":"applied_counterpart"),p.classIndex,p.entity,nodeId,inputId,c.executed);}
             ReleaseSRWLockExclusive(&kisculeLock);if(!run)break;
             alignas(16) unsigned char signal[32]{};std::memcpy(signal+0xc,&nodeId,4);std::memcpy(signal+0x10,&inputId,4);std::memcpy(signal+0x18,&node,8);

@@ -119,6 +119,21 @@ Blocking the input therefore never stopped it.
 
 Harness v2021 saves the Sokolov, Meagan, player and avatar entities of both games at a failure. `Run-Campaign-v2041i.sh a` reruns The Clockwork Mansion on v2041h with it.
 
+**The carriage after the pull-out scene** (helper's third reading; confirmed static):
+- The scene and its endless `Door_StayingOpened` loop hold Sokolov at the cable car's `center_cab_jnt` with a teleporting retarget, and ragdolling is allowed. No floor holds him.
+- The loop breaks only when `sokolov_is_inside_carriage` goes false, and nothing in the map sets it false.
+- No node handles the carried house body; the streets map spawns a new Sokolov.
+
+**Clockwork Mansion on v2041h with harness v2021 (v2041ia):** this time the host ended first (death counters). The failure entities show where each game's carriage Sokolov is (confirmed runtime):
+- **Host:** in the carriage at the station (240.9, 184.8, 1.5).
+- **Partner:** at (225.4, -76.1, -193.7), about 190 m below the track near the middle of the route.
+
+The partner's own cable car ride ran 3.8 s behind the host's. The host's 609 waited 750 ms for the partner's flow and was then applied while the partner's car was still moving. The sleep damage made Sokolov a ragdoll in a moving car, so he fell and died. The partner's blocked GameOver came before its own 609.
+
+The host's own GameOver came 11.4 s after its 609, with no other script action and no scene between. In v2041ha and v2041ia the host's loss came 8 to 13 s after the partner's (clock offset from the 609 apply). Hypothesis: the partner's dead Sokolov reaches the host world through NPC state sync. Not yet traced.
+
+**Candidate damageinflow-v2041j:** a host run of an `ActionDamage` waits up to 8 s for the partner's own flow to reach it (750 ms for other classes), so 609 runs in the partner's own pull-out scene. `Run-Campaign-v2041j.sh a` reruns The Clockwork Mansion.
+
 ## Still to do in area 4.3
 
 - **The campaign on two accounts:** The Clockwork Mansion streets death (cable car damage) and the partner's own spawner choices reaching the host; The Good Doctor glass; then one full run of all nine missions on one candidate.
