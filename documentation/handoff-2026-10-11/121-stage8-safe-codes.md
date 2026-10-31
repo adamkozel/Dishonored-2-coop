@@ -147,9 +147,29 @@ A source read found how a partner-world NPC death can reach the host (confirmed 
 
 **Candidate loaddressing-v2041k:** a table of load-time dressing nodes that a shared story flag decides. Under host story the partner runs them in its own flow at its own load (`hostStoryDressing`). The host's later run finds them executed. First entries: the boat's 21792515, 508102253, 424070462, 79209850 and 1393111919. It is archived and goes to the lab after the full run (`Run-Campaign-v2041k.sh a`, The Good Doctor).
 
+**The full campaign on damageinflow-v2041j (v2042a):** seven of the nine missions are equal on one candidate (confirmed runtime):
+
+| Mission | Take | Result |
+|---|---|---|
+| Dunwall | campaign-dunwall-vm-ipp-v2042a | equal, 286 values |
+| Edge of the World | campaign-eotw-vm-ipp-v2042a | the route never left the map |
+| Royal Conservatory | campaign-curator-vm-ipp-v2042a | equal, 519 |
+| The Good Doctor | campaign-institute-vm-ipp-v2042a | the host died in a guard fight |
+| The Clockwork Mansion | campaign-madinventor-vm-ipp-v2042a | equal, 281 |
+| Dust District | campaign-dust-vm-ipp-v2042a | equal, 2324 |
+| A Crack in the Slab | campaign-bunker-vm-ipp-v2042a | equal, 480 |
+| Death to the Duke | campaign-palace-vm-ipp-v2042a | equal, 608 |
+| Death to the Empress | campaign-empress-vm-ipp-v2042a | equal, 249 |
+
+Neither failure shows a world difference:
+- **Edge of the World:** both games' gameflow states match v2040a step for step up to step 19 (confirmed runtime). At step 20 the host used the Addermire station cable car while it fought two station guards (v2040a had one). The trip did not start, and the partner saw only two more blocked runs, against 70 in v2040a. Hypothesis: the use went in during combat. This is a route problem, not a sync problem.
+- **The Good Doctor:** the host's GameOver is a player death ("Death Has Taken You", logic 13 from 0x85c6b4, not the Kiscule ActionGameOver at 0x525df2), in the second guard clear by the whale oil tank. The elite took 22 presses this time, against one in v2040a. The lab health hold was on, but it is not god mode. The partner received the death through death sharing (`deathReceived` 1) (confirmed runtime).
+
+`Run-Campaign-v2041k.sh a campaign-v2041k-rerun-plan.txt` reruns both missions on loaddressing-v2041k: The Good Doctor first, for the glass fix.
+
 ## Still to do in area 4.3
 
-- **The campaign on two accounts:** the full run v2042a on one candidate; The Good Doctor glass; the NPC Life roster under host story (issue #254).
+- **The campaign on two accounts:** reruns of Edge of the World and The Good Doctor on v2041k (the glass); the NPC Life roster under host story (issue #254).
 - **Note text on screen:** check that the partner's note shows the host's digits. This is visual acceptance, recorded separately.
 - **A partner opens a safe with the host's code** (a route step on Edge of the World).
 - **Codes outside `3_digits_lock`:** the Jindosh lock (chapter 110) and other lock decls, if any.
