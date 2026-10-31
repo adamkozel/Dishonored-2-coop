@@ -1,0 +1,213 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+02:26:14 copying lab scripts, tooling and bin
+02:26:20 mod resources (voidmod, master.index) into the game copy
+02:26:23 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : 8647EC49A8EAE205
+probe           : 0CE41CD5E6331FDA
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 95
+PSComputerName  : D2CoopVM
+RunspaceId      : b5ac1bfc-b95e-4147-981e-e672329b97f3
+
+
+02:27:25 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             95 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "client died during entities (GameOver)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-gameoverstack-v2041g",
+      "hostDll": "8647EC49A8EAE205DE8BC4BC57E33EEF334D21B19316F1D7F86597C5EB9D3675",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 12891
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 14765
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 104,
+        "client": 104,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "healthHold": [
+      "from step step11-heal",
+      "from step step17-heal",
+      "from step step20-heal",
+      "from step step22-heal"
+    ],
+    "transitionConfirms": [
+      "step14-use pending 0",
+      "step14-use pending 0",
+      "step14-use pending 0"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+        "epoch": 31,
+        "cine": 73,
+        "pos": [
+          243.047379,
+          184.581207,
+          0.805749
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          4,
+          1,
+          5,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "released/2672",
+        "ka": "702/7/3",
+        "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+      },
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/madinventor/streets/madinv_streets_p_lowchaos",
+        "epoch": 31,
+        "cine": 18,
+        "pos": [
+          242.719757,
+          184.727783,
+          0.892937
+        ],
+        "fresh": true,
+        "gameflow": [
+          235,
+          0,
+          3,
+          4,
+          1,
+          5,
+          0
+        ],
+        "gfApplied": 13,
+        "lt": "applied/0/3",
+        "hold": "released/0",
+        "ka": "1/330/0",
+        "active": "Mission_MI,Obj_MI_Streets,Task_MI_Carriage"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2020.ps1:692[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 692 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mclient died during entities (GameOver)[0m

@@ -1,0 +1,170 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             95 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "Guest Send-D2Input failed (1): \u001b[31;1mException: \u001b[0mC:\\D2Lab\\ws\\outputs\\d2-coop-lab\\tooling\\Publish-D2Packet.ps1:17\u001b[0m \u001b[31;1m\u001b[0m\u001b[36;1mLine |\u001b[0m \u001b[31;1m\u001b[0m\u001b[36;1m\u001b[36;1m  17 | \u001b[0m . w -ge $ExpiresUtc){\u001b[36;1mthrow 'Packet expired before atomic publication.'\u001b[0m}\u001b[0m \u001b[31;1m\u001b[0m\u001b[36;1m\u001b[36;1m\u001b[0m\u001b[36;1m\u001b[0m\u001b[36;1m     | \u001b[31;1m                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\u001b[0m \u001b[31;1m\u001b[0m\u001b[36;1m\u001b[36;1m\u001b[0m\u001b[36;1m\u001b[0m\u001b[36;1m\u001b[31;1m\u001b[31;1m\u001b[36;1m     | \u001b[31;1mPacket expired before atomic publication.\u001b[0m",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-loaddressing-v2041k",
+      "hostDll": "3988E59B4DE4D836B75C5B2629D7F6664479F98CA01BA1DA1F1DA99B38FDAB9F",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 13531
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 13766
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 26,
+        "client": 26,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "failureState": {
+      "client": {
+        "logic": 5,
+        "pending": 0,
+        "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+        "epoch": 21,
+        "cine": 15,
+        "pos": [
+          -6.790001,
+          -16.840027,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          231,
+          2,
+          6,
+          7,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 9,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "6/80/0",
+        "active": "Mission_EotW_Boat,Mission_Void01,Obj_Boat_EotW_A,Obj_FV_Find_Rune,Task_Boat_EotW_A_01,Task_FV_Recover_The_Rune"
+      },
+      "host": {
+        "logic": 5,
+        "pending": 0,
+        "map": "campaign/boat/edge_of_the_world/boat_eotw_p",
+        "epoch": 21,
+        "cine": 23,
+        "pos": [
+          -6.790001,
+          -16.840027,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          231,
+          2,
+          3,
+          10,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/11609",
+        "ka": "91/6/0",
+        "active": "Mission_EotW_Boat,Obj_Boat_EotW_A,Task_Boat_EotW_A_01"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/void/void_01/void_01.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2021.ps1:695[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 695 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mGuest Send-D2Input failed (1): [31;1mException:[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[31;1m[36;1m     | [31;1m[0mC:\D2Lab\ws\outputs\d2-coop-lab\tooling\Publish-D2Packet.ps1:17[0m [31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[31;1m[36;1m[31;1m[0m[0m[31;1m[0m[36;1m[0m[36;1m     | [31;1m[31;1m[0m[36;1m[36;1m  17 | [0m . w -ge $ExpiresUtc){[36;1mthrow 'Packet expired before atomic[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[31;1m[36;1m[31;1m[0m[0m[31;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[0m[36;1m[36;1m[0m[36;1m[36;1m     | [31;1mpublication.'[0m}[0m [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                     [0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[31;1m[36;1m[31;1m[0m[0m[31;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[0m[36;1m[36;1m[0m[36;1m[36;1m[31;1m[0m[0m[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[36;1m     | [31;1m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[31;1m[36;1m[31;1m[0m[0m[31;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[0m[36;1m[36;1m[0m[36;1m[36;1m[31;1m[0m[0m[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[36;1m[31;1m[0m[36;1m     | [31;1m[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mPacket expired before atomic[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[31;1m[36;1m[31;1m[0m[0m[31;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[0m[36;1m[36;1m[0m[36;1m[36;1m[31;1m[0m[0m[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[36;1m[31;1m[0m[36;1m[31;1m[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m[31;1m[36;1m     | [31;1mpublication.[0m

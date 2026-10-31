@@ -941,6 +941,7 @@ bool prepareCheckpointPresentation(bool shadow);
 #include "mission_end_mirror.h"
 #include "kiscule_action_mirror.h"
 #include "story_flag_mirror.h" // 1214kj (#220)
+#include "safe_code_mirror.h" // stage 8.4.3 (#239)
 #include "gameover_probe.h"
 void exchangePoses(ULONGLONG tick) {
     if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected)return;
@@ -1090,6 +1091,11 @@ void exchangePoses(ULONGLONG tick) {
         if(magic==0x464D3244) {
             if(messages[i]->m_cbSize==sizeof(MissionFollowPacket)){MissionFollowPacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveMissionFollow(p);}
             else ++missionFollow.refused;
+            messages[i]->Release();continue;
+        }
+        if(magic==kSafeCodeMagic) { // stage 8.4.3 (#239): D2SC, the host's safe codes
+            if(messages[i]->m_cbSize==sizeof(SafeCodePacket)){static SafeCodePacket p;std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveSafeCodes(p);}
+            else ++safeCodeSync.refused;
             messages[i]->Release();continue;
         }
         if(magic==kStoryFlagMagic) { // 1214kj (#220): D2SF, the host's story flags
@@ -1721,6 +1727,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_diagnostics on")||!std::strcmp(text,"coop_diagnostics off"))return true; // 1214jz (#195)
     if(!std::strcmp(text,"coop_difficulty_sync on")||!std::strcmp(text,"coop_difficulty_sync off"))return true; // 1214kb (#177)
     if(!std::strcmp(text,"coop_story_flags on")||!std::strcmp(text,"coop_story_flags off")||!std::strcmp(text,"coop_story_flags flip"))return true; // 1214kj-kk (#220)
+    if(!std::strcmp(text,"coop_safe_codes on")||!std::strcmp(text,"coop_safe_codes off"))return true; // stage 8.4.3 (#239)
     if(!std::strncmp(text,"coop_difficulty_set ",20)){const char* v=text+20;return v[0]>='0'&&v[0]<='4'&&!v[1];}
     // 1214jt (#177, lab): the native difficulty override cvar, -1 (off) or a preset index 0-4.
     if(!std::strncmp(text,"ark_difficulty_level_override ",30)){const char* v=text+30;return !std::strcmp(v,"-1")||(v[0]>='0'&&v[0]<='4'&&!v[1]);}
@@ -1798,7 +1805,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_kiscule_mirror on")){AcquireSRWLockExclusive(&kisculeLock);if(!kisculeMirrorEnabled){kisculeMirrorEnabled=true;kisculeMirror={};kisculeMirror.result="armed";}ReleaseSRWLockExclusive(&kisculeLock);return;}
     // 1214jj (#187, lab diagnostic): the dispatched Kiscule signal trace.
     if(!std::strcmp(request.command,"coop_kiscule_trace on")){AcquireSRWLockExclusive(&kisculeLock);kisculeTraceCount=0;kisculeTraceTotal=0;eventTraceCount=0;eventTraceTotal=0;kisculeTraceStarted=GetTickCount64();kisculeTraceOn=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
-    if(!std::strcmp(request.command,"coop_host_story on")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=true;kisculeHostStoryTwinNoBlock=false;kisculeHostStoryExempt.fill(false);kisculeMirror.hostStoryBlocked=kisculeMirror.hostStoryAsked=kisculeMirror.hostStoryLeaked=kisculeMirror.hostStoryInFlow=0;ReleaseSRWLockExclusive(&kisculeLock);return;} // the twin never outlives a take (hoststory-dunwall-v2014b)
+    if(!std::strcmp(request.command,"coop_host_story on")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=true;kisculeHostStoryTwinNoBlock=false;kisculeHostStoryExempt.fill(false);kisculeMirror.hostStoryBlocked=kisculeMirror.hostStoryAsked=kisculeMirror.hostStoryLeaked=kisculeMirror.hostStoryGameOverBlocked=kisculeMirror.hostStoryGameOverUpdateBlocked=kisculeMirror.playerDamageLocal=kisculeMirror.playerDamageRefused=kisculeMirror.characterBranchRefused=kisculeMirror.hostStoryDressing=kisculeMirror.hostStoryInFlow=0;ReleaseSRWLockExclusive(&kisculeLock);return;} // the twin never outlives a take (hoststory-dunwall-v2014b)
     if(!std::strncmp(request.command,"coop_host_story exempt ",23)){const int i=kisculePolicyIndexByName(request.command+23);if(i>=0){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStoryExempt[i]=true;ReleaseSRWLockExclusive(&kisculeLock);}return;}
     if(!std::strcmp(request.command,"coop_host_story twin_no_block")){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStoryTwinNoBlock=true;ReleaseSRWLockExclusive(&kisculeLock);return;}
     if(!std::strcmp(request.command,"coop_items_per_player on")){itemsPerPlayer=true;itemsPerPlayerRefusals=0;return;}
@@ -1933,6 +1940,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_difficulty_sync on")||!std::strcmp(request.command,"coop_difficulty_sync off")){difficultySync.enabled=!std::strcmp(request.command,"coop_difficulty_sync on");return;}
     if(!std::strcmp(request.command,"coop_story_flags on")||!std::strcmp(request.command,"coop_story_flags off")){storyFlagSync.enabled=!std::strcmp(request.command,"coop_story_flags on");return;}
     if(!std::strcmp(request.command,"coop_story_flags flip")){storyFlagSync.flipRequest=true;return;} // 1214kk (#220, test fixture)
+    if(!std::strcmp(request.command,"coop_safe_codes on")||!std::strcmp(request.command,"coop_safe_codes off")){safeCodeSync.enabled=!std::strcmp(request.command,"coop_safe_codes on");safeCodeSync.lastValid=false;return;}
     if(!std::strncmp(request.command,"coop_difficulty_set ",20)){const char* v=request.command+20;if(v[0]>='0'&&v[0]<='4'&&!v[1])difficultySync.labSet=v[0]-'0';return;}
     if(!std::strncmp(request.command,"coop_lab_ai_pause ",18)&&labAiPauseAllowed(request.command+18,labAiPauseSpawner,&labAiPauseSeconds)){labAiPauseRequest=1;return;}
     if(!std::strcmp(request.command,"coop_grant_item pistol")){labGrantRequest=4;return;}
@@ -2298,7 +2306,7 @@ void writeDiagnosticSlice(ULONGLONG tick){
         case 63:timedNativeService("writeWindblastFxStream",[&]{writeWindblastFxStream();});break;
         case 64:timedNativeService("writeGrappleFxStream",[&]{writeGrappleFxStream();});break;
         case 65:timedNativeService("writePartnerEnemyStatus",[&]{writePartnerEnemyStatus(tick);});break;
-        case 66:timedNativeService("writeCheckpointTrace",[&]{writeCheckpointTrace();writeActivationTrace();writeTriggerTrace();writeUseMirror();writeMissionEndMirror();writeKisculeMirror();writeStoryFlags();writeOnlineSession();writeProductSession();writeDifficultySync();});break;
+        case 66:timedNativeService("writeCheckpointTrace",[&]{writeCheckpointTrace();writeActivationTrace();writeTriggerTrace();writeUseMirror();writeMissionEndMirror();writeKisculeMirror();writeStoryFlags();writeSafeCodes();writeOnlineSession();writeProductSession();writeDifficultySync();});break;
         case 67:timedNativeService("writeSwitchTrace",[&]{writeSwitchTrace();});break;
         case 68:timedNativeService("writeReplacementTrace",[&]{writeReplacementTrace();});break;
         case 69:timedNativeService("writeCheckpointSync",[&]{writeCheckpointSync();});break;
@@ -2333,7 +2341,7 @@ void writeStatus(ULONGLONG tick) {
         case 4:timedNativeService("writeNpcCombat",[&]{writeNpcCombat();});break;
         case 5:timedNativeService("writeMovementStatus",[&]{writeMovementStatus();});break;
         case 6:timedNativeService("writeDifficultySync",[&]{writeDifficultySync();});break;
-        case 7:timedNativeService("writeStoryFlags",[&]{writeStoryFlags();});break; // 1214kj (#220)
+        case 7:timedNativeService("writeStoryFlags",[&]{writeStoryFlags();writeSafeCodes();});break; // 1214kj (#220), stage 8.4.3 (#239)
         }}
     if(!*statusPath||tick-lastStatus<(coopDiagnostics?250u:1000u))return;lastStatus=tick;
     if(coopDiagnostics){
@@ -2424,7 +2432,7 @@ void executeBuffer(void* system) {
         if(tick-lastPump>=10) {
             installCheckpointCommandObservers();
             lastPump=tick;nativeMutationAllowed=true;pumpTransport(tick);nativeMutationAllowed=false;
-            {NativeServiceTimer scope("native_services_all");serviceLoadingProbe(tick);finishCinematicHold(tick);serviceAiDecisionHold(tick);serviceObserverIsolation(tick);commandPump(system);serviceProductSession(system,tick);serviceMissionFollow(system,tick);nativeMutationAllowed=true;serviceDifficultySync(tick);servicePowerFixture(tick);serviceDarkVisionFixture(tick);serviceWindblastFixture(tick);serviceBendTimeFixture(tick);serviceRangedFixture(tick);serviceGrenadeFixture(tick);serviceHeartFixture(tick);serviceTrapFixture(tick);servicePotionFixture(tick);serviceNoteRestoreFixture();serviceCoinFixture(tick);serviceCoinSync(tick);servicePickupCatchUp(tick);serviceNpcAuthorityHold(tick);timedNativeService("serviceNpcStream",[&]{serviceNpcStream(tick);});serviceNpcCombat(tick);serviceNpcKnockoutTest();serviceNpcHostWorldTest();serviceNpcAttack(tick);serviceObserverCamera(tick);servicePartnerHeldObject(tick);serviceCoopMenu(tick);serviceCoopSaves(tick);serviceCoopPause(tick);serviceCoopCharacter(tick);serviceMesmerizeFixture(tick);serviceDominoFixture(tick);serviceSwarmFixture(tick);servicePossessionFixture(tick);serviceDoppelgangerFixture(tick);serviceShadowWalkFixture(tick);serviceClimbFixture(tick);serviceDoorFixture(tick);serviceUsableFixture(tick);timedNativeService("serviceDoorSync",[&]{serviceDoorSync(tick);});timedNativeService("serviceUsableSync",[&]{serviceUsableSync(tick);});timedNativeService("serviceBreakableSync",[&]{serviceBreakableSync(tick);});timedNativeService("servicePropRest",[&]{servicePropRest(tick);});serviceTriggerMirror(tick);serviceUseMirror(tick);serviceMissionEndMirror(tick);serviceChaosSync(tick);serviceGameflowMirror(tick);serviceLevelTransitionMirror(tick);serviceKisculeMirror(tick);serviceStoryFlags(tick);serviceRangedProp(tick);serviceGrenadeProp(tick);serviceHeartProp(tick);serviceTrapProp(tick);serviceGrenadeFx(tick);sampleMesmerizeWorld(tick);presentMesmerizeWorld(tick);sampleDominoWorld(tick);presentDominoWorld(tick);samplePossessionFx(tick);presentPossessionFx(tick);servicePossessionTargetFx(tick);sampleSwarmWorld(tick);presentSwarmWorld(tick);sampleDoppelgangerWorld(tick);presentDoppelgangerWorld(tick);serviceDoppelgangerVisual(tick);serviceSwarmRatVisual(tick);serviceSwarmSpawnFx(tick);serviceSwarmTrails(tick);serviceDominoMarks(tick);serviceDominoBeams(tick);serviceMesmerizeVisual(tick);serviceMesmerizeHost(tick);serviceShadeHost(tick);serviceSwarmHost(tick);serviceTimeBendHost(tick);serviceAgilityFixture(tick);serviceCarryAttachmentProduct(tick);serviceCarryAttachmentFixture(tick);serviceShadowWalkFx(tick);if(!labPartnerEffectUntil)serviceShadowWalkMaterial(tick);serviceNativePowerFx(tick);servicePowerFxStream(tick);nativeMutationAllowed=false;checkpointEngineService(system);serviceEnemyOutcome(tick);serviceEnemyMelee(tick);serviceGuardLink(tick);serviceGuardWeapon(tick);serviceGuardEquipment(tick);serviceAvatarWeapon(tick);serviceAvatarSword(tick);serviceShadowEquipment(tick);serviceShadowStream(tick);servicePossessionBodyVisibility(tick);serviceShadowAction(tick);serviceArmProbe(tick);servicePartnerEnemy(tick);serviceSwordLink(tick);finishTransformTrace(tick);}
+            {NativeServiceTimer scope("native_services_all");serviceLoadingProbe(tick);finishCinematicHold(tick);serviceAiDecisionHold(tick);serviceObserverIsolation(tick);commandPump(system);serviceProductSession(system,tick);serviceMissionFollow(system,tick);nativeMutationAllowed=true;serviceDifficultySync(tick);servicePowerFixture(tick);serviceDarkVisionFixture(tick);serviceWindblastFixture(tick);serviceBendTimeFixture(tick);serviceRangedFixture(tick);serviceGrenadeFixture(tick);serviceHeartFixture(tick);serviceTrapFixture(tick);servicePotionFixture(tick);serviceNoteRestoreFixture();serviceCoinFixture(tick);serviceCoinSync(tick);servicePickupCatchUp(tick);serviceNpcAuthorityHold(tick);timedNativeService("serviceNpcStream",[&]{serviceNpcStream(tick);});serviceNpcCombat(tick);serviceNpcKnockoutTest();serviceNpcHostWorldTest();serviceNpcAttack(tick);serviceObserverCamera(tick);servicePartnerHeldObject(tick);serviceCoopMenu(tick);serviceCoopSaves(tick);serviceCoopPause(tick);serviceCoopCharacter(tick);serviceMesmerizeFixture(tick);serviceDominoFixture(tick);serviceSwarmFixture(tick);servicePossessionFixture(tick);serviceDoppelgangerFixture(tick);serviceShadowWalkFixture(tick);serviceClimbFixture(tick);serviceDoorFixture(tick);serviceUsableFixture(tick);timedNativeService("serviceDoorSync",[&]{serviceDoorSync(tick);});timedNativeService("serviceUsableSync",[&]{serviceUsableSync(tick);});timedNativeService("serviceBreakableSync",[&]{serviceBreakableSync(tick);});timedNativeService("servicePropRest",[&]{servicePropRest(tick);});serviceTriggerMirror(tick);serviceUseMirror(tick);serviceMissionEndMirror(tick);serviceChaosSync(tick);serviceGameflowMirror(tick);serviceLevelTransitionMirror(tick);serviceKisculeMirror(tick);serviceStoryFlags(tick);serviceSafeCodes(tick);serviceRangedProp(tick);serviceGrenadeProp(tick);serviceHeartProp(tick);serviceTrapProp(tick);serviceGrenadeFx(tick);sampleMesmerizeWorld(tick);presentMesmerizeWorld(tick);sampleDominoWorld(tick);presentDominoWorld(tick);samplePossessionFx(tick);presentPossessionFx(tick);servicePossessionTargetFx(tick);sampleSwarmWorld(tick);presentSwarmWorld(tick);sampleDoppelgangerWorld(tick);presentDoppelgangerWorld(tick);serviceDoppelgangerVisual(tick);serviceSwarmRatVisual(tick);serviceSwarmSpawnFx(tick);serviceSwarmTrails(tick);serviceDominoMarks(tick);serviceDominoBeams(tick);serviceMesmerizeVisual(tick);serviceMesmerizeHost(tick);serviceShadeHost(tick);serviceSwarmHost(tick);serviceTimeBendHost(tick);serviceAgilityFixture(tick);serviceCarryAttachmentProduct(tick);serviceCarryAttachmentFixture(tick);serviceShadowWalkFx(tick);if(!labPartnerEffectUntil)serviceShadowWalkMaterial(tick);serviceNativePowerFx(tick);servicePowerFxStream(tick);nativeMutationAllowed=false;checkpointEngineService(system);serviceEnemyOutcome(tick);serviceEnemyMelee(tick);serviceGuardLink(tick);serviceGuardWeapon(tick);serviceGuardEquipment(tick);serviceAvatarWeapon(tick);serviceAvatarSword(tick);serviceShadowEquipment(tick);serviceShadowStream(tick);servicePossessionBodyVisibility(tick);serviceShadowAction(tick);serviceArmProbe(tick);servicePartnerEnemy(tick);serviceSwordLink(tick);finishTransformTrace(tick);}
         }
         // Render presentation at each native engine frame, independent of
         // transport/gameplay service cadence. QPC avoids coarse tick stepping.
@@ -2484,6 +2492,7 @@ bool installEngineBridge(unsigned char* image,const char* role) {
      GetEnvironmentVariableA("D2COOP_DATA_DIR",productDataDir,sizeof(productDataDir));if(!*productDataDir)productMode=false;}
     {char hostStory[4]{};productHostStory=!(GetEnvironmentVariableA("D2COOP_HOST_STORY",hostStory,sizeof(hostStory))==1&&hostStory[0]=='0');}
     {char perPlayer[4]{};productItemsPerPlayer=!(GetEnvironmentVariableA("D2COOP_ITEMS_PER_PLAYER",perPlayer,sizeof(perPlayer))==1&&perPlayer[0]=='0');}
+    {char safeCodes[4]{};if(GetEnvironmentVariableA("D2COOP_SAFE_CODES",safeCodes,sizeof(safeCodes))==1&&safeCodes[0]=='0')safeCodeSync.enabled=false;}
     char partnerFlag[8]{};partnerAssetsEnabled=GetEnvironmentVariableA("D2COOP_PARTNER_ASSETS",partnerFlag,sizeof(partnerFlag))==1&&partnerFlag[0]=='1';
     HMODULE module=nullptr;
     if(GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS|GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,reinterpret_cast<LPCSTR>(&installEngineBridge),&module)) {

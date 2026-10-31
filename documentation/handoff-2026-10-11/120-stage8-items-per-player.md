@@ -83,6 +83,18 @@ Host Corvo on this PC, VM partner Emily on the second Steam account, co-op saves
 | The Grand Palace | stopped | before the mission: the host's co-op saves switch stayed in `profile_saving` for 90 s (its 15 s timeout never reported). Re-run as `campaign-palace-vm-ipp-v2036b` | - |
 | Death to the Empress | pass | equal (249) | 586 / 575 / 402 / 679 |
 
+Re-runs on the same candidate:
+
+- **The Clockwork Mansion, `campaign-madinventor-vm-ipp-v2036b`, route v2038.** With host story, Jindosh is already in his lab when the host arrives (`step17-trigger-host.png`; the 0.9.6 take `campaign-madinventor-vm-v1929a` has no Jindosh there yet). The route turned its test health hold on only after that, so the host died. Route v2038 turns it on before the lab trigger.
+  - The re-run then stopped at the mansion door. The door opened the native Go/Stay choice as logic 9 itself (caller 0x5369f4, 1 -> 9), not as a pending 9, so the harness counted the open choice as its hit without pressing A (confirmed runtime, from the per-step loading snapshots).
+  - Why the choice appeared here and not in v2036a is a hypothesis: the host's Kiscule went to applied 5 / suppressed 2 at the door, against +1 applied in v2036a, so a partner-first request may have changed the host's chain.
+  - Harness v2016 presses A on a logic-9 choice too.
+- **The Grand Palace, `campaign-palace-vm-ipp-v2036b`.** The co-op saves switch went through this time. The skiff use started the departure scene (1 -> 5 -> 9 -> 5), but the scene ended back in plain gameplay with Meagan offering a talk, and no LevelTransition followed. In `campaign-palace-vm-hoststory-v2031a` the host sat in logic 5 until the transition.
+  - The host's Kiscule was not stubbed (applied and suppressed 0).
+  - Hypothesis: the host-side story pickup catch-up on the boat. Harness v2016 saves `pickup-catchup.json` and `kiscule.json` at every step to settle it.
+- **`campaign-palace-vm-ipp-v2036c` was stopped by hand during its VM join** (a misread stall; it held only the VM sync). The lab was restored with `Deploy-SourceClock`; its `recovery.json` records that the interrupted-take recovery could not run, because the VM take had stopped the local client game.
+- **`campaign-palace-vm-ipp-v2036a`** is a hypothesis: the host's engine thread blocked in the native profile save (0xd3bd0) for more than 90 s. The VM lost the host's packets, and the switch's own 15 s timeout never ran.
+
 ## Still to do in area 4.2
 - The old pickup tests (`pickup_catchup_tests.h`, `coin_protocol_tests.h`, `Test-MissionPickupFamilies-v1855.ps1`, the join audit) run with items per player off. Their per-player versions are the tests above.
 - Containers, pickpockets and NPC loot under items per player.
