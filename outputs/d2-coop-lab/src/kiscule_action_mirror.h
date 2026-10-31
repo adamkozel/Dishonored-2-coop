@@ -118,8 +118,21 @@ const KisculeLoadDressing kisculeLoadDressings[]={
     {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",79209850},  // the second load-time state and destroy pair
     {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",1393111919},
 };
+// load-dressing-map-v2041m: mapName is filled only once the world state is 3, so it is empty while the load-time nodes
+// run (campaign-institute-vm-ipp-v2041ka: hostStoryDressing 0, the nodes still blocked). The loading map's name is read
+// from the game itself, as the runtime probe does.
+bool kisculeLoadingMap(char* out,std::size_t size){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t game=0,vtable=0,name=0;std::memset(out,0,size);
+    return memoryRead(base+0x39a5290,&game,8)&&game&&memoryRead(game,&vtable,8)&&vtable==base+0x1c940a8&&
+        memoryRead(game+0x337138,&name,8)&&name&&memoryRead(name,out,size-1);
+}
 bool kisculeLoadDressing(const std::string& entity,std::uint32_t node){
-    for(const auto& d:kisculeLoadDressings)if(node==d.node&&entity==d.entity&&!std::strcmp(d.map,mapName))return true;
+    char map[192];bool loaded=false;
+    for(const auto& d:kisculeLoadDressings){
+        if(node!=d.node||entity!=d.entity)continue;
+        if(!loaded){if(!kisculeLoadingMap(map,sizeof(map)))return false;loaded=true;}
+        if(!std::strcmp(d.map,map))return true;
+    }
     return false;
 }
 bool kisculeOtherCharacterBranch(const char* entity,std::uint32_t node){

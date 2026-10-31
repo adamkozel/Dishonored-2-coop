@@ -23,8 +23,8 @@
 # v2041). Takes campaign-<mission>-vm-ipp-v2042<letter>/.
 # 2041k: candidate loaddressing-v2041k (the partner runs the Dreadful Wale load-time dressing in its own flow).
 # Takes campaign-<mission>-vm-ipp-v2041k<letter>/.
-# 2043: the full nine-mission campaign on candidate npclife-v2041l (the host refuses a partner life roster state for a named
-# character under host story, #254). Takes campaign-<mission>-vm-ipp-v2043<letter>/.
+# 2043: the full nine-mission campaign on candidate loadmap-v2041m (npclife-v2041l: the host refuses a partner life roster state for a named
+# character under host story, #254; v2041m: the dressing table reads the loading map). Takes campaign-<mission>-vm-ipp-v2043<letter>/.
 # Usage: Run-Campaign-v2043.sh <letter> <plan>. Results: campaign-<mission>-vm-ipp-v2043<letter>/
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
@@ -35,6 +35,6 @@ while read -r m mapinfo steps; do
   [ -z "$m" ] && continue
   take="campaign-$m-vm-ipp-v2043$L"
   if [ -e "$take" ]; then echo "$m: $take exists, skipped"; continue; fi
-  "$P" -NoProfile -File Route-MissionVM-v2021.ps1 -Take "$take" -MapInfo "$mapinfo" -Candidate candidate-npclife-v2041l -StepsFile "$steps" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+  "$P" -NoProfile -File Route-MissionVM-v2021.ps1 -Take "$take" -MapInfo "$mapinfo" -Candidate candidate-loadmap-v2041m -StepsFile "$steps" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
   echo "$m: exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'),n.get('hostStory'),n.get('worldDiff'),n.get('frameTimeouts'))" 2>&1 | head -c 600)"
 done < "$PLAN"
