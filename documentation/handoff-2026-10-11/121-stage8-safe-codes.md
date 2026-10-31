@@ -167,9 +167,11 @@ Neither failure shows a world difference:
 
 `Run-Campaign-v2041k.sh a campaign-v2041k-rerun-plan.txt` reruns both missions on loaddressing-v2041k: The Good Doctor first, for the glass fix.
 
+**Candidate npclife-v2041l (issue #254):** under host story the host refuses a partner's life roster state (unconscious or dead) for a named character. A named character is a definition under `def/story/` or `def/maps/`: Sokolov is `models/characters/def/maps/madinventor/anton_sokolov.def`. The counter is `lifeHostStoryRefused` in the NPC stream status. Generic guards and civilians still come through, so an ordinary partner kill outside a combat channel still reaches the host. The host's own states still reach the partner. A unit test covers the gate (`npcLifeHostStoryWatched`). The candidate is archived; `Run-Campaign-v2043.sh a` runs the full campaign on it after the v2041k reruns.
+
 ## Still to do in area 4.3
 
-- **The campaign on two accounts:** reruns of Edge of the World and The Good Doctor on v2041k (the glass); the NPC Life roster under host story (issue #254).
+- **The campaign on two accounts:** reruns of Edge of the World and The Good Doctor on v2041k (the glass); then the full campaign v2043a on npclife-v2041l (issue #254).
 - **Note text on screen:** check that the partner's note shows the host's digits. This is visual acceptance, recorded separately.
 - **A partner opens a safe with the host's code** (a route step on Edge of the World).
 - **Codes outside `3_digits_lock`:** the Jindosh lock (chapter 110) and other lock decls, if any.
