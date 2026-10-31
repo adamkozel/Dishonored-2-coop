@@ -111,6 +111,14 @@ Blocking the input therefore never stopped it.
 
 **Candidate gameoverupdate-v2041h:** under host story the partner's `ActionGameOver` update returns finished (status 4, with the result fields the native update writes) without firing (`hostStoryGameOverUpdateBlocked`, a vtable slot wrapper installed with the dispatch observer). The partner's GameOver comes only from the host's Death message. Why the partner's Sokolov is lost in its own world is still open; if he dies there, the end diff will show it. `Run-Campaign-v2041h.sh a` reruns The Clockwork Mansion on it.
 
+**Clockwork Mansion on gameoverupdate-v2041h (v2041ha):**
+- **The partner fix works** (confirmed runtime). The partner blocked both its `ActionGameOver` input and its update at step 25 (`hostStoryGameOverUpdateBlocked` 1), 141 ms after its own blocked run of 609, and did not end.
+- **The host lost its own Sokolov this time.** The host's own `script_kiscule_gameover` node 1399851223 ran 16.7 s after its 609, at step 26, with no other script action between. Its switch stack is the same latent update.
+- **So the carriage Sokolov is lost in either world,** the host's in v2041ha and the partner's in v2041fa and v2041ga.
+- **Overlap ruled out:** both players stood on the carriage exit in v1929a too, before host story, and that take passed. So the overlap alone does not explain the loss.
+
+Harness v2021 saves the Sokolov, Meagan, player and avatar entities of both games at a failure. `Run-Campaign-v2041i.sh a` reruns The Clockwork Mansion on v2041h with it.
+
 ## Still to do in area 4.3
 
 - **The campaign on two accounts:** The Clockwork Mansion streets death (cable car damage) and the partner's own spawner choices reaching the host; The Good Doctor glass; then one full run of all nine missions on one candidate.
