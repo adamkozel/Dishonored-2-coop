@@ -98,6 +98,19 @@ What node 609 hurts is not recorded. **Candidate damagetarget-v2041e** (diagnost
 
 **Candidate charbranch-v2041f:** the host refuses a partner request for the other character's branch of a World node behind a character test (`characterBranchRefused`, a table in `kiscule_action_mirror.h`; first entries: the streets dead body spawners above). The partner gets the host's own spawners as they are. `Run-Campaign-v2041f.sh a` reruns The Clockwork Mansion on it with harness v2019.
 
+**Clockwork Mansion on charbranch-v2041f (v2041fa, harness v2019):** both players got through the arrival for the first time under host story. The host refused the partner's two Emily-branch spawners (`characterBranchRefused` 2), and the partner applied the host's Corvo ones. The host then carried Sokolov to Meagan (steps 25 to 29). The partner's game ended at step 30, 3.3 s after it applied the host's Meagan talk. Its screen shows the Sokolov reason. The death counters settle the order (confirmed runtime): the partner has `deathCount` 1 and `deathReceived` 0, and the host has `deathReceived` 1 and `deathApplied` 1. So in every Clockwork Mansion failure since v2040a the partner ended first, and the host's "You Have Perished" or "Your Death Is Upon You" is the random line of a copied GameOver.
+
+The streets GameOver (a helper's second reading; confirmed static): `ActionGameOver` 1399851223 (`ui_gameover_10`) runs from a gate fed by the carriage Sokolov's `IncapacitationNotification.Died`, by `DamageNotification` `DAMAGETYPE_PRE_SLEEP` on him, or by `DAMAGETYPE_GRAPPLE` while `sokolov_is_inside_carriage`. 609's sleep damage is not one of those types.
+
+**gameoverstack-v2041g (v2041ga, harness v2020):** the GameOver switch now records its stack, and harness v2020 saves `.loading.json` at a failure. The partner ended first again (death counters as above). Its switch to 13 came from `0x525df2`, called from `0x7c11c0`. That is the Kiscule run loop's update call (`call [vtable+0x40]`, kind 1), not the input dispatcher `0x7c0e30` that host story hooks (confirmed runtime and static). `ActionGameOver` is a latent node:
+- its input only arms it;
+- its update, vtable entry 8 (`0x525d30`), counts down the delay at `+0x30`, sets the reason and switches to 13 at `0x525ded`;
+- it then returns status 1, and 4 once it has fired.
+
+Blocking the input therefore never stopped it.
+
+**Candidate gameoverupdate-v2041h:** under host story the partner's `ActionGameOver` update returns finished (status 4, with the result fields the native update writes) without firing (`hostStoryGameOverUpdateBlocked`, a vtable slot wrapper installed with the dispatch observer). The partner's GameOver comes only from the host's Death message. Why the partner's Sokolov is lost in its own world is still open; if he dies there, the end diff will show it. `Run-Campaign-v2041h.sh a` reruns The Clockwork Mansion on it.
+
 ## Still to do in area 4.3
 
 - **The campaign on two accounts:** The Clockwork Mansion streets death (cable car damage) and the partner's own spawner choices reaching the host; The Good Doctor glass; then one full run of all nine missions on one candidate.
