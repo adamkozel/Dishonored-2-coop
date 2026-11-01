@@ -1,0 +1,285 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+23:10:31 copying lab scripts, tooling and bin
+23:10:37 mod resources (voidmod, master.index) into the game copy
+23:10:40 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : BD020E42973CEDEA
+probe           : 0CE41CD5E6331FDA
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 94
+PSComputerName  : D2CoopVM
+RunspaceId      : 413945d5-2bd4-4c17-90e9-d6b275ad75d3
+
+
+23:11:40 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             94 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-safedials-v2051",
+      "hostDll": "BD020E42973CEDEACFB6136DDFAAA90AD6727D3EDC7B92FECF18AC45BFC7ECD0",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 13234
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 9843
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 25,
+        "client": 25,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 25,
+        "client": 25,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "partnerDial": {
+      "lock": 2241413328,
+      "hostCombination": 488,
+      "partnerCombination": 488,
+      "partnerPosition": 488,
+      "hostPosition": 488,
+      "misses": 15
+    },
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 12,
+        "pos": [
+          2.400586,
+          -28.165548,
+          12.642112
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          3,
+          6,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/288/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 7,
+        "pos": [
+          35.170425,
+          44.940155,
+          27.003666
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          3,
+          6,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/288/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      }
+    },
+    "gameflowEqual": true,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "slot": -1,
+        "startMap": "",
+        "sent": 0,
+        "resent": 0,
+        "hostReplays": 0,
+        "hostContinues": 0,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "loadedSlot": -1,
+        "received": 0,
+        "refused": 0,
+        "duplicates": 0,
+        "partnerHeld": 0,
+        "replayed": 0,
+        "continued": 0,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "EQUAL",
+      "compared": 2158,
+      "differences": 0
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "c6c0bedc3862fe41",
+        "connection": 1784136135,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "c6c0bedc3862fe41",
+        "sent": 319,
+        "received": 316,
+        "refused": 0,
+        "silentMs": 109
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "c6c0bedc3862fe41",
+        "connection": 3611908427,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "c6c0bedc3862fe41",
+        "sent": 317,
+        "received": 319,
+        "refused": 0,
+        "silentMs": 844
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 288,
+      "asked": 288,
+      "inFlow": 0,
+      "replayed": 288,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 21
+    },
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "replayRefused": 0,
+      "replayAccepted": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

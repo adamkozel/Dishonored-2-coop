@@ -239,12 +239,29 @@ The twin's harness judges the open state only at the end; a later version should
 |---|---|---|
 | `safe-partner-institute-v2049a` | replaydecision-v2047d | **The partner's safe opened with the host's code** (lock 2241413328: host code 488, partner code 488, partner Position 488; 3 focus misses). **The world diff fails, 4 values:** the three dials (host `[2,1]`, `[5,1]`, `[7,1]`; partner `[4,0]`, `[8,0]`, `[8,0]`) and `ld_safe_main_01_door` (host `[0,0]`, partner `[1,1]`). The partner's dial turns never reached the host, so the host's lock and door did not move (confirmed runtime) |
 
-Under the stage 8 rule the partner's dial turns must be requests that the host applies to its own dials, so the host's lock opens the host's door. Research on the usable sync is under way.
+**Why (confirmed static, helper reading):** none of the three partner-to-host usable paths takes a safe. Usable sync keeps two-state toggles and drops names with "safe" (`usable_catalog.h`). The use mirror drops "safe", "digit" and "combinaison" (`use_mirror_protocol.h`). Door sync covers ArkDoor openables, and the safe door is an `arkCpntUsableWithStateList`. The lock graphs are nested Kiscule instances, which host story does not identify, so they run locally in each world. The world diff's usable pair is `[stage, enabled byte]`.
+
+**Candidate safedials-v2050 (D2SD):**
+- After the start positions, a turn of a dial in the partner's world is sent to the host with the state the partner reached.
+- The host turns its own dial there one native stage per service, through the indexed request with the stage events on (`requestNativeUsableIndex`). Its own lock reads each step, sets Position and opens its own door. A disabled dial is refused. The host rechecks its safes 500 ms after a step.
+- The partner follows the host's dial states one stage at a time with the same request, except on a dial it turned in the last 5 s. A turn the host refuses is undone in the partner's world.
+- Counters in `.safe-codes.json`: `dialTurnsSent`, `dialRequestsReceived`, `dialRequestsRefused`, `dialStepsApplied`, `dialStepsFollowed`, `dialStepsRefused`.
+- Lab switch: `coop_safe_dials on|off` on the host. safedials-v2051 adds it to the DLL's own lab command allowlist.
+- Gap: the partner's own lock can still open its door a moment before the host's. The partner's native use is not held.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `safe-partner-institute-v2050a` | safedials-v2050 | Harness fail: dial `_15` reached the host's digit, but the partner's use focus missed dial `_17` at most stands. Harness v2051 sweeps five bearings at each stand |
+| `safe-partner-institute-v2050b` | safedials-v2050 | Refused: `coop_safe_dials` was not in `Send-D2Command`'s command set |
+| `safe-partner-institute-v2051a` | safedials-v2050 | **Pass.** Code 601. Host: 13 requests received, 13 native steps applied. Both locks at 601, world diff equal (2158) |
+| `safe-partner-institute-v2051b` | safedials-v2050 | Not a twin: the DLL's own allowlist refused `coop_safe_dials off`, so the host kept applying the turns (equal) |
+| `safe-partner-institute-v2052a` | safedials-v2051 | **Pass.** Code 488. Host: 17 received, 17 applied. Both locks at 488, world diff equal (2158) |
+| `safe-partner-institute-v2052b` | safedials-v2051 | **Mutation twin, red as required.** The host refused all 10 requests. The partner followed the host back 30 times, so its lock stayed at the host's 778 and its safe stayed shut |
 
 ## Still to do in area 4.3
 
 - **Note text on screen:** check that the partner's safe note and Jindosh riddle show the host's values. This is visual acceptance, recorded separately.
-- **A partner opens a safe with the host's code**, and solves the Jindosh lock with the host's answer.
+- **A partner solves the Jindosh lock** with the host's answer. The safe is done (v2052a).
 - **Other lock decls** besides `3_digits_lock` and the Jindosh lock, if any.
 - **Door families outside the catalogue** (vaults, linked, blocked and broken doors, quest devices) under the host: a census of where they differ.
 - Done: the full campaign v2043 (above); the release notes draft documents `safe_codes=0` with `host_story=0` and `items_per_player=0` (troubleshooting).
