@@ -1,0 +1,54 @@
+[
+  {
+    "do": "wait",
+    "ms": 8000,
+    "settle": 3000
+  },
+  {
+    "do": "partnerdial",
+    "dials": [
+      "ld_combinaison_numbers_15",
+      "ld_combinaison_numbers_17",
+      "ld_combinaison_numbers_16"
+    ],
+    "offsets": [
+      [
+        0.8,
+        0
+      ],
+      [
+        -0.8,
+        0
+      ],
+      [
+        0,
+        0.8
+      ],
+      [
+        0,
+        -0.8
+      ],
+      [
+        0.6,
+        0.6
+      ],
+      [
+        -0.6,
+        -0.6
+      ],
+      [
+        0.6,
+        -0.6
+      ],
+      [
+        -0.6,
+        0.6
+      ]
+    ]
+  },
+  {
+    "do": "wait",
+    "ms": 5000,
+    "settle": 3000
+  }
+]

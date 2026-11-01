@@ -1746,6 +1746,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_difficulty_sync on")||!std::strcmp(text,"coop_difficulty_sync off"))return true; // 1214kb (#177)
     if(!std::strcmp(text,"coop_story_flags on")||!std::strcmp(text,"coop_story_flags off")||!std::strcmp(text,"coop_story_flags flip"))return true; // 1214kj-kk (#220)
     if(!std::strcmp(text,"coop_safe_codes on")||!std::strcmp(text,"coop_safe_codes off"))return true; // stage 8.4.3 (#239)
+    if(!std::strcmp(text,"coop_safe_dials on")||!std::strcmp(text,"coop_safe_dials off"))return true; // stage 8.4.3 (#239), 2050
     if(!std::strcmp(text,"coop_mission_decision on")||!std::strcmp(text,"coop_mission_decision off"))return true; // stage 8 (#253)
     if(!std::strncmp(text,"coop_difficulty_set ",20)){const char* v=text+20;return v[0]>='0'&&v[0]<='4'&&!v[1];}
     // 1214jt (#177, lab): the native difficulty override cvar, -1 (off) or a preset index 0-4.
