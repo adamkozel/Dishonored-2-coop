@@ -175,11 +175,53 @@ Neither failure shows a world difference:
 
 **Candidate loadmap-v2041m:** npclife-v2041l plus a fix to the dressing table: it reads the loading map's name from the game (`game+0x337138`, as the runtime probe does) instead of `mapName`. `Run-Campaign-v2043.sh a` runs the full campaign on it.
 
+**The full campaign on loadmap-v2041m (v2043):** all nine missions on two Steam accounts (host Corvo on this PC, VM partner Emily), with co-op saves, host story, items per player and safe codes on, end with zero world differences and equal gameflow (confirmed runtime). The issue #254 fix and the glass fix hold:
+
+| Mission | Take | Values compared |
+|---|---|---|
+| A Long Day in Dunwall | campaign-dunwall-vm-ipp-v2043a | 286 |
+| Edge of the World | campaign-eotw-vm-ipp-v2043a | 2158 |
+| The Good Doctor | campaign-institute-vm-ipp-v2043a | 530 |
+| The Clockwork Mansion | campaign-madinventor-vm-ipp-v2043a | 281 |
+| The Royal Conservatory | campaign-curator-vm-ipp-v2043a | 519 |
+| The Dust District | campaign-dust-vm-ipp-v2043a | 2325 |
+| A Crack in the Slab | campaign-bunker-vm-ipp-v2043a | 480 |
+| The Grand Palace | campaign-palace-vm-ipp-v2043a | 608 |
+| Death to the Empress | campaign-empress-vm-ipp-v2043b | 249; the partner's world ran no story script itself |
+
+campaign-empress-vm-ipp-v2043a was cut off at its start by a PC shutdown (only `vm-sync.log`); v2043b is the rerun.
+
+## The Jindosh lock (candidate jindosh-v2045, `jindosh_mirror.h`, `jindosh_protocol.h`)
+
+Before this, each world rolled its own Jindosh riddle in The Dust District, so the two players read different riddles and had different answers. A helper's static study (2026-11-01; game-derived exports stay local) found:
+- **The answer (confirmed static):** five Kiscule ListInt variables of the lock's `jindosh_enigma.kiscule` instance (entity `ld_enigma_v2_kiscule`): `RandomFamily`, `RandomColor`, `RandomHeirloom`, `RandomBeverage` and `RandomCity`. Each is `[-1, x1..x5]`, a shuffle of the ids 1..5 by seat. The decl's `Init` rolls them once per world on the map's first load and sends `Enigma2.RandomDone`, which formats the notes and copies the lists into the five seat instances (`jindosh_enigma_wheel.kiscule`). The wheels' start stages are authored, not rolled. There is no native lock component.
+- **The texts (confirmed static):** journal lists 15 (the riddle, 25 ints: var 5(s-1)+k = list k[s]-1) and 14, 19, 20, 21 and 25 (the solution notes, 10 ints: family and heirloom per seat). Every value is 0..4.
+- **The check:** each wheel turn recomputes its seat. The lock opens when every row pairs a person with their own heirloom; row order is free.
+- **`EnigmaExpectedStage*`** are ListInt story flags written at the solve and read only by `void_03_p`. Chapter 110's "scrambled per world" was a reader artifact: it compared the low bytes of the default list's heap pointer (corrected there).
+
+**How the mirror works:**
+- **Host:** on the lock's map, in plain gameplay, it sends its five lists (D2JL) every 2 s when they change, and at least every 6 s.
+- **Partner:** after 3 s of plain gameplay on the same map, and once its own roll has finished (its lists are a full answer and its riddle list is formatted):
+  - it writes the host's ints raw into the main decl's five lists and into each seat's copies (value idList at +0x28, count at +0x30; ListInt vtable RVA 0x1cd9bc8): no Updated event, no reroll;
+  - it rewrites the six journal lists in place with the values derived from the host's answer, only where the count matches.
+- **Never called or sent:** the decl's `Init`, any `Enigma2.*` event (`Cheat.Randomize` rerolls), any variable Set path, or the formatter `0x140725a50` (it stops the game on an unknown id).
+- Each player dials their own lock, which now has the host's answer. It follows the safe-code switch (`coop_safe_codes`, `d2coop.cfg` `safe_codes=0`).
+- **Status:** `<status>.jindosh.json`, with the counters, this world's lists, the host's last lists and this world's riddle list.
+- **Unit tests** (`d2_shadow_action_tests`): the validator (sentinel, permutation, role, sequence) and the derived journal values.
+
+**Results** (`Test-Jindosh-v2045.ps1`, two lab games on `campaign/dust/dust.mapinfo`, confirmed runtime):
+
+| Take | Result |
+|---|---|
+| `jindosh-v2045a` | **Pass.** The host found the lock and its five seats, and sent 10 times. The partner applied the answer: 19 list writes, 30 seat writes, 49 journal writes, nothing refused, no count mismatch. Its five lists and its riddle list equal the host's. World diff equal (2120) |
+| `jindosh-v2045b` | **Mutation twin, red as required.** With `coop_safe_codes off` on the host, the partner keeps its own roll (another answer and riddle). The safe dials differ too (3 differences). The host reports no lists in this case, because its service stops before reading the lock |
+
+Still open for the lock: visual acceptance of the riddle note on the partner, and a two-player solve (each player dials their own lock with the shared answer).
+
 ## Still to do in area 4.3
 
-- **The campaign on two accounts:** the full campaign v2043a on loadmap-v2041m (the glass, issue #254).
-- **Note text on screen:** check that the partner's note shows the host's digits. This is visual acceptance, recorded separately.
-- **A partner opens a safe with the host's code** (a route step on Edge of the World).
-- **Codes outside `3_digits_lock`:** the Jindosh lock (chapter 110) and other lock decls, if any.
+- **Note text on screen:** check that the partner's safe note and Jindosh riddle show the host's values. This is visual acceptance, recorded separately.
+- **A partner opens a safe with the host's code**, and solves the Jindosh lock with the host's answer.
+- **Other lock decls** besides `3_digits_lock` and the Jindosh lock, if any.
 - **Safe-room doors** (result-level door sync) and the door mutation twin.
-- The 1.0 `d2coop.cfg` and README document `safe_codes=0`.
+- Done: the full campaign v2043 (above); the release notes draft documents `safe_codes=0` with `host_story=0` and `items_per_player=0` (troubleshooting).
