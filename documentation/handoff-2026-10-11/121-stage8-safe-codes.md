@@ -233,6 +233,14 @@ The door channels (`door_sync.h`, `door_protocol.h`, since 1214jf) already follo
 
 The twin's harness judges the open state only at the end; a later version should also flag a disagreement during the window.
 
+**A partner opens a safe (v2049a).** Harness `Route-MissionVM-v2049` adds a `partnerdial` step. The VM partner presses each listed dial (X) from stands around it, only while its native use focus is on the dial. The first press that turns a dial shows which lock and which digit it turns, from the partner's safe-codes status; the dial is then pressed until that digit is the host's. Route `safe-partner-institute-v2049`: The Good Doctor from its start, Vasco's safe (`ld_combinaison_numbers_15/17/16`).
+
+| Take | Candidate | Result |
+|---|---|---|
+| `safe-partner-institute-v2049a` | replaydecision-v2047d | **The partner's safe opened with the host's code** (lock 2241413328: host code 488, partner code 488, partner Position 488; 3 focus misses). **The world diff fails, 4 values:** the three dials (host `[2,1]`, `[5,1]`, `[7,1]`; partner `[4,0]`, `[8,0]`, `[8,0]`) and `ld_safe_main_01_door` (host `[0,0]`, partner `[1,1]`). The partner's dial turns never reached the host, so the host's lock and door did not move (confirmed runtime) |
+
+Under the stage 8 rule the partner's dial turns must be requests that the host applies to its own dials, so the host's lock opens the host's door. Research on the usable sync is under way.
+
 ## Still to do in area 4.3
 
 - **Note text on screen:** check that the partner's safe note and Jindosh riddle show the host's values. This is visual acceptance, recorded separately.
