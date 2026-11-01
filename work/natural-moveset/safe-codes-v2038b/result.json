@@ -1,0 +1,115 @@
+{
+  "passed": false,
+  "failure": "The host found no safe lock (result off, read failures 0); 6 safe dials differ: ld_combinaison_numbers, ld_combinaison_numbers_15, ld_combinaison_numbers_16, ld_combinaison_numbers_17, ld_combinaison_numbers_18, ld_combinaison_numbers_19",
+  "notes": {
+    "mapInfo": "campaign/institute/institute.mapinfo",
+    "off": true,
+    "safeCodes": {
+      "host": {
+        "result": "off",
+        "locks": 0,
+        "dials": 0,
+        "texts": 0,
+        "sent": 0,
+        "readFailures": 0
+      },
+      "client": {
+        "result": "waiting_host",
+        "locks": 0,
+        "dials": 0,
+        "texts": 0,
+        "hostLocks": 0,
+        "codeWrites": 0,
+        "positionWrites": 0,
+        "dialWrites": 0,
+        "journalWrites": 0,
+        "unknownLocks": 0,
+        "unknownDials": 0,
+        "unknownTexts": 0,
+        "readFailures": 0
+      }
+    },
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 2157,
+      "differences": 6
+    },
+    "dialDifferences": [
+      {
+        "key": "ld_combinaison_numbers",
+        "host": [
+          4,
+          1
+        ],
+        "client": [
+          5,
+          1
+        ]
+      },
+      {
+        "key": "ld_combinaison_numbers_15",
+        "host": [
+          0,
+          1
+        ],
+        "client": [
+          2,
+          1
+        ]
+      },
+      {
+        "key": "ld_combinaison_numbers_16",
+        "host": [
+          5,
+          1
+        ],
+        "client": [
+          2,
+          1
+        ]
+      },
+      {
+        "key": "ld_combinaison_numbers_17",
+        "host": [
+          4,
+          1
+        ],
+        "client": [
+          9,
+          1
+        ]
+      },
+      {
+        "key": "ld_combinaison_numbers_18",
+        "host": [
+          3,
+          1
+        ],
+        "client": [
+          4,
+          1
+        ]
+      },
+      {
+        "key": "ld_combinaison_numbers_19",
+        "host": [
+          5,
+          1
+        ],
+        "client": [
+          7,
+          1
+        ]
+      }
+    ],
+    "codes": {
+      "host": [],
+      "client": []
+    },
+    "problems": [
+      "The host found no safe lock (result off, read failures 0)",
+      "6 safe dials differ: ld_combinaison_numbers, ld_combinaison_numbers_15, ld_combinaison_numbers_16, ld_combinaison_numbers_17, ld_combinaison_numbers_18, ld_combinaison_numbers_19"
+    ]
+  },
+  "scope": "2037 (#239): one safe code for both players on campaign/institute/institute.mapinfo, mutation twin: safe codes off"
+}

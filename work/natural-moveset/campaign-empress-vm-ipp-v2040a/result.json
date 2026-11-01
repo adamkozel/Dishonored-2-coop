@@ -1,0 +1,190 @@
+{
+  "passed": false,
+  "failure": "Expected both worlds on campaign/end/end_p: host campaign/end/end_p logic 5, client campaign/dunwall/return/tower/dunwall_return_tower_p logic 1",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-safecodes-v2039",
+      "hostDll": "5202C400735189D2CF19BB9C83E2C92F5403C540F9CB036882FC47910B34CD7C",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 140,
+        "client": 140,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "healthHold": [
+      "from step step05-heal"
+    ],
+    "transitionConfirms": [
+      "step11-use pending 0",
+      "step13-use pending 0",
+      "step16-use pending 0"
+    ],
+    "step21-flag": {
+      "variable": "Bool_MissionStep_ThroneRoom_Reached",
+      "value": 1,
+      "ms": 966
+    },
+    "step23-flag": {
+      "variable": "Bool_MissionStep_Portal_IsActive",
+      "value": 1,
+      "ms": 807
+    },
+    "step26-flag": {
+      "variable": "Bool_MissionStep_UDW_Reached",
+      "value": 1,
+      "ms": 857
+    },
+    "step28-flag": {
+      "variable": "Bool_MissionStep_Delilah_IsDead",
+      "value": 1,
+      "ms": 807
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/return/tower/dunwall_return_tower_p",
+        "epoch": 36,
+        "cine": 20,
+        "pos": [
+          -39.633625,
+          27.117966,
+          61.003647
+        ],
+        "fresh": true,
+        "gameflow": [
+          227,
+          2,
+          2,
+          11,
+          0,
+          6,
+          0
+        ],
+        "gfApplied": 32,
+        "lt": "applied/0/4",
+        "hold": "released/860",
+        "ka": "13/649/0",
+        "active": "Obj_DTTE_EndGame_asCorvo,Task_DTTE_ReclaimThrone_Corvo"
+      },
+      "host": {
+        "logic": 5,
+        "pending": 0,
+        "map": "campaign/end/end_p",
+        "epoch": 41,
+        "cine": 45,
+        "pos": [
+          -42.699997,
+          -13.2,
+          59.365269
+        ],
+        "fresh": true,
+        "gameflow": [
+          226,
+          0,
+          0,
+          14,
+          0,
+          8,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/4/0",
+        "hold": "timeout/90015",
+        "ka": "1090/13/0",
+        "active": ""
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/boat/dunwall_return/boat_dunwall_return.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

@@ -60,6 +60,10 @@ inline unsigned npcRelevanceCivilianRank(unsigned priority){return priority==kNp
 // world ran his routine on its own and he stood in different rooms (route-palace-duke-v1900a/v1902a): the partner
 // could not confront the host's double. A story character is never evicted for a generic NPC.
 inline bool npcStoryDefinition(const std::string& definition){return definition.find("/def/story/")!=std::string::npos;}
+// npclife-hoststory-v2041l (#254): a named character, a story definition or one authored for its map (Sokolov is
+// models/characters/def/maps/madinventor/anton_sokolov.def), is one the host's scripts watch. Under host story the host
+// refuses a partner's life roster state for it; generic guards and civilians still come through.
+inline bool npcLifeHostStoryWatched(const std::string& definition){return npcStoryDefinition(definition)||definition.find("/def/maps/")!=std::string::npos;}
 inline unsigned npcRelevanceStoryRank(unsigned priority){return priority==kNpcRelevanceUnranked?priority:0u;}
 inline bool npcRelevanceDisplaces(unsigned candidate,unsigned bound){
     return candidate!=kNpcRelevanceUnranked&&(bound==kNpcRelevanceUnranked||candidate+2<bound);

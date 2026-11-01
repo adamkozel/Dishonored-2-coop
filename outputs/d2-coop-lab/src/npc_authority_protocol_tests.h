@@ -49,6 +49,7 @@ void npcAuthorityProtocolTests(){
      require(npcRelevanceDisplaces(pr[24],pr[23])&&!npcRelevanceDisplaces(pr[24],pr[1]),"the host's guard displaces the client's 24th NPC, not its nearest");
      require(!npcRelevanceDisplaces(5,6)&&npcRelevanceDisplaces(3,6),"two-rank margin against churn");
      require(npcStoryDefinition("models/characters/def/story/luca_abele_double.def")&&!npcStoryDefinition("models/characters/def/generic/guard_male_small_01.def"),"1214ke: story characters are those under def/story/");
+     require(npcLifeHostStoryWatched("models/characters/def/maps/madinventor/anton_sokolov.def")&&npcLifeHostStoryWatched("models/characters/def/story/luca_abele_double.def")&&!npcLifeHostStoryWatched("models/characters/def/generic/guard_male_small_01.def"),"#254: the host story life gate covers story and map characters, not generic ones");
      require(npcRelevanceStoryRank(9)==0&&npcRelevanceStoryRank(kNpcRelevanceUnranked)==kNpcRelevanceUnranked&&!npcRelevanceDisplaces(npcRelevanceCivilianRank(0),npcRelevanceStoryRank(4)),"1214ke: a ranked story character is first and is not evicted for a civilian");
      require(!npcRelevanceDisplaces(kNpcRelevanceUnranked,kNpcRelevanceUnranked)&&npcRelevanceDisplaces(0,kNpcRelevanceUnranked),"unranked candidates never displace; unranked bound NPCs always give way");
      require(npcRelevanceCivilianRank(0)==8&&npcRelevanceCivilianRank(kNpcRelevanceUnranked)==kNpcRelevanceUnranked,"1214ey: civilians rank 8 places behind");

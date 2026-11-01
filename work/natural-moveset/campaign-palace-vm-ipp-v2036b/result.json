@@ -1,0 +1,165 @@
+{
+  "passed": false,
+  "failure": "Expected both worlds on palace/streets/palace_streets: host campaign/boat/duke_palace/boat_palace_p logic 1, client campaign/boat/duke_palace/boat_palace_p logic 1",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-itemsperplayer-v2036",
+      "hostDll": "8DB7D54F3B52321BE94EE65F412008E1A01BDEEC03F2A3562B496E287CCDE5D4",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 4,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 114,
+        "client": 114,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command host coop_difficulty_set 0"
+    ],
+    "difficulty": [
+      {
+        "step": "step03-difficulty",
+        "expect": 0,
+        "host": 0,
+        "client": 0,
+        "clientResult": "matched",
+        "clientApplied": 0,
+        "hostPreset": "difficulty/preset/easy.difficultypreset",
+        "clientPreset": "difficulty/preset/easy.difficultypreset",
+        "ok": true
+      }
+    ],
+    "healthHold": [
+      "from step step04-heal"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 16,
+        "cine": 10,
+        "pos": [
+          -6.869990,
+          -14.876461,
+          0.111584
+        ],
+        "fresh": true,
+        "gameflow": [
+          244,
+          0,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 2,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "1/17/0",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/duke_palace/boat_palace_p",
+        "epoch": 16,
+        "cine": 27,
+        "pos": [
+          -3.94713,
+          -32.907455,
+          7.403671
+        ],
+        "fresh": true,
+        "gameflow": [
+          244,
+          0,
+          3,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "24/0/0",
+        "active": "Mission_PA_Boat,Obj_PA_Boat_Investigate_about_next_mission,Task_PA_Boat_Meet_Meagan"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/boat/duke_palace/boat_palace.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

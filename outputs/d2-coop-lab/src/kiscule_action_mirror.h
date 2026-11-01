@@ -94,6 +94,54 @@ void kisculeCharacterCounterpart(const char* entity,std::uint32_t& node,std::uin
         if(character==1&&node==g.emilyNode&&input==g.emilyInput){node=g.corvoNode;input=g.corvoInput;return;}
     }
 }
+// character-branch-v2041f: World nodes behind a player-character test (test_player.kiscule) that pick a different
+// node per character. Each world takes its own player's branch, so under host story the partner asked the host for
+// its Emily nodes and the host ran both branches (campaign-madinventor-vm-ipp-v2041ca: the streets witch ambush
+// dead bodies 7 and 9 next to the host's 8 and 10; branch read from the map data, confirmed static). The host decides:
+// it refuses a partner request for the other character's branch, and the partner gets the host's own nodes as they are.
+struct KisculeCharacterBranch{const char* mapPrefix;const char* entity;std::uint32_t corvoNode,emilyNode;};
+const KisculeCharacterBranch kisculeCharacterBranches[]={
+    {"campaign/madinventor/streets/madinv_streets_p_","script_kiscule_return_main",1200362106,791556406}, // deadbody_8 / deadbody_7
+    {"campaign/madinventor/streets/madinv_streets_p_","script_kiscule_return_main",391263537,1248112637},  // deadbody_10 / deadbody_9
+};
+// load-dressing-v2041k: load-time set dressing that a story flag both worlds share decides (LevelLoadedFirstTime, then a
+// story flag test, then EntityStateControl or ActionDestroy on a list of props). The partner runs it in its own flow at its
+// own load; the host's run, when it comes, finds it executed. Blocked, it waited for the host's run, which came 69 s
+// later when the host loaded later: meanwhile the partner's hyp_arrived lab set on the Dreadful Wale stayed live, and two
+// glass props bound to its teapot cup broke and left the world (campaign-institute-vm-ipp-v2031a to v2040a; nodes read from
+// the map data, confirmed static: hypatia_is_alive true 21792515, false 508102253 and 424070462).
+struct KisculeLoadDressing{const char* map;const char* entity;std::uint32_t node;};
+const KisculeLoadDressing kisculeLoadDressings[]={
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",21792515},  // hypatia alive: hide the b_hyp_absent set
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",508102253}, // hypatia not alive: hide the b_hyp_arrived set
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",424070462}, // and destroy script_book_02
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",79209850},  // the second load-time state and destroy pair
+    {"campaign/boat/madinventor/boat_madinventor_p","script_kiscule",1393111919},
+};
+// load-dressing-map-v2041m: mapName is filled only once the world state is 3, so it is empty while the load-time nodes
+// run (campaign-institute-vm-ipp-v2041ka: hostStoryDressing 0, the nodes still blocked). The loading map's name is read
+// from the game itself, as the runtime probe does.
+bool kisculeLoadingMap(char* out,std::size_t size){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t game=0,vtable=0,name=0;std::memset(out,0,size);
+    return memoryRead(base+0x39a5290,&game,8)&&game&&memoryRead(game,&vtable,8)&&vtable==base+0x1c940a8&&
+        memoryRead(game+0x337138,&name,8)&&name&&memoryRead(name,out,size-1);
+}
+bool kisculeLoadDressing(const std::string& entity,std::uint32_t node){
+    char map[192];bool loaded=false;
+    for(const auto& d:kisculeLoadDressings){
+        if(node!=d.node||entity!=d.entity)continue;
+        if(!loaded){if(!kisculeLoadingMap(map,sizeof(map)))return false;loaded=true;}
+        if(!std::strcmp(d.map,map))return true;
+    }
+    return false;
+}
+bool kisculeOtherCharacterBranch(const char* entity,std::uint32_t node){
+    const int character=kisculeLocalCharacter();if(!character)return false;
+    for(const auto& c:kisculeCharacterBranches){
+        if(std::strcmp(c.entity,entity)||std::strncmp(c.mapPrefix,mapName,std::strlen(c.mapPrefix)))continue;
+        if((character==1&&node==c.emilyNode)||(character==2&&node==c.corvoNode))return true;}
+    return false;
+}
 #pragma pack(push,1)
 struct KisculeActionPacket {
     std::uint32_t magic=0x414B3244; // "D2KA"
@@ -109,7 +157,7 @@ struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;
 struct KisculeActionEvent{std::uint64_t tick=0;std::uint32_t cls=0,node=0,input=0,count=0;char entity[64]{};const char* what="";};
 struct KisculePending{KisculeActionPacket packet{};std::uint64_t at=0;};
 struct KisculeMirror {
-    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
+    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,hostStoryGameOverUpdateBlocked=0,playerDamageLocal=0,playerDamageRefused=0,characterBranchRefused=0,hostStoryDressing=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
     std::uint32_t dispatchThread=0;const char* result="idle";
     std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue;std::vector<KisculePending> pending;
     KisculeActionEvent events[256]{};std::uint64_t eventCount=0;
@@ -194,6 +242,40 @@ std::uintptr_t kisculeInputDescriptor(std::uintptr_t node,std::uint32_t input){
     return 0;
 }
 bool kisculeCodePointer(std::uintptr_t p){const auto base=reinterpret_cast<std::uintptr_t>(gameImage);return p>base+0x1000&&p<base+0x1a00000;}
+// player-damage-v2041d: an ActionDamage (RVA 0x1cbe348) Hurt (input 2) or Kill (input 4) whose target is this world's own
+// player belongs to that player: each world runs its own, and none is mirrored or asked of the host. A Player node
+// (arkKisculeNodePlayer, vtable 0x1cda848) resolves to the player of the world that runs it, so the partner's fall
+// death on the Clockwork Mansion streets (script_kiscule_gameover node 244843386 "Kill", script_trigger_falldeath),
+// asked of the host under host story, would kill the host (campaign-madinventor-vm-ipp-v2041a, hypothesis).
+// (A) reads the target input's link (as 0x7be020 walks it); (B) resolves it as the handlers do (0x528040 with the
+// target key at 0x3984148, then the entity handle against this world's player, entity +0xa8). Engine thread only.
+bool kisculeDamageTargetsLocalPlayer(std::uintptr_t node,std::uint32_t input){
+    if(input!=2&&input!=4)return false;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t key=0,decl=0,inputs=0,instance=0;std::uint32_t count=0;
+    if(memoryRead(base+0x3984148,&key,8)&&key&&memoryRead(node+0x20,&instance,8)&&instance&&memoryRead(node+0x28,&decl,8)&&decl&&
+       memoryRead(decl+0x40,&inputs,8)&&inputs&&memoryRead(decl+0x48,&count,4)&&(count&0xffffff)<=256)
+        for(std::uint32_t i=0;i<(count&0xffffff);++i){const auto e=inputs+i*0x48ull;std::uintptr_t desc=0,name=0,conn=0,src=0,vt=0;std::int32_t type=0;std::uint32_t links=0,srcId=0;
+            if(!memoryRead(e+0x20,&desc,8)||!desc||!memoryRead(desc,&type,4)||static_cast<std::uint32_t>(type-2)>=3||!memoryRead(e+0x10,&name,8)||name!=key)continue;
+            if(memoryRead(e+0x38,&links,4)&&(links&0xffffff)&&memoryRead(e+0x30,&conn,8)&&conn&&memoryRead(conn+0x20,&srcId,4)&&
+               (src=kisculeNodeIn(instance,srcId))&&memoryRead(src,&vt,8)&&vt==base+0x1cda848)return true;
+            break;}
+    if(std::memcmp(gameImage+0x528040,kisculeVariableAccessorPrefix,sizeof(kisculeVariableAccessorPrefix))||!observedPlayer)return false;
+    const auto* h=reinterpret_cast<const std::uint32_t*(*)(void*,const void*)>(gameImage+0x528040)(reinterpret_cast<void*>(node),gameImage+0x3984148);
+    std::uint32_t mine=0,target=0;return h&&memoryRead(reinterpret_cast<std::uintptr_t>(h),&target,4)&&memoryRead(observedPlayer+0xa8,&mine,4)&&mine!=0x3fff0010&&target==mine;
+}
+int kisculeDamageClass(){static const int i=kisculePolicyIndex(0x1cbe348);return i<0?-1:kKisculeHostStoryBase+i;}
+// damage-target-v2041e (diagnostic): the entity an ActionDamage Hurt or Kill resolves to in this world, as the handlers
+// resolve it. The streets cable car (script_kiscule_cablecar node 609, Hurt) ran in both worlds right before the host
+// died and the partner lost Sokolov (campaign-madinventor-vm-ipp-v2041ca); its target was not recorded. Engine thread only.
+bool kisculeDamageTarget(std::uintptr_t node,std::uint32_t& handle,std::string& name){
+    handle=0;name.clear();
+    if(std::memcmp(gameImage+0x528040,kisculeVariableAccessorPrefix,sizeof(kisculeVariableAccessorPrefix))||!observedGame)return false;
+    const auto* h=reinterpret_cast<const std::uint32_t*(*)(void*,const void*)>(gameImage+0x528040)(reinterpret_cast<void*>(node),gameImage+0x3984148);
+    if(!h||!memoryRead(reinterpret_cast<std::uintptr_t>(h),&handle,4))return false;
+    std::uint32_t mine=0;if(observedPlayer&&memoryRead(observedPlayer+0xa8,&mine,4)&&mine==handle){name="<local player>";return true;}
+    std::uintptr_t actor=worldIdentityEntity(memoryRead,observedGame,handle),n=0;
+    return actor&&memoryRead(actor+0x20,&n,8)&&worldIdentityString(memoryRead,n,name);
+}
 // Caller holds kisculeLock. A new node instance means a new world: counts restart.
 KisculeActionCount& kisculeCount(const std::string& entity,std::uint32_t node,std::uint32_t input,std::uint32_t cls,std::uintptr_t instanceNode){
     for(auto& c:kisculeMirror.counts)if(c.node==node&&c.input==input&&c.cls==cls&&c.entity==entity){
@@ -238,11 +320,21 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     const int cls=kisculeClassOfVtable(*reinterpret_cast<const std::uintptr_t*>(node));if(cls<0)return realKisculeDispatch(self,out,signal);
     std::uint32_t nodeId=0,input=0;std::memcpy(&nodeId,signal+0xc,4);std::memcpy(&input,signal+0x10,4);
     std::string entity;bool skip=false;
+    const bool playerDamage=!kisculeHostStoryTwinNoBlock&&cls==kisculeDamageClass()&&kisculeDamageTargetsLocalPlayer(node,input);
+    std::uint32_t damageHandle=0;std::string damageName;
+    const bool damageSeen=cls==kisculeDamageClass()&&(input==2||input==4)&&(kisculeDamageTarget(node,damageHandle,damageName),true);
     AcquireSRWLockExclusive(&kisculeLock);
     kisculeMirror.dispatchThread=GetCurrentThreadId();
+    if(damageSeen)kisculeEvent("damage_target",cls,damageName,nodeId,input,damageHandle);
+    // hoststory-gameover-v2041: under host story the partner never ends the game on its own. Its GameOver comes from
+    // the host's Death message (checkpoint_sync.h). In campaign-madinventor-vm-ipp-v2040a the partner's streets
+    // script_kiscule_gameover ("Sokolov dead") ran natively and ended both games while the host's Sokolov was fine.
+    if(localRole==1&&!kisculeHostStoryTwinNoBlock&&cls==kKisculeHostStoryBase+kisculePolicyIndex(0x1b79cc8)){
+        kisculeNodeEntity(node,entity);skip=true;++kisculeMirror.hostStoryGameOverBlocked;kisculeEvent("gameover_blocked",cls,entity,nodeId,input,0);}
+    else if(playerDamage){kisculeNodeEntity(node,entity);++kisculeMirror.playerDamageLocal;kisculeEvent("player_damage_local",cls,entity,nodeId,input,0);}
     // 1214bj: an action during a load or an intro may run before the map id is
     // known; it is counted now and sent once the map id is (service).
-    if(!kisculeNodeEntity(node,entity)){++kisculeMirror.identity;kisculeEvent("unidentified",cls,entity,nodeId,input,0);}
+    else if(!kisculeNodeEntity(node,entity)){++kisculeMirror.identity;kisculeEvent("unidentified",cls,entity,nodeId,input,0);}
     else if(cls<kKisculeHostStoryBase&&!kisculeMirrorClasses[cls].mirrored){++kisculeMirror.personal;kisculeEvent("personal",cls,entity,nodeId,input,0);}
     else if(std::string item;cls==0&&kisculePlayerScopedItem(node,item)){++kisculeMirror.personal;kisculeEvent("personal",cls,entity,nodeId,input,0);}
     else{auto& c=kisculeCount(entity,nodeId,input,cls,node);++c.requests;
@@ -252,6 +344,8 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
         // (saferoom-trace-v2028a; hoststory-lead-dunwall-v2027a reached the node first and passed).
         if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&c.executed<c.requests&&c.requests<=c.hostCount){
             ++c.executed;++kisculeMirror.hostStoryInFlow;kisculeEvent("in_flow",cls,entity,nodeId,input,c.executed);}
+        else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&kisculeLoadDressing(entity,nodeId)){
+            ++c.executed;++kisculeMirror.hostStoryDressing;kisculeEvent("load_dressing",cls,entity,nodeId,input,c.executed);}
         else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);
             // A request goes out at once, whatever state the partner's game is in: the host runs it only in its own plain
             // gameplay. Ramsey's ring task nodes run in the instant the loot scene ends, while the partner is still in its
@@ -282,6 +376,32 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
     std::memcpy(reinterpret_cast<void*>(desc+0x30),&h0,8);std::memcpy(reinterpret_cast<void*>(desc+0x38),&h1,8);
     return result;
 }
+// gameover-update-v2041h: ActionGameOver (vtable RVA 0x1b79cc8) is a latent node. Its input only arms it; the run loop
+// (0x7c1170, kind 1) then calls its update, vtable entry 8 (0x525d30), which counts down the delay at +0x30 and then
+// sets the reason and switches to GameOver (13) itself at 0x525ded, without the input dispatcher (confirmed static).
+// Blocking the input left the update armed: the partner still reached its own Sokolov GameOver from
+// script_kiscule_gameover, and the host copied it (campaign-madinventor-vm-ipp-v2041ga: the switch stack is
+// 0x525df2 from 0x7c11c0; .reset.json shows the partner died first). Under host story the partner's update returns
+// finished (status 4, the result the native update writes after firing) without firing; the host's Death decides.
+using NativeKisculeUpdate=unsigned char*(*)(void*,unsigned char*);
+NativeKisculeUpdate realGameOverUpdate=nullptr;
+unsigned char* kisculeGameOverUpdateWrapper(void* node,unsigned char* out){
+    const auto n=reinterpret_cast<std::uintptr_t>(node);std::uintptr_t decl=0;std::uint32_t id=0;
+    if(localRole==1&&kisculeHostStory&&!kisculeHostStoryTwinNoBlock&&kisculeMirrorActive()&&memoryRead(n+0x28,&decl,8)&&decl&&memoryRead(decl+8,&id,4)){
+        std::memset(out,0,0x20);out[0]=4;std::memcpy(out+4,&id,4);std::memcpy(out+0xc,&id,4);std::memcpy(out+0x18,&n,8);
+        std::string entity;kisculeNodeEntity(n,entity);
+        AcquireSRWLockExclusive(&kisculeLock);++kisculeMirror.hostStoryGameOverUpdateBlocked;
+        kisculeEvent("gameover_update_blocked",static_cast<std::uint32_t>(kKisculeHostStoryBase+kisculePolicyIndex(0x1b79cc8)),entity,id,0,0);ReleaseSRWLockExclusive(&kisculeLock);
+        return out;}
+    return realGameOverUpdate(node,out);
+}
+bool installKisculeGameOverUpdate(){
+    auto* slot=reinterpret_cast<std::uintptr_t*>(gameImage+0x1b79cc8+8*8);
+    if(*slot!=reinterpret_cast<std::uintptr_t>(gameImage)+0x525d30)return false;
+    DWORD old=0,unused=0;if(!VirtualProtect(slot,8,PAGE_READWRITE,&old))return false;
+    realGameOverUpdate=reinterpret_cast<NativeKisculeUpdate>(*slot);*slot=reinterpret_cast<std::uintptr_t>(&kisculeGameOverUpdateWrapper);
+    return VirtualProtect(slot,8,old,&unused)!=0;
+}
 bool installKisculeDispatchObserver(){
     auto* target=gameImage+0x7c0e30;if(std::memcmp(target,kisculeDispatchPrefix,sizeof(kisculeDispatchPrefix)))return false;
     // The first 15 bytes are four complete instructions with no branches or
@@ -293,7 +413,7 @@ bool installKisculeDispatchObserver(){
     FlushInstructionCache(GetCurrentProcess(),trampoline,64);void* wrapper=reinterpret_cast<void*>(&kisculeDispatchWrapper);std::memcpy(jump+6,&wrapper,8);
     if(!VirtualProtect(target,15,PAGE_EXECUTE_READWRITE,&old)){VirtualFree(trampoline,0,MEM_RELEASE);return false;}
     realKisculeDispatch=reinterpret_cast<NativeKisculeDispatch>(trampoline);std::memcpy(target,jump,15);FlushInstructionCache(GetCurrentProcess(),target,15);
-    return VirtualProtect(target,15,old,&unused)!=0;
+    return VirtualProtect(target,15,old,&unused)!=0&&installKisculeGameOverUpdate();
 }
 void receiveKisculeAction(const KisculeActionPacket& p){
     AcquireSRWLockExclusive(&kisculeLock);auto& k=kisculeMirror;++k.received;
@@ -350,13 +470,23 @@ void serviceKisculeMirror(std::uint64_t tick){
            !(h1?kisculeCodePointer(h1):kisculeCodePointer(h0))){
             if(tick-w.at<10000){keep.push_back(w);continue;}
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
+        if(p.role==1&&localRole==0&&kisculeOtherCharacterBranch(p.entity,nodeId)){
+            AcquireSRWLockExclusive(&kisculeLock);++k.characterBranchRefused;++k.refused;kisculeEvent("character_branch_refused",p.classIndex,p.entity,nodeId,inputId,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
+        if(static_cast<int>(p.classIndex)==kisculeDamageClass()&&(inputId==2||inputId==4)){std::uint32_t th=0;std::string tn;kisculeDamageTarget(node,th,tn);
+            AcquireSRWLockExclusive(&kisculeLock);kisculeEvent("apply_damage_target",p.classIndex,tn,nodeId,inputId,th);ReleaseSRWLockExclusive(&kisculeLock);}
+        if(p.role==1&&static_cast<int>(p.classIndex)==kisculeDamageClass()&&kisculeDamageTargetsLocalPlayer(node,inputId)){
+            AcquireSRWLockExclusive(&kisculeLock);++k.playerDamageRefused;++k.refused;kisculeEvent("player_damage_refused",p.classIndex,p.entity,nodeId,inputId,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
         std::uint32_t ranTo=0;
         for(unsigned guard=0;guard<4;++guard){
             AcquireSRWLockExclusive(&kisculeLock);auto& c=kisculeCount(p.entity,nodeId,inputId,p.classIndex,node);
             const bool hostStoryRun=p.role==0&&localRole==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase);
             if(hostStoryRun&&p.count>c.hostCount)c.hostCount=p.count;
             // Up to 750 ms for the partner's own flow to reach the node and run it in flow; then it is applied here.
-            if(hostStoryRun&&c.requests<p.count&&c.executed<p.count&&tick-w.at<750){ReleaseSRWLockExclusive(&kisculeLock);keep.push_back(w);break;}
+            // damage-inflow-v2041j: an ActionDamage waits up to 8 s. The carriage Sokolov's sleep damage (609) runs from the
+            // pull-out scene; applied after 750 ms while the partner's own cable car ride was 3.8 s behind, it made him a
+            // ragdoll in a moving car, and he fell 190 m and died (campaign-madinventor-vm-ipp-v2041ia, confirmed runtime).
+            const std::uint64_t inFlowWait=static_cast<int>(p.classIndex)==kisculeDamageClass()?8000:750;
+            if(hostStoryRun&&c.requests<p.count&&c.executed<p.count&&tick-w.at<inFlowWait){ReleaseSRWLockExclusive(&kisculeLock);keep.push_back(w);break;}
             const bool run=c.executed<p.count;if(run){++c.executed;ranTo=c.executed;++k.applied;k.result="applied";kisculeEvent(p.role==1?(nodeId==p.node?"applied_partner":"applied_partner_counterpart"):(nodeId==p.node?"applied":"applied_counterpart"),p.classIndex,p.entity,nodeId,inputId,c.executed);}
             ReleaseSRWLockExclusive(&kisculeLock);if(!run)break;
             alignas(16) unsigned char signal[32]{};std::memcpy(signal+0xc,&nodeId,4);std::memcpy(signal+0x10,&inputId,4);std::memcpy(signal+0x18,&node,8);
@@ -451,7 +581,7 @@ void writeKisculeMirror(){
     if(std::snprintf(path,sizeof(path),"%s.kiscule.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
     AcquireSRWLockShared(&kisculeLock);const auto& k=kisculeMirror;
-    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryInFlow,k.resultScreenHeld);
+    fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryGameOverBlocked\":%llu,\"hostStoryGameOverUpdateBlocked\":%llu,\"playerDamageLocal\":%llu,\"playerDamageRefused\":%llu,\"characterBranchRefused\":%llu,\"hostStoryDressing\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryGameOverBlocked,k.hostStoryGameOverUpdateBlocked,k.playerDamageLocal,k.playerDamageRefused,k.characterBranchRefused,k.hostStoryDressing,k.hostStoryInFlow,k.resultScreenHeld);
     fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
         kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
     const auto first=k.eventCount>256?k.eventCount-256:0;

@@ -140,6 +140,9 @@ inline bool installCoopHubHook(){
 // (profile.bin) still follows the root in this candidate (lab test; its keys are decided separately).
 struct CoopSaveSwitch {int phase=0;bool target=false,active=false;ULONGLONG startedAt=0;const char* result="idle";
     std::uint64_t switches=0,failures=0,rebuilds=0,profileLoads=0,profileSeeds=0,refreshes=0,profileSaves=0,profileSkips=0;std::uint32_t listed=0;int lastDirty=-1;
+    // gameover-v2041b: the last service tick and the largest gap between two services. A host stuck in profile_saving
+    // with no timeout (campaign-bunker-vm-ipp-v2040a, campaign-palace-vm-ipp-v2036a) means the service stopped running.
+    ULONGLONG serviceAt=0,serviceGapMax=0;
     char folder[MAX_PATH]{};const char* original=nullptr;};
 CoopSaveSwitch coopSaves{};bool coopSavesEnabled=true;
 static const char kCoopSaveRoot[]="savegame_coop";
@@ -181,6 +184,7 @@ inline bool coopProfileLoad(const CoopProfileHandles& h,bool seedCoop){
     std::int32_t after=0;memoryRead(h.pm+0x20,&after,4);return after!=sentinel;}
 void serviceCoopSaves(ULONGLONG tick){
     if(!coopSavesEnabled)return;auto& s=coopSaves;const bool want=coopModeSelected.load();
+    if(s.serviceAt&&tick-s.serviceAt>s.serviceGapMax)s.serviceGapMax=tick-s.serviceAt;s.serviceAt=tick;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);auto** root=reinterpret_cast<const char**>(base+0x2286f40);
     if(!s.original){const char* current=nullptr;if(!memoryRead(base+0x2286f40,&current,8)||!current){s.result="no_root";return;}s.original=current;}
     // 1214hs: on the main menu, or in plain gameplay (a partner who joins, or a host who presses F7, mid-mission); never
@@ -373,11 +377,12 @@ void writeCoopMenu(){
         for(int k=0;k<31&&r.name[k];++k)name[k]=(r.name[k]=='"'||r.name[k]=='\\'||r.name[k]<32)?'_':r.name[k];
         for(int k=0;k<31&&r.arg[k];++k)arg[k]=(r.arg[k]=='"'||r.arg[k]=='\\'||r.arg[k]<32)?'_':r.arg[k];
         fprintf(f,"%s{\"name\":\"%s\",\"argc\":%d,\"type\":%d,\"arg\":\"%s\",\"rawLength\":%llu}",first?"":",",name,r.argc,r.type,arg,static_cast<unsigned long long>(r.rawLength));first=false;}}
-    fprintf(f,"],\"saves\":{\"result\":\"%s\",\"active\":%s,\"phase\":%d,\"switches\":%llu,\"failures\":%llu,\"rebuilds\":%llu,\"profileLoads\":%llu,\"profileSeeds\":%llu,\"sessionRequests\":%llu,\"refreshes\":%llu,\"listed\":%u,\"profileSaves\":%llu,\"profileSkips\":%llu,\"lastDirty\":%d}",coopSaves.result,
+    fprintf(f,"],\"saves\":{\"result\":\"%s\",\"active\":%s,\"phase\":%d,\"switches\":%llu,\"failures\":%llu,\"rebuilds\":%llu,\"profileLoads\":%llu,\"profileSeeds\":%llu,\"sessionRequests\":%llu,\"refreshes\":%llu,\"listed\":%u,\"profileSaves\":%llu,\"profileSkips\":%llu,\"lastDirty\":%d,\"serviceAgeMs\":%llu,\"serviceGapMaxMs\":%llu}",coopSaves.result,
         coopSaves.active?"true":"false",coopSaves.phase,static_cast<unsigned long long>(coopSaves.switches),static_cast<unsigned long long>(coopSaves.failures),
         static_cast<unsigned long long>(coopSaves.rebuilds),static_cast<unsigned long long>(coopSaves.profileLoads),static_cast<unsigned long long>(coopSaves.profileSeeds),
         static_cast<unsigned long long>(coopMenu.sessionRequests),static_cast<unsigned long long>(coopSaves.refreshes),coopSaves.listed,
-        static_cast<unsigned long long>(coopSaves.profileSaves),static_cast<unsigned long long>(coopSaves.profileSkips),coopSaves.lastDirty);
+        static_cast<unsigned long long>(coopSaves.profileSaves),static_cast<unsigned long long>(coopSaves.profileSkips),coopSaves.lastDirty,
+        static_cast<unsigned long long>(coopSaves.serviceAt?GetTickCount64()-coopSaves.serviceAt:0),static_cast<unsigned long long>(coopSaves.serviceGapMax));
     fprintf(f,",\"pause\":{\"result\":\"%s\",\"inSession\":%s,\"labelled\":%s,\"relabels\":%llu,\"restores\":%llu,\"clears\":%llu,\"leaves\":%llu,\"translationHooked\":%s,\"translations\":%llu,\"translationMode\":%d,\"translationFlag\":%u,\"translate8Calls\":%llu,\"localizeHooked\":%s,\"localizeSwaps\":%llu,\"pauseContext\":%s,\"lastKeys\":[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"]}",
         coopPause.result,coopInSession()?"true":"false",coopPause.labelled?"true":"false",static_cast<unsigned long long>(coopPause.relabels),static_cast<unsigned long long>(coopPause.restores),
         static_cast<unsigned long long>(coopPause.clears),static_cast<unsigned long long>(coopPause.leaves),coopTranslationHooked?"true":"false",static_cast<unsigned long long>(coopLeaveTranslations.load()),

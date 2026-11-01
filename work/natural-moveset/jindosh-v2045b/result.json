@@ -1,0 +1,48 @@
+{
+  "passed": false,
+  "failure": "The host has no rolled lock (result off, seats 0); Answers differ: host [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], partner [-1,1,5,3,2,4,-1,2,5,3,4,1,-1,1,5,3,4,2,-1,5,2,1,3,4,-1,1,5,3,2,4]; Riddles differ: host [], partner [0,1,0,4,0,4,4,4,1,4,2,2,2,0,2,1,3,3,2,1,3,0,1,3,3]; World diff DIFFERENT (3 differences)",
+  "notes": {
+    "mapInfo": "campaign/dust/dust.mapinfo",
+    "off": true,
+    "jindosh": {
+      "host": {
+        "result": "off",
+        "lockFound": false,
+        "seats": 0,
+        "localValid": false,
+        "sent": 0,
+        "readFailures": 0,
+        "lists": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+        "riddle": ""
+      },
+      "client": {
+        "result": "waiting_host",
+        "lockFound": true,
+        "seats": 5,
+        "received": 0,
+        "refused": 0,
+        "listWrites": 0,
+        "seatWrites": 0,
+        "journalWrites": 0,
+        "notReady": 0,
+        "journalMismatch": 0,
+        "readFailures": 0,
+        "lists": "-1,1,5,3,2,4,-1,2,5,3,4,1,-1,1,5,3,4,2,-1,5,2,1,3,4,-1,1,5,3,2,4",
+        "hostLists": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+        "riddle": "0,1,0,4,0,4,4,4,1,4,2,2,2,0,2,1,3,3,2,1,3,0,1,3,3"
+      }
+    },
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 2120,
+      "differences": 3
+    },
+    "problems": [
+      "The host has no rolled lock (result off, seats 0)",
+      "Answers differ: host [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], partner [-1,1,5,3,2,4,-1,2,5,3,4,1,-1,1,5,3,4,2,-1,5,2,1,3,4,-1,1,5,3,2,4]",
+      "Riddles differ: host [], partner [0,1,0,4,0,4,4,4,1,4,2,2,2,0,2,1,3,3,2,1,3,0,1,3,3]",
+      "World diff DIFFERENT (3 differences)"
+    ]
+  },
+  "scope": "2045 (#239): one Jindosh lock answer for both players on campaign/dust/dust.mapinfo, mutation twin: safe codes off"
+}

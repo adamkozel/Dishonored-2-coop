@@ -1,0 +1,9 @@
+{
+ "candidate": "gameoverupdate-v2041h",
+ "card": 237,
+ "dll": "07177151F02295EDAD0284C6E4C33DF4CF48A70822FC795BDB0F04806FC7BD95",
+ "previousCandidate": "gameoverstack-v2041g",
+ "sourceCommit": "fc1b11c31a9666511ffd910001139db9802a6c08",
+ "sourceDiff": "source-change.diff",
+ "change": "gameoverstack-v2041g plus: under host story the partner's ActionGameOver update (vtable RVA 0x1b79cc8 entry 8, 0x525d30, which counts down and switches to GameOver itself) returns finished without firing (hostStoryGameOverUpdateBlocked). campaign-madinventor-vm-ipp-v2041ga: the partner's Sokolov GameOver came from that update (switch at 0x525df2 called from the run loop 0x7c11c0), not the blocked input"
+}

@@ -110,7 +110,9 @@ void traceLogicSwitch(void* manager,int target) {
     NativeSwitchEvent e{};e.tick=GetTickCount64();e.thread=GetCurrentThreadId();e.to=target;
     e.caller=reinterpret_cast<std::uintptr_t>(_ReturnAddress())-reinterpret_cast<std::uintptr_t>(gameImage);
     nativeSwitchContext(reinterpret_cast<std::uintptr_t>(manager),e);
-    if(target==15){
+    // gameover-stack-v2041g: a GameOver switch (13) records its stack too; the partner reached GameOver with Sokolov's
+    // reason while its own ActionGameOver node was blocked (campaign-madinventor-vm-ipp-v2041fa), by an unknown path.
+    if(target==15||target==13){
         void* frames[40]{};const USHORT n=RtlCaptureStackBackTrace(1,40,frames,nullptr);
         const auto base=reinterpret_cast<std::uintptr_t>(gameImage);LoadingEntryStack s{};s.tick=e.tick;s.caller=static_cast<unsigned>(e.caller);
         for(USHORT i=0;i<n&&s.count<24;++i){const auto a=reinterpret_cast<std::uintptr_t>(frames[i]);if(a>base&&a<base+0x2000000)s.rva[s.count++]=static_cast<std::uint32_t>(a-base);}

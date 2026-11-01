@@ -10,6 +10,7 @@
 #include "doppelganger_world_protocol.h"
 #include "presentation_refusal.h"
 #include "swarm_spawn_fx_protocol.h"
+#include "jindosh_protocol.h"
 #include "possession_fx_protocol.h"
 #include "swarm_world_presentation.h"
 #include "power_failure_fx_policy.h"
@@ -200,7 +201,24 @@ void timeBendPoseTests(){
     q=p;q.flags|=0x800u;check(!validCoopPose(q,0),"1214ie: reserved bit 11");
     q=p;q.flags|=0x800000u|0x400u;check(!validCoopPose(q,0),"1214ie: reserved bit 23");
     q=p;q.version=12;check(!validCoopPose(q,0),"1214ie: pose version 12 refused");}
-int main(){presentationHoldTests();unboundGroundTests();chokePresentationTests();timeBendPoseTests();
+// Stage 8.4.3 (#239): the Jindosh answer packet and the journal values derived from it.
+void jindoshProtocolTests(){
+    JindoshPacket p{};p.sequence=1;const std::int32_t answer[5][6]={{-1,1,4,3,2,5},{-1,2,1,5,4,3},{-1,5,3,1,2,4},{-1,4,5,2,3,1},{-1,3,2,4,5,1}};
+    std::memcpy(p.lists,answer,sizeof(answer));check(validJindosh(p),"jindosh: a rolled answer (route-dd-v1306a RandomFamily) is valid");
+    auto q=p;q.lists[2][3]=3;check(!validJindosh(q),"jindosh: a repeated id is refused");
+    q=p;q.lists[0][0]=1;check(!validJindosh(q),"jindosh: a list without the -1 sentinel is refused");
+    q=p;q.lists[4][5]=6;check(!validJindosh(q),"jindosh: an id outside 1..5 is refused");
+    q=p;q.role=1;check(!validJindosh(q),"jindosh: only the host sends the answer");
+    q=p;q.sequence=0;check(!validJindosh(q),"jindosh: a zero sequence is refused");
+    std::vector<std::int32_t> v;jindoshJournalValues(p.lists,15,v);
+    check(v.size()==25&&jindoshJournalCount(15)==25,"jindosh: the riddle list has 25 values");
+    check(v[0]==0&&v[1]==1&&v[2]==4&&v[3]==3&&v[4]==2&&v[5]==3,"jindosh: riddle var 5(s-1)+k is list k[s]-1");
+    jindoshJournalValues(p.lists,19,v);check(v.size()==10&&jindoshJournalCount(19)==10,"jindosh: a solution list has 10 values");
+    check(v[0]==0&&v[1]==4&&v[2]==3&&v[3]==2&&v[8]==4&&v[9]==3,"jindosh: solution vars are family and heirloom per seat");
+    bool range=true;for(const auto index:kJindoshJournalIndex){jindoshJournalValues(p.lists,index,v);for(const auto x:v)range=range&&x>=0&&x<=4;}
+    check(range,"jindosh: every journal value is 0..4");
+}
+int main(){presentationHoldTests();jindoshProtocolTests();unboundGroundTests();chokePresentationTests();timeBendPoseTests();
     grenadePresentationTests();
     carryPresentationTests();
     rangedShotTests();

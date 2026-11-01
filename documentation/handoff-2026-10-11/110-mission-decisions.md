@@ -30,13 +30,15 @@ task) and the **story flags**. Labels follow the handoff rules: confirmed static
 | Chaos | the host | 1214ba |
 | The Outsider's offer | each player | 1214bk (chapter 97) |
 | Map variants (`dust_return_p` and others) | the host's world | map changes follow the host (chapter 97); they read the host's flags |
-| Combination dials and the Jindosh lock riddle | each world | per world, decided (chapter 106); `EnigmaExpectedStage*` differ by design |
+| Combination dials and the Jindosh lock riddle | each world (0.9.6) | the host from stage 8 ([chapter 121](121-stage8-safe-codes.md)): one safe code and one Jindosh answer |
 
 ## Runtime
 
 - **Every mission map loads with equal decision flags in both worlds** (story-flags-v1836a). Both lab games loaded
   the nine missions' maps with the native `campaign` command. The only differences are the Jindosh lock riddle's two
-  `EnigmaExpectedStage*` values from Dust District on, which the game scrambles per world (non-bool, pointer-like bytes).
+  `EnigmaExpectedStage*` values from Dust District on. Correction (2026-11-01, confirmed static): they are ListInt
+  story flags, and the reader compared bytes +0x18/+0x19, the low bytes of the default list's heap pointer, so that
+  difference is a reader artifact, not a decision ([chapter 121](121-stage8-safe-codes.md), the Jindosh lock).
 - **Her kill of Ramsey sets the host's flag** (route-dunwall-lead-v1835a). In a partner-led Dunwall (steps 1-15 of the
   v1674 route, held at the end), she kills and loots Ramsey, opens the vault and her locker. Both worlds then hold
   `ramsey_is_alive` 0, and the 22 flags show no difference (`storyflags-diff.json`, `storyflags-values.json`).
