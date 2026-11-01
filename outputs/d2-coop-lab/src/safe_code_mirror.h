@@ -13,6 +13,12 @@
 //    match; after that each player turns their own dials and opens their own safe;
 //  - overwrites in place each journal digit list whose text id and length match its own (never a foreign id: the native
 //    formatter stops the game on an unknown one).
+// Dial turns (2050, safe-partner-institute-v2049a: the partner opened its safe in its own world only, and the host's dials
+// and door never moved). After the start positions, a turn of a dial in the partner's world is sent to the host (D2SD,
+// the dial and the state the partner reached). The host turns its own dial there one stage per service with the native
+// indexed request (events on: its own lock reads each step, sets Position and opens its own door), refusing a disabled
+// dial. The host checks its safes every 500 ms after a step. The partner follows the host's dial states one stage at a
+// time with the same request, except on a dial it turned in the last 5 s. Lab: coop_safe_dials on|off on the host.
 // Lab: coop_safe_codes on|off (on by default); off restores 0.9.6 (per-world codes). The host decides: a host with it
 // off sends nothing.
 #include <array>
@@ -20,6 +26,7 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include "usable_native_api.h"
 constexpr std::uint32_t kSafeCodeMagic=0x43533244; // "D2SC"
 constexpr unsigned kSafeLockMax=32,kSafeDialMax=96,kSafeJournalMax=32;
 constexpr std::uintptr_t kKisculeIntVariableVtableRva=0x1c9f998; // story_flag_mirror.h (confirmed runtime)
@@ -32,7 +39,15 @@ struct SafeCodePacket {
     std::uint32_t role=0,locks=0,dials=0,journal=0;std::uint64_t session=0,sequence=0,mapId=0,epoch=0;
     SafeLockEntry lock[kSafeLockMax]{};SafeDialEntry dial[kSafeDialMax]{};SafeJournalEntry text[kSafeJournalMax]{};
 };
+constexpr std::uint32_t kSafeDialRequestMagic=0x44533244; // "D2SD"
+struct SafeDialRequest {
+    std::uint32_t magic=kSafeDialRequestMagic;std::uint16_t version=1,size=sizeof(SafeDialRequest);
+    std::uint64_t session=0,sequence=0,mapId=0,epoch=0;std::uint32_t name=0;std::int32_t target=0;
+};
 #pragma pack(pop)
+inline bool validSafeDialRequest(const SafeDialRequest& p){
+    return p.magic==kSafeDialRequestMagic&&p.version==1&&p.size==sizeof(p)&&p.sequence&&p.name&&p.target>=0&&p.target<=9;
+}
 inline bool validSafeCodes(const SafeCodePacket& p){
     if(p.magic!=kSafeCodeMagic||p.version!=1||p.size!=sizeof(p)||p.role!=0||!p.sequence||p.locks>kSafeLockMax||p.dials>kSafeDialMax||p.journal>kSafeJournalMax)return false;
     for(unsigned i=0;i<p.locks;++i){const auto& l=p.lock[i];if(!l.entity||l.combination<0||l.combination>999||l.position<0||l.position>999)return false;
@@ -49,6 +64,10 @@ struct SafeCodeSync {
     std::uint32_t sentDigest=0;unsigned locks=0,dials=0,texts=0;const char* result="idle";
     SafeCodePacket last{};bool lastValid=false;
     std::vector<std::array<std::int32_t,3>> detail; // entity hash, Combination, Position of this world's locks at the last service
+    // 2050: dial turns.
+    bool dialTurns=true;std::uint64_t dialSequence=0,dialPeerSequence=0,dialTurnsSent=0,dialRequestsReceived=0,dialRequestsRefused=0,
+        dialStepsApplied=0,dialStepsFollowed=0,dialStepsRefused=0;ULONGLONG dialStepAt=0;
+    std::vector<std::pair<std::uint32_t,std::int32_t>> dialTargets,dialSeen;std::vector<std::pair<std::uint32_t,ULONGLONG>> dialTurnAt;
 };
 SafeCodeSync safeCodeSync{};
 std::uint32_t safeHash(const std::string& s){std::uint32_t h=2166136261u;for(unsigned char c:s){h^=c;h*=16777619u;}return h?h:1;}
@@ -111,6 +130,47 @@ bool readSafeJournal(std::vector<SafeJournalList>& out){
         if(digits&&l.count==3)out.push_back(l);}
     return true;
 }
+void receiveSafeDialRequest(const SafeDialRequest& p){
+    auto& s=safeCodeSync;++s.dialRequestsReceived;
+    if(!validSafeDialRequest(p)||localRole!=0||!s.enabled||!s.dialTurns||p.session!=remote.session||p.sequence<=s.dialPeerSequence||
+       p.mapId!=outgoing.mapId){++s.dialRequestsRefused;return;}
+    s.dialPeerSequence=p.sequence;
+    for(auto& t:s.dialTargets)if(t.first==p.name){t.second=p.target;return;}
+    if(s.dialTargets.size()<kSafeDialMax)s.dialTargets.push_back({p.name,p.target});else ++s.dialRequestsRefused;
+}
+// The host turns its own dials toward the partner's requested states, one stage per dial per call.
+void stepSafeDialTargets(ULONGLONG tick){
+    auto& s=safeCodeSync;if(s.dialTargets.empty()||tick-s.dialStepAt<150)return;s.dialStepAt=tick;
+    std::vector<std::pair<std::uint32_t,NativeUsable>> dials;if(!readSafeDials(dials))return;
+    for(std::size_t i=0;i<s.dialTargets.size();){const auto [name,target]=s.dialTargets[i];const NativeUsable* u=nullptr;
+        for(const auto& d:dials)if(d.first==name){u=&d.second;break;}
+        if(!u||!u->enabled){++s.dialStepsRefused;s.dialTargets.erase(s.dialTargets.begin()+static_cast<std::ptrdiff_t>(i));continue;}
+        if(u->current==target&&!u->transitioning()){s.dialTargets.erase(s.dialTargets.begin()+static_cast<std::ptrdiff_t>(i));continue;}
+        if(!u->transitioning()){NativeUsable after{};
+            if(requestNativeUsableIndex(*u,static_cast<unsigned>((u->current+1)%10),after,true)){++s.dialStepsApplied;s.checkedAt=tick>1500?tick-1500:0;}
+            else ++s.dialStepsRefused;}
+        ++i;}
+}
+// The partner sends its own turns and follows the host's dial states (after the start positions).
+void serviceSafeDialTurns(ULONGLONG tick,const std::vector<std::pair<std::uint32_t,NativeUsable>>& dials){
+    auto& s=safeCodeSync;
+    const auto seen=[&](std::uint32_t name)->std::int32_t*{for(auto& d:s.dialSeen)if(d.first==name)return &d.second;return nullptr;};
+    const auto turnedAt=[&](std::uint32_t name)->ULONGLONG{for(const auto& d:s.dialTurnAt)if(d.first==name)return d.second;return 0;};
+    for(const auto& [name,u]:dials){if(u.transitioning())continue;auto* last=seen(name);
+        if(!last){if(s.dialSeen.size()<kSafeDialMax)s.dialSeen.push_back({name,u.current});continue;}
+        if(u.current!=*last){*last=u.current;
+            SafeDialRequest r{};r.session=outgoing.session;r.sequence=++s.dialSequence;r.mapId=outgoing.mapId;r.epoch=outgoing.worldEpoch;r.name=name;r.target=u.current;
+            if(coopSendMessage(connection,&r,sizeof(r),k_nSteamNetworkingSend_Reliable,nullptr)==k_EResultOK)++s.dialTurnsSent;
+            bool found=false;for(auto& d:s.dialTurnAt)if(d.first==name){d.second=tick;found=true;}
+            if(!found&&s.dialTurnAt.size()<kSafeDialMax)s.dialTurnAt.push_back({name,tick});
+            continue;}
+        const auto at=turnedAt(name);if(at&&tick-at<5000)continue;
+        for(unsigned i=0;i<s.last.dials;++i)if(s.last.dial[i].name==name){
+            if(u.current!=s.last.dial[i].state&&u.enabled){NativeUsable after{};
+                if(requestNativeUsableIndex(u,static_cast<unsigned>((u.current+1)%10),after,true)){++s.dialStepsFollowed;*last=after.pending>=0?after.pending:after.current;}
+                else ++s.dialStepsRefused;}
+            break;}}
+}
 void receiveSafeCodes(const SafeCodePacket& p){
     auto& s=safeCodeSync;++s.received;
     if(!validSafeCodes(p)||localRole!=1||p.session!=remote.session||p.sequence<=s.peerSequence){++s.refused;return;}
@@ -125,6 +185,7 @@ void serviceSafeCodes(ULONGLONG tick){
     if(!s.gameplaySince||s.gameplayMap!=outgoing.mapId||s.gameplayEpoch!=outgoing.worldEpoch){s.gameplaySince=tick;s.gameplayMap=outgoing.mapId;s.gameplayEpoch=outgoing.worldEpoch;}
     if(tick-s.gameplaySince<3000){s.result="settling";return;}
     if(localRole==0){
+        if(s.dialTurns)stepSafeDialTargets(tick);else s.dialTargets.clear();
         // safe-codes-v2038a: the 2 s read and the 6 s resend need their own clocks; with one, a host whose safes did not
         // change sent once, and the partner fell back to waiting_host after 15 s.
         if(tick-s.checkedAt<2000)return;s.checkedAt=tick;
@@ -170,7 +231,8 @@ void serviceSafeCodes(ULONGLONG tick){
                 if(memoryRead(t.values+k*4ull,&now,4)&&now!=e.value[k]){*reinterpret_cast<std::int32_t*>(t.values+k*4ull)=e.value[k];++s.journalWrites;}}break;}
             if(!found)++s.unknownTexts;}}
     else ++s.readFailures;
-    if(start&&startDone){s.startAppliedMap=outgoing.mapId;s.startAppliedEpoch=outgoing.worldEpoch;}
+    if(start&&startDone){s.startAppliedMap=outgoing.mapId;s.startAppliedEpoch=outgoing.worldEpoch;s.dialSeen.clear();s.dialTurnAt.clear();}
+    else if(!start)serviceSafeDialTurns(tick,dials);
     s.detail.clear();for(const auto& l:locks){std::int32_t c=-1,q=-1;safeIntRead(l.combination,c);safeIntRead(l.position,q);s.detail.push_back({static_cast<std::int32_t>(l.entity),c,q});}
     s.locks=static_cast<unsigned>(locks.size());s.dials=static_cast<unsigned>(dials.size());s.texts=static_cast<unsigned>(texts.size());s.result="applied";
 }
@@ -179,9 +241,11 @@ void writeSafeCodes(){
     if(std::snprintf(path,sizeof(path),"%s.safe-codes.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& s=safeCodeSync;
     fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"locks\":%u,\"dials\":%u,\"texts\":%u,\"hostLocks\":%u,\"hostDials\":%u,\"hostTexts\":%u,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,"
-        "\"codeWrites\":%llu,\"positionWrites\":%llu,\"dialWrites\":%llu,\"journalWrites\":%llu,\"unknownLocks\":%llu,\"unknownDials\":%llu,\"unknownTexts\":%llu,\"readFailures\":%llu,\"locksDetail\":[",
+        "\"codeWrites\":%llu,\"positionWrites\":%llu,\"dialWrites\":%llu,\"journalWrites\":%llu,\"unknownLocks\":%llu,\"unknownDials\":%llu,\"unknownTexts\":%llu,\"readFailures\":%llu,"
+        "\"dialTurns\":%s,\"dialTurnsSent\":%llu,\"dialRequestsReceived\":%llu,\"dialRequestsRefused\":%llu,\"dialStepsApplied\":%llu,\"dialStepsFollowed\":%llu,\"dialStepsRefused\":%llu,\"dialTargets\":%u,\"locksDetail\":[",
         s.enabled?"true":"false",localRole,s.result,s.locks,s.dials,s.texts,s.lastValid?s.last.locks:0u,s.lastValid?s.last.dials:0u,s.lastValid?s.last.journal:0u,
-        s.sent,s.received,s.refused,s.codeWrites,s.positionWrites,s.dialWrites,s.journalWrites,s.unknownLocks,s.unknownDials,s.unknownTexts,s.readFailures);
+        s.sent,s.received,s.refused,s.codeWrites,s.positionWrites,s.dialWrites,s.journalWrites,s.unknownLocks,s.unknownDials,s.unknownTexts,s.readFailures,
+        s.dialTurns?"true":"false",s.dialTurnsSent,s.dialRequestsReceived,s.dialRequestsRefused,s.dialStepsApplied,s.dialStepsFollowed,s.dialStepsRefused,static_cast<unsigned>(s.dialTargets.size()));
     // This world's locks at the last service (the host's sent values, or the partner's after its writes), for the take's checks.
     bool first=true;for(const auto& d:s.detail){fprintf(f,"%s{\"entity\":%u,\"combination\":%d,\"position\":%d}",first?"":",",static_cast<std::uint32_t>(d[0]),d[1],d[2]);first=false;}
     fputs("]}\n",f);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
