@@ -52,11 +52,12 @@ The harness is `Route-MissionVM-v2047.ps1` on `routes/campaign-dunwall-vm-v2041.
 | `replay-decision-vm-v2047e` | v2047c | **Mutation twin, red as required**, as v2047b |
 | `replay-decision-vm-v2047f` | v2047d | **Pass.** The host replayed (Replay sent, slot 21, start map `campaign/dunwall/escape/tower/dunwall_escape_tower_p`; 1 send, 70 re-sends). The partner held her own A press, then loaded her own slot 21 (`replayed`). Both worlds end on the tower in gameplay, with equal gameflow, no story node run in the partner's world under host story, and world diff equal (554) |
 | `continue-decision-vm-v2047g` | v2047d | **Fail before the mission end:** the route's loot of Ramsey's body did not register (step 12). The same route step failure is in more than ten earlier takes (for example `hoststory-lead-dunwall-v2023a`); no mission end was reached |
+| `continue-decision-vm-v2047h` | v2047d | **Interrupted:** the PC shut down at step 3 (2026-11-01). Kept as evidence; the lab was restored with `Deploy-SourceClock` and the take rerun as v2047i |
 
 The mutation twins ran on v2047b and v2047c; with the switch off, the decision code returns before any of the v2047c and v2047d changes. The Continue regression on v2047b passed (v2047c above); v2047d changes only what the partner permits after a dispatched Replay.
 
 ## Still to do
 
-- The Continue regression on v2047d, after v2047g stopped on the flaky loot step.
+- The Continue regression on v2047d (`continue-decision-vm-v2047i`), after v2047g stopped on the flaky loot step and v2047h on a PC shutdown.
 - On the result screen the partner's buttons do nothing until the host chooses; there is no on-screen hint yet.
 - Replay and Continue on the other eight missions are covered by the full-campaign proof of step 8.6.
