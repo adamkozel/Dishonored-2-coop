@@ -1,0 +1,167 @@
+[
+  {
+    "do": "trigger",
+    "name": "ld_trigger_23",
+    "settle": 4000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger",
+    "settle": 6000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_19",
+    "settle": 30000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_15",
+    "bounce": true,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_28",
+    "bounce": true,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "ld_trigger_34",
+    "settle": 6000
+  },
+  {
+    "do": "use",
+    "name": "ld_outsider_rune_pickup",
+    "pitches": [
+      0,
+      25,
+      45
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 500,
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 5000
+  },
+  {
+    "do": "trigger",
+    "name": "midnights_trigger_eotw_brief_meagan",
+    "settle": 20000
+  },
+  {
+    "do": "talk",
+    "name": "meagan",
+    "near": [
+      -5.8,
+      -31.6
+    ],
+    "settle": 20000
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_skiff_01_usable",
+    "pitches": [
+      0,
+      20,
+      40
+    ],
+    "yaws": [
+      0,
+      -15,
+      15
+    ],
+    "hold": 400,
+    "settle": 60000
+  },
+  {
+    "do": "wait",
+    "ms": 15000,
+    "settle": 5000
+  },
+  {
+    "do": "cast",
+    "role": "host",
+    "ms": 1200,
+    "settle": 3000,
+    "expectMoved": true,
+    "grant": "models/powers/blink/blink.inventoryitem",
+    "expectFx": true
+  },
+  {
+    "do": "wait",
+    "ms": 2000,
+    "settle": 1000
+  },
+  {
+    "do": "cast",
+    "role": "client",
+    "ms": 1200,
+    "settle": 3000,
+    "expectMoved": true,
+    "grant": "models/powers/grapple/grapple.inventoryitem",
+    "expectFx": true
+  },
+  {
+    "do": "die",
+    "role": "host",
+    "settle": 5000
+  },
+  {
+    "do": "wait",
+    "ms": 5000,
+    "settle": 3000
+  },
+  {
+    "do": "trigger",
+    "name": "script_trigger_addermirestation_inside_area",
+    "settle": 5000
+  },
+  {
+    "do": "use",
+    "name": "script_kar_cable_car_01_1",
+    "offsets": [
+      [
+        2.0,
+        0.7
+      ]
+    ],
+    "z": 25.95,
+    "pitches": [
+      27,
+      22,
+      32
+    ],
+    "hold": 250,
+    "settle": 8000,
+    "yaws": [
+      -19.29,
+      -12,
+      -26
+    ]
+  },
+  {
+    "do": "wait",
+    "ms": 60000,
+    "settle": 5000
+  },
+  {
+    "do": "expect",
+    "map": "institute",
+    "ms": 240000,
+    "settle": 5000
+  }
+]
