@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-11-01T14:10:00+01:00",
+  "UpdatedAt": "2026-11-01T19:30:00+01:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Stage 8 (#239): the full campaign v2043 on loadmap-v2041m has zero world differences in all nine missions (v2043a, Empress v2043b after a PC shutdown). Candidate jindosh-v2045 (jindosh_mirror.h): one Jindosh answer for both players; jindosh-v2045a passes, its twin v2045b is red. Next in area 4.3: a partner opens a safe with the host's code and solves the Jindosh lock, safe-room doors and the door twin, visual acceptance of the notes; then chapter 121, merge PR #252. #253 (Replay Mission) has its diagnostic in replay-dunwall-vm-v2044a.",
+  "NextAction": "Stage 8 (#253): the host decides at a mission end (mission_decision.h, D2MD, chapter 122). Candidate replaydecision-v2047d is deployed: replay-decision-vm-v2047f passes (both worlds replay to the tower, world diff equal 554); the twins v2047b/e are red; the Continue regression passed on v2047b (continue-decision-vm-v2047c) and is rerun on v2047d as v2047h (v2047g stopped on the flaky Ramsey loot step). #254 lab check mission-partner-kill-v2048a passes. Next: area 4.3 leftovers (#239: a partner opens a safe and solves the Jindosh lock, door families outside the catalogue, note visual acceptance), then 4.4 mid-mission join and quickload (#240).",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",

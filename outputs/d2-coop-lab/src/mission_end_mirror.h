@@ -162,6 +162,7 @@ void waitMissionTransition(){
         if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected){++h.aborted;h.result="connection_lost";break;}
         if(h.ownsWindow&&tick-lastPeek>=500){MSG msg{};PeekMessageW(&msg,nullptr,0,0,PM_NOREMOVE);lastPeek=tick;++h.peeks;}
         if(tick-mapReadySentAt>=1000)sendMapReady(tick);
+        resendMissionDecision(tick); // stage 8 (#253, mission_decision.h): the host's Continue or Replay
         pumpTransport(tick);writeStatus(tick);Sleep(10);
     }
     h.held=false;h.releasedAt=GetTickCount64();h.lastWaitMs=h.releasedAt-h.startedAt;++h.released;

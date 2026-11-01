@@ -11,6 +11,8 @@
 #include "presentation_refusal.h"
 #include "swarm_spawn_fx_protocol.h"
 #include "jindosh_protocol.h"
+#include "mission_decision_protocol.h"
+#include <cstdio>
 #include "possession_fx_protocol.h"
 #include "swarm_world_presentation.h"
 #include "power_failure_fx_policy.h"
@@ -202,6 +204,29 @@ void timeBendPoseTests(){
     q=p;q.flags|=0x800000u|0x400u;check(!validCoopPose(q,0),"1214ie: reserved bit 23");
     q=p;q.version=12;check(!validCoopPose(q,0),"1214ie: pose version 12 refused");}
 // Stage 8.4.3 (#239): the Jindosh answer packet and the journal values derived from it.
+void missionDecisionProtocolTests(){
+    MissionDecisionPacket p{};p.decision=kMissionReplay;p.slot=21;p.sequence=1;p.endEpoch=31;std::snprintf(p.startMap,sizeof(p.startMap),"%s","campaign/dunwall/escape/tower/dunwall_escape_tower_p");
+    check(validMissionDecision(p),"mission decision: the host's Replay of its mission-start save (replay-dunwall-vm-v2044a: LoadGame 21) is valid");
+    auto q=p;*q.startMap=0;check(validMissionDecision(q),"mission decision: a Replay whose start map the host could not read still names the slot");
+    q=p;q.slot=100;check(!validMissionDecision(q),"mission decision: a Replay slot outside 0..99 is refused");
+    q=p;std::snprintf(q.startMap,sizeof(q.startMap),"%s","campaign/x_p\nquit");check(!validMissionDecision(q),"mission decision: a line break in the start map is refused");
+    q=p;std::snprintf(q.startMap,sizeof(q.startMap),"%s","campaign/x_p;quit");check(!validMissionDecision(q),"mission decision: a command separator in the start map is refused");
+    q=p;std::snprintf(q.startMap,sizeof(q.startMap),"%s","menu/menu_p");check(!validMissionDecision(q),"mission decision: a start map outside campaign/ is refused");
+    q=p;q.role=1;check(!validMissionDecision(q),"mission decision: only the host decides");
+    q=p;q.sequence=0;check(!validMissionDecision(q),"mission decision: a zero sequence is refused");
+    q=p;q.endEpoch=0;check(!validMissionDecision(q),"mission decision: a decision names the host's mission-end world");
+    MissionDecisionPacket c{};c.decision=kMissionContinue;c.sequence=2;c.endEpoch=31;check(validMissionDecision(c),"mission decision: Continue is valid");
+    q=c;q.slot=22;check(!validMissionDecision(q),"mission decision: Continue carries no slot");
+    q=c;q.decision=3;check(!validMissionDecision(q),"mission decision: an unknown choice is refused");
+    check(missionDecisionRule(0,2,true,true,true,false)==0&&missionDecisionRule(0,1,true,true,true,false)==0,"mission decision: the host's Continue and Replay run");
+    check(missionDecisionRule(0,2,true,false,false,false)==0,"mission decision: a host's Replay without a shared end runs (it was consumed as a reload before)");
+    check(missionDecisionRule(1,1,true,true,true,false)==1&&missionDecisionRule(1,2,true,true,true,false)==1,"mission decision: the connected partner's own choice waits for the host");
+    check(missionDecisionRule(1,1,true,true,true,true)==0&&missionDecisionRule(1,2,true,true,true,true)==0,"mission decision: the host's choice, dispatched in the partner's world, runs");
+    check(missionDecisionRule(1,1,true,true,false,false)==0&&missionDecisionRule(1,1,true,false,true,false)==0,"mission decision: a partner alone or without a shared end decides for itself");
+    check(missionDecisionRule(1,1,false,true,true,false)==-1&&missionDecisionRule(0,0,true,true,true,false)==-1,"mission decision: outside the result screen, and RestartFromCheckpoint, the checkpoint rules decide");
+    check(missionResultsScreen(11,false)&&missionResultsScreen(3,true)&&!missionResultsScreen(3,false)&&!missionResultsScreen(1,true),"mission decision: the Replay confirmation box (logic 3) is the result screen only after a shared mission end (replay-decision-vm-v2047a)");
+    check(missionDecisionPermits(2,2)&&missionDecisionPermits(2,1)&&missionDecisionPermits(1,1)&&!missionDecisionPermits(1,2)&&!missionDecisionPermits(0,1),"mission decision: a dispatched Replay also permits the memory continuation its LoadGame queues (replay-decision-vm-v2047d); a Continue permits no Replay");
+}
 void jindoshProtocolTests(){
     JindoshPacket p{};p.sequence=1;const std::int32_t answer[5][6]={{-1,1,4,3,2,5},{-1,2,1,5,4,3},{-1,5,3,1,2,4},{-1,4,5,2,3,1},{-1,3,2,4,5,1}};
     std::memcpy(p.lists,answer,sizeof(answer));check(validJindosh(p),"jindosh: a rolled answer (route-dd-v1306a RandomFamily) is valid");
@@ -218,7 +243,7 @@ void jindoshProtocolTests(){
     bool range=true;for(const auto index:kJindoshJournalIndex){jindoshJournalValues(p.lists,index,v);for(const auto x:v)range=range&&x>=0&&x<=4;}
     check(range,"jindosh: every journal value is 0..4");
 }
-int main(){presentationHoldTests();jindoshProtocolTests();unboundGroundTests();chokePresentationTests();timeBendPoseTests();
+int main(){presentationHoldTests();missionDecisionProtocolTests();jindoshProtocolTests();unboundGroundTests();chokePresentationTests();timeBendPoseTests();
     grenadePresentationTests();
     carryPresentationTests();
     rangedShotTests();

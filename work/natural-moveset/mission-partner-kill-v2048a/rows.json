@@ -1,0 +1,225 @@
+{
+  "power": "kill",
+  "pairing": "corvo-emily",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Kill: strikes alive,alive,alive,alive,alive,alive,dead, guard models/characters/def/generic/guard_male_small_01.def, outcome dead/dead",
+    "Host guard moved up to 2.69 m (health 40 -> 0); her copy up to 2.74 m (health 40 -> 0); outcome dead/dead, end gap 0 m (last samples 0 m)"
+  ],
+  "definitions": {
+    "host": "models/characters/def/generic/guard_male_small_01.def",
+    "client": "models/characters/def/generic/guard_male_small_01.def"
+  },
+  "grants": [],
+  "upgrades": [],
+  "stand": {
+    "side": "front",
+    "stand": [
+      4.02293,
+      61.653,
+      15.966
+    ],
+    "guard": [
+      4.43998,
+      59.1883,
+      15.9529
+    ],
+    "facing": [
+      -0.16685296429905905,
+      0.9859817890329503
+    ],
+    "trials": [
+      {
+        "side": "behind",
+        "asked": [
+          4.857112410747648,
+          56.72334552741762
+        ],
+        "rest": [
+          4.92895,
+          56.7711,
+          16.6125
+        ],
+        "ok": false
+      },
+      {
+        "side": "front",
+        "asked": [
+          4.022847589252352,
+          61.653254472582375
+        ],
+        "rest": [
+          4.02293,
+          61.653,
+          15.966
+        ],
+        "ok": true
+      }
+    ]
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.44115,
+        59.1838,
+        15.9529
+      ]
+    },
+    "client": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.44115,
+        59.1838,
+        15.9529
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": true,
+    "ms": 735,
+    "channel": "client_replica",
+    "gap": 0.0
+  },
+  "camera": [
+    -1.683705177422313,
+    59.41642245743497,
+    18.5529
+  ],
+  "aim": {
+    "target": [
+      4.44115,
+      59.1838,
+      15.9529
+    ],
+    "stand": [
+      4.02293,
+      61.653,
+      15.966
+    ],
+    "yaw": -80.4,
+    "pitch": 9.0,
+    "distance": 2.5
+  },
+  "before": {
+    "ms": 0,
+    "host": {
+      "present": true,
+      "position": [
+        4.42642,
+        59.2713,
+        15.9531
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_host": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client": {
+      "present": true,
+      "position": [
+        4.43591,
+        59.2154,
+        15.9529
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_client": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    }
+  },
+  "attempts": [],
+  "castAt": 1,
+  "kill": [
+    {
+      "try": 1,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 2,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 3,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 4,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 5,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 6,
+      "client": "alive",
+      "host": "alive"
+    },
+    {
+      "try": 7,
+      "client": "dead",
+      "host": "dead"
+    }
+  ],
+  "castEnd": 14521,
+  "outcome": {
+    "host": "dead",
+    "client": "dead"
+  },
+  "summary": {
+    "hostGuardMaxMove": 2.69,
+    "herCopyMaxMove": 2.74,
+    "endGap": 0.0,
+    "rawEndGap": 0.0,
+    "hostHealth": [
+      40,
+      0
+    ],
+    "herHealth": [
+      40,
+      0
+    ],
+    "outcome": {
+      "host": "dead",
+      "client": "dead"
+    }
+  },
+  "life": {
+    "host": {
+      "lifeSent": 0,
+      "lifeReceived": 24,
+      "lifeApplied": 0,
+      "lifeRefused": 0,
+      "lifeHostStoryRefused": 3
+    },
+    "client": {
+      "lifeSent": 24,
+      "lifeReceived": 0,
+      "lifeApplied": 0,
+      "lifeRefused": 0,
+      "lifeHostStoryRefused": 0
+    }
+  },
+  "hiddenInHerWorld": 0
+}

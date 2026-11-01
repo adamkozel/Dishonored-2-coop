@@ -1,0 +1,258 @@
+{
+  "passed": false,
+  "failure": "Worlds ended on different maps: host campaign/dunwall/escape/streets/dunwall_escape_streets_p, client campaign/void/void_01/void_01_p",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-replaydecision-v2047c",
+      "hostDll": "7EDF40D64111B7B009C7D42D9B63400748C514887821DA48D01C20C64A0F6955",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 14610
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 10688
+      }
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 22,
+        "client": 26,
+        "decisionDifferences": 22
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "missionDecisionOff": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 29,
+        "pos": [
+          -7.011006,
+          -14.707168,
+          -99.890923
+        ],
+        "fresh": true,
+        "gameflow": [
+          232,
+          0,
+          2,
+          13,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 15,
+        "lt": "applied/0/1",
+        "hold": "timeout/90015",
+        "ka": "2/81/1",
+        "active": "Obj_DW_EscapeDunwall,Task_DW_TalkToMeagan"
+      },
+      "host": {
+        "logic": 11,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 64,
+        "pos": [
+          95.776001,
+          -15.215,
+          -3.859375
+        ],
+        "fresh": true,
+        "gameflow": [
+          232,
+          0,
+          0,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "expecting/1188",
+        "ka": "116/1/0",
+        "active": ""
+      }
+    },
+    "gameflowEqual": false,
+    "missionDecision": {
+      "host": {
+        "enabled": false,
+        "result": "idle",
+        "decision": 0,
+        "slot": -1,
+        "startMap": "",
+        "sent": 0,
+        "resent": 0,
+        "hostReplays": 0,
+        "hostContinues": 0,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": false,
+        "result": "idle",
+        "decision": 0,
+        "loadedSlot": -1,
+        "received": 0,
+        "refused": 0,
+        "duplicates": 0,
+        "partnerHeld": 0,
+        "replayed": 0,
+        "continued": 0,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 29,
+        "pos": [
+          -7.011006,
+          -14.707168,
+          -99.890923
+        ],
+        "fresh": true,
+        "gameflow": [
+          232,
+          0,
+          2,
+          13,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 15,
+        "lt": "applied/0/1",
+        "hold": "timeout/90015",
+        "ka": "2/81/1",
+        "active": "Obj_DW_EscapeDunwall,Task_DW_TalkToMeagan"
+      },
+      "host": {
+        "logic": 11,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 64,
+        "pos": [
+          95.776001,
+          -15.215,
+          -3.859375
+        ],
+        "fresh": true,
+        "gameflow": [
+          232,
+          0,
+          0,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "expecting/1188",
+        "ka": "116/1/0",
+        "active": ""
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

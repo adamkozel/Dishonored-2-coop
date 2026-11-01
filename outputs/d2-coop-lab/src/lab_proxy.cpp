@@ -233,6 +233,8 @@ BOOL WINAPI DllMain(HINSTANCE dll, DWORD reason, LPVOID) {
         if(GetPrivateProfileIntA("d2coop","items_per_player",1,cfg)==0)SetEnvironmentVariableA("D2COOP_ITEMS_PER_PLAYER","0");
         // Stage 8.4.3 (#239): safe_codes=0 keeps each world's own safe codes (0.9.6); a host with it off sends none.
         if(GetPrivateProfileIntA("d2coop","safe_codes",1,cfg)==0)SetEnvironmentVariableA("D2COOP_SAFE_CODES","0");
+        // Stage 8 (#253): mission_decision=0 lets each player choose Continue or Replay again; the host's setting holds for both.
+        if(GetPrivateProfileIntA("d2coop","mission_decision",1,cfg)==0)SetEnvironmentVariableA("D2COOP_MISSION_DECISION","0");
         // Mission checkpoints read the game's own autosave details (read only).
         char savegame[MAX_PATH]{};
         if(!GetPrivateProfileStringA("d2coop","savegame","",savegame,sizeof(savegame),cfg)){

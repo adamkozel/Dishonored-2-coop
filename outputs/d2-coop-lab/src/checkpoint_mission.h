@@ -62,17 +62,22 @@ bool missionDetailsEntry(const char* path,std::uint64_t& stamp,std::uint64_t& si
     } while(FindNextFileA(find,&found));
     FindClose(find);return present;
 }
+// The folder of the game's current save slots, beside the checkpoint directory.
+bool missionSaveRoot(char* root,std::size_t size) {
+    if(!*checkpointDirectory)return false;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+    std::snprintf(root,size,"%s",checkpointDirectory);
+    char* cut=std::strrchr(root,'\\');char* cut2=std::strrchr(root,'/');if(cut2>cut)cut=cut2;if(!cut)return false;*cut=0;
+    // 1214il (#171): the game's current save root (the pointer at 0x142286f40; savegame_coop during a co-op session).
+    std::uintptr_t rootName=0;std::string rootText;
+    return memoryRead(base+0x2286f40,&rootName,8)&&worldIdentityString(memoryRead,rootName,rootText)&&rootText.size()<32&&
+       missionSaveFolder(root,size,rootText.c_str());
+}
 bool readMissionAutosave(MissionAutosaveDetails& d) {
     const auto& m=checkpointMission;
     if(!*checkpointDirectory)return false;
     std::uintptr_t game=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(!memoryRead(base+0x39a5290,&game,8)||!game||!memoryRead(game+0x2e75d8+0x1c,&d.slot,4)||d.slot<0||d.slot>99)return false;
-    char root[MAX_PATH]{};std::snprintf(root,sizeof(root),"%s",checkpointDirectory);
-    char* cut=std::strrchr(root,'\\');char* cut2=std::strrchr(root,'/');if(cut2>cut)cut=cut2;if(!cut)return false;*cut=0;
-    // 1214il (#171): the game's current save root (the pointer at 0x142286f40; savegame_coop during a co-op session).
-    std::uintptr_t rootName=0;std::string rootText;
-    if(!memoryRead(base+0x2286f40,&rootName,8)||!worldIdentityString(memoryRead,rootName,rootText)||rootText.size()>=32||
-       !missionSaveFolder(root,sizeof(root),rootText.c_str()))return false;
+    char root[MAX_PATH]{};if(!missionSaveRoot(root,sizeof(root)))return false;
     char path[MAX_PATH]{};if(std::snprintf(path,sizeof(path),"%s\\SLOT%02d\\game.details",root,d.slot)>=static_cast<int>(sizeof(path)))return false;
     std::uint64_t stamp=0,size=0;bool busy=false;
     if(!missionDetailsEntry(path,stamp,size,busy))return false;
