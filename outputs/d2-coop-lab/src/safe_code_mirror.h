@@ -103,12 +103,17 @@ bool readSafeLocks(std::vector<SafeLockVars>& out){
                 if(!memoryRead(node+0x10,&next,8))break;node=next;}}}
     return true;
 }
-// Every safe dial of this world: a 10-state usable whose name holds combinaison_numbers.
+// Every safe dial of this world: a 10-state usable whose name holds combinaison_numbers. 2053: and the Dust District's
+// Jindosh lock wheels (ld_wheel_family_N, ld_wheel_herloom_N), so a partner's wheel turns are host requests too.
+inline bool safeDialUsable(const NativeUsable& u){
+    if(u.stateCount==10&&u.name.find("combinaison_numbers")!=std::string::npos)return true;
+    return u.stateCount>=2&&u.stateCount<=10&&(u.name.find("ld_wheel_family_")!=std::string::npos||u.name.find("ld_wheel_herloom_")!=std::string::npos);
+}
 bool readSafeDials(std::vector<std::pair<std::uint32_t,NativeUsable>>& out){
     out.clear();const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t list=0;unsigned count=0;
     if(!observedGame||!memoryRead(observedGame+0x601c0,&list,8)||!list||!memoryRead(observedGame+0x601c8,&count,4)||!(count&0xffffff)||(count&0xffffff)>16384)return false;
     std::vector<unsigned> handles(count&0xffffff);if(!memoryRead(list,handles.data(),handles.size()*4))return false;
-    for(auto h:handles){NativeUsable u{};if(!readNativeUsable(memoryRead,base,observedGame,h,u)||u.stateCount!=10||u.name.find("combinaison_numbers")==std::string::npos)continue;
+    for(auto h:handles){NativeUsable u{};if(!readNativeUsable(memoryRead,base,observedGame,h,u)||!safeDialUsable(u))continue;
         if(out.size()<kSafeDialMax)out.push_back({safeHash(u.name),u});}
     return true;
 }
@@ -147,7 +152,7 @@ void stepSafeDialTargets(ULONGLONG tick){
         if(!u||!u->enabled){++s.dialStepsRefused;s.dialTargets.erase(s.dialTargets.begin()+static_cast<std::ptrdiff_t>(i));continue;}
         if(u->current==target&&!u->transitioning()){s.dialTargets.erase(s.dialTargets.begin()+static_cast<std::ptrdiff_t>(i));continue;}
         if(!u->transitioning()){NativeUsable after{};
-            if(requestNativeUsableIndex(*u,static_cast<unsigned>((u->current+1)%10),after,true)){++s.dialStepsApplied;s.checkedAt=tick>1500?tick-1500:0;}
+            if(requestNativeUsableIndex(*u,static_cast<unsigned>((u->current+1)%static_cast<int>(u->stateCount)),after,true)){++s.dialStepsApplied;s.checkedAt=tick>1500?tick-1500:0;}
             else ++s.dialStepsRefused;}
         ++i;}
 }
@@ -167,7 +172,7 @@ void serviceSafeDialTurns(ULONGLONG tick,const std::vector<std::pair<std::uint32
         const auto at=turnedAt(name);if(at&&tick-at<5000)continue;
         for(unsigned i=0;i<s.last.dials;++i)if(s.last.dial[i].name==name){
             if(u.current!=s.last.dial[i].state&&u.enabled){NativeUsable after{};
-                if(requestNativeUsableIndex(u,static_cast<unsigned>((u.current+1)%10),after,true)){++s.dialStepsFollowed;*last=after.pending>=0?after.pending:after.current;}
+                if(requestNativeUsableIndex(u,static_cast<unsigned>((u.current+1)%static_cast<int>(u.stateCount)),after,true)){++s.dialStepsFollowed;*last=after.pending>=0?after.pending:after.current;}
                 else ++s.dialStepsRefused;}
             break;}}
 }
