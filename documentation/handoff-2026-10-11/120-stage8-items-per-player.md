@@ -99,4 +99,4 @@ Re-runs on the same candidate:
 - The old pickup tests (`pickup_catchup_tests.h`, `coin_protocol_tests.h`, `Test-MissionPickupFamilies-v1855.ps1`, the join audit) run with items per player off. Their per-player versions are the tests above.
 - Containers, pickpockets and NPC loot under items per player.
 - Review the partner-first locker grants (#183) for doubled ammunition or money.
-- The 1.0 `d2coop.cfg` and README document `host_story=0` and `items_per_player=0`.
+- Done: the release notes draft documents `host_story=0` and `items_per_player=0` (troubleshooting, with `safe_codes=0`).

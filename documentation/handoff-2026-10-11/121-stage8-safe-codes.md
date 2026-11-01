@@ -218,10 +218,23 @@ Before this, each world rolled its own Jindosh riddle in The Dust District, so t
 
 Still open for the lock: visual acceptance of the riddle note on the partner, and a two-player solve (each player dials their own lock with the shared answer).
 
+## Doors decided by the host
+
+The door channels (`door_sync.h`, `door_protocol.h`, since 1214jf) already follow the host. Only the host sends a door's State (its desired open state and side), the partner sends Requests, and the host's revision is authoritative. A shared key unlock is applied once in the other world. The catalogue covers ordinary authored doors; linked, blocked, broken and ambiguous doors, vaults and quest devices stay out of it. Two-state toggles (levers, switches) use the same host order in `usable_sync.h`.
+
+`Test-DoorAuthority-v2046.ps1` proves it on a mission door (Edge of the World, `script_door_overseersoutpost_3rdfloor_interrogationroom_01`, candidate jindosh-v2045). The host unlocks the door with its key (setup, shared); then only the partner focuses the door and presses use:
+
+| Take | Result |
+|---|---|
+| `door-authority-v2046a` | **Pass.** Her press became one request, and the host opened its own door: both doors open (state 2), both channels converged on the host's revision 2, world diff equal (2138) |
+| `door-authority-v2046b` | **Mutation twin, red as required.** With door sync off in both games just before her press, her door opened only in her world (state 2 while the host's stayed 0 for about 3 s) and then swung shut by itself. Her swinging door knocked over a bottle (`env_bottle_04_19`) that still stands in the host's world: the one world difference |
+
+The twin's harness judges the open state only at the end; a later version should also flag a disagreement during the window.
+
 ## Still to do in area 4.3
 
 - **Note text on screen:** check that the partner's safe note and Jindosh riddle show the host's values. This is visual acceptance, recorded separately.
 - **A partner opens a safe with the host's code**, and solves the Jindosh lock with the host's answer.
 - **Other lock decls** besides `3_digits_lock` and the Jindosh lock, if any.
-- **Safe-room doors** (result-level door sync) and the door mutation twin.
+- **Door families outside the catalogue** (vaults, linked, blocked and broken doors, quest devices) under the host: a census of where they differ.
 - Done: the full campaign v2043 (above); the release notes draft documents `safe_codes=0` with `host_story=0` and `items_per_player=0` (troubleshooting).
