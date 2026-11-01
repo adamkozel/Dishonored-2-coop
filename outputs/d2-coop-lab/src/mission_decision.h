@@ -1,0 +1,138 @@
+#pragma once
+// Stage 8 (#253, mission_decision_protocol.h): one choice at a shared mission end, the host's. Before, each world made
+// its own: the host's Replay Mission was consumed as a user reload (the checkpoint rules) and the host stayed on its
+// result screen, while the partner's Continue loaded the next mission (take replay-dunwall-vm-v2044a). Now, on a result
+// screen whose mission end both worlds share (mission_end_mirror.h, D2ME), the host's Continue or Replay runs and is sent
+// as D2MD. The partner's own presses wait for it while connected; on D2MD the partner dispatches the same native command:
+// RestartFromMemoryCheckpoint, or LoadGame of its own mission-start save (slot type 2) of the host's replayed map. A
+// partner without that save continues instead, and mission follow (session_product.h) then loads the host's mission.
+// Both worlds expect the transition, so the both-ready hold meets them at the new map's load end. The host's setting
+// holds for both players (control hello flag 16): mission_decision=0 in d2coop.cfg, or the lab switch
+// coop_mission_decision off in the host's game, restores each world's own choice (the mutation twin).
+#include "mission_decision_protocol.h"
+struct MissionDecision {
+    bool enabled=true,pending=false,held=false;
+    unsigned heldKind=0,appliedKind=0;int heldSlot=-1,loadedSlot=-1;
+    std::uint64_t sequence=0,peerSequence=0,sent=0,resent=0,received=0,refused=0,duplicates=0,hostContinues=0,hostReplays=0,unreadable=0;
+    std::uint64_t partnerHeld=0,continued=0,replayed=0,missingSaves=0,localReleases=0;
+    std::uint64_t decidedEpoch=0,decidedAt=0,sentAt=0,receivedAt=0,appliedEndEpoch=0,partnerAppliedEpoch=0;
+    MissionDecisionPacket last{},incoming{};const char* result="idle";
+};
+MissionDecision missionDecision{};
+bool coopMissionDecisionFlag(){return localRole==0&&missionDecision.enabled;}
+// A product partner follows the host's setting from its control hello; a lab partner keeps its own switch.
+bool missionDecisionOn(){return localRole==1&&(productMode||productAutoArm)?coopControl.helloOk&&coopControl.peerMissionDecision:missionDecision.enabled;}
+// One slot's game.details: its map name and slot type, read with delete sharing and never while the native save thread
+// is writing it (checkpoint_mission.h, 1214km).
+struct MissionSlotDetails {char map[160]{};int type=-1;std::uint64_t stamp=0;};
+bool missionSlotDetails(const char* root,int slot,MissionSlotDetails& d) {
+    d={};char path[MAX_PATH]{};
+    if(slot<0||slot>99||std::snprintf(path,sizeof(path),"%s\\SLOT%02d\\game.details",root,slot)>=static_cast<int>(sizeof(path)))return false;
+    std::uint64_t stamp=0,size=0;bool busy=false;
+    if(!missionDetailsEntry(path,stamp,size,busy)||busy)return false;
+    HANDLE file=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,0,nullptr);
+    if(file==INVALID_HANDLE_VALUE)return false;
+    char text[1024]{};DWORD count=0;const bool read=ReadFile(file,text,sizeof(text)-1,&count,nullptr)&&count>0;CloseHandle(file);
+    if(!read)return false;text[count]=0;char type[8]{};
+    if(!missionDetailsField(text,"mapName",d.map,sizeof(d.map))||!missionDetailsField(text,"slotType",type,sizeof(type)))return false;
+    d.type=std::atoi(type);d.stamp=stamp;return true;
+}
+// The partner's save for the host's Replay: the host's slot number when it holds a mission-start save of the same map,
+// else this save root's newest mission-start save of that map. An empty map (the host could not read its own) accepts
+// the host's slot number alone.
+int missionReplaySlot(int hostSlot,const char* startMap) {
+    char root[MAX_PATH]{};if(!missionSaveRoot(root,sizeof(root)))return -1;
+    MissionSlotDetails d{};
+    if(missionSlotDetails(root,hostSlot,d)&&d.type==2&&(!*startMap||!std::strcmp(d.map,startMap)))return hostSlot;
+    if(!*startMap)return -1;
+    int best=-1;std::uint64_t newest=0;
+    for(int slot=0;slot<100;++slot)if(missionSlotDetails(root,slot,d)&&d.type==2&&!std::strcmp(d.map,startMap)&&(best<0||d.stamp>newest)){best=slot;newest=d.stamp;}
+    return best;
+}
+void sendMissionDecision(std::uint64_t tick) {
+    auto& d=missionDecision;if(!d.last.sequence||!checkpointConnected())return;
+    if(coopSendMessage(connection,&d.last,sizeof(d.last),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){if(d.sentAt)++d.resent;else ++d.sent;d.sentAt=tick;}
+}
+// The host repeats its choice every second for two minutes, from its services and from the both-ready hold; the partner
+// counts the copies as duplicates.
+void resendMissionDecision(std::uint64_t tick) {
+    const auto& d=missionDecision;
+    if(localRole==0&&d.last.sequence&&tickAge(tick,d.decidedAt)<120000&&tickAge(tick,d.sentAt)>=1000)sendMissionDecision(tick);
+}
+void missionDecisionHost(unsigned kind,int slot,std::uint64_t tick) {
+    auto& d=missionDecision;if(d.decidedEpoch==outgoing.worldEpoch)return; // a native requeue of the same choice
+    MissionDecisionPacket p{};p.decision=kind==2?kMissionReplay:kMissionContinue;p.session=outgoing.session;p.endEpoch=outgoing.worldEpoch;
+    if(kind==2){
+        p.slot=slot;char root[MAX_PATH]{};MissionSlotDetails s{};
+        if(missionSaveRoot(root,sizeof(root))&&missionSlotDetails(root,slot,s)&&!std::strncmp(s.map,"campaign/",9)&&!std::strpbrk(s.map," ;\"\r\n\t"))std::snprintf(p.startMap,sizeof(p.startMap),"%s",s.map);
+        else ++d.unreadable;
+        ++d.hostReplays;d.loadedSlot=slot;
+    }else ++d.hostContinues;
+    p.sequence=++d.sequence;
+    if(!validMissionDecision(p)){d.result="invalid";return;}
+    d.last=p;d.decidedEpoch=outgoing.worldEpoch;d.decidedAt=tick;d.sentAt=0;d.result=kind==2?"replay_sent":"continue_sent";
+    expectMissionTransition(tick);sendMissionDecision(tick);
+}
+int missionDecisionIntercept(unsigned kind,int slot) {
+    auto& d=missionDecision;
+    if(!missionDecisionOn()||GetCurrentThreadId()!=engineThread.load()||checkpointSync.expectBoundary)return -1;
+    const bool shared=(missionEndMirrorEnabled||productMode)&&missionEnd.sentEpoch==outgoing.worldEpoch;
+    const bool atResults=missionResultsScreen(outgoing.gameLogicState,shared);
+    // The partner's dispatch of the host's choice, its native requeues while save I/O is busy and a Replay's memory continuation run.
+    const bool permitted=d.partnerAppliedEpoch==outgoing.worldEpoch&&missionDecisionPermits(d.appliedKind,kind);
+    const int rule=missionDecisionRule(localRole,kind,atResults,shared,checkpointConnected(),permitted);
+    if(rule==0&&kind==1)++checkpointMissionContinues;
+    if(rule==0&&localRole==0&&shared)missionDecisionHost(kind,slot,GetTickCount64());
+    if(rule==1){if(!d.held)++d.partnerHeld;d.held=true;d.heldKind=kind;d.heldSlot=slot;d.result="waiting_for_host";}
+    return rule;
+}
+void receiveMissionDecision(const MissionDecisionPacket& p) {
+    auto& d=missionDecision;++d.received;
+    if(localRole!=1||!validMissionDecision(p)||p.session!=remote.session){++d.refused;return;}
+    if(p.sequence<=d.peerSequence||p.endEpoch==d.appliedEndEpoch){++d.duplicates;return;}
+    d.peerSequence=p.sequence;d.incoming=p;d.pending=true;d.receivedAt=GetTickCount64();d.result="received";
+}
+void dispatchMissionDecision(void* system,unsigned kind,int slot) {
+    auto& d=missionDecision;char command[40]{};
+    if(kind==2)std::snprintf(command,sizeof(command),"LoadGame %d\n",slot);else std::snprintf(command,sizeof(command),"RestartFromMemoryCheckpoint\n");
+    d.partnerAppliedEpoch=outgoing.worldEpoch;d.appliedKind=kind;d.held=false;
+    reinterpret_cast<void(*)(void*,const char*)>(gameImage+0xfec70)(system,command);
+}
+void serviceMissionDecision(void* system,std::uint64_t tick) {
+    if(GetCurrentThreadId()!=engineThread.load())return;
+    auto& d=missionDecision;
+    if(localRole==0){resendMissionDecision(tick);return;}
+    const bool shared=(missionEndMirrorEnabled||productMode)&&missionEnd.sentEpoch==outgoing.worldEpoch;
+    const bool atResults=missionResultsScreen(outgoing.gameLogicState,shared)&&!outgoing.pendingGameLogicState;
+    if(d.held&&!(atResults&&shared))d.held=false;
+    // A choice held for a host that is gone is the player's own again.
+    if(d.held&&!d.pending&&!checkpointConnected()){
+        const unsigned kind=d.heldKind;const int slot=d.heldSlot;
+        if(kind==1||(kind==2&&slot>=0&&slot<=99)){dispatchMissionDecision(system,kind,slot);++d.localReleases;d.result="released_local";}
+        else d.held=false;
+        return;
+    }
+    if(!d.pending)return;
+    if(tickAge(tick,d.receivedAt)>120000){d.pending=false;d.result="expired";return;}
+    if(!missionDecisionOn()){d.pending=false;d.result="off";return;}
+    if(!atResults||!shared||d.partnerAppliedEpoch==outgoing.worldEpoch){d.result="waiting_results";return;}
+    d.pending=false;d.appliedEndEpoch=d.incoming.endEpoch;
+    if(d.incoming.decision==kMissionReplay){
+        const int slot=missionReplaySlot(d.incoming.slot,d.incoming.startMap);
+        if(slot>=0){d.loadedSlot=slot;expectMissionTransition(tick);dispatchMissionDecision(system,2,slot);++d.replayed;d.result="replayed";return;}
+        // No mission-start save of that map: continue alone, without the hold, and follow the host's mission from there.
+        ++d.missingSaves;transitionHold.expect=false;dispatchMissionDecision(system,1,-1);d.result="replay_save_missing";return;
+    }
+    expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued";
+}
+void writeMissionDecision() {
+    char path[MAX_PATH]{},temp[MAX_PATH]{};
+    if(std::snprintf(path,sizeof(path),"%s.missiondecision.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
+    FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& d=missionDecision;const auto& p=localRole?d.incoming:d.last;
+    fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"decision\":%u,\"slot\":%d,\"startMap\":\"%s\",\"loadedSlot\":%d,\"pending\":%s,\"held\":%s,\"heldKind\":%u,"
+        "\"sent\":%llu,\"resent\":%llu,\"received\":%llu,\"refused\":%llu,\"duplicates\":%llu,\"hostContinues\":%llu,\"hostReplays\":%llu,\"unreadable\":%llu,"
+        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu}\n",
+        missionDecisionOn()?"true":"false",localRole,d.result,p.decision,p.slot,p.startMap,d.loadedSlot,d.pending?"true":"false",d.held?"true":"false",d.heldKind,
+        d.sent,d.resent,d.received,d.refused,d.duplicates,d.hostContinues,d.hostReplays,d.unreadable,d.partnerHeld,d.continued,d.replayed,d.missingSaves,d.localReleases);
+    const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
+}

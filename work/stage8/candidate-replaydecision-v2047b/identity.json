@@ -1,0 +1,10 @@
+{
+  "candidate": "replaydecision-v2047b",
+  "card": 253,
+  "dll": "24512EE5910850A4AB90CBB81C4A572269509DF611101B83BD6837275740BDFC",
+  "probe": "0CE41CD5E6331FDA1C5358D56F5B676F9AE5572C505CF4E859A726A85975CC12",
+  "previousCandidate": "jindosh-v2045",
+  "sourceCommit": "19ee1bc6cf896a9265cd1995b8ef4e2540b2eb8a",
+  "sourceDiff": "source-change.diff",
+  "change": "jindosh-v2045 plus mission_decision.h: on a result screen whose mission end both worlds share, the host decides. Its Continue (RestartFromMemoryCheckpoint) or Replay Mission (LoadGame of its mission-start save) runs and is sent as D2MD with the slot and that save's map; the connected partner's own Continue and Replay are consumed until it arrives, and the partner then dispatches the same command, LoadGame of its own mission-start save of that map for a Replay. Both expect the transition for the both-ready hold. A host Replay is no longer consumed as a user reload. The host's setting holds for both players (control hello flag 16; d2coop.cfg mission_decision=0, lab switch coop_mission_decision on|off in the host's game). Protocol unit tests in d2_shadow_action_tests."
+}

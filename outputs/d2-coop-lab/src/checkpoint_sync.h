@@ -156,8 +156,11 @@ void checkpointRequest(std::uint64_t tick) {
     if(!checkpointSend(CheckpointMessage::Request))checkpointFail("request_send_failed");
 }
 std::uint64_t checkpointMissionContinues=0;
+int missionDecisionIntercept(unsigned kind,int slot); // stage 8 (#253, mission_decision.h)
 bool checkpointIntercept(unsigned kind,int slot,bool& continuation) {
     continuation=false;
+    // Stage 8 (#253): on a shared result screen the host's Continue or Replay decides for both worlds.
+    {const int decision=missionDecisionIntercept(kind,slot);if(decision>=0)return decision==1;}
     auto& s=checkpointSync;if(!s.enabled)return false;
     if(checkpointMission.mission&&s.permitLoad&&kind==0) {
         // Our own dispatched RestartFromCheckpoint: the native routine caches

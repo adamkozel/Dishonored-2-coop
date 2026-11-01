@@ -195,7 +195,9 @@ Emily's powers now act on the host's characters as they do in single player ([#1
   partner joins again.
   The partner's game follows the host's mission.
 - When either player dies, both see the game-over screen. Restarting from the last checkpoint restarts both games together.
-- Cutscenes play for both players. Mission ends take both players to the next mission together.
+- Cutscenes play for both players.
+- At a mission's end the host chooses for both players: *Continue* takes both games to the next mission, and *Replay
+  Mission* restarts the mission in both. The partner's own buttons on the result screen wait for the host's choice.
 - Either player can do the story: objectives, story items and level changes completed by the partner count for both worlds.
 
 ## Uninstall
@@ -221,7 +223,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 | The partner cannot join | Both players need the same mod version and must be Steam friends. The lobby is friends-only. |
 | The partner's game stays at the title screen after accepting the invite | Press a key: it joins after that ([#146](https://github.com/adamkozel/Dishonored-2-coop/issues/146)). |
 | Something went wrong during install | Nothing in the game folder changed unless the installer said "Installed". Run `Uninstall.cmd` if a receipt exists. |
-| Something in the shared world misbehaves: the story, an item or a safe | The host's game decides these for both players. To go back to the 0.9.6 behaviour for one area, the host adds a line under `[d2coop]` in `d2coop\d2coop.cfg`: `host_story=0` (each game runs its own story), `items_per_player=0` (pickups are shared again) or `safe_codes=0` (each world keeps its own safe codes). The host's setting holds for both players. Please report what happened in a [GitHub issue](https://github.com/adamkozel/Dishonored-2-coop/issues). |
+| Something in the shared world misbehaves: the story, an item, a safe or a mission end | The host's game decides these for both players. To go back to the 0.9.6 behaviour for one area, the host adds a line under `[d2coop]` in `d2coop\d2coop.cfg`: `host_story=0` (each game runs its own story), `items_per_player=0` (pickups are shared again), `safe_codes=0` (each world keeps its own safe codes) or `mission_decision=0` (each player chooses *Continue* or *Replay Mission* for their own game). The host's setting holds for both players. Please report what happened in a [GitHub issue](https://github.com/adamkozel/Dishonored-2-coop/issues). |
 | Stutters or hitches in a session | Open `d2coop\coop-status.json.frame-timing.json` in the game folder after a few minutes of play (the mod rewrites it every second). Report its `window` (frame-time percentiles and spikes per minute) and its `spikes` list (each hitch with the mod's own time and its most expensive part) in a [GitHub issue](https://github.com/adamkozel/Dishonored-2-coop/issues), with both players' files if you can. For a deeper report, add `diagnostics=1` under `[d2coop]` in `d2coop\d2coop.cfg`, play the moment again, and attach the `coop-status.json.*` files. Remove the line afterwards, because the full diagnostics cost frame time. |
 
 ## Known limitations
