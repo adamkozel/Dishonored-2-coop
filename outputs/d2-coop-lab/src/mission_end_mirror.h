@@ -347,7 +347,7 @@ struct GameflowMirrorPacket {
 static_assert(sizeof(GameflowMirrorPacket)==1640);
 bool gameflowMirrorEnabled=false;
 struct GameflowMirror {
-    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,refused=0,applied=0,notFound=0,skippedMission=0,missionActivated=0,sentAt=0,hostMap=0,reset=0;
+    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,refused=0,applied=0,notFound=0,skippedMission=0,missionActivated=0,sentAt=0,hostMap=0,reset=0,missionCompleted=0;
     std::uint32_t idHash=0,peerIdHash=0,nodes=0;bool pending=false;GameflowNodeState incoming[200]{};std::uint32_t incomingCount=0;const char* result="idle";
     std::unordered_map<std::uint32_t,std::uint32_t> absent; // partner node id -> consecutive host packets without it
     // 1214fr (#134, gameflow_advance.h): the partner's own advances held against the mirror, the states the mirror set,
@@ -415,7 +415,8 @@ void serviceGameflowMirror(std::uint64_t tick){
         g.idHash=h;g.nodes=static_cast<std::uint32_t>(nodes.size());
         // gameover-v2041b: active missions (state 2) go too, so a partner whose own activation was lost can be activated;
         // completion stays with the mission-end message (D2ME).
-        for(std::size_t i=0;i<nodes.size()&&p.count<200;++i){if((mission[i]&&nodes[i].first.state!=2)||nodes[i].first.state==0)continue;p.nodes[p.count++]=nodes[i].first;}
+        // 2104 (#264): completed missions (state 3) go too; see the partner side.
+        for(std::size_t i=0;i<nodes.size()&&p.count<200;++i){if((mission[i]&&nodes[i].first.state!=2&&nodes[i].first.state!=3)||nodes[i].first.state==0)continue;p.nodes[p.count++]=nodes[i].first;}
         p.role=0;p.session=outgoing.session;p.mapId=outgoing.mapId;p.sequence=++g.sequence;
         if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_UnreliableNoNagle,nullptr)==k_EResultOK){++g.sent;g.sentAt=tick;g.result="publishing";}
         return;
@@ -451,7 +452,14 @@ void serviceGameflowMirror(std::uint64_t tick){
             // stayed 0, D2ME found no active mission, and the host loaded end_p alone.
             if(mission[j]){if(nodes[j].first.state==0&&want.state==2){
                 reinterpret_cast<NativeGameflowSetState>(gameImage+0x4e9bd0)(reinterpret_cast<void*>(observedGame+0x1f7780),&want.id,want.state);
-                g.mirrorSet[want.id]=want.state;++g.missionActivated;++changed;}else ++g.skippedMission;break;}
+                g.mirrorSet[want.id]=want.state;++g.missionActivated;++changed;}
+                // 2104 (#264): a mission the host completed that this world never ran. A partner who reached the next
+                // mission through "campaign <mapinfo>" (mission follow, join, her Continue to the host's mission) has the
+                // ended mission at 0: the host's world ran its end (firstmission-dunwall-v2100a, v2103a-e: Escape Dunwall
+                // node bf0f0d6f host 3, partner 0 in the Void). Written into the node (+0xc, the state the scan reads)
+                // without the native routine, so no mission notice shows and no script reacts to a mission of another map.
+                else if(nodes[j].first.state==0&&want.state==3){*reinterpret_cast<std::int32_t*>(nodes[j].second+0xc)=3;
+                g.mirrorSet[want.id]=want.state;++g.missionCompleted;++changed;}else ++g.skippedMission;break;}
             if(nodes[j].first.state!=want.state){
                 const auto hd=g.held.find(want.id);
                 if(hd!=g.held.end()&&hd->second.to==nodes[j].first.state){if(tick-hd->second.at<kGameflowAdvanceHoldMs)break;++g.partnerExpired;g.held.erase(hd);}
@@ -584,11 +592,11 @@ void writeMissionEndMirror(){
     if(statesOk){fprintf(f,"{\"gameflowStates\":[%u,%u,%u,%u,%u,%u,%u],\"gameflowNodes\":[",states[0],states[1],states[2],states[3],states[4],states[5],states[6]);
         for(unsigned i=0;i<gameflowListedCount;++i)fprintf(f,"%s[%u,%d]",i?",":"",gameflowListed[i].id,gameflowListed[i].state);fprintf(f,"],");}
     else fprintf(f,"{\"gameflowStates\":null,\"gameflowNodes\":null,");
-    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"sharedLoad\":%s,\"sharedLoadBypassed\":%llu,\"resultsSwitches\":%llu,\"unnamed\":%llu,\"staleDropped\":%llu,\"identity\":\"%s\",\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu,\"missionActivated\":%llu,\"reset\":%llu,\"partnerSent\":%llu,\"partnerHeld\":%llu,\"partnerExpired\":%llu,\"partnerReceived\":%llu,\"partnerApplied\":%llu,\"partnerAlready\":%llu,\"partnerRefused\":%llu,\"hostMovedFirst\":%llu},\"levelTransition\":{\"result\":\"%s\",\"observed\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"otherMap\":%llu,\"map\":\"%s\",\"start\":\"%s\"}}\n",
+    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"noActive\":%llu,\"notSameMission\":%llu,\"scanFailed\":%llu,\"missions\":%u,\"appliedState\":%d,\"pending\":%s,\"peerMapinfo\":\"%s\",\"peerHigh\":%u,\"checkpointContinues\":%llu,\"sharedLoad\":%s,\"sharedLoadBypassed\":%llu,\"resultsSwitches\":%llu,\"unnamed\":%llu,\"staleDropped\":%llu,\"identity\":\"%s\",\"hold\":{\"result\":\"%s\",\"expect\":%s,\"held\":%s,\"holds\":%llu,\"released\":%llu,\"timeouts\":%llu,\"aborted\":%llu,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"lastWaitMs\":%llu,\"caller\":\"0x%x\",\"from\":%u,\"to\":%u,\"pending\":%u,\"localMap\":\"%s\",\"peerMap\":\"%s\",\"ownsWindow\":%s,\"peeks\":%llu},\"chaos\":{\"result\":\"%s\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"missing\":%llu,\"hostPoints\":%d,\"hostLevel\":%d,\"localPoints\":%d,\"localLevel\":%d,\"before\":%d,\"labWrites\":%llu,\"labRefused\":%llu},\"gameflowMirror\":{\"enabled\":%s,\"result\":\"%s\",\"nodes\":%u,\"idHash\":\"%08x\",\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"applied\":%llu,\"notFound\":%llu,\"skippedMission\":%llu,\"missionActivated\":%llu,\"missionCompleted\":%llu,\"reset\":%llu,\"partnerSent\":%llu,\"partnerHeld\":%llu,\"partnerExpired\":%llu,\"partnerReceived\":%llu,\"partnerApplied\":%llu,\"partnerAlready\":%llu,\"partnerRefused\":%llu,\"hostMovedFirst\":%llu},\"levelTransition\":{\"result\":\"%s\",\"observed\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"refused\":%llu,\"otherMap\":%llu,\"map\":\"%s\",\"start\":\"%s\"}}\n",
         (missionEndMirrorEnabled||productMode)?"true":"false",m.result,localRole,m.sent,m.received,m.applied,m.refused,m.noActive,m.notSameMission,m.scanFailed,m.missions,m.appliedState,m.pending?"true":"false",m.incoming.mapinfo,m.incoming.highChaos,checkpointMissionContinues,checkpointSharedLoad?"true":"false",checkpointSharedLoadBypassed,static_cast<unsigned long long>(missionResultsSwitches.load()),m.unnamed,m.staleDropped,lastMissionMapinfo,
         transitionHold.result,transitionHold.expect?"true":"false",transitionHold.held?"true":"false",transitionHold.holds,transitionHold.released,transitionHold.timeouts,transitionHold.aborted,transitionHold.sent,transitionHold.received,transitionHold.refused,transitionHold.lastWaitMs,transitionHold.caller,transitionHold.from,transitionHold.to,transitionHold.pending,transitionHold.localMap,transitionHold.peerMap,transitionHold.ownsWindow?"true":"false",transitionHold.peeks,
         chaosSync.result,chaosSync.sent,chaosSync.received,chaosSync.refused,chaosSync.writes,chaosSync.missing,chaosSync.hostPoints,chaosSync.hostLevel,chaosSync.localPoints,chaosSync.localLevel,chaosSync.before,labChaosWrites,labChaosRefused,
-        (gameflowMirrorEnabled||productMode)?"true":"false",gameflowMirror.result,gameflowMirror.nodes,gameflowMirror.idHash,gameflowMirror.sent,gameflowMirror.received,gameflowMirror.refused,gameflowMirror.applied,gameflowMirror.notFound,gameflowMirror.skippedMission,gameflowMirror.missionActivated,gameflowMirror.reset,
+        (gameflowMirrorEnabled||productMode)?"true":"false",gameflowMirror.result,gameflowMirror.nodes,gameflowMirror.idHash,gameflowMirror.sent,gameflowMirror.received,gameflowMirror.refused,gameflowMirror.applied,gameflowMirror.notFound,gameflowMirror.skippedMission,gameflowMirror.missionActivated,gameflowMirror.missionCompleted,gameflowMirror.reset,
         gameflowMirror.partnerSent,gameflowMirror.partnerHeld,gameflowMirror.partnerExpired,gameflowMirror.partnerReceived,gameflowMirror.partnerApplied,gameflowMirror.partnerAlready,gameflowMirror.partnerRefused,gameflowMirror.hostMovedFirst,
         levelMirror.result,levelMirror.observed,levelMirror.sent,levelMirror.received,levelMirror.applied,levelMirror.refused,levelMirror.otherMap,levelMirror.lastMap,levelMirror.lastStart);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);

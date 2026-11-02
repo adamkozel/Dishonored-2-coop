@@ -8,7 +8,7 @@
 |---|---|---|---|
 | K1 | The route's loot of Ramsey's body did not register | `hoststory-lead-dunwall-v2017d` to `v2023a`, `continue-decision-vm-v2047g` (ch. 122) | Fixed for the partner's ring in hoststory-v2024 (ch. 119: ActionSpecialLoot runs in both worlds). Recheck in the measure takes |
 | K2 | The end-of-mission talk to Meagan did not register | `route-dunwall-lead-v1753e`, `v1755a`, `hoststory-lead-dunwall-v2024a`, `v2026b` | Passed from `hoststory-lead-dunwall-v2027a` on. Recheck |
-| K3 | The tower safe-room doors (`env_interiors_safe_door`, `_6`, `_9`) open on the host and stay closed on the partner | ch. 119 (still open after hoststory-v2027) | Open |
+| K3 | The tower safe-room doors (`env_interiors_safe_door`, `_6`, `_9`) open on the host and stay closed on the partner | ch. 119 (still open after hoststory-v2027) | Fixed in progress-v2100 (`v2100a`, `v2103a`, `c`, `d`, `e`; the twin `v2103b` shows the doors again) |
 | K4 | The partner's game had to answer the native choice screen in the first mission | ch. 126 | Fixed in nativechoice-v2088 (the co-op Character box asks; the native screen is answered) |
 | K5 | Co-op saves switch stalls in `profile_saving` | #263 | Open. Again in `firstmission-dunwall-v2099e` (Emily host, before the mission) |
 | K6 | The partner's presentation is not live in the scripted opening | ch. 95 (`1829a`) | Known; recheck what the partner sees at the start |
@@ -57,6 +57,23 @@ K3's cause (confirmed static): usable sync (`usable_sync.h`) mirrors the host's 
 
 **M1 fix, candidate progress-v2103 (`mission_decision.h`):** with follow on, the partner's Continue waits on her result screen for the map the host's hold announces (D2MR, re-sent every second), then loads that mission at once (`campaign <mapinfo> <chaos> <her character>`). A follow load already works this way, and partner progression restores her items after it. With no announcement in 60 s she falls back to her own Continue. Lab switch `coop_continue_follow on|off`.
 - `Run-V2103.sh`: a Corvo / Emily with both fixes on; b, the twin, with safe doors and continue-follow off; then c, d and e for the other pairings.
+
+| Take | Pairing (host / partner) | Result |
+|---|---|---|
+| `firstmission-dunwall-v2103a` | Corvo / Emily | **M1 and K3 fixed.** The partner's Continue loaded the host's Void at once (`continued_to_host_mission`, `followContinues` 1, no fallback); the host's hold released after 6.9 s instead of timing out at 90 s. Balcony and streets equal. One end difference: M4 |
+| `firstmission-dunwall-v2103b` | Corvo / Emily, twin | **Both faults back:** the three safe-room doors differ at the balcony and streets (K3), and the host's hold timed out at 90 s (`timeout_other_map`) with the partner's own Continue (M1). End: M4 |
+| `firstmission-dunwall-v2103c` | Emily / Corvo | Same as a (hold released after 6.0 s) |
+| `firstmission-dunwall-v2103d` | Corvo / Corvo | Same as a (4.2 s) |
+| `firstmission-dunwall-v2103e` | Emily / Emily | Same as a (4.3 s). Co-op saves switched on this time (K5 did not recur) |
+
+In all five the saferoom digest failed on the host (M2) and the Meagan step was skipped because her scene had already run (`npc gone`), so K2 was not exercised.
+
+| # | Problem | Evidence | State |
+|---|---|---|---|
+| M4 | **The ended mission stays 0 in the partner's world.** At the Void, gameflow node `bf0f0d6f` (the first mission, `Mission_DW`) is 3 on the host and 0 on the partner | v2100a and v2103a to e, all pairings, the twin too | Cause confirmed runtime and static: the partner reaches the next mission through `campaign <mapinfo>` (follow or her Continue), which leaves the ended mission at 0, while the host's world ran its end. The gameflow mirror sent only active missions (state 2) and the partner skipped every mission node (`skippedMission` 1392 in v2103a) |
+| M2 | (cause) | v2103a to e | Hypothesis, harness-side: the route's saferoom diff comes right after the ring locker use, which starts the load into the streets (the step's snapshot shows both on the streets map, the host held at its load end), so the host's probe reads the usable catalog mid-load (exit 45). The balcony diff 15 s later passes in every take |
+
+**M4 fix, candidate progress-v2104 (`mission_end_mirror.h`):** the host's gameflow mirror also sends completed missions (state 3). A partner whose node is 0 gets 3 written into the node (+0xc) without the native set-state routine, so no mission notice shows and no script reacts to a mission of another map. The status adds `gameflowMirror.missionCompleted`. **M2:** harness `Route-MissionVM-v2106.ps1` retries a failed world diff once after 10 s and records the first error as `retried`. `Run-V2106.sh` runs a (Corvo / Emily) and b (Emily / Corvo) on both; the end and saferoom diffs must be equal.
 
 ## 3. Done when
 
