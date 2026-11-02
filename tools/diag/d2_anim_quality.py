@@ -2,8 +2,9 @@
 
 Reads d2_runtime_probe --anim-sample output (one JSON line per sample of the observed partner rig: ms, root, yaw and,
 per foot, the world points toe, ankle, knee, hip) and measures:
-- foot skate: while a toe is planted (within 3 cm of its lowest height in the take and moving vertically under
-  0.05 m/s), its horizontal drift over each contact; the worst contact and the p95 are reported;
+- foot skate: while a toe is planted (the lower toe, within 3 cm of the local floor and moving vertically under
+  0.05 m/s), its farthest horizontal excursion from where it landed, per contact; the worst contact and the p95 are
+  reported;
 - jitter: animcheck's reversal rule scaled to metres (5 reversals of the root's travel direction within 8 samples,
   each leg at least 0.036 m);
 - snaps: a root step between two samples larger than 0.6 m (11 m/s at 55 ms, beyond a sprint);
@@ -78,7 +79,7 @@ def foot_skate(rows):
         toes.append((feet[0]["points"][0]["at"], feet[1]["points"][0]["at"]))
     contacts = []
     for f in range(2):
-        drift, run = 0.0, 0
+        drift, run, start = 0.0, 0, None
         for i in range(1, len(rows)):
             if toes[i] is None or toes[i - 1] is None:
                 continue
@@ -92,11 +93,19 @@ def foot_skate(rows):
             if MUT == "skate_ignores_planted":
                 planted = False
             if planted:
-                drift += dist2(a, b)
+                # 2092: the drift is the toe's farthest excursion from where it landed. Summing the path counted the
+                # +-2 cm wobble of a planted toe as skate (animquality-eotw-v2091a: 0.13 m over a contact that moved
+                # 7 mm net); the wobble is one frame of root travel, the probe reading the root and the pose a frame apart.
+                if start is None:
+                    start = a
+                if MUT == "skate_path_length":
+                    drift += dist2(a, b)
+                else:
+                    drift = max(drift, dist2(start, b))
                 run += 1
             elif run:
                 contacts.append(drift)
-                drift, run = 0.0, 0
+                drift, run, start = 0.0, 0, None
         if run:
             contacts.append(drift)
     return contacts

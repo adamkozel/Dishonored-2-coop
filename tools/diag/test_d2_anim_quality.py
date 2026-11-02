@@ -12,7 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import d2_anim_quality as aq  # noqa: E402
 
-TWINS = ["skate_ignores_planted", "no_jitter", "loose_snap", "no_rubber", "no_frozen_guard"]
+TWINS = ["skate_ignores_planted", "skate_path_length", "no_jitter", "loose_snap", "no_rubber", "no_frozen_guard"]
 
 
 def sample(ms, root, toes):
@@ -49,6 +49,16 @@ class Quality(unittest.TestCase):
     def test_foot_skate_is_caught(self):
         r = aq.analyse(walk(slide=1.5))
         self.assertIn("footSkateP95", r["failures"])
+
+    def test_planted_wobble_is_not_skate(self):
+        # 2092: a planted toe that wobbles +-2 cm around its spot (one frame of root travel) does not slide.
+        rows = walk()
+        for k, r in enumerate(rows):
+            for ft in r["feet"]:
+                ft["points"][0]["at"][1] += 0.02 * (1 if k % 2 else -1)
+        r = aq.analyse(rows)
+        self.assertNotIn("footSkateP95", r["failures"], r)
+        self.assertNotIn("footSkateMax", r["failures"], r)
 
     def test_jitter_is_caught(self):
         rows = [sample(i * 40, (0.05 * (i % 2), 0, 0), [(0, 0.1, 0), (0, -0.1, 0)]) for i in range(40)]

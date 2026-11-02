@@ -251,6 +251,11 @@ struct IggyText16 {const char16_t* text=nullptr;std::int32_t length=0;};
 using IggyTranslate16=int(*)(void*,IggyText16*,IggyText16*);using IggyTranslateFree=void(*)(void*,void*,int);
 IggyTranslate16 realTranslate16=nullptr;IggyTranslateFree realTranslateFree=nullptr;bool coopTranslationHooked=false;
 static const char16_t kLeaveQuestion16[]=u"Leave the co-op session?";static const char16_t kLeaveButton16[]=u"Leave co-op";
+// 2092 (#243): while a co-op notice box is open (native_notice.h), its question key (the Character dialog's) reads as
+// the notice text.
+std::atomic<bool> coopNoticeShowing{false};
+static const char16_t kNoticeVersion16[]=u"Your friend's co-op mod is a different version. Both players need the same version to play together.";
+static const char kNoticeVersion8[]="Your friend's co-op mod is a different version. Both players need the same version to play together.";
 std::atomic<std::uint64_t> coopLeaveTranslations{0};
 struct CoopPauseState {const char* result="idle";std::uintptr_t movie=0;bool labelled=false,cacheSession=false;char original[64]{};
     std::uint64_t relabels=0,restores=0,clears=0,leaves=0;};
@@ -258,6 +263,7 @@ CoopPauseState coopPause{};
 inline bool coopKey16(const IggyText16* in,const char* key){if(!in||!in->text)return false;const auto n=static_cast<std::int32_t>(std::strlen(key));
     if(in->length!=n)return false;for(std::int32_t i=0;i<n;++i)if(in->text[i]!=static_cast<char16_t>(key[i]))return false;return true;}
 inline int hookTranslate16(void* data,IggyText16* in,IggyText16* out){
+    if(coopNoticeShowing.load()&&out&&coopKey16(in,"ui_mplus_character_label")){out->text=kNoticeVersion16;out->length=static_cast<std::int32_t>(std::char_traits<char16_t>::length(kNoticeVersion16));return 1;}
     if(coopInSession()&&coopPauseContext.load()&&out){const char16_t* text=nullptr;
         if(coopKey16(in,"UI_quitgame_question"))text=kLeaveQuestion16;else if(coopKey16(in,"ui_gameover_button_back_main_menu"))text=kLeaveButton16;
         if(text){out->text=text;out->length=static_cast<std::int32_t>(std::char_traits<char16_t>::length(text));++coopLeaveTranslations;return 1;}}
@@ -279,12 +285,13 @@ inline int hookTranslate8(void* data,IggyText8* in,IggyText8* out){
     ++coopTranslate8Calls;
     if(in&&in->text&&in->length>0){auto& slot=coopLastKeys[coopLastKey.fetch_add(1)%6];const auto n=static_cast<std::size_t>(in->length<47?in->length:47);
         for(std::size_t i=0;i<n;++i){const char c=in->text[i];slot[i]=(c<32||c=='"'||c=='\\'||c>126)?'_':c;}slot[n]=0;}
+    if(coopNoticeShowing.load()&&out&&coopKey8(in,"ui_mplus_character_label")){out->text=kNoticeVersion8;out->length=static_cast<std::int32_t>(std::strlen(kNoticeVersion8));return 1;}
     if(coopInSession()&&coopPauseContext.load()&&out){const char* text=nullptr;
         if(coopKey8(in,"UI_quitgame_question"))text=kLeaveQuestion8;else if(coopKey8(in,"ui_gameover_button_back_main_menu"))text=kLeaveButton8;
         if(text){out->text=text;out->length=static_cast<std::int32_t>(std::strlen(text));++coopLeaveTranslations;return 1;}}
     return realTranslate8?realTranslate8(data,in,out):0;}
 inline void hookTranslateFree(void* data,void* text,int bytes){
-    if(text==kLeaveQuestion16||text==kLeaveButton16||text==kLeaveQuestion8||text==kLeaveButton8)return;if(realTranslateFree)realTranslateFree(data,text,bytes);}
+    if(text==kLeaveQuestion16||text==kLeaveButton16||text==kLeaveQuestion8||text==kLeaveButton8||text==kNoticeVersion16||text==kNoticeVersion8)return;if(realTranslateFree)realTranslateFree(data,text,bytes);}
 inline void installCoopTranslation(){
     if(coopTranslationHooked)return;auto* table=reinterpret_cast<void**>(gameImage+0x3ec0920);
     if(!table[0]&&!table[1])return; // the engine registers its callback once the UI is up

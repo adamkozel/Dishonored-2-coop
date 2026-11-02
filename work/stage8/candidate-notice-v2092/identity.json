@@ -1,0 +1,9 @@
+{
+ "candidate": "notice-v2092",
+ "card": 243,
+ "dll": "7CF124F40FC3C2811B0440065AEE10A10042B2E4A26E08096A2831FA4C7BBDF2",
+ "previousCandidate": "nativechoice-v2088",
+ "sourceCommit": "6f7e828dbbf9cef57b7d09f073c3d05124e8747c",
+ "sourceDiff": "source-change.diff",
+ "change": "an on-screen notice when the two players run different co-op versions: the control channel hello check and the lobby version tag set a pending notice; native_notice.h opens a one-button engine message box (the Character dialog box, its question key read as the notice text while open, the button ui_common_confirm) in gameplay, the pause menu or the main menu; lab command coop_notice_test; it logs COOP: notice shown / answered"
+}

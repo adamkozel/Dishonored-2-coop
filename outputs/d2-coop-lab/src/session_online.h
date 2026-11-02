@@ -152,7 +152,7 @@ void serviceOnlineSession(ULONGLONG tick){
         if(failed||!onlineSteam.callResult(onlineSteam.utils,o.call,&r,sizeof(r),kLobbyEnterCallback,&failed)||failed||r.response!=1||!r.lobby){o.phase=OnlinePhase::Failed;o.result="lobby_enter_failed";return;}
         o.lobby=r.lobby;o.owner=onlineSteam.lobbyOwner(onlineSteam.matchmaking,o.lobby);
         const char* tag=onlineSteam.getLobbyData(onlineSteam.matchmaking,o.lobby,"d2coop");
-        if(!tag||std::strcmp(tag,"1171")){o.phase=OnlinePhase::Failed;o.result="lobby_version_mismatch";return;}
+        if(!tag||std::strcmp(tag,"1171")){o.phase=OnlinePhase::Failed;o.result="lobby_version_mismatch";coopNoticePending.store(1);return;}
         if(!o.owner||o.owner==o.self){o.phase=OnlinePhase::Failed;o.result="lobby_owner_is_self";return;}
         SteamNetworkingIdentity identity{};identity.SetSteamID64(o.owner);
         SteamNetworkingConfigValue_t options[5];options[0].SetPtr(k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged,reinterpret_cast<void*>(&statusCallback));

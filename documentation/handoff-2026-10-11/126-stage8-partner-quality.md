@@ -154,3 +154,27 @@ In v2086a the route placed the partner about 0.8 m up on furniture in the bedroo
 **The first mission's character choice is done** (candidate nativechoice-v2088). Both characters are answered natively without input, and the twin is red. It remains to update the release notes (RELEASE-NOTES:183, :233).
 
 **Next movement take: `animquality-dunwall-v2090a`.** The partner stands 2.5 m from the host on the in-view line of v2086a, and the moves are mostly sideways.
+
+## First in-view numbers on free floor (Edge of the World docks)
+
+| Take | Candidate | Result |
+|---|---|---|
+| `animquality-dunwall-v2090a` | nativechoice-v2088 | **Fixture guard stop (`FIXTURE`, a 0.11 m spread):** the spot 2.5 m from the host was furniture again. Dunwall Tower has no free floor in view of both spawns, so the movement takes moved to the Edge of the World docks |
+| `animquality-eotw-v2091a` | nativechoice-v2088 | **Both directions sampled in view** (157 and 180 samples at 21 Hz; 7.8 m and 9.7 m of travel). Jitter, snaps and rubber-banding are all 0. Foot skate failed under the path-length metric: p95 0.13 m and 0.22 m |
+
+**What the samples show** (confirmed runtime, `animquality-eotw-v2091a/step05-animsample-anim.jsonl`):
+- **A planted toe wobbles ±1–2 cm around its spot** while the root moves. Example: the left toe from 1375 ms to 1938 ms stays between y 176.952 and 176.980, a net move of 7 mm, while the path-length sum came to 0.13 m. When idle, the toes hold to 1 mm.
+- **The wobble is about one frame of root travel** (1.2 m/s × 16 ms). Hypothesis: the probe reads the root and the pose a frame apart.
+- **Idle pops:** in about 1 of 10 idle samples, both toes and ankles rise exactly 10 cm, the knees bend 4 cm and the hips stay put, then everything returns on the next sample. The pose is coherent (not a torn read). It is either a one-frame foot-IK dropout or a read between the animation pass and the IK pass. Removing the pops does not lower the skate numbers, so they are a separate item, kept for the native baseline.
+
+**The analyser now measures foot skate as each contact's farthest excursion from where the toe landed** (`d2_anim_quality.py` 2092). Summing the path counted the wobble as skate. A new test (`test_planted_wobble_is_not_skate`) and twin (`skate_path_length`) cover it: 8 tests, 6 twins caught.
+
+| Take, direction | Contacts | Skate p95 | Skate max | Status (proposed limits 0.05 / 0.12 m) |
+|---|---|---|---|---|
+| v2091a, host observes the partner | 30 | 0.083 m | 0.145 m | FAIL |
+| v2091a, partner observes the host | 20 | 0.073 m | 0.074 m | FAIL (p95) |
+| v2086a step09 (Dunwall, re-scored) | 42 | 0.041 m | 0.091 m | PASS |
+
+**The contacts over 5 cm are at starts and stops:** the foot slides 7–15 cm into the idle stance while the root is already still, and running contacts drift 6–7 cm. Native locomotion blends in the same way, so the limits need a native baseline before these count as defects.
+
+**Next take: `animquality-baseline-eotw-v2093a`.** It samples five native civilians within 4–17 m of the docks walkway with the same probe and analyser, and it calibrates the limits from whichever of them walk.
