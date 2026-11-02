@@ -1,0 +1,77 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_partner_progress off"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--player-inventory"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named components/characters/player/base/attributes/extended_health.inventoryitem"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named components/equipment/ammo/bolt_tranquilizer.inventoryitem"
+ },
+ {
+  "do": "wait",
+  "ms": 9000
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--player-inventory"
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".partner-progress.json"
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--ai-decision",
+  "arg": "770189828"
+ },
+ {
+  "do": "wait",
+  "ms": 15000
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--ai-decision",
+  "arg": "770189828"
+ },
+ {
+  "do": "wait",
+  "ms": 60000
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--ai-decision",
+  "arg": "770189828"
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--entities"
+ }
+]
