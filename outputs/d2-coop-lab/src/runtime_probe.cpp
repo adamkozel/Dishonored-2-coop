@@ -509,9 +509,15 @@ int main(int argc, char** argv) {
     if(argc==3&&!std::strcmp(argv[2],"--world-digest")){
         std::uintptr_t game=0,list=0,vt=0;unsigned count=0;
         const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
-        if(!reader(base+0x39a5290,&game,8)||!game||!reader(game,&vt,8)||vt!=base+0x1c940a8||!reader(game+0x601c0,&list,8)||!list||
-           !reader(game+0x601c8,&count,4)||!(count&0xffffff)||(count&0xffffff)>16384)return 45;
-        std::vector<unsigned> handles(count&0xffffff);if(!reader(list,handles.data(),handles.size()*4))return 45;
+        // 2106 (M2): the reason for exit 45 goes to stderr. The host's saferoom digest failed in every first-mission
+        // take (v2095 to v2106) and again 10 s later, while the host was in gameplay on the streets map.
+        const auto fail=[&](const char* why){std::fprintf(stderr,"world-digest: %s game=%llx vt=%llx list=%llx count=%x\n",why,
+            static_cast<unsigned long long>(game),static_cast<unsigned long long>(vt?vt-base:0),static_cast<unsigned long long>(list),count);return 45;};
+        if(!reader(base+0x39a5290,&game,8)||!game)return fail("no_game");
+        if(!reader(game,&vt,8)||vt!=base+0x1c940a8)return fail("game_vtable");
+        if(!reader(game+0x601c0,&list,8)||!list||!reader(game+0x601c8,&count,4))return fail("entity_list");
+        if(!(count&0xffffff)||(count&0xffffff)>16384)return fail("entity_count");
+        std::vector<unsigned> handles(count&0xffffff);if(!reader(list,handles.data(),handles.size()*4))return fail("entity_read");
         std::string map;std::uint32_t worldState=0;
         {std::uintptr_t session=0,mapName=0;read(process.value,base+0x25af110+0x19a8,&session,8);
          if(session){read(process.value,session+0x337128+0x10,&mapName,8);read(process.value,session+0x341058,&worldState,4);if(mapName)map=readString(process.value,mapName);}}

@@ -75,6 +75,13 @@ In all five the saferoom digest failed on the host (M2) and the Meagan step was 
 
 **M4 fix, candidate progress-v2104 (`mission_end_mirror.h`):** the host's gameflow mirror also sends completed missions (state 3). A partner whose node is 0 gets 3 written into the node (+0xc) without the native set-state routine, so no mission notice shows and no script reacts to a mission of another map. The status adds `gameflowMirror.missionCompleted`. **M2:** harness `Route-MissionVM-v2106.ps1` retries a failed world diff once after 10 s and records the first error as `retried`. `Run-V2106.sh` runs a (Corvo / Emily) and b (Emily / Corvo) on both; the end and saferoom diffs must be equal.
 
+| Take | Pairing (host / partner) | Result |
+|---|---|---|
+| `firstmission-dunwall-v2106a` | Corvo / Emily | **Passed. M4 fixed:** the end diff is equal (286 keys on both sides). The partner continued to the host's Void (hold released after 4.3 s). Every diff equal except the saferoom one (M2) |
+| `firstmission-dunwall-v2106b` | Emily / Corvo | **Passed**, the same as a (4.2 s) |
+
+**M2 is not load timing:** the retry 10 s later failed the same way in both takes. The host frame at that step shows it in gameplay in the safe room. The check's 16384 entity cap is the engine registry's own size (`game+0x3130b0`), so the cause is one of the probe's other reads. Candidate progress-v2106 changes only the probe: it writes the reason for exit 45 (`no_game`, `game_vtable`, `entity_list`, `entity_count`, `entity_read`) and the values read to stderr, which the take log keeps. `Run-V2108.sh` runs the done-when check on it: all four pairings twice in a row (takes a to d, then e to h).
+
 ## 3. Done when
 
 The whole first mission plays through cleanly in all four pairings on two accounts, every diff equal, twice in a row on one candidate, and the user's own list is resolved or written down as known.
