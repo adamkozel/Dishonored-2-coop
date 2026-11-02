@@ -113,3 +113,32 @@ In v2086a the route placed the partner about 0.8 m up on furniture in the bedroo
 **Its twin, `v2088b`:** the partner back on the furniture, where the guard must stop the step.
 
 **Noted for later (a decision, not done):** smoothing the gait clock's velocity vector instead of its magnitude would keep a real player wedged in geometry from stepping in place. It changes every gait start and stop, so it needs the full movement regression.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `animquality-dunwall-v2088a` | nativechoice-v2085 | Harness fail: the fixture guard flattened the five rest positions into one list and compared x with y (a "spread" of 220 m). The raw rests were five identical positions, so the free floor was still. Harness v2089 keeps each position as one array |
+| `animquality-dunwall-v2088b` | nativechoice-v2085 | The same harness fail. The raw rests on the furniture moved 12 cm in y, so the guard would have stopped it once fixed |
+
+## The native sequence for the partner's choice (candidate nativechoice-v2088)
+
+**Research follow-up** (d2-ghidra, confirmed static, with the stall explanation as a hypothesis built on confirmed values):
+- **The scene's two nodes:** the choice scene has an Emily-focused and a Corvo-focused node.
+- **A native right press** (update 0x140681cf0) clears the input byte (state 37 +0x58), sets the selection to 1, sets the scene variable to 1 (`FUN_140854d50` with key `image+0x398a8a0`) and sends signal `image+0x398a8b0` (`FUN_140854d20`). The scene then turns to Corvo.
+- **The confirm:** writing +0x114 is exactly what a box "yes" does. The update then sends variable 2 and signal 8a8, which only the Corvo-focused node handles.
+- **Why v2087a stalled:** holding the selection alone left the scene Emily-focused, so the Corvo confirm went unheard.
+- **Finding state 37:** `FUN_1408a8ba0(game)`, then component `0x39aed60`, then +0x90, then +0x138, with vtable `image+0x1c3aaa8`.
+
+**The service now:**
+1. It waits for the scene's Inputs On (+0x58 == 1).
+2. For Corvo, it replays the right press, then waits for Inputs On again.
+3. It confirms, no earlier than 1.5 s after the screen appeared.
+4. If the focus has not landed after 3 s, it resets and presses again (`retries`).
+5. The `SwitchCharacter` backstop stays.
+
+**Open:** a native confirm input arrives about 67 frames in, with no harness press. Hypothesis: a held input from the intro skip.
+
+**Takes:**
+- `nativechoice-dunwall-v2088a`: a Corvo partner.
+- `v2088b`: an Emily partner.
+- `v2088c`: the manual twin.
+- Then the movement pair on harness v2089.
