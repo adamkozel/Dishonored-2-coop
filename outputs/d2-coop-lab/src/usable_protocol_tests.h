@@ -39,7 +39,9 @@ inline void usableProtocolTests(){
     other=n;other.enabled=0;require(!nativeUsableToggleFamily(other),"disabled use remains disabled");
     other=n;other.name=other.definitionName="esc_env_cupboard_01_28";other.declarationName="map_cpntusablewithstatelist_decl_14";other.entries[0].customPrompt=other.entries[1].customPrompt=1;
     require(nativeUsableToggleFamily(other),"uniform Open/Close prompt toggles on any map join the family");
-    other.name=other.definitionName="esc_env_safe_door_4";require(!nativeUsableToggleFamily(other),"vault doors keep their own semantics");
+    other.name=other.definitionName="esc_env_safe_door_4";require(nativeUsableToggleFamily(other),"enabled Open/Close safe doors follow the host");
+    usableSafeDoorsShared=false;require(!nativeUsableToggleFamily(other),"safe_doors off keeps every safe per world");usableSafeDoorsShared=true;
+    other.enabled=0;require(!nativeUsableToggleFamily(other),"a vault door disabled until dialled stays out");
     other=n;other.flags=1;require(!nativeUsableToggleFamily(other),"flagged quest devices keep their own semantics");
     other=n;other.stateCount=5;require(!nativeUsableToggleFamily(other),"multi-state devices are not toggles");
     other=n;other.entries[0].exit=1;other.entries[1].exit=0;require(nativeUsableToggleFamily(other)&&nativeUsableRulesHash(other)!=hash,"uniform reversed toggles join with a distinct descriptor");

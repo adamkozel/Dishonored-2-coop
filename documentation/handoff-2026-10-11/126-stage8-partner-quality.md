@@ -204,3 +204,16 @@ The partner's high contacts are at starts and stops, where the native worker sco
 | Partner, Dunwall (v2086a step09) | 41 | 0.032 m | 0.091 m | PASS |
 
 **Finding (#266):** seen from the host, the partner's stance foot glides 14.5 cm at a walk start from idle. Her root starts moving (3313 → 3360 ms) while her right toe is planted and the left is 12 cm up, and the toe moves with the root. Hypothesis: the root follows the position stream before her gait animation starts. Stop contacts settle 7–8 cm.
+
+## The version notice (candidates notice-v2092, progress-v2097, progress-v2100)
+
+When the friend's mod is a different version (control hello or lobby tag), each game shows a one-button engine message box (`native_notice.h`). Lab command `coop_notice_test` raises one.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `notice-eotw-v2092a` | notice-v2092 | Opened in gameplay, the box closed at once, unseen. The check read the appended logs whole, so twin b counted a's lines |
+| `notice-eotw-v2097a` | progress-v2097 | **Log pass:** both games logged "notice shown (version mismatch) in logic 2" and "notice answered (result 0)". **Visual fail:** the box opens in the pause menu on both machines (frames `step04-press-box1-host`, `step11-press-box2-vm`) but reads "Character" with a Confirm button |
+| `notice-eotw-v2097b` | nativechoice-v2088 (twin, no notice) | **Red as required:** no notice lines in either log after the take began |
+| `notice-eotw-v2100a` | progress-v2100 | queued |
+
+**Why the text was wrong (confirmed static):** the box sends its question to the movie as text it resolves itself. A nonzero question id at `+0x14` goes through `FUN_1400288e0` and the native localization lookup `FUN_1401653e0`, so the Iggy translation hook never sees the borrowed `ui_mplus_character_label` key. With id 0, `FUN_140462210` sends the box's own idStr at `+0x18` (built empty by the constructor `0x460e20`) through `FUN_140028870`. Candidate progress-v2100 sets the id to 0, rebuilds that idStr with the notice text, and drops the unreachable translation swap.

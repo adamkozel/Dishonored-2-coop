@@ -21,10 +21,32 @@ The full first-mission route (casts, deaths, the bedroom, Mayhew, Ramsey and his
 
 | Take | Pairing (host / partner) | Result |
 |---|---|---|
-| `firstmission-dunwall-v2095a` | Corvo / Emily | queued |
-| `firstmission-dunwall-v2095b` | Emily / Corvo | queued |
-| `firstmission-dunwall-v2095c` | Corvo / Corvo | queued |
-| `firstmission-dunwall-v2095d` | Emily / Emily | queued |
+| `firstmission-dunwall-v2095a` | Corvo / Emily | **Failed at the end:** the host in the Void, the partner on the streets (M1). Diffs equal through the ring locker; saferoom digest error (M2); balcony and streets 3 differences each (K3) |
+| `firstmission-dunwall-v2095b` | Emily / Corvo | **Same as a**, value for value |
+| `firstmission-dunwall-v2095c` | Corvo / Corvo | **Failed: talk to Meagan not registered** (K2 again). Diffs equal through the ring locker; saferoom, balcony and streets 3 differences each (K3) |
+| `firstmission-dunwall-v2095d` | Emily / Emily | **Lost in setup** ("The credential is invalid"): a side script of mine polled the VM over PowerShell Direct during the take. Repeated as `firstmission-dunwall-v2099e` |
+| `firstmission-dunwall-v2099e` | Emily / Emily | queued (harness v2099 saves both games' mission follow and decision status at every step) |
+| `firstmission-dunwall-v2099f` | Corvo / Emily | queued (a again, for M1's follow status) |
+
+Rechecks of section 1 (confirmed runtime):
+- **K1:** the ramsey-loot diff is equal in a, b and c (552 values), and the route's loot step registered.
+- **K2:** in a the scene had already run when the route arrived (`skipped: npc gone`); in c (both Corvo) the talk did not register. It is open again.
+- **K3:** the same three doors (`env_interiors_safe_door`, `_6`, `_9`; host `[1, 1]`, partner `[0, 1]`) in all three takes, from the safe room to the streets. Every other value is equal.
+
+New rows:
+
+| # | Problem | Evidence | State |
+|---|---|---|---|
+| M1 | **The partner does not follow the host into the Void.** The host's Continue is sent (D2MD) and the partner runs it, but its `RestartFromMemoryCheckpoint` reloads its own last streets checkpoint (load 2.8 s; its gameflow is back at `Task_DW_TalkToBoatCaptain`). Its both-ready hold then times out after 90 s (`timeout_other_map`), and no mission-follow load is logged in the VM's log. | a and b (confirmed runtime). The earlier passes (`hoststory-lead-dunwall-v2029a/b`) were lab takes in which the partner's own world led the transition | Open. Why mission follow did not load the host's mission is measured in v2099e/f |
+| M2 | The saferoom world diff failed on the host: probe exit 45 (usable catalog unreadable) | a and b; c's saferoom diff ran | Hypothesis: the host was in a load or scene at that moment. Harness-side; recheck in v2099e/f |
+| M3 | Partner-loss check at Edge of the World: one docks NPC's AI pause count rose 0 to 1 after the partner's game was killed | `progress-eotw-v2097a/b` (the twin too, so not the progression code) | v2098b: docks worker 770189828 (`worker_male_small_01`) kept it for 60 s. Control `m3control-eotw-v2101a` (no kill; the worker probed at the kill's moments) tells a native ambient pause from a leak in our partner-loss cleanup |
+
+K3's cause (confirmed static): usable sync (`usable_sync.h`) mirrors the host's two-state toggles, including state changes made by a script. But `nativeUsableToggleFamily` (`usable_catalog.h`) drops every name containing `safe`, a rule from chapter 106, when safes stayed per world. Chapter 106 also found the plain Dunwall safe doors to be ordinary Open/Close toggles. Vault doors are disabled until dialled, so the family's `enabled` rule already leaves them out at catalog time. Whether the three tower doors pass the family's other rules is the next runtime check.
+
+**K3 fix, candidate progress-v2100:** names containing `safe` join the family while `usableSafeDoorsShared` is on. That is the default; the lab switch is `coop_usable_safe_doors on|off`, read at the next map load, and the product switch is `d2coop.cfg` `safe_doors=0`. A disabled vault door stays out. Unit tests: an enabled Open/Close safe door joins, it stays out with the switch off, and a disabled one stays out.
+- `firstmission-dunwall-v2100a`: Corvo / Emily with the switch on. The saferoom, balcony and streets diffs must be equal.
+- `firstmission-dunwall-v2100b`, the twin: the switch is off in both games and must show the three doors again.
+- Queued in `Run-V2100.sh`.
 
 ## 3. Done when
 

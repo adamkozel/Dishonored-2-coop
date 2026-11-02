@@ -1750,6 +1750,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_difficulty_sync on")||!std::strcmp(text,"coop_difficulty_sync off"))return true; // 1214kb (#177)
     if(!std::strcmp(text,"coop_story_flags on")||!std::strcmp(text,"coop_story_flags off")||!std::strcmp(text,"coop_story_flags flip"))return true; // 1214kj-kk (#220)
     if(!std::strcmp(text,"coop_safe_codes on")||!std::strcmp(text,"coop_safe_codes off"))return true; // stage 8.4.3 (#239)
+    if(!std::strcmp(text,"coop_usable_safe_doors on")||!std::strcmp(text,"coop_usable_safe_doors off"))return true; // 2100 (#264)
     if(!std::strcmp(text,"coop_safe_dials on")||!std::strcmp(text,"coop_safe_dials off"))return true; // stage 8.4.3 (#239), 2050
     if(!std::strcmp(text,"coop_join_snapshot on")||!std::strcmp(text,"coop_join_snapshot off"))return true; // stage 8.4.4 (#240), 2055
     if(!std::strcmp(text,"coop_shared_load on")||!std::strcmp(text,"coop_shared_load off"))return true; // stage 8.4.4 (#240), 2065
@@ -1972,6 +1973,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_story_flags on")||!std::strcmp(request.command,"coop_story_flags off")){storyFlagSync.enabled=!std::strcmp(request.command,"coop_story_flags on");return;}
     if(!std::strcmp(request.command,"coop_story_flags flip")){storyFlagSync.flipRequest=true;return;} // 1214kk (#220, test fixture)
     if(!std::strcmp(request.command,"coop_safe_codes on")||!std::strcmp(request.command,"coop_safe_codes off")){safeCodeSync.enabled=!std::strcmp(request.command,"coop_safe_codes on");safeCodeSync.lastValid=false;return;}
+    if(!std::strcmp(request.command,"coop_usable_safe_doors on")||!std::strcmp(request.command,"coop_usable_safe_doors off")){usableSafeDoorsShared=!std::strcmp(request.command,"coop_usable_safe_doors on");return;} // 2100 (#264): from the next map load
     if(!std::strcmp(request.command,"coop_notice_test")){coopNoticePending.store(1);return;}
     if(!std::strcmp(request.command,"coop_partner_progress on")||!std::strcmp(request.command,"coop_partner_progress off")){partnerProgressEnabled=request.command[22]=='o'&&request.command[23]=='n';return;}
     if(!std::strcmp(request.command,"coop_native_choice auto")||!std::strcmp(request.command,"coop_native_choice manual")){nativeChoiceAuto=!std::strcmp(request.command,"coop_native_choice auto");return;}
@@ -2534,6 +2536,7 @@ bool installEngineBridge(unsigned char* image,const char* role) {
     {char hostStory[4]{};productHostStory=!(GetEnvironmentVariableA("D2COOP_HOST_STORY",hostStory,sizeof(hostStory))==1&&hostStory[0]=='0');}
     {char perPlayer[4]{};productItemsPerPlayer=!(GetEnvironmentVariableA("D2COOP_ITEMS_PER_PLAYER",perPlayer,sizeof(perPlayer))==1&&perPlayer[0]=='0');}
     {char safeCodes[4]{};if(GetEnvironmentVariableA("D2COOP_SAFE_CODES",safeCodes,sizeof(safeCodes))==1&&safeCodes[0]=='0')safeCodeSync.enabled=false;}
+    {char safeDoors[4]{};if(GetEnvironmentVariableA("D2COOP_SAFE_DOORS",safeDoors,sizeof(safeDoors))==1&&safeDoors[0]=='0')usableSafeDoorsShared=false;}
     {char decision[4]{};if(GetEnvironmentVariableA("D2COOP_MISSION_DECISION",decision,sizeof(decision))==1&&decision[0]=='0')missionDecision.enabled=false;} // stage 8 (#253)
     char partnerFlag[8]{};partnerAssetsEnabled=GetEnvironmentVariableA("D2COOP_PARTNER_ASSETS",partnerFlag,sizeof(partnerFlag))==1&&partnerFlag[0]=='1';
     HMODULE module=nullptr;
