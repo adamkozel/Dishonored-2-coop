@@ -88,3 +88,15 @@ Today, with checkpoint sync on, any load is intercepted (`checkpointIntercept`) 
 | `hostload-dunwall-v2065b` | sharedload-v2065 | **Mutation twin, red as required** (15 differences). With `coop_shared_load off`, only the host reloaded (epoch 21; the partner stayed at 16), back to the mission start: the clockwork soldiers were alive again and a gameflow value differed |
 
 **Confirmed runtime:** a host's own load is a shared restart from the last paired autosave in both worlds (v2065a). The same load outside the share goes to the host's own last checkpoint (v2065b).
+| `hostload-dunwall-v2065c` | sharedload-v2065 | **Pass, partner load:** the VM partner's own `RestartFromCheckpoint` became a request the host carried out. Both worlds reloaded (epoch 16 to 21 on both) and the diff after the load is equal (550 compared) |
+
+## Status
+
+**Area 4.4 is done on sharedload-v2065, which includes joinexpiry-v2063:**
+- **A mid-mission join** ends in the host's world: v2063a and v2063c pass, and the twin v2063b is red.
+- **A host load** rewinds both worlds together: v2065a passes, and the twin v2065b is red.
+- **A partner's load** is a request to the host: v2065c passes.
+
+**Lab switches:** `coop_join_snapshot` and `coop_shared_load`.
+
+**Not done, judged not needed by these takes:** epoch filtering of D2SF, D2GF and Kiscule packets. Every reload ended equal, so it stays a hardening item. The step 6 full runs and their in-mission diffs watch for stale packets.

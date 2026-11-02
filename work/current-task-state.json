@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-11-02T01:30:00+01:00",
+  "UpdatedAt": "2026-11-02T06:30:00+01:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -1458,7 +1458,7 @@
     "VisualGripPassed": false,
     "ObservedAt": "2026-10-09T07:55:12.8975154+02:00"
   },
-  "NextAction": "Stage 8 area 4.3 (#239, PR #256): a partner opens a safe under the host (D2SD, safedials-v2051: safe-partner-institute-v2052a equal 2158, twin v2052b red); the Jindosh wheels join the dial reader (jindoshwheels-v2053: v2053a 9 of 10 wheels then a harness focus miss, twin v2053b red; v2054a reruns with harness v2054). Next: merge #256, then 4.4 (#240) per stage8-step1-notes/join-quickload-map.md: measure a join (join-measure-dunwall-v2055a on the current candidate), then the join snapshot (scratchpad patch: host resends its NPC life roster to each new partner world, partner retries every 5 s, Kiscule log held while the partner loads, lab switch coop_join_snapshot), then host quickload. Door census: the world diff covers every openable and usable; in-mission diffs at each mission end come with the step 6 full run.",
+  "NextAction": "Stage 8 area 4.4 (#240, PR #257) is done on sharedload-v2065 (chapter 123): a mid-mission join ends equal (join-probe-dunwall-v2063a/c, twin v2063b red), a host load rewinds both worlds (hostload-dunwall-v2065a, twin v2065b red), a partner load is a host request (v2065c). Next: 4.5 (#241) far guards per stage8-step1-notes/far-guards-design.md: candidate keepawake-v2066 (native LOD level 6 request on host-bound NPCs far from the host and near the partner; source patch work/stage8/candidate-keepawake-v2066/source-change.diff) with the local test work/stage8/Test-ActivationRange-v2066.ps1, then handoff, anti-flap and death journal; then 4.6 (#242), step 5 (#243), step 6 (#244).",
   "LastGhidraFindings": [
     "RVA619380 creates/links equipment entity for existing inventory entry; no runtime mutation tested.",
     "RVA614c20 selects existing entries, not native insertion.",
