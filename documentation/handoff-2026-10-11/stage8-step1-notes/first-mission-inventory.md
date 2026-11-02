@@ -13,7 +13,7 @@
 | K5 | Co-op saves switch stalls in `profile_saving` | #263 | Open. Again in `firstmission-dunwall-v2099e` (Emily host, before the mission) |
 | K6 | The partner's presentation is not live in the scripted opening | ch. 95 (`1829a`) | Known; recheck what the partner sees at the start |
 | K7 | Ramsey and Alexi alive in a partner's fresh world after a mid-mission join | ch. 106 | Fixed by the join snapshot (#240, ch. 123). Recheck |
-| K8 | The user's and partner's own list | asked 2026-11-02 | Not received yet |
+| K8 | The user's and partner's own list | asked 2026-11-02 | **Not coming** (user, 2026-11-02: the mission was generally broken, and writing it up would take a day). Replaced by the own sweep in section 4 |
 
 ## 2. Measured (Run-FirstMission-v2095.sh)
 
@@ -84,4 +84,17 @@ In all five the saferoom digest failed on the host (M2) and the Meagan step was 
 
 ## 3. Done when
 
-The whole first mission plays through cleanly in all four pairings on two accounts, every diff equal, twice in a row on one candidate, and the user's own list is resolved or written down as known.
+The whole first mission plays through cleanly in all four pairings on two accounts, every diff equal, twice in a row on one candidate, and every sweep row in section 4 has passed or is written down as known.
+
+## 4. Own sweep (replaces K8)
+
+The user's report is "generally broken", so the scripted route alone is not enough: it starts both games on the mission in lab mode and has the host do the story. Real play differs in four ways, and each gets its own takes on the passing candidate, in all four pairings:
+
+| # | What real play does | Take shape | State |
+|---|---|---|---|
+| S1 | The partner joins from the co-op menu (product mode) mid-mission, not at the start | host plays to the bedroom, the VM joins from its menu, then the full route; diffs at every stage | To do |
+| S2 | The partner does the story beats (kills, Ramsey's loot, the ring, the safe room, Meagan) | the route with the partner as actor; diffs at every stage | To do |
+| S3 | Deaths and loads mid-mission (quickload, checkpoint reload, a death of either player) | the route with a load after mayhew and a partner death after the safe room; diffs after each rewind | To do |
+| S4 | What both players see | a recorded clip of both screens at each stage, reviewed for presence, duplicate or missing characters and stuck animations (visual acceptance, recorded separately) | To do |
+
+Each failure becomes an M row with its fix and mutation twin, as above.
