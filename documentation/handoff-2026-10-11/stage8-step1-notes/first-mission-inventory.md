@@ -10,7 +10,7 @@
 | K2 | The end-of-mission talk to Meagan did not register | `route-dunwall-lead-v1753e`, `v1755a`, `hoststory-lead-dunwall-v2024a`, `v2026b` | Passed from `hoststory-lead-dunwall-v2027a` on. Recheck |
 | K3 | The tower safe-room doors (`env_interiors_safe_door`, `_6`, `_9`) open on the host and stay closed on the partner | ch. 119 (still open after hoststory-v2027) | Open |
 | K4 | The partner's game had to answer the native choice screen in the first mission | ch. 126 | Fixed in nativechoice-v2088 (the co-op Character box asks; the native screen is answered) |
-| K5 | Co-op saves switch stalls in `profile_saving` | #263 | Open, seen in some lab takes |
+| K5 | Co-op saves switch stalls in `profile_saving` | #263 | Open. Again in `firstmission-dunwall-v2099e` (Emily host, before the mission) |
 | K6 | The partner's presentation is not live in the scripted opening | ch. 95 (`1829a`) | Known; recheck what the partner sees at the start |
 | K7 | Ramsey and Alexi alive in a partner's fresh world after a mid-mission join | ch. 106 | Fixed by the join snapshot (#240, ch. 123). Recheck |
 | K8 | The user's and partner's own list | asked 2026-11-02 | Not received yet |
@@ -25,8 +25,8 @@ The full first-mission route (casts, deaths, the bedroom, Mayhew, Ramsey and his
 | `firstmission-dunwall-v2095b` | Emily / Corvo | **Same as a**, value for value |
 | `firstmission-dunwall-v2095c` | Corvo / Corvo | **Failed: talk to Meagan not registered** (K2 again). Diffs equal through the ring locker; saferoom, balcony and streets 3 differences each (K3) |
 | `firstmission-dunwall-v2095d` | Emily / Emily | **Lost in setup** ("The credential is invalid"): a side script of mine polled the VM over PowerShell Direct during the take. Repeated as `firstmission-dunwall-v2099e` |
-| `firstmission-dunwall-v2099e` | Emily / Emily | queued (harness v2099 saves both games' mission follow and decision status at every step) |
-| `firstmission-dunwall-v2099f` | Corvo / Emily | queued (a again, for M1's follow status) |
+| `firstmission-dunwall-v2099e` | Emily / Emily | **Failed at the start: co-op saves did not switch on.** The host stayed in `profile_saving` (K5, #263), after the harness's retry too |
+| `firstmission-dunwall-v2099f` | Corvo / Emily | **Same as a** (M1 and K3, everything else equal). The follow status explains M1, below |
 
 Rechecks of section 1 (confirmed runtime):
 - **K1:** the ramsey-loot diff is equal in a, b and c (552 values), and the route's loot step registered.
@@ -37,7 +37,7 @@ New rows:
 
 | # | Problem | Evidence | State |
 |---|---|---|---|
-| M1 | **The partner does not follow the host into the Void.** The host's Continue is sent (D2MD) and the partner runs it, but its `RestartFromMemoryCheckpoint` reloads its own last streets checkpoint (load 2.8 s; its gameflow is back at `Task_DW_TalkToBoatCaptain`). Its both-ready hold then times out after 90 s (`timeout_other_map`), and no mission-follow load is logged in the VM's log. | a and b (confirmed runtime). The earlier passes (`hoststory-lead-dunwall-v2029a/b`) were lab takes in which the partner's own world led the transition | Open. Why mission follow did not load the host's mission is measured in v2099e/f |
+| M1 | **The partner does not follow the host into the Void.** The host's Continue is sent (D2MD) and the partner runs it, but its `RestartFromMemoryCheckpoint` reloads its own last streets checkpoint (load 2.8 s; its gameflow is back at `Task_DW_TalkToBoatCaptain`). Its both-ready hold then times out after 90 s (`timeout_other_map`), and no mission-follow load is logged in the VM's log. | a and b (confirmed runtime). The earlier passes (`hoststory-lead-dunwall-v2029a/b`) were lab takes in which the partner's own world led the transition | **Partly a harness artifact (confirmed runtime, v2099f):** mission follow was off in both games for the whole take (`enabled: false`). The harness turns it on only when the VM joins from its menu, and this route starts both games on the mission, while the product turns it on (`productMode`). The defect underneath stays: the partner's Continue reloads her own streets checkpoint, and only follow can take her to the host's mission, after the 90 s hold times out. The v2100 first-mission routes turn `coop_follow_host` on in both games at the start, as the product does |
 | M2 | The saferoom world diff failed on the host: probe exit 45 (usable catalog unreadable) | a and b; c's saferoom diff ran | Hypothesis: the host was in a load or scene at that moment. Harness-side; recheck in v2099e/f |
 | M3 | Partner-loss check at Edge of the World: one docks NPC's AI pause count rose 0 to 1 after the partner's game was killed | `progress-eotw-v2097a/b` (the twin too, so not the progression code) | v2098b: docks worker 770189828 (`worker_male_small_01`) kept it for 60 s. Control `m3control-eotw-v2101a` (no kill; the worker probed at the kill's moments) tells a native ambient pause from a leak in our partner-loss cleanup |
 
