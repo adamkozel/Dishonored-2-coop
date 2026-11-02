@@ -157,7 +157,7 @@ struct KisculeActionCount{std::string entity;std::uint32_t node=0,input=0,cls=0;
 struct KisculeActionEvent{std::uint64_t tick=0;std::uint32_t cls=0,node=0,input=0,count=0;char entity[64]{};const char* what="";};
 struct KisculePending{KisculeActionPacket packet{};std::uint64_t at=0;};
 struct KisculeMirror {
-    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,hostStoryGameOverUpdateBlocked=0,playerDamageLocal=0,playerDamageRefused=0,characterBranchRefused=0,hostStoryDressing=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,otherMap=0,dropped=0,threadMismatch=0;
+    std::uint64_t hostStoryBlocked=0,hostStoryAsked=0,hostStoryLeaked=0,hostStoryGameOverBlocked=0,hostStoryGameOverUpdateBlocked=0,playerDamageLocal=0,playerDamageRefused=0,characterBranchRefused=0,hostStoryDressing=0,hostStoryInFlow=0,resultScreenHeld=0,sequence=0,peerSequence=0,local=0,personal=0,sent=0,received=0,applied=0,suppressed=0,suppressFallback=0,refused=0,notFound=0,nested=0,identity=0,expired=0,joinHeld=0,joinQuiet=0,otherMap=0,dropped=0,threadMismatch=0;
     std::uint32_t dispatchThread=0;const char* result="idle";
     std::vector<KisculeActionCount> counts;std::vector<KisculeActionPacket> outgoingQueue;std::vector<KisculePending> pending;
     KisculeActionEvent events[256]{};std::uint64_t eventCount=0;
@@ -186,6 +186,16 @@ bool kisculeHostStoryTwinNoBlock=false;
 // opening cinematic twice while running such requests (hoststory-lead-dunwall-v2014c, v2016c).
 bool kisculeHostStoryAsk=true;
 bool kisculePlainGameplay(){return outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState;}
+// 2057 (#240): a partner's first run of a node goes to the host only after its world has had 10 s of plain gameplay.
+// A partner that joins mid-mission runs its own mission start while it loads, and the host ran 69 of those nodes
+// (ActionGameflowMission, ActionDoor, the coup and audience scenes) as partner-first requests (join-measure-dunwall-v2055a).
+// The service sets the clock each frame under kisculeLock; the dispatch reads it under the same lock.
+extern bool npcLifeJoinSnapshot;std::uint64_t kisculeSettleEpoch=~0ull;ULONGLONG kisculeSettleSince=0;
+void kisculeSettleTick(ULONGLONG tick){
+    if(kisculeSettleEpoch!=outgoing.worldEpoch){kisculeSettleEpoch=outgoing.worldEpoch;kisculeSettleSince=0;}
+    if(!kisculeSettleSince&&kisculePlainGameplay())kisculeSettleSince=tick;
+}
+bool kisculePartnerSettled(){return !npcLifeJoinSnapshot||kisculeSettleEpoch==outgoing.worldEpoch&&kisculeSettleSince&&GetTickCount64()-kisculeSettleSince>=10000;}
 // Any World class may be requested, by count: a node is requested whenever the partner reached it more often than the
 // host has run it (the host had already run the loot's task nodes 2899 and 2973 earlier on the route, so a one-time
 // request never went out, loot-trace-on-v2018e). A story-only list was too narrow: Ramsey's ring task follows an
@@ -357,7 +367,8 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
                 if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
         else if(c.requests<=c.executed){skip=true;++kisculeMirror.suppressed;kisculeEvent("suppressed",cls,entity,nodeId,input,c.executed);}
         else{++c.executed;++kisculeMirror.local;kisculeEvent("local",cls,entity,nodeId,input,c.executed);
-            const bool partnerFirst=localRole==1&&c.executed==1&&kisculePartnerScope(); // 1214jc (#183)
+            const bool partnerFirst=localRole==1&&c.executed==1&&kisculePartnerScope()&&kisculePartnerSettled(); // 1214jc (#183), 2057
+            if(localRole==1&&c.executed==1&&kisculePartnerScope()&&!partnerFirst)++kisculeMirror.joinQuiet;
             if(localRole==0||partnerFirst){KisculeActionPacket p{};p.role=localRole;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.executed;
             if(partnerFirst){p.reserved=kKisculePartnerFirst;kisculeEvent("partner_first",cls,entity,nodeId,input,1);}
             std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());
@@ -442,7 +453,7 @@ void serviceKisculeMirror(std::uint64_t tick){
     if((productMode||productAutoArm)&&localRole==1||productMode&&localRole==0){const bool want=localRole==0?productHostStory:coopControl.helloOk&&coopControl.peerHostStory;
         if(want!=kisculeHostStory){AcquireSRWLockExclusive(&kisculeLock);kisculeHostStory=want;ReleaseSRWLockExclusive(&kisculeLock);}}
     std::vector<KisculeActionPacket> send;std::vector<KisculePending> work;
-    AcquireSRWLockExclusive(&kisculeLock);send.swap(k.outgoingQueue);work.swap(k.pending);
+    AcquireSRWLockExclusive(&kisculeLock);kisculeSettleTick(tick);send.swap(k.outgoingQueue);work.swap(k.pending);
     ReleaseSRWLockExclusive(&kisculeLock);
     const bool connected=sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected;
     std::vector<KisculeActionPacket> later;
@@ -455,6 +466,10 @@ void serviceKisculeMirror(std::uint64_t tick){
     std::vector<KisculePending> keep;
     const bool loading=outgoing.gameLogicState==15||outgoing.pendingGameLogicState==15||outgoing.gameLogicState==0||!observedPlayer;
     for(auto& w:work){const auto& p=w.packet;
+        // 2055 (#240): while the partner loads, the host's log waits and its 60 s start in gameplay. A VM join loads for
+        // 170 to 180 s, so the host's log from before the join expired before the partner's world existed
+        // (join-measure-dunwall-v2055a: 77 expired, the throne room actors stayed in the partner's world).
+        if(localRole==1&&loading&&npcLifeJoinSnapshot){w.at=tick;++k.joinHeld;keep.push_back(w);continue;}
         if(tick-w.at>60000){++k.expired;k.result="expired";continue;}
         if(p.role==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&!kisculePlainGameplay()){keep.push_back(w);continue;} // stage 8.4.1: a partner's request waits for plain gameplay
         // A replay never runs on the mission result screen (logic 11), where the world is being torn down: the VM partner's game
@@ -582,8 +597,8 @@ void writeKisculeMirror(){
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
     AcquireSRWLockShared(&kisculeLock);const auto& k=kisculeMirror;
     fprintf(f,"{\"hostStory\":%s,\"hostStoryBlocked\":%llu,\"hostStoryAsked\":%llu,\"hostStoryLeaked\":%llu,\"hostStoryGameOverBlocked\":%llu,\"hostStoryGameOverUpdateBlocked\":%llu,\"playerDamageLocal\":%llu,\"playerDamageRefused\":%llu,\"characterBranchRefused\":%llu,\"hostStoryDressing\":%llu,\"hostStoryInFlow\":%llu,\"resultScreenHeld\":%llu,",kisculeHostStory?"true":"false",k.hostStoryBlocked,k.hostStoryAsked,k.hostStoryLeaked,k.hostStoryGameOverBlocked,k.hostStoryGameOverUpdateBlocked,k.playerDamageLocal,k.playerDamageRefused,k.characterBranchRefused,k.hostStoryDressing,k.hostStoryInFlow,k.resultScreenHeld);
-    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
-        kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
+    fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"role\":%u,\"dispatchThread\":%u,\"engineThread\":%lu,\"local\":%llu,\"personal\":%llu,\"sent\":%llu,\"received\":%llu,\"applied\":%llu,\"suppressed\":%llu,\"suppressFallback\":%llu,\"refused\":%llu,\"notFound\":%llu,\"nested\":%llu,\"unidentified\":%llu,\"expired\":%llu,\"joinHeld\":%llu,\"joinQuiet\":%llu,\"otherMap\":%llu,\"dropped\":%llu,\"threadMismatch\":%llu,\"pending\":%zu,\"counts\":%zu,\"events\":[",
+        kisculeMirrorActive()?"true":"false",k.result,localRole,k.dispatchThread,engineThread.load(),k.local,k.personal,k.sent,k.received,k.applied,k.suppressed,k.suppressFallback,k.refused,k.notFound,k.nested,k.identity,k.expired,k.joinHeld,k.joinQuiet,k.otherMap,k.dropped,k.threadMismatch,k.pending.size(),k.counts.size());
     const auto first=k.eventCount>256?k.eventCount-256:0;
     for(auto i=first;i<k.eventCount;++i){const auto& e=k.events[i%256];
         fprintf(f,"%s{\"tick\":%llu,\"what\":\"%s\",\"class\":\"%s\",\"entity\":\"%s\",\"node\":%u,\"input\":%u,\"count\":%u}",i==first?"":",",e.tick,e.what,e.cls<static_cast<std::uint32_t>(kisculeMirrorClassCount)?kisculeMirrorClasses[e.cls].name:e.cls>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&e.cls<kKisculeHostStoryBase+kKisculePolicyCount?kKisculePolicy[e.cls-kKisculeHostStoryBase].name:"?",e.entity,e.node,e.input,e.count);}

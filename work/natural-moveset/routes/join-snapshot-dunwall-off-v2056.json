@@ -1,0 +1,72 @@
+[
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_join_snapshot off"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_join_snapshot off"
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_bedroom",
+  "settle": 5000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_nearmayhew",
+  "settle": 4000
+ },
+ {
+  "do": "trigger",
+  "name": "ld_trigger_mayhew",
+  "settle": 6000
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "attack",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "max": 80,
+  "settle": 4000,
+  "behind": true
+ },
+ {
+  "do": "loot",
+  "name": "mortimer_ramsey",
+  "near": [
+   -44.1,
+   -120.1
+  ],
+  "settle": 6000,
+  "expect": 6
+ },
+ {
+  "do": "diff",
+  "tag": "join"
+ },
+ {
+  "do": "wait",
+  "ms": 60000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "join60",
+  "require": true
+ }
+]

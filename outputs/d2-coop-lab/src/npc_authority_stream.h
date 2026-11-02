@@ -488,8 +488,12 @@ void beginNpcStream(ULONGLONG tick){
     npcAuthorityStreamActive=true;npcStreamResult="negotiating";
 }
 // 1214ad: life roster of unbound NPCs.
-struct NpcLifeEntry{std::string key;unsigned sent=0,desired=0;bool applied=true;unsigned attempts=0;};
+struct NpcLifeEntry{std::string key;unsigned sent=0,desired=0;bool applied=true;unsigned attempts=0;ULONGLONG lastAt=0;};
 std::vector<NpcLifeEntry> npcLifeEntries;std::uint64_t npcLifeEpoch=~0ull,npcLifeSequence=0,npcLifeSent=0,npcLifeReceived=0,npcLifeApplied=0,npcLifeRefused=0,npcLifeHostStoryRefused=0;
+// 2055 (#240): the join snapshot. The host sends its whole roster again to each new partner world (a new peer session or
+// world epoch), and the partner retries a state it could not apply every 5 s, 40 tries at most (campaign-join-vm-v1703a:
+// deaths the host sent before a rejoin were never sent again; route-dunwall-join-v1682a: Alexi gave up after 5).
+std::uint64_t npcLifePeerSession=0,npcLifePeerEpoch=~0ull,npcLifeSnapshots=0;bool npcLifeJoinSnapshot=true;
 bool applyNpcLife(const NativeNpcLife& n,unsigned state);
 NpcLifeEntry& npcLifeEntry(const std::string& key){
     for(auto& e:npcLifeEntries)if(e.key==key)return e;
@@ -511,12 +515,15 @@ bool sendNpcLife(const NativeNpcLife& n){
 void processNpcLife(const NpcCatalogSnapshot& s){
     if(!npcAuthorityStreamActive||!npcStreamContext(GetTickCount64()))return;
     if(npcLifeEpoch!=outgoing.worldEpoch){npcLifeEntries.clear();npcLifeEpoch=outgoing.worldEpoch;}
+    if(!localRole&&npcLifeJoinSnapshot&&(npcLifePeerSession!=npcStreamPeerSession||npcLifePeerEpoch!=npcStreamPeerEpoch)){
+        npcLifePeerSession=npcStreamPeerSession;npcLifePeerEpoch=npcStreamPeerEpoch;for(auto& e:npcLifeEntries)e.sent=0;++npcLifeSnapshots;}
+    const ULONGLONG tick=GetTickCount64();
     for(const auto& n:s.life){
         if(npcLifeBound(n.spawner,n.definition))continue;
         auto& e=npcLifeEntry(n.spawner+"|"+n.definition);
-        if(!e.applied&&e.attempts<5){
+        if(!e.applied&&(e.attempts<5||npcLifeJoinSnapshot&&e.attempts<40&&tick-e.lastAt>=5000)){
             if(!npcLifeApplies(n.state,e.desired)){e.applied=true;}
-            else{++e.attempts;if(applyNpcLife(n,e.desired)){e.applied=true;++npcLifeApplied;e.sent=(std::max)(e.sent,e.desired);continue;}++npcLifeRefused;}
+            else{++e.attempts;e.lastAt=tick;if(applyNpcLife(n,e.desired)){e.applied=true;++npcLifeApplied;e.sent=(std::max)(e.sent,e.desired);continue;}++npcLifeRefused;}
         }
         if(n.state>e.sent&&sendNpcLife(n))e.sent=n.state;
     }
@@ -878,7 +885,7 @@ void writeNpcStream(){
     }
     SteamNetConnectionRealTimeStatus_t status{};const bool qos=sockets&&connection&&sockets->GetConnectionRealTimeStatus(connection,&status,0,nullptr)==k_EResultOK;
     const auto& s=npcStreamSessionState;
-    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"lifeHostStoryRefused\":%llu,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"vanishedDead\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcLifeHostStoryRefused,npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcVanishedDead,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
+    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"lifeHostStoryRefused\":%llu,\"lifeSnapshots\":%llu,\"joinSnapshot\":%s,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"vanishedDead\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcLifeHostStoryRefused,npcLifeSnapshots,npcLifeJoinSnapshot?"true":"false",npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcVanishedDead,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
     fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu,\"phaseBlips\":%llu,\"phaseBlipEnds\":%llu,\"phaseBlip\":[%u,%u,%u,%u,%u,%u,%u,%u,%u,%u]}",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost,npcPhaseBlips,npcPhaseBlipEnds,
         npcPhaseBlipFields[0],npcPhaseBlipFields[1],npcPhaseBlipFields[2],npcPhaseBlipFields[3],npcPhaseBlipFields[4],npcPhaseBlipFields[5],npcPhaseBlipFields[6],npcPhaseBlipFields[7],npcPhaseBlipFields[8],npcPhaseBlipFields[9]);
