@@ -233,10 +233,47 @@ The door channels (`door_sync.h`, `door_protocol.h`, since 1214jf) already follo
 
 The twin's harness judges the open state only at the end; a later version should also flag a disagreement during the window.
 
+**A partner opens a safe (v2049a).** Harness `Route-MissionVM-v2049` adds a `partnerdial` step. The VM partner presses each listed dial (X) from stands around it, only while its native use focus is on the dial. The first press that turns a dial shows which lock and which digit it turns, from the partner's safe-codes status; the dial is then pressed until that digit is the host's. Route `safe-partner-institute-v2049`: The Good Doctor from its start, Vasco's safe (`ld_combinaison_numbers_15/17/16`).
+
+| Take | Candidate | Result |
+|---|---|---|
+| `safe-partner-institute-v2049a` | replaydecision-v2047d | **The partner's safe opened with the host's code** (lock 2241413328: host code 488, partner code 488, partner Position 488; 3 focus misses). **The world diff fails, 4 values:** the three dials (host `[2,1]`, `[5,1]`, `[7,1]`; partner `[4,0]`, `[8,0]`, `[8,0]`) and `ld_safe_main_01_door` (host `[0,0]`, partner `[1,1]`). The partner's dial turns never reached the host, so the host's lock and door did not move (confirmed runtime) |
+
+**Why (confirmed static, helper reading):** none of the three partner-to-host usable paths takes a safe. Usable sync keeps two-state toggles and drops names with "safe" (`usable_catalog.h`). The use mirror drops "safe", "digit" and "combinaison" (`use_mirror_protocol.h`). Door sync covers ArkDoor openables, and the safe door is an `arkCpntUsableWithStateList`. The lock graphs are nested Kiscule instances, which host story does not identify, so they run locally in each world. The world diff's usable pair is `[stage, enabled byte]`.
+
+**Candidate safedials-v2050 (D2SD):**
+- After the start positions, a turn of a dial in the partner's world is sent to the host with the state the partner reached.
+- The host turns its own dial there one native stage per service, through the indexed request with the stage events on (`requestNativeUsableIndex`). Its own lock reads each step, sets Position and opens its own door. A disabled dial is refused. The host rechecks its safes 500 ms after a step.
+- The partner follows the host's dial states one stage at a time with the same request, except on a dial it turned in the last 5 s. A turn the host refuses is undone in the partner's world.
+- Counters in `.safe-codes.json`: `dialTurnsSent`, `dialRequestsReceived`, `dialRequestsRefused`, `dialStepsApplied`, `dialStepsFollowed`, `dialStepsRefused`.
+- Lab switch: `coop_safe_dials on|off` on the host. safedials-v2051 adds it to the DLL's own lab command allowlist.
+- Gap: the partner's own lock can still open its door a moment before the host's. The partner's native use is not held.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `safe-partner-institute-v2050a` | safedials-v2050 | Harness fail: dial `_15` reached the host's digit, but the partner's use focus missed dial `_17` at most stands. Harness v2051 sweeps five bearings at each stand |
+| `safe-partner-institute-v2050b` | safedials-v2050 | Refused: `coop_safe_dials` was not in `Send-D2Command`'s command set |
+| `safe-partner-institute-v2051a` | safedials-v2050 | **Pass.** Code 601. Host: 13 requests received, 13 native steps applied. Both locks at 601, world diff equal (2158) |
+| `safe-partner-institute-v2051b` | safedials-v2050 | Not a twin: the DLL's own allowlist refused `coop_safe_dials off`, so the host kept applying the turns (equal) |
+| `safe-partner-institute-v2052a` | safedials-v2051 | **Pass.** Code 488. Host: 17 received, 17 applied. Both locks at 488, world diff equal (2158) |
+| `safe-partner-institute-v2052b` | safedials-v2051 | **Mutation twin, red as required.** The host refused all 10 requests. The partner followed the host back 30 times, so its lock stayed at the host's 778 and its safe stayed shut |
+
+### The Jindosh lock (2053)
+
+**Candidate jindoshwheels-v2053:** the Dust District's Jindosh wheels (`ld_wheel_family_N`, `ld_wheel_herloom_N`, 2 to 10 states) join the safe dials in the dial reader (`safeDialUsable`). A partner's wheel turn is a D2SD request, and the host and partner step at the wheel's own state count. The harness step `partnerjindosh` presses each wheel in the partner's world until the host's lock (`tools/diag/d2_jindosh_lock.py`) reads seat i at index i, then needs the host's index sum 31 and a required world diff.
+
+**Confirmed runtime (v2053a):** a wheel's state order is not its index order. `ld_wheel_family_1` read 4, 2, 5, 3, 1 on the host over four of the partner's presses, so the host applies the partner's states, not indices.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `jindosh-partner-dust-v2053a` | jindoshwheels-v2053 | Harness fail: 9 of 10 wheels at their seat on the host (20 requests received, 20 applied, none refused). The partner's use focus left `ld_wheel_herloom_5` after two presses. Harness v2054 adds pitches 40 and -20 and stands at 0.8 and 1.8 m |
+| `jindosh-partner-dust-v2053b` | jindoshwheels-v2053 | **Mutation twin, red as required.** With `coop_safe_dials off` the host refused all 8 requests, and the partner followed the host back 7 times, so the host's `ld_wheel_family_1` never reached index 1 |
+| `jindosh-partner-dust-v2054a` | jindoshwheels-v2053 | **Pass** (harness v2054). The host's lock reached index sum 31 from the partner's turns: 16 requests received, 16 applied, none refused. The partner followed the host 4 times. World diff equal (2325) |
+
 ## Still to do in area 4.3
 
 - **Note text on screen:** check that the partner's safe note and Jindosh riddle show the host's values. This is visual acceptance, recorded separately.
-- **A partner opens a safe with the host's code**, and solves the Jindosh lock with the host's answer.
+- Done: a partner opens a safe (v2052a) and solves the Jindosh lock (v2054a) under the host.
 - **Other lock decls** besides `3_digits_lock` and the Jindosh lock, if any.
-- **Door families outside the catalogue** (vaults, linked, blocked and broken doors, quest devices) under the host: a census of where they differ.
+- **Door families outside the catalogue** (vaults, linked, blocked and broken doors, quest devices). The world diff covers every openable (`[current, pending, locked, broken]`) and every usable of the world, not only the catalogue (`runtime_probe.cpp --world-digest`, confirmed static). In-mission diffs so far: A Crack in the Slab (51 doors, 289 usables) and the Institute (56 doors, 244 usables), equal in campaign v2043a. The step 6 full run adds an in-mission diff before each mission's end, which makes this census.
 - Done: the full campaign v2043 (above); the release notes draft documents `safe_codes=0` with `host_story=0` and `items_per_player=0` (troubleshooting).

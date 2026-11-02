@@ -1,0 +1,9 @@
+{
+ "candidate": "safedials-v2050",
+ "card": 239,
+ "dll": "68A9EB34C098C662E78C1FB55A7B5F0B48E44850E60F173A4C299126EE662334",
+ "previousCandidate": "replaydecision-v2047d",
+ "sourceCommit": "f7f9dc299f67858334fbd4c6cdb495cf92ab45d9",
+ "sourceDiff": "source-change.diff",
+ "change": "replaydecision-v2047d plus: a partner safe dial turn is sent to the host (D2SD); the host turns its own dial there one native stage per service (events on, so its own lock opens its own door) and checks its safes 500 ms after a step; the partner follows the host dial states one stage at a time except on a dial it turned in the last 5 s. Lab coop_safe_dials on|off. safe-partner-institute-v2049a: the partner opened its safe in its own world only"
+}

@@ -1101,6 +1101,11 @@ void exchangePoses(ULONGLONG tick) {
             else ++safeCodeSync.refused;
             messages[i]->Release();continue;
         }
+        if(magic==kSafeDialRequestMagic) { // stage 8.4.3 (#239), 2050: D2SD, a partner's safe dial turn
+            if(messages[i]->m_cbSize==sizeof(SafeDialRequest)){SafeDialRequest p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveSafeDialRequest(p);}
+            else ++safeCodeSync.dialRequestsRefused;
+            messages[i]->Release();continue;
+        }
         if(magic==kJindoshMagic) { // stage 8.4.3 (#239): D2JL, the host's Jindosh lock answer
             if(messages[i]->m_cbSize==sizeof(JindoshPacket)){JindoshPacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveJindosh(p);}
             else ++jindoshSync.refused;
@@ -1741,6 +1746,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_difficulty_sync on")||!std::strcmp(text,"coop_difficulty_sync off"))return true; // 1214kb (#177)
     if(!std::strcmp(text,"coop_story_flags on")||!std::strcmp(text,"coop_story_flags off")||!std::strcmp(text,"coop_story_flags flip"))return true; // 1214kj-kk (#220)
     if(!std::strcmp(text,"coop_safe_codes on")||!std::strcmp(text,"coop_safe_codes off"))return true; // stage 8.4.3 (#239)
+    if(!std::strcmp(text,"coop_safe_dials on")||!std::strcmp(text,"coop_safe_dials off"))return true; // stage 8.4.3 (#239), 2050
     if(!std::strcmp(text,"coop_mission_decision on")||!std::strcmp(text,"coop_mission_decision off"))return true; // stage 8 (#253)
     if(!std::strncmp(text,"coop_difficulty_set ",20)){const char* v=text+20;return v[0]>='0'&&v[0]<='4'&&!v[1];}
     // 1214jt (#177, lab): the native difficulty override cvar, -1 (off) or a preset index 0-4.
@@ -1955,6 +1961,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_story_flags on")||!std::strcmp(request.command,"coop_story_flags off")){storyFlagSync.enabled=!std::strcmp(request.command,"coop_story_flags on");return;}
     if(!std::strcmp(request.command,"coop_story_flags flip")){storyFlagSync.flipRequest=true;return;} // 1214kk (#220, test fixture)
     if(!std::strcmp(request.command,"coop_safe_codes on")||!std::strcmp(request.command,"coop_safe_codes off")){safeCodeSync.enabled=!std::strcmp(request.command,"coop_safe_codes on");safeCodeSync.lastValid=false;return;}
+    if(!std::strcmp(request.command,"coop_safe_dials on")||!std::strcmp(request.command,"coop_safe_dials off")){safeCodeSync.dialTurns=!std::strcmp(request.command,"coop_safe_dials on");safeCodeSync.dialTargets.clear();return;}
     if(!std::strcmp(request.command,"coop_mission_decision on")||!std::strcmp(request.command,"coop_mission_decision off")){missionDecision.enabled=!std::strcmp(request.command,"coop_mission_decision on");return;} // stage 8 (#253)
     if(!std::strncmp(request.command,"coop_difficulty_set ",20)){const char* v=request.command+20;if(v[0]>='0'&&v[0]<='4'&&!v[1])difficultySync.labSet=v[0]-'0';return;}
     if(!std::strncmp(request.command,"coop_lab_ai_pause ",18)&&labAiPauseAllowed(request.command+18,labAiPauseSpawner,&labAiPauseSeconds)){labAiPauseRequest=1;return;}
