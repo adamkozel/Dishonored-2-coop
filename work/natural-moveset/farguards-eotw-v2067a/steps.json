@@ -1,0 +1,84 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "partner",
+  "pos": [
+   62.226,
+   4.468,
+   34.6
+  ]
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 2000
+ },
+ {
+  "do": "probe",
+  "mode": "--npc-activity"
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 2000
+ },
+ {
+  "do": "probe",
+  "mode": "--npc-activity"
+ },
+ {
+  "do": "diff",
+  "tag": "far",
+  "require": true
+ },
+ {
+  "do": "partnerattack",
+  "name": "addermirestation_entrance_guard_02",
+  "near": [
+   62.226,
+   4.468,
+   34.6
+  ]
+ },
+ {
+  "do": "wait",
+  "ms": 10000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "kill",
+  "require": true
+ },
+ {
+  "do": "probe",
+  "mode": "--npc-activity"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   62.226,
+   4.468,
+   34.6
+  ]
+ },
+ {
+  "do": "wait",
+  "ms": 30000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "end",
+  "require": true
+ }
+]

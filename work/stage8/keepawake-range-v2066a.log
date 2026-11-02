@@ -1,0 +1,148 @@
+{
+  "scope": "Keep-awake on Edge of the World (2066, #241): spawn, partner far with keep-awake on, partner far with it off (twin); Dunwall fixture restored.",
+  "failure": "Command is outside the bounded native research command set.",
+  "passed": false,
+  "phases": [
+    {
+      "clientStream": {
+        "enabled": true,
+        "result": "active",
+        "reloadPending": false,
+        "reloadReady": false,
+        "reloads": 0,
+        "rearms": 0,
+        "menuSuspended": false,
+        "menuSuspensions": 0,
+        "menuResumes": 0,
+        "menuPausedMs": 0,
+        "ignored": 0,
+        "acquired": 42,
+        "released": 18,
+        "retired": 0,
+        "lost": 0,
+        "phaseBlips": 0,
+        "phaseBlipEnds": 0,
+        "phaseBlip": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "failedReads": 4,
+      "samples": 30,
+      "hostStream": {
+        "enabled": true,
+        "result": "active",
+        "reloadPending": false,
+        "reloadReady": false,
+        "reloads": 0,
+        "rearms": 0,
+        "menuSuspended": false,
+        "menuSuspensions": 0,
+        "menuResumes": 0,
+        "menuPausedMs": 0,
+        "ignored": 0,
+        "acquired": 0,
+        "released": 0,
+        "retired": 0,
+        "lost": 0,
+        "phaseBlips": 0,
+        "phaseBlipEnds": 0,
+        "phaseBlip": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "phase": "spawn",
+      "seconds": 30
+    },
+    {
+      "clientStream": {
+        "enabled": true,
+        "result": "active",
+        "reloadPending": false,
+        "reloadReady": false,
+        "reloads": 0,
+        "rearms": 0,
+        "menuSuspended": false,
+        "menuSuspensions": 0,
+        "menuResumes": 0,
+        "menuPausedMs": 0,
+        "ignored": 0,
+        "acquired": 66,
+        "released": 18,
+        "retired": 0,
+        "lost": 0,
+        "phaseBlips": 0,
+        "phaseBlipEnds": 0,
+        "phaseBlip": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "failedReads": 10,
+      "samples": 60,
+      "hostStream": {
+        "enabled": true,
+        "result": "active",
+        "reloadPending": false,
+        "reloadReady": false,
+        "reloads": 0,
+        "rearms": 0,
+        "menuSuspended": false,
+        "menuSuspensions": 0,
+        "menuResumes": 0,
+        "menuPausedMs": 0,
+        "ignored": 0,
+        "acquired": 0,
+        "released": 0,
+        "retired": 0,
+        "lost": 0,
+        "phaseBlips": 0,
+        "phaseBlipEnds": 0,
+        "phaseBlip": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "phase": "far",
+      "seconds": 60
+    }
+  ]
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\stage8\Test-ActivationRange-v2066.ps1:91[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  91 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mCommand is outside the bounded native research command set.[0m

@@ -1749,6 +1749,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_safe_dials on")||!std::strcmp(text,"coop_safe_dials off"))return true; // stage 8.4.3 (#239), 2050
     if(!std::strcmp(text,"coop_join_snapshot on")||!std::strcmp(text,"coop_join_snapshot off"))return true; // stage 8.4.4 (#240), 2055
     if(!std::strcmp(text,"coop_shared_load on")||!std::strcmp(text,"coop_shared_load off"))return true; // stage 8.4.4 (#240), 2065
+    if(!std::strcmp(text,"coop_npc_keep_awake on")||!std::strcmp(text,"coop_npc_keep_awake off"))return true; // stage 8.4.5 (#241), 2066
     if(!std::strcmp(text,"coop_mission_decision on")||!std::strcmp(text,"coop_mission_decision off"))return true; // stage 8 (#253)
     if(!std::strncmp(text,"coop_difficulty_set ",20)){const char* v=text+20;return v[0]>='0'&&v[0]<='4'&&!v[1];}
     // 1214jt (#177, lab): the native difficulty override cvar, -1 (off) or a preset index 0-4.
@@ -1963,6 +1964,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_story_flags on")||!std::strcmp(request.command,"coop_story_flags off")){storyFlagSync.enabled=!std::strcmp(request.command,"coop_story_flags on");return;}
     if(!std::strcmp(request.command,"coop_story_flags flip")){storyFlagSync.flipRequest=true;return;} // 1214kk (#220, test fixture)
     if(!std::strcmp(request.command,"coop_safe_codes on")||!std::strcmp(request.command,"coop_safe_codes off")){safeCodeSync.enabled=!std::strcmp(request.command,"coop_safe_codes on");safeCodeSync.lastValid=false;return;}
+    if(!std::strcmp(request.command,"coop_npc_keep_awake on")||!std::strcmp(request.command,"coop_npc_keep_awake off")){npcKeepAwake=!std::strcmp(request.command,"coop_npc_keep_awake on");return;}
     if(!std::strcmp(request.command,"coop_shared_load on")||!std::strcmp(request.command,"coop_shared_load off")){checkpointSharedLoad=!std::strcmp(request.command,"coop_shared_load on");return;}
     if(!std::strcmp(request.command,"coop_join_snapshot on")||!std::strcmp(request.command,"coop_join_snapshot off")){npcLifeJoinSnapshot=!std::strcmp(request.command,"coop_join_snapshot on");return;}
     if(!std::strcmp(request.command,"coop_safe_dials on")||!std::strcmp(request.command,"coop_safe_dials off")){safeCodeSync.dialTurns=!std::strcmp(request.command,"coop_safe_dials on");safeCodeSync.dialTargets.clear();return;}

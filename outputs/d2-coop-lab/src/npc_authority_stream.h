@@ -75,6 +75,7 @@ struct NpcAuthorityChannel {
     NpcAiLease lease{};NpcRenderIdentity render{};NpcPoseBuffer buffer{};
     std::uint64_t arm=0,peerArm=0,rig=0,peerSequence=0,sequence=0;
     unsigned peerHandle=0;
+    int keepAwake=-1;std::uintptr_t keepAwakeComponent=0; // 2066 (#241): the host's LOD request id and the NPC's LOD component
     ULONGLONG started=0,helloAt=0,readyAt=0,peerAt=0,poseAt=0,lastSend=0,lastCheck=0;
     unsigned lifecycleDiff=0;
     // 1113 corpse authority: after a shared death the host streams the corpse for
@@ -230,12 +231,42 @@ void writeNpcStreamTraces(FILE* f){
         npcClientForcedLeases,npcClientForcedReady,npcClientForcedStopped);
     fprintf(f,",\"leaseAcquireStep\":\"%s\",\"leaseAcquireFlags\":[%u,%u,%u]",npcLeaseAcquireStep,npcLeaseAcquireFlags[0],npcLeaseAcquireFlags[1],npcLeaseAcquireFlags[2]); // 1214iv
     writeNpcStreamTraceRing(f,"stopTraces",npcStopTraces,npcStopTraceNext);writeNpcStreamTraceRing(f,"helloTraces",npcHelloTraces,npcHelloTraceNext);}
+// 2066 (#241): keep-awake. The engine pauses an NPC's AI at LOD level 7: not rendered and more than 50 m from the camera,
+// which is the host's only (activation-range-v2001a: the host's guards near a far partner were 100 % paused, so the
+// partner's replicas stood frozen). A bound NPC more than 50 m from the host and within 55 m of the partner gets a native
+// LOD request at level 6 on its LOD component (descriptor 0x39b4480; arkCpntPossession::Begin asks the same component for
+// level 0): acquire 0x720780(component, &id, name, level), release 0x721490(component, {2, id}); the component's entity
+// is at +0x10 and the lowest requested level becomes the entity's clamp (+0x29c, 0x879ae0; d2-ghidra, confirmed static).
+// Released when the host is back within 40 m, the partner beyond 70 m, or the channel stops. Lab switch coop_npc_keep_awake.
+bool npcKeepAwake=true;std::uint64_t npcKeepAwakeHeld=0,npcKeepAwakeReleased=0,npcKeepAwakeRefused=0;
+float npcDistanceSq(const float* a,const float* b){float d=0;for(unsigned k=0;k<3;++k){const float v=a[k]-b[k];d+=v*v;}return d;}
+void npcKeepAwakeRelease(NpcAuthorityChannel& c){
+    if(c.keepAwake<0)return;const auto actor=c.lease.binding.npc.actor;std::uintptr_t owner=0;
+    if(c.keepAwakeComponent&&nativeMutationAllowed&&GetCurrentThreadId()==engineThread.load()&&actor&&
+       worldIdentityEntity(memoryRead,observedGame,c.lease.binding.npc.handle)==actor&&memoryRead(c.keepAwakeComponent+0x10,&owner,8)&&owner==actor){
+        std::uint32_t handle[2]{2u,static_cast<std::uint32_t>(c.keepAwake)};
+        reinterpret_cast<std::uint64_t(*)(std::uintptr_t,void*)>(gameImage+0x721490)(c.keepAwakeComponent,handle);++npcKeepAwakeReleased;}
+    c.keepAwake=-1;c.keepAwakeComponent=0;
+}
+void npcKeepAwakeService(NpcAuthorityChannel& c,const float* position){
+    if(localRole||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    const float host=npcDistanceSq(position,outgoing.position),partner=npcDistanceSq(position,remote.position);
+    if(c.keepAwake>=0){if(!npcKeepAwake||host<40.f*40.f||partner>70.f*70.f)npcKeepAwakeRelease(c);return;}
+    if(!npcKeepAwake||host<=50.f*50.f||partner>55.f*55.f)return;
+    const auto actor=c.lease.binding.npc.actor;std::uintptr_t owner=0;
+    if(!actor||worldIdentityEntity(memoryRead,observedGame,c.lease.binding.npc.handle)!=actor){++npcKeepAwakeRefused;return;}
+    const auto component=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,void*,int)>(gameImage+0x877720)(actor,gameImage+0x39b4480,2);
+    if(!component||!memoryRead(component+0x10,&owner,8)||owner!=actor){++npcKeepAwakeRefused;return;}
+    std::int32_t id=-1;reinterpret_cast<void*(*)(std::uintptr_t,void*,const char*,int)>(gameImage+0x720780)(component,&id,"d2coop::KeepAwake",6);
+    if(id<0){++npcKeepAwakeRefused;return;}
+    c.keepAwake=id;c.keepAwakeComponent=component;++npcKeepAwakeHeld;
+}
 void stopNpcChannel(NpcAuthorityChannel& c,const char* reason,bool notify=true){
     if(!c.enabled)return;clearNpcPresentation(c.arm);
     if(c.corpsePhysics&&npcCarrySuppressed(c,GetTickCount64())){c.corpsePhysics=0;++npcCarrySuppression.physicsSkips;}
     npcPhysicsRelease(c);
     if(notify&&c.peerArm)sendNpcControl(c,NpcAuthorityMessage::Stop);
-    releaseNpcAiLease(c.lease);
+    releaseNpcAiLease(c.lease);npcKeepAwakeRelease(c);
     auto& s=npcStreamSessionState;s.released+=c.lease.released;s.retired+=c.lease.retired;s.lost+=c.lease.lost;
     {const ULONGLONG now=GetTickCount64();npcStreamTraceAdd(npcStopTraces,npcStopTraceNext,now,c.lease.binding.npc.handle,static_cast<unsigned>(now>c.started?now-c.started:0),
         c.ready,c.peerArm!=0,reason,c.lease.binding.npc.spawnerName.c_str());} // 1214it (#180)
@@ -290,6 +321,9 @@ void beforeNpcNativeLoad(){
 // retires channels whose NPC is beyond 75 m of both players (Stop to the
 // client). The client binds only on a host Hello, so both sets are the host's.
 constexpr float kNpcRelevanceAdd=55.f,kNpcRelevanceDrop=75.f;constexpr unsigned kNpcRelevanceMax=24;
+// 2067 (#241): anti-flap. The bind and drop radii are 36 % apart and the drop scan runs every 2 s; an eviction also waits
+// until the bind is 1.5 s old.
+constexpr ULONGLONG kNpcRelevanceDwellMs=1500;std::uint64_t npcRelevanceDwellHeld=0;
 constexpr float kNpcCivilianRelevanceAdd=15.f,kNpcCivilianRelevanceDrop=20.f; // 1214ey (#113)
 inline bool npcCivilian(const NativeNpcAuthority& n){return n.ai[0].kind==NativeAiKind::DecisionCivilian;}
 ULONGLONG npcRelevanceAt=0;std::uint64_t npcRelevanceScans=0,npcRelevanceAdded=0,npcRelevanceDropped=0,npcRelevanceEvicted=0,npcClientBound=0,npcClientBindRefused=0;
@@ -390,6 +424,7 @@ void addRelevantNpcs(std::vector<NativeNpcAuthority> catalog,ULONGLONG tick){
     for(unsigned i:order){const auto& n=catalog[i];NpcAuthorityChannel* evict=nullptr;
         if(bound>=kNpcRelevanceMax){unsigned worst=0;int worstAt=-1;
             for(unsigned j=catalog.size();j<owners.size();++j){auto* c=owners[j]?channelByArm(owners[j]):nullptr;if(!c||c->localPaired||c->hostPairedLease||c->hostPairedFollow)continue;
+                if(tick-c->started<kNpcRelevanceDwellMs){++npcRelevanceDwellHeld;continue;} // 2067 (#241): anti-flap, a bind lasts at least 1.5 s
                 if(npcCarrySuppressed(*c,GetTickCount64())){++npcCarrySuppression.evictSkips;continue;}
                 if(worstAt<0||priority[j]>worst){worst=priority[j];worstAt=int(j);}}
             if(worstAt<0||!npcRelevanceDisplaces(priority[i],worst))break;
@@ -411,7 +446,8 @@ void refreshNpcRelevance(ULONGLONG tick){
     for(auto& c:npcChannels){if(!c.enabled)continue;NativeNpcAuthority fresh{};
         if(!readNativeNpcAuthority(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,c.lease.binding.npc.handle,fresh))continue;
         const float drop=npcCivilian(fresh)&&!npcStoryDefinition(fresh.npc.definition)&&!c.localPaired&&!c.hostPairedLease&&!c.hostPairedFollow?kNpcCivilianRelevanceDrop:kNpcRelevanceDrop;
-        if(npcNearestPlayerSq(fresh.npc.position)>drop*drop){stopNpcChannel(c,"relevance_left");++npcRelevanceDropped;}}
+        if(npcNearestPlayerSq(fresh.npc.position)>drop*drop){stopNpcChannel(c,"relevance_left");++npcRelevanceDropped;continue;}
+        npcKeepAwakeService(c,fresh.npc.position);}
     npcCatalogRequest(); // 1214aa: also at the cap, so a nearer NPC can displace a far one
 }
 // Client: bind the NPC named by a host Hello from the current eligible catalog.
@@ -885,7 +921,7 @@ void writeNpcStream(){
     }
     SteamNetConnectionRealTimeStatus_t status{};const bool qos=sockets&&connection&&sockets->GetConnectionRealTimeStatus(connection,&status,0,nullptr)==k_EResultOK;
     const auto& s=npcStreamSessionState;
-    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"lifeHostStoryRefused\":%llu,\"lifeSnapshots\":%llu,\"joinSnapshot\":%s,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"vanishedDead\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcLifeHostStoryRefused,npcLifeSnapshots,npcLifeJoinSnapshot?"true":"false",npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcVanishedDead,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
+    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"lifeHostStoryRefused\":%llu,\"keepAwake\":%s,\"keepAwakeHeld\":%llu,\"keepAwakeReleased\":%llu,\"keepAwakeRefused\":%llu,\"dwellHeld\":%llu,\"lifeSnapshots\":%llu,\"joinSnapshot\":%s,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"vanishedDead\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcLifeHostStoryRefused,npcKeepAwake?"true":"false",npcKeepAwakeHeld,npcKeepAwakeReleased,npcKeepAwakeRefused,npcRelevanceDwellHeld,npcLifeSnapshots,npcLifeJoinSnapshot?"true":"false",npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcVanishedDead,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
     fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu,\"phaseBlips\":%llu,\"phaseBlipEnds\":%llu,\"phaseBlip\":[%u,%u,%u,%u,%u,%u,%u,%u,%u,%u]}",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost,npcPhaseBlips,npcPhaseBlipEnds,
         npcPhaseBlipFields[0],npcPhaseBlipFields[1],npcPhaseBlipFields[2],npcPhaseBlipFields[3],npcPhaseBlipFields[4],npcPhaseBlipFields[5],npcPhaseBlipFields[6],npcPhaseBlipFields[7],npcPhaseBlipFields[8],npcPhaseBlipFields[9]);
