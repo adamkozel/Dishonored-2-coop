@@ -47,3 +47,19 @@ Step 5 measures partner movement in numbers, gives the first mission's character
 - Lab switch: `coop_native_choice auto|manual`. Status file: `.native-choice.json`.
 
 **Harness v2084:** it presses nothing on the partner's logic 14 and fails if that screen is still up after 25 s; `-NativeChoiceManual` is the twin. The takes (`Run-NativeChoice-v2084.sh`) are a partner Corvo with an Emily host, a partner Emily with a Corvo host, and the manual twin.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `animquality-eotw-v2083b` | nativechoice-v2084 | Harness fail: the NPC-baseline step has no inputs, and `@($null)` sent one 0 ms input. Harness v2085 skips empty inputs |
+| `nativechoice-dunwall-v2084a` | nativechoice-v2084 | **Fail:** the partner was meant to play Corvo and ended as Emily. Her service saw logic 14 but never answered (`answered 0`): the screen left in under 2.5 s. **Cause (hypothesis, consistent with ch108):** the harness's cutscene skip confirms the current selection, which is Emily by default |
+| `nativechoice-dunwall-v2084b` | nativechoice-v2084 | "Pass", but not evidence: Emily is the default selection. Logic 14 was seen, not answered |
+| `nativechoice-dunwall-v2084c` | nativechoice-v2084 | **Twin (`coop_native_choice manual`), red as required:** the partner was meant to play Corvo and ended as Emily |
+
+**Candidate nativechoice-v2085:**
+- From the first frame of logic 14, the selection is held at her pick, so any confirmation, a skip included, takes her character (`held` counter).
+- The explicit confirm still follows after 2.5 s.
+- The backstop (check the character in gameplay, else `SwitchCharacter`) runs after any screen she saw.
+
+**Harness v2085:**
+- No input for an empty `inputs`.
+- The co-op saves wait is 180 s, with one more `coop_saves on` at 90 s. animquality-eotw-v2083a and bottle-eotw-v2078a stopped when the host's profile save stalled in `profile_saving`. The host's status file stopped updating; hypothesis: disk contention right after the VM workspace sync.

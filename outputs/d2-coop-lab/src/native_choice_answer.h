@@ -8,7 +8,7 @@
 // allow-local and runs in both worlds, and the host keeps its own screen. Back in gameplay the native character is checked
 // and SwitchCharacter (idempotent) is the backstop. Lab switch coop_native_choice auto|manual.
 bool nativeChoiceAuto=true;std::uint64_t nativeChoiceAnswered=0,nativeChoiceBackstops=0,nativeChoiceRefused=0;ULONGLONG nativeChoiceSeenAt=0;
-int nativeChoiceAnsweredPick=0;const char* nativeChoiceResult="idle";
+int nativeChoiceAnsweredPick=0;const char* nativeChoiceResult="idle";std::uint64_t nativeChoiceHeld=0;ULONGLONG nativeChoiceConfirmedAt=0;
 void serviceNativeCharacterChoice(ULONGLONG tick){
     if(localRole!=1||!nativeChoiceAuto||!coopNativeChoicePick||!observedGame||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
@@ -19,21 +19,23 @@ void serviceNativeCharacterChoice(ULONGLONG tick){
             else nativeChoiceResult="answered_verified";
             nativeChoiceAnsweredPick=0;}
         nativeChoiceSeenAt=0;return;}
-    if(nativeChoiceAnsweredPick)return;
-    if(!nativeChoiceSeenAt){nativeChoiceSeenAt=tick;nativeChoiceResult="seen";return;}
-    if(tick-nativeChoiceSeenAt<2500)return; // after the choice scene's Inputs On (hypothesis: a settle, as the harness used)
+    // 2085: from the first frame of logic 14 the selection is held at her pick, so any confirmation (a skipped choice scene
+    // confirms the current selection: nativechoice-dunwall-v2084a ended as Emily, the default, before 2.5 s) takes her
+    // character; the backstop runs after any screen she saw.
+    if(!nativeChoiceSeenAt){nativeChoiceSeenAt=tick;nativeChoiceResult="seen";nativeChoiceAnsweredPick=coopNativeChoicePick;}
     std::uintptr_t st=0,vt=0;int box=0;unsigned char confirmed=0;
     if(!memoryRead(observedGame+0x1f6f50,&st,8)||!st||!memoryRead(st,&vt,8)||vt!=base+0x1b698d8||!memoryRead(st+0x110,&box,4)||!memoryRead(st+0x114,&confirmed,1)){
         ++nativeChoiceRefused;nativeChoiceResult="state_unreadable";return;}
-    if(box!=-1||confirmed){nativeChoiceResult="box_open_or_confirmed";return;}
-    *reinterpret_cast<int*>(st+0x48)=coopNativeChoicePick==1?1:0;*reinterpret_cast<unsigned char*>(st+0x114)=1;
-    nativeChoiceAnsweredPick=coopNativeChoicePick;++nativeChoiceAnswered;nativeChoiceResult="answered";
+    if(box!=-1||confirmed)return;
+    *reinterpret_cast<int*>(st+0x48)=coopNativeChoicePick==1?1:0;++nativeChoiceHeld;
+    if(tick-nativeChoiceSeenAt<2500||nativeChoiceConfirmedAt==nativeChoiceSeenAt)return; // after the choice scene's Inputs On (hypothesis)
+    *reinterpret_cast<unsigned char*>(st+0x114)=1;nativeChoiceConfirmedAt=nativeChoiceSeenAt;++nativeChoiceAnswered;nativeChoiceResult="answered";
 }
 void writeNativeChoice(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.native-choice.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;
-    fprintf(f,"{\"auto\":%s,\"result\":\"%s\",\"pick\":%d,\"answered\":%llu,\"backstops\":%llu,\"refused\":%llu,\"role\":%u}\n",
-        nativeChoiceAuto?"true":"false",nativeChoiceResult,coopNativeChoicePick,nativeChoiceAnswered,nativeChoiceBackstops,nativeChoiceRefused,localRole);
+    fprintf(f,"{\"auto\":%s,\"result\":\"%s\",\"pick\":%d,\"answered\":%llu,\"backstops\":%llu,\"refused\":%llu,\"held\":%llu,\"role\":%u}\n",
+        nativeChoiceAuto?"true":"false",nativeChoiceResult,coopNativeChoicePick,nativeChoiceAnswered,nativeChoiceBackstops,nativeChoiceRefused,nativeChoiceHeld,localRole);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
