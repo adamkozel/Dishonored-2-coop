@@ -55,3 +55,20 @@ Harness v2067 adds `partnerattack`: the VM partner attacks an NPC in its own wor
 | `farguards-eotw-v2067b` | farguards-v2067 | **Twin, red as required** on activity: with `coop_npc_keep_awake off` the same three guards are LOD 7, clamp 8, paused (refs 1, 1, 0) in both probes. Diffs at spawn and far equal, because the diff compares life states only. The same harness fail at the kill |
 
 Harness v2068: `partnerattack` finds the NPC by spawner name through `--npc-activity`, then the entity by its handle.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `farguards-eotw-v2068a` | farguards-v2067 | **Pass on two Steam accounts.** The VM partner, about 205 m from the host, killed `addermirestation_entrance_guard_02` in its own world in 5 presses. The digest reads that guard `dead` in both worlds, and every spawner key appears exactly once in each world. Diffs equal at spawn (2279), far (2138), kill (2138), end (2279) and final |
+| `farguards-eotw-v2068b` | farguards-v2067 | Harness fail: the first `--npc-activity` probe failed with exit 59 (catalog read). Diffs at spawn and far equal. The activity twin on this candidate is v2067b, red |
+
+## Status
+
+**Area 4.5 is done on farguards-v2067:**
+- **Keep-awake works:** `keepawake-range-v2066b` locally, and `farguards-eotw-v2067a` on two accounts.
+- **The twins are red on activity:** v2066b and v2067b.
+- **The split-up take is equal and the far guard is killed by the partner:** v2068a.
+
+**Open:**
+- The death journal is not built. Add it only if a take shows a guard resetting.
+- The unbound civilian shopkeeper still runs in each world on its own (0.9 m apart). Civilians bind within 15 m only.
+- The step 6 full runs keep watching guard differences.
