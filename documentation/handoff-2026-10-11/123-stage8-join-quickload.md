@@ -74,3 +74,10 @@ The host plays Dunwall alone: the bedroom, Mayhew, then Ramsey killed and looted
 ## Host load (2064)
 
 Today, with checkpoint sync on, any load is intercepted (`checkpointIntercept`) and becomes a shared restart from the last paired autosave, which the host starts. A partner's load is a request to the host. Take `hostload-dunwall-v2064a`: both players play Dunwall from the start, the host kills and loots Ramsey, then the host loads its last checkpoint (`RestartFromCheckpoint`, the pause menu's load). A diff is required once both have reloaded. The twin v2064b turns `coop_checkpoint_sync off` on the host before its load.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `hostload-dunwall-v2064a` | joinexpiry-v2063 | Equal before (536 compared) and after the load (554). Both worlds reloaded (world epoch 16 to 21 on both). A weak proof, because nothing changed between the autosave and the load |
+| `hostload-dunwall-v2064b` | joinexpiry-v2063 | **Not a twin:** equal (552). `coop_checkpoint_sync off` was switched back on by the product maintenance, which re-issues `coop_checkpoint_sync on`, so both worlds reloaded again |
+
+**Candidate sharedload-v2065:** adds the lab-only switch `coop_shared_load on|off`. Off lets a player's own load pass through to its own world alone; death restarts stay shared. The status file `.missionend.json` gains `sharedLoad` and `sharedLoadBypassed`. In route `hostload-dunwall-v2065`, the host opens Ramsey's ring locker after the loot, so the load has a change to undo; the twin sets `coop_shared_load off` on the host before its load.
