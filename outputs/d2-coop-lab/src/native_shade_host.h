@@ -128,22 +128,21 @@ void shadeHostRemove(ShadeHostPuppet& p,const char* why){
     const auto lost=p.lostEvent;p={};p.lostEvent=lost;shadeHostResult=why;
 }
 bool shadeHostDeadlyParent(const float* at,std::uintptr_t& parent,std::uintptr_t& definition){
-    parent=definition=0;std::uintptr_t table=0,team=0,component=0,slot=0;int index=-1;
+    parent=definition=0;std::uintptr_t table=0,team=0;int index=-1;
     if(!observedPlayer||!observedGame||!memoryRead(observedPlayer+0x2e0,&index,4)||index<0||index>=64||!memoryRead(observedGame+0x341068,&table,8)||!table||
        !memoryRead(table+static_cast<std::uintptr_t>(index)*8,&team,8)||!team)return false;
     // 2070: natively at the caster first, then at the aim (FUN_14043de90); the host has her streamed root and her shade.
     const auto find=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,const float*)>(gameImage+0x4e51c0);
     parent=find(team,remote.position);if(!parent)parent=find(team,at);
-    // 2075: the host player's team list had no entry near her (deadlyshade-eotw-v2074a: 6 m behind a guard, 814 refusals),
-    // so the nearest world NPC within 15 m of her root stands in.
-    if(!parent){std::vector<NativeWorldNpc> catalog;unsigned unbound=0;float best=15.f*15.f;
-        if(readWorldNpcCatalog(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),observedGame,catalog,unbound))
-            for(const auto& n:catalog){float d=0;for(unsigned k=0;k<3;++k){const float v=n.position[k]-remote.position[k];d+=v*v;}
-                if(d<best&&n.actor){best=d;parent=n.actor;}}
-        if(parent)++shadeHostDeadlyNearest;}
+    const auto cloneOf=[&](std::uintptr_t npc){std::uintptr_t c=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,void*,int)>(gameImage+0x877720)(npc,gameImage+0x39ae070,2),s=0,d=0;
+        return c&&memoryRead(c+0x6d8,&s,8)&&s&&memoryRead(s,&d,8)?d:std::uintptr_t(0);};
+    // 2076: the team list holds the player team's own members, and component 0x39ae070 (arkCpntPowerClone, hypothesis by
+    // its strings) carries the caster's clone definition: natively the deadly shadow is the caster's own clone, parented to
+    // the caster. No guard has it (deadlyshade-eotw-v2075a: 27 nearest NPCs, none with a clone definition). The host's
+    // own player stands in for her when the list has no entry near her.
+    if(!parent&&observedPlayer){parent=observedPlayer;++shadeHostDeadlyNearest;}
     if(!parent)return false;
-    component=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,void*,int)>(gameImage+0x877720)(parent,gameImage+0x39ae070,2);
-    return component&&memoryRead(component+0x6d8,&slot,8)&&slot&&memoryRead(slot,&definition,8)&&definition;
+    definition=cloneOf(parent);return definition!=0;
 }
 bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULONGLONG tick){
     std::uintptr_t parent=0,definition=0;

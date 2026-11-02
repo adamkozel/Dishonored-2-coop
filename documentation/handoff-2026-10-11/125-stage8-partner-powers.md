@@ -59,3 +59,11 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 - When the team list has no entry, the nearest world NPC within 15 m of the partner's root becomes the parent.
 - The host tries once per 500 ms.
 - `.shade-host.json` gains `deadly`, `deadlyParents`, `deadlyNearest` and `deadlyRefused`.
+| `deadlyshade-eotw-v2075a` | deadlyshade-v2075 | The partner's deadly shadow reached the host again (kind 2, present). The nearest-NPC fallback chose a candidate 27 times; each had no clone definition, so `deadly_no_parent`. Diffs equal (2278, 2277) |
+| `deadlyshade-eotw-v2075b` | deadlyshade-v2075 | Twin: with `deadly_off` no host attempt; diffs equal |
+
+**Finding (confirmed static, plus a hypothesis):**
+- Component `0x39ae070` is only referenced by `OnCloneSpawned` and by its type-descriptor getter (`0x1408bab70`). By its strings it is most likely `arkCpntPowerClone`: hypothesis.
+- The team source list that `FUN_1404e51c0` searches therefore holds the player team's own members. Natively, the deadly shadow is the caster's own clone, parented to the caster. No guard has the component.
+
+**Candidate deadlyshade-v2076:** when the list has no entry near her, the host's own player is the parent, and its clone definition is used. The spawn is at her shade.
