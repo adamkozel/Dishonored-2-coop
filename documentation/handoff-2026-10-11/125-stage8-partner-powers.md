@@ -48,3 +48,7 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 | `deadlyshade-dunwall-v2072d` | deadlyshade-v2070 | The same (twin route) |
 
 **Next take: `deadlyshade-dunwall-v2073`.** She casts from her spawn in the tower toward the NPC 9.5 m away, at (-34.0, -160.6, 66.6).
+| `deadlyshade-dunwall-v2073a` | deadlyshade-v2070 | Harness: no cast (`sent 0`; the partner's world had no shade). **Cause (confirmed runtime, VM screenshot):** at the start of A Long Day in Dunwall the partner has no Mark and no mana arc, so no power can be cast; host Corvo's avatar also stood in her view. Diffs equal (538) |
+| `deadlyshade-dunwall-v2073b` | deadlyshade-v2070 | The same (twin route) |
+
+**Next take: `deadlyshade-eotw-v2074`**, on Edge of the World, where the partner has the Mark and mana. Harness v2074 adds `partnerface`: the partner stands 6 m behind an NPC of her own world, found by spawner name through `--npc-activity`, and faces it. She casts behind `addermirestation_entrance_guard_02`.
