@@ -1,0 +1,9 @@
+{
+ "candidate": "joinsnapshot-v2055",
+ "card": 240,
+ "dll": "69FDFF55DFDD4BF304EA19D008ACCB749B79B278B1BC0E55B3A36FDDC6A7714B",
+ "previousCandidate": "jindoshwheels-v2053",
+ "sourceCommit": "93e9f907609093d2547ee08875278330470b7bc6",
+ "sourceDiff": "source-change.diff",
+ "change": "jindoshwheels-v2053 plus the join snapshot: the host resends its NPC life roster to each new partner world (peer session or epoch), the partner retries an unapplied life state every 5 s up to 40 tries, and the partner holds the host Kiscule log while it loads (its 60 s start in gameplay); lab switch coop_join_snapshot on|off"
+}

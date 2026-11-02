@@ -156,6 +156,10 @@ void checkpointRequest(std::uint64_t tick) {
     if(!checkpointSend(CheckpointMessage::Request))checkpointFail("request_send_failed");
 }
 std::uint64_t checkpointMissionContinues=0;
+// 2065 (#240, lab only): coop_shared_load off lets a player's own load pass through to its own world alone, the
+// mutation twin of the shared load (the product maintenance re-issues coop_checkpoint_sync on, so switching the sync
+// off is no twin: hostload-dunwall-v2064b reloaded both worlds). Death restarts stay shared.
+bool checkpointSharedLoad=true;std::uint64_t checkpointSharedLoadBypassed=0;
 int missionDecisionIntercept(unsigned kind,int slot); // stage 8 (#253, mission_decision.h)
 bool checkpointIntercept(unsigned kind,int slot,bool& continuation) {
     continuation=false;
@@ -202,6 +206,7 @@ bool checkpointIntercept(unsigned kind,int slot,bool& continuation) {
     // transitions, not user reloads: pass them through unless this checkpoint
     // sync is itself mid-reload.
     if(kind==1&&(outgoing.gameLogicState==11||(outgoing.gameLogicState==15&&!s.expectBoundary&&!s.permitContinuation))){++checkpointMissionContinues;return false;}
+    if(!checkpointSharedLoad&&!s.deathActive){++checkpointSharedLoadBypassed;return false;}
     checkpointRequest(GetTickCount64());return true;
 }
 void checkpointContinuationReturned(unsigned char result) {

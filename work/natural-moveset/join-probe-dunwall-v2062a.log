@@ -1,0 +1,222 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+03:38:44 copying lab scripts, tooling and bin
+03:38:49 mod resources (voidmod, master.index) into the game copy
+03:38:53 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : 369C8A367F295E34
+probe           : 643951F1F7999444
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 93
+PSComputerName  : D2CoopVM
+RunspaceId      : 5ce8b624-13ba-409a-9ae4-fbe54d79fb58
+
+
+03:39:56 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             93 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The worlds differ at join60: 1 values (DIFFERENT)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-joinmap-v2062",
+      "hostDll": "369C8A367F295E347234A24CB4F7A9C4CD69B0C8D44E0542BBAD139C357DB036",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 15797
+      },
+      "client": null
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "join": {
+      "afterStep": 8,
+      "clientBefore": {
+        "logic": 6,
+        "map": "campaign/menu/menu_p"
+      },
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true,
+      "loadMs": 91232,
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 1,
+        "warpDistance": 36.38
+      },
+      "hostPos": [
+        -39.184307,
+        -119.678856,
+        61.423927
+      ],
+      "clientPos": [
+        -40.041000,
+        -120.518997,
+        61.003647
+      ],
+      "distance": 1.27,
+      "gameflow": {
+        "host": "237 1 3 6 0 1 0",
+        "client": "237 1 3 6 0 1 0",
+        "equal": true
+      },
+      "npcCounts": {
+        "host": 48,
+        "client": 49
+      },
+      "npcStateDiffs": [
+        {
+          "handle": "0xb340750",
+          "name": "ld_spawner_clockw_right",
+          "host": "absent",
+          "client": "alive"
+        }
+      ],
+      "armed": {
+        "product": {
+          "host": "armed",
+          "client": "armed"
+        },
+        "banks": {
+          "host": true,
+          "client": true
+        },
+        "ok": true
+      }
+    },
+    "diff-join": {
+      "status": "DIFFERENT",
+      "compared": 536,
+      "differences": 1
+    },
+    "diff-join60": {
+      "status": "DIFFERENT",
+      "compared": 536,
+      "differences": 1
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 40,
+        "pos": [
+          -39.184273,
+          -119.678856,
+          61.424881
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "41/49/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 20,
+        "pos": [
+          -39.892384,
+          -120.905380,
+          61.320385
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 8,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/218/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 8 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2059.ps1:783[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 783 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe worlds differ at join60: 1 values (DIFFERENT)[0m

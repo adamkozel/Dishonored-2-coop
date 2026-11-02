@@ -1,0 +1,282 @@
+{
+  "passed": false,
+  "failure": "The VM was not placed beside the host (3.05 m, warps 1)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-joinsnapshot-v2055",
+      "hostDll": "69FDFF55DFDD4BF304EA19D008ACCB749B79B278B1BC0E55B3A36FDDC6A7714B",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 13016
+      },
+      "client": null
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step01-command host coop_join_snapshot off",
+      "step02-command client coop_join_snapshot off"
+    ],
+    "join": {
+      "afterStep": 9,
+      "clientBefore": {
+        "logic": 6,
+        "map": "campaign/menu/menu_p"
+      },
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true,
+      "loadMs": 93680,
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 1,
+        "warpDistance": 36.42
+      },
+      "hostPos": [
+        -52.918434,
+        -130.201172,
+        61.004704
+      ],
+      "clientPos": [
+        -55.645195,
+        -129.649994,
+        59.763649
+      ],
+      "distance": 3.05,
+      "gameflow": {
+        "host": "237 1 3 6 0 1 0",
+        "client": "237 1 3 6 0 1 0",
+        "equal": true
+      },
+      "npcCounts": {
+        "host": 58,
+        "client": 48
+      },
+      "npcStateDiffs": [
+        {
+          "handle": "0xb1e0966",
+          "name": "ld_spawner_clockw_right",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xb480764",
+          "name": "ld_spawner_guard_tutorial_2",
+          "host": "dead",
+          "client": "alive"
+        },
+        {
+          "handle": "0xb4a0766",
+          "name": "ld_spawner_vista_8",
+          "host": "absent",
+          "client": "alive"
+        },
+        {
+          "handle": "0xb4c0768",
+          "name": "ld_spawner_vista_6",
+          "host": "absent",
+          "client": "alive"
+        },
+        {
+          "handle": "0xb53076f",
+          "name": "ld_spawner_vista_3",
+          "host": "absent",
+          "client": "alive"
+        },
+        {
+          "handle": "0xb5a0776",
+          "name": "ld_spawner_alexi_escape",
+          "host": "dead",
+          "client": "alive"
+        },
+        {
+          "handle": "0xc50099e",
+          "name": "ld_spawner_clockw_left",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcad09d6",
+          "name": "ld_spawner_duke_guard_right_1",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcb209db",
+          "name": "ld_spawner_duke_guard_left_1",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcb709e0",
+          "name": "ld_spawner_duke_guard_right_2",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcbc09e5",
+          "name": "ld_spawner_duke_guard_left_2",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcc109ea",
+          "name": "ld_spawner_duke",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcc609ef",
+          "name": "ld_spawner_duke_carrier_front",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xccb09f4",
+          "name": "ld_spawner_duke_carrier_back",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcd009f9",
+          "name": "ld_spawner_delilah",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xced0a16",
+          "name": "ld_spawner_vista_8",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcf10a1a",
+          "name": "ld_spawner_guard_tutorial_2",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcf50a1e",
+          "name": "ld_spawner_guard_tutorial_2",
+          "host": "alive",
+          "client": "absent"
+        }
+      ],
+      "armed": {
+        "product": {
+          "host": "armed",
+          "client": "armed"
+        },
+        "banks": {
+          "host": true,
+          "client": true
+        },
+        "ok": true
+      }
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 46,
+        "pos": [
+          -53.900661,
+          -133.350708,
+          61.962128
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "88/147/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 18,
+        "pos": [
+          -55.645195,
+          -129.649994,
+          59.763649
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 8,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/161/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 9 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
