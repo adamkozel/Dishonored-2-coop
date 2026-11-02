@@ -80,3 +80,10 @@ Step 5 measures partner movement in numbers, gives the first mission's character
 - The two players stand 4.7 m apart, facing each other.
 - The partner walks, runs and strafes while the host samples her rig, then the reverse.
 - Then `nativechoice-dunwall-v2086a` again, a Corvo partner opposite an Emily host.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `animquality-dunwall-v2086a` | nativechoice-v2085 | **First in-view numbers on two Steam accounts.** Tower bedroom, players 4.7 m apart. **Host watching the partner** (VM): 208 samples at 19.9 Hz, travel 10.1 m, foot skate p95 0.22 m (max 0.25 m), **3 jitter episodes**. From 1.5 s, the root's y swings 4 to 7 cm in alternating directions every sample. **Partner watching the host:** 244 samples at 21.4 Hz, travel 11.7 m, foot skate p95 0.052 m (max 0.091 m), no jitter, snaps or rubber-banding |
+| `nativechoice-dunwall-v2086a` | nativechoice-v2085 | Harness timeout: the Corvo partner's screen was still logic 14 at 25 s. Her VM frame shows the choice scene with both characters, likely the chosen ending. Harness v2087 waits 120 s and keeps her `.native-choice.json` |
+
+**Open, being researched:** the jitter of the partner's rig in the host's view. Alternating ±4-7 cm per sample suggests two positioning paths taking turns (hypothesis). Only the host-watches-partner direction shows it.
