@@ -1,0 +1,76 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named components/characters/player/base/attributes/doppelganger_deadlyshade.inventoryitem"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   62.226,
+   4.468,
+   34.6
+  ]
+ },
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 1000
+ },
+ {
+  "do": "partnerface",
+  "name": "addermirestation_entrance_guard_02",
+  "dist": 6
+ },
+ {
+  "do": "wait",
+  "ms": 2000,
+  "settle": 500
+ },
+ {
+  "do": "cast",
+  "role": "client",
+  "grant": "models/powers/doppelganger/doppelganger.inventoryitem",
+  "ms": 800
+ },
+ {
+  "do": "status",
+  "role": "host",
+  "suffix": ".shade-host.json"
+ },
+ {
+  "do": "wait",
+  "ms": 12000,
+  "settle": 1000
+ },
+ {
+  "do": "status",
+  "suffix": ".shade-host.json"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-combat.json"
+ },
+ {
+  "do": "diff",
+  "tag": "after"
+ },
+ {
+  "do": "wait",
+  "ms": 30000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "end"
+ }
+]

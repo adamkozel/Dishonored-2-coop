@@ -73,3 +73,10 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 | `deadlyshade-eotw-v2076d` | deadlyshade-v2076 | Twin: no host attempt; every diff equal (the bottle was present this time) |
 
 **Candidate deadlyshade-v2077:** with no clone definition, the deadly shadow's own definition (`deadlyshadow_entity.def`) is created parented to the host's player, not free-standing. Counter: `deadlyOwnDefinition`. Its take records the diffs without requiring them and is judged on `.shade-host.json` and on no crash.
+| `deadlyshade-eotw-v2077a` | deadlyshade-v2077 | **Host process lost before the cast:** the host's process was gone at step 7, a wait after `partnerface`. There is no Windows crash record for the game and no error in its engine log. Unexplained, recorded as a host loss. Spawn diff equal |
+| `deadlyshade-eotw-v2077b` | deadlyshade-v2077 | Twin: the cast reached the host (kind 2) with `deadly_off`, so no host attempt. Every diff equal (2279, with NPCs compared by the fixed diff tool) |
+
+**Next:** `deadlyshade-eotw-v2078a` on fragile-v2078, which carries the v2077 code, after the #260 bottle takes.
+| `deadlyshade-eotw-v2078a` | fragile-v2078 (v2077 code) | **The host process was lost again at the cast.** The harness records completed steps only, so v2077a's loss was at the cast too, not before it. That makes 2 of 2 host losses when the host spawned `deadlyshadow_entity.def` parented to its player, and none in the twins. **Conclusion:** the deadly shadow's own definition crashes the host when parented to its player, as it did free-standing |
+
+**Candidate shadedecoy-v2079:** on a host without a clone definition, the partner's deadly shadow gets the proven decoy puppet (`decoy_entity.def`, free-standing). The host's guards perceive and fight it, and her shadow's kills are still forwarded. This is the research's fallback.

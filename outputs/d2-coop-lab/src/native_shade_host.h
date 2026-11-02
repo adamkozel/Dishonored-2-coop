@@ -143,10 +143,11 @@ bool shadeHostDeadlyParent(const float* at,std::uintptr_t& parent,std::uintptr_t
     if(!parent&&observedPlayer){parent=observedPlayer;++shadeHostDeadlyNearest;}
     if(!parent)return false;
     definition=cloneOf(parent);
-    // 2077: a host without Doppelganger (Corvo) has no clone definition (deadlyshade-eotw-v2076c: 28 refusals with the host
-    // player as parent); the deadly shadow's own definition is created parented to the host player instead of free-standing
-    // (the free-standing spawn crashed in FUN_1404a3f90, partner-shade-v1729c).
-    if(!definition){definition=lookupEntityDefinition(kShadeHostDeadlyDefinition);if(definition)++shadeHostDeadlyOwnDefinition;}
+    // 2079: a host without Doppelganger (Corvo) has no clone definition (deadlyshade-eotw-v2076c: 28 refusals). The deadly
+    // shadow's own definition crashed the host parented to the host player (2077: deadlyshade-eotw-v2077a and v2078a lost the
+    // host process at the cast) as it did free-standing (partner-shade-v1729c). The proven decoy puppet stands in, free-
+    // standing: the host's guards perceive and fight it, and her deadly shadow's kills are still forwarded (1214gx).
+    if(!definition){parent=0;definition=lookupEntityDefinition(kShadeHostDefinition);if(definition)++shadeHostDeadlyOwnDefinition;}
     return definition!=0;
 }
 bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULONGLONG tick){

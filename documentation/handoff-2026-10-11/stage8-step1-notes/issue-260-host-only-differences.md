@@ -40,3 +40,13 @@ When one digest sample's NPC catalog read failed (`npcs {}`), `d2_world_diff.py`
 **Re-diffing the archived digests with the fixed tool** (written to the scratchpad; the evidence is not rewritten):
 - farguards-eotw-v2067a and v2068a stay equal with NPCs compared (2275 to 2279).
 - v2071b's two missing reinforcements are confirmed.
+
+## Bottle takes on fragile-v2078
+
+| Take | Result |
+|---|---|
+| `bottle-eotw-v2078a` | Setup fail: co-op saves did not switch on |
+| `bottle-eotw-v2078b` | **Equal at spawn and 30 s later** (2279, NPCs compared). Prop rest skipped breakables 1956 times; host sent 2 rests, partner 2 |
+| `bottle-eotw-v2078c` | **Equal at spawn and 30 s later** (2279) |
+
+Two equal spawns in a row, against 3 of 4 failures before: good evidence for the prop-rest cause, not yet conclusive. The step 6 runs keep watching it.
