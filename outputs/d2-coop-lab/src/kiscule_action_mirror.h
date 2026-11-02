@@ -361,7 +361,8 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
             // gameplay. Ramsey's ring task nodes run in the instant the loot scene ends, while the partner is still in its
             // cinematic state (onlytask-v2022e), and the task that ends Dunwall runs inside the partner's ending
             // cinematic: held until plain gameplay, it never went out (hoststory-lead-dunwall-v2025a).
-            if(kisculeHostStoryAsk&&kisculeHostStoryAskable(cls)&&c.requests>c.executed&&c.requests>c.asked&&kisculePartnerScope()){c.asked=c.requests;++kisculeMirror.hostStoryAsked;
+            // 2060 (#240): asks too wait for 10 s of plain gameplay (join-snapshot-dunwall-v2058c: the host ran 49 of a joiner's mission start asks).
+            if(kisculeHostStoryAsk&&kisculeHostStoryAskable(cls)&&c.requests>c.executed&&c.requests>c.asked&&kisculePartnerScope()&&kisculePartnerSettled()){c.asked=c.requests;++kisculeMirror.hostStoryAsked;
                 KisculeActionPacket p{};p.role=1;p.classIndex=static_cast<std::uint32_t>(cls);p.mapId=outgoing.mapId;p.node=nodeId;p.input=input;p.count=c.requests;p.reserved=kKisculePartnerFirst;
                 std::snprintf(p.entity,sizeof(p.entity),"%s",entity.c_str());
                 if(kisculeMirror.outgoingQueue.size()<1024)kisculeMirror.outgoingQueue.push_back(p);else ++kisculeMirror.dropped;}}
@@ -466,10 +467,11 @@ void serviceKisculeMirror(std::uint64_t tick){
     std::vector<KisculePending> keep;
     const bool loading=outgoing.gameLogicState==15||outgoing.pendingGameLogicState==15||outgoing.gameLogicState==0||!observedPlayer;
     for(auto& w:work){const auto& p=w.packet;
-        // 2055 (#240): until the partner's world first reaches plain gameplay, the host's log waits and its 60 s start
-        // there. A VM join loads for 170 to 180 s (join-measure-dunwall-v2055a: 77 expired, the throne room actors stayed in
-        // the partner's world); 2058: then plays its own mission start scene (join-snapshot-dunwall-v2056a: 51 expired).
-        if(localRole==1&&npcLifeJoinSnapshot&&(loading||kisculeSettleEpoch!=outgoing.worldEpoch||!kisculeSettleSince)){w.at=tick;++k.joinHeld;keep.push_back(w);continue;}
+        // 2055 (#240): while the partner loads, the host's log waits and its 60 s start in gameplay. A VM join loads for
+        // 170 to 180 s, so the host's log from before the join expired before the partner's world existed
+        // (join-measure-dunwall-v2055a: 77 expired, the throne room actors stayed in the partner's world). Held until plain
+        // gameplay instead (2058), the partner's own mission start scene waited for host counts and never ended (v2058c).
+        if(localRole==1&&loading&&npcLifeJoinSnapshot){w.at=tick;++k.joinHeld;keep.push_back(w);continue;}
         if(tick-w.at>60000){++k.expired;k.result="expired";continue;}
         if(p.role==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&!kisculePlainGameplay()){keep.push_back(w);continue;} // stage 8.4.1: a partner's request waits for plain gameplay
         // A replay never runs on the mission result screen (logic 11), where the world is being torn down: the VM partner's game

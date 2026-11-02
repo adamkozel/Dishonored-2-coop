@@ -33,4 +33,14 @@ The host plays Dunwall alone: the bedroom, Mayhew, then Ramsey killed and looted
 
 **Candidate joinhold-v2058:** joinquiet-v2057, plus the partner holds the host's log until its world first reaches plain gameplay, not only while it loads.
 
+| Take | Candidate | Result |
+|---|---|---|
+| `join-snapshot-dunwall-v2058a` | joinhold-v2058 | Route flake before the join: the loot of Ramsey was not registered |
+| `join-snapshot-dunwall-v2058b` | joinhold-v2058 | **Mutation twin, red as required** (15 differences). With `coop_join_snapshot off`, Alexi stays alive for the partner, and the host runs 110 partner-first nodes. The throne room actors differ as in v2056a, so that difference does not come from the snapshot |
+| `join-snapshot-dunwall-v2058c` | joinhold-v2058 | **Fail:** the partner never reached gameplay after the join. Its own mission-start scene waited on host counts that the hold kept back (67 pending). The host also ran 49 of the partner's host-story asks from that scene |
+
+**Confirmed runtime (v2058b):** the coup's `ActionDestroy` 643901705 (`ld_kiscule_coup`) runs 8 times in the partner's world from the host's log, which removes the throne room actors there. The host ran it 8 times too, yet still has one alive, detached actor per spawner.
+
+**Candidate joinasks-v2060:** v2058's hold is reverted, so the partner holds only while loading (as in v2057). A partner's host-story asks now wait for the same 10 s of plain gameplay as partner-first runs. Harness v2059 adds a `probe` step. Route `join-probe-dunwall-v2059` runs `--npc-authority-all` on the host before the join and on both games at the end.
+
 **Open question:** in the host's world, are the throne room actors that stay alive and detached after the coup hidden? A two-player start from the tower would show whether a partner that runs the coup itself also ends at `[1, 0, 0]`.
