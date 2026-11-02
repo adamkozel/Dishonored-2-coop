@@ -103,3 +103,19 @@ Test: `Test-MissionPartnerPowers-v2080.ps1`, from v1833, on the local lab with t
 - A kick (`blink_attack`, `focused_blink_attack`) carries its flags byte and two reaction bytes in the PeerNative `weapon` field. `validNpcPeerNative` allows that only for those two declarations, with a unit test.
 - The host applies them, plus the kick direction from her avatar to the NPC at +0x3c.
 - Lab switch: `coop_blink_kick native|legacy`. Counters: `npcBlinkKicksSent` and `npcBlinkKicksApplied`.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `blinkkick-v2081a` | blinkkick-v2081 | Her kick's flags, reactions and direction reach the host. The host guard was pushed **6.75 m** (3.73 m in v2080b with the defaults) and her copy 6.52 m. Health 40 to 30 in both worlds, end gap 0 m. **Still no knockdown** (host down poses 0) |
+| `blinkkick-v2081b` | blinkkick-v2081 | Twin with `coop_blink_kick legacy`: the guard died in both worlds (40 to 0, so the 219 down poses are its corpse). That differs from v2080b on the same legacy path, so the kick outcome varies between takes and this is not a clean twin. Switch reset to native after the take |
+
+## Status of area 4.6
+
+**Done:**
+- **Deadly Shade:** the host puppet, v2079a.
+- **Blink Assault:** the kick is a request the host carries out with the kick's own flags, reactions and direction. Both worlds end equal (health, outcome, position).
+
+**Not done, follow-up issue #261.** These are fidelity gaps the world diff cannot see; the world state stays equal:
+- **The Blink Assault knockdown.** The host applies the kick and the guard is pushed, but the native knockdown animation is not reproduced.
+- **Corpse possession.** It was not seen to move a corpse even natively (carry-body-v1644b, mission-partner-powers-v1833a).
+- **Rat and fish possession presence in the host's world.** It changes only her own body, and the ambient swarms are not synced.
