@@ -48,3 +48,10 @@ Harness v2067 adds `partnerattack`: the VM partner attacks an NPC in its own wor
 - `--npc-activity` probes run, with required diffs at spawn, far, after the kill and at the end.
 - The partner kills `addermirestation_entrance_guard_02`.
 - The twin turns keep-awake off.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `farguards-eotw-v2067a` | farguards-v2067 | **Keep-awake on two Steam accounts** (confirmed runtime). The partner stood about 205 m from the host. Both `--npc-activity` probes on the host show `addermire_roof_02`, `addermire_roof_03` and `addermirestation_entrance_guard_02` clamped to LOD 4 or 6, with no pause refs. Diffs at spawn (2278) and far (2138) equal. Harness fail at the kill: `partnerattack` searched `--entities` names, which are entity names, not spawner names |
+| `farguards-eotw-v2067b` | farguards-v2067 | **Twin, red as required** on activity: with `coop_npc_keep_awake off` the same three guards are LOD 7, clamp 8, paused (refs 1, 1, 0) in both probes. Diffs at spawn and far equal, because the diff compares life states only. The same harness fail at the kill |
+
+Harness v2068: `partnerattack` finds the NPC by spawner name through `--npc-activity`, then the entity by its handle.
