@@ -82,6 +82,23 @@ In all five the saferoom digest failed on the host (M2) and the Meagan step was 
 
 **M2 is not load timing:** the retry 10 s later failed the same way in both takes. The host frame at that step shows it in gameplay in the safe room. The check's 16384 entity cap is the engine registry's own size (`game+0x3130b0`), so the cause is one of the probe's other reads. Candidate progress-v2106 changes only the probe: it writes the reason for exit 45 (`no_game`, `game_vtable`, `entity_list`, `entity_count`, `entity_read`) and the values read to stderr, which the take log keeps. `Run-V2108.sh` runs the done-when check on it: all four pairings twice in a row (takes a to d, then e to h).
 
+**Done-when rounds on progress-v2106 (`Run-V2108.sh`, harness v2107):**
+
+| Take | Pairing (host / partner) | Result |
+|---|---|---|
+| `firstmission-dunwall-v2108a` | Corvo / Emily | Reached the Void (`continued_to_host_mission`). Every diff equal (start 538 to end 286 values) except the saferoom one (M2) |
+| `firstmission-dunwall-v2108b` | Emily / Corvo | Same as a |
+| `firstmission-dunwall-v2108c` | Corvo / Corvo | **Lost in setup:** the host's game played Emily after `campaign ... corvo` (the previous take's character). Harness-side, not a co-op fault; harness v2108 loads both missions again (up to 2 tries) |
+| `firstmission-dunwall-v2108d` | Emily / Emily | Same as a |
+| `firstmission-dunwall-v2108e` | Corvo / Emily | Same as a |
+| `firstmission-dunwall-v2108f` | Emily / Corvo | **Every diff equal, the saferoom one too** (1148 values) |
+| `firstmission-dunwall-v2108g` | Corvo / Corvo | Same as a |
+| `firstmission-dunwall-v2108h` | Emily / Emily | Same as a |
+
+Seven of eight reached the next mission with no difference anywhere they were measured: no co-op fault in the scripted route on progress-v2106 (confirmed runtime).
+
+**M2's reason (confirmed runtime, the v2106 probe):** in every failing take the host's digest reads `entity_list` (the game object is there, its entity list empty, count 0), and the retry 10 s later reads `no_game` (no game object). That is the host tearing down one map and building the next. In f the digest got through, with 1148 values, the size of the later balcony and streets digests (1152) and not of the tower's (552). So the saferoom diff lands in the load into the streets map, and the earlier "not load timing" note was wrong: one 10 s retry was too short (hypothesis for the length, to confirm). Harness v2108 retries the digest every 10 s for up to 60 s and records the tries. `Run-V2112.sh` repeats both rounds on it, on progress-v2109 if the wait-notice take `v2111a` passes, else on progress-v2108.
+
 ## 3. Done when
 
 The whole first mission plays through cleanly in all four pairings on two accounts, every diff equal, twice in a row on one candidate, and every sweep row in section 4 has passed or is written down as known.
