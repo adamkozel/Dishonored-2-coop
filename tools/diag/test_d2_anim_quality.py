@@ -12,7 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import d2_anim_quality as aq  # noqa: E402
 
-TWINS = ["skate_ignores_planted", "no_jitter", "loose_snap", "no_rubber"]
+TWINS = ["skate_ignores_planted", "no_jitter", "loose_snap", "no_rubber", "no_frozen_guard"]
 
 
 def sample(ms, root, toes):
@@ -67,6 +67,10 @@ class Quality(unittest.TestCase):
         rows[10]["root"] = [2.5, 0, 0]
         r = aq.analyse(rows)
         self.assertIn("rubberBands", r["failures"])
+
+    def test_frozen_rig_is_not_scored(self):
+        rows = [sample(i * 40, (0.1 * i, 0, 0), [(0.1 * i + 0.2, 0.1, 0), (0.1 * i - 0.2, -0.1, 0)]) for i in range(40)]
+        self.assertEqual(aq.analyse(rows)["status"], "FROZEN")
 
     def test_too_few_samples_skip(self):
         self.assertEqual(aq.analyse(walk(n=5))["status"], "SKIP")

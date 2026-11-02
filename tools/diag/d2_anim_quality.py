@@ -66,22 +66,29 @@ def percentile(values, q):
 
 
 def foot_skate(rows):
+    """Per-contact horizontal drift of the stance toe. 2085: the floor is local (the lowest toe height within 0.5 s of the
+    sample, either foot) and only the lower of the two toes can be planted; a whole-take floor counted most of a walk on
+    uneven ground as planted (animquality-eotw-v2085a: 4.5 m for a native NPC)."""
+    toes = []
+    for r in rows:
+        feet = r.get("feet") or []
+        if len(feet) < 2 or not feet[0].get("points") or not feet[1].get("points"):
+            toes.append(None)
+            continue
+        toes.append((feet[0]["points"][0]["at"], feet[1]["points"][0]["at"]))
     contacts = []
     for f in range(2):
-        pts = []
-        for r in rows:
-            feet = r.get("feet") or []
-            if len(feet) > f and feet[f].get("points"):
-                pts.append((r["ms"], feet[f]["points"][0]["at"]))
-        if len(pts) < 3:
-            continue
-        floor = min(p[1][2] for p in pts)
         drift, run = 0.0, 0
-        for i in range(1, len(pts)):
-            (t0, a), (t1, b) = pts[i - 1], pts[i]
-            dt = max((t1 - t0) / 1000.0, 1e-3)
-            vz = abs(b[2] - a[2]) / dt
-            planted = (b[2] - floor) <= PLANTED_HEIGHT and vz < PLANTED_VZ
+        for i in range(1, len(rows)):
+            if toes[i] is None or toes[i - 1] is None:
+                continue
+            t = rows[i]["ms"]
+            near = [toes[j] for j in range(len(rows)) if toes[j] is not None and abs(rows[j]["ms"] - t) <= 500]
+            floor = min(min(a[2], b[2]) for a, b in near)
+            a, b = toes[i - 1][f], toes[i][f]
+            other = toes[i][1 - f]
+            dt = max((t - rows[i - 1]["ms"]) / 1000.0, 1e-3)
+            planted = b[2] <= other[2] + 0.005 and (b[2] - floor) <= PLANTED_HEIGHT and abs(b[2] - a[2]) / dt < PLANTED_VZ
             if MUT == "skate_ignores_planted":
                 planted = False
             if planted:
@@ -146,6 +153,20 @@ def analyse(rows):
     contacts = foot_skate(rows)
     duration = (rows[-1]["ms"] - rows[0]["ms"]) / 1000.0
     travel = sum(dist2(rows[i - 1]["root"], rows[i]["root"]) for i in range(1, len(rows)))
+    # 2086: a rig the observer's engine does not animate (far from its camera: animquality-eotw-v2085a, the partner rig
+    # 200 m away kept its toe at a fixed offset from the root while travelling 13.6 m) cannot be measured.
+    offs = []
+    for r in rows:
+        feet = r.get("feet") or []
+        if feet and feet[0].get("points"):
+            t = feet[0]["points"][0]["at"]
+            offs.append((t[0] - r["root"][0], t[1] - r["root"][1], t[2] - r["root"][2]))
+    if offs and MUT != "no_frozen_guard":
+        mean = [sum(o[k] for o in offs) / len(offs) for k in range(3)]
+        spread = max(math.sqrt(sum((o[k] - mean[k]) ** 2 for o in offs) / len(offs)) for k in range(3))
+        if travel > 1.0 and spread < 0.002:
+            return {"status": "FROZEN", "reason": "the rig pose does not change while it travels (not animated by the observer)",
+                    "samples": len(rows), "travel": round(travel, 3), "poseSpread": round(spread, 5)}
     m = {
         "samples": len(rows), "seconds": round(duration, 3), "hz": round(len(rows) / duration, 2) if duration else 0,
         "travel": round(travel, 3), "contacts": len(contacts),

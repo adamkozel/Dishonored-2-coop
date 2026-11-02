@@ -63,3 +63,20 @@ Step 5 measures partner movement in numbers, gives the first mission's character
 **Harness v2085:**
 - No input for an empty `inputs`.
 - The co-op saves wait is 180 s, with one more `coop_saves on` at 90 s. animquality-eotw-v2083a and bottle-eotw-v2078a stopped when the host's profile save stalled in `profile_saving`. The host's status file stopped updating; hypothesis: disk contention right after the VM workspace sync.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `nativechoice-dunwall-v2085a` | nativechoice-v2085 | Setup fail: co-op saves did not switch on, even with the 180 s wait and a retry (issue #263) |
+| `nativechoice-dunwall-v2085b` | nativechoice-v2085 | **Pass:** the partner plays Emily, opposite a Corvo host. Her selection was held for 67 frames, and the character was verified in gameplay (`answered_verified`) |
+| `nativechoice-dunwall-v2085c` | nativechoice-v2085 | **Twin (`coop_native_choice manual`), red as required:** her choice screen was still unanswered after 25 s |
+| `animquality-eotw-v2085a` | nativechoice-v2085 | Harness fail at the partner-observer step: the `animsample` loop variable `$i` overwrote the step counter (fixed in harness v2086). **Finding (confirmed runtime):** a rig far from the observer's camera is not animated. The partner rig 200 m from the host kept its toe at a fixed offset from the root while travelling 13.6 m, and the NPC baseline moved its toe only 3 cm. Neither can be measured |
+
+**Analyser changes:**
+- **Foot skate** uses a local floor (the lowest toe within 0.5 s) and only the lower toe.
+- **A frozen pose** (the toe's offset from the root never changes while the rig travels) is reported as `FROZEN`, not scored. 7 tests and 5 mutation twins.
+- **Re-analysis of v2082a with the new skate:** walk 0.05 to 0.07 m p95 per contact (0.14 m max); turning on the spot 0.15 m.
+
+**Next take: `animquality-dunwall-v2086a`**, in the tower bedroom.
+- The two players stand 4.7 m apart, facing each other.
+- The partner walks, runs and strafes while the host samples her rig, then the reverse.
+- Then `nativechoice-dunwall-v2086a` again, a Corvo partner opposite an Emily host.
