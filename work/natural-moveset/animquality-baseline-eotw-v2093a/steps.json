@@ -1,0 +1,74 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "at",
+  "pos": [
+   -31.2,
+   182.1,
+   2.91
+  ],
+  "yaw": -90
+ },
+ {
+  "do": "partner",
+  "pos": [
+   -31.2,
+   186.5,
+   2.91
+  ],
+  "yaw": 90
+ },
+ {
+  "do": "wait",
+  "ms": 3000,
+  "settle": 1000
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--npc-activity"
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 10000,
+  "npc": "docks_civilian_06"
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 10000,
+  "npc": "docks_civilian_05"
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 10000,
+  "npc": "docks_oh_workers_bloodflymeat_worker_c"
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 10000,
+  "npc": "docks_civilian_11"
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 10000,
+  "npc": "docks_civilian_13"
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--npc-activity"
+ },
+ {
+  "do": "diff",
+  "tag": "end"
+ }
+]

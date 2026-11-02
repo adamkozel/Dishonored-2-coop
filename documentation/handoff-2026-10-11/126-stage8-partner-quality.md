@@ -177,4 +177,10 @@ In v2086a the route placed the partner about 0.8 m up on furniture in the bedroo
 
 **The contacts over 5 cm are at starts and stops:** the foot slides 7–15 cm into the idle stance while the root is already still, and running contacts drift 6–7 cm. Native locomotion blends in the same way, so the limits need a native baseline before these count as defects.
 
-**Next take: `animquality-baseline-eotw-v2093a`.** It samples five native civilians within 4–17 m of the docks walkway with the same probe and analyser, and it calibrates the limits from whichever of them walk.
+**Native baseline, first take:**
+
+| Take | Candidate | Result |
+|---|---|---|
+| `animquality-baseline-eotw-v2093a` | nativechoice-v2088 | Five native civilians within 4–17 m of the docks walkway, sampled in view for 10 s each. **None walked** (travel 0 for four). Idle contacts scored 0 to 0.033 m. The bloodfly-meat worker turned in place (0.2 m of travel) and scored **0.161 m**, so the native game scores high on in-place pivots and settles too |
+
+The partner's high contacts are at starts and stops, where the native worker scores just as high. A walking baseline is next: `animquality-baseline-eotw-v2094a` samples `docks_docker_10`, which walks a 10–12 m loop (seen in `farguards-eotw-v2068b` and v2093a), from 10 m away.
