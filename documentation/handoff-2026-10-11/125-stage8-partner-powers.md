@@ -35,3 +35,16 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 - The VM partner gets Doppelganger with Deadly Shade and casts at checkpoint guard 01 from v1833a's front stand.
 - The host's `.shade-host.json` is saved, and the diffs after the cast and at the end are required.
 - The twin sets `deadly_off`.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `deadlyshade-eotw-v2071a` | deadlyshade-v2070 | Harness fail as a shade test, though it "passed": no cast happened. The partner slid off the v1833a stand (z 15.97 to 13.98) to the foot of the checkpoint wall, faced the wall, and her doppelganger stream sent 0. Her HUD shows mana. Diffs equal (2279) |
+| `deadlyshade-eotw-v2071b` | deadlyshade-v2070 | Not a twin (no cast). The diff after the cast differs in 2 values: `script_spawner_checkpoint_reinf_01` and `_02` alive on the host, absent for the partner. These are checkpoint reinforcements that spawned in the host's world only, with no power involved. **Open, a hypothesis to check in the step 6 runs:** a reinforcement spawn reaches only the host's world |
+
+**Next take: `deadlyshade-dunwall-v2072`.** The partner casts at the start of Dunwall, from partner-shade-v1736b's stand toward guard 1.
+| `deadlyshade-dunwall-v2072a` | deadlyshade-v2070 | Harness fail before the cast. The partner was set at partner-shade-v1736b's stand (-55.4, -144.7, 61.0), which is not streamed at the start of Dunwall: she fell to z -515 and died, and the shared GameOver ended the host. Restore passed |
+| `deadlyshade-dunwall-v2072b` | deadlyshade-v2070 | The same (twin route) |
+| `deadlyshade-dunwall-v2072c` | deadlyshade-v2070 | The same, with the host health hold on (a shared death all the same) |
+| `deadlyshade-dunwall-v2072d` | deadlyshade-v2070 | The same (twin route) |
+
+**Next take: `deadlyshade-dunwall-v2073`.** She casts from her spawn in the tower toward the NPC 9.5 m away, at (-34.0, -160.6, 66.6).
