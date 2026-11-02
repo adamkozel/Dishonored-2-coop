@@ -73,14 +73,24 @@ def canonical(value):
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
 
-def stable_view(snaps):
-    """Per category: {key: canonical value} for keys equal in every snapshot, plus the unstable keys."""
+def stable_view(snaps, failed=None):
+    """Per category: {key: canonical value} for keys equal in every snapshot, plus the unstable keys.
+
+    2078 (#260): a snapshot whose category is empty while another snapshot of it has keys is a failed read (the probe's
+    NPC catalog read can fail and return npcs {}); it is skipped for that category and counted in failed[cat], instead of
+    making every key unstable (deadlyshade-eotw-v2071b compared 2138 keys, NPCs silently left out).
+    """
     stable, unstable = {}, {}
     categories = set()
     for s in snaps:
         categories.update(s.get("categories", {}))
     for cat in sorted(categories):
         values = [s.get("categories", {}).get(cat, {}) for s in snaps]
+        if MUT != "empty_sample_unstable" and any(values):
+            kept = [v for v in values if v]
+            if failed is not None and len(kept) < len(values):
+                failed[cat] = failed.get(cat, 0) + len(values) - len(kept)
+            values = kept
         keys = set().union(*values)
         stable[cat], unstable[cat] = {}, []
         for k in keys:
@@ -113,8 +123,9 @@ def compare(host_snaps, client_snaps, ignore=()):
         result["status"] = "SKIP"
         result["reason"] = "the two games are not on one map in every snapshot"
         return result
-    hs, hu = stable_view([normalise(x) for x in host_snaps])
-    cs, cu = stable_view([normalise(x) for x in client_snaps])
+    hf, cf = {}, {}
+    hs, hu = stable_view([normalise(x) for x in host_snaps], hf)
+    cs, cu = stable_view([normalise(x) for x in client_snaps], cf)
     compared = differing = 0
     for cat in sorted(set(hs) | set(cs)):
         if cat in ignore:
@@ -134,6 +145,7 @@ def compare(host_snaps, client_snaps, ignore=()):
         result["categories"][cat] = {
             "perPlayer": per_player,
             "hostKeys": len(h), "clientKeys": len(c), "unstable": len(unstable),
+            "failedSamples": {"host": hf.get(cat, 0), "client": cf.get(cat, 0)},
             "hostDigest": "%016x" % hd[1], "clientDigest": "%016x" % cd[1],
             "differingBuckets": sum(a != b for a, b in zip(hd[0], cd[0])),
             "equal": hd[1] == cd[1] and not diffs,
