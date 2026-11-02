@@ -81,3 +81,10 @@ Today, with checkpoint sync on, any load is intercepted (`checkpointIntercept`) 
 | `hostload-dunwall-v2064b` | joinexpiry-v2063 | **Not a twin:** equal (552). `coop_checkpoint_sync off` was switched back on by the product maintenance, which re-issues `coop_checkpoint_sync on`, so both worlds reloaded again |
 
 **Candidate sharedload-v2065:** adds the lab-only switch `coop_shared_load on|off`. Off lets a player's own load pass through to its own world alone; death restarts stay shared. The status file `.missionend.json` gains `sharedLoad` and `sharedLoadBypassed`. In route `hostload-dunwall-v2065`, the host opens Ramsey's ring locker after the loot, so the load has a change to undo; the twin sets `coop_shared_load off` on the host before its load.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `hostload-dunwall-v2065a` | sharedload-v2065 | **Pass.** The host opened Ramsey's ring locker, then loaded. Both worlds reloaded (epoch 16 to 21 on both, gameflow equal) and the diff after the load is equal (554 compared). The `opened` diff before the load caught a door still swinging (`ld_door_big_rich_int_window_350_0_4`, host `[2, 2, 0, 0]`); it was recorded, not required |
+| `hostload-dunwall-v2065b` | sharedload-v2065 | **Mutation twin, red as required** (15 differences). With `coop_shared_load off`, only the host reloaded (epoch 21; the partner stayed at 16), back to the mission start: the clockwork soldiers were alive again and a gameflow value differed |
+
+**Confirmed runtime:** a host's own load is a shared restart from the last paired autosave in both worlds (v2065a). The same load outside the share goes to the host's own last checkpoint (v2065b).
