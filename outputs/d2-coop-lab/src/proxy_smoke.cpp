@@ -44,7 +44,7 @@ int wmain(int argc, wchar_t** argv) {
     if(!validCoopPose(pose,0))return 11;
     pose.sampleTimeUs=0;if(validCoopPose(pose,0))return 111;
     pose.sampleTimeUs=9007199254740992ull;if(validCoopPose(pose,0))return 112;
-    pose.sampleTimeUs=1000000;pose.version=10;if(validCoopPose(pose,0))return 113;pose.version=11;
+    pose.sampleTimeUs=1000000;pose.version=12;if(validCoopPose(pose,0))return 113;pose.version=CoopPosePacket{}.version; // 2108 (#247): restore the current version, not 11 (the packet is at 13, so every later check failed and the stance check, the first, returned 86)
     const auto valid=pose;
     pose.playerStanceValid=1;pose.playerStance=1;if(!validCoopPose(pose,0))return 86;
     pose.playerStance=2;if(validCoopPose(pose,0))return 87;
