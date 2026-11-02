@@ -1,4 +1,5 @@
 #pragma once
+#include "native_bonecharm.h"
 // 2096 (#265): the partner keeps her progression between joins, per character. A join loads the host's mission fresh
 // (campaign <mapinfo> <chaos> <character>), so arkCpntInventory's Start gives the mission's default loadout and nothing
 // she earned survives a rejoin or a character switch. The game itself carries the player from mission to mission through
@@ -12,10 +13,15 @@
 // the native apply: powers, upgrades and enhancements after every load, never lowered (each value is the larger of the
 // two); runes, coins, ammunition and the rest only after a join's campaign load, set to the saved values (a checkpoint
 // rewind must not give back what the world gives again). Lab switch coop_partner_progress on|off.
+// 2107: found bonecharms too (native_bonecharm.h): the owned ones and the equipped slots are saved as charm lines (their
+// 32-bit ids), and after a join's load the missing ones are given (0x14060e4c0), those equipped but not saved are
+// unequipped (0x140611350) and the saved ones equipped (0x14060f520). Crafted charms (named keys) are counted, not carried.
 bool partnerProgressEnabled=true;
 struct PartnerProgressEntry {std::string name;std::int32_t quantity=0,maximum=0,f2c=0,f30=0;std::uint8_t f28=0,f34=0,f35=0;};
+struct PartnerCharm {std::uint32_t id=0;bool equipped=false;};
 struct PartnerProgress {
     std::uint64_t restoreEpoch=0,capturedEpoch=0,captures=0,writes=0,restores=0,restoredEntries=0,raisedEntries=0,failures=0;
+    std::uint64_t charmsGiven=0,charmsEquipped=0,charmsUnequipped=0,charmFailures=0;std::size_t charmsSaved=0,craftedSkipped=0;
     int character=0;bool restoredThisLoad=false;ULONGLONG gameplaySince=0,capturedAt=0;
     std::int32_t money=0,lastMoney=0;std::size_t lastCount=0;const char* result="idle";std::string lastText;};
 PartnerProgress partnerProgress{};
@@ -46,19 +52,21 @@ inline bool readPartnerInventory(std::uintptr_t& inventory,std::int32_t& money,s
            !memoryRead(e+0x30,&x.f30,4)||!memoryRead(e+0x34,&x.f34,1)||!memoryRead(e+0x35,&x.f35,1))return false;
         out.push_back(std::move(x));}
     return true;}
-inline bool loadPartnerProgress(int character,std::int32_t& money,std::vector<PartnerProgressEntry>& out){
+inline bool loadPartnerProgress(int character,std::int32_t& money,std::vector<PartnerProgressEntry>& out,std::vector<PartnerCharm>* charms=nullptr){
     char path[MAX_PATH]{};partnerProgressPath(character,path,sizeof(path));FILE* f=nullptr;if(fopen_s(&f,path,"rb")||!f)return false;
-    out.clear();money=0;char line[400]{};bool header=false;
+    out.clear();money=0;char line[400]{};bool header=false;if(charms)charms->clear();
     while(fgets(line,sizeof(line),f)){char name[200]{};PartnerProgressEntry e{};unsigned f28=0,f34=0,f35=0;
         if(std::sscanf(line,"money %d",&money)==1){header=true;continue;}
+        {unsigned id=0,equipped=0;if(std::sscanf(line,"charm %u %u",&id,&equipped)==2){if(charms&&id)charms->push_back({id,equipped!=0});continue;}}
         if(std::sscanf(line,"%199s %d %d %u %d %d %u %u",name,&e.quantity,&e.maximum,&f28,&e.f2c,&e.f30,&f34,&f35)==8){
             e.name=name;e.f28=static_cast<std::uint8_t>(f28);e.f34=static_cast<std::uint8_t>(f34);e.f35=static_cast<std::uint8_t>(f35);out.push_back(std::move(e));}}
     fclose(f);return header;}
-inline bool writePartnerProgress(int character,std::int32_t money,const std::vector<PartnerInventoryEntry>& held){
+inline bool writePartnerProgress(int character,std::int32_t money,const std::vector<PartnerInventoryEntry>& held,const std::vector<PartnerCharm>& charms){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};partnerProgressPath(character,path,sizeof(path));std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     std::string text="money "+std::to_string(money)+"\n";
     for(const auto& x:held){if(!x.quantity&&!x.maximum)continue;char line[400]{};
         std::snprintf(line,sizeof(line),"%s %d %d %u %d %d %u %u\n",x.name.c_str(),x.quantity,x.maximum,x.f28,x.f2c,x.f30,x.f34,x.f35);text+=line;}
+    for(const auto& c:charms)text+="charm "+std::to_string(c.id)+(c.equipped?" 1\n":" 0\n");
     if(text==partnerProgress.lastText)return true;
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return false;const bool ok=fwrite(text.data(),1,text.size(),f)==text.size();
     if(fclose(f)||!ok||!MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING))return false;partnerProgress.lastText=text;++partnerProgress.writes;return true;}
@@ -66,12 +74,14 @@ struct PartnerSavedItemState {std::uint32_t hash=0;std::int32_t quantity=0,maxim
 static_assert(sizeof(PartnerSavedItemState)==0x20,"itemState_t is 0x20 bytes");
 struct PartnerSavedState {std::int32_t money=0,v170=0;PartnerSavedItemState* items=nullptr;std::uint32_t count=0,capacity=0;};
 static_assert(sizeof(PartnerSavedState)==0x18,"savegameState_t is 0x18 bytes");
+inline void restorePartnerCharms(const std::vector<PartnerCharm>& saved);
 // Applies the saved entries the current load may take (every load: class 1; a join's load: both classes and money):
 // class 1 raised to the larger of the saved and the held value, class 2 set to the saved value, through the native apply.
 // Returns the number of changed entries.
 inline int restorePartnerProgress(bool joinLoad){
-    auto& g=partnerProgress;std::int32_t savedMoney=0;std::vector<PartnerProgressEntry> saved;
-    if(!loadPartnerProgress(g.character,savedMoney,saved)){g.result="nothing_saved";return 0;}
+    auto& g=partnerProgress;std::int32_t savedMoney=0;std::vector<PartnerProgressEntry> saved;std::vector<PartnerCharm> charms;
+    if(!loadPartnerProgress(g.character,savedMoney,saved,&charms)){g.result="nothing_saved";return 0;}
+    g.charmsSaved=charms.size();
     std::uintptr_t inventory=0;std::int32_t money=0;std::vector<PartnerInventoryEntry> held;
     if(!readPartnerInventory(inventory,money,held)){++g.failures;g.result="inventory_unreadable";return -1;}
     std::int32_t v170=0;if(!memoryRead(inventory+0x170,&v170,4)){++g.failures;g.result="inventory_unreadable";return -1;}
@@ -87,14 +97,63 @@ inline int restorePartnerProgress(bool joinLoad){
         PartnerSavedItemState r{};r.hash=partnerProgressHash(x.name);r.quantity=quantity;r.maximum=maximum;
         r.f0c=s.f2c;r.f10=s.f30;r.f14=s.f34;r.f15=s.f28;r.f1c=s.f35;records.push_back(r);}
     const std::int32_t newMoney=joinLoad?savedMoney:money;
+    if(joinLoad)restorePartnerCharms(charms);
     if(records.empty()&&newMoney==money){g.result="nothing_to_raise";return 0;}
     PartnerSavedState state{};state.money=newMoney;state.v170=v170;state.items=records.data();
     state.count=static_cast<std::uint32_t>(records.size());state.capacity=static_cast<std::uint32_t>(records.size())<<8;
     reinterpret_cast<void(*)(std::uintptr_t,void*)>(gameImage+0x6182f0)(inventory,&state);
     g.raisedEntries+=records.size();g.result=joinLoad?"restored_join":"restored_load";return static_cast<int>(records.size());}
+// 2107: this world's found charms (owned, and whether equipped); false when the component is unreadable.
+inline bool readPartnerCharms(std::vector<PartnerCharm>& out,std::size_t& crafted){
+    NativeBoneCharms c{};if(!readNativeBoneCharms(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c))return false;
+    out.clear();crafted=c.craftedCount;
+    for(const auto& e:c.entries){if(!e.owned)continue;if(!e.key.name.empty()){++crafted;continue;}
+        bool equipped=false;for(const auto& k:c.equipped)if(k.name.empty()&&k.kind==e.key.kind&&k.kind){equipped=true;break;}
+        out.push_back({static_cast<std::uint32_t>(e.key.kind),equipped});}
+    return true;}
+// One native charm call with a found charm's key (id, empty idStr, -1); the callee takes the key by value and destroys
+// its idStr, which for an empty inline string frees nothing.
+inline void partnerCharmCall(std::uintptr_t function,std::uintptr_t component,std::uint32_t id){
+    alignas(16) unsigned char key[0x38]{};std::memcpy(key,&id,4);const std::int32_t extra=-1;std::memcpy(key+0x30,&extra,4);
+    reinterpret_cast<void(*)(void*,const char*)>(gameImage+0x13f9d0)(key+8,"");
+    reinterpret_cast<void(*)(std::uintptr_t,void*)>(gameImage+function)(component,key);}
+// After a join's load: own every saved charm, then make the equipped slots the saved ones.
+inline void restorePartnerCharms(const std::vector<PartnerCharm>& saved){
+    auto& g=partnerProgress;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeBoneCharms c{};
+    if(saved.empty())return;
+    if(!readNativeBoneCharms(memoryRead,base,c)){++g.charmFailures;return;}
+    for(const auto& s:saved){bool known=false,owned=false;
+        for(const auto& e:c.entries)if(e.key.name.empty()&&static_cast<std::uint32_t>(e.key.kind)==s.id){known=true;owned=e.owned;break;}
+        if(!known){++g.charmFailures;continue;}
+        if(!owned){partnerCharmCall(0x60e4c0,c.component,s.id);++g.charmsGiven;}}
+    if(!readNativeBoneCharms(memoryRead,base,c)){++g.charmFailures;return;}
+    for(const auto& k:c.equipped){if(!k.kind||!k.name.empty())continue;bool want=false;
+        for(const auto& s:saved)if(s.equipped&&s.id==static_cast<std::uint32_t>(k.kind)){want=true;break;}
+        if(!want){partnerCharmCall(0x611350,c.component,static_cast<std::uint32_t>(k.kind));++g.charmsUnequipped;}}
+    for(const auto& s:saved){if(!s.equipped)continue;bool on=false;
+        for(const auto& k:c.equipped)if(k.name.empty()&&static_cast<std::uint32_t>(k.kind)==s.id){on=true;break;}
+        if(!on){partnerCharmCall(0x60f520,c.component,s.id);++g.charmsEquipped;}}
+}
+// 2107 (lab only): "coop_grant_charm <id>" owns one found bonecharm by its id (the probe's --bonecharms kind, unsigned)
+// and equips it when it is not equipped yet, for the progression takes.
+std::uint32_t labGrantCharmId=0;const char* labCharmResult="idle";
+inline bool labCharmIdAllowed(const char* t,std::uint32_t* id=nullptr){
+    const auto len=std::strlen(t);if(!len||len>10)return false;std::uint64_t v=0;
+    for(std::size_t i=0;i<len;++i){if(t[i]<'0'||t[i]>'9')return false;v=v*10+static_cast<unsigned>(t[i]-'0');}
+    if(!v||v>0xffffffffull)return false;if(id)*id=static_cast<std::uint32_t>(v);return true;}
+inline void serviceLabGrantCharm(){
+    if(!labGrantCharmId||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||outgoing.gameLogicState!=1||outgoing.pendingGameLogicState)return;
+    const auto id=labGrantCharmId;labGrantCharmId=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeBoneCharms c{};
+    if(!readNativeBoneCharms(memoryRead,base,c)){labCharmResult="unreadable";return;}
+    bool known=false;for(const auto& e:c.entries)if(e.key.name.empty()&&static_cast<std::uint32_t>(e.key.kind)==id){known=true;break;}
+    if(!known){labCharmResult="unknown_id";return;}
+    partnerCharmCall(0x60e4c0,c.component,id);
+    if(!readNativeBoneCharms(memoryRead,base,c)){labCharmResult="unreadable_after";return;}
+    for(const auto& k:c.equipped)if(k.name.empty()&&static_cast<std::uint32_t>(k.kind)==id){labCharmResult="granted_equipped";return;}
+    partnerCharmCall(0x60f520,c.component,id);labCharmResult="granted";}
 // The engine-thread service: partner only, in a session, in gameplay.
 void servicePartnerProgress(ULONGLONG tick){
-    auto& g=partnerProgress;
+    auto& g=partnerProgress;serviceLabGrantCharm();
     if(localRole!=1||!partnerProgressEnabled||!coopInSession()||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     if(outgoing.gameLogicState!=1||outgoing.pendingGameLogicState){g.gameplaySince=0;return;}
     if(!g.gameplaySince){g.gameplaySince=tick;return;}
@@ -110,15 +169,20 @@ void servicePartnerProgress(ULONGLONG tick){
     std::uintptr_t inventory=0;std::vector<PartnerInventoryEntry> held;
     if(!readPartnerInventory(inventory,g.money,held)){++g.failures;g.result="capture_unreadable";return;}
     ++g.captures;g.lastCount=held.size();g.capturedEpoch=outgoing.worldEpoch;
-    if(!writePartnerProgress(character,g.money,held)){++g.failures;g.result="write_failed";return;}
+    std::vector<PartnerCharm> charms;if(!readPartnerCharms(charms,g.craftedSkipped)){++g.charmFailures;g.result="charms_unreadable";return;}
+    g.charmsSaved=charms.size();
+    if(!writePartnerProgress(character,g.money,held,charms)){++g.failures;g.result="write_failed";return;}
     if(std::strncmp(g.result,"restored",8))g.result="captured";}
 inline void writePartnerProgressStatus(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.partner-progress.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& g=partnerProgress;
     fprintf(f,"{\"enabled\":%s,\"role\":%d,\"character\":%d,\"result\":\"%s\",\"restores\":%llu,\"restoredEntries\":%llu,\"raisedEntries\":%llu,\"captures\":%llu,\"writes\":%llu,"
-        "\"failures\":%llu,\"carried\":%zu,\"money\":%d,\"joinLoadPending\":%s,\"restoreEpoch\":%llu,\"epoch\":%llu}\n",
+        "\"failures\":%llu,\"carried\":%zu,\"money\":%d,\"joinLoadPending\":%s,\"restoreEpoch\":%llu,\"epoch\":%llu,"
+        "\"charms\":{\"saved\":%zu,\"given\":%llu,\"equipped\":%llu,\"unequipped\":%llu,\"failures\":%llu,\"craftedSkipped\":%zu,\"lab\":\"%s\"}}\n",
         partnerProgressEnabled?"true":"false",localRole,g.character,g.result,static_cast<unsigned long long>(g.restores),static_cast<unsigned long long>(g.restoredEntries),
         static_cast<unsigned long long>(g.raisedEntries),static_cast<unsigned long long>(g.captures),static_cast<unsigned long long>(g.writes),
         static_cast<unsigned long long>(g.failures),g.lastCount,g.money,partnerProgressJoinPending?"true":"false",
-        static_cast<unsigned long long>(g.restoreEpoch),static_cast<unsigned long long>(outgoing.worldEpoch));
+        static_cast<unsigned long long>(g.restoreEpoch),static_cast<unsigned long long>(outgoing.worldEpoch),
+        g.charmsSaved,static_cast<unsigned long long>(g.charmsGiven),static_cast<unsigned long long>(g.charmsEquipped),
+        static_cast<unsigned long long>(g.charmsUnequipped),static_cast<unsigned long long>(g.charmFailures),g.craftedSkipped,labCharmResult);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);}

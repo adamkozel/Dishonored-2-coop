@@ -82,6 +82,7 @@ std::string objectType(HANDLE process,std::uintptr_t base,std::uintptr_t pointer
 #include "usable_catalog.h"
 #include "native_sword_equipment.h"
 #include "native_player_sword.h"
+#include "native_bonecharm.h" // 2107 (#265)
 #include "native_player_power_item.h"
 #include "native_player_darkvision_item.h"
 #include "native_player_windblast_item.h"
@@ -1786,6 +1787,19 @@ int main(int argc, char** argv) {
         NativeFood food{};if(!found||!readNativeFood(reader,base,player.sword.inventory,player.sword.actor,found,food))return 59;
         std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"character\":"<<player.character<<",\"food\":";std::cout.flush();
         writePickupFoodValue(stdout,food.value);std::cout<<"}\n";return 0;
+    }
+    // 2107 (#265): the player's bonecharm component (native_bonecharm.h): every charm with its key and flags, the
+    // equipped slots and the crafted count. Read-only; names are game-derived, keep output local.
+    if(argc==3&&!std::strcmp(argv[2],"--bonecharms")){
+        const auto reader=[&](auto p,auto d,auto size){return read(process.value,p,d,size);};NativeBoneCharms c{};
+        if(!readNativeBoneCharms(reader,base,c)){std::fprintf(stderr,"bonecharms: %s component=%llx charms=%u slots=%u\n",c.why,static_cast<unsigned long long>(c.component),c.charmCount,c.slotCount);return 59;}
+        const auto text=[](const std::string& s){std::string o;for(const char ch:s){if(ch=='"'||ch=='\\')o+='\\';if(static_cast<unsigned char>(ch)>=32)o+=ch;}return o;};
+        unsigned owned=0;for(const auto& e:c.entries)owned+=e.owned;
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"charms\":"<<c.charmCount<<",\"owned\":"<<owned<<",\"crafted\":"<<c.craftedCount<<",\"slots\":"<<c.slotCount<<",\"equipped\":[";
+        for(std::size_t i=0;i<c.equipped.size();++i){const auto& k=c.equipped[i];std::cout<<(i?",":"")<<"{\"kind\":"<<k.kind<<",\"extra\":"<<k.extra<<",\"name\":\""<<text(k.name)<<"\"}";}
+        std::cout<<"],\"entries\":[";
+        for(std::size_t i=0;i<c.entries.size();++i){const auto& e=c.entries[i];std::cout<<(i?",":"")<<"{\"kind\":"<<e.key.kind<<",\"extra\":"<<e.key.extra<<",\"flags\":"<<unsigned(e.flags)<<",\"name\":\""<<text(e.key.name)<<"\"}";}
+        std::cout<<"]}\n";return 0;
     }
     if(argc==3&&!std::strcmp(argv[2],"--player-inventory")){
         const auto reader=[&](auto p,auto b,auto size){return read(process.value,p,b,size);};NativePlayerSword first{},last{};

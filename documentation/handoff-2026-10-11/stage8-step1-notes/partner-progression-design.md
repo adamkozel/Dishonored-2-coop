@@ -73,6 +73,29 @@ The research was read-only: d2-ghidra, plus a capstone disassembly of the `work/
   - Runes, coins, ammunition, elixirs, gear and whalebone come back only after a join's campaign load (`partnerProgressJoinPending`, set where join-follow sends the campaign command). A checkpoint rewind must not give back what the world offers again.
 - **Status file:** `.partner-progress.json`. Lab switch: `coop_partner_progress on|off`.
 - **Bonecharms are not in this candidate** (next).
+
+## Bonecharms: candidate progress-v2108 (`native_bonecharm.h`, `partner_progress.h`)
+
+**Layout, confirmed static and runtime.** The probe's new `--bonecharms` mode read the host player's component in a running take: 93 charms and 5 slots, none owned at a fresh Edge of the World start.
+- **Each charm entry (0x40 bytes)** starts with its key:
+  - kind at +0: for a found charm, a unique 32-bit id;
+  - an idStr name at +8: empty for found charms, so names belong to crafted ones;
+  - an int at +0x30: -1.
+  The flag byte is at +0x38: bit 1 is owned, and bit 0 is set on 86 of the 93.
+- **Equipped slots** are keys (stride 0x38). An empty slot has kind 0.
+- **idStr** (0x14013f490, 0x140143bb0): the data pointer is at +0, and the length is the low 29 bits of +8.
+- **Keys compare on kind and name** (0x14060b1d0). Give, equip and unequip take the key by value and destroy its idStr, which frees nothing for an empty inline string.
+
+**Capture:** the partner's owned found charms, and whether each is equipped, become `charm <id> <equipped>` lines in the progress file. Older readers skip those lines. Crafted (named) charms are counted (`craftedSkipped`), not carried.
+
+**Restore:** after a join's load only, because charms are found in the world like runes:
+1. give each saved charm she lacks (0x14060e4c0);
+2. unequip any charm equipped but not saved as equipped (0x140611350);
+3. equip each saved equipped charm (0x14060f520).
+
+The status adds `charms`. The lab command `coop_grant_charm <id>` gives and equips one charm.
+
+**Takes:** `Run-V2110.sh` runs the twin `progress-eotw-v2110b` (progression off, must lose the charm) and `v2110a`. Both use route `progress-eotw-charm-v2110` (charm 13858082), and `Check-Charms-v2110.py` judges them.
 - **Takes:** `Run-Progress-v2096.sh`. Twin `progress-eotw-v2096b` (switch off, must lose both), then `progress-eotw-v2096a`. The VM partner is granted extended_health and tranquilizer bolts; her game is closed, relaunched and joins from the main menu; `Check-Progress-v2096.py` compares her entries.
 
 | Take | Candidate | Result |
