@@ -268,11 +268,12 @@ The twin's harness judges the open state only at the end; a later version should
 |---|---|---|
 | `jindosh-partner-dust-v2053a` | jindoshwheels-v2053 | Harness fail: 9 of 10 wheels at their seat on the host (20 requests received, 20 applied, none refused). The partner's use focus left `ld_wheel_herloom_5` after two presses. Harness v2054 adds pitches 40 and -20 and stands at 0.8 and 1.8 m |
 | `jindosh-partner-dust-v2053b` | jindoshwheels-v2053 | **Mutation twin, red as required.** With `coop_safe_dials off` the host refused all 8 requests, and the partner followed the host back 7 times, so the host's `ld_wheel_family_1` never reached index 1 |
+| `jindosh-partner-dust-v2054a` | jindoshwheels-v2053 | **Pass** (harness v2054). The host's lock reached index sum 31 from the partner's turns: 16 requests received, 16 applied, none refused. The partner followed the host 4 times. World diff equal (2325) |
 
 ## Still to do in area 4.3
 
 - **Note text on screen:** check that the partner's safe note and Jindosh riddle show the host's values. This is visual acceptance, recorded separately.
-- **A partner solves the Jindosh lock** with the host's answer. The safe is done (v2052a).
+- Done: a partner opens a safe (v2052a) and solves the Jindosh lock (v2054a) under the host.
 - **Other lock decls** besides `3_digits_lock` and the Jindosh lock, if any.
-- **Door families outside the catalogue** (vaults, linked, blocked and broken doors, quest devices) under the host: a census of where they differ.
+- **Door families outside the catalogue** (vaults, linked, blocked and broken doors, quest devices). The world diff covers every openable (`[current, pending, locked, broken]`) and every usable of the world, not only the catalogue (`runtime_probe.cpp --world-digest`, confirmed static). In-mission diffs so far: A Crack in the Slab (51 doors, 289 usables) and the Institute (56 doors, 244 usables), equal in campaign v2043a. The step 6 full run adds an in-mission diff before each mission's end, which makes this census.
 - Done: the full campaign v2043 (above); the release notes draft documents `safe_codes=0` with `host_story=0` and `items_per_player=0` (troubleshooting).
