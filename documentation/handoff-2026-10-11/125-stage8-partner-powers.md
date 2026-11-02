@@ -80,3 +80,10 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 | `deadlyshade-eotw-v2078a` | fragile-v2078 (v2077 code) | **The host process was lost again at the cast.** The harness records completed steps only, so v2077a's loss was at the cast too, not before it. That makes 2 of 2 host losses when the host spawned `deadlyshadow_entity.def` parented to its player, and none in the twins. **Conclusion:** the deadly shadow's own definition crashes the host when parented to its player, as it did free-standing |
 
 **Candidate shadedecoy-v2079:** on a host without a clone definition, the partner's deadly shadow gets the proven decoy puppet (`decoy_entity.def`, free-standing). The host's guards perceive and fight it, and her shadow's kills are still forwarded. This is the research's fallback.
+| `deadlyshade-eotw-v2079a` | shadedecoy-v2079 | **Pass.** The partner's deadly shadow (kind 2) got a host puppet: spawned 1, stimulus posted, following her shadow (183 pins after the cast, 358 later). It was later lost in the host's world (`puppet_lost`), as when the host's guards fight it. No host loss. Diffs equal at spawn, after, end and final (2279, NPCs compared) |
+| `deadlyshade-eotw-v2079b` | shadedecoy-v2079 | **Twin, red as required** on the power's own check: with `deadly_off` the cast reached the host (kind 2) and no puppet was spawned. Diffs equal (the digest cannot see shades) |
+
+**Deadly Shade status:**
+- On a host without Doppelganger (Corvo), the partner's deadly shadow is the decoy puppet in the host's world. The host's guards perceive and fight it, and her shadow's own kills are forwarded.
+- On a host with Doppelganger (Emily), the host's player has a clone definition (a hypothesis until an Emily-host take), and the native parented clone is used.
+- The deadly shadow's own definition is never spawned: it crashed the host free-standing (v1729c) and parented (v2077a, v2078a).
