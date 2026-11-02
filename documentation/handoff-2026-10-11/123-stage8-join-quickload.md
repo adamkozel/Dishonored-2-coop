@@ -23,3 +23,14 @@ The host plays Dunwall alone: the bedroom, Mayhew, then Ramsey killed and looted
 - **Kiscule log** (`kiscule_action_mirror.h`): while the partner is loading, the host's log entries wait, and their 60 s window starts in gameplay. `joinHeld` counts the entries held this way.
 - **Lab switch:** `coop_join_snapshot on|off`. The twin sends it to both games before the join.
 - **Candidate joinquiet-v2057** adds: a partner sends a first run of a node to the host only after its world has had 10 s of plain gameplay. The clock is set in the Kiscule service each frame. `joinQuiet` counts the runs kept local this way.
+
+## Join snapshot takes
+
+| Take | Candidate | Result |
+|---|---|---|
+| `join-snapshot-dunwall-v2056a` | joinsnapshot-v2055 | **Fail, 14 differences** (535 compared). Alexi now matches. The throne room actors are gone from the partner's world, but the host still counts each as one alive NPC detached from its spawner (`[1, 0, 0]`). The partner held 12 of the host's entries while loading, then let 51 expire while its own mission-start scene played. The host applied 110 of the partner's partner-first nodes |
+| `join-snapshot-dunwall-v2056b` | joinsnapshot-v2055 | Harness fail before the diffs: the VM was placed 3.05 m from the host. Not a twin |
+
+**Candidate joinhold-v2058:** joinquiet-v2057, plus the partner holds the host's log until its world first reaches plain gameplay, not only while it loads.
+
+**Open question:** in the host's world, are the throne room actors that stay alive and detached after the coup hidden? A two-player start from the tower would show whether a partner that runs the coup itself also ends at `[1, 0, 0]`.

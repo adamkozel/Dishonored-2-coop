@@ -466,10 +466,10 @@ void serviceKisculeMirror(std::uint64_t tick){
     std::vector<KisculePending> keep;
     const bool loading=outgoing.gameLogicState==15||outgoing.pendingGameLogicState==15||outgoing.gameLogicState==0||!observedPlayer;
     for(auto& w:work){const auto& p=w.packet;
-        // 2055 (#240): while the partner loads, the host's log waits and its 60 s start in gameplay. A VM join loads for
-        // 170 to 180 s, so the host's log from before the join expired before the partner's world existed
-        // (join-measure-dunwall-v2055a: 77 expired, the throne room actors stayed in the partner's world).
-        if(localRole==1&&loading&&npcLifeJoinSnapshot){w.at=tick;++k.joinHeld;keep.push_back(w);continue;}
+        // 2055 (#240): until the partner's world first reaches plain gameplay, the host's log waits and its 60 s start
+        // there. A VM join loads for 170 to 180 s (join-measure-dunwall-v2055a: 77 expired, the throne room actors stayed in
+        // the partner's world); 2058: then plays its own mission start scene (join-snapshot-dunwall-v2056a: 51 expired).
+        if(localRole==1&&npcLifeJoinSnapshot&&(loading||kisculeSettleEpoch!=outgoing.worldEpoch||!kisculeSettleSince)){w.at=tick;++k.joinHeld;keep.push_back(w);continue;}
         if(tick-w.at>60000){++k.expired;k.result="expired";continue;}
         if(p.role==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&!kisculePlainGameplay()){keep.push_back(w);continue;} // stage 8.4.1: a partner's request waits for plain gameplay
         // A replay never runs on the mission result screen (logic 11), where the world is being torn down: the VM partner's game
