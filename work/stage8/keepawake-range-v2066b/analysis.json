@@ -1,0 +1,557 @@
+{
+ "take": "keepawake-range-v2066b",
+ "phases": {
+  "spawn": {
+   "samples": {
+    "host": 24,
+    "client": 24
+   },
+   "host": {
+    "npcSamples": 2735,
+    "lod": {
+     "0": 144,
+     "3": 72,
+     "4": 624,
+     "6": 110,
+     "7": 1785
+    },
+    "pausedShare": 0.653,
+    "schedulerShare": 0.295,
+    "autoPauseLevels": {
+     "7": 2735
+    }
+   },
+   "client": {
+    "npcSamples": 2735,
+    "lod": {
+     "0": 144,
+     "3": 72,
+     "4": 595,
+     "6": 106,
+     "7": 1818
+    },
+    "pausedShare": 0.766,
+    "schedulerShare": 0.181,
+    "autoPauseLevels": {
+     "7": 2735
+    }
+   },
+   "nearPartner": {
+    "phase": "spawn",
+    "partner": [
+     -30.8141,
+     192.748,
+     1.25397
+    ],
+    "hostView": [
+     -30.814,
+     192.696,
+     2.95118
+    ],
+    "near": 40.0,
+    "npcs": [
+     {
+      "npc": "script_spawner_docks_civilian_05",
+      "toPartner": 18.5,
+      "toHostView": 18.5,
+      "hostLod": {
+       "3": 24
+      },
+      "clientLod": {
+       "3": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_civilian_06",
+      "toPartner": 16.5,
+      "toHostView": 16.5,
+      "hostLod": {
+       "3": 24
+      },
+      "clientLod": {
+       "3": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_civilian_11",
+      "toPartner": 11.5,
+      "toHostView": 11.3,
+      "hostLod": {
+       "4": 24
+      },
+      "clientLod": {
+       "4": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_civilian_13",
+      "toPartner": 21.0,
+      "toHostView": 21.1,
+      "hostLod": {
+       "4": 24
+      },
+      "clientLod": {
+       "4": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 0.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_civilian_31",
+      "toPartner": 30.7,
+      "toHostView": 30.6,
+      "hostLod": {
+       "4": 24
+      },
+      "clientLod": {
+       "4": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 0.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_docker_19",
+      "toPartner": 36.7,
+      "toHostView": 36.6,
+      "hostLod": {
+       "4": 24
+      },
+      "clientLod": {
+       "4": 21,
+       "6": 3
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.2,
+      "clientPath": 0.07,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_musician_guitar",
+      "toPartner": 34.2,
+      "toHostView": 34.1,
+      "hostLod": {
+       "4": 24
+      },
+      "clientLod": {
+       "4": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 0.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_musician_violin",
+      "toPartner": 34.8,
+      "toHostView": 34.7,
+      "hostLod": {
+       "4": 24
+      },
+      "clientLod": {
+       "4": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 0.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_oh_civ_barge_civilian",
+      "toPartner": 25.3,
+      "toHostView": 25.3,
+      "hostLod": {
+       "4": 1,
+       "6": 23
+      },
+      "clientLod": {
+       "4": 1,
+       "6": 23
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 0.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_oh_civ_barge_worker_c",
+      "toPartner": 25.5,
+      "toHostView": 25.6,
+      "hostLod": {
+       "4": 1,
+       "6": 23
+      },
+      "clientLod": {
+       "4": 1,
+       "6": 23
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.17,
+      "clientPath": 0.09,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_oh_workers_bloodflymeat_worker_c",
+      "toPartner": 18.4,
+      "toHostView": 18.2,
+      "hostLod": {
+       "3": 24
+      },
+      "clientLod": {
+       "3": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.41,
+      "clientPath": 0.41,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_oh_workers_dreadfulwale_worker_b",
+      "toPartner": 28.4,
+      "toHostView": 28.3,
+      "hostLod": {
+       "4": 24
+      },
+      "clientLod": {
+       "4": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_photograph",
+      "toPartner": 24.2,
+      "toHostView": 24.1,
+      "hostLod": {
+       "4": 6,
+       "6": 18
+      },
+      "clientLod": {
+       "4": 4,
+       "6": 20
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 0.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.3,
+      "clientPath": 0.3,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_docks_worker_01",
+      "toPartner": 24.2,
+      "toHostView": 24.2,
+      "hostLod": {
+       "4": 1,
+       "6": 23
+      },
+      "clientLod": {
+       "4": 1,
+       "6": 23
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_oh_workers_dreadfulwale_worker_a",
+      "toPartner": 25.7,
+      "toHostView": 25.6,
+      "hostLod": {
+       "4": 24
+      },
+      "clientLod": {
+       "4": 24
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     }
+    ]
+   }
+  },
+  "far": {
+   "samples": {
+    "host": 57,
+    "client": 52
+   },
+   "host": {
+    "npcSamples": 6498,
+    "lod": {
+     "0": 342,
+     "3": 171,
+     "4": 864,
+     "6": 913,
+     "7": 4208
+    },
+    "pausedShare": 0.648,
+    "schedulerShare": 0.3,
+    "autoPauseLevels": {
+     "7": 6498
+    }
+   },
+   "client": {
+    "npcSamples": 5927,
+    "lod": {
+     "0": 312,
+     "4": 582,
+     "6": 643,
+     "7": 4390
+    },
+    "pausedShare": 0.872,
+    "schedulerShare": 0.075,
+    "autoPauseLevels": {
+     "7": 5927
+    }
+   },
+   "nearPartner": {
+    "phase": "far",
+    "partner": [
+     62.222,
+     4.47205,
+     33.495
+    ],
+    "hostView": [
+     -30.814,
+     192.696,
+     2.94765
+    ],
+    "near": 40.0,
+    "npcs": [
+     {
+      "npc": "script_spawner_addermire_roof_03",
+      "toPartner": 39.0,
+      "toHostView": 186.3,
+      "hostLod": {
+       "6": 15,
+       "4": 42
+      },
+      "clientLod": {
+       "6": 52
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 22.52,
+      "clientPath": 22.53,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_addermirestation_entrance_guard_02",
+      "toPartner": 24.6,
+      "toHostView": 191.6,
+      "hostLod": {
+       "4": 40,
+       "6": 17
+      },
+      "clientLod": {
+       "4": 35,
+       "6": 17
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_streets_aftersquare_shop_shopkeeper",
+      "toPartner": 15.5,
+      "toHostView": 206.5,
+      "hostLod": {
+       "7": 57
+      },
+      "clientLod": {
+       "6": 21,
+       "4": 31
+      },
+      "hostPausedShare": 1.0,
+      "clientPausedShare": 0.0,
+      "hostScheduledShare": 0.0,
+      "hostPath": 0.0,
+      "clientPath": 8.92,
+      "endGap": 0.9
+     }
+    ]
+   }
+  },
+  "far-off": {
+   "samples": {
+    "host": 57,
+    "client": 55
+   },
+   "host": {
+    "npcSamples": 6498,
+    "lod": {
+     "0": 342,
+     "3": 171,
+     "4": 622,
+     "6": 522,
+     "7": 4841
+    },
+    "pausedShare": 0.745,
+    "schedulerShare": 0.202,
+    "autoPauseLevels": {
+     "7": 6498
+    }
+   },
+   "client": {
+    "npcSamples": 6266,
+    "lod": {
+     "0": 330,
+     "4": 469,
+     "6": 769,
+     "7": 4698
+    },
+    "pausedShare": 0.877,
+    "schedulerShare": 0.07,
+    "autoPauseLevels": {
+     "7": 6266
+    }
+   },
+   "nearPartner": {
+    "phase": "far-off",
+    "partner": [
+     62.222,
+     4.47205,
+     33.495
+    ],
+    "hostView": [
+     -30.814,
+     192.696,
+     2.95132
+    ],
+    "near": 40.0,
+    "npcs": [
+     {
+      "npc": "script_spawner_addermire_roof_02",
+      "toPartner": 37.6,
+      "toHostView": 178.6,
+      "hostLod": {
+       "4": 57
+      },
+      "clientLod": {
+       "6": 55
+      },
+      "hostPausedShare": 0.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 1.0,
+      "hostPath": 24.38,
+      "clientPath": 23.78,
+      "endGap": 0.24
+     },
+     {
+      "npc": "script_spawner_addermire_roof_03",
+      "toPartner": 38.4,
+      "toHostView": 188.4,
+      "hostLod": {
+       "7": 57
+      },
+      "clientLod": {
+       "6": 55
+      },
+      "hostPausedShare": 1.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 0.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_addermirestation_entrance_guard_02",
+      "toPartner": 24.6,
+      "toHostView": 191.6,
+      "hostLod": {
+       "7": 57
+      },
+      "clientLod": {
+       "6": 55
+      },
+      "hostPausedShare": 1.0,
+      "clientPausedShare": 1.0,
+      "hostScheduledShare": 0.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.0
+     },
+     {
+      "npc": "script_spawner_streets_aftersquare_shop_shopkeeper",
+      "toPartner": 15.2,
+      "toHostView": 206.5,
+      "hostLod": {
+       "7": 57
+      },
+      "clientLod": {
+       "6": 55
+      },
+      "hostPausedShare": 1.0,
+      "clientPausedShare": 0.0,
+      "hostScheduledShare": 0.0,
+      "hostPath": 0.0,
+      "clientPath": 0.0,
+      "endGap": 0.9
+     }
+    ]
+   }
+  },
+  "far-noauth": {
+   "status": "SKIP",
+   "reason": "no samples"
+  }
+ },
+ "decision": {
+  "status": "MEASURED",
+  "npcsNearPartner": 3,
+  "pausedInHostWorld": 1,
+  "hostCanRunFarGuardsAsIs": false,
+  "note": "Paused = the host world's decision AI holds a pause ref for at least half the far phase."
+ }
+}
