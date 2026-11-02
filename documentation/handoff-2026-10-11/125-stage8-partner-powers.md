@@ -67,3 +67,9 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 - The team source list that `FUN_1404e51c0` searches therefore holds the player team's own members. Natively, the deadly shadow is the caster's own clone, parented to the caster. No guard has the component.
 
 **Candidate deadlyshade-v2076:** when the list has no entry near her, the host's own player is the parent, and its clone definition is used. The spawn is at her shade.
+| `deadlyshade-eotw-v2076a` | deadlyshade-v2076 | Stopped at the spawn diff, before the cast: `env_bottle_04_19` absent on the host (#260) |
+| `deadlyshade-eotw-v2076b` | deadlyshade-v2076 | The same |
+| `deadlyshade-eotw-v2076c` | deadlyshade-v2076 | Spawn diff not required. The cast reached the host (kind 2). With the host's player as parent, 28 refusals: Corvo, without Doppelganger, has no clone definition. The diff after the cast differs only by the same bottle, which stays absent on the host |
+| `deadlyshade-eotw-v2076d` | deadlyshade-v2076 | Twin: no host attempt; every diff equal (the bottle was present this time) |
+
+**Candidate deadlyshade-v2077:** with no clone definition, the deadly shadow's own definition (`deadlyshadow_entity.def`) is created parented to the host's player, not free-standing. Counter: `deadlyOwnDefinition`. Its take records the diffs without requiring them and is judged on `.shade-host.json` and on no crash.
