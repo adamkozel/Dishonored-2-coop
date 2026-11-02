@@ -87,3 +87,19 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 - On a host without Doppelganger (Corvo), the partner's deadly shadow is the decoy puppet in the host's world. The host's guards perceive and fight it, and her shadow's own kills are forwarded.
 - On a host with Doppelganger (Emily), the host's player has a clone definition (a hypothesis until an Emily-host take), and the native parented clone is used.
 - The deadly shadow's own definition is never spawned: it crashed the host free-standing (v1729c) and parented (v2077a, v2078a).
+
+## Blink Assault (2080 to 2081)
+
+Test: `Test-MissionPartnerPowers-v2080.ps1`, from v1833, on the local lab with the partner as Corvo.
+- Both peers' damage observers are armed before the cast, and their `.damage.json` is kept, with each hit's 144 raw parameter bytes.
+- From v2081, `-BlinkLegacy` sends `coop_blink_kick legacy` to her game first (the twin).
+
+| Take | Candidate | Result |
+|---|---|---|
+| `blinkkick-params-v2080a` | shadedecoy-v2079 | Setup fail: a client command receipt was not confirmed while loading. Restore passed |
+| `blinkkick-params-v2080b` | shadedecoy-v2079 | **Discovery** (confirmed runtime). The kick landed in both worlds: health 40 to 30 on each side, host guard pushed 3.73 m, end gap 0 m. Host down poses sent: 0, so no knockdown. Her own native kick hits read flags `0x12` at +0x10 and reactions 2 and 2 at +0x18 and +0x1c, with a hit point and direction after them. The host's `npcCombatApplyPeerNative` applies only the declaration defaults, the amount and the attacker |
+
+**Candidate blinkkick-v2081:**
+- A kick (`blink_attack`, `focused_blink_attack`) carries its flags byte and two reaction bytes in the PeerNative `weapon` field. `validNpcPeerNative` allows that only for those two declarations, with a unit test.
+- The host applies them, plus the kick direction from her avatar to the NPC at +0x3c.
+- Lab switch: `coop_blink_kick native|legacy`. Counters: `npcBlinkKicksSent` and `npcBlinkKicksApplied`.

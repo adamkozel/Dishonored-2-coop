@@ -93,8 +93,13 @@ inline bool npcCombatHostPairedDeclaration(unsigned localRole,bool playerOwned,s
     for(const auto* d:kNpcHostPairedDecls)if(npcCombatDeclKey(d)==key)return true;
     return false;
 }
+// 2081 (#242): a Blink Assault kick (blink_attack, focused_blink_attack) carries its native flags byte (+0x10) and two
+// reaction bytes (+0x18, +0x1c) in weapon, so the host applies the kick, not the declaration defaults (blinkkick-params-
+// v2080b: her kick flags 0x12, reactions 2 and 2; the host guard only staggered).
+inline bool npcCombatBlinkKickDeclaration(std::uint64_t key){return key==0x4c7015915e21527full||key==0x68aef1ce03873015ull;}
 inline bool validNpcPeerNative(const NpcCombatRangedDamage& r){
-    return npcDamageDeclarationName(r.declaration)&&!npcCombatReplayableDeclaration(r.declaration)&&std::isfinite(r.amount)&&r.amount>=0&&r.amount<=1000&&r.distance==0&&!r.weapon;
+    return npcDamageDeclarationName(r.declaration)&&!npcCombatReplayableDeclaration(r.declaration)&&std::isfinite(r.amount)&&r.amount>=0&&r.amount<=1000&&r.distance==0&&
+        (!r.weapon||(npcCombatBlinkKickDeclaration(r.declaration)&&!(r.weapon&~0xffffffu)));
 }
 // 1214fm (#117): the native Domino network repeats a hit on each linked NPC with bit 40 of the damage flags set
 // (takes 1647a fatality and 1648a assassination; confirmed runtime). A Linked request carries a replayable player

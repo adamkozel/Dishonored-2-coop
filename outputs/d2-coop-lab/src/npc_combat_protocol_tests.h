@@ -169,5 +169,8 @@ void npcCombatProtocolTests(){
         s=npcDamageKey("components/characters/player/base/damage/player_sword.damage");
      require(npcCombatHostPairedDeclaration(0,true,a)&&npcCombatHostPairedDeclaration(0,true,f)&&!npcCombatHostPairedDeclaration(0,true,s)&&
              !npcCombatHostPairedDeclaration(1,true,a)&&!npcCombatHostPairedDeclaration(0,false,a),"1214fw: only the host player's own assassination and fatality apply natively");}
+    {const auto kick=npcDamageKey("components/characters/player/base/damage/blink_attack.damage"),sword=npcDamageKey("components/characters/player/base/damage/player_sword.damage");
+     require(validNpcPeerNative(NpcCombatRangedDamage{kick,10,0,0x020212u})&&!validNpcPeerNative(NpcCombatRangedDamage{kick,10,0,0x1000000u})&&
+             !validNpcPeerNative(NpcCombatRangedDamage{sword,10,0,0x12u}),"2081: only a Blink Assault kick carries its flags and reactions in a PeerNative hit");}
     std::cout<<"PASS: NPC combat authority, exact incarnation, ordered repeated hits, duplicate and malformed result rejection\n";
 }

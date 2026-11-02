@@ -561,6 +561,7 @@ bool npcCombatFollowHost(NpcAuthorityChannel& c,const NativeHealth& before,float
 // 1214y: the host applies a client PeerNative hit natively, the partner avatar as
 // attacker and inflictor; HostWorld commits a loss and Dead a death.
 // 1214fm (#117): a Linked hit too, with its native amount and flags, up to 96 m from the partner (Domino links far).
+bool npcBlinkKickForward=true;std::uint64_t npcBlinkKicksSent=0,npcBlinkKicksApplied=0; // 2081 (#242): coop_blink_kick legacy|native
 bool npcCombatApplyPeerNative(NpcAuthorityChannel& c,const NativeHealth& before,const NpcCombatRangedDamage& r,bool linked=false){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const char* name=npcDamageDeclarationName(r.declaration);
     if(localRole||!realNativeDamage||!name||!(linked?validNpcLinked(r):validNpcPeerNative(r))||!npcCombatNear(c,1,linked?96.f:32.f)||npcCombatNativeApplication||(before.ownerFlags&8))return false;
@@ -572,6 +573,12 @@ bool npcCombatApplyPeerNative(NpcAuthorityChannel& c,const NativeHealth& before,
     reinterpret_cast<void(*)(void*)>(gameImage+0x780470)(result.data());
     if(r.amount>0||linked)std::memcpy(params.data()+8,&r.amount,4);
     if(linked){const std::uint64_t flags=r.weapon;std::memcpy(params.data()+0x10,&flags,8);}
+    // 2081 (#242): her kick's flags and reactions, and its direction from her avatar to the NPC (+0x3c, horizontal).
+    else if(r.weapon&&npcCombatBlinkKickDeclaration(r.declaration)){const std::uint64_t flags=r.weapon&0xff;const std::uint32_t r0=(r.weapon>>8)&0xff,r1=(r.weapon>>16)&0xff;
+        std::memcpy(params.data()+0x10,&flags,8);std::memcpy(params.data()+0x18,&r0,4);std::memcpy(params.data()+0x1c,&r1,4);
+        float from[3]{},to[3]{};if(avatar.actor&&memoryRead(avatar.actor+0x300,from,12)&&memoryRead(before.actor+0x300,to,12)){
+            float d[3]={to[0]-from[0],to[1]-from[1],0.f};const float n=std::sqrt(d[0]*d[0]+d[1]*d[1]);if(n>.01f){d[0]/=n;d[1]/=n;std::memcpy(params.data()+0x3c,d,12);}}
+        ++npcBlinkKicksApplied;}
     std::memcpy(params.data()+0x50,&avatar.handle,4);std::memcpy(params.data()+0x54,&avatar.handle,4);
     NativeHealth recheck{};
     if(!readNativeHealth(memoryRead,base,before.handle,recheck)||recheck.actor!=before.actor||recheck.component!=before.component||recheck.current!=before.current)return false;
@@ -671,6 +678,8 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
                     npcCombat.outgoing.push_back(p);++npcCombat.requests;++npcCombat.linkedRequests;return true;}
             }
             NpcCombatRangedDamage native{npcDamageKey(npcCombatLastDecl),0,0,0};std::memcpy(&native.amount,capture.info.data()+8,4);
+            if(npcBlinkKickForward&&npcCombatBlinkKickDeclaration(native.declaration)){std::uint32_t r0=0,r1=0;std::memcpy(&r0,capture.info.data()+0x18,4);std::memcpy(&r1,capture.info.data()+0x1c,4); // 2081
+                native.weapon=static_cast<unsigned>(capturedFlags&0xff)|((r0&0xff)<<8)|((r1&0xff)<<16);++npcBlinkKicksSent;}
             // 1214gx (#131): a hit by Emily's own shade (the deadly shadow's kill_damage) was refused here as
             // hit_damage_parameters (partner-shade-v1731a). Its amount is clamped to the PeerNative limit (the host applies its
             // own declaration) and a world inflictor or attacker is allowed when the other one is her shade.
