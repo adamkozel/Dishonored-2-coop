@@ -9,9 +9,9 @@
 // (d2-ghidra, confirmed static; stage8-step1-notes/partner-progression-design.md).
 // The partner's game keeps her carried entries (the types below) and money in coop-progress-<character>.txt beside the
 // co-op saves, captured every 3 s in gameplay once this load's restore has run. After each load the file is applied with
-// the native apply, never lowering what she has (each value is the larger of the two): powers, upgrades and enhancements
-// after every load; runes, coins, ammunition and the rest only after a join's campaign load (a checkpoint rewind must not
-// give back what the world gives again). Lab switch coop_partner_progress on|off.
+// the native apply: powers, upgrades and enhancements after every load, never lowered (each value is the larger of the
+// two); runes, coins, ammunition and the rest only after a join's campaign load, set to the saved values (a checkpoint
+// rewind must not give back what the world gives again). Lab switch coop_partner_progress on|off.
 bool partnerProgressEnabled=true;
 struct PartnerProgressEntry {std::string name;std::int32_t quantity=0,maximum=0,f2c=0,f30=0;std::uint8_t f28=0,f34=0,f35=0;};
 struct PartnerProgress {
@@ -66,8 +66,9 @@ struct PartnerSavedItemState {std::uint32_t hash=0;std::int32_t quantity=0,maxim
 static_assert(sizeof(PartnerSavedItemState)==0x20,"itemState_t is 0x20 bytes");
 struct PartnerSavedState {std::int32_t money=0,v170=0;PartnerSavedItemState* items=nullptr;std::uint32_t count=0,capacity=0;};
 static_assert(sizeof(PartnerSavedState)==0x18,"savegameState_t is 0x18 bytes");
-// Applies the saved entries the current load may take (every load: class 1; a join's load: both classes and money), each
-// raised to the larger of the saved and the held value, through the native apply. Returns the number of raised entries.
+// Applies the saved entries the current load may take (every load: class 1; a join's load: both classes and money):
+// class 1 raised to the larger of the saved and the held value, class 2 set to the saved value, through the native apply.
+// Returns the number of changed entries.
 inline int restorePartnerProgress(bool joinLoad){
     auto& g=partnerProgress;std::int32_t savedMoney=0;std::vector<PartnerProgressEntry> saved;
     if(!loadPartnerProgress(g.character,savedMoney,saved)){g.result="nothing_saved";return 0;}
@@ -76,11 +77,16 @@ inline int restorePartnerProgress(bool joinLoad){
     std::int32_t v170=0;if(!memoryRead(inventory+0x170,&v170,4)){++g.failures;g.result="inventory_unreadable";return -1;}
     std::unordered_map<std::string,const PartnerProgressEntry*> byName;for(const auto& s:saved)byName[s.name]=&s;
     std::vector<PartnerSavedItemState> records;
+    // 2104 (#265): on a join's load the class 2 entries (ammunition, elixirs, runes, gear, whalebone) and money are set to
+    // the saved values, as a native mission change carries them. Raised only, a rejoin refilled them to the mission's
+    // default loadout (progress-eotw-v2104a: tranquilizer bolts saved 1, rejoined 3).
     for(const auto& x:held){const auto it=byName.find(x.name);if(it==byName.end())continue;if(x.cls==2&&!joinLoad)continue;
-        const auto& s=*it->second;if(s.quantity<=x.quantity&&s.maximum<=x.maximum)continue;
-        PartnerSavedItemState r{};r.hash=partnerProgressHash(x.name);r.quantity=(std::max)(s.quantity,x.quantity);r.maximum=(std::max)(s.maximum,x.maximum);
+        const auto& s=*it->second;const bool exact=x.cls==2;
+        const std::int32_t quantity=exact?s.quantity:(std::max)(s.quantity,x.quantity),maximum=exact?s.maximum:(std::max)(s.maximum,x.maximum);
+        if(quantity==x.quantity&&maximum==x.maximum)continue;
+        PartnerSavedItemState r{};r.hash=partnerProgressHash(x.name);r.quantity=quantity;r.maximum=maximum;
         r.f0c=s.f2c;r.f10=s.f30;r.f14=s.f34;r.f15=s.f28;r.f1c=s.f35;records.push_back(r);}
-    const std::int32_t newMoney=joinLoad?(std::max)(money,savedMoney):money;
+    const std::int32_t newMoney=joinLoad?savedMoney:money;
     if(records.empty()&&newMoney==money){g.result="nothing_to_raise";return 0;}
     PartnerSavedState state{};state.money=newMoney;state.v170=v170;state.items=records.data();
     state.count=static_cast<std::uint32_t>(records.size());state.capacity=static_cast<std::uint32_t>(records.size())<<8;
