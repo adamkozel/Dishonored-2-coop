@@ -84,7 +84,8 @@ int missionDecisionIntercept(unsigned kind,int slot) {
     const int rule=missionDecisionRule(localRole,kind,atResults,shared,checkpointConnected(),permitted);
     if(rule==0&&kind==1)++checkpointMissionContinues;
     if(rule==0&&localRole==0&&shared)missionDecisionHost(kind,slot,GetTickCount64());
-    if(rule==1){if(!d.held)++d.partnerHeld;d.held=true;d.heldKind=kind;d.heldSlot=slot;d.result="waiting_for_host";}
+    // 2108: her first held press on this result screen shows the wait notice (native_notice.h), unless a notice is pending.
+    if(rule==1){if(!d.held){++d.partnerHeld;int none=0;coopNoticePending.compare_exchange_strong(none,2);}d.held=true;d.heldKind=kind;d.heldSlot=slot;d.result="waiting_for_host";}
     return rule;
 }
 void receiveMissionDecision(const MissionDecisionPacket& p) {

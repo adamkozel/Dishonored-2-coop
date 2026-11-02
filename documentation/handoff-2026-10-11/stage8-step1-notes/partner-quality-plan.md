@@ -28,7 +28,7 @@ Read-only research, 2026-11-02. Labels: confirmed static, confirmed runtime, hyp
 ## Polish list (known items)
 
 - The version mismatch has no on-screen message (ch118:51).
-- The partner's result-screen buttons give no hint while she waits for the host (ch122:62).
+- The partner's result-screen buttons give no hint while she waits for the host (ch122:62). **Candidate progress-v2109:** her first held Replay or Continue opens a one-button engine box on the result screen (notice 2, `native_notice.h`): "The host chooses what happens next. Your game follows when your friend continues." Take `firstmission-dunwall-v2111a` (`Run-V2111.sh`) must show it in a partner box frame and still reach the host's Void with every diff equal. Hypothesis to check: a box left open does not block her move, which is a `campaign` command under continue-follow, not her native Continue.
 - RELEASE-NOTES:183 and :233 change after the dialog fix.
 - Hypotheses to check:
   - partner wait states without on-screen text (session_product.h:269-286);
