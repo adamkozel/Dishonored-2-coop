@@ -28,3 +28,22 @@ Step 5 measures partner movement in numbers, gives the first mission's character
 - Native baseline: `addermire_roof_03`.
 - The host samples the partner's rig while she walks, runs and strafes.
 - The partner samples the host's rig while he does the same.
+
+| Take | Result |
+|---|---|
+| `animquality-eotw-v2083a` | Setup fail: co-op saves did not switch on (the same flake as bottle-eotw-v2078a). Rerun as v2083b on nativechoice-v2084 |
+
+## The first mission's character choice in our own dialog (candidate nativechoice-v2084)
+
+**Research:** [native-character-choice.md](stage8-step1-notes/native-character-choice.md).
+- The native screen is logic state 14 (`arkGameLogicStateCharacterChoice` at `game+0x1f6f50`).
+- Writing its selection (+0x48: 0 Emily, 1 Corvo) and its confirmed flag (+0x114) makes the game play the chosen ending, and its Kiscule node calls `SwitchCharacter` itself. The "Play as …?" box never opens (confirmed static).
+
+**The change:**
+- `session_product.h`: our Character box asks on the first mission too, where it was skipped before.
+- The `campaign` command records the partner's pick (`coopNativeChoicePick`).
+- `native_choice_answer.h`: a partner-only service answers logic 14 about 2.5 s after it appears, when no box is open. Back in gameplay it checks the native character, and `SwitchCharacter` is the backstop.
+- The host keeps its own native screen.
+- Lab switch: `coop_native_choice auto|manual`. Status file: `.native-choice.json`.
+
+**Harness v2084:** it presses nothing on the partner's logic 14 and fails if that screen is still up after 25 s; `-NativeChoiceManual` is the twin. The takes (`Run-NativeChoice-v2084.sh`) are a partner Corvo with an Emily host, a partner Emily with a Corvo host, and the manual twin.
