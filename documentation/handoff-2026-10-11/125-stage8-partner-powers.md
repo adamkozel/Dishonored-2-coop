@@ -21,3 +21,17 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 - Counters: `shadeHostDeadlyParents` and `shadeHostDeadlyRefused`.
 
 **Test:** `work/natural-moveset/Test-PartnerShade-v2069.ps1`, from v1738, on the local lab. With `-Deadly`, the host must spawn a puppet and a guard must die in both worlds. `-DeadlyOff` is the twin, where the host must spawn no puppet.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `partner-shade-v2069a` | deadlyshade-v2069 | Harness fail: her shade never appeared. Guard 1 now stands at (-57.9, -144.5, 61.5) facing the stairs, so the stand 6 m behind it put her against a wall and no cast happened. The restore found the client's checkpoint inventory changed. The lab was recovered (`Recover-InterruptedTake-v1055`, into v2069b) |
+| `partner-shade-v2069b` | deadlyshade-v2069 | Harness fail: observer pitch did not settle (lab left dirty by v2069a) |
+| `partner-shade-v2070a` | deadlyshade-v2070 | Harness fail: observer pitch did not settle; the cast video was not finalised. The restore passed |
+| `partner-shade-v2070c` | deadlyshade-v2070 | Harness fail: from the fixed fallback stand with a clear view, still no shade (doppelganger world `sent 0`). The local shade harness no longer reaches a cast; the cause, for example the partner's mana, is not known |
+
+**Candidate deadlyshade-v2070:** looks up the deadly shadow's parent NPC at the partner's root first, then at her shade, as `FUN_14043de90` does at the caster and the aim.
+
+**Next take: `deadlyshade-eotw-v2071`** on two Steam accounts (harness v2071 with a `status` step).
+- The VM partner gets Doppelganger with Deadly Shade and casts at checkpoint guard 01 from v1833a's front stand.
+- The host's `.shade-host.json` is saved, and the diffs after the cast and at the end are required.
+- The twin sets `deadly_off`.

@@ -131,7 +131,9 @@ bool shadeHostDeadlyParent(const float* at,std::uintptr_t& parent,std::uintptr_t
     parent=definition=0;std::uintptr_t table=0,team=0,component=0,slot=0;int index=-1;
     if(!observedPlayer||!observedGame||!memoryRead(observedPlayer+0x2e0,&index,4)||index<0||index>=64||!memoryRead(observedGame+0x341068,&table,8)||!table||
        !memoryRead(table+static_cast<std::uintptr_t>(index)*8,&team,8)||!team)return false;
-    parent=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,const float*)>(gameImage+0x4e51c0)(team,at);
+    // 2070: natively at the caster first, then at the aim (FUN_14043de90); the host has her streamed root and her shade.
+    const auto find=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,const float*)>(gameImage+0x4e51c0);
+    parent=find(team,remote.position);if(!parent)parent=find(team,at);
     if(!parent)return false;
     component=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,void*,int)>(gameImage+0x877720)(parent,gameImage+0x39ae070,2);
     return component&&memoryRead(component+0x6d8,&slot,8)&&slot&&memoryRead(slot,&definition,8)&&definition;
