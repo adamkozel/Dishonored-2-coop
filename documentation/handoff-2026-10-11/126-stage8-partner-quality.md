@@ -87,3 +87,29 @@ Step 5 measures partner movement in numbers, gives the first mission's character
 | `nativechoice-dunwall-v2086a` | nativechoice-v2085 | Harness timeout: the Corvo partner's screen was still logic 14 at 25 s. Her VM frame shows the choice scene with both characters, likely the chosen ending. Harness v2087 waits 120 s and keeps her `.native-choice.json` |
 
 **Open, being researched:** the jitter of the partner's rig in the host's view. Alternating ±4-7 cm per sample suggests two positioning paths taking turns (hypothesis). Only the host-watches-partner direction shows it.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `nativechoice-dunwall-v2087a` | nativechoice-v2085 | **Fail:** a partner picking Corvo, opposite an Emily host. Her selection was held for 67 frames; then something other than our write confirmed it (`answered 0`), and her choice scene stayed in logic 14 for the full 120 s. The Kiscule mirror was not active yet, so host story is not involved |
+| `nativechoice-dunwall-v2087b` | nativechoice-v2085 | **Twin, manual:** her screen stayed unanswered for 120 s, red as required |
+
+**Analysis:**
+- The Emily pick (v2085b) completed after the same 67 frames. The Corvo pick then stalls.
+- Hypothesis: the direct writes skip what the native focus (left/right) and confirm paths also signal to the choice scene. Research into the native confirm sequence is under way.
+- Input injection is not an option for the release: the lab's virtual pad (`lab_proxy.cpp`) exists in lab builds only.
+
+## The partner rig jitter was the fixture (research, confirmed runtime)
+
+In v2086a the route placed the partner about 0.8 m up on furniture in the bedroom, wedged in a slot.
+- **The source:** her own sent position wobbled 4 to 7 cm in y while idle (`route.json` `localPosition`).
+- **The host:** it follows a single interpolated target and never extrapolates (`pose_interpolation.h`), so it showed the wobble faithfully.
+- **The gait clock:** it took the wobble for walking (`movement_bank.h:291`), so the legs stepped in place, which gives the foot skate.
+- **Controls:** the reverse direction, and the partner on a free roof (eotw-v2085a), were still at rest.
+
+**Harness v2088 adds a fixture guard:** the mover must rest within 5 mm before sampling, or the step stops as `FIXTURE`.
+
+**Take `animquality-dunwall-v2088a`:** both players on free floor, 13 m apart.
+
+**Its twin, `v2088b`:** the partner back on the furniture, where the guard must stop the step.
+
+**Noted for later (a decision, not done):** smoothing the gait clock's velocity vector instead of its magnitude would keep a real player wedged in geometry from stepping in place. It changes every gait start and stop, so it needs the full movement regression.
