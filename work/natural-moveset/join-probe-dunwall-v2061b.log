@@ -1,0 +1,300 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             93 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The worlds differ at join60: 15 values (DIFFERENT)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-joinanswer-v2061",
+      "hostDll": "AAC2D955029F9DEDCE76CDE7550731BD43703F0574BF412323772F317C4DB02C",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 13000
+      },
+      "client": null
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step01-command host coop_join_snapshot off",
+      "step02-command client coop_join_snapshot off"
+    ],
+    "join": {
+      "afterStep": 10,
+      "clientBefore": {
+        "logic": 6,
+        "map": "campaign/menu/menu_p"
+      },
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true,
+      "loadMs": 93126,
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 1,
+        "warpDistance": 48.53
+      },
+      "hostPos": [
+        -48.751259,
+        -111.010262,
+        61.003647
+      ],
+      "clientPos": [
+        -49.389977,
+        -110.652107,
+        61.433311
+      ],
+      "distance": 0.85,
+      "gameflow": {
+        "host": "237 1 3 6 0 1 0",
+        "client": "237 1 3 6 0 1 0",
+        "equal": true
+      },
+      "npcCounts": {
+        "client": 48,
+        "host": 58
+      },
+      "npcStateDiffs": [
+        {
+          "handle": "0xb2b095e",
+          "name": "ld_spawner_clockw_right",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xb4a0766",
+          "name": "ld_spawner_vista_8",
+          "host": "absent",
+          "client": "alive"
+        },
+        {
+          "handle": "0xb4c0768",
+          "name": "ld_spawner_vista_6",
+          "host": "absent",
+          "client": "alive"
+        },
+        {
+          "handle": "0xb53076f",
+          "name": "ld_spawner_vista_3",
+          "host": "absent",
+          "client": "alive"
+        },
+        {
+          "handle": "0xb5a0776",
+          "name": "ld_spawner_alexi_escape",
+          "host": "dead",
+          "client": "alive"
+        },
+        {
+          "handle": "0xc530996",
+          "name": "ld_spawner_clockw_left",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcb009ce",
+          "name": "ld_spawner_duke_guard_right_1",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcb509d3",
+          "name": "ld_spawner_duke_guard_left_1",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcba09d8",
+          "name": "ld_spawner_duke_guard_right_2",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcbf09dd",
+          "name": "ld_spawner_duke_guard_left_2",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcc409e2",
+          "name": "ld_spawner_duke",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcc909e7",
+          "name": "ld_spawner_duke_carrier_front",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcce09ec",
+          "name": "ld_spawner_duke_carrier_back",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcd309f1",
+          "name": "ld_spawner_delilah",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xce80a08",
+          "name": "ld_spawner_vista_8",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcec0a0c",
+          "name": "ld_spawner_guard_tutorial_2",
+          "host": "alive",
+          "client": "absent"
+        },
+        {
+          "handle": "0xcf00a10",
+          "name": "ld_spawner_guard_tutorial_2",
+          "host": "alive",
+          "client": "absent"
+        }
+      ],
+      "armed": {
+        "product": {
+          "client": "armed",
+          "host": "armed"
+        },
+        "banks": {
+          "client": true,
+          "host": true
+        },
+        "ok": true
+      }
+    },
+    "diff-join": {
+      "status": "DIFFERENT",
+      "compared": 535,
+      "differences": 15
+    },
+    "diff-join60": {
+      "status": "DIFFERENT",
+      "compared": 535,
+      "differences": 15
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 18,
+        "pos": [
+          -52.445152,
+          -113.286522,
+          61.003647
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 8,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/152/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 43,
+        "pos": [
+          -49.81451,
+          -111.484207,
+          61.003647
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "74/143/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 10 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2059.ps1:783[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 783 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe worlds differ at join60: 15 values (DIFFERENT)[0m

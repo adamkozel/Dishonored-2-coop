@@ -44,3 +44,18 @@ The host plays Dunwall alone: the bedroom, Mayhew, then Ramsey killed and looted
 **Candidate joinasks-v2060:** v2058's hold is reverted, so the partner holds only while loading (as in v2057). A partner's host-story asks now wait for the same 10 s of plain gameplay as partner-first runs. Harness v2059 adds a `probe` step. Route `join-probe-dunwall-v2059` runs `--npc-authority-all` on the host before the join and on both games at the end.
 
 **Open question:** in the host's world, are the throne room actors that stay alive and detached after the coup hidden? A two-player start from the tower would show whether a partner that runs the coup itself also ends at `[1, 0, 0]`.
+
+## Answered asks (2060 to 2062)
+
+| Take | Candidate | Result |
+|---|---|---|
+| `join-probe-dunwall-v2060a` | joinasks-v2060 | **Fail:** the partner never reached gameplay. Its mission-start scene needs the host's answers to its host-story asks |
+| `join-probe-dunwall-v2060b` | joinasks-v2060 | **Mutation twin, red as required** (15 differences) |
+| `join-probe-dunwall-v2061a` | joinanswer-v2061 | **4 differences, down from 18** (535 compared). The host answered 155 of the joiner's asks without running them and ran 2 nodes. Left: Delilah and `ramsey_audience` alive for the partner, a door (`ld_door_350cm_int_rich_wood_01`) locked only on the host, and Alexi's scroll case. The partner let 42 of the host's entries expire |
+| `join-probe-dunwall-v2061b` | joinanswer-v2061 | **Mutation twin, red as required** (15 differences, the host ran 111 of the partner's nodes) |
+
+**Confirmed runtime (v2060a and v2060b, `--npc-authority-all` on the host before the join):** the host has no throne room actors before the join. The `[1, 0, 0]` actors of v2056a to v2058b were spawned in the host's world by the partner's mission-start nodes, which the host ran for it.
+
+**Candidates:**
+- **joinanswer-v2061:** an ask the partner sends before it has settled carries a joining bit (`kKisculeJoining`). The host answers it with the count and runs nothing (`joinAnswered`); asks are not gated.
+- **joinmap-v2062:** the partner also holds the host's log while its map does not yet match the host's and it has not settled. Hypothesis: the 42 entries expired during the partner's mission-start scene, before its map name was filled.
