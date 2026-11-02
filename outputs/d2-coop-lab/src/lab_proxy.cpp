@@ -235,6 +235,8 @@ BOOL WINAPI DllMain(HINSTANCE dll, DWORD reason, LPVOID) {
         if(GetPrivateProfileIntA("d2coop","safe_codes",1,cfg)==0)SetEnvironmentVariableA("D2COOP_SAFE_CODES","0");
         // 2100 (#264): safe_doors=0 keeps safe doors per world (0.9.6); both players should use the same setting.
         if(GetPrivateProfileIntA("d2coop","safe_doors",1,cfg)==0)SetEnvironmentVariableA("D2COOP_SAFE_DOORS","0");
+        // 2102 (#265): partner_progress=0 stops keeping the partner's progression (captures and restores) in this game.
+        if(GetPrivateProfileIntA("d2coop","partner_progress",1,cfg)==0)SetEnvironmentVariableA("D2COOP_PARTNER_PROGRESS","0");
         // Stage 8 (#253): mission_decision=0 lets each player choose Continue or Replay again; the host's setting holds for both.
         if(GetPrivateProfileIntA("d2coop","mission_decision",1,cfg)==0)SetEnvironmentVariableA("D2COOP_MISSION_DECISION","0");
         // Mission checkpoints read the game's own autosave details (read only).

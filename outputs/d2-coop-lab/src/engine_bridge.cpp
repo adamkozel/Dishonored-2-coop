@@ -2537,6 +2537,7 @@ bool installEngineBridge(unsigned char* image,const char* role) {
     {char perPlayer[4]{};productItemsPerPlayer=!(GetEnvironmentVariableA("D2COOP_ITEMS_PER_PLAYER",perPlayer,sizeof(perPlayer))==1&&perPlayer[0]=='0');}
     {char safeCodes[4]{};if(GetEnvironmentVariableA("D2COOP_SAFE_CODES",safeCodes,sizeof(safeCodes))==1&&safeCodes[0]=='0')safeCodeSync.enabled=false;}
     {char safeDoors[4]{};if(GetEnvironmentVariableA("D2COOP_SAFE_DOORS",safeDoors,sizeof(safeDoors))==1&&safeDoors[0]=='0')usableSafeDoorsShared=false;}
+    {char progress[4]{};if(GetEnvironmentVariableA("D2COOP_PARTNER_PROGRESS",progress,sizeof(progress))==1&&progress[0]=='0')partnerProgressEnabled=false;}
     {char decision[4]{};if(GetEnvironmentVariableA("D2COOP_MISSION_DECISION",decision,sizeof(decision))==1&&decision[0]=='0')missionDecision.enabled=false;} // stage 8 (#253)
     char partnerFlag[8]{};partnerAssetsEnabled=GetEnvironmentVariableA("D2COOP_PARTNER_ASSETS",partnerFlag,sizeof(partnerFlag))==1&&partnerFlag[0]=='1';
     HMODULE module=nullptr;
