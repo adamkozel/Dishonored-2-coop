@@ -46,7 +46,17 @@ K3's cause (confirmed static): usable sync (`usable_sync.h`) mirrors the host's 
 **K3 fix, candidate progress-v2100:** names containing `safe` join the family while `usableSafeDoorsShared` is on. That is the default; the lab switch is `coop_usable_safe_doors on|off`, read at the next map load, and the product switch is `d2coop.cfg` `safe_doors=0`. A disabled vault door stays out. Unit tests: an enabled Open/Close safe door joins, it stays out with the switch off, and a disabled one stays out.
 - `firstmission-dunwall-v2100a`: Corvo / Emily with the switch on. The saferoom, balcony and streets diffs must be equal.
 - `firstmission-dunwall-v2100b`, the twin: the switch is off in both games and must show the three doors again.
-- Queued in `Run-V2100.sh`.
+- Queued in `Run-V2100.sh`. Both v2100 routes also turn `coop_follow_host` on in both games, as the product does.
+
+| Take | Result |
+|---|---|
+| `firstmission-dunwall-v2100a` (switch on) | **K3 fixed:** the balcony and streets diffs are equal (1152 values each; 3 differences before). The saferoom digest failed again on the host (M2). **With follow on, the partner reached the Void.** Her Continue reloaded her streets checkpoint, the host's hold at the Void timed out (90 s), and then follow loaded the Void for her. The end diff has 1 difference: Void gameflow node `bf0f0d6f` (host 3, partner 0), because she arrived about 2 minutes after the host |
+| `firstmission-dunwall-v2100b` (twin) | **Lost to K5:** co-op saves did not switch on (#263). Repeated as v2103b |
+
+**Why M1 takes 90 s (confirmed static):** the host holds at its new map's load end until the partner reports the same map (`waitMissionTransition`, `mission_end_mirror.h`), while it publishes its mission for follow only in gameplay. Each waits for the other until the 90 s timeout.
+
+**M1 fix, candidate progress-v2103 (`mission_decision.h`):** with follow on, the partner's Continue waits on her result screen for the map the host's hold announces (D2MR, re-sent every second), then loads that mission at once (`campaign <mapinfo> <chaos> <her character>`). A follow load already works this way, and partner progression restores her items after it. With no announcement in 60 s she falls back to her own Continue. Lab switch `coop_continue_follow on|off`.
+- `Run-V2103.sh`: a Corvo / Emily with both fixes on; b, the twin, with safe doors and continue-follow off; then c, d and e for the other pairings.
 
 ## 3. Done when
 
