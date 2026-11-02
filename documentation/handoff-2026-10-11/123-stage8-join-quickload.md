@@ -59,3 +59,9 @@ The host plays Dunwall alone: the bedroom, Mayhew, then Ramsey killed and looted
 **Candidates:**
 - **joinanswer-v2061:** an ask the partner sends before it has settled carries a joining bit (`kKisculeJoining`). The host answers it with the count and runs nothing (`joinAnswered`); asks are not gated.
 - **joinmap-v2062:** the partner also holds the host's log while its map does not yet match the host's and it has not settled. Hypothesis: the 42 entries expired during the partner's mission-start scene, before its map name was filled.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `join-probe-dunwall-v2062a` | joinmap-v2062 | **1 difference** (536 compared): `ld_spawner_clockw_right` is alive for the partner and absent on the host. The host answered 168 asks. After the partner settled, it ran 49 more: 46 of them ambient fire damage from `esc_env_kiscule_fire_01_1`, plus a candlestick. 36 host entries still expired in the partner's world |
+
+**Hypothesis:** the clockwork soldier is an ordering race in the coup. The partner's world lost a host `ActionDestroy` to expiry but kept the matching `ActionSpawner` (v2061a lost Delilah instead). Native removal (`0x8784b0`) only hides an actor, so it would not take it out of the catalog. **Candidate joinexpiry-v2063** therefore logs each expired entry as an event (`expired_samemap` or `expired_othermap`) in a 1024-entry ring, to find out why entries wait 60 s.
