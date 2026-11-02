@@ -142,3 +142,15 @@ In v2086a the route placed the partner about 0.8 m up on furniture in the bedroo
 - `v2088b`: an Emily partner.
 - `v2088c`: the manual twin.
 - Then the movement pair on harness v2089.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `nativechoice-dunwall-v2088a` | nativechoice-v2088 | **Pass:** a partner picking Corvo, opposite an Emily host. One right press was replayed and the confirm answered (`answered 1`, `held 1`, `retries 0`); in gameplay she is Corvo (`answered_verified`, no backstop) |
+| `nativechoice-dunwall-v2088b` | nativechoice-v2088 | **Pass:** a partner picking Emily, opposite a Corvo host. The confirm was answered and she is verified as Emily |
+| `nativechoice-dunwall-v2088c` | nativechoice-v2088 | **Twin (`coop_native_choice manual`), red as required:** her choice screen was still unanswered after 120 s |
+| `animquality-dunwall-v2089a` | nativechoice-v2088 | Both directions `FROZEN`: a wall stood between the bedroom-trigger spot and the partner's spawn, so neither rig was rendered (the host's frame shows the bedroom only). The guard worked as meant |
+| `animquality-dunwall-v2089b` | nativechoice-v2088 | **Fixture twin, red as required:** with the partner back on the furniture, the guard stopped the step (`FIXTURE`, a y spread of 0.14 m) |
+
+**The first mission's character choice is done** (candidate nativechoice-v2088). Both characters are answered natively without input, and the twin is red. It remains to update the release notes (RELEASE-NOTES:183, :233).
+
+**Next movement take: `animquality-dunwall-v2090a`.** The partner stands 2.5 m from the host on the in-view line of v2086a, and the moves are mostly sideways.
