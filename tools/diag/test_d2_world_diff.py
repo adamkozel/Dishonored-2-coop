@@ -13,7 +13,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import d2_world_diff as wd  # noqa: E402
 
-TWINS = ["no_stability_gate", "presence_only", "zero_compared_passes", "no_generated_grouping"]
+TWINS = ["no_stability_gate", "presence_only", "zero_compared_passes", "no_generated_grouping", "empty_sample_unstable"]
 
 
 def snap(cats, map_="m"):
@@ -26,6 +26,14 @@ class Diff(unittest.TestCase):
         r = wd.compare(h, list(h))
         self.assertEqual(r["status"], "EQUAL")
         self.assertEqual(r["comparedKeys"], 1)
+
+    def test_failed_sample_is_skipped(self):
+        # 2078 (#260): one empty npcs sample (a failed catalog read) must not leave the NPCs uncompared.
+        h = [snap({"npcs": {"g": "alive"}}), snap({"npcs": {}}), snap({"npcs": {"g": "alive"}})]
+        c = [snap({"npcs": {"g": "dead"}})] * 3
+        r = wd.compare(h, c)
+        self.assertEqual(r["status"], "DIFFERENT")
+        self.assertEqual(r["categories"]["npcs"]["failedSamples"]["host"], 1)
 
     def test_changed_value_is_named(self):
         h = [snap({"usables": {"dial_1": [7, 1]}})] * 3

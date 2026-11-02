@@ -17,7 +17,7 @@ struct PropRestState {
     std::vector<PropRestEntry> entries;std::vector<PropRestRemote> pending;std::vector<std::string> recent;
     ULONGLONG scanAt=0,pollAt=0;unsigned scanMs=0,pollMs=0;
     std::uint64_t scans=0,sent=0,sendFailures=0,received=0,rejected=0,ignored=0,unmatched=0,overflow=0,applied=0,applyRefused=0,
-        heldSkips=0,attachedSkips=0,quietSkips=0,worldResets=0;
+        heldSkips=0,attachedSkips=0,quietSkips=0,worldResets=0,breakableSkips=0;
     const char* result="off";const char* lastApply="none";
 };
 PropRestState propRest;int propRestEnableRequest=-1;
@@ -41,6 +41,9 @@ void scanPropRest(ULONGLONG tick){
         if(!memoryRead(handles+i*4,&handle,4)||!handle)continue;
         const auto actor=worldIdentityEntity(memoryRead,game,handle);if(!actor||!memoryRead(actor,&vt,8))continue;
         if(!propRestEntityVtable(vt,base))continue;
+        // 2078 (#260): a breakable prop (a bottle) is left to the breakable sync. A rest teleport of a fragile prop can smash it
+        // in one world only (env_bottle_04_19 absent on the host at spawn in deadlyshade-eotw-v2074b, v2076a-c; hypothesis).
+        {NativeBreakable nb{};if(readNativeBreakable(memoryRead,base,game,handle,nb)&&nb.stepCount>0){++propRest.breakableSkips;continue;}}
         PropRestEntry e{};e.handle=handle;e.actor=actor;
         std::uintptr_t list=0;std::uint32_t components=0;
         if(memoryRead(actor+0x268,&list,8)&&list&&memoryRead(actor+0x270,&components,4)&&(components&0xffffff)<=64)
@@ -131,9 +134,9 @@ void writePropRest(){
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& s=propRest;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"lastApply\":\"%s\",\"catalog\":%zu,\"scans\":%llu,\"scanMs\":%u,\"pollMs\":%u,\"sent\":%llu,\"sendFailures\":%llu,"
         "\"received\":%llu,\"rejected\":%llu,\"ignored\":%llu,\"unmatched\":%llu,\"overflow\":%llu,\"applied\":%llu,\"applyRefused\":%llu,\"heldSkips\":%llu,"
-        "\"attachedSkips\":%llu,\"quietSkips\":%llu,\"worldResets\":%llu,\"recent\":[",
+        "\"attachedSkips\":%llu,\"quietSkips\":%llu,\"worldResets\":%llu,\"breakableSkips\":%llu,\"recent\":[",
         s.enabled?"true":"false",s.result,s.lastApply,s.entries.size(),s.scans,s.scanMs,s.pollMs,s.sent,s.sendFailures,s.received,s.rejected,
-        s.ignored,s.unmatched,s.overflow,s.applied,s.applyRefused,s.heldSkips,s.attachedSkips,s.quietSkips,s.worldResets);
+        s.ignored,s.unmatched,s.overflow,s.applied,s.applyRefused,s.heldSkips,s.attachedSkips,s.quietSkips,s.worldResets,s.breakableSkips);
     for(std::size_t i=0;i<s.recent.size();++i){if(i)fputc(',',f);writeWorldText(f,s.recent[i].c_str());}
     fputs("]}\n",f);const bool ok=!ferror(f);const auto closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

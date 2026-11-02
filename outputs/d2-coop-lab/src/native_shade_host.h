@@ -18,6 +18,13 @@ constexpr const char* kShadeHostDeadlyDefinition="models/powers/doppelganger/dea
 struct ShadeHostPuppet {std::uintptr_t actor=0,game=0;unsigned handle=0,source=0,kind=0;std::uint64_t epoch=0,event=0,lostEvent=0;ULONGLONG createdAt=0,seen=0;unsigned pins=0;float drift=0,at[3]{};};
 std::array<ShadeHostPuppet,kDoppelgangerWireSlots> shadeHostPuppets{};
 bool shadeHostFollowEnabled=true;
+// 2069 (#242): the host replays OnCloneSpawned for her deadly shadow (kind 2). Natively (FUN_14043e0c0, d2-ghidra, confirmed
+// static) the cast's decoy is replaced by a clone of an NPC near the caster: FUN_14043de90 finds it in the caster team's
+// source list (game+0x341068[team at player+0x2e0], FUN_1404e51c0: the nearest entry within its radius, at the caster,
+// then at the aim), the clone definition is that NPC's component 0x39ae070 +0x6d8, and the clone is created with that NPC
+// as parent (the free-standing deadly shadow crashed the host in FUN_1404a3f90, partner-shade-v1729c). The host looks
+// the NPC up from its own player's team at her streamed shade. Lab switch coop_shade_native deadly_off|deadly_on.
+bool shadeHostDeadly=true;std::uint64_t shadeHostDeadlyParents=0,shadeHostDeadlyRefused=0,shadeHostDeadlyNearest=0,shadeHostDeadlyOwnDefinition=0;ULONGLONG shadeHostDeadlyTriedAt=0;
 std::uint64_t shadeHostSpawned=0,shadeHostRemoved=0,shadeHostLost=0,shadeHostPins=0,shadeHostRefused=0,shadeHostStimuli=0;
 // 1214gt: her shade runs (the native decoy flees: 25 m in 7 s in partner-shade-v1727c) while the host puppet stood, so
 // the 1 m pin teleported it 62 times. A native transform is a teleport that refreshes observable membership (1BF/1BE;
@@ -120,11 +127,38 @@ void shadeHostRemove(ShadeHostPuppet& p,const char* why){
         reinterpret_cast<void(*)(void*)>(gameImage+0x882fc0)(message);++shadeHostRemoved;}
     const auto lost=p.lostEvent;p={};p.lostEvent=lost;shadeHostResult=why;
 }
+bool shadeHostDeadlyParent(const float* at,std::uintptr_t& parent,std::uintptr_t& definition){
+    parent=definition=0;std::uintptr_t table=0,team=0;int index=-1;
+    if(!observedPlayer||!observedGame||!memoryRead(observedPlayer+0x2e0,&index,4)||index<0||index>=64||!memoryRead(observedGame+0x341068,&table,8)||!table||
+       !memoryRead(table+static_cast<std::uintptr_t>(index)*8,&team,8)||!team)return false;
+    // 2070: natively at the caster first, then at the aim (FUN_14043de90); the host has her streamed root and her shade.
+    const auto find=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,const float*)>(gameImage+0x4e51c0);
+    parent=find(team,remote.position);if(!parent)parent=find(team,at);
+    const auto cloneOf=[&](std::uintptr_t npc){std::uintptr_t c=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,void*,int)>(gameImage+0x877720)(npc,gameImage+0x39ae070,2),s=0,d=0;
+        return c&&memoryRead(c+0x6d8,&s,8)&&s&&memoryRead(s,&d,8)?d:std::uintptr_t(0);};
+    // 2076: the team list holds the player team's own members, and component 0x39ae070 (arkCpntPowerClone, hypothesis by
+    // its strings) carries the caster's clone definition: natively the deadly shadow is the caster's own clone, parented to
+    // the caster. No guard has it (deadlyshade-eotw-v2075a: 27 nearest NPCs, none with a clone definition). The host's
+    // own player stands in for her when the list has no entry near her.
+    if(!parent&&observedPlayer){parent=observedPlayer;++shadeHostDeadlyNearest;}
+    if(!parent)return false;
+    definition=cloneOf(parent);
+    // 2079: a host without Doppelganger (Corvo) has no clone definition (deadlyshade-eotw-v2076c: 28 refusals). The deadly
+    // shadow's own definition crashed the host parented to the host player (2077: deadlyshade-eotw-v2077a and v2078a lost the
+    // host process at the cast) as it did free-standing (partner-shade-v1729c). The proven decoy puppet stands in, free-
+    // standing: the host's guards perceive and fight it, and her deadly shadow's kills are still forwarded (1214gx).
+    if(!definition){parent=0;definition=lookupEntityDefinition(kShadeHostDefinition);if(definition)++shadeHostDeadlyOwnDefinition;}
+    return definition!=0;
+}
 bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULONGLONG tick){
-    const auto definition=lookupEntityDefinition(q.kind==2?kShadeHostDeadlyDefinition:kShadeHostDefinition);if(!definition){shadeHostResult="definition_missing";++shadeHostRefused;return false;}
+    std::uintptr_t parent=0,definition=0;
+    if(q.kind==2){if(tick-shadeHostDeadlyTriedAt<500)return false;shadeHostDeadlyTriedAt=tick; // 2075: one try per 500 ms
+        if(!shadeHostDeadlyParent(q.transform.data(),parent,definition)){shadeHostResult="deadly_no_parent";++shadeHostDeadlyRefused;++shadeHostRefused;return false;}++shadeHostDeadlyParents;}
+    else definition=lookupEntityDefinition(kShadeHostDefinition);
+    if(!definition){shadeHostResult="definition_missing";++shadeHostRefused;return false;}
     if(!shadeHostPhantomOn()){shadeHostResult=shadeHostSlotWasSet?"player_has_doppelganger":"phantom_refused";++shadeHostRefused;return false;}
     void* actor=reinterpret_cast<void*(*)(std::uintptr_t,std::uintptr_t,const float*,const float*,std::uintptr_t,char,std::uintptr_t,std::uintptr_t,std::uintptr_t)>(gameImage+0x8ae9b0)(
-        observedGame,definition,q.transform.data(),q.transform.data()+3,0,0,0,0,0);
+        observedGame,definition,q.transform.data(),q.transform.data()+3,parent,0,0,0,0);
     if(!actor){shadeHostResult="native_creation_refused";++shadeHostRefused;return false;}
     const auto lost=p.lostEvent;p={};p.lostEvent=lost;p.actor=reinterpret_cast<std::uintptr_t>(actor);p.game=observedGame;p.epoch=outgoing.worldEpoch;p.event=q.event;p.source=q.nativeHandle;p.kind=q.kind==2?2u:1u;
     p.createdAt=p.seen=tick;memoryRead(p.actor+0xa8,&p.handle,4);std::memcpy(p.at,q.transform.data(),12);++shadeHostSpawned;shadeHostPhantomList();
@@ -166,7 +200,7 @@ void serviceShadeHost(ULONGLONG tick){
         // 1214gv: no puppet for the Deadly Shade's deadly shadow (1214gu crashed the host in its AI, partner-shade-v1729c,
         // 4a404e: FUN_1404a3f90 reads a component the free-standing spawn lacks; natively OnCloneSpawned spawns it parented
         // to a target NPC with that NPC's clone definition). Corvo still sees it through the presentation; its hits are next.
-        const bool hers=scope&&s.lease>tick&&q.present&&q.event&&q.kind!=2&&validDoppelgangerTransform(q.transform);
+        const bool hers=scope&&s.lease>tick&&q.present&&q.event&&(q.kind!=2||shadeHostDeadly)&&validDoppelgangerTransform(q.transform); // 2069: kind 2 too
         if(p.actor&&shadeHostAlive(p)){NativeHealth h{};if(readNativeHealth(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),p.handle,h)&&h.current<=0)sendShadeKill(k,p);}
         if(p.actor&&!shadeHostAlive(p)){if(shadeHostHits[k].valid&&tick-shadeHostHits[k].tick<2000)sendShadeKill(k,p);
             p.lostEvent=p.event;const auto lost=p.lostEvent;p={};p.lostEvent=lost;++shadeHostLost;shadeHostResult="puppet_lost";}
@@ -188,8 +222,8 @@ void serviceShadeHost(ULONGLONG tick){
 void writeShadeHost(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.shade-host.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    fprintf(f,"{\"result\":\"%s\",\"enabled\":%s,\"spawned\":%llu,\"removed\":%llu,\"lost\":%llu,\"pins\":%llu,\"refused\":%llu,\"stimuli\":%llu,\"slots\":[",
-        shadeHostResult,shadeHostFollowEnabled?"true":"false",shadeHostSpawned,shadeHostRemoved,shadeHostLost,shadeHostPins,shadeHostRefused,shadeHostStimuli);
+    fprintf(f,"{\"result\":\"%s\",\"enabled\":%s,\"spawned\":%llu,\"removed\":%llu,\"lost\":%llu,\"pins\":%llu,\"refused\":%llu,\"stimuli\":%llu,\"deadly\":%s,\"deadlyParents\":%llu,\"deadlyNearest\":%llu,\"deadlyRefused\":%llu,\"deadlyOwnDefinition\":%llu,\"slots\":[",
+        shadeHostResult,shadeHostFollowEnabled?"true":"false",shadeHostSpawned,shadeHostRemoved,shadeHostLost,shadeHostPins,shadeHostRefused,shadeHostStimuli,shadeHostDeadly?"true":"false",shadeHostDeadlyParents,shadeHostDeadlyNearest,shadeHostDeadlyRefused,shadeHostDeadlyOwnDefinition);
     for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& p=shadeHostPuppets[k];const auto& q=doppelgangerWorldStreams[k].presented;
         fprintf(f,"%s{\"kind\":%u,\"partnerKind\":%u,\"puppet\":%s,\"handle\":%u,\"source\":%u,\"event\":%llu,\"lostEvent\":%llu,\"pins\":%u,\"drift\":%.3f,\"at\":[%.3f,%.3f,%.3f],\"partnerPresent\":%u,\"partnerEvent\":%llu,\"partnerAt\":[%.3f,%.3f,%.3f]}",
             k?",":"",p.kind,q.kind,p.actor?"true":"false",p.handle,p.source,p.event,p.lostEvent,p.pins,p.drift,p.at[0],p.at[1],p.at[2],q.present,q.event,q.transform[0],q.transform[1],q.transform[2]);}

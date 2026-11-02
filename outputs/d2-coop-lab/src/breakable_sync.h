@@ -108,7 +108,9 @@ void serviceBreakableSync(ULONGLONG tick){
                 // 1214io (#178): a movable on its final step is removed from the world at once (a smashed bottle), before a
                 // poll reads the step. An entry that vanished within 5 s of a noted hit is sent as broken to its last step.
                 BreakableHit h{};
-                if(e.sent<e.stepCount&&!worldIdentityEntity(memoryRead,observedGame,e.handle)&&latestBreakableHit(e.handle,tick>=5000?tick-5000:0,h)&&
+                // 2078 (#260): on the host a vanished entry is sent without a noted hit too (a knock or a fall leaves none; the
+                // host decides the shared world). The partner still needs a hit, so its own physics noise is not pushed.
+                if(e.sent<e.stepCount&&!worldIdentityEntity(memoryRead,observedGame,e.handle)&&(!localRole||latestBreakableHit(e.handle,tick>=5000?tick-5000:0,h))&&
                    sendBreakableStep(e,e.stepCount,tick)){e.sent=e.step=e.stepCount;++s.vanishedSent;}
                 continue;}
             e.step=b.step;if(b.step>e.sent&&sendBreakableStep(e,b.step,tick))e.sent=b.step;}

@@ -1,0 +1,51 @@
+{
+  "passed": false,
+  "failure": "Observer pitch did not settle; restore: Checkpoint inventory differs (client)",
+  "case": {
+    "passed": false,
+    "failure": "Observer pitch did not settle",
+    "checks": [],
+    "granted": [
+      {
+        "item": "models/powers/doppelganger/doppelganger.inventoryitem",
+        "result": "named_power_equip_requested"
+      },
+      {
+        "item": "components/characters/player/base/attributes/doppelganger_deadlyshade.inventoryitem",
+        "result": "granted_named"
+      }
+    ],
+    "guard1Before": [
+      -57.82,
+      -147.105,
+      63.2139
+    ],
+    "castAt4m": [
+      -57.79284356,
+      -143.10509199999998,
+      63.2139
+    ],
+    "castAim": {
+      "target": [
+        -57.79284356,
+        -143.10509199999998,
+        63.2139
+      ],
+      "stand": [
+        -57.8607,
+        -156.177,
+        52.8235
+      ],
+      "yaw": 89.70257955429713,
+      "pitch": -37,
+      "distance": 13.072084120633315
+    },
+    "castFallback": [
+      -57.8606987,
+      -165.494446,
+      -202.013382
+    ],
+    "restored": false
+  },
+  "scope": "Stage 4 partner shade (#131): Emily casts her own Doppelganger near the Dunwall lower-floor tutorial guard 1 under the product controller; the host spawns the native shade at her streamed shade, the host NPCs perceive it, and it ends with hers; fixture restored."
+}

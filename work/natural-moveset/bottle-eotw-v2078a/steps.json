@@ -1,0 +1,34 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".prop-rest.json"
+ },
+ {
+  "do": "status",
+  "suffix": ".breakable-sync.json"
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "wait",
+  "ms": 30000,
+  "settle": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".breakable-sync.json"
+ },
+ {
+  "do": "diff",
+  "tag": "later",
+  "require": true
+ }
+]
