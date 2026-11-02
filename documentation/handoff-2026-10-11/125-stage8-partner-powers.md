@@ -52,3 +52,10 @@ The world diff has no NPC positions, hit reactions, alert state, rats or fish. S
 | `deadlyshade-dunwall-v2073b` | deadlyshade-v2070 | The same (twin route) |
 
 **Next take: `deadlyshade-eotw-v2074`**, on Edge of the World, where the partner has the Mark and mana. Harness v2074 adds `partnerface`: the partner stands 6 m behind an NPC of her own world, found by spawner name through `--npc-activity`, and faces it. She casts behind `addermirestation_entrance_guard_02`.
+| `deadlyshade-eotw-v2074a` | deadlyshade-v2070 | **First real cast.** `partnerface` put the partner 6 m behind `addermirestation_entrance_guard_02` (stand (53.07, 22.04, 19.0)). Her deadly shadow reached the host as kind 2, present (event 1). The host refused it 814 times with `deadly_no_parent` (confirmed runtime): its own player team's source list had no entry near her. It also retried every frame. Diffs equal (2137) |
+| `deadlyshade-eotw-v2074b` | deadlyshade-v2070 | Stopped at the spawn diff, before the twin's cast: breakable `env_bottle_04_19` gone on the host, present for the partner, before anyone moved. **Open, hypothesis:** physics at load; the step 6 runs watch it |
+
+**Candidate deadlyshade-v2075:**
+- When the team list has no entry, the nearest world NPC within 15 m of the partner's root becomes the parent.
+- The host tries once per 500 ms.
+- `.shade-host.json` gains `deadly`, `deadlyParents`, `deadlyNearest` and `deadlyRefused`.
