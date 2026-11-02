@@ -66,3 +66,11 @@ The host plays Dunwall alone: the bedroom, Mayhew, then Ramsey killed and looted
 
 **Hypothesis:** the clockwork soldier is an ordering race in the coup. The partner's world lost a host `ActionDestroy` to expiry but kept the matching `ActionSpawner` (v2061a lost Delilah instead). Native removal (`0x8784b0`) only hides an actor, so it would not take it out of the catalog. **Candidate joinexpiry-v2063** therefore logs each expired entry as an event (`expired_samemap` or `expired_othermap`) in a 1024-entry ring, to find out why entries wait 60 s.
 | `join-probe-dunwall-v2063a` | joinexpiry-v2063 | **Pass:** world diff equal at the join, 60 s later and at the end (536 compared, only per-character differences). The host answered the joiner's asks. Only 1 host entry expired in the partner's world (an `inventory` node on the same map), against 36 in v2062a, so the expiry varies from run to run. The twin v2063b and a repeat v2063c follow |
+| `join-probe-dunwall-v2063b` | joinexpiry-v2063 | **Mutation twin, red as required** (15 differences). With `coop_join_snapshot off`, Alexi stays alive for the partner and the host spawns the throne room actors |
+| `join-probe-dunwall-v2063c` | joinexpiry-v2063 | **Pass, repeat:** equal at the join, 60 s later and at the end (536 compared). 19 host entries expired on the same map, mostly `ActionGameflowTask`, `ActionPatrol` and `ActionUsable`, without changing the world |
+
+**The join is done on joinexpiry-v2063:** two passes (v2063a, v2063c) and a red twin (v2063b). Open observation: host entries still expire in the partner's world on the same map, after it has settled. This changed nothing here, and the step 6 full runs watch for it.
+
+## Host load (2064)
+
+Today, with checkpoint sync on, any load is intercepted (`checkpointIntercept`) and becomes a shared restart from the last paired autosave, which the host starts. A partner's load is a request to the host. Take `hostload-dunwall-v2064a`: both players play Dunwall from the start, the host kills and loots Ramsey, then the host loads its last checkpoint (`RestartFromCheckpoint`, the pause menu's load). A diff is required once both have reloaded. The twin v2064b turns `coop_checkpoint_sync off` on the host before its load.

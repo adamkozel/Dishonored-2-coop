@@ -1,0 +1,286 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             93 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-joinexpiry-v2063",
+      "hostDll": "ED254EB8D59925FD331FA454ABDFE4D2BABD5E92AA9A2BF353F5CAA7E75D1EA6",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 12735
+      },
+      "client": null
+    },
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "join": {
+      "afterStep": 8,
+      "clientBefore": {
+        "logic": 6,
+        "map": "campaign/menu/menu_p"
+      },
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true,
+      "loadMs": 93170,
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 0,
+        "warpDistance": 22.24
+      },
+      "hostPos": [
+        -40.988029,
+        -136.486435,
+        61.603653
+      ],
+      "clientPos": [
+        -28.092138,
+        -153.962173,
+        66.403648
+      ],
+      "distance": 22.24,
+      "gameflow": {
+        "host": "237 1 3 6 0 1 0",
+        "client": "237 1 3 6 0 1 0",
+        "equal": true
+      },
+      "npcCounts": {
+        "client": 48,
+        "host": 48
+      },
+      "npcStateDiffs": [],
+      "armed": {
+        "product": {
+          "client": "armed",
+          "host": "armed"
+        },
+        "banks": {
+          "client": true,
+          "host": true
+        },
+        "ok": true
+      }
+    },
+    "diff-join": {
+      "status": "EQUAL",
+      "compared": 536,
+      "differences": 0
+    },
+    "diff-join60": {
+      "status": "EQUAL",
+      "compared": 536,
+      "differences": 0
+    },
+    "storyFlags": [
+      {
+        "label": "end",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 20,
+        "pos": [
+          -28.092138,
+          -153.962173,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 8,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/174/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 49,
+        "pos": [
+          -40.988026,
+          -136.486481,
+          61.613289
+        ],
+        "fresh": true,
+        "gameflow": [
+          237,
+          1,
+          3,
+          6,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "39/1/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_OpenVault"
+      }
+    },
+    "gameflowEqual": true,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "slot": -1,
+        "startMap": "",
+        "sent": 0,
+        "resent": 0,
+        "hostReplays": 0,
+        "hostContinues": 0,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "loadedSlot": -1,
+        "received": 0,
+        "refused": 0,
+        "duplicates": 0,
+        "partnerHeld": 0,
+        "replayed": 0,
+        "continued": 0,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "EQUAL",
+      "compared": 536,
+      "differences": 0
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "953c445e1038f23e",
+        "connection": 582834476,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "953c445e1038f23e",
+        "sent": 274,
+        "received": 272,
+        "refused": 0,
+        "silentMs": 953
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "953c445e1038f23e",
+        "connection": 3250374930,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "953c445e1038f23e",
+        "sent": 272,
+        "received": 273,
+        "refused": 0,
+        "silentMs": 828
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 183,
+      "asked": 183,
+      "inFlow": 0,
+      "replayed": 174,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 7
+    },
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "replayRefused": 0,
+      "replayAccepted": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 8 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
