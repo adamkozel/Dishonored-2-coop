@@ -1,0 +1,924 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -6.866292,
+        -14.884203,
+        0.111881
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -6.358601,
+        -15.392109,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step01-command",
+    "spec": {
+      "do": "command",
+      "role": "host",
+      "text": "coop_safe_dials off"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -6.866292,
+        -14.884203,
+        0.111881
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -6.358601,
+        -15.392109,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step02-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 15000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -6.866292,
+        -14.884203,
+        0.111881
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -6.358601,
+        -15.392109,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step03-cast",
+    "spec": {
+      "do": "cast",
+      "role": "host",
+      "ms": 1200,
+      "settle": 3000,
+      "grant": "models/powers/blink/blink.inventoryitem",
+      "expectMoved": true,
+      "expectFx": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -4.616424,
+        -14.80258,
+        0.893753
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -6.340355,
+        -15.410356,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/1/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step04-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 2000,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -4.616424,
+        -14.80258,
+        0.893753
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -6.340355,
+        -15.410356,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/1/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step05-cast",
+    "spec": {
+      "do": "cast",
+      "role": "client",
+      "ms": 1200,
+      "settle": 3000,
+      "grant": "models/powers/grapple/grapple.inventoryitem",
+      "expectMoved": true,
+      "expectFx": true,
+      "minMove": 0.1
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        -4.616424,
+        -14.80258,
+        0.893753
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -5.641911,
+        -15.390111,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/1/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step06-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_1",
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 10,
+      "pos": [
+        1.964,
+        6.798,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "3/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -5.641911,
+        -15.390111,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/2/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step07-talk",
+    "spec": {
+      "do": "talk",
+      "name": "sokolov",
+      "near": [
+        1.1,
+        12.1
+      ],
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 15,
+      "pos": [
+        0.86927,
+        8.181709,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "9/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_GotoDust"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -5.641911,
+        -15.390111,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/8/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_GotoDust"
+    }
+  },
+  {
+    "step": "step08-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 10000,
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 15,
+      "pos": [
+        0.86927,
+        8.181709,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "9/0/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_GotoDust"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -5.641911,
+        -15.390111,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        244,
+        0,
+        3,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "1/8/0",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_GotoDust"
+    }
+  },
+  {
+    "step": "step09-use",
+    "spec": {
+      "do": "use",
+      "name": "script_skiff_01_usable",
+      "focus": true,
+      "offsets": [
+        [
+          1.2,
+          0
+        ]
+      ],
+      "z": 9.15,
+      "pitches": [
+        25,
+        15,
+        35,
+        25
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 90000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 27,
+      "pos": [
+        -59.077583,
+        -49.998352,
+        -47.275009
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/3953",
+      "ka": "177/3/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 13,
+      "pos": [
+        -59.077583,
+        -49.998352,
+        -47.275002
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "1/89/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    }
+  },
+  {
+    "step": "step10-expect",
+    "spec": {
+      "do": "expect",
+      "map": "dust/dust_p",
+      "ms": 300000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 27,
+      "pos": [
+        -59.032127,
+        -51.149837,
+        -48.042568
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/3953",
+      "ka": "178/3/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 13,
+      "pos": [
+        -58.234596,
+        -51.391144,
+        -48.222252
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "1/90/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    }
+  },
+  {
+    "step": "step11-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 20000,
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 27,
+      "pos": [
+        -59.031921,
+        -51.153721,
+        -48.033966
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/3953",
+      "ka": "178/3/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 13,
+      "pos": [
+        -58.259991,
+        -51.316849,
+        -48.219742
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        4,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "1/90/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_TalkToMeagan"
+    }
+  },
+  {
+    "step": "step12-use",
+    "spec": {
+      "do": "use",
+      "match": "meagan_foster",
+      "near": [
+        -31.0,
+        -81.1
+      ],
+      "focus": true,
+      "offsets": [
+        [
+          0,
+          1.6
+        ]
+      ],
+      "z": -20.05,
+      "pitches": [
+        10,
+        0,
+        20,
+        10
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 300,
+      "expect": "logic",
+      "settle": 120000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 32,
+      "pos": [
+        -33.61813,
+        -82.806213,
+        -21.454334
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        3,
+        4,
+        5,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/3953",
+      "ka": "207/3/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_DeliverByrneorPaolo,Task_DD_FindAnotherWay"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 16,
+      "pos": [
+        -33.401566,
+        -83.491234,
+        -21.448626
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        3,
+        4,
+        5,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 4,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "1/117/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_DeliverByrneorPaolo,Task_DD_FindAnotherWay"
+    }
+  },
+  {
+    "step": "step13-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 32,
+      "pos": [
+        -33.61813,
+        -82.806213,
+        -21.454334
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        3,
+        4,
+        5,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/3953",
+      "ka": "207/3/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_DeliverByrneorPaolo,Task_DD_FindAnotherWay"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/dust/dust_p_lowchaos",
+      "epoch": 21,
+      "cine": 16,
+      "pos": [
+        -33.401566,
+        -83.491234,
+        -21.448626
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        3,
+        4,
+        5,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 4,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "1/117/0",
+      "active": "Mission_DD,Obj_DD_AccessTheBunker,Task_DD_DeliverByrneorPaolo,Task_DD_FindAnotherWay"
+    }
+  }
+]

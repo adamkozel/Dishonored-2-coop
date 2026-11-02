@@ -258,6 +258,17 @@ The twin's harness judges the open state only at the end; a later version should
 | `safe-partner-institute-v2052a` | safedials-v2051 | **Pass.** Code 488. Host: 17 received, 17 applied. Both locks at 488, world diff equal (2158) |
 | `safe-partner-institute-v2052b` | safedials-v2051 | **Mutation twin, red as required.** The host refused all 10 requests. The partner followed the host back 30 times, so its lock stayed at the host's 778 and its safe stayed shut |
 
+### The Jindosh lock (2053)
+
+**Candidate jindoshwheels-v2053:** the Dust District's Jindosh wheels (`ld_wheel_family_N`, `ld_wheel_herloom_N`, 2 to 10 states) join the safe dials in the dial reader (`safeDialUsable`). A partner's wheel turn is a D2SD request, and the host and partner step at the wheel's own state count. The harness step `partnerjindosh` presses each wheel in the partner's world until the host's lock (`tools/diag/d2_jindosh_lock.py`) reads seat i at index i, then needs the host's index sum 31 and a required world diff.
+
+**Confirmed runtime (v2053a):** a wheel's state order is not its index order. `ld_wheel_family_1` read 4, 2, 5, 3, 1 on the host over four of the partner's presses, so the host applies the partner's states, not indices.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `jindosh-partner-dust-v2053a` | jindoshwheels-v2053 | Harness fail: 9 of 10 wheels at their seat on the host (20 requests received, 20 applied, none refused). The partner's use focus left `ld_wheel_herloom_5` after two presses. Harness v2054 adds pitches 40 and -20 and stands at 0.8 and 1.8 m |
+| `jindosh-partner-dust-v2053b` | jindoshwheels-v2053 | **Mutation twin, red as required.** With `coop_safe_dials off` the host refused all 8 requests, and the partner followed the host back 7 times, so the host's `ld_wheel_family_1` never reached index 1 |
+
 ## Still to do in area 4.3
 
 - **Note text on screen:** check that the partner's safe note and Jindosh riddle show the host's values. This is visual acceptance, recorded separately.
