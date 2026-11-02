@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 2101: candidate progress-v2100 on harness Route-MissionVM-v2101.ps1.
+# 2101: candidate progress-v2102 (v2100 plus the #263 co-op saves trace) on harness Route-MissionVM-v2101.ps1.
 # m3control-eotw-v2101a (inventory row M3): the progression route's first nine steps with nothing killed, then the docks
 # worker 770189828 (worker_male_small_01, whose AI pause count rose 0 to 1 and stayed after the partner's game was
 # killed in progress-eotw-v2097a/b and v2098b) is probed at the kill's moments: at once, +15 s and +75 s. A count that
@@ -9,7 +9,7 @@
 # Usage: Run-V2101.sh. Result: m3control-eotw-v2101a, progress-eotw-v2101b, progress-eotw-v2101a
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2100
+CAND=candidate-progress-v2102
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
 "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2101-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
 # The partner's progress files are lab state; every take starts and ends without them.
