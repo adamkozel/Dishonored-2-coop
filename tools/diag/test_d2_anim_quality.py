@@ -12,7 +12,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import d2_anim_quality as aq  # noqa: E402
 
-TWINS = ["skate_ignores_planted", "skate_path_length", "no_jitter", "loose_snap", "no_rubber", "no_frozen_guard"]
+TWINS = ["skate_ignores_planted", "skate_path_length", "no_speed_gate", "no_jitter", "loose_snap", "no_rubber",
+         "no_frozen_guard"]
 
 
 def sample(ms, root, toes):
@@ -56,6 +57,18 @@ class Quality(unittest.TestCase):
         for k, r in enumerate(rows):
             for ft in r["feet"]:
                 ft["points"][0]["at"][1] += 0.02 * (1 if k % 2 else -1)
+        r = aq.analyse(rows)
+        self.assertNotIn("footSkateP95", r["failures"], r)
+        self.assertNotIn("footSkateMax", r["failures"], r)
+
+    def test_low_lift_swing_is_not_skate(self):
+        # 2097: a shuffling gait whose swinging toe stays within 4 mm of the floor (a native docker,
+        # animquality-baseline-eotw-v2094a) is not a planted foot sliding.
+        rows = walk()
+        for r in rows:
+            for ft in r["feet"]:
+                at = ft["points"][0]["at"]
+                at[2] = 0.004 if at[2] > 0 else 0.0
         r = aq.analyse(rows)
         self.assertNotIn("footSkateP95", r["failures"], r)
         self.assertNotIn("footSkateMax", r["failures"], r)

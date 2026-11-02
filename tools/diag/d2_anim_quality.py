@@ -22,8 +22,10 @@ import sys
 
 MUT = os.environ.get("COOP_MUT", "")
 
+# 2097: calibrated on the native walking baseline (animquality-baseline-eotw-v2094a step09, docks_docker_10 walking 12.6 m
+# in view: p95 0.073 m, max 0.073 m; native pivots 0.011-0.043 m, idle 0-0.033 m).
 LIMITS = {
-    "footSkateP95": 0.05,      # metres per contact
+    "footSkateP95": 0.08,      # metres per contact
     "footSkateMax": 0.12,
     "jitterEpisodes": 0,
     "snaps": 0,
@@ -31,6 +33,9 @@ LIMITS = {
 }
 PLANTED_HEIGHT = 0.03
 PLANTED_VZ = 0.05
+PLANTED_SPEED = 0.3          # m/s: a toe moving faster than this (or half the root's speed) is swinging...
+PLANTED_SPEED_SHARE = 0.5
+SWING_LIFT = 0.06            # ...unless the other toe is this much higher
 JITTER_AMP = 0.036
 SNAP_STEP = 0.6
 RUBBER_OUT = 2.1
@@ -90,6 +95,13 @@ def foot_skate(rows):
             other = toes[i][1 - f]
             dt = max((t - rows[i - 1]["ms"]) / 1000.0, 1e-3)
             planted = b[2] <= other[2] + 0.005 and (b[2] - floor) <= PLANTED_HEIGHT and abs(b[2] - a[2]) / dt < PLANTED_VZ
+            # 2097: a low toe that moves fast is a swinging foot in a low-lift gait (animquality-baseline-eotw-v2094a: a
+            # native docker shuffling 2-5 cm high scored 3.08 m), unless the other foot is clearly lifted, when the low
+            # one carries the body and any travel is skate.
+            root_speed = dist2(rows[i - 1]["root"], rows[i]["root"]) / dt
+            if MUT != "no_speed_gate" and dist2(a, b) / dt >= max(PLANTED_SPEED, PLANTED_SPEED_SHARE * root_speed) \
+                    and other[2] - b[2] <= SWING_LIFT:
+                planted = False
             if MUT == "skate_ignores_planted":
                 planted = False
             if planted:

@@ -183,4 +183,24 @@ In v2086a the route placed the partner about 0.8 m up on furniture in the bedroo
 |---|---|---|
 | `animquality-baseline-eotw-v2093a` | nativechoice-v2088 | Five native civilians within 4–17 m of the docks walkway, sampled in view for 10 s each. **None walked** (travel 0 for four). Idle contacts scored 0 to 0.033 m. The bloodfly-meat worker turned in place (0.2 m of travel) and scored **0.161 m**, so the native game scores high on in-place pivots and settles too |
 
-The partner's high contacts are at starts and stops, where the native worker scores just as high. A walking baseline is next: `animquality-baseline-eotw-v2094a` samples `docks_docker_10`, which walks a 10–12 m loop (seen in `farguards-eotw-v2068b` and v2093a), from 10 m away.
+The partner's high contacts are at starts and stops, where the native worker scores just as high.
+
+**The native walking baseline and the calibration:**
+
+| Take | Candidate | Result |
+|---|---|---|
+| `animquality-baseline-eotw-v2094a` | nativechoice-v2088 | `docks_docker_10` was sampled three times from 10 m away. It **walked 12.6 m in view once** (step09), over stairs and flat floor. Old detector: 3.08 m. `docks_docker_19` worked in place |
+
+- **What broke the old detector** (confirmed runtime): the docker shuffles with his swinging toe only 2–5 cm up. That toe passed the height and vertical-speed tests and counted as planted while it moved forward.
+- **The detector now** (`d2_anim_quality.py` 2097): a low toe moving faster than 0.3 m/s, or faster than half the root's speed, is swinging. The exception is when the other toe is 6 cm or more higher: then the low toe carries the body and any travel is skate. New test `test_low_lift_swing_is_not_skate`, twin `no_speed_gate`: 9 tests, 7 twins caught.
+- **Calibrated limits:** p95 at most **0.08 m**, max at most **0.12 m**, from the native walker (p95 0.073 m, max 0.073 m).
+
+| Sample (re-scored) | Contacts | Skate p95 | Skate max | Status |
+|---|---|---|---|---|
+| Native docker walking 12.6 m (v2094a step09) | 14 | 0.073 m | 0.073 m | PASS |
+| Native workers and pivots (v2094a step06, step08; v2093a step08) | 3–7 | 0.011–0.043 m | 0.011–0.043 m | PASS |
+| **Partner seen from her own client** (v2091a step09) | 19 | 0.074 m | 0.074 m | **PASS** |
+| **Partner seen from the host** (v2091a step05) | 29 | 0.091 m | 0.145 m | **FAIL** |
+| Partner, Dunwall (v2086a step09) | 41 | 0.032 m | 0.091 m | PASS |
+
+**Finding (#266):** seen from the host, the partner's stance foot glides 14.5 cm at a walk start from idle. Her root starts moving (3313 → 3360 ms) while her right toe is planted and the left is 12 cm up, and the toe moves with the root. Hypothesis: the root follows the position stream before her gait animation starts. Stop contacts settle 7–8 cm.

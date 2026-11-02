@@ -1,12 +1,12 @@
 #pragma once
 // 2092 (#243): co-op notices on screen. A pending notice (coopNoticePending, 1: the friend runs a different co-op version,
 // set by the control channel's hello check and the lobby's version tag) opens a one-button engine message box, built
-// as the Character dialog's (coop_character.h), in gameplay, the pause menu or the main menu when no other co-op box is
+// as the Character dialog's (coop_character.h), in the pause menu or the main menu when no other co-op box is
 // open. Its question is the Character dialog's key, read as the notice text while the box is open (native_menu_ui.h);
 // the button is the game's ui_common_confirm. Lab command coop_notice_test raises one for a visual check.
 struct CoopNotice {int handle=-1;std::uint64_t shown=0,answered=0,failures=0;const char* result="idle";};
 CoopNotice coopNotice{};CoopBoxCallback coopNoticeCallback{};
-inline void coopNoticeAnswered(void*,int handle,int){if(handle!=coopNotice.handle)return;coopNotice.handle=-1;++coopNotice.answered;coopNotice.result="answered";coopNoticeShowing.store(false);consoleOutput("COOP: notice answered\n");}
+inline void coopNoticeAnswered(void*,int handle,int result){if(handle!=coopNotice.handle)return;coopNotice.handle=-1;++coopNotice.answered;coopNotice.result="answered";coopNoticeShowing.store(false);consoleOutput("COOP: notice answered (result %d)\n",result);}
 inline bool openCoopNotice(){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t game=0,lib=0;
     if(!memoryRead(base+0x39a5290,&game,8)||!game)return false;const auto mgr=game+0x30f260;if(!memoryRead(mgr+0x18,&lib,8))return false;
@@ -29,6 +29,8 @@ inline bool openCoopNotice(){
     return true;}
 void serviceCoopNotice(){
     if(!coopNoticePending.load()||coopNotice.handle>=0||coopChoice.handle>=0||GetCurrentThreadId()!=engineThread.load())return;
-    const unsigned logic=outgoing.gameLogicState;if(outgoing.pendingGameLogicState||(logic!=1&&logic!=2&&logic!=6))return;
+    // 2097: not in gameplay. A box opened there closed at once, unseen (notice-eotw-v2092a: answered three log lines after it
+    // opened, no box in the frames); a pending notice waits for the pause menu.
+    const unsigned logic=outgoing.gameLogicState;if(outgoing.pendingGameLogicState||(logic!=2&&logic!=6))return;
     if(openCoopNotice()){coopNoticePending.store(0);++coopNotice.shown;coopNotice.result="shown";consoleOutput("COOP: notice shown (version mismatch) in logic %u\n",logic);}else{++coopNotice.failures;coopNotice.result="open_failed";}
 }
