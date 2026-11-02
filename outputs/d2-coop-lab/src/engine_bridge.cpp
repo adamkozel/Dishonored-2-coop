@@ -1199,6 +1199,12 @@ void exchangePoses(ULONGLONG tick) {
             else ++breakableSync.rejected;
             messages[i]->Release();continue;
         }
+        if(magic==0x56423244) { // 2107 (#260): D2BV, the host's breakable presence
+            const auto bytes=static_cast<std::size_t>(messages[i]->m_cbSize);
+            if(bytes>=sizeof(CoopBreakablePresenceHeader)&&bytes<=sizeof(CoopBreakablePresencePacket)){static CoopBreakablePresencePacket p;p=CoopBreakablePresencePacket{};std::memcpy(&p,messages[i]->m_pData,bytes);receiveBreakablePresence(p,bytes,tick);}
+            else ++breakableSync.presenceRejected;
+            messages[i]->Release();continue;
+        }
         if(magic==0x53553244) {
             if(messages[i]->m_cbSize==sizeof(CoopUsablePacket)){CoopUsablePacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveUsablePacket(p,tick);}
             else ++usableCatalogRejected;

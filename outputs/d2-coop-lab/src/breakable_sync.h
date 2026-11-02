@@ -10,7 +10,7 @@
 //   default sword damage params carrying the hit, so the pieces, chunks and FX are the game's own. The breakable's
 //   health is lowered to the applied step's threshold, so later hits break the next step as in the other world.
 // - Breaks only go forward and an applied step counts as sent, so nothing echoes. Lab and product: coop_breakable_sync.
-struct BreakableEntry {std::uint32_t handle=0;std::string name;int stepCount=0,step=0,sent=0;std::uint64_t sends=0,applied=0;ULONGLONG seenAt=0;};
+struct BreakableEntry {std::uint32_t handle=0;std::string name;int stepCount=0,step=0,sent=0;std::uint64_t sends=0,applied=0;ULONGLONG seenAt=0,firstSeen=0;};
 struct BreakableRemoteStep {std::uint32_t handle=0;int step=0,stepCount=0;bool hitValid=false;float hit[3]{},direction[3]{};std::string name;};
 struct BreakableSyncState {
     bool enabled=false;std::uint64_t epoch=0,peerEpoch=0,map=0,session=0,peerSession=0,sequence=0;
@@ -18,6 +18,9 @@ struct BreakableSyncState {
     ULONGLONG scanAt=0,pollAt=0;unsigned scanMs=0;
     std::uint64_t scans=0,sent=0,sentWithHit=0,sendFailures=0,received=0,rejected=0,ignored=0,unmatched=0,overflow=0,
         applied=0,appliedSteps=0,applyRefused=0,healthLowered=0,worldResets=0,vanishedSent=0,catalogFull=0;
+    // 2107 (#260): the host's presence (breakable_protocol.h); on the partner the last list received.
+    std::vector<std::uint32_t> hostPresence;ULONGLONG presenceAt=0;bool presencePending=false,scanFull=false;
+    std::uint64_t presenceSequence=0,presenceSent=0,presenceSendFailures=0,presenceReceived=0,presenceRejected=0,presenceBroken=0,presenceRefused=0;
     const char* result="off";const char* lastApply="none";
 };
 BreakableSyncState breakableSync;int breakableSyncEnableRequest=-1;
@@ -26,19 +29,38 @@ bool breakableSyncContext(){
 }
 void scanBreakables(ULONGLONG tick){
     auto& s=breakableSync;const auto started=GetTickCount64();const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
-    std::uintptr_t game=0,handles=0;std::uint32_t flags=0;s.scanAt=tick;
+    std::uintptr_t game=0,handles=0;std::uint32_t flags=0;s.scanAt=tick;s.scanFull=true;
     if(!memoryRead(base+0x39a5290,&game,8)||!game||!memoryRead(game+0x601c0,&handles,8)||!handles||!memoryRead(game+0x601c8,&flags,4))return;
     const auto count=flags&0xffffff;if(count>16384)return;
     std::vector<BreakableEntry> next;
     for(std::uint32_t i=0;i<count;++i){std::uint32_t handle=0;NativeBreakable b{};
         if(!memoryRead(handles+i*4,&handle,4)||!handle||!readNativeBreakable(memoryRead,base,game,handle,b,true))continue;
-        BreakableEntry e{};e.handle=handle;e.name=b.name;e.stepCount=b.stepCount;e.step=e.sent=b.step;e.seenAt=tick;
-        for(const auto& old:s.entries)if(old.handle==handle&&old.name==b.name){e.sent=(std::max)(old.sent,b.step);e.sends=old.sends;e.applied=old.applied;break;}
+        BreakableEntry e{};e.handle=handle;e.name=b.name;e.stepCount=b.stepCount;e.step=e.sent=b.step;e.seenAt=e.firstSeen=tick;
+        for(const auto& old:s.entries)if(old.handle==handle&&old.name==b.name){e.sent=(std::max)(old.sent,b.step);e.sends=old.sends;e.applied=old.applied;e.firstSeen=old.firstSeen;break;}
         // 1214is (#179): 4096, was 1024. With movables Edge of the World has 1269 breakables (mission-breakables-v1774a),
         // and the catalog stopped at 1024 (mission-breakables-v1778a): later entries were never polled.
         next.push_back(std::move(e));if(next.size()>=4096){++s.catalogFull;break;}
     }
-    s.entries=std::move(next);++s.scans;s.scanMs=static_cast<unsigned>(GetTickCount64()-started);
+    s.entries=std::move(next);++s.scans;s.scanMs=static_cast<unsigned>(GetTickCount64()-started);s.scanFull=s.entries.size()>=4096;
+}
+// 2107 (#260): the host's presence after each complete scan (breakable_protocol.h).
+void sendBreakablePresence(){
+    auto& s=breakableSync;if(localRole!=0||remote.role!=1||s.scanFull)return;
+    std::vector<std::uint32_t> hashes;hashes.reserve(s.entries.size());for(const auto& e:s.entries)hashes.push_back(breakableNameHash(e.name));
+    std::sort(hashes.begin(),hashes.end());hashes.erase(std::unique(hashes.begin(),hashes.end()),hashes.end());
+    if(hashes.size()>kBreakablePresenceMax){++s.presenceSendFailures;return;}
+    static CoopBreakablePresencePacket p;p=CoopBreakablePresencePacket{};auto& h=p.header;h.role=0;h.count=static_cast<std::uint32_t>(hashes.size());
+    h.sequence=++s.presenceSequence;h.sourceSession=outgoing.session;h.targetSession=remote.session;h.sourceEpoch=outgoing.worldEpoch;h.targetEpoch=remote.worldEpoch;h.mapId=outgoing.mapId;
+    if(!hashes.empty())std::memcpy(p.hashes,hashes.data(),hashes.size()*4);
+    const std::size_t bytes=sizeof(h)+hashes.size()*4;
+    if(coopSendMessage(connection,&p,static_cast<std::uint32_t>(bytes),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)!=k_EResultOK){++s.presenceSendFailures;return;}
+    ++s.presenceSent;
+}
+void receiveBreakablePresence(const CoopBreakablePresencePacket& p,std::size_t bytes,ULONGLONG tick){
+    auto& s=breakableSync;
+    if(!s.enabled){++s.ignored;return;}
+    if(!validCoopBreakablePresence(p,bytes,outgoing,remote)){++s.presenceRejected;return;}
+    s.hostPresence.assign(p.hashes,p.hashes+p.header.count);s.presenceAt=tick;s.presencePending=true;++s.presenceReceived;
 }
 bool advanceNativeBreakable(const NativeBreakable& b,const BreakableRemoteStep& r){
     static std::uintptr_t decl=0;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t vt=0;
@@ -96,12 +118,19 @@ void serviceBreakableSync(ULONGLONG tick){
     if(!breakableSyncContext()||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()){s.result="waiting_world";return;}
     if(s.epoch!=outgoing.worldEpoch||s.peerEpoch!=remote.worldEpoch||s.map!=outgoing.mapId||s.session!=outgoing.session||s.peerSession!=remote.session){
         s.epoch=outgoing.worldEpoch;s.peerEpoch=remote.worldEpoch;s.map=outgoing.mapId;s.session=outgoing.session;s.peerSession=remote.session;
-        s.entries.clear();s.pending.clear();s.scanAt=0;++s.worldResets;}
-    if(!s.scanAt||tick-s.scanAt>=15000)scanBreakables(tick);
+        s.entries.clear();s.pending.clear();s.scanAt=0;s.hostPresence.clear();s.presencePending=false;++s.worldResets;}
+    if(!s.scanAt||tick-s.scanAt>=15000){scanBreakables(tick);sendBreakablePresence();}
     for(const auto& r:s.pending){bool matched=false;
         for(auto& e:s.entries)if(e.handle==r.handle&&e.name==r.name){matched=true;applyBreakableStep(e,r);break;}
         if(!matched)++s.unmatched;}
     s.pending.clear();
+    // 2107 (#260): on the partner, its unbroken breakables the host's world lacks go to their last step, through the same
+    // native advance as a received step. More than 16 at once means the lists do not describe the same world: none.
+    if(localRole==1&&s.presencePending&&!s.scanFull){s.presencePending=false;std::vector<BreakableEntry*> targets;
+        for(auto& e:s.entries)if(breakablePresenceTarget(s.hostPresence,e.name,e.sent,e.stepCount,e.firstSeen,s.presenceAt))targets.push_back(&e);
+        if(targets.size()>kBreakablePresenceMaxBreaks)++s.presenceRefused;
+        else for(auto* e:targets){BreakableRemoteStep r{};r.handle=e->handle;r.step=r.stepCount=e->stepCount;r.name=e->name;
+            applyBreakableStep(*e,r);e->sent=e->stepCount;++s.presenceBroken;}}
     if(tick-s.pollAt>=100){s.pollAt=tick;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
         for(auto& e:s.entries){NativeBreakable b{};
             if(!readNativeBreakable(memoryRead,base,observedGame,e.handle,b)||b.stepCount!=e.stepCount){
@@ -122,9 +151,11 @@ void writeBreakableSync(){
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& s=breakableSync;
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"lastApply\":\"%s\",\"catalog\":%zu,\"scans\":%llu,\"scanMs\":%u,\"sent\":%llu,\"sentWithHit\":%llu,\"sendFailures\":%llu,"
         "\"received\":%llu,\"rejected\":%llu,\"ignored\":%llu,\"unmatched\":%llu,\"overflow\":%llu,\"applied\":%llu,\"appliedSteps\":%llu,\"applyRefused\":%llu,"
-        "\"healthLowered\":%llu,\"worldResets\":%llu,\"hitsNoted\":%llu,\"vanishedSent\":%llu,\"catalogFull\":%llu,\"broken\":[",
+        "\"healthLowered\":%llu,\"worldResets\":%llu,\"hitsNoted\":%llu,\"vanishedSent\":%llu,\"catalogFull\":%llu,"
+        "\"presence\":{\"sent\":%llu,\"sendFailures\":%llu,\"received\":%llu,\"rejected\":%llu,\"listed\":%zu,\"broken\":%llu,\"refused\":%llu},\"broken\":[",
         s.enabled?"true":"false",s.result,s.lastApply,s.entries.size(),s.scans,s.scanMs,s.sent,s.sentWithHit,s.sendFailures,s.received,s.rejected,s.ignored,
-        s.unmatched,s.overflow,s.applied,s.appliedSteps,s.applyRefused,s.healthLowered,s.worldResets,breakableHitsNoted.load(),s.vanishedSent,s.catalogFull);
+        s.unmatched,s.overflow,s.applied,s.appliedSteps,s.applyRefused,s.healthLowered,s.worldResets,breakableHitsNoted.load(),s.vanishedSent,s.catalogFull,
+        s.presenceSent,s.presenceSendFailures,s.presenceReceived,s.presenceRejected,s.hostPresence.size(),s.presenceBroken,s.presenceRefused);
     bool first=true;for(const auto& e:s.entries){if(!e.step&&!e.sent)continue;if(!first)fputc(',',f);first=false;
         fprintf(f,"{\"handle\":%u,\"name\":",e.handle);writeWorldText(f,e.name.c_str());
         fprintf(f,",\"step\":%d,\"steps\":%d,\"sent\":%d,\"sends\":%llu,\"applied\":%llu}",e.step,e.stepCount,e.sent,e.sends,e.applied);}

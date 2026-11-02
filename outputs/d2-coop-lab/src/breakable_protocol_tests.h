@@ -1,6 +1,7 @@
 #pragma once
 #include "breakable_protocol.h"
 #include "native_breakable.h"
+#include <algorithm>
 #include <cstring>
 #include <unordered_map>
 void breakableProtocolTests(){
@@ -47,4 +48,23 @@ void breakableProtocolTests(){
     put64(actor,base+0x1c5de18);require(readNativeBreakable(read,base,game,handle,b)&&b.component==comp,"1214io (#178): a movable prop with a breakable component is a breakable");put64(actor,base+0x1b67bc8);
     put64(comp+0x10,0x9999);require(!readNativeBreakable(read,base,game,handle,b),"1214fq: the component must belong to the entity");put64(comp+0x10,actor);
     put32(actor+0xa8,handle+1);require(!readNativeBreakable(read,base,game,handle,b),"1214fq: a recycled handle is refused");
+    // 2107 (#260): the host's breakable presence.
+    static CoopBreakablePresencePacket v;v=CoopBreakablePresencePacket{};auto& vh=v.header;vh.sequence=1;vh.sourceSession=11;vh.targetSession=22;
+    vh.sourceEpoch=3;vh.targetEpoch=5;vh.mapId=7;vh.count=3;v.hashes[0]=5;v.hashes[1]=9;v.hashes[2]=40;
+    const std::size_t vb=sizeof(vh)+3*4;
+    require(validCoopBreakablePresence(v,vb,client,host),"2107: the host's presence reaches the partner");
+    require(!validCoopBreakablePresence(v,vb+4,client,host),"2107: the size must match the count");
+    require(!validCoopBreakablePresence(v,vb,host,client),"2107: only the partner takes the host's presence");
+    {auto w=v;w.header.role=1;require(!validCoopBreakablePresence(w,vb,client,host),"2107: the partner never sends a presence");}
+    {auto w=v;w.hashes[2]=9;require(!validCoopBreakablePresence(w,vb,client,host),"2107: hashes rise strictly");}
+    {auto w=v;w.header.targetEpoch=4;require(!validCoopBreakablePresence(w,vb,client,host),"2107: another world epoch is refused");}
+    {auto w=v;w.header.mapId=8;require(!validCoopBreakablePresence(w,vb,client,host),"2107: another map is refused");}
+    {auto w=v;w.header.count=kBreakablePresenceMax+1;require(!validCoopBreakablePresence(w,sizeof(vh)+(kBreakablePresenceMax+1)*4ull,client,host),"2107: the list is bounded");}
+    require(breakableNameHash("env_bottle_04_19")==breakableNameHash(std::string("env_bottle_04_19"))&&breakableNameHash("a")!=breakableNameHash("b"),"2107: name hashes are stable");
+    const std::vector<std::uint32_t> listed{breakableNameHash("env_bottle_04_18"),breakableNameHash("env_bottle_04_20")};
+    std::vector<std::uint32_t> sortedListed=listed;std::sort(sortedListed.begin(),sortedListed.end());
+    require(breakablePresenceTarget(sortedListed,"env_bottle_04_19",0,1,1000,20000),"2107: an unbroken breakable the host lacks is broken");
+    require(!breakablePresenceTarget(sortedListed,"env_bottle_04_18",0,1,1000,20000),"2107: a breakable the host has is kept");
+    require(!breakablePresenceTarget(sortedListed,"env_bottle_04_19",1,1,1000,20000),"2107: an already broken breakable is left");
+    require(!breakablePresenceTarget(sortedListed,"env_bottle_04_19",0,1,15000,20000),"2107: a breakable known here under 10 s before the list is left");
 }
