@@ -139,6 +139,15 @@ The status adds `charms`. The lab command `coop_grant_charm <id>` gives and equi
 - The route `progress-eotw-crafted-v2117` is the v2110 charm route plus `coop_lab_crafted_charm`.
 - The partner is killed after step 12 and rejoins.
 - `Check-Crafted-v2117.py` judges both charms at steps 4, 11 and 16. The twin `v2117b` (progression off) must lose both.
+
+**Result (confirmed runtime, candidate progress-v2112):**
+
+| Take | Result |
+|---|---|
+| `progress-eotw-v2117b` (twin, progression off) | **RED as required.** Fresh world: neither charm owned. Before the close: the found charm and `coop_lab_crafted` owned and equipped, crafted list 1 (lab result `crafted_equipped`). After the rejoin: both lost, crafted list 0. Items: extended_health 0, 1, 0; bolts 3, 1, 3 |
+| `progress-eotw-v2117a` | **PASS.** The same first two states. After the rejoin both charms are owned and equipped again, crafted list 1. Items kept: extended_health 0, 1, 1; bolts 3, 1, 1 (`Check-Progress-v2107.py`, steps 3, 10, 15) |
+
+The crafted record goes through the native readers and comes back equipped. Still open: the kind, ints and traits of a charm made at a crafting table (hypothesis that they come back the same way), checked when a later mission's route crafts one.
 - **Takes:** `Run-Progress-v2096.sh`. Twin `progress-eotw-v2096b` (switch off, must lose both), then `progress-eotw-v2096a`. The VM partner is granted extended_health and tranquilizer bolts; her game is closed, relaunched and joins from the main menu; `Check-Progress-v2096.py` compares her entries.
 
 | Take | Candidate | Result |
