@@ -147,6 +147,21 @@ No co-op difference anywhere a diff read, and in all five finished takes the par
 The input retry and the settle worked: no packet was lost, and the saferoom diff read in all seven takes that got there. With a Corvo host Meagan's scene had already run when the route arrived (`skipped: npc gone`). With an Emily host the talk registered in d and f and not in b.
 The two co-op faults, M7 and M8, are fixed in candidate progress-v2123 (progress-v2114 plus the two fixes). Harness v2113 also makes a talk second pass 8 s later, and before the second loot pass it takes down up to three living NPCs within 7 m of the host. `Run-V2123.sh` runs both rounds on them, ahead of the sweeps, which now run on v2123 and v2113 too.
 
+**Done-when rounds on progress-v2123 (`Run-V2123.sh`, harness v2113): passed.**
+
+| Take | Pairing (host / partner) | Result |
+|---|---|---|
+| `firstmission-dunwall-v2123a` | Corvo / Emily | Reached the Void (`continued_to_host_mission`). Every diff equal, nine of them (start to end; 1151 values at the saferoom). Armwait at the saferoom 5.1 s |
+| `firstmission-dunwall-v2123b` | Emily / Corvo | Same; saferoom armwait 10.2 s. The ring-locker diff equal (M9 not seen again) |
+| `firstmission-dunwall-v2123c` | Corvo / Corvo | Same; saferoom armwait 4.4 s. the mayhew diff equal, Alexi included, in the pairing where he stayed alive for the partner (M8 fixed) |
+| `firstmission-dunwall-v2123d` | Emily / Emily | Same; saferoom armwait 10.2 s |
+| `firstmission-dunwall-v2123e` | Corvo / Emily | Same; saferoom armwait 9.3 s |
+| `firstmission-dunwall-v2123f` | Emily / Corvo | Same; saferoom armwait 9.6 s |
+| `firstmission-dunwall-v2123g` | Corvo / Corvo | Same; saferoom armwait 5.7 s |
+| `firstmission-dunwall-v2123h` | Emily / Emily | Same; before the second loot pass the harness took down one guard beside Ramsey (`lootCleared`), then the loot landed; saferoom armwait 9.6 s |
+
+All eight takes, both rounds in all four pairings, reached the Void on one candidate with every diff equal (confirmed runtime). M7 and M8 are fixed, and M9 did not recur in eight ring-locker diffs; it stays a one-read hypothesis (a door that had not crossed yet). The scripted part of the done-when (section 3) is met. Open: the toggle session armed 4.4 to 10.2 s after the streets settle, not the 2 s the restarted round predicts. Every diff was equal after it, so this is latency, not a difference (hypothesis: a channel waits for its first catalog scan after the round re-arms the session).
+
 ## 3. Done when
 
 The whole first mission plays through cleanly in all four pairings on two accounts, every diff equal, twice in a row on one candidate, and every sweep row in section 4 has passed or is written down as known.
@@ -157,7 +172,7 @@ The user's report is "generally broken", so the scripted route alone is not enou
 
 | # | What real play does | Take shape | State |
 |---|---|---|---|
-| S1 | The partner joins from the co-op menu (product mode) mid-mission, not at the start | host plays to the bedroom, the VM joins from its menu, then the full route; diffs at every stage | Queued: `Run-V2119.sh` (route `sweep-s1-dunwall-v2119`). The host plays alone through Ramsey's loot, and the VM joins after step 9. There is a diff at the join and a required one 30 s later, then the rest to the Void. Four pairings, progress-v2123 and harness v2113 (after `Run-V2123.sh`) |
+| S1 | The partner joins from the co-op menu (product mode) mid-mission, not at the start | host plays to the bedroom, the VM joins from its menu, then the full route; diffs at every stage | `Run-V2119.sh` (route `sweep-s1-dunwall-v2119`): the host plays alone through Ramsey's loot, and the VM joins after step 9, with a diff at the join, a required one 30 s later, then the rest to the Void. **d (Emily / Emily) passed:** every diff equal, the partner placed 1.0 m away, `continued_to_host_mission`. **b and c reached the Void with every diff equal, but the partner played Emily, not Corvo.** Cause (confirmed static): the lab does not run in product mode (`D2COOP_PRODUCT`), so join-follow skips the Character box and loads as Emily (`session_product.h`, 1214hx), and the native choice was answered Emily. The product always asks, so this is a harness gap. **a failed at the placement check:** after the warp the partner stood 2.5 m from the host on the ground but 2.2 m lower (the floor below the step Ramsey's body lies on), so 3.33 m in 3D against a 3 m limit. Harness v2114 turns on `coop_character_choice` before the menu join, and it counts the partner as placed when they are within 3 m on the ground and within 2.5 m of the host's height. `Run-V2125.sh` runs S1 again in the four pairings (queued after `Run-V2124.sh`) |
 | S2 | The partner does the story beats (kills, Ramsey's loot, the ring, the safe room, Meagan) | the route with the partner as actor; diffs at every stage | Queued: `Run-V2121.sh` (route `sweep-s2-dunwall-v2121`). The partner enters every trigger volume, kills Ramsey and loots him. `partnerloot` passes when the host's gameflow completes the node. The host still uses the ring lockers and talks to Meagan. Four pairings, progress-v2123 and harness v2113 (after `Run-V2123.sh`) |
 | S3 | Deaths and loads mid-mission (quickload, checkpoint reload, a death of either player) | the route with a load after mayhew and a partner death after the safe room; diffs after each rewind | Queued: `Run-V2120.sh` (route `sweep-s3-dunwall-v2120`). The full route plus a host death after Mayhew and a partner death on the streets, each followed by a diff after both reloads. Four pairings, progress-v2123 and harness v2113 (after `Run-V2123.sh`) |
 | S4 | What both players see | a recorded clip of both screens at each stage, reviewed for presence, duplicate or missing characters and stuck animations (visual acceptance, recorded separately) | To do |
