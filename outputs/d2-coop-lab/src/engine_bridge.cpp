@@ -120,7 +120,7 @@ void updateReferenceFrame(void* frame) {
 std::uint32_t localRole=0,lastCommand=0;
 // 1214hy (#159, coop_character.h): the players' characters (1 Corvo, 2 Emily); until the partner's first pose the
 // role defaults stand (the host Corvo, the partner Emily).
-int remoteCharacter();int localCharacter();bool remoteCharacterKnown();inline bool remoteIsCorvo(){return remoteCharacter()==1;}
+int remoteCharacter();int localCharacter();bool remoteCharacterKnown();bool localCharacterKnown();inline bool remoteIsCorvo(){return remoteCharacter()==1;}
 // 1181: installed release (no lab environment); data in <game>\d2coop.
 bool productMode=false;char productDataDir[MAX_PATH]{};
 extern bool productAutoArm;

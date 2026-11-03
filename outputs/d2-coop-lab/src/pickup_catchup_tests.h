@@ -32,6 +32,17 @@ inline void pickupCatchUpTests(){
     require(!pickupCatchUpTarget(bolts,entries,entries)&&!pickupCatchUpTarget(rune,entries,entries),"runtime pickups match by base name within 3 m");
     require(pickupCatchUpTarget(farRune,entries,entries)&&pickupCatchUpTarget(pouch,entries,entries),"a runtime pickup with no namesake nearby is caught up");
     require(!pickupCatchUpTarget(emilyNews,entries,entries)&&!pickupCatchUpTarget(emilyNews,{},{}),"character variants are never caught up");
+    // 2132 (#264): Ramsey's ring, both variants in both worlds; each player takes their own character's.
+    const PickupPresenceItem corvoRing{"ld_imperial_ring_pickup_corvo",0x10000404u,{}},emilyRing{"ld_imperial_ring_pickup_emily",0x11000505u,{}};
+    const auto bothRings=pickupPresenceEntries({corvoRing,emilyRing}),corvoLeft=pickupPresenceEntries({corvoRing}),emilyLeft=pickupPresenceEntries({emilyRing});
+    require(!pickupCharacterCatchUpTarget(corvoRing,1,2,bothRings,bothRings)&&!pickupCharacterCatchUpTarget(emilyRing,2,1,bothRings,bothRings),"a ring the peer still has stays");
+    require(pickupCharacterCatchUpTarget(corvoRing,1,2,corvoLeft,corvoLeft),"2132: Corvo's world takes his ring when Emily's partner took hers (sweep-s2-dunwall-v2130a)");
+    require(pickupCharacterCatchUpTarget(emilyRing,2,1,emilyLeft,emilyLeft),"2132: Emily's world takes her ring when Corvo's partner took his (sweep-s2-dunwall-v2130b)");
+    require(pickupCharacterCatchUpTarget(corvoRing,1,1,emilyLeft,emilyLeft)&&!pickupCharacterCatchUpTarget(corvoRing,1,1,corvoLeft,corvoLeft),"in a Corvo / Corvo pair the same variant decides");
+    require(!pickupCharacterCatchUpTarget(emilyRing,1,2,corvoLeft,corvoLeft)&&!pickupCharacterCatchUpTarget(corvoRing,2,1,emilyLeft,emilyLeft),"the other character's variant is never taken");
+    require(!pickupCharacterCatchUpTarget(corvoRing,1,2,corvoLeft,bothRings),"the peer's previous presence still had the ring: wait for the next");
+    require(!pickupCharacterCatchUpTarget(corvoRing,0,2,corvoLeft,corvoLeft)&&!pickupCharacterCatchUpTarget(corvoRing,1,0,corvoLeft,corvoLeft),"unknown characters never catch up");
+    require(!pickupCharacterCatchUpTarget(coin,1,2,{},{})&&!pickupCharacterCatchUpTarget({"ld_ring_corvo_12140",(12140u<<16)|4u,{}},1,2,{},{}),"plain and runtime names are not character variants");
     // 1214jv (#203): absent from both of the peer's last presences, and the host catches up authored names only.
     const auto withBanana=pickupPresenceEntries({{"pickups_coin1_lowvalue_7",0x0d000101u,{}},{"pickups_fruit_banana_02_6",(8072u<<16)|7074u,{}}});
     require(!pickupCatchUpTarget(banana,entries,withBanana),"a pickup the peer's previous presence still had waits for the next");

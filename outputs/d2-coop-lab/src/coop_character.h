@@ -23,6 +23,7 @@ CoopCharacterChoice coopChoice{};CoopBoxCallback coopChoiceCallback{};
 std::atomic<int> coopLocalCharacter{0},coopRemoteCharacter{0};ULONGLONG coopCharacterSampledAt=0;
 std::atomic<std::uint32_t> coopTimeBendFlags{0}; // 1214ie (#160): the local Bend Time for the pose flags (time_bend.h)
 bool remoteCharacterKnown(){const int c=coopRemoteCharacter.load();return c==1||c==2;}
+bool localCharacterKnown(){const int c=coopLocalCharacter.load();return c==1||c==2;}
 int remoteCharacter(){const int c=coopRemoteCharacter.load();return c==1||c==2?c:(localRole?1:2);}
 int localCharacter(){const int c=coopLocalCharacter.load();return c==1||c==2?c:(localRole?2:1);}
 inline void coopStampCharacter(){outgoing.flags=(outgoing.flags&1u)|(static_cast<std::uint32_t>(coopLocalCharacter.load()&3)<<8)|((outgoing.flags&1u)?coopTimeBendFlags.load():0u);}
