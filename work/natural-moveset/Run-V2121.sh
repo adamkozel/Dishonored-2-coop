@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2123: moved to candidate progress-v2123 and harness v2113 after Run-V2116 (wrap fix, prompt re-arm, armwait).
 # 2121 (#264, sweep S2): the partner does the story beats, in all four pairings. Route sweep-s2-dunwall-v2121 is the
 # first-mission route with the partner entering every trigger volume, killing Ramsey (partnerattack) and looting him
 # (partnerloot: done when the host's gameflow completes the node); the host still uses the ring lockers and talks to
@@ -6,7 +7,7 @@
 # Usage: Run-V2121.sh [a b c d e f g h]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2113
+CAND=candidate-progress-v2123
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
 "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2121-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
@@ -19,7 +20,7 @@ run(){
  take="$1";steps="$2";hc="$3";pc="$4";side="$5"
  if [ -e "$take" ]; then echo "$take exists, skipped";return;fi
  clean
- "$P" -NoProfile -File Route-MissionVM-v2112.ps1 -Take "$take" -MapInfo campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+ "$P" -NoProfile -File Route-MissionVM-v2113.ps1 -Take "$take" -MapInfo campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
  echo "$take exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'));[print(k,v) for k,v in n.items() if k.startswith(('diff-','diffwait-'))];f=n.get('final',{});print({x:(f[x].get('map'),f[x].get('hold')) for x in f})" 2>&1 | head -c 2500)"
  grep -h "world-digest:" "$take.log" | head -3; ls "$take" | grep -i box
  for t in mayhew ramsey-loot saferoom balcony streets end; do [ -f "$take/diff-$t.txt" ] && { echo "$t:"; head -6 "$take/diff-$t.txt"; }; done

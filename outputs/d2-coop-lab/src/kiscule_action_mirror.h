@@ -477,20 +477,23 @@ void serviceKisculeMirror(std::uint64_t tick){
         // start scene runs before mapName is filled; join-probe-dunwall-v2061a: 42 expired, Delilah and a door lock stayed).
         if(localRole==1&&npcLifeJoinSnapshot&&(loading||p.mapId!=outgoing.mapId&&!kisculePartnerSettled())){w.at=tick;++k.joinHeld;keep.push_back(w);continue;}
         // 2063 (#240): an expired entry is an event (same or other map), to see which host runs a joiner loses.
-        if(tick-w.at>60000){AcquireSRWLockExclusive(&kisculeLock);++k.expired;k.result="expired";kisculeEvent(p.mapId==outgoing.mapId?"expired_samemap":"expired_othermap",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
+        // 2123: ages through tickAge. A packet received in this frame's transport pump is stamped after the frame tick, and
+        // tick-w.at wrapped to a huge age: the host's runs of Alexi's death expired the frame they arrived and Alexi stayed
+        // alive in the partner's world (firstmission-dunwall-v2116c, events host_story_blocked then expired_samemap 47 ms later).
+        if(tickAge(tick,w.at)>60000){AcquireSRWLockExclusive(&kisculeLock);++k.expired;k.result="expired";kisculeEvent(p.mapId==outgoing.mapId?"expired_samemap":"expired_othermap",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
         if(p.role==1&&p.classIndex>=static_cast<std::uint32_t>(kKisculeHostStoryBase)&&!kisculePlainGameplay()){keep.push_back(w);continue;} // stage 8.4.1: a partner's request waits for plain gameplay
         // A replay never runs on the mission result screen (logic 11), where the world is being torn down: the VM partner's game
         // vanished right after eight host inventory replays there (campaign-curator-vm-hoststory-v2031a and v2031b). It waits;
         // on the next map it lapses as other_map.
         if(outgoing.gameLogicState==11||outgoing.pendingGameLogicState==11){++k.resultScreenHeld;keep.push_back(w);continue;}
-        if(loading||p.mapId!=outgoing.mapId){if(!loading&&outgoing.gameLogicState==1&&tick-w.at>20000){++k.otherMap;k.result="other_map";continue;}keep.push_back(w);continue;}
+        if(loading||p.mapId!=outgoing.mapId){if(!loading&&outgoing.gameLogicState==1&&tickAge(tick,w.at)>20000){++k.otherMap;k.result="other_map";continue;}keep.push_back(w);continue;}
         if(k.dispatchThread&&k.dispatchThread!=GetCurrentThreadId()){++k.threadMismatch;k.result="thread_mismatch";continue;}
         std::uint32_t nodeId=p.node,inputId=p.input;kisculeCharacterCounterpart(p.entity,nodeId,inputId);
         const auto instance=kisculeInstanceByName(p.entity);const auto node=instance?kisculeNodeIn(instance,nodeId):0;
         const auto desc=node?kisculeInputDescriptor(node,inputId):0;std::uintptr_t h0=0,h1=0;
         if(!node||kisculeClassOf(node)!=static_cast<int>(p.classIndex)||!desc||!memoryRead(desc+0x30,&h0,8)||!memoryRead(desc+0x38,&h1,8)||
            !(h1?kisculeCodePointer(h1):kisculeCodePointer(h0))){
-            if(tick-w.at<10000){keep.push_back(w);continue;}
+            if(tickAge(tick,w.at)<10000){keep.push_back(w);continue;}
             AcquireSRWLockExclusive(&kisculeLock);++k.notFound;k.result="not_found";kisculeEvent("not_found",p.classIndex,p.entity,p.node,p.input,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
         if(p.role==1&&localRole==0&&kisculeOtherCharacterBranch(p.entity,nodeId)){
             AcquireSRWLockExclusive(&kisculeLock);++k.characterBranchRefused;++k.refused;kisculeEvent("character_branch_refused",p.classIndex,p.entity,nodeId,inputId,p.count);ReleaseSRWLockExclusive(&kisculeLock);continue;}
@@ -512,7 +515,7 @@ void serviceKisculeMirror(std::uint64_t tick){
             // pull-out scene; applied after 750 ms while the partner's own cable car ride was 3.8 s behind, it made him a
             // ragdoll in a moving car, and he fell 190 m and died (campaign-madinventor-vm-ipp-v2041ia, confirmed runtime).
             const std::uint64_t inFlowWait=static_cast<int>(p.classIndex)==kisculeDamageClass()?8000:750;
-            if(hostStoryRun&&c.requests<p.count&&c.executed<p.count&&tick-w.at<inFlowWait){ReleaseSRWLockExclusive(&kisculeLock);keep.push_back(w);break;}
+            if(hostStoryRun&&c.requests<p.count&&c.executed<p.count&&tickAge(tick,w.at)<inFlowWait){ReleaseSRWLockExclusive(&kisculeLock);keep.push_back(w);break;}
             const bool run=c.executed<p.count;if(run){++c.executed;ranTo=c.executed;++k.applied;k.result="applied";kisculeEvent(p.role==1?(nodeId==p.node?"applied_partner":"applied_partner_counterpart"):(nodeId==p.node?"applied":"applied_counterpart"),p.classIndex,p.entity,nodeId,inputId,c.executed);}
             ReleaseSRWLockExclusive(&kisculeLock);if(!run)break;
             alignas(16) unsigned char signal[32]{};std::memcpy(signal+0xc,&nodeId,4);std::memcpy(signal+0x10,&inputId,4);std::memcpy(signal+0x18,&node,8);

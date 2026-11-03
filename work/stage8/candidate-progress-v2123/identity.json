@@ -1,0 +1,9 @@
+{
+ "candidate": "progress-v2123",
+ "card": 264,
+ "dll": "640FEEA8DCF139559BF99E207D4DC1CF8814AFE0735D4A43A7381E6F9C84EC1A",
+ "previousCandidate": "progress-v2114",
+ "sourceCommit": "682537c9648d40b54b86b0e0af08b0dc5bc3ac19",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2114 plus two first-mission fixes from firstmission-dunwall-v2116: the Kiscule mirror ages its pending host runs through tickAge, so a run received in the frame's transport pump no longer wraps to a huge age and expires at once (Alexi stayed alive for the partner in v2116c); and a new shared world starts the product maintenance round over, so the toggle session (safe-room doors) and the other shared-state systems are armed again within about 5 s of the settle instead of 4 to 15 s (K3 transient in v2116a, b, d, e, f). Unit test for the round restart"
+}

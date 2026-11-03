@@ -16,5 +16,10 @@ struct ProductArm {
 // comment meant. F8 and coop_product_auto still reset everything, so a new session arms from step 0.
 inline void productNewWorld(ProductArm& a,std::uint64_t epoch,std::uint64_t peerEpoch,std::uint64_t map,unsigned long long tick){
     ++a.worlds;a.repairBackoff=0;
+    // 2123: the maintenance round starts over, so the shared-state systems a map load ends (checkpoint, doors, toggles)
+    // are armed again within 5 s of the settle. Left where it was, the toggle session came back anywhere from 4 to 15 s
+    // after the load, and the tower safe-room doors were still closed for the partner 7 s after it in 5 of 7 takes
+    // (firstmission-dunwall-v2116a, b, d, e, f).
+    a.maintenance=0;
     a.epoch=epoch;a.peerEpoch=peerEpoch;a.map=map;a.nextAt=tick+3000;a.result="world_settling";
 }
