@@ -1724,6 +1724,7 @@ bool allowedCommand(const char* text) {
         for(;*c;++c)if(!((*c>='a'&&*c<='z')||(*c>='A'&&*c<='Z')||(*c>='0'&&*c<='9')||*c==' '||*c=='_'||*c=='-'||*c=='?'))return false;return true;}
     if(!std::strcmp(text,"coop_door_sync on")||!std::strcmp(text,"coop_door_sync session")||!std::strcmp(text,"coop_door_sync off")||!std::strcmp(text,"coop_door_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_breakable_sync on")||!std::strcmp(text,"coop_breakable_sync off"))return true;
+    if(!std::strncmp(text,"coop_breakable_break ",21)){const char* n=text+21;if(!*n||std::strlen(n)>120)return false;for(;*n;++n)if(*n==' ')return false;return true;} // 2111 (#260, lab)
     if(!std::strcmp(text,"coop_prop_rest on")||!std::strcmp(text,"coop_prop_rest off"))return true; // 1214ip (#178)
     if(!std::strcmp(text,"coop_usable_sync on")||!std::strcmp(text,"coop_usable_sync session")||!std::strcmp(text,"coop_usable_sync off")||!std::strcmp(text,"coop_usable_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_door_fixture open")||!std::strcmp(text,"coop_door_fixture close"))return true;
@@ -2181,6 +2182,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_usable_sync off")){usableSyncEnableRequest=0;return;}
     if(!std::strcmp(request.command,"coop_breakable_sync on")){breakableSyncEnableRequest=1;return;}
     if(!std::strcmp(request.command,"coop_breakable_sync off")){breakableSyncEnableRequest=0;return;}
+    if(!std::strncmp(request.command,"coop_breakable_break ",21)){breakableLabBreakName=request.command+21;breakableLabBreakResult="pending";return;} // 2111 (#260, lab)
     if(!std::strcmp(request.command,"coop_prop_rest on")){propRestEnableRequest=1;return;} // 1214ip (#178)
     if(!std::strcmp(request.command,"coop_prop_rest off")){propRestEnableRequest=0;return;}
     if(!std::strcmp(request.command,"coop_door_sync duplicate")){doorSyncDuplicateRequest=true;return;}

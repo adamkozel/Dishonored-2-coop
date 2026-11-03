@@ -24,6 +24,10 @@ struct BreakableSyncState {
     const char* result="off";const char* lastApply="none";
 };
 BreakableSyncState breakableSync;int breakableSyncEnableRequest=-1;
+// 2111 (#260, lab): coop_breakable_break <name> breaks this world's catalogued breakable of that name at the next service,
+// through the native advance a received step uses, and counts it as sent: no break message goes to the peer, as for a
+// bottle broken during the host's load. The forced presence test (Run-V2115.sh) uses it on the host.
+std::string breakableLabBreakName;const char* breakableLabBreakResult="idle";
 bool breakableSyncContext(){
     return sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected&&coopWorldPairReady(outgoing,remote)&&!doorCheckpointBarrierActive();
 }
@@ -124,6 +128,10 @@ void serviceBreakableSync(ULONGLONG tick){
         for(auto& e:s.entries)if(e.handle==r.handle&&e.name==r.name){matched=true;applyBreakableStep(e,r);break;}
         if(!matched)++s.unmatched;}
     s.pending.clear();
+    if(!breakableLabBreakName.empty()){breakableLabBreakResult="not_catalogued";
+        for(auto& e:s.entries)if(e.name==breakableLabBreakName&&e.stepCount>0){BreakableRemoteStep r{};r.handle=e.handle;r.step=r.stepCount=e.stepCount;r.name=e.name;
+            applyBreakableStep(e,r);e.sent=e.stepCount;breakableLabBreakResult="broken";break;}
+        breakableLabBreakName.clear();}
     // 2107 (#260): on the partner, its unbroken breakables the host's world lacks go to their last step, through the same
     // native advance as a received step. More than 16 at once means the lists do not describe the same world: none.
     if(localRole==1&&s.presencePending&&!s.scanFull){s.presencePending=false;std::vector<BreakableEntry*> targets;
@@ -152,10 +160,10 @@ void writeBreakableSync(){
     fprintf(f,"{\"enabled\":%s,\"result\":\"%s\",\"lastApply\":\"%s\",\"catalog\":%zu,\"scans\":%llu,\"scanMs\":%u,\"sent\":%llu,\"sentWithHit\":%llu,\"sendFailures\":%llu,"
         "\"received\":%llu,\"rejected\":%llu,\"ignored\":%llu,\"unmatched\":%llu,\"overflow\":%llu,\"applied\":%llu,\"appliedSteps\":%llu,\"applyRefused\":%llu,"
         "\"healthLowered\":%llu,\"worldResets\":%llu,\"hitsNoted\":%llu,\"vanishedSent\":%llu,\"catalogFull\":%llu,"
-        "\"presence\":{\"sent\":%llu,\"sendFailures\":%llu,\"received\":%llu,\"rejected\":%llu,\"listed\":%zu,\"broken\":%llu,\"refused\":%llu},\"broken\":[",
+        "\"presence\":{\"sent\":%llu,\"sendFailures\":%llu,\"received\":%llu,\"rejected\":%llu,\"listed\":%zu,\"broken\":%llu,\"refused\":%llu},\"labBreak\":\"%s\",\"broken\":[",
         s.enabled?"true":"false",s.result,s.lastApply,s.entries.size(),s.scans,s.scanMs,s.sent,s.sentWithHit,s.sendFailures,s.received,s.rejected,s.ignored,
         s.unmatched,s.overflow,s.applied,s.appliedSteps,s.applyRefused,s.healthLowered,s.worldResets,breakableHitsNoted.load(),s.vanishedSent,s.catalogFull,
-        s.presenceSent,s.presenceSendFailures,s.presenceReceived,s.presenceRejected,s.hostPresence.size(),s.presenceBroken,s.presenceRefused);
+        s.presenceSent,s.presenceSendFailures,s.presenceReceived,s.presenceRejected,s.hostPresence.size(),s.presenceBroken,s.presenceRefused,breakableLabBreakResult);
     bool first=true;for(const auto& e:s.entries){if(!e.step&&!e.sent)continue;if(!first)fputc(',',f);first=false;
         fprintf(f,"{\"handle\":%u,\"name\":",e.handle);writeWorldText(f,e.name.c_str());
         fprintf(f,",\"step\":%d,\"steps\":%d,\"sent\":%d,\"sends\":%llu,\"applied\":%llu}",e.step,e.stepCount,e.sent,e.sends,e.applied);}
