@@ -544,7 +544,7 @@ int main(int argc, char** argv) {
                 // strictly; every other pickup is each player's own.
                 std::uintptr_t decl=0,item=0,dvt=0;unsigned family=0;
                 const bool story=reader(component+8,&decl,8)&&decl&&reader(decl,&dvt,8)&&dvt==base+0x1c5a278&&reader(decl+0xf8,&item,8)&&item&&
-                    reader(item,&dvt,8)&&dvt==base+0x1b9ea48&&reader(item+0x60,&family,4)&&(family==12||family==17||family==22||family==24||family==27);
+                    reader(item,&dvt,8)&&dvt==base+0x1b9ea48&&reader(item+0x60,&family,4)&&(family==11||family==12||family==17||family==22||family==24||family==27);
                 put(story?"storypickups":"pickups",actorName(actor),"["+std::to_string((flags>>3)&1)+","+std::to_string(ownerFlags&1)+"]");}
         }
         {std::vector<NativeWorldNpc> catalog;unsigned unbound=0;std::map<std::string,std::array<unsigned,3>> packs;

@@ -43,6 +43,7 @@ inline void pickupCatchUpTests(){
     require(!pickupCharacterCatchUpTarget(corvoRing,1,2,corvoLeft,bothRings),"the peer's previous presence still had the ring: wait for the next");
     require(!pickupCharacterCatchUpTarget(corvoRing,0,2,corvoLeft,corvoLeft)&&!pickupCharacterCatchUpTarget(corvoRing,1,0,corvoLeft,corvoLeft),"unknown characters never catch up");
     require(!pickupCharacterCatchUpTarget(coin,1,2,{},{})&&!pickupCharacterCatchUpTarget({"ld_ring_corvo_12140",(12140u<<16)|4u,{}},1,2,{},{}),"plain and runtime names are not character variants");
+    require(storyPickupFamily(11)&&storyPickupFamily(12)&&storyPickupFamily(17)&&!storyPickupFamily(1)&&!storyPickupFamily(0)&&!storyPickupFamily(25),"2133: mission items (the ring, family 11) are story items; coins, the carved boat and books stay per player");
     // 1214jv (#203): absent from both of the peer's last presences, and the host catches up authored names only.
     const auto withBanana=pickupPresenceEntries({{"pickups_coin1_lowvalue_7",0x0d000101u,{}},{"pickups_fruit_banana_02_6",(8072u<<16)|7074u,{}}});
     require(!pickupCatchUpTarget(banana,entries,withBanana),"a pickup the peer's previous presence still had waits for the next");

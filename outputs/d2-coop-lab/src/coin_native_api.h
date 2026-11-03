@@ -1,5 +1,6 @@
 #pragma once
 #include "native_coin.h"
+#include "pickup_catchup.h"
 #include "native_player_states.h"
 #include "native_stack_item.h"
 #include "native_food.h"
@@ -97,7 +98,6 @@ CoinApply applyNativeCoin(const NativeCoin& binding,CoinAwardReceipt& receipt,un
 // Stage 8.4.2 (#238): story items reach both players. A story pickup is a key (item family 17), a note (12), the rewire
 // tool (22) or a map (24, 27); every other family (money and valuables, ammunition, food, runes, elixirs, paintings,
 // blueprints, books, whalebone) is each player's own (pickup census, edge of the world, items-per-player-v2033a time).
-inline bool storyPickupFamily(unsigned family){return family==12||family==17||family==22||family==24||family==27;}
 // The same exact pickup declaration as readNativeCoin, for a story family (any special index; quantity 1 to 1000).
 template<class Read> bool readNativeStoryPickup(Read read,std::uintptr_t base,std::uintptr_t game,unsigned handle,NativeCoin& out){
     NativeCoin s{};s.game=game;s.handle=handle;std::uintptr_t vt=0,p=0,list=0;unsigned count=0;

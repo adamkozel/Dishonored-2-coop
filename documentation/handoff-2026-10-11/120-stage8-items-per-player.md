@@ -32,6 +32,7 @@ The probe's `--pickup-census` now reports each pickup's item declaration, family
 | 4 | ammunition (bolts, bullets, grenades) | own |
 | 6 | food | own |
 | 7, 8 | runes | own |
+| 11 | mission items (Ramsey's ring, both character variants; A Long Day in Dunwall, `simple-pickup-catalog-v810`; added in progress-v2133, #264) | story |
 | 12 | notes and newspapers (special = note category) | story |
 | 14 | elixirs | own |
 | 15 | Sokolov's paintings | own |

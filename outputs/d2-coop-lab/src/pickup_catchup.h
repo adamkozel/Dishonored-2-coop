@@ -39,6 +39,9 @@ inline bool pickupRuntimeNamed(const std::string& name,std::uint32_t handle){
     return slot==(handle>>16);
 }
 inline std::string pickupBaseName(const std::string& name){const auto at=name.find_last_of('_');return at==std::string::npos?name:name.substr(0,at);}
+// Stage 8.4.2 (#238): the item families that reach both players (chapter 120). 2133 (#264): family 11 holds the
+// mission items, such as Ramsey's ring (both variants, simple-pickup-catalog-v810); Edge of the World has none.
+inline bool storyPickupFamily(unsigned family){return family==11||family==12||family==17||family==22||family==24||family==27;}
 inline bool pickupCharacterNamed(const std::string& name){return name.find("corvo")!=std::string::npos||name.find("emily")!=std::string::npos;}
 struct PickupPresenceItem {std::string name;std::uint32_t handle=0;float position[3]{};};
 inline PickupPresenceEntry pickupPresenceEntry(const PickupPresenceItem& item){
