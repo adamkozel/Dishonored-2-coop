@@ -215,6 +215,23 @@ The partner's high contacts are at starts and stops, where the native worker sco
   - Stops are unchanged.
 - **Takes.** `Run-V2122.sh` runs the v2091 walkway route in all four pairings, plus the twin `v2122e` with the switch off.
 
+**Result, `Run-V2122.sh` (progress-v2123, which carries the v2114 start phase): not confirmed.** Step 6 has the host sample the partner, and step 11 has the partner sample the host. The route has two parts: walk, start and stop, then a run.
+
+| Take | Pairing (host / partner) | Start phase | Step 6 skate p95 / max | Step 11 skate p95 / max |
+|---|---|---|---|---|
+| `animquality-eotw-v2122a` | Corvo / Emily | on | not run: the route file was missing (see below) | |
+| `animquality-eotw-v2122b` | Emily / Corvo | on | 0.076 / 0.080 m PASS | 0.305 / 0.305 m FAIL |
+| `animquality-eotw-v2122c` | Corvo / Corvo | on | 0.107 / 0.184 m FAIL | 0.159 / 0.204 m FAIL |
+| `animquality-eotw-v2122d` | Emily / Emily | on | 0.051 / 0.062 m PASS | 0.131 / 0.160 m FAIL |
+| `animquality-eotw-v2122e` (twin) | Corvo / Emily | off | 0.039 / 0.054 m PASS | 0.169 / 0.169 m FAIL |
+
+- **The twin passed step 6** with the switch off, and c failed it with the switch on. The take-to-take spread (p95 0.04 to 0.11 m) is larger than any effect of the start phase. The start-phase finding stays a hypothesis.
+- **Step 11 failed in all four takes.** Per contact (scratch analysis of the samples), the large drifts are not at walk starts:
+  - They fall in steady walking at 1 to 1.4 m/s, at the walk-to-run change, and once with the root at rest (c step 6, 0.107 m).
+  - Most last two samples (94 ms). In b, a "planted" toe moved 0.305 m in 94 ms, faster than the root (2.1 m/s at most). That is a swinging foot read as planted, or a root and a pose read at different times.
+- **The measurement is the next step (hypothesis).** The probe samples from outside the process at about 21 Hz, with irregular gaps (31, 47 ms), and reads the root and the pose separately. At that rate a contact is two or three samples, so one misread sample decides the p95. Planned: sample the root and the feet in the same engine frame inside the DLL, at the frame rate, then judge #266 again on the same route.
+- **Take a** started during the squash merge of PR #262 (`git switch main` removed the branch's route file for about a minute) and failed on the missing file. It is rerun with the next round.
+
 ## The version notice (candidates notice-v2092, progress-v2097, progress-v2100)
 
 When the friend's mod is a different version (control hello or lobby tag), each game shows a one-button engine message box (`native_notice.h`). Lab command `coop_notice_test` raises one.
