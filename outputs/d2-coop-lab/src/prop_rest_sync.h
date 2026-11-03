@@ -97,7 +97,9 @@ void receivePropRest(const CoopPropRestPacket& p){
 }
 void servicePropRest(ULONGLONG tick){
     auto& s=propRest;
-    if(propRestEnableRequest>=0){s.enabled=propRestEnableRequest!=0;propRestEnableRequest=-1;s.entries.clear();s.pending.clear();s.scanAt=0;s.result=s.enabled?"waiting_world":"off";}
+    // 2124: as the breakable sync, a repeated request (the maintenance round, about every 12 s) keeps the catalog.
+    if(propRestEnableRequest>=0&&(propRestEnableRequest!=0)!=s.enabled){s.enabled=propRestEnableRequest!=0;s.entries.clear();s.pending.clear();s.scanAt=0;s.result=s.enabled?"waiting_world":"off";}
+    propRestEnableRequest=-1;
     if(!s.enabled)return;
     if(!propRestContext()||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()){s.result="waiting_world";return;}
     if(s.epoch!=outgoing.worldEpoch||s.peerEpoch!=remote.worldEpoch||s.map!=outgoing.mapId||s.session!=outgoing.session||s.peerSession!=remote.session){

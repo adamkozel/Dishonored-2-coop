@@ -66,6 +66,8 @@ void breakableProtocolTests(){
     require(breakablePresenceTarget(sortedListed,"env_bottle_04_19",0,1,1000,20000),"2107: an unbroken breakable the host lacks is broken");
     require(!breakablePresenceTarget(sortedListed,"env_bottle_04_18",0,1,1000,20000),"2107: a breakable the host has is kept");
     require(!breakablePresenceTarget(sortedListed,"env_bottle_04_19",1,1,1000,20000),"2107: an already broken breakable is left");
+    require(!breakableEnableChanges(true,1)&&!breakableEnableChanges(false,0)&&!breakableEnableChanges(true,-1),"2124: a repeated or absent enable request keeps the catalog");
+    require(breakableEnableChanges(false,1)&&breakableEnableChanges(true,0),"2124: turning the sync on or off resets it");
     require(!breakablePresenceTarget(sortedListed,"env_bottle_04_19",0,1,15000,20000),"2107: a breakable known here under 10 s before the list is left");
     require(breakableGeneratedName("speaker_01_a0_brk_5462")&&!breakableGeneratedName("env_bottle_04_19")&&!breakableGeneratedName("_1234")&&!breakableGeneratedName("bottle_123"),"2110: generated names are told apart");
     require(!breakablePresenceTarget(sortedListed,"speaker_01_a0_brk_5462",0,1,1000,20000),"2110: a generated name the host lacks is left");

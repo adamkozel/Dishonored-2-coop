@@ -122,7 +122,8 @@ bool sendBreakableStep(BreakableEntry& e,int step,ULONGLONG tick){
 }
 void serviceBreakableSync(ULONGLONG tick){
     auto& s=breakableSync;
-    if(breakableSyncEnableRequest>=0){s.enabled=breakableSyncEnableRequest!=0;breakableSyncEnableRequest=-1;s.entries.clear();s.pending.clear();s.scanAt=0;s.result=s.enabled?"waiting_world":"off";}
+    if(breakableEnableChanges(s.enabled,breakableSyncEnableRequest)){s.enabled=breakableSyncEnableRequest!=0;s.entries.clear();s.pending.clear();s.scanAt=0;s.result=s.enabled?"waiting_world":"off";}
+    breakableSyncEnableRequest=-1; // 2124 (#260): a repeated request keeps the catalog (breakable_protocol.h)
     if(!s.enabled)return;
     if(!breakableSyncContext()||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()){s.result="waiting_world";return;}
     if(s.epoch!=outgoing.worldEpoch||s.peerEpoch!=remote.worldEpoch||s.map!=outgoing.mapId||s.session!=outgoing.session||s.peerSession!=remote.session){

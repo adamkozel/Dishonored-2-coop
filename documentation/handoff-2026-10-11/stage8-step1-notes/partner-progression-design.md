@@ -178,6 +178,10 @@ The crafted record goes through the native readers and comes back equipped. Stil
 
   The cause is open. Candidate progress-v2113 adds presence diagnostics. Each partner evaluation records how many of her named breakables the host's list lacks, how many were targets, and a sample of them (name, step, sent, steps, age). The host counts its listed entries on their last step. `Run-V2118.sh` repeats take a on it, with partner statuses 20 s and 45 s in.
 
+**v2118 on progress-v2113: the cause (diagnostics confirmed runtime, cause confirmed static).** In `bottlepresence-eotw-v2118a` the partner evaluated 16 host lists. Each time exactly one of her named breakables was missing from the host's list (`missing` 1): `env_bottle_04_19`, unbroken (step 0 of 1). But it was never a target (`targets` 0), because its age was 1 s at step 9 and 2 s at step 11, under the 10 s rule. The product's maintenance round sends `coop_breakable_sync on` about every 12 s, and every enable request cleared the catalog, even with the sync already on. So each entry's first-seen time restarted between the host's 15 s lists, and the age never reached 10 s. Prop rest cleared its catalog the same way.
+
+**Fix, candidate progress-v2124 (progress-v2123 plus this):** a request changes anything only when it changes the setting (`breakableEnableChanges`, unit tests). Prop rest does the same. `Run-V2124.sh` runs the forced test again (`bottlepresence-eotw-v2124a`, chained after Run-V2122). Its later diff must be equal, with `presence.broken` 1 or more. The twin is unchanged by this fix (the partner's sync stays off), so `v2115b` stands as the RED twin.
+
 **Exact join restores, candidate progress-v2105 (`partner_progress.h`):** on a join's load the class 2 entries (ammunition, elixirs, runes, gear, whalebone) and money are set to the saved values, as a native mission change carries them. Powers, upgrades and enhancements are still only raised. `Check-Progress-v2107.py` asks for each granted entry to differ from its fresh value before the close and to be equal after the rejoin.
 
 ## Plan

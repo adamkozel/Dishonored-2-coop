@@ -69,6 +69,10 @@ constexpr std::size_t kBreakablePresenceMaxBreaks=16;
 inline bool breakableGeneratedName(const std::string& s){std::size_t digits=0;
     while(digits<s.size()&&s[s.size()-1-digits]>='0'&&s[s.size()-1-digits]<='9')++digits;
     return digits>=4&&digits+1<s.size()&&s[s.size()-1-digits]=='_';}
+// 2124 (#260): an enable request changes anything only when it changes the setting. The product's maintenance round sends
+// coop_breakable_sync on about every 12 s; each one cleared the catalog, so every entry's first-seen time restarted and
+// the 10 s age of a presence target never came (bottlepresence-eotw-v2118a: missing 1, targets 0, age 1 to 2 s).
+inline bool breakableEnableChanges(bool enabled,int request){return request>=0&&(request!=0)!=enabled;}
 inline bool breakablePresenceTarget(const std::vector<std::uint32_t>& host,const std::string& name,int done,int steps,
     std::uint64_t firstSeen,std::uint64_t presenceAt){
     return !name.empty()&&!breakableGeneratedName(name)&&steps>0&&done<steps&&presenceAt>=firstSeen+10000&&!std::binary_search(host.begin(),host.end(),breakableNameHash(name));

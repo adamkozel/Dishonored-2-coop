@@ -1,0 +1,9 @@
+{
+ "candidate": "progress-v2124",
+ "card": 260,
+ "dll": "7D9ED34D332D5080A7FDA2984AD4F901FF03F9F1A5336F2FD39DA2CA62144824",
+ "previousCandidate": "progress-v2123",
+ "sourceCommit": "0a8a6c206db7aaec4b51809327c75214a986dc63",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2123 plus idempotent enable requests for the breakable sync and prop rest: a repeated coop_breakable_sync on / coop_prop_rest on (the product maintenance round, about every 12 s) no longer clears the catalog, so a breakable's first-seen time survives and the 10 s age of a presence target can come (bottlepresence-eotw-v2118a: missing 1, targets 0, age 1 to 2 s). Unit tests for breakableEnableChanges"
+}
