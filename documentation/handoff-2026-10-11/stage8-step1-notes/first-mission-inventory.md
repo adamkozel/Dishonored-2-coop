@@ -138,9 +138,9 @@ The user's report is "generally broken", so the scripted route alone is not enou
 
 | # | What real play does | Take shape | State |
 |---|---|---|---|
-| S1 | The partner joins from the co-op menu (product mode) mid-mission, not at the start | host plays to the bedroom, the VM joins from its menu, then the full route; diffs at every stage | To do |
-| S2 | The partner does the story beats (kills, Ramsey's loot, the ring, the safe room, Meagan) | the route with the partner as actor; diffs at every stage | To do |
-| S3 | Deaths and loads mid-mission (quickload, checkpoint reload, a death of either player) | the route with a load after mayhew and a partner death after the safe room; diffs after each rewind | To do |
+| S1 | The partner joins from the co-op menu (product mode) mid-mission, not at the start | host plays to the bedroom, the VM joins from its menu, then the full route; diffs at every stage | Queued: `Run-V2119.sh` (route `sweep-s1-dunwall-v2119`). The host plays alone through Ramsey's loot, and the VM joins after step 9. There is a diff at the join and a required one 30 s later, then the rest to the Void. Four pairings, progress-v2113 |
+| S2 | The partner does the story beats (kills, Ramsey's loot, the ring, the safe room, Meagan) | the route with the partner as actor; diffs at every stage | Queued: `Run-V2121.sh` (route `sweep-s2-dunwall-v2121`, harness v2112). The partner enters every trigger volume, kills Ramsey and loots him. `partnerloot` passes when the host's gameflow completes the node. The host still uses the ring lockers and talks to Meagan. Four pairings, progress-v2113 |
+| S3 | Deaths and loads mid-mission (quickload, checkpoint reload, a death of either player) | the route with a load after mayhew and a partner death after the safe room; diffs after each rewind | Queued: `Run-V2120.sh` (route `sweep-s3-dunwall-v2120`). The full route plus a host death after Mayhew and a partner death on the streets, each followed by a diff after both reloads. Four pairings, progress-v2113 |
 | S4 | What both players see | a recorded clip of both screens at each stage, reviewed for presence, duplicate or missing characters and stuck animations (visual acceptance, recorded separately) | To do |
 
 Each failure becomes an M row with its fix and mutation twin, as above.
