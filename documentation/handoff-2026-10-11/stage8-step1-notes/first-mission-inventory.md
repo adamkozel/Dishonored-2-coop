@@ -99,6 +99,15 @@ Seven of eight reached the next mission with no difference anywhere they were me
 
 **M2's reason (confirmed runtime, the v2106 probe):** in every failing take the host's digest reads `entity_list` (the game object is there, its entity list empty, count 0), and the retry 10 s later reads `no_game` (no game object). That is the host tearing down one map and building the next. In f the digest got through, with 1148 values, the size of the later balcony and streets digests (1152) and not of the tower's (552). So the saferoom diff lands in the load into the streets map, and the earlier "not load timing" note was wrong: one 10 s retry was too short (hypothesis for the length, to confirm). Harness v2108 retries the digest every 10 s for up to 60 s and records the tries. `Run-V2112.sh` repeats both rounds on it, on progress-v2109 if the wait-notice take `v2111a` passes, else on progress-v2108.
 
+**Wait-notice take on progress-v2109 (`firstmission-dunwall-v2111a`, Corvo / Emily): failed, two new rows.**
+
+| # | Problem | Evidence | State |
+|---|---|---|---|
+| M5 | The partner's game faulted at the end. Her wait notice was open on the result screen when her continue-follow load (`campaign .../void_01.mapinfo low emily`) came (Dishonored2.exe+0x1f7dd28) | v2111a VM engine log, the VM desktop in the step 35 frame (confirmed runtime) | **Fixed by removal:** progress-v2110 never raises the notice (partner-quality-plan) |
+| M6 | **Breakable presence broke the partner's streets speakers.** The streets diff showed `speaker_01_a0_brk#gen` on the host and none on the partner. Those names end in a number made at spawn, different in each world (host `_5276`/`_5414`, partner `_5462`/`_5502` in v2108a). So the host's list never has the partner's names, and presence (progress-v2107 on) broke every one of them | v2111a streets digests against v2108a and f (confirmed runtime) | **Fixed in progress-v2110:** presence leaves names ending in `_<4+ digits>` alone, the rule the world diff uses (#gen). Unit tests added. The twin is v2111a itself |
+
+Every other diff of v2111a was equal (start to balcony; saferoom M2 as before). `Run-V2112.sh` (progress-v2108, which still has M6) was cut to its take a, and its folders b to h were left empty so the runner skips them. `Run-V2113.sh` now runs the forced bottle test on progress-v2110, and `Run-V2114.sh` runs both done-when rounds on it.
+
 ## 3. Done when
 
 The whole first mission plays through cleanly in all four pairings on two accounts, every diff equal, twice in a row on one candidate, and every sweep row in section 4 has passed or is written down as known.

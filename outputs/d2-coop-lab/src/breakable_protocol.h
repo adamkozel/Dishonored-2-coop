@@ -63,7 +63,13 @@ inline bool validCoopBreakablePresence(const CoopBreakablePresencePacket& p,std:
 // A partner breakable the host's world lacks, still unbroken here, and known here for 10 s before the host's list was
 // received (so a breakable the partner's world has only just streamed in is not judged on an older list).
 constexpr std::size_t kBreakablePresenceMaxBreaks=16;
+// 2110: a name ending in _<4+ digits> is generated at spawn and differs between the two worlds (the streets speakers:
+// host speaker_01_a0_brk_5276, partner _5462; firstmission-dunwall-v2111a broke every partner speaker). Presence never
+// judges such a name; the world diff groups them the same way (#gen).
+inline bool breakableGeneratedName(const std::string& s){std::size_t digits=0;
+    while(digits<s.size()&&s[s.size()-1-digits]>='0'&&s[s.size()-1-digits]<='9')++digits;
+    return digits>=4&&digits+1<s.size()&&s[s.size()-1-digits]=='_';}
 inline bool breakablePresenceTarget(const std::vector<std::uint32_t>& host,const std::string& name,int done,int steps,
     std::uint64_t firstSeen,std::uint64_t presenceAt){
-    return !name.empty()&&steps>0&&done<steps&&presenceAt>=firstSeen+10000&&!std::binary_search(host.begin(),host.end(),breakableNameHash(name));
+    return !name.empty()&&!breakableGeneratedName(name)&&steps>0&&done<steps&&presenceAt>=firstSeen+10000&&!std::binary_search(host.begin(),host.end(),breakableNameHash(name));
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 2113 (#260): a forced test of the host's breakable presence (progress-v2107 on). The bottle of #260 broke in the
+# 2113 (#260): a forced test of the host's breakable presence (progress-v2110: the v2107 presence, generated names left out). The bottle of #260 broke in the
 # host's load in 1 of 2 takes only, and in none of the v2109 takes. Here, with breakable sync off in both games, the
 # host breaks env_bottle_04_19 itself (harness v2109 breakhost), so no break message reaches the partner; sync is then
 # turned back on (its catalog starts empty, as after a load). Within 45 s the partner must break her copy from the
@@ -18,6 +18,6 @@ run(){
  [ -f "$take/diff-later.txt" ] && head -5 "$take/diff-later.txt"
  for f in "$take"/*breakable-sync-*.json; do [ -f "$f" ] && echo "$f $(grep -o '"presence":{[^}]*}' "$f")"; done
 }
-run bottlepresence-eotw-v2113a candidate-progress-v2107
+run bottlepresence-eotw-v2113a candidate-progress-v2110
 run bottlepresence-eotw-v2113b candidate-progress-v2106
 echo done

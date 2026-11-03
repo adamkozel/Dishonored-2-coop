@@ -84,8 +84,9 @@ int missionDecisionIntercept(unsigned kind,int slot) {
     const int rule=missionDecisionRule(localRole,kind,atResults,shared,checkpointConnected(),permitted);
     if(rule==0&&kind==1)++checkpointMissionContinues;
     if(rule==0&&localRole==0&&shared)missionDecisionHost(kind,slot,GetTickCount64());
-    // 2108: her first held press on this result screen shows the wait notice (native_notice.h), unless a notice is pending.
-    if(rule==1){if(!d.held){++d.partnerHeld;int none=0;coopNoticePending.compare_exchange_strong(none,2);}d.held=true;d.heldKind=kind;d.heldSlot=slot;d.result="waiting_for_host";}
+    // 2110: the wait notice of 2108 is not shown: its box was still open when her continue-follow load came, and her game
+    // faulted (firstmission-dunwall-v2111a, Dishonored2.exe+0x1f7dd28). Notice kind 2 stays in native_notice.h, unused.
+    if(rule==1){if(!d.held)++d.partnerHeld;d.held=true;d.heldKind=kind;d.heldSlot=slot;d.result="waiting_for_host";}
     return rule;
 }
 void receiveMissionDecision(const MissionDecisionPacket& p) {

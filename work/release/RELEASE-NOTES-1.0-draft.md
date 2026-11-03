@@ -30,7 +30,7 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
 
 ## Still to come before 1.0
 
-- **Step 5:** partner movement measured in numbers, and the polish pass over messages and menus (#243). Being tested: a message on the partner's result screen saying that the host chooses what happens next.
+- **Step 5:** partner movement measured in numbers, and the polish pass over messages and menus (#243).
 - **Step 5b:** the first mission (*A Long Day in Dunwall*) clean in all four pairings, twice (#264).
 - **Step 5c:** crafted bonecharms are not carried yet (#265).
 - **Step 6:** the proof runs and the release (#244).
@@ -43,4 +43,4 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
   - Possessing a rat or fish is not shown in the host's game.
   - Possessing a corpse is unverified.
 - On a host without Doppelganger (Corvo), the partner's Deadly Shade appears in the host's world as the Doppelganger decoy.
-- On Edge of the World, the checkpoint reinforcements can disappear from the partner's world (#260). A bottle that breaks as the host's game loads the map stays whole in the partner's world; a fix is being tested.
+- On Edge of the World, the checkpoint reinforcements can disappear from the partner's world (#260). A bottle that breaks as the host's game loads the map stays whole in the partner's world; a fix is being tested (it now leaves the streets speakers of the first mission alone).
