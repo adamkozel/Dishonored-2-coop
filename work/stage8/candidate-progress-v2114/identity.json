@@ -1,0 +1,9 @@
+{
+ "candidate": "progress-v2114",
+ "card": 266,
+ "dll": "5140354DC80170EBD53B6387DA78B9CE5F641D35B8607EB6FF49482AD50FABC8",
+ "previousCandidate": "progress-v2113",
+ "sourceCommit": "79fe63329a775fdf20bd6f94f076a703760e6219",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2113 plus the walk start phase (#266): a start from rest (gait speed under 0.025 m/s) begins the partner rig walk cycle at the clip phase nearest the idle pose (MovementBank::startPhase, cached per clip, unit test), so a walk start seen from the host no longer pops the planted toe; lab switch coop_movement_start_phase on|off; movement status startPhase"
+}

@@ -205,6 +205,16 @@ The partner's high contacts are at starts and stops, where the native worker sco
 
 **Finding (#266):** seen from the host, the partner's stance foot glides 14.5 cm at a walk start from idle. Her root starts moving (3313 → 3360 ms) while her right toe is planted and the left is 12 cm up, and the toe moves with the root. Hypothesis: the root follows the position stream before her gait animation starts. Stop contacts settle 7–8 cm.
 
+**#266, a second reading of the code (confirmed static) and candidate progress-v2114:**
+- **The cycle advances by distance.** The host's rig advances its walk cycle by the distance travelled (`MovementClock::advance`: phase += distance / stride), so a walking stance foot does not slide.
+- **The blend is short.** The idle-to-walk blend is `moving = smoothstep((speed − 0.025) / 0.30)` on a speed filtered with τ = 0.1 s (`movement_playback.h`). At walking speed it is complete in about 30 to 50 ms, too short for a 14.5 cm slide while the root moved 7 cm.
+- **The phase resumes where the last walk ended.** On a start from rest, the cycle picks up there. The pose then jumps in a few frames from the idle feet to that phase's feet, and the analyser reads the jump as a planted toe moving (hypothesis).
+- **Candidate progress-v2114.** A start from rest (filtered speed under the blend's 0.025 m/s floor) begins at the clip's phase nearest the idle pose.
+  - `MovementBank::startPhase` picks it by the summed joint distance to idle over 60 phases, cached per clip, with a unit test.
+  - Lab switch `coop_movement_start_phase on|off`; the movement status gains `startPhase`.
+  - Stops are unchanged.
+- **Takes.** `Run-V2122.sh` runs the v2091 walkway route in all four pairings, plus the twin `v2122e` with the switch off.
+
 ## The version notice (candidates notice-v2092, progress-v2097, progress-v2100)
 
 When the friend's mod is a different version (control hello or lobby tag), each game shows a one-button engine message box (`native_notice.h`). Lab command `coop_notice_test` raises one.
