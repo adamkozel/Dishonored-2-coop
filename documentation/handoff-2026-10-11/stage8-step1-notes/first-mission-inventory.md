@@ -10,7 +10,7 @@
 | K2 | The end-of-mission talk to Meagan did not register | `route-dunwall-lead-v1753e`, `v1755a`, `hoststory-lead-dunwall-v2024a`, `v2026b` | Passed from `hoststory-lead-dunwall-v2027a` on. Recheck |
 | K3 | The tower safe-room doors (`env_interiors_safe_door`, `_6`, `_9`) open on the host and stay closed on the partner | ch. 119 (still open after hoststory-v2027) | Fixed in progress-v2100 (`v2100a`, `v2103a`, `c`, `d`, `e`; the twin `v2103b` shows the doors again) |
 | K4 | The partner's game had to answer the native choice screen in the first mission | ch. 126 | Fixed in nativechoice-v2088 (the co-op Character box asks; the native screen is answered) |
-| K5 | Co-op saves switch stalls in `profile_saving` | #263 | Open. Again in `firstmission-dunwall-v2099e` (Emily host, before the mission) and `firstmission-dunwall-v2112a` (Corvo host). In v2112a the host status was fresh (service 16 ms ago), phase 2 had started only 266 ms earlier, and there was no failure. So the switch did not stall: it began at the very end of the 180 s wait (confirmed runtime), and what held it before is unknown. Harness v2110 traces the host's saves result, phase and game logic during the wait |
+| K5 | Co-op saves switch stalls in `profile_saving` | #263 | Open. Again in `firstmission-dunwall-v2099e` (Emily host, before the mission) and `firstmission-dunwall-v2112a` (Corvo host). In v2112a the host status was fresh (service 16 ms ago), phase 2 had started only 266 ms earlier, and there was no failure. So the switch did not stall: it began at the very end of the 180 s wait (confirmed runtime), and what held it before is unknown. Harness v2110 traces the host's saves result, phase and game logic during the wait. It did not recur in the eight `v2114` takes: co-op saves were already on at the trace's first poll (2.3 to 2.5 s) |
 | K6 | The partner's presentation is not live in the scripted opening | ch. 95 (`1829a`) | Known; recheck what the partner sees at the start |
 | K7 | Ramsey and Alexi alive in a partner's fresh world after a mid-mission join | ch. 106 | Fixed by the join snapshot (#240, ch. 123). Recheck |
 | K8 | The user's and partner's own list | asked 2026-11-02 | **Not coming** (user, 2026-11-02: the mission was generally broken, and writing it up would take a day). Replaced by the own sweep in section 4 |
@@ -107,6 +107,26 @@ Seven of eight reached the next mission with no difference anywhere they were me
 | M6 | **Breakable presence broke the partner's streets speakers.** The streets diff showed `speaker_01_a0_brk#gen` on the host and none on the partner. Those names end in a number made at spawn, different in each world (host `_5276`/`_5414`, partner `_5462`/`_5502` in v2108a). So the host's list never has the partner's names, and presence (progress-v2107 on) broke every one of them | v2111a streets digests against v2108a and f (confirmed runtime) | **Fixed in progress-v2110:** presence leaves names ending in `_<4+ digits>` alone, the rule the world diff uses (#gen). Unit tests added. The twin is v2111a itself |
 
 Every other diff of v2111a was equal (start to balcony; saferoom M2 as before). `Run-V2112.sh` (progress-v2108, which still has M6) was cut to its take a, and its folders b to h were left empty so the runner skips them. `Run-V2113.sh` now runs the forced bottle test on progress-v2110, and `Run-V2114.sh` runs both done-when rounds on it.
+
+**Done-when rounds on progress-v2110 (`Run-V2114.sh`, harness v2110):**
+
+| Take | Pairing (host / partner) | Result |
+|---|---|---|
+| `firstmission-dunwall-v2114a` | Corvo / Emily | Reached the Void (`continued_to_host_mission`). Every diff equal (start 538 to end 286 values, the streets 1152) except the saferoom one, unread after 7 tries. Co-op saves were already on at the first poll (K5 did not recur) |
+| `firstmission-dunwall-v2114b` | Emily / Corvo | Same as a. The saferoom retries were refused because the first try had already written its digest file (a harness fault) |
+| `firstmission-dunwall-v2114c` | Corvo / Corvo | Same as a |
+| `firstmission-dunwall-v2114d` | Emily / Emily | Same as a |
+| `firstmission-dunwall-v2114e` | Corvo / Emily | **Lost at step 11 (die):** a lab input packet expired before it was published (`Publish-D2Packet`). Harness-side |
+| `firstmission-dunwall-v2114f` | Emily / Corvo | **Lost at the Ramsey loot:** guards fought the host over the body, and the ring stayed about 3 m away (failure frame), so no press landed. Diffs to mayhew equal. Harness-side (route) |
+| `firstmission-dunwall-v2114g` | Corvo / Corvo | Lost like e, after step 19 |
+| `firstmission-dunwall-v2114h` | Emily / Emily | Same as a |
+
+No co-op difference anywhere a diff read, and in all five finished takes the partner followed into the Void (confirmed runtime). The round did not meet the done-when, for three reasons, all fixed:
+- **M2 timing (confirmed runtime):** the ring-locker use starts the host's load into the streets, and that load takes about 75 s. In a, the host's logic went 15 to 1 at ticks 121548078 and 121623250. The 60 s of retries end before it. Harness v2111 first settles both worlds in gameplay (up to 150 s, noted as `diffwait-<tag>`), and gives each retry its own digest tag.
+- **Expired input packets:** `Send-D2Input.ps1` set the expiry to the press length, so a host stall of that length threw. It now rebuilds an expired, unpublished press with a new sequence, up to 3 tries.
+- **The loot:** the loot step makes a second pass 8 s later.
+
+`Run-V2116.sh` runs both rounds again on harness v2111 and progress-v2111, which is progress-v2110 plus the lab-only break command.
 
 ## 3. Done when
 
