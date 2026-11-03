@@ -917,6 +917,8 @@ bool movementShadowWalkFixtureBusy();
 #include "held_object_presentation.h"
 #include "native_menu_ui.h"
 #include "coop_character.h" // 1214hx (#158)
+#include "native_notice.h" // 2092 (#243)
+#include "partner_progress.h" // 2096 (#265)
 struct NativeSwitchEvent;
 bool checkpointIntercept(unsigned kind,int slot,bool& continuation);
 void checkpointContinuationReturned(unsigned char result);
@@ -1197,6 +1199,12 @@ void exchangePoses(ULONGLONG tick) {
             else ++breakableSync.rejected;
             messages[i]->Release();continue;
         }
+        if(magic==0x56423244) { // 2107 (#260): D2BV, the host's breakable presence
+            const auto bytes=static_cast<std::size_t>(messages[i]->m_cbSize);
+            if(bytes>=sizeof(CoopBreakablePresenceHeader)&&bytes<=sizeof(CoopBreakablePresencePacket)){static CoopBreakablePresencePacket p;p=CoopBreakablePresencePacket{};std::memcpy(&p,messages[i]->m_pData,bytes);receiveBreakablePresence(p,bytes,tick);}
+            else ++breakableSync.presenceRejected;
+            messages[i]->Release();continue;
+        }
         if(magic==0x53553244) {
             if(messages[i]->m_cbSize==sizeof(CoopUsablePacket)){CoopUsablePacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveUsablePacket(p,tick);}
             else ++usableCatalogRejected;
@@ -1428,6 +1436,7 @@ bool spawnProbe(const char* character) {
 #include "mesmerize_visual_fixture.h"
 #include "native_mesmerize_host.h"
 #include "native_shade_host.h"
+#include "native_choice_answer.h" // 2084 (#243)
 #include "swarm_host.h" // 1214id (#160)
 #include "time_bend.h" // 1214ie (#160)
 #include "swarm_rat_visual_fixture.h"
@@ -1707,6 +1716,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_movement_bank 60000")||!std::strcmp(text,"coop_movement_bank on")||!std::strcmp(text,"coop_movement_bank off"))return true;
     if(!std::strcmp(text,"coop_movement_resume on")||!std::strcmp(text,"coop_movement_resume off"))return true;
     if(!std::strcmp(text,"coop_movement_feet on")||!std::strcmp(text,"coop_movement_feet off")||!std::strcmp(text,"coop_movement_feet authored"))return true;
+    if(!std::strcmp(text,"coop_movement_start_phase on")||!std::strcmp(text,"coop_movement_start_phase off"))return true; // 2114 (#266)
     if(!std::strcmp(text,"coop_decl_probe")||!std::strcmp(text,"coop_tables_probe"))return true;
     if(!std::strcmp(text,"coop_character_choice on")||!std::strcmp(text,"coop_character_choice off"))return true; // 1214hx (#158, lab)
     if(!std::strcmp(text,"coop_time_bend on")||!std::strcmp(text,"coop_time_bend off")||!std::strcmp(text,"coop_time_bend unbent100")||!std::strcmp(text,"coop_time_bend unbent70"))return true; // 1214if (#160, lab)
@@ -1715,6 +1725,7 @@ bool allowedCommand(const char* text) {
         for(;*c;++c)if(!((*c>='a'&&*c<='z')||(*c>='A'&&*c<='Z')||(*c>='0'&&*c<='9')||*c==' '||*c=='_'||*c=='-'||*c=='?'))return false;return true;}
     if(!std::strcmp(text,"coop_door_sync on")||!std::strcmp(text,"coop_door_sync session")||!std::strcmp(text,"coop_door_sync off")||!std::strcmp(text,"coop_door_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_breakable_sync on")||!std::strcmp(text,"coop_breakable_sync off"))return true;
+    if(!std::strncmp(text,"coop_breakable_break ",21)){const char* n=text+21;if(!*n||std::strlen(n)>120)return false;for(;*n;++n)if(*n==' ')return false;return true;} // 2111 (#260, lab)
     if(!std::strcmp(text,"coop_prop_rest on")||!std::strcmp(text,"coop_prop_rest off"))return true; // 1214ip (#178)
     if(!std::strcmp(text,"coop_usable_sync on")||!std::strcmp(text,"coop_usable_sync session")||!std::strcmp(text,"coop_usable_sync off")||!std::strcmp(text,"coop_usable_sync duplicate"))return true;
     if(!std::strcmp(text,"coop_door_fixture open")||!std::strcmp(text,"coop_door_fixture close"))return true;
@@ -1738,7 +1749,8 @@ bool allowedCommand(const char* text) {
         if(std::strstr(text,".."))return false;
         const char* rest=end+8;
         if(!std::strncmp(rest," low",4))rest+=4;else if(!std::strncmp(rest," high",5))rest+=5;
-        if(!std::strncmp(rest," emily",6))rest+=6;else if(!std::strncmp(rest," corvo",6))rest+=6;
+        int pick=0;if(!std::strncmp(rest," emily",6)){rest+=6;pick=2;}else if(!std::strncmp(rest," corvo",6)){rest+=6;pick=1;}
+        if(*rest==0&&pick)coopNativeChoicePick=pick; // 2084 (#243): the native first-mission choice is answered with it
         return *rest==0;
     }
     if(!std::strcmp(text,"coop_player_health_hold on")||!std::strcmp(text,"coop_player_health_hold off"))return true;
@@ -1746,17 +1758,24 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_difficulty_sync on")||!std::strcmp(text,"coop_difficulty_sync off"))return true; // 1214kb (#177)
     if(!std::strcmp(text,"coop_story_flags on")||!std::strcmp(text,"coop_story_flags off")||!std::strcmp(text,"coop_story_flags flip"))return true; // 1214kj-kk (#220)
     if(!std::strcmp(text,"coop_safe_codes on")||!std::strcmp(text,"coop_safe_codes off"))return true; // stage 8.4.3 (#239)
+    if(!std::strcmp(text,"coop_continue_follow on")||!std::strcmp(text,"coop_continue_follow off"))return true; // 2103 (#264)
+    if(!std::strcmp(text,"coop_usable_safe_doors on")||!std::strcmp(text,"coop_usable_safe_doors off"))return true; // 2100 (#264)
     if(!std::strcmp(text,"coop_safe_dials on")||!std::strcmp(text,"coop_safe_dials off"))return true; // stage 8.4.3 (#239), 2050
     if(!std::strcmp(text,"coop_join_snapshot on")||!std::strcmp(text,"coop_join_snapshot off"))return true; // stage 8.4.4 (#240), 2055
     if(!std::strcmp(text,"coop_shared_load on")||!std::strcmp(text,"coop_shared_load off"))return true; // stage 8.4.4 (#240), 2065
     if(!std::strcmp(text,"coop_npc_keep_awake on")||!std::strcmp(text,"coop_npc_keep_awake off"))return true; // stage 8.4.5 (#241), 2066
     if(!std::strcmp(text,"coop_blink_kick native")||!std::strcmp(text,"coop_blink_kick legacy"))return true; // stage 8.4.6 (#242), 2081
+    if(!std::strcmp(text,"coop_native_choice auto")||!std::strcmp(text,"coop_native_choice manual"))return true; // stage 8.5 (#243), 2084
+    if(!std::strcmp(text,"coop_notice_test"))return true; // stage 8.5 (#243), 2092
+    if(!std::strcmp(text,"coop_partner_progress on")||!std::strcmp(text,"coop_partner_progress off"))return true; // stage 8.5c (#265), 2096
     if(!std::strcmp(text,"coop_mission_decision on")||!std::strcmp(text,"coop_mission_decision off"))return true; // stage 8 (#253)
     if(!std::strncmp(text,"coop_difficulty_set ",20)){const char* v=text+20;return v[0]>='0'&&v[0]<='4'&&!v[1];}
     // 1214jt (#177, lab): the native difficulty override cvar, -1 (off) or a preset index 0-4.
     if(!std::strncmp(text,"ark_difficulty_level_override ",30)){const char* v=text+30;return !std::strcmp(v,"-1")||(v[0]>='0'&&v[0]<='4'&&!v[1]);}
     if(!std::strcmp(text,"coop_grant_item grenade")||!std::strcmp(text,"coop_grant_item health")||!std::strcmp(text,"coop_grant_item mana"))return true;
     if(!std::strncmp(text,"coop_grant_named ",17))return labGrantNameAllowed(text+17);
+    if(!std::strncmp(text,"coop_grant_charm ",17))return labCharmIdAllowed(text+17); // 2107 (#265)
+    if(!std::strcmp(text,"coop_lab_crafted_charm"))return true; // 2112 (#265, lab)
     if(!std::strncmp(text,"coop_partner_effect ",20))return labPartnerEffectAllowed(text+20);
     if(!std::strncmp(text,"coop_lab_hit ",13))return labHitAllowed(text+13);
     if(!std::strncmp(text,"coop_lab_npc_place ",19))return labNpcPlaceAllowed(text+19);
@@ -1956,6 +1975,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_grant_item health")){labGrantRequest=2;return;}
     if(!std::strcmp(request.command,"coop_grant_item mana")){labGrantRequest=3;return;}
     if(!std::strncmp(request.command,"coop_grant_named ",17)&&labGrantNameAllowed(request.command+17)){strcpy_s(labGrantName,request.command+17);labGrantNamedRequest=true;return;}
+    if(!std::strncmp(request.command,"coop_grant_charm ",17)){std::uint32_t id=0;if(labCharmIdAllowed(request.command+17,&id))labGrantCharmId=id;return;}
+    if(!std::strcmp(request.command,"coop_lab_crafted_charm")){labCraftedCharmRequest=true;labCraftedResult="pending";return;} // 2112 (#265, lab)
     if(!std::strncmp(request.command,"coop_partner_effect ",20)&&labPartnerEffectAllowed(request.command+20)){requestLabPartnerEffect(request.command+20);return;}
     if(!std::strncmp(request.command,"coop_lab_hit ",13)&&labHitAllowed(request.command+13,&labHitKind,&labHitSide)){labKnockdownRequest=true;return;}
     if(!std::strncmp(request.command,"coop_lab_npc_place ",19)&&labNpcPlaceAllowed(request.command+19,labPlaceSpawner,labPlaceAt)){labPlaceRequest=true;return;}
@@ -1965,6 +1986,11 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_story_flags on")||!std::strcmp(request.command,"coop_story_flags off")){storyFlagSync.enabled=!std::strcmp(request.command,"coop_story_flags on");return;}
     if(!std::strcmp(request.command,"coop_story_flags flip")){storyFlagSync.flipRequest=true;return;} // 1214kk (#220, test fixture)
     if(!std::strcmp(request.command,"coop_safe_codes on")||!std::strcmp(request.command,"coop_safe_codes off")){safeCodeSync.enabled=!std::strcmp(request.command,"coop_safe_codes on");safeCodeSync.lastValid=false;return;}
+    if(!std::strcmp(request.command,"coop_continue_follow on")||!std::strcmp(request.command,"coop_continue_follow off")){missionContinueFollow=!std::strcmp(request.command,"coop_continue_follow on");return;} // 2103 (#264)
+    if(!std::strcmp(request.command,"coop_usable_safe_doors on")||!std::strcmp(request.command,"coop_usable_safe_doors off")){usableSafeDoorsShared=!std::strcmp(request.command,"coop_usable_safe_doors on");return;} // 2100 (#264): from the next map load
+    if(!std::strcmp(request.command,"coop_notice_test")){coopNoticePending.store(1);return;}
+    if(!std::strcmp(request.command,"coop_partner_progress on")||!std::strcmp(request.command,"coop_partner_progress off")){partnerProgressEnabled=request.command[22]=='o'&&request.command[23]=='n';return;}
+    if(!std::strcmp(request.command,"coop_native_choice auto")||!std::strcmp(request.command,"coop_native_choice manual")){nativeChoiceAuto=!std::strcmp(request.command,"coop_native_choice auto");return;}
     if(!std::strcmp(request.command,"coop_blink_kick native")||!std::strcmp(request.command,"coop_blink_kick legacy")){npcBlinkKickForward=!std::strcmp(request.command,"coop_blink_kick native");return;}
     if(!std::strcmp(request.command,"coop_npc_keep_awake on")||!std::strcmp(request.command,"coop_npc_keep_awake off")){npcKeepAwake=!std::strcmp(request.command,"coop_npc_keep_awake on");return;}
     if(!std::strcmp(request.command,"coop_shared_load on")||!std::strcmp(request.command,"coop_shared_load off")){checkpointSharedLoad=!std::strcmp(request.command,"coop_shared_load on");return;}
@@ -2116,6 +2142,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_movement_bank off")){stopMovementBank();return;}
     if(!std::strcmp(request.command,"coop_movement_resume on")){beginMovementResume();return;}
     if(!std::strcmp(request.command,"coop_movement_resume off")){stopMovementResume();return;}
+    if(!std::strcmp(request.command,"coop_movement_start_phase on")||!std::strcmp(request.command,"coop_movement_start_phase off")){movementStartPhaseEnabled=!std::strcmp(request.command,"coop_movement_start_phase on");return;} // 2114 (#266)
     if(!std::strcmp(request.command,"coop_movement_feet on")||!std::strcmp(request.command,"coop_movement_feet off")||!std::strcmp(request.command,"coop_movement_feet authored")){
         if(!movementBankActive()&&!movementLoad.state.load()){
             movementNativeFeetRequested=std::strcmp(request.command,"coop_movement_feet off")!=0;
@@ -2159,6 +2186,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_usable_sync off")){usableSyncEnableRequest=0;return;}
     if(!std::strcmp(request.command,"coop_breakable_sync on")){breakableSyncEnableRequest=1;return;}
     if(!std::strcmp(request.command,"coop_breakable_sync off")){breakableSyncEnableRequest=0;return;}
+    if(!std::strncmp(request.command,"coop_breakable_break ",21)){breakableLabBreakName=request.command+21;breakableLabBreakResult="pending";return;} // 2111 (#260, lab)
     if(!std::strcmp(request.command,"coop_prop_rest on")){propRestEnableRequest=1;return;} // 1214ip (#178)
     if(!std::strcmp(request.command,"coop_prop_rest off")){propRestEnableRequest=0;return;}
     if(!std::strcmp(request.command,"coop_door_sync duplicate")){doorSyncDuplicateRequest=true;return;}
@@ -2323,7 +2351,7 @@ void writeDiagnosticSlice(ULONGLONG tick){
         case 49:timedNativeService("writeDominoBeams",[&]{writeDominoBeams();});break;
         case 50:timedNativeService("writePossessionFx",[&]{writePossessionFx();});break;
         case 51:timedNativeService("writeSwarmWorld",[&]{writeSwarmWorld();writeSwarmHost();writeTimeBend();});break;
-        case 52:timedNativeService("writeDoppelgangerWorld",[&]{writeDoppelgangerWorld();writeShadeHost();});break;
+        case 52:timedNativeService("writeDoppelgangerWorld",[&]{writeDoppelgangerWorld();writeShadeHost();writeNativeChoice();writePartnerProgressStatus();});break;
         case 53:timedNativeService("writeDoppelgangerVisual",[&]{writeDoppelgangerVisual();});break;
         case 54:timedNativeService("writeSwarmSpawnFx",[&]{writeSwarmSpawnFx();});break;
         case 55:timedNativeService("writeSwarmTrails",[&]{writeSwarmTrails();});break;
@@ -2463,7 +2491,7 @@ void executeBuffer(void* system) {
         if(tick-lastPump>=10) {
             installCheckpointCommandObservers();
             lastPump=tick;nativeMutationAllowed=true;pumpTransport(tick);nativeMutationAllowed=false;
-            {NativeServiceTimer scope("native_services_all");serviceLoadingProbe(tick);finishCinematicHold(tick);serviceAiDecisionHold(tick);serviceObserverIsolation(tick);commandPump(system);serviceProductSession(system,tick);serviceMissionFollow(system,tick);nativeMutationAllowed=true;serviceDifficultySync(tick);servicePowerFixture(tick);serviceDarkVisionFixture(tick);serviceWindblastFixture(tick);serviceBendTimeFixture(tick);serviceRangedFixture(tick);serviceGrenadeFixture(tick);serviceHeartFixture(tick);serviceTrapFixture(tick);servicePotionFixture(tick);serviceNoteRestoreFixture();serviceCoinFixture(tick);serviceCoinSync(tick);servicePickupCatchUp(tick);serviceNpcAuthorityHold(tick);timedNativeService("serviceNpcStream",[&]{serviceNpcStream(tick);});serviceNpcCombat(tick);serviceNpcKnockoutTest();serviceNpcHostWorldTest();serviceNpcAttack(tick);serviceObserverCamera(tick);servicePartnerHeldObject(tick);serviceCoopMenu(tick);serviceCoopSaves(tick);serviceCoopPause(tick);serviceCoopCharacter(tick);serviceMesmerizeFixture(tick);serviceDominoFixture(tick);serviceSwarmFixture(tick);servicePossessionFixture(tick);serviceDoppelgangerFixture(tick);serviceShadowWalkFixture(tick);serviceClimbFixture(tick);serviceDoorFixture(tick);serviceUsableFixture(tick);timedNativeService("serviceDoorSync",[&]{serviceDoorSync(tick);});timedNativeService("serviceUsableSync",[&]{serviceUsableSync(tick);});timedNativeService("serviceBreakableSync",[&]{serviceBreakableSync(tick);});timedNativeService("servicePropRest",[&]{servicePropRest(tick);});serviceTriggerMirror(tick);serviceUseMirror(tick);serviceMissionEndMirror(tick);serviceChaosSync(tick);serviceGameflowMirror(tick);serviceLevelTransitionMirror(tick);serviceKisculeMirror(tick);serviceStoryFlags(tick);serviceSafeCodes(tick);serviceJindosh(tick);serviceRangedProp(tick);serviceGrenadeProp(tick);serviceHeartProp(tick);serviceTrapProp(tick);serviceGrenadeFx(tick);sampleMesmerizeWorld(tick);presentMesmerizeWorld(tick);sampleDominoWorld(tick);presentDominoWorld(tick);samplePossessionFx(tick);presentPossessionFx(tick);servicePossessionTargetFx(tick);sampleSwarmWorld(tick);presentSwarmWorld(tick);sampleDoppelgangerWorld(tick);presentDoppelgangerWorld(tick);serviceDoppelgangerVisual(tick);serviceSwarmRatVisual(tick);serviceSwarmSpawnFx(tick);serviceSwarmTrails(tick);serviceDominoMarks(tick);serviceDominoBeams(tick);serviceMesmerizeVisual(tick);serviceMesmerizeHost(tick);serviceShadeHost(tick);serviceSwarmHost(tick);serviceTimeBendHost(tick);serviceAgilityFixture(tick);serviceCarryAttachmentProduct(tick);serviceCarryAttachmentFixture(tick);serviceShadowWalkFx(tick);if(!labPartnerEffectUntil)serviceShadowWalkMaterial(tick);serviceNativePowerFx(tick);servicePowerFxStream(tick);nativeMutationAllowed=false;checkpointEngineService(system);serviceMissionDecision(system,tick);serviceEnemyOutcome(tick);serviceEnemyMelee(tick);serviceGuardLink(tick);serviceGuardWeapon(tick);serviceGuardEquipment(tick);serviceAvatarWeapon(tick);serviceAvatarSword(tick);serviceShadowEquipment(tick);serviceShadowStream(tick);servicePossessionBodyVisibility(tick);serviceShadowAction(tick);serviceArmProbe(tick);servicePartnerEnemy(tick);serviceSwordLink(tick);finishTransformTrace(tick);}
+            {NativeServiceTimer scope("native_services_all");serviceLoadingProbe(tick);finishCinematicHold(tick);serviceAiDecisionHold(tick);serviceObserverIsolation(tick);commandPump(system);serviceProductSession(system,tick);serviceMissionFollow(system,tick);nativeMutationAllowed=true;serviceDifficultySync(tick);servicePowerFixture(tick);serviceDarkVisionFixture(tick);serviceWindblastFixture(tick);serviceBendTimeFixture(tick);serviceRangedFixture(tick);serviceGrenadeFixture(tick);serviceHeartFixture(tick);serviceTrapFixture(tick);servicePotionFixture(tick);serviceNoteRestoreFixture();serviceCoinFixture(tick);serviceCoinSync(tick);servicePickupCatchUp(tick);serviceNpcAuthorityHold(tick);timedNativeService("serviceNpcStream",[&]{serviceNpcStream(tick);});serviceNpcCombat(tick);serviceNpcKnockoutTest();serviceNpcHostWorldTest();serviceNpcAttack(tick);serviceObserverCamera(tick);servicePartnerHeldObject(tick);serviceCoopMenu(tick);serviceCoopSaves(tick);serviceCoopPause(tick);serviceCoopCharacter(tick);serviceMesmerizeFixture(tick);serviceDominoFixture(tick);serviceSwarmFixture(tick);servicePossessionFixture(tick);serviceDoppelgangerFixture(tick);serviceShadowWalkFixture(tick);serviceClimbFixture(tick);serviceDoorFixture(tick);serviceUsableFixture(tick);timedNativeService("serviceDoorSync",[&]{serviceDoorSync(tick);});timedNativeService("serviceUsableSync",[&]{serviceUsableSync(tick);});timedNativeService("serviceBreakableSync",[&]{serviceBreakableSync(tick);});timedNativeService("servicePropRest",[&]{servicePropRest(tick);});serviceTriggerMirror(tick);serviceUseMirror(tick);serviceMissionEndMirror(tick);serviceChaosSync(tick);serviceGameflowMirror(tick);serviceLevelTransitionMirror(tick);serviceKisculeMirror(tick);serviceStoryFlags(tick);serviceSafeCodes(tick);serviceJindosh(tick);serviceRangedProp(tick);serviceGrenadeProp(tick);serviceHeartProp(tick);serviceTrapProp(tick);serviceGrenadeFx(tick);sampleMesmerizeWorld(tick);presentMesmerizeWorld(tick);sampleDominoWorld(tick);presentDominoWorld(tick);samplePossessionFx(tick);presentPossessionFx(tick);servicePossessionTargetFx(tick);sampleSwarmWorld(tick);presentSwarmWorld(tick);sampleDoppelgangerWorld(tick);presentDoppelgangerWorld(tick);serviceDoppelgangerVisual(tick);serviceSwarmRatVisual(tick);serviceSwarmSpawnFx(tick);serviceSwarmTrails(tick);serviceDominoMarks(tick);serviceDominoBeams(tick);serviceMesmerizeVisual(tick);serviceMesmerizeHost(tick);serviceShadeHost(tick);serviceNativeCharacterChoice(tick);serviceCoopNotice();servicePartnerProgress(tick);serviceSwarmHost(tick);serviceTimeBendHost(tick);serviceAgilityFixture(tick);serviceCarryAttachmentProduct(tick);serviceCarryAttachmentFixture(tick);serviceShadowWalkFx(tick);if(!labPartnerEffectUntil)serviceShadowWalkMaterial(tick);serviceNativePowerFx(tick);servicePowerFxStream(tick);nativeMutationAllowed=false;checkpointEngineService(system);serviceMissionDecision(system,tick);serviceEnemyOutcome(tick);serviceEnemyMelee(tick);serviceGuardLink(tick);serviceGuardWeapon(tick);serviceGuardEquipment(tick);serviceAvatarWeapon(tick);serviceAvatarSword(tick);serviceShadowEquipment(tick);serviceShadowStream(tick);servicePossessionBodyVisibility(tick);serviceShadowAction(tick);serviceArmProbe(tick);servicePartnerEnemy(tick);serviceSwordLink(tick);finishTransformTrace(tick);}
         }
         // Render presentation at each native engine frame, independent of
         // transport/gameplay service cadence. QPC avoids coarse tick stepping.
@@ -2524,6 +2552,8 @@ bool installEngineBridge(unsigned char* image,const char* role) {
     {char hostStory[4]{};productHostStory=!(GetEnvironmentVariableA("D2COOP_HOST_STORY",hostStory,sizeof(hostStory))==1&&hostStory[0]=='0');}
     {char perPlayer[4]{};productItemsPerPlayer=!(GetEnvironmentVariableA("D2COOP_ITEMS_PER_PLAYER",perPlayer,sizeof(perPlayer))==1&&perPlayer[0]=='0');}
     {char safeCodes[4]{};if(GetEnvironmentVariableA("D2COOP_SAFE_CODES",safeCodes,sizeof(safeCodes))==1&&safeCodes[0]=='0')safeCodeSync.enabled=false;}
+    {char safeDoors[4]{};if(GetEnvironmentVariableA("D2COOP_SAFE_DOORS",safeDoors,sizeof(safeDoors))==1&&safeDoors[0]=='0')usableSafeDoorsShared=false;}
+    {char progress[4]{};if(GetEnvironmentVariableA("D2COOP_PARTNER_PROGRESS",progress,sizeof(progress))==1&&progress[0]=='0')partnerProgressEnabled=false;}
     {char decision[4]{};if(GetEnvironmentVariableA("D2COOP_MISSION_DECISION",decision,sizeof(decision))==1&&decision[0]=='0')missionDecision.enabled=false;} // stage 8 (#253)
     char partnerFlag[8]{};partnerAssetsEnabled=GetEnvironmentVariableA("D2COOP_PARTNER_ASSETS",partnerFlag,sizeof(partnerFlag))==1&&partnerFlag[0]=='1';
     HMODULE module=nullptr;

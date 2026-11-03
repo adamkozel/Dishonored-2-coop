@@ -1,4 +1,6 @@
 #pragma once
+// 2092 (#243): an on-screen notice is pending (1: the friend runs a different co-op version); native_notice.h shows it.
+std::atomic<int> coopNoticePending{0};
 // Stage 8.3 (#236): the control channel, from coop-anything's Steam P2P rules (chapter 114). One small reliable packet:
 // - kind 1, every second while connected: the versioned hello and keep-alive. It carries the control protocol, the
 //   game build, a hash of this DLL file and a loading flag. A peer with another protocol or DLL is refused with a
@@ -79,7 +81,7 @@ inline void receiveCoopControl(const void* data,std::uint32_t size,ULONGLONG tic
             static_cast<unsigned long long>(coopDllHash()),static_cast<unsigned long long>(p.dllHash));
         std::snprintf(coopControl.result,sizeof(coopControl.result),"%s",reason);
         consoleOutput("COOP: %s\n",reason);
-        endCoopConnection(tick,reason,"version_mismatch");return;
+        coopNoticePending.store(1);endCoopConnection(tick,reason,"version_mismatch");return;
     }
     if(!coopControl.helloOk){coopControl.helloOk=true;std::snprintf(coopControl.result,sizeof(coopControl.result),"live");}
 }

@@ -20,6 +20,9 @@ if($process.Path -ne $launch.executable) { throw 'The recorded lab process no lo
 $buttons=@{RightShoulder=0x0200;LeftShoulder=0x0100;LeftThumb=0x0040;RightThumb=0x0080;Neutral=0;A=0x1000;B=0x2000;X=0x4000;Y=0x8000;Start=0x10;Back=0x20;Up=1;Down=2;Left=4;Right=8}
 $buttonMask=0
 foreach($b in $Button){$buttonMask=$buttonMask -bor $buttons[$b]}
+# 2116: a host stall longer than the press (firstmission-dunwall-v2114e and g) expired the packet before it was
+# published, so the game never saw it; such a press is rebuilt with a new sequence and expiry, up to 3 tries.
+for($attempt=1;;$attempt++){
 $sequence=[uint32]([DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds() % 4294967296L)
 if($sequence -eq 0) {$sequence=1}
 $stream=[IO.MemoryStream]::new()
@@ -38,7 +41,11 @@ $writer.Write([uint64]0)
 $writer.Flush()
 try {
     Publish-D2Packet -Path (Join-Path $instanceRoot 'input.bin') -Bytes $stream.ToArray() -ExpiresUtc $expiresUtc
+    break
+} catch {
+    if($attempt -ge 3 -or $_.Exception.Message -notmatch 'expired before atomic publication'){throw}
 } finally {
     $writer.Dispose(); $stream.Dispose()
+}
 }
 [pscustomobject]@{Role=$Role;Sequence=$sequence;Button=$Button;DurationMs=$DurationMs;LeftX=$LeftX;LeftY=$LeftY;RightX=$RightX;RightY=$RightY}

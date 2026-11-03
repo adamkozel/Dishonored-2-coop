@@ -1,4 +1,10 @@
 #pragma once
+// 2084 (#243): the partner's character for the first mission's native choice screen (1 Corvo, 2 Emily, 0 none), set when
+// a campaign command carries a character; native_choice_answer.h answers the screen with it.
+int coopNativeChoicePick=0;
+// 2096 (#265): a join's campaign load is pending for this character (1 Corvo, 2 Emily); partner_progress.h then gives back
+// her runes, coins and ammunition as well as her powers.
+bool partnerProgressJoinPending=false;int partnerProgressJoinCharacter=0;
 // 1181 product session controller. In product mode (installed release, no lab
 // environment) or with the lab-only "coop_product_auto on", the DLL itself arms
 // the standard co-op feature set for every new shared world, using the same
@@ -280,10 +286,12 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
     if(productMode&&!coopSavesReadyForSession()){requestCoopSaves();m.result="waiting_coop_saves";return;} // 1214hs
     // 1214hx (#158): the partner chooses Corvo or Emily on every join (coop_character.h); lab default stays Emily.
     // The first mission has the game's own choice screen (its script switches the character), so it asks no question.
-    int character=2;const bool nativeChoice=!std::strcmp(m.hostMapinfo,"campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo");
-    if((productMode||coopCharacterChoiceEnabled)&&!nativeChoice){character=coopPartnerCharacterForJoin(tick,static_cast<std::uint64_t>(connection));if(!character){m.result="choosing_character";return;}}
+    // 2084 (#243): the first mission asks our own box too; its native choice screen is then answered with the pick
+    // (native_choice_answer.h), instead of the partner meeting the game's own screen.
+    int character=2;
+    if(productMode||coopCharacterChoiceEnabled){character=coopPartnerCharacterForJoin(tick,static_cast<std::uint64_t>(connection));if(!character){m.result="choosing_character";return;}}
     char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s %s",m.hostMapinfo,m.hostHigh?"high":"low",character==1?"corvo":"emily");
-    dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.followedMap=m.hostMap;m.result="loading_host_mission";
+    coopNativeChoicePick=character;partnerProgressJoinPending=true;partnerProgressJoinCharacter=character;dispatchCoopCommand(system,command);++m.loads;m.loadAt=tick;m.loadedForMap=m.hostMap;m.followedMap=m.hostMap;m.result="loading_host_mission";
 }
 void writeMissionFollow(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};

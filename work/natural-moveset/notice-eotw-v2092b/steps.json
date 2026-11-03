@@ -1,0 +1,7 @@
+[
+ {"do": "wait", "ms": 20000, "settle": 3000},
+ {"do": "command", "role": "host", "text": "coop_notice_test"},
+ {"do": "wait", "ms": 4000},
+ {"do": "command", "role": "client", "text": "coop_notice_test"},
+ {"do": "wait", "ms": 4000}
+]

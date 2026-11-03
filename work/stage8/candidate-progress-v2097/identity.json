@@ -1,0 +1,9 @@
+{
+ "candidate": "progress-v2097",
+ "card": 265,
+ "dll": "05A35C4DC7C2D8B41BF6F8189AD0D55DDDF611F6AFFC6907AF831D7592B18288",
+ "previousCandidate": "progress-v2096",
+ "sourceCommit": "a76274b21bcdbed0dc88401ac8030e59b5e410c9",
+ "sourceDiff": "source-change.diff",
+ "change": "the partner keeps her progression per character (partner_progress.h): her carried inventory entries (powers, upgrades, enhancements, equipment upgrades, runes, ammunition, elixirs, gear, whalebone) and money are captured every 3 s in gameplay to coop-progress-<character>.txt beside the co-op saves and, after each load, raised back through the native inventory state apply 0x1406182f0 (never lowered); runes, coins and consumables only after a join campaign load; lab switch coop_partner_progress on|off; and the co-op notice opens only in the pause menu or the main menu, logging the box result (notice-eotw-v2092a: a box opened in gameplay closed at once, unseen)"
+}

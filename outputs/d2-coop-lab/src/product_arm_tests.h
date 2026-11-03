@@ -9,5 +9,6 @@ void productArmTests(){
     require(a.repairBackoff==0&&a.epoch==6&&a.peerEpoch==7&&a.map==9&&a.nextAt==4000&&!std::strcmp(a.result,"world_settling"),
             "1214ga (#145): a new world restarts the repair backoff and settles for 3 s");
     productNewWorld(a,8,7,10,5000);require(a.worlds==2&&a.map==10,"1214ga (#145): every world counts");
+    a.maintenance=17;productNewWorld(a,9,8,11,9000);require(a.maintenance==0,"2123: a new world starts the maintenance round over");
     ProductArm f{};productNewWorld(f,1,1,3,0);require(f.worlds==1&&f.step==0,"1214ga (#145): after F8 or coop_product_auto the first world arms from step 0");
 }

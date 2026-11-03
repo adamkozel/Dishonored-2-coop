@@ -1,0 +1,9 @@
+{
+ "candidate": "nativechoice-v2088",
+ "card": 243,
+ "dll": "46D6F20CA8FC84D34F5039E5C0F64E04DECA03DE28088C027068ACCD452C8D93",
+ "previousCandidate": "nativechoice-v2085",
+ "sourceCommit": "45f0dc75823d7377654fb15b0ceecef34feda435",
+ "sourceDiff": "source-change.diff",
+ "change": "the partner's native first-mission choice follows the native sequence: wait for the choice scene's Inputs On (player state 37 +0x58), replay the right press for Corvo (input off, selection 1, scene variable 1, signal 8b0), wait for Inputs On again, then confirm (+0x114 as a box yes); a dropped focus is reset and retried after 3 s; the SwitchCharacter backstop stays (nativechoice-dunwall-v2087a: holding the selection alone left the scene Emily-focused)"
+}

@@ -219,6 +219,19 @@ struct MovementBank {
         float u=std::atan2(y,x)/.7853981634f;if(u<0)u+=8;u=(std::min)(u,7.9999995f);
         const auto sector=unsigned(u);a=sector+1;b=(sector+1)%8+1;t=u-sector;return true;
     }
+    // 2114 (#266): the phase of a clip whose pose is nearest the idle pose (clip 0 at phase 0), by the summed joint
+    // distance (quaternion 1-|dot| plus squared translation) over every joint below the root, in 60 steps; cached.
+    mutable std::vector<float> startPhases;
+    float startPhase(unsigned clip)const{
+        if(clip>=clips.size()||clips[0].values.size()<joints||clips[clip].values.size()<size_t(frames)*joints)return 0;
+        if(startPhases.size()!=clips.size())startPhases.assign(clips.size(),-1.f);
+        if(startPhases[clip]>=0)return startPhases[clip];
+        float best=0,bestCost=1e30f;
+        for(unsigned s=0;s<60;++s){const float ph=s/60.f;float cost=0;
+            for(unsigned j=2;j<joints;++j){const auto w=sample(clip,j,ph),i=sample(0,j,0.f);float dot=0;for(unsigned k=0;k<4;++k)dot+=w[k]*i[k];
+                cost+=1-std::fabs(dot);for(unsigned k=4;k<7;++k)cost+=(w[k]-i[k])*(w[k]-i[k]);}
+            if(cost<bestCost){bestCost=cost;best=ph;}}
+        return startPhases[clip]=best;}
     Joint sample(unsigned clip,unsigned joint,float phase)const{
         phase-=std::floor(phase);const float f=phase*(frames-1);const auto a=unsigned(f),b=a+1;
         return blend(clips[clip].values[a*joints+joint],clips[clip].values[b*joints+joint],f-a);
@@ -263,7 +276,10 @@ struct MovementBank {
 };
 // Receives the SAME delayed root used to place the remote avatar. Phase is
 // accumulated distance; idle time never advances the walking cycle.
+// 2114 (#266): lab switch coop_movement_start_phase on|off (on by default).
+inline bool movementStartPhaseEnabled=true;
 struct MovementClock {
+    unsigned startPhaseResets=0;
     // Last rejected physical step, retained for independent runtime diagnosis.
     unsigned rejectCode=0,rejectCount=0,rejectMotion=0,rejectAirState=0;
     float rejectDt=0,rejectDz=0,rejectRate=0;
@@ -306,7 +322,7 @@ struct MovementClock {
         // re-ramped the body weight. A 10 m/s grounded discontinuity is still refused.
         if(physicalRate>(powered?500.f:10.f)||std::fabs(dz)>(powered?500.f*float(dt):((traversing||settling)&&bank.hasLowMantle())?20.f*float(dt):(airborne||landingStep||interpolatedAir)?60.f*float(dt):(std::max)(.15f,6.f*float(dt)))){
             rejectStep(physicalRate>(powered?500.f:10.f)?2u:3u,dt,dz,physicalRate,motion);clearTerrain();clearTurn();positioned=false;weight=0;return false;}
-        const float alpha=1-std::exp(-float(dt)/.10f);speed+=(rate-speed)*alpha;
+        const float speedBefore=speed;const float alpha=1-std::exp(-float(dt)/.10f);speed+=(rate-speed)*alpha;
         // Full-body reversible stance blend; never adjust just the pelvis/legs.
         // Cadence below uses this same blend, so visual steps and travelled
         // distance cannot run on separate clocks during a stance transition.
@@ -419,6 +435,10 @@ struct MovementClock {
                 stride=empty+(stride-empty)*armedAmount;
             }
             if(bank.hasTerrain())stride+=(bank.terrainStride(terrainDown,terrainRun,armedAmount)-stride)*terrainWeight;
+            // 2114 (#266): a start from rest (the gait still fully out: speed under the playback's 0.025 m/s blend floor)
+            // begins at the clip's phase nearest the idle pose. Seen from the host, a walk start popped a planted toe 14.5 cm
+            // while the root moved 7 cm (animquality-eotw-v2091a): the cycle resumed wherever the last walk had ended.
+            if(movementStartPhaseEnabled&&eligible&&speedBefore<.025f){phase=bank.startPhase(a);++startPhaseResets;}
             if(eligible&&rate<(bank.gaits>1?9.f:1.8f)){phase+=distance/stride;phase-=std::floor(phase);}
         }
         // Version 1 remains walking-only; version 2 contains separate running

@@ -17,6 +17,7 @@ struct MissionDecision {
     std::uint64_t partnerHeld=0,continued=0,replayed=0,missingSaves=0,localReleases=0;
     std::uint64_t decidedEpoch=0,decidedAt=0,sentAt=0,receivedAt=0,appliedEndEpoch=0,partnerAppliedEpoch=0;
     MissionDecisionPacket last{},incoming{};const char* result="idle";
+    bool awaitingHostMap=false;std::uint64_t awaitSince=0,followContinues=0,followFallbacks=0; // 2103 (#264, M1)
 };
 MissionDecision missionDecision{};
 bool coopMissionDecisionFlag(){return localRole==0&&missionDecision.enabled;}
@@ -83,6 +84,8 @@ int missionDecisionIntercept(unsigned kind,int slot) {
     const int rule=missionDecisionRule(localRole,kind,atResults,shared,checkpointConnected(),permitted);
     if(rule==0&&kind==1)++checkpointMissionContinues;
     if(rule==0&&localRole==0&&shared)missionDecisionHost(kind,slot,GetTickCount64());
+    // 2110: the wait notice of 2108 is not shown: its box was still open when her continue-follow load came, and her game
+    // faulted (firstmission-dunwall-v2111a, Dishonored2.exe+0x1f7dd28). Notice kind 2 stays in native_notice.h, unused.
     if(rule==1){if(!d.held)++d.partnerHeld;d.held=true;d.heldKind=kind;d.heldSlot=slot;d.result="waiting_for_host";}
     return rule;
 }
@@ -98,6 +101,27 @@ void dispatchMissionDecision(void* system,unsigned kind,int slot) {
     d.partnerAppliedEpoch=outgoing.worldEpoch;d.appliedKind=kind;d.held=false;
     reinterpret_cast<void(*)(void*,const char*)>(gameImage+0xfec70)(system,command);
 }
+// 2103 (#264, M1): a partner's Continue goes to the host's next mission. Her own RestartFromMemoryCheckpoint reloaded her
+// last checkpoint of the ended mission (firstmission-dunwall-v2095a/b, v2099f: back on the streets, gameflow back at
+// the boat captain), because only the host's world ran the native mission end. The host then held at its new map's
+// load end for her (both-ready hold, 90 s) and published its mission only after, so mission follow brought her
+// across 2 minutes late (firstmission-dunwall-v2100a). Now, with mission follow on, she waits on her result screen
+// for the map the host's hold announces (D2MR, transitionHold.peerMap) and loads that mission at once, as a join
+// does ("campaign <mapinfo>", her progression restored after it, partner_progress.h). No announcement in 60 s:
+// her own Continue as before. Lab switch coop_continue_follow on|off (the twin).
+bool missionContinueFollow=true;
+bool missionFollowOn(){return productMode||followHostEnabled;}
+bool continueToHostMission(void* system){
+    auto& d=missionDecision;const char* peer=transitionHold.peerMap;
+    if(!*peer||!std::strcmp(peer,mapName))return false;
+    char mapinfo[160]{};if(!mapinfoFromMapName(peer,mapinfo,sizeof(mapinfo)))return false;
+    const int character=localCharacter(); // she goes on as the character she plays
+    char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s %s",mapinfo,std::strstr(peer,"highchaos")?"high":"low",character==1?"corvo":"emily");
+    coopNativeChoicePick=character;partnerProgressJoinPending=true;partnerProgressJoinCharacter=character;
+    d.partnerAppliedEpoch=outgoing.worldEpoch;d.appliedKind=1;d.held=false;d.awaitingHostMap=false;
+    dispatchCoopCommand(system,command);++d.followContinues;++d.continued;d.result="continued_to_host_mission";
+    return true;
+}
 void serviceMissionDecision(void* system,std::uint64_t tick) {
     if(GetCurrentThreadId()!=engineThread.load())return;
     auto& d=missionDecision;
@@ -112,6 +136,12 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
         else d.held=false;
         return;
     }
+    if(d.awaitingHostMap){
+        if(!atResults||!shared){d.awaitingHostMap=false;d.result="await_left_results";return;}
+        if(continueToHostMission(system))return;
+        if(tickAge(tick,d.awaitSince)>60000){d.awaitingHostMap=false;++d.followFallbacks;expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued_own_fallback";}
+        return;
+    }
     if(!d.pending)return;
     if(tickAge(tick,d.receivedAt)>120000){d.pending=false;d.result="expired";return;}
     if(!missionDecisionOn()){d.pending=false;d.result="off";return;}
@@ -123,6 +153,8 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
         // No mission-start save of that map: continue alone, without the hold, and follow the host's mission from there.
         ++d.missingSaves;transitionHold.expect=false;dispatchMissionDecision(system,1,-1);d.result="replay_save_missing";return;
     }
+    if(missionContinueFollow&&missionFollowOn()){d.awaitingHostMap=true;d.awaitSince=tick;expectMissionTransition(tick);d.result="awaiting_host_mission";
+        continueToHostMission(system);return;}
     expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued";
 }
 void writeMissionDecision() {
@@ -131,8 +163,9 @@ void writeMissionDecision() {
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& d=missionDecision;const auto& p=localRole?d.incoming:d.last;
     fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"decision\":%u,\"slot\":%d,\"startMap\":\"%s\",\"loadedSlot\":%d,\"pending\":%s,\"held\":%s,\"heldKind\":%u,"
         "\"sent\":%llu,\"resent\":%llu,\"received\":%llu,\"refused\":%llu,\"duplicates\":%llu,\"hostContinues\":%llu,\"hostReplays\":%llu,\"unreadable\":%llu,"
-        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu}\n",
+        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu}\n",
         missionDecisionOn()?"true":"false",localRole,d.result,p.decision,p.slot,p.startMap,d.loadedSlot,d.pending?"true":"false",d.held?"true":"false",d.heldKind,
-        d.sent,d.resent,d.received,d.refused,d.duplicates,d.hostContinues,d.hostReplays,d.unreadable,d.partnerHeld,d.continued,d.replayed,d.missingSaves,d.localReleases);
+        d.sent,d.resent,d.received,d.refused,d.duplicates,d.hostContinues,d.hostReplays,d.unreadable,d.partnerHeld,d.continued,d.replayed,d.missingSaves,d.localReleases,
+        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

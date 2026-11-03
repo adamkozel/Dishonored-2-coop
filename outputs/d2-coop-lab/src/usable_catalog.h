@@ -6,10 +6,16 @@
 // share instant two-state entries {enter 255, exit i}. Custom prompts must be
 // uniform (Open/Close). Vaults (combination safes) and flagged quest devices
 // (flags bit 0, e.g. audiographs) keep their own semantics.
+// 2100 (#264, K3): the host decides safe doors too. An enabled two-state Open/Close usable named "safe" (the tower
+// safe-room doors, Dunwall's plain safe doors) joins the family, so the host's state, a script's change included,
+// reaches the partner (firstmission-dunwall-v2095a-c: env_interiors_safe_door, _6 and _9 open only on the host).
+// Vault doors stay out: they are disabled until their dials open them (chapter 121). Off (lab coop_usable_safe_doors
+// off, d2coop.cfg safe_doors=0) restores chapter 106's rule, every safe per world.
+inline bool usableSafeDoorsShared=true;
 inline bool nativeUsableToggleFamily(const NativeUsable& n){
     if(n.name.empty()||n.definitionName!=n.name||n.name.size()>=192||
        n.declarationName.rfind("map_cpntusablewithstatelist_decl_",0)!=0||
-       n.stateCount!=2||n.initial!=0||!n.enabled||(n.flags&1)||n.name.find("safe")!=std::string::npos)return false;
+       n.stateCount!=2||n.initial!=0||!n.enabled||(n.flags&1)||(!usableSafeDoorsShared&&n.name.find("safe")!=std::string::npos))return false;
     for(unsigned char c:n.name)if(!((c>='a'&&c<='z')||(c>='0'&&c<='9')||c=='_'))return false;
     // 1123b: reversed toggles (entry i exits to 1-i, e.g. sinks/taps) share the
     // same indexed semantics; the mapping must be uniform and is in the rules hash.

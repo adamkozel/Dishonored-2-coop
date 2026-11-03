@@ -15,6 +15,13 @@ int main(int argc,char** argv){
     {MovementBank b;b.version=73;check(!b.hasKnockdown()&&MovementBank::clipCount(73)==380,"bank73 cannot address the knockdown clip");
      b.version=74;check(b.hasKnockdown()&&!b.hasShop()&&MovementBank::clipCount(74)==381,"bank74 adds the knockdown clip 380");
      b.version=75;check(b.hasShop()&&MovementBank::clipCount(75)==382&&MovementBank::clipCount(76)==0,"bank75 adds the shop gesture clip 381");}
+    // 2114 (#266): a start from rest begins at the clip phase nearest the idle pose.
+    {MovementBank b;b.joints=3;b.clips.resize(2);const MovementBank::Joint rest{0,0,0,1,0,0,0};
+     for(auto& c:b.clips)c.values.assign(size_t(MovementBank::frames)*3,rest);
+     for(unsigned f=0;f<MovementBank::frames;++f){auto& j=b.clips[1].values[f*3+2];j[4]=std::fabs(float(f)-60.f)/60.f;}
+     check(std::fabs(b.startPhase(1)-.5f)<.0001f,"the start phase is where the walk pose meets idle");
+     b.clips[1].values[60*3+2][4]=1;check(std::fabs(b.startPhase(1)-.5f)<.0001f,"the start phase is cached per clip");
+     check(b.startPhase(7)==0,"a clip the bank lacks starts at 0");}
     check(argc==1||argc==3,"no args for protocol fixtures, or two actual native banks");
     for(unsigned format=(argc==1?1:59);format<=59;++format)for(unsigned role=0;role<2;++role){std::vector<unsigned char> bytes;
         const unsigned joints=role?219:215;const auto layout=role?0x84db84f5d1336b80ull:0x00db32d37719931full;MovementBank bank;

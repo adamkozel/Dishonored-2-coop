@@ -1,0 +1,92 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "partner",
+  "pos": [
+   62.226,
+   4.468,
+   34.6
+  ]
+ },
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 1000
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "npc": "addermire_roof_03",
+  "ms": 15000
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 14000,
+  "inputs": [
+   {
+    "LeftY": 16000,
+    "ms": 2000
+   },
+   {
+    "LeftY": -16000,
+    "ms": 2000
+   },
+   {
+    "LeftY": 32000,
+    "ms": 2000
+   },
+   {
+    "LeftY": -32000,
+    "ms": 2000
+   },
+   {
+    "LeftX": -20000,
+    "ms": 2000
+   },
+   {
+    "LeftX": 20000,
+    "ms": 2000
+   }
+  ]
+ },
+ {
+  "do": "animsample",
+  "role": "client",
+  "ms": 15000,
+  "inputs": [
+   {
+    "LeftY": 16000,
+    "ms": 2000
+   },
+   {
+    "LeftY": -16000,
+    "ms": 2000
+   },
+   {
+    "LeftY": 32000,
+    "ms": 2000
+   },
+   {
+    "LeftY": -32000,
+    "ms": 2000
+   },
+   {
+    "LeftX": -20000,
+    "ms": 2000
+   },
+   {
+    "LeftX": 20000,
+    "ms": 2000
+   }
+  ]
+ },
+ {
+  "do": "diff",
+  "tag": "end"
+ }
+]

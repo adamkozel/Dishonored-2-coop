@@ -1,0 +1,46 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_breakable_sync off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_breakable_break env_bottle_04_19"
+ },
+ {
+  "do": "wait",
+  "ms": 5000,
+  "settle": 1000
+ },
+ {
+  "do": "status",
+  "role": "host",
+  "suffix": ".breakable-sync.json"
+ },
+ {
+  "do": "wait",
+  "ms": 45000,
+  "settle": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".breakable-sync.json"
+ },
+ {
+  "do": "diff",
+  "tag": "later",
+  "require": false
+ }
+]

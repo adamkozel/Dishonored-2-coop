@@ -82,6 +82,7 @@ std::string objectType(HANDLE process,std::uintptr_t base,std::uintptr_t pointer
 #include "usable_catalog.h"
 #include "native_sword_equipment.h"
 #include "native_player_sword.h"
+#include "native_bonecharm.h" // 2107 (#265)
 #include "native_player_power_item.h"
 #include "native_player_darkvision_item.h"
 #include "native_player_windblast_item.h"
@@ -140,7 +141,7 @@ bool jointNames(HANDLE process,std::uintptr_t base,const std::vector<std::uint16
     out=std::move(names);return true;
 }
 int main(int argc, char** argv) {
-    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--npc-ai-registries")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-timepiece-scene")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground")&&std::strcmp(argv[2],"--takedown-gates"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
+    if (argc < 2 || argc > 6 || (argc==6&&std::strcmp(argv[2],"--grapple-attachment")&&std::strcmp(argv[2],"--contact-pair-final")) || (argc==5&&std::strcmp(argv[2],"--watch-potion-states")&&std::strcmp(argv[2],"--anim-sample")&&std::strcmp(argv[2],"--doppelganger-skeleton-final")&&std::strcmp(argv[2],"--skeleton-final")&&std::strcmp(argv[2],"--contact-pair")) || (argc==4&&std::strcmp(argv[2],"--usable")&&std::strcmp(argv[2],"--npc-ai-registries")&&std::strcmp(argv[2],"--watch-player-states")&&std::strcmp(argv[2],"--watch-block-state")&&std::strcmp(argv[2],"--watch-combat-scene")&&std::strcmp(argv[2],"--material-params")&&std::strcmp(argv[2],"--watch-shadowwalk-state")&&std::strcmp(argv[2],"--watch-doppelganger-effects")&&std::strcmp(argv[2],"--watch-possession-effects")&&std::strcmp(argv[2],"--watch-possession-state")&&std::strcmp(argv[2],"--watch-possession-scenes")&&std::strcmp(argv[2],"--watch-swarm-effects")&&std::strcmp(argv[2],"--watch-swarm-world")&&std::strcmp(argv[2],"--watch-doppelganger-world")&&std::strcmp(argv[2],"--watch-doppelganger-scenes")&&std::strcmp(argv[2],"--watch-swarm-scenes")&&std::strcmp(argv[2],"--watch-domino-links")&&std::strcmp(argv[2],"--watch-domino-targets")&&std::strcmp(argv[2],"--watch-domino-scenes")&&std::strcmp(argv[2],"--watch-mesmerize-targets")&&std::strcmp(argv[2],"--watch-mesmerize-eyes")&&std::strcmp(argv[2],"--watch-mesmerize-world")&&std::strcmp(argv[2],"--watch-power-scenes")&&std::strcmp(argv[2],"--watch-timepiece-scene")&&std::strcmp(argv[2],"--watch-midnight")&&std::strcmp(argv[2],"--player-potion")&&std::strcmp(argv[2],"--watch-grenade-scenes")&&std::strcmp(argv[2],"--retargeting")&&std::strcmp(argv[2],"--loading-world")&&std::strcmp(argv[2],"--components")&&std::strcmp(argv[2],"--object")&&std::strcmp(argv[2],"--bones")&&std::strcmp(argv[2],"--skeleton")&&std::strcmp(argv[2],"--doppelganger-skeleton")&&std::strcmp(argv[2],"--rat-skeleton")&&std::strcmp(argv[2],"--arm-skeleton")&&std::strcmp(argv[2],"--prop-skeleton")&&std::strcmp(argv[2],"--weapon-skeleton")&&std::strcmp(argv[2],"--health")&&std::strcmp(argv[2],"--avatar-sword")&&std::strcmp(argv[2],"--avatar-sword-attachment")&&std::strcmp(argv[2],"--sword-equipment")&&std::strcmp(argv[2],"--sword-attachment")&&std::strcmp(argv[2],"--faction")&&std::strcmp(argv[2],"--ai-targets")&&std::strcmp(argv[2],"--animation")&&std::strcmp(argv[2],"--ai-decision")&&std::strcmp(argv[2],"--ai-reflex")&&std::strcmp(argv[2],"--ai-attack")&&std::strcmp(argv[2],"--ai-idle")&&std::strcmp(argv[2],"--npc-pose")&&std::strcmp(argv[2],"--on-ground")&&std::strcmp(argv[2],"--takedown-gates"))) { std::cerr << "Usage: d2_runtime_probe PID [--detail|--commands|--player|--player-stance|--player-states|--gameover|--character|--input|--entities|--world|--world-npcs|--logic|--cinematic|--midnight|--kiscule|--loading-world ADDRESS|--components HANDLE|--object ADDRESS|--bones HANDLE|--skeleton HANDLE|--arm-skeleton HANDLE|--prop-skeleton HANDLE|--weapon-skeleton HANDLE|--health HANDLE|--faction HANDLE|--sword-equipment HANDLE|--sword-attachment HANDLE|--avatar-sword HANDLE|--avatar-sword-attachment HANDLE|--ai-targets HANDLE|--animation HANDLE|--ai-decision HANDLE|--ai-reflex HANDLE|--ai-attack HANDLE|--ai-idle HANDLE|--npc-pose HANDLE]\n"; return 2; }
     const bool detail = argc == 3 && std::strcmp(argv[2], "--detail") == 0;
     const DWORD pid = std::stoul(argv[1]);
     ProcessHandle snapshot{CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, pid)};
@@ -509,9 +510,15 @@ int main(int argc, char** argv) {
     if(argc==3&&!std::strcmp(argv[2],"--world-digest")){
         std::uintptr_t game=0,list=0,vt=0;unsigned count=0;
         const auto reader=[&](auto a,auto d,auto n){return read(process.value,a,d,n);};
-        if(!reader(base+0x39a5290,&game,8)||!game||!reader(game,&vt,8)||vt!=base+0x1c940a8||!reader(game+0x601c0,&list,8)||!list||
-           !reader(game+0x601c8,&count,4)||!(count&0xffffff)||(count&0xffffff)>16384)return 45;
-        std::vector<unsigned> handles(count&0xffffff);if(!reader(list,handles.data(),handles.size()*4))return 45;
+        // 2106 (M2): the reason for exit 45 goes to stderr. The host's saferoom digest failed in every first-mission
+        // take (v2095 to v2106) and again 10 s later, while the host was in gameplay on the streets map.
+        const auto fail=[&](const char* why){std::fprintf(stderr,"world-digest: %s game=%llx vt=%llx list=%llx count=%x\n",why,
+            static_cast<unsigned long long>(game),static_cast<unsigned long long>(vt?vt-base:0),static_cast<unsigned long long>(list),count);return 45;};
+        if(!reader(base+0x39a5290,&game,8)||!game)return fail("no_game");
+        if(!reader(game,&vt,8)||vt!=base+0x1c940a8)return fail("game_vtable");
+        if(!reader(game+0x601c0,&list,8)||!list||!reader(game+0x601c8,&count,4))return fail("entity_list");
+        if(!(count&0xffffff)||(count&0xffffff)>16384)return fail("entity_count");
+        std::vector<unsigned> handles(count&0xffffff);if(!reader(list,handles.data(),handles.size()*4))return fail("entity_read");
         std::string map;std::uint32_t worldState=0;
         {std::uintptr_t session=0,mapName=0;read(process.value,base+0x25af110+0x19a8,&session,8);
          if(session){read(process.value,session+0x337128+0x10,&mapName,8);read(process.value,session+0x341058,&worldState,4);if(mapName)map=readString(process.value,mapName);}}
@@ -1781,6 +1788,19 @@ int main(int argc, char** argv) {
         std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"character\":"<<player.character<<",\"food\":";std::cout.flush();
         writePickupFoodValue(stdout,food.value);std::cout<<"}\n";return 0;
     }
+    // 2107 (#265): the player's bonecharm component (native_bonecharm.h): every charm with its key and flags, the
+    // equipped slots and the crafted count. Read-only; names are game-derived, keep output local.
+    if(argc==3&&!std::strcmp(argv[2],"--bonecharms")){
+        const auto reader=[&](auto p,auto d,auto size){return read(process.value,p,d,size);};NativeBoneCharms c{};
+        if(!readNativeBoneCharms(reader,base,c)){std::fprintf(stderr,"bonecharms: %s component=%llx charms=%u slots=%u\n",c.why,static_cast<unsigned long long>(c.component),c.charmCount,c.slotCount);return 59;}
+        const auto text=[](const std::string& s){std::string o;for(const char ch:s){if(ch=='"'||ch=='\\')o+='\\';if(static_cast<unsigned char>(ch)>=32)o+=ch;}return o;};
+        unsigned owned=0;for(const auto& e:c.entries)owned+=e.owned;
+        std::cout<<"{\"readOnly\":true,\"tick\":"<<GetTickCount64()<<",\"charms\":"<<c.charmCount<<",\"owned\":"<<owned<<",\"crafted\":"<<c.craftedCount<<",\"slots\":"<<c.slotCount<<",\"equipped\":[";
+        for(std::size_t i=0;i<c.equipped.size();++i){const auto& k=c.equipped[i];std::cout<<(i?",":"")<<"{\"kind\":"<<k.kind<<",\"extra\":"<<k.extra<<",\"name\":\""<<text(k.name)<<"\"}";}
+        std::cout<<"],\"entries\":[";
+        for(std::size_t i=0;i<c.entries.size();++i){const auto& e=c.entries[i];std::cout<<(i?",":"")<<"{\"kind\":"<<e.key.kind<<",\"extra\":"<<e.key.extra<<",\"flags\":"<<unsigned(e.flags)<<",\"name\":\""<<text(e.key.name)<<"\"}";}
+        std::cout<<"]}\n";return 0;
+    }
     if(argc==3&&!std::strcmp(argv[2],"--player-inventory")){
         const auto reader=[&](auto p,auto b,auto size){return read(process.value,p,b,size);};NativePlayerSword first{},last{};
         if(!readNativePlayerSword(reader,base,first))return 59;
@@ -1853,6 +1873,27 @@ int main(int argc, char** argv) {
             <<",\"baseMaximum\":"<<s.baseMaximum<<",\"suppressedMaximum\":"<<s.suppressedMaximum<<",\"explicitHidden\":"<<((visibility&1)?"true":"false")<<",\"ownerSuppressed\":"<<((s.ownerFlags&0x20)?"true":"false")
             <<",\"maximumIndex\":"<<s.maximumIndex<<",\"suppressedIndex\":"<<s.suppressedIndex<<",\"attributeCount\":"<<(s.attributeCount&0xffffff)
             <<",\"attributeValues\":["<<s.attributeValues[0]<<','<<s.attributeValues[1]<<','<<s.attributeValues[2]<<','<<s.attributeValues[3]<<"]}\n";return 0;
+    }
+    // 2082 (#243): --anim-sample <handle> <ms>: the observed partner rig (actor scope: the d2coop shadow rig) about every 33 ms for <ms>, one
+    // JSON line per sample: ms, root position and yaw, and the world positions of each ankle (joints 21 and 25), its first
+    // child (toe), its parent and grandparent. World point = root[0..2] + sum_c root[3+c*3+r] * globalPose[j][12+c].
+    if(argc==5&&!std::strcmp(argv[2],"--anim-sample")){
+        const auto handle=static_cast<std::uint32_t>(std::strtoul(argv[3],nullptr,0));const unsigned long total=std::strtoul(argv[4],nullptr,0);
+        if(!handle||!total||total>120000)return 64;
+        const auto reader=[&](std::uintptr_t a,void* d,std::size_t n){return read(process.value,a,d,n);};
+        const auto start=GetTickCount64();unsigned samples=0,failed=0;std::cout.precision(6);std::cout<<std::fixed;
+        while(GetTickCount64()-start<total){const auto t0=GetTickCount64();NativeSkeleton s{};
+            if(!readNativeSkeleton(reader,base,handle,s)||s.globalPose.size()<=25||s.parents.size()!=s.globalPose.size()){++failed;Sleep(33);continue;}
+            const auto world=[&](int j,float* w){for(unsigned r=0;r<3;++r){w[r]=s.root[r];for(unsigned c=0;c<3;++c)w[r]+=s.root[3+c*3+r]*s.globalPose[j][12+c];}};
+            std::cout<<"{\"ms\":"<<(t0-start)<<",\"root\":["<<s.root[0]<<","<<s.root[1]<<","<<s.root[2]<<"],\"yaw\":"<<std::atan2(s.root[4],s.root[3])*57.29578f<<",\"feet\":[";
+            for(unsigned f=0;f<2;++f){const int ankle=f?25:21;int toe=-1;for(int j=0;j<int(s.parents.size());++j)if(s.parents[j]==ankle){toe=j;break;}
+                const int chain[4]={toe,ankle,s.parents[ankle],s.parents[ankle]>=0?s.parents[s.parents[ankle]]:-1};std::cout<<(f?",":"")<<"{\"ankle\":"<<ankle<<",\"points\":[";
+                for(unsigned k=0;k<4;++k){float w[3]{};const bool ok=chain[k]>=0&&chain[k]<int(s.globalPose.size());if(ok)world(chain[k],w);
+                    std::cout<<(k?",":"")<<"{\"joint\":"<<chain[k]<<",\"at\":["<<w[0]<<","<<w[1]<<","<<w[2]<<"]}";}
+                std::cout<<"]}";}
+            std::cout<<"],\"joints\":"<<s.globalPose.size()<<"}\n";std::cout.flush();++samples;
+            const auto spent=GetTickCount64()-t0;if(spent<33)Sleep(static_cast<DWORD>(33-spent));}
+        std::cout<<"{\"done\":true,\"samples\":"<<samples<<",\"failed\":"<<failed<<"}\n";return samples?0:53;
     }
     if((argc==5&&(!std::strcmp(argv[2],"--doppelganger-skeleton-final")||!std::strcmp(argv[2],"--skeleton-final")))||(argc==4 && (std::strcmp(argv[2],"--skeleton")==0||std::strcmp(argv[2],"--doppelganger-skeleton")==0||std::strcmp(argv[2],"--rat-skeleton")==0||(std::strcmp(argv[2],"--arm-skeleton")==0||std::strcmp(argv[2],"--prop-skeleton")==0||std::strcmp(argv[2],"--weapon-skeleton")==0)))) {
         std::uintptr_t publication=0;std::uint64_t before[2]{},after[2]{};

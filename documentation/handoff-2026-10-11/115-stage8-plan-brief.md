@@ -95,6 +95,19 @@ Every area also has an **off-switch** back to today's behaviour, so a problem in
 - **Polish:** the first mission's character choice uses our own *Character* dialog, and the messages and menus are reviewed for anything that still feels unfinished.
 - **Done when:** the movement numbers pass their limits in both roles and all four pairings.
 
+### Step 5b: Fix the first mission (added by the user, 2026-11-02)
+The first mission, A Long Day in Dunwall, was the main test map throughout development, and in co-op play it breaks far more often than the other missions. Step 6 starts there in every pairing, so it is fixed first:
+- **Inventory** the known problems and the user's own list.
+- **Measure** with full first-mission runs in all four pairings, with required world diffs at each stage of the mission.
+- **Fix** host-decides first, with a mutation twin for each fix.
+- **Done when:** the whole mission plays through cleanly in all four pairings on two accounts, twice in a row on one candidate.
+
+### Step 5c: The partner keeps her progression (added by the user, 2026-11-02)
+Today a join loads the host's mission fresh, so the partner loses her powers, upgrades, bonecharms and runes on every rejoin and on a character switch. The user decided that her progression is kept **per partner and per character**, travels with her into any host's game, and is part of 1.0:
+- **Save** at autosaves, on leaving and at mission ends.
+- **Restore** on the next join through the native item grant, without removing anything the mission start gives.
+- **Tests** on two Steam accounts in both characters, with a mutation twin.
+
 ### Step 6: Prove it and release 1.0
 - A one-hour session on two Steam accounts with zero differences.
 - The whole campaign on two Steam accounts (this PC and the VM) in one pairing, and the other three pairings through the first, a middle and the last mission.

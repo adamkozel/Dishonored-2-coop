@@ -1,0 +1,366 @@
+{
+  "passed": false,
+  "failure": "The worlds differ at the end: 1 values",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2103",
+      "hostDll": "C6A67298A47E96033B2E75137F3E8A2F9C1B3288F3FB3863DEE213F9E4886657",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 21109,
+        "writtenAt": 95640890,
+        "startedAgoMs": 2859,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 17094,
+        "writtenAt": 95593062,
+        "startedAgoMs": 1797,
+        "phase2Checks": 15
+      }
+    },
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 26,
+        "client": 26,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command host coop_usable_safe_doors on",
+      "step03-command client coop_usable_safe_doors on",
+      "step04-command host coop_follow_host on",
+      "step05-command client coop_follow_host on",
+      "step06-command client coop_continue_follow on"
+    ],
+    "diff-start": {
+      "status": "EQUAL",
+      "compared": 538,
+      "differences": 0
+    },
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "diff-deaths": {
+      "status": "EQUAL",
+      "compared": 554,
+      "differences": 0
+    },
+    "diff-mayhew": {
+      "status": "EQUAL",
+      "compared": 554,
+      "differences": 0
+    },
+    "diff-ramsey-loot": {
+      "status": "EQUAL",
+      "compared": 552,
+      "differences": 0
+    },
+    "diff-ring-locker": {
+      "status": "EQUAL",
+      "compared": 552,
+      "differences": 0
+    },
+    "diff-saferoom": {
+      "status": "ERROR",
+      "error": "World digest failed (host, 45)"
+    },
+    "diff-balcony": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0
+    },
+    "diff-streets": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0
+    },
+    "step36-talk": "skipped: npc gone (scene already ran)",
+    "diff-end": {
+      "status": "DIFFERENT",
+      "compared": 286,
+      "differences": 1
+    },
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 62,
+        "pos": [
+          -7.013578,
+          -14.125813,
+          -99.886673
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/4157",
+        "ka": "152/2/0",
+        "active": "Mission_Void01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 31,
+        "pos": [
+          -7.000959,
+          -15.075701,
+          -99.903839
+        ],
+        "fresh": true,
+        "gameflow": [
+          231,
+          1,
+          1,
+          14,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 21,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "2/119/1",
+        "active": "Mission_Void01"
+      }
+    },
+    "gameflowEqual": false,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "continue_sent",
+        "decision": 1,
+        "slot": -1,
+        "startMap": "",
+        "sent": 1,
+        "resent": 118,
+        "hostReplays": 0,
+        "hostContinues": 1,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "continued_to_host_mission",
+        "decision": 1,
+        "loadedSlot": -1,
+        "received": 119,
+        "refused": 0,
+        "duplicates": 118,
+        "partnerHeld": 1,
+        "replayed": 0,
+        "continued": 1,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 286,
+      "differences": 1
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "6f6a109361f730fb",
+        "connection": 4072937397,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "6f6a109361f730fb",
+        "sent": 1027,
+        "received": 1021,
+        "refused": 0,
+        "silentMs": 750
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "6f6a109361f730fb",
+        "connection": 597829081,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "6f6a109361f730fb",
+        "sent": 1022,
+        "received": 1027,
+        "refused": 0,
+        "silentMs": 219
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 90,
+      "asked": 79,
+      "inFlow": 32,
+      "replayed": 119,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 50
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 62,
+        "pos": [
+          -7.013578,
+          -14.125813,
+          -99.886673
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/4157",
+        "ka": "152/2/0",
+        "active": "Mission_Void01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 31,
+        "pos": [
+          -7.000959,
+          -15.075701,
+          -99.903839
+        ],
+        "fresh": true,
+        "gameflow": [
+          231,
+          1,
+          1,
+          14,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 21,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "2/119/1",
+        "active": "Mission_Void01"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
