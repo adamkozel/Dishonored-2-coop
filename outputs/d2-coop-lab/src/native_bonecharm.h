@@ -1,6 +1,7 @@
 #pragma once
 #include "native_health.h"
 #include "world_identity.h"
+#include <cstring>
 #include <string>
 #include <vector>
 // 2107 (#265): the player's arkCpntBoneCharmInventory (vtable 0x141b99928; d2-ghidra, confirmed static).
@@ -48,3 +49,57 @@ template<class Read> bool readNativeBoneCharms(Read read,std::uintptr_t base,Nat
         if(!readNativeBoneCharmKey(read,out.slots+static_cast<std::uintptr_t>(i)*0x38,k)){out.why="slot_key";return false;}out.equipped.push_back(std::move(k));}
     return true;
 }
+// 2112 (#265): crafted charms. A crafted charm is a named entry in the +0x38 list (owned like a found one: equip
+// 0x14060f520 checks the owned bit there, 0x1406101f0) and a record in the +0x48 list (key, ints +0x38 and +0x3c, a
+// trait id list at +0x40, an int at +0x50; 0x140610f50) that the equip applies through 0x14060e310. The game grows the
+// +0x48 list only in its save reader, so both lists are carried in the component serializer's own byte format
+// (writers 0x14060dee0 and 0x14060de50, readers 0x14060db30 and 0x14060da30; d2-ghidra, confirmed static):
+// - a count is a u16, or 0xffff then a u32;
+// - a key is its kind (4 bytes), its name (a count, then that many bytes) and, from version 0x1c, its +0x30 int;
+// - a +0x38 entry is a key and a flag byte (the low 4 bits);
+// - a crafted record is a key, two ints, a count of trait ids (4 bytes each) and an int.
+// The codec below checks saved bytes before the native reader sees them, and builds the lab charm.
+struct NativeCharmRecord {NativeBoneCharmKey key;std::uint8_t flags=0;};
+struct NativeCraftedRecord {NativeBoneCharmKey key;std::int32_t a=0,b=0,last=0;std::vector<std::int32_t> traits;};
+inline void charmPutBytes(std::string& o,const void* p,std::size_t n){o.append(static_cast<const char*>(p),n);}
+inline void charmPutCount(std::string& o,std::uint32_t n){if(n<0xffff){const std::uint16_t s=static_cast<std::uint16_t>(n);charmPutBytes(o,&s,2);return;}
+    const std::uint16_t m=0xffff;charmPutBytes(o,&m,2);charmPutBytes(o,&n,4);}
+inline bool charmGetBytes(const std::string& s,std::size_t& at,void* p,std::size_t n){if(n>s.size()||at>s.size()-n)return false;std::memcpy(p,s.data()+at,n);at+=n;return true;}
+inline bool charmGetCount(const std::string& s,std::size_t& at,std::uint32_t& n){std::uint16_t c=0;if(!charmGetBytes(s,at,&c,2))return false;
+    if(c!=0xffff){n=c;return true;}return charmGetBytes(s,at,&n,4);}
+inline void charmPutKey(std::string& o,const NativeBoneCharmKey& k){charmPutBytes(o,&k.kind,4);charmPutCount(o,static_cast<std::uint32_t>(k.name.size()));
+    o+=k.name;charmPutBytes(o,&k.extra,4);}
+inline bool charmGetKey(const std::string& s,std::size_t& at,NativeBoneCharmKey& k){std::uint32_t n=0;
+    if(!charmGetBytes(s,at,&k.kind,4)||!charmGetCount(s,at,n)||n>190||n>s.size()-at)return false;
+    k.name.assign(s.data()+at,n);at+=n;return charmGetBytes(s,at,&k.extra,4);}
+inline std::string encodeNativeCharmList(const std::vector<NativeCharmRecord>& v){std::string o;charmPutCount(o,static_cast<std::uint32_t>(v.size()));
+    for(const auto& r:v){charmPutKey(o,r.key);const std::uint8_t f=r.flags&0xf;charmPutBytes(o,&f,1);}return o;}
+inline bool decodeNativeCharmList(const std::string& s,std::vector<NativeCharmRecord>& v){v.clear();std::size_t at=0;std::uint32_t n=0;
+    if(!charmGetCount(s,at,n)||n>1024)return false;
+    for(std::uint32_t i=0;i<n;++i){NativeCharmRecord r{};if(!charmGetKey(s,at,r.key)||!charmGetBytes(s,at,&r.flags,1)||(r.flags&0xf0))return false;v.push_back(std::move(r));}
+    return at==s.size();}
+inline std::string encodeNativeCraftedList(const std::vector<NativeCraftedRecord>& v){std::string o;charmPutCount(o,static_cast<std::uint32_t>(v.size()));
+    for(const auto& r:v){charmPutKey(o,r.key);charmPutBytes(o,&r.a,4);charmPutBytes(o,&r.b,4);charmPutCount(o,static_cast<std::uint32_t>(r.traits.size()));
+        for(const auto t:r.traits)charmPutBytes(o,&t,4);charmPutBytes(o,&r.last,4);}return o;}
+inline bool decodeNativeCraftedList(const std::string& s,std::vector<NativeCraftedRecord>& v){v.clear();std::size_t at=0;std::uint32_t n=0;
+    if(!charmGetCount(s,at,n)||n>256)return false;
+    for(std::uint32_t i=0;i<n;++i){NativeCraftedRecord r{};std::uint32_t t=0;
+        if(!charmGetKey(s,at,r.key)||r.key.name.empty()||!charmGetBytes(s,at,&r.a,4)||!charmGetBytes(s,at,&r.b,4)||!charmGetCount(s,at,t)||t>64)return false;
+        r.traits.resize(t);for(auto& x:r.traits)if(!charmGetBytes(s,at,&x,4))return false;
+        if(!charmGetBytes(s,at,&r.last,4))return false;v.push_back(std::move(r));}
+    return at==s.size();}
+// Saved lists fit this world when its found charms are the saved ones in the same order (the same declarations), the
+// saved crafted charms each have their named entry, and this world has no crafted charm yet (a join's fresh load).
+inline bool nativeCraftedRestoreFits(const NativeBoneCharms& now,const std::vector<NativeCharmRecord>& charms,const std::vector<NativeCraftedRecord>& crafted){
+    if(now.craftedCount)return false;std::size_t found=0;
+    for(const auto& e:now.entries){if(!e.key.name.empty())return false;
+        if(found>=charms.size()||!charms[found].key.name.empty()||charms[found].key.kind!=e.key.kind)return false;++found;}
+    for(std::size_t i=found;i<charms.size();++i)if(charms[i].key.name.empty())return false;
+    for(const auto& c:crafted){bool named=false;for(std::size_t i=found;i<charms.size();++i)if(charms[i].key.name==c.key.name&&charms[i].key.kind==c.key.kind){named=true;break;}
+        if(!named)return false;}
+    return charms.size()>found;}
+inline std::string charmHex(const std::string& s){static const char* d="0123456789abcdef";std::string o;o.reserve(s.size()*2);
+    for(const unsigned char c:s){o+=d[c>>4];o+=d[c&15];}return o;}
+inline bool charmUnhex(const std::string& h,std::string& o){o.clear();if(h.size()%2)return false;
+    auto v=[](char c)->int{return c>='0'&&c<='9'?c-'0':c>='a'&&c<='f'?c-'a'+10:-1;};
+    for(std::size_t i=0;i<h.size();i+=2){const int x=v(h[i]),y=v(h[i+1]);if(x<0||y<0)return false;o+=static_cast<char>(x*16+y);}return true;}

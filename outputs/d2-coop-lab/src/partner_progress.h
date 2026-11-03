@@ -15,13 +15,19 @@
 // rewind must not give back what the world gives again). Lab switch coop_partner_progress on|off.
 // 2107: found bonecharms too (native_bonecharm.h): the owned ones and the equipped slots are saved as charm lines (their
 // 32-bit ids), and after a join's load the missing ones are given (0x14060e4c0), those equipped but not saved are
-// unequipped (0x140611350) and the saved ones equipped (0x14060f520). Crafted charms (named keys) are counted, not carried.
+// unequipped (0x140611350) and the saved ones equipped (0x14060f520).
+// 2112: crafted charms too. When she has one, both charm lists are saved in the serializer's byte format (charmlist and
+// craftlist hex lines, native_bonecharm.h) and her equipped crafted keys as ccharm lines. After a join's load, when the
+// saved lists fit her fresh world, the game's own list readers load them through an in-memory idFile, and the saved
+// crafted keys are equipped like found ones.
 bool partnerProgressEnabled=true;
 struct PartnerProgressEntry {std::string name;std::int32_t quantity=0,maximum=0,f2c=0,f30=0;std::uint8_t f28=0,f34=0,f35=0;};
 struct PartnerCharm {std::uint32_t id=0;bool equipped=false;};
+struct PartnerCrafted {std::string charmHex,craftedHex;std::vector<NativeBoneCharmKey> equipped;};
 struct PartnerProgress {
     std::uint64_t restoreEpoch=0,capturedEpoch=0,captures=0,writes=0,restores=0,restoredEntries=0,raisedEntries=0,failures=0;
     std::uint64_t charmsGiven=0,charmsEquipped=0,charmsUnequipped=0,charmFailures=0;std::size_t charmsSaved=0,craftedSkipped=0;
+    std::uint64_t craftedRestored=0,craftedEquipped=0,craftedFailures=0;std::size_t craftedSaved=0,craftedPresent=0,craftedEquippedNow=0;const char* craftedResult="idle";
     int character=0;bool restoredThisLoad=false;ULONGLONG gameplaySince=0,capturedAt=0;
     std::int32_t money=0,lastMoney=0;std::size_t lastCount=0;const char* result="idle";std::string lastText;};
 PartnerProgress partnerProgress{};
@@ -52,21 +58,28 @@ inline bool readPartnerInventory(std::uintptr_t& inventory,std::int32_t& money,s
            !memoryRead(e+0x30,&x.f30,4)||!memoryRead(e+0x34,&x.f34,1)||!memoryRead(e+0x35,&x.f35,1))return false;
         out.push_back(std::move(x));}
     return true;}
-inline bool loadPartnerProgress(int character,std::int32_t& money,std::vector<PartnerProgressEntry>& out,std::vector<PartnerCharm>* charms=nullptr){
+inline bool loadPartnerProgress(int character,std::int32_t& money,std::vector<PartnerProgressEntry>& out,std::vector<PartnerCharm>* charms=nullptr,PartnerCrafted* crafted=nullptr){
     char path[MAX_PATH]{};partnerProgressPath(character,path,sizeof(path));FILE* f=nullptr;if(fopen_s(&f,path,"rb")||!f)return false;
-    out.clear();money=0;char line[400]{};bool header=false;if(charms)charms->clear();
+    out.clear();money=0;char line[1024]{};bool header=false;if(charms)charms->clear();if(crafted)*crafted=PartnerCrafted{};
     while(fgets(line,sizeof(line),f)){char name[200]{};PartnerProgressEntry e{};unsigned f28=0,f34=0,f35=0;
         if(std::sscanf(line,"money %d",&money)==1){header=true;continue;}
+        {char hex[1000]{};int kind=0,extra=0;
+         if(std::sscanf(line,"charmlist %999s",hex)==1){if(crafted)crafted->charmHex+=hex;continue;}
+         if(std::sscanf(line,"craftlist %999s",hex)==1){if(crafted)crafted->craftedHex+=hex;continue;}
+         if(std::sscanf(line,"ccharm %d %d %999s",&kind,&extra,hex)==3){std::string n;if(crafted&&charmUnhex(hex,n)&&!n.empty())crafted->equipped.push_back({kind,extra,n});continue;}}
         {unsigned id=0,equipped=0;if(std::sscanf(line,"charm %u %u",&id,&equipped)==2){if(charms&&id)charms->push_back({id,equipped!=0});continue;}}
         if(std::sscanf(line,"%199s %d %d %u %d %d %u %u",name,&e.quantity,&e.maximum,&f28,&e.f2c,&e.f30,&f34,&f35)==8){
             e.name=name;e.f28=static_cast<std::uint8_t>(f28);e.f34=static_cast<std::uint8_t>(f34);e.f35=static_cast<std::uint8_t>(f35);out.push_back(std::move(e));}}
     fclose(f);return header;}
-inline bool writePartnerProgress(int character,std::int32_t money,const std::vector<PartnerInventoryEntry>& held,const std::vector<PartnerCharm>& charms){
+inline bool writePartnerProgress(int character,std::int32_t money,const std::vector<PartnerInventoryEntry>& held,const std::vector<PartnerCharm>& charms,const PartnerCrafted& crafted){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};partnerProgressPath(character,path,sizeof(path));std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     std::string text="money "+std::to_string(money)+"\n";
     for(const auto& x:held){if(!x.quantity&&!x.maximum)continue;char line[400]{};
         std::snprintf(line,sizeof(line),"%s %d %d %u %d %d %u %u\n",x.name.c_str(),x.quantity,x.maximum,x.f28,x.f2c,x.f30,x.f34,x.f35);text+=line;}
     for(const auto& c:charms)text+="charm "+std::to_string(c.id)+(c.equipped?" 1\n":" 0\n");
+    for(std::size_t i=0;i<crafted.charmHex.size();i+=512)text+="charmlist "+crafted.charmHex.substr(i,512)+"\n";
+    for(std::size_t i=0;i<crafted.craftedHex.size();i+=512)text+="craftlist "+crafted.craftedHex.substr(i,512)+"\n";
+    for(const auto& k:crafted.equipped)text+="ccharm "+std::to_string(k.kind)+" "+std::to_string(k.extra)+" "+charmHex(k.name)+"\n";
     if(text==partnerProgress.lastText)return true;
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return false;const bool ok=fwrite(text.data(),1,text.size(),f)==text.size();
     if(fclose(f)||!ok||!MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING))return false;partnerProgress.lastText=text;++partnerProgress.writes;return true;}
@@ -74,13 +87,13 @@ struct PartnerSavedItemState {std::uint32_t hash=0;std::int32_t quantity=0,maxim
 static_assert(sizeof(PartnerSavedItemState)==0x20,"itemState_t is 0x20 bytes");
 struct PartnerSavedState {std::int32_t money=0,v170=0;PartnerSavedItemState* items=nullptr;std::uint32_t count=0,capacity=0;};
 static_assert(sizeof(PartnerSavedState)==0x18,"savegameState_t is 0x18 bytes");
-inline void restorePartnerCharms(const std::vector<PartnerCharm>& saved);
+inline void restorePartnerCharms(const std::vector<PartnerCharm>& saved,const PartnerCrafted& crafted);
 // Applies the saved entries the current load may take (every load: class 1; a join's load: both classes and money):
 // class 1 raised to the larger of the saved and the held value, class 2 set to the saved value, through the native apply.
 // Returns the number of changed entries.
 inline int restorePartnerProgress(bool joinLoad){
-    auto& g=partnerProgress;std::int32_t savedMoney=0;std::vector<PartnerProgressEntry> saved;std::vector<PartnerCharm> charms;
-    if(!loadPartnerProgress(g.character,savedMoney,saved,&charms)){g.result="nothing_saved";return 0;}
+    auto& g=partnerProgress;std::int32_t savedMoney=0;std::vector<PartnerProgressEntry> saved;std::vector<PartnerCharm> charms;PartnerCrafted crafted;
+    if(!loadPartnerProgress(g.character,savedMoney,saved,&charms,&crafted)){g.result="nothing_saved";return 0;}
     g.charmsSaved=charms.size();
     std::uintptr_t inventory=0;std::int32_t money=0;std::vector<PartnerInventoryEntry> held;
     if(!readPartnerInventory(inventory,money,held)){++g.failures;g.result="inventory_unreadable";return -1;}
@@ -97,7 +110,7 @@ inline int restorePartnerProgress(bool joinLoad){
         PartnerSavedItemState r{};r.hash=partnerProgressHash(x.name);r.quantity=quantity;r.maximum=maximum;
         r.f0c=s.f2c;r.f10=s.f30;r.f14=s.f34;r.f15=s.f28;r.f1c=s.f35;records.push_back(r);}
     const std::int32_t newMoney=joinLoad?savedMoney:money;
-    if(joinLoad)restorePartnerCharms(charms);
+    if(joinLoad)restorePartnerCharms(charms,crafted);
     if(records.empty()&&newMoney==money){g.result="nothing_to_raise";return 0;}
     PartnerSavedState state{};state.money=newMoney;state.v170=v170;state.items=records.data();
     state.count=static_cast<std::uint32_t>(records.size());state.capacity=static_cast<std::uint32_t>(records.size())<<8;
@@ -117,11 +130,56 @@ inline void partnerCharmCall(std::uintptr_t function,std::uintptr_t component,st
     alignas(16) unsigned char key[0x38]{};std::memcpy(key,&id,4);const std::int32_t extra=-1;std::memcpy(key+0x30,&extra,4);
     reinterpret_cast<void(*)(void*,const char*)>(gameImage+0x13f9d0)(key+8,"");
     reinterpret_cast<void(*)(std::uintptr_t,void*)>(gameImage+function)(component,key);}
+// 2112: a charm call with any key; the game's idStr constructor (0x13f9d0) makes the name, which the callee destroys.
+inline void partnerCharmKeyCall(std::uintptr_t function,std::uintptr_t component,const NativeBoneCharmKey& k){
+    alignas(16) unsigned char key[0x38]{};std::memcpy(key,&k.kind,4);std::memcpy(key+0x30,&k.extra,4);
+    reinterpret_cast<void(*)(void*,const char*)>(gameImage+0x13f9d0)(key+8,k.name.c_str());
+    reinterpret_cast<void(*)(std::uintptr_t,void*)>(gameImage+function)(component,key);}
+// 2112: an in-memory idFile for the charm list serializers, which call only Read (vtable +0x28) and Write (+0x30). The
+// serializer object is {file, writing byte at +8, version at +0x10}; version 0x36 keeps each key's +0x30 int (>= 0x1c).
+struct PartnerCharmFile {const void* const* vtable=nullptr;std::string* bytes=nullptr;std::size_t at=0;bool failed=false;};
+inline int partnerCharmFileNone(){return 0;}
+inline int partnerCharmFileRead(PartnerCharmFile* f,void* to,int n){
+    if(n<0||static_cast<std::size_t>(n)>f->bytes->size()-f->at){f->failed=true;if(n>0)std::memset(to,0,static_cast<std::size_t>(n));return 0;}
+    std::memcpy(to,f->bytes->data()+f->at,static_cast<std::size_t>(n));f->at+=static_cast<std::size_t>(n);return n;}
+inline int partnerCharmFileWrite(PartnerCharmFile* f,const void* from,int n){if(n<0){f->failed=true;return 0;}f->bytes->append(static_cast<const char*>(from),static_cast<std::size_t>(n));return n;}
+inline const void* const* partnerCharmFileVtable(){
+    static const void* const none=reinterpret_cast<const void*>(&partnerCharmFileNone);
+    static const void* const v[16]={none,none,none,none,none,reinterpret_cast<const void*>(&partnerCharmFileRead),reinterpret_cast<const void*>(&partnerCharmFileWrite),
+        none,none,none,none,none,none,none,none,none};
+    return v;}
+inline bool partnerCharmSerialize(std::uintptr_t function,std::uintptr_t list,std::string& bytes,bool writing){
+    PartnerCharmFile file{};file.vtable=partnerCharmFileVtable();file.bytes=&bytes;
+    alignas(16) unsigned char ser[0x40]{};void* fp=&file;std::memcpy(ser,&fp,8);ser[8]=writing?1:0;const std::uint32_t version=0x36;std::memcpy(ser+0x10,&version,4);
+    reinterpret_cast<void(*)(void*,std::uintptr_t)>(gameImage+function)(ser,list);
+    return !file.failed&&(writing||file.at==bytes.size());}
+// This world's charm lists through the native writers (0x14060dee0, 0x14060de50), checked by the codec.
+inline bool partnerCharmLists(const NativeBoneCharms& c,std::string& charms,std::string& crafted,std::vector<NativeCharmRecord>& cr,std::vector<NativeCraftedRecord>& kr){
+    charms.clear();crafted.clear();
+    return partnerCharmSerialize(0x60dee0,c.component+0x38,charms,true)&&partnerCharmSerialize(0x60de50,c.component+0x48,crafted,true)&&
+        decodeNativeCharmList(charms,cr)&&decodeNativeCraftedList(crafted,kr)&&cr.size()==c.charmCount&&kr.size()==c.craftedCount;}
+// Capture: nothing when she has no crafted charm; else both lists and her equipped crafted keys. False when unreadable.
+inline bool capturePartnerCrafted(PartnerCrafted& out){
+    auto& g=partnerProgress;out=PartnerCrafted{};NativeBoneCharms c{};
+    if(!readNativeBoneCharms(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage),c))return false;
+    g.craftedPresent=0;g.craftedEquippedNow=0;for(const auto& e:c.entries)if(!e.key.name.empty()&&e.owned)++g.craftedPresent;
+    for(const auto& k:c.equipped)if(!k.name.empty()){++g.craftedEquippedNow;out.equipped.push_back(k);}
+    if(!g.craftedPresent&&!c.craftedCount){out.equipped.clear();g.craftedSaved=0;return true;}
+    std::string charms,crafted;std::vector<NativeCharmRecord> cr;std::vector<NativeCraftedRecord> kr;
+    if(!partnerCharmLists(c,charms,crafted,cr,kr)){out=PartnerCrafted{};return false;}
+    out.charmHex=charmHex(charms);out.craftedHex=charmHex(crafted);g.craftedSaved=kr.size();return true;}
 // After a join's load: own every saved charm, then make the equipped slots the saved ones.
-inline void restorePartnerCharms(const std::vector<PartnerCharm>& saved){
+inline void restorePartnerCharms(const std::vector<PartnerCharm>& saved,const PartnerCrafted& crafted){
     auto& g=partnerProgress;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeBoneCharms c{};
-    if(saved.empty())return;
+    if(saved.empty()&&crafted.charmHex.empty())return;
     if(!readNativeBoneCharms(memoryRead,base,c)){++g.charmFailures;return;}
+    // 2112: the saved lists first (they also set the found charms' owned bits); refused unless they fit her fresh world.
+    if(!crafted.charmHex.empty()){std::string cb,kb;std::vector<NativeCharmRecord> cr;std::vector<NativeCraftedRecord> kr;
+        if(!charmUnhex(crafted.charmHex,cb)||!charmUnhex(crafted.craftedHex,kb)||!decodeNativeCharmList(cb,cr)||!decodeNativeCraftedList(kb,kr)){++g.craftedFailures;g.craftedResult="unreadable";}
+        else if(!nativeCraftedRestoreFits(c,cr,kr)){++g.craftedFailures;g.craftedResult="does_not_fit";}
+        else if(!partnerCharmSerialize(0x60db30,c.component+0x38,cb,false)||!partnerCharmSerialize(0x60da30,c.component+0x48,kb,false)){++g.craftedFailures;g.craftedResult="reader_failed";}
+        else{g.craftedRestored+=kr.size();g.craftedResult="restored";}
+        if(!readNativeBoneCharms(memoryRead,base,c)){++g.charmFailures;return;}}
     for(const auto& s:saved){bool known=false,owned=false;
         for(const auto& e:c.entries)if(e.key.name.empty()&&static_cast<std::uint32_t>(e.key.kind)==s.id){known=true;owned=e.owned;break;}
         if(!known){++g.charmFailures;continue;}
@@ -133,7 +191,27 @@ inline void restorePartnerCharms(const std::vector<PartnerCharm>& saved){
     for(const auto& s:saved){if(!s.equipped)continue;bool on=false;
         for(const auto& k:c.equipped)if(k.name.empty()&&static_cast<std::uint32_t>(k.kind)==s.id){on=true;break;}
         if(!on){partnerCharmCall(0x60f520,c.component,s.id);++g.charmsEquipped;}}
+    for(const auto& s:crafted.equipped){bool on=false;
+        for(const auto& k:c.equipped)if(k.kind==s.kind&&k.name==s.name){on=true;break;}
+        if(!on){partnerCharmKeyCall(0x60f520,c.component,s);++g.craftedEquipped;}}
 }
+// 2112 (lab only): "coop_lab_crafted_charm" adds one crafted charm (kind 0, name coop_lab_crafted, no traits) through
+// the same native list readers, then equips it, so a take can carry a crafted charm without the crafting screen.
+bool labCraftedCharmRequest=false;const char* labCraftedResult="idle";
+inline void serviceLabCraftedCharm(){
+    if(!labCraftedCharmRequest||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||outgoing.gameLogicState!=1||outgoing.pendingGameLogicState)return;
+    labCraftedCharmRequest=false;const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativeBoneCharms c{};
+    if(!readNativeBoneCharms(memoryRead,base,c)){labCraftedResult="unreadable";return;}
+    std::string cb,kb;std::vector<NativeCharmRecord> cr;std::vector<NativeCraftedRecord> kr;
+    if(!partnerCharmLists(c,cb,kb,cr,kr)){labCraftedResult="lists_unreadable";return;}
+    const NativeBoneCharmKey key{0,-1,"coop_lab_crafted"};
+    for(const auto& r:cr)if(r.key.name==key.name){labCraftedResult="present";return;}
+    NativeCharmRecord r{};r.key=key;r.flags=2;cr.push_back(r);NativeCraftedRecord k{};k.key=key;kr.push_back(k);
+    cb=encodeNativeCharmList(cr);kb=encodeNativeCraftedList(kr);
+    if(!partnerCharmSerialize(0x60db30,c.component+0x38,cb,false)||!partnerCharmSerialize(0x60da30,c.component+0x48,kb,false)){labCraftedResult="reader_failed";return;}
+    partnerCharmKeyCall(0x60f520,c.component,key);
+    if(!readNativeBoneCharms(memoryRead,base,c)){labCraftedResult="unreadable_after";return;}
+    labCraftedResult="crafted";for(const auto& e:c.equipped)if(e.name==key.name){labCraftedResult="crafted_equipped";break;}}
 // 2107 (lab only): "coop_grant_charm <id>" owns one found bonecharm by its id (the probe's --bonecharms kind, unsigned)
 // and equips it when it is not equipped yet, for the progression takes.
 std::uint32_t labGrantCharmId=0;const char* labCharmResult="idle";
@@ -153,7 +231,7 @@ inline void serviceLabGrantCharm(){
     partnerCharmCall(0x60f520,c.component,id);labCharmResult="granted";}
 // The engine-thread service: partner only, in a session, in gameplay.
 void servicePartnerProgress(ULONGLONG tick){
-    auto& g=partnerProgress;serviceLabGrantCharm();
+    auto& g=partnerProgress;serviceLabGrantCharm();serviceLabCraftedCharm();
     if(localRole!=1||!partnerProgressEnabled||!coopInSession()||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     if(outgoing.gameLogicState!=1||outgoing.pendingGameLogicState){g.gameplaySince=0;return;}
     if(!g.gameplaySince){g.gameplaySince=tick;return;}
@@ -171,18 +249,22 @@ void servicePartnerProgress(ULONGLONG tick){
     ++g.captures;g.lastCount=held.size();g.capturedEpoch=outgoing.worldEpoch;
     std::vector<PartnerCharm> charms;if(!readPartnerCharms(charms,g.craftedSkipped)){++g.charmFailures;g.result="charms_unreadable";return;}
     g.charmsSaved=charms.size();
-    if(!writePartnerProgress(character,g.money,held,charms)){++g.failures;g.result="write_failed";return;}
+    PartnerCrafted crafted;if(!capturePartnerCrafted(crafted)){++g.craftedFailures;g.craftedResult="capture_unreadable";g.result="charms_unreadable";return;}
+    if(!writePartnerProgress(character,g.money,held,charms,crafted)){++g.failures;g.result="write_failed";return;}
     if(std::strncmp(g.result,"restored",8))g.result="captured";}
 inline void writePartnerProgressStatus(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.partner-progress.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;const auto& g=partnerProgress;
     fprintf(f,"{\"enabled\":%s,\"role\":%d,\"character\":%d,\"result\":\"%s\",\"restores\":%llu,\"restoredEntries\":%llu,\"raisedEntries\":%llu,\"captures\":%llu,\"writes\":%llu,"
         "\"failures\":%llu,\"carried\":%zu,\"money\":%d,\"joinLoadPending\":%s,\"restoreEpoch\":%llu,\"epoch\":%llu,"
-        "\"charms\":{\"saved\":%zu,\"given\":%llu,\"equipped\":%llu,\"unequipped\":%llu,\"failures\":%llu,\"craftedSkipped\":%zu,\"lab\":\"%s\"}}\n",
+        "\"charms\":{\"saved\":%zu,\"given\":%llu,\"equipped\":%llu,\"unequipped\":%llu,\"failures\":%llu,\"craftedSkipped\":%zu,\"lab\":\"%s\"},"
+        "\"crafted\":{\"saved\":%zu,\"restored\":%llu,\"equipped\":%llu,\"failures\":%llu,\"present\":%zu,\"equippedNow\":%zu,\"result\":\"%s\",\"lab\":\"%s\"}}\n",
         partnerProgressEnabled?"true":"false",localRole,g.character,g.result,static_cast<unsigned long long>(g.restores),static_cast<unsigned long long>(g.restoredEntries),
         static_cast<unsigned long long>(g.raisedEntries),static_cast<unsigned long long>(g.captures),static_cast<unsigned long long>(g.writes),
         static_cast<unsigned long long>(g.failures),g.lastCount,g.money,partnerProgressJoinPending?"true":"false",
         static_cast<unsigned long long>(g.restoreEpoch),static_cast<unsigned long long>(outgoing.worldEpoch),
         g.charmsSaved,static_cast<unsigned long long>(g.charmsGiven),static_cast<unsigned long long>(g.charmsEquipped),
-        static_cast<unsigned long long>(g.charmsUnequipped),static_cast<unsigned long long>(g.charmFailures),g.craftedSkipped,labCharmResult);
+        static_cast<unsigned long long>(g.charmsUnequipped),static_cast<unsigned long long>(g.charmFailures),g.craftedSkipped,labCharmResult,
+        g.craftedSaved,static_cast<unsigned long long>(g.craftedRestored),static_cast<unsigned long long>(g.craftedEquipped),
+        static_cast<unsigned long long>(g.craftedFailures),g.craftedPresent,g.craftedEquippedNow,g.craftedResult,labCraftedResult);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);}

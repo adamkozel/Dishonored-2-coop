@@ -1,0 +1,9 @@
+{
+ "candidate": "progress-v2112",
+ "card": 265,
+ "dll": "805BA3D7565AC7E3415791ADCF148AA0C8F12F19724CDA1D9962F8AE61FB54B6",
+ "previousCandidate": "progress-v2111",
+ "sourceCommit": "93b37b3aaaf846c357f25cb0aef1a643b8f80c76",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2111 plus crafted bonecharms in the partner progression: when she has one, both charm lists are saved in the component serializer byte format (charmlist, craftlist and ccharm lines) through an in-memory idFile, and after a join load the native list readers load them when they fit her fresh world, then her crafted keys are equipped; the codec checks saved bytes (unit tests). Lab command coop_lab_crafted_charm adds one crafted charm; status crafted"
+}

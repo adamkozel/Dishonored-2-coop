@@ -101,6 +101,44 @@ The status adds `charms`. The lab command `coop_grant_charm <id>` gives and equi
 - **`progress-eotw-v2110a` passed.** Charm 13858082 is not owned when the partner's game is fresh (0 owned). Before her game closes it is owned and equipped (1 owned). After the rejoin it is owned and equipped again (1). Health and tranquilizer bolts are kept as in v2107 (`Check-Progress` PASS). The end diff is equal (2279 values).
 - **The twin `v2110b` is RED as required.** With progression off, the charm is lost after the rejoin (0 owned), and so are health and bolts. Its end diff is equal too, so the bonecharm calls change nothing in the shared world.
 - Found bonecharms are carried. Crafted ones (named keys) are still only counted.
+
+## Crafted bonecharms: candidate progress-v2112
+
+**What a crafted charm is (d2-ghidra, confirmed static):**
+- **Two parts.** A crafted charm is a named entry in the +0x38 list and a record in the +0x48 list.
+- **Ownership lives in +0x38.** Equip (0x14060f520) first asks 0x1406101f0, which looks the key up only in +0x38 (0x14060f900) and reads the owned bit.
+- **The traits live in +0x48.** Equip then applies the charm's traits through 0x14060e310. That finds a key in the declaration table first, then in the +0x48 list (0x14060f830). From there it takes the trait id list at +0x40 and the int at +0x50.
+- **The +0x38 list starts with the declared charms.** At the component's start it is sized from the declaration count (93), so a crafted entry comes after them.
+- **The +0x48 list grows only in the save reader.** Its allocator (0x14060efc0) and resize (0x140610c70) are reached only from there, so the native way in is the component's serializer.
+
+**The serializer's format:**
+- **Functions.** The writers are 0x14060dee0 (+0x38) and 0x14060de50 (+0x48); the readers are 0x14060db30 and 0x14060da30.
+- **Serializer object:** the idFile at +0, a writing byte at +8 and the version at +0x10. From version 0x1c each key's +0x30 int is included.
+- **File methods.** Every helper in this tree calls only the file's Read (vtable +0x28) and Write (+0x30).
+- **Counts** are a u16, or 0xffff followed by a u32.
+- **A key** is its kind (4 bytes), its name (a count, then the bytes) and its int.
+- **A +0x38 entry** is a key and a flag byte.
+- **A crafted record** is a key, two ints, a count of trait ids and an int.
+
+**Implementation (`native_bonecharm.h`, `partner_progress.h`):**
+- **In-memory idFile.** A small object whose vtable has Read and Write, with the serializer object built beside it (version 0x36).
+- **Capture.** Only when she has a crafted charm: both lists go through the native writers and are checked by our own codec. They are saved as `charmlist` and `craftlist` hex lines, and her equipped crafted keys as `ccharm <kind> <int> <hex name>` lines. Older readers skip all three.
+- **Restore,** after a join's load only:
+  - The codec checks the saved bytes, and they must fit her fresh world: the same found charms in the same order, no crafted charm yet, and every crafted record with its named entry. The native readers then load both lists. This also sets the found charms' owned bits.
+  - The existing found-charm pass runs. Then each saved crafted key is equipped through 0x14060f520, with its name made by the game's own idStr constructor.
+  - Crafting grows the +0x38 list during play, so the game already copes with that list moving under it (hypothesis until the take).
+- **Lab command `coop_lab_crafted_charm`.** It adds one crafted charm through the same readers and equips it: kind 0, name `coop_lab_crafted`, no traits. The status gains a `crafted` object.
+- **Unit tests** cover the codec: round trips, short or trailing bytes, flag bits, the 0xffff count, and the fit rules.
+- **Still a hypothesis:**
+  - The kind and the two ints of a real crafted charm (the lab one uses 0).
+  - That a real crafted charm's traits come back with it.
+
+  A crafted charm made at a crafting table in a later mission will check both.
+
+**Takes (`Run-V2117.sh`, harness v2111, chained after Run-V2116):**
+- The route `progress-eotw-crafted-v2117` is the v2110 charm route plus `coop_lab_crafted_charm`.
+- The partner is killed after step 12 and rejoins.
+- `Check-Crafted-v2117.py` judges both charms at steps 4, 11 and 16. The twin `v2117b` (progression off) must lose both.
 - **Takes:** `Run-Progress-v2096.sh`. Twin `progress-eotw-v2096b` (switch off, must lose both), then `progress-eotw-v2096a`. The VM partner is granted extended_health and tranquilizer bolts; her game is closed, relaunched and joins from the main menu; `Check-Progress-v2096.py` compares her entries.
 
 | Take | Candidate | Result |
@@ -118,6 +156,18 @@ The status adds `charms`. The lab command `coop_grant_charm <id>` gives and equi
 **v2109 on progress-v2107 (confirmed runtime):** `progress-eotw-v2109a`, `b` and `c` passed. In each, the end diff is equal (2279 values) and progression is kept as in v2107a and c. But the bottle stayed whole in the host's world in all three, so the presence path had nothing to do. The host sent its list (13 to 15 per take, no send failures); the partner's status is not kept by this route. So these takes show that presence breaks nothing it shouldn't, not that it fixes #260. The forced test `Run-V2113.sh` (harness v2109, step `breakhost`) turns breakable sync off in both games and has the host break `env_bottle_04_19` itself, so no break message is sent. It then turns sync back on, with an empty catalog as after a load. Within 45 s the later diff must be equal, with the partner's `presence.broken` at least 1. The twin `v2113b` on progress-v2106, which has no presence, must keep the difference.
 
 **v2113 failed in setup, both takes:** the melee swings did not break the bottle. The harness tried 24 views, and the host stood against a wall beside it. Neither take reached the presence check. Candidate progress-v2111 adds the lab command `coop_breakable_break <name>`. It breaks a catalogued breakable through the same native step advance that a received step uses, and counts it as sent, so no message goes out. In `Run-V2115.sh` the partner's sync is off while the host breaks the bottle, then turned on again. The twin `v2115b` keeps her sync off.
+
+**v2115 on progress-v2111 (confirmed runtime): the lab break works and the twin is RED, but presence did not fix the bottle.**
+- **Lab break.** In `bottlepresence-eotw-v2115a` the host's lab break worked (`labBreak` broken, the bottle absent from its world).
+- **The host's lists.** It kept sending them: 15 sent, 1268 names. Its catalog's `broken` list was empty, so it no longer listed the bottle.
+- **The partner received them but broke nothing.** She received 13 lists, 1268 names each, and broke 0, refused 0. Forty-five seconds after her sync came back on, the later diff still showed `env_bottle_04_19` (host absent, partner 0).
+- **The twin `v2115b` is RED as required.** It shows the same difference at its end.
+- **Ruled out by reading the code:**
+  - generated names (the bottle's suffix has two digits);
+  - the two clocks (both are `GetTickCount64` from the frame pump);
+  - the 16 cap (refused 0).
+
+  The cause is open. Candidate progress-v2113 adds presence diagnostics. Each partner evaluation records how many of her named breakables the host's list lacks, how many were targets, and a sample of them (name, step, sent, steps, age). The host counts its listed entries on their last step. `Run-V2118.sh` repeats take a on it, with partner statuses 20 s and 45 s in.
 
 **Exact join restores, candidate progress-v2105 (`partner_progress.h`):** on a join's load the class 2 entries (ammunition, elixirs, runes, gear, whalebone) and money are set to the saved values, as a native mission change carries them. Powers, upgrades and enhancements are still only raised. `Check-Progress-v2107.py` asks for each granted entry to differ from its fresh value before the close and to be equal after the rejoin.
 

@@ -1774,6 +1774,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_grant_item grenade")||!std::strcmp(text,"coop_grant_item health")||!std::strcmp(text,"coop_grant_item mana"))return true;
     if(!std::strncmp(text,"coop_grant_named ",17))return labGrantNameAllowed(text+17);
     if(!std::strncmp(text,"coop_grant_charm ",17))return labCharmIdAllowed(text+17); // 2107 (#265)
+    if(!std::strcmp(text,"coop_lab_crafted_charm"))return true; // 2112 (#265, lab)
     if(!std::strncmp(text,"coop_partner_effect ",20))return labPartnerEffectAllowed(text+20);
     if(!std::strncmp(text,"coop_lab_hit ",13))return labHitAllowed(text+13);
     if(!std::strncmp(text,"coop_lab_npc_place ",19))return labNpcPlaceAllowed(text+19);
@@ -1974,6 +1975,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_grant_item mana")){labGrantRequest=3;return;}
     if(!std::strncmp(request.command,"coop_grant_named ",17)&&labGrantNameAllowed(request.command+17)){strcpy_s(labGrantName,request.command+17);labGrantNamedRequest=true;return;}
     if(!std::strncmp(request.command,"coop_grant_charm ",17)){std::uint32_t id=0;if(labCharmIdAllowed(request.command+17,&id))labGrantCharmId=id;return;}
+    if(!std::strcmp(request.command,"coop_lab_crafted_charm")){labCraftedCharmRequest=true;labCraftedResult="pending";return;} // 2112 (#265, lab)
     if(!std::strncmp(request.command,"coop_partner_effect ",20)&&labPartnerEffectAllowed(request.command+20)){requestLabPartnerEffect(request.command+20);return;}
     if(!std::strncmp(request.command,"coop_lab_hit ",13)&&labHitAllowed(request.command+13,&labHitKind,&labHitSide)){labKnockdownRequest=true;return;}
     if(!std::strncmp(request.command,"coop_lab_npc_place ",19)&&labNpcPlaceAllowed(request.command+19,labPlaceSpawner,labPlaceAt)){labPlaceRequest=true;return;}
