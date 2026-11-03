@@ -15,7 +15,7 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
   - The partner's Deadly Shade shadow is fought by the host's guards.
   - A Blink Assault kick lands on the host's guards with its full push (#242).
 - **First mission:** the partner chooses Corvo or Emily in the co-op *Character* dialog here too; the game's own choice screen is answered for them (#243).
-- **The partner keeps their progression between joins, per character (#265).** Powers, upgrades, extra health, runes, coins, ammunition and elixirs come back after the partner leaves and joins again. Ammunition and the like come back exactly as they were, so rejoining does not refill them.
+- **The partner keeps their progression between joins, per character (#265).** Powers, upgrades, extra health, runes, coins, ammunition, elixirs and found bonecharms (and which of them are equipped) come back after the partner leaves and joins again. Ammunition and the like come back exactly as they were, so rejoining does not refill them.
 - **A different co-op version is explained on screen:** if your friend runs another version of the mod, a message says that both players need the same version (#243).
 
 ## Fixed
@@ -32,7 +32,7 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
 
 - **Step 5:** partner movement measured in numbers, and the polish pass over messages and menus (#243). Being tested: a message on the partner's result screen saying that the host chooses what happens next.
 - **Step 5b:** the first mission (*A Long Day in Dunwall*) clean in all four pairings, twice (#264).
-- **Step 5c:** found bonecharms kept between joins too; being tested (#265). Crafted bonecharms are not carried yet.
+- **Step 5c:** crafted bonecharms are not carried yet (#265).
 - **Step 6:** the proof runs and the release (#244).
 
 ## Known limitations (so far)

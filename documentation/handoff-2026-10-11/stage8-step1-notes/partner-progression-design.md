@@ -96,6 +96,11 @@ The research was read-only: d2-ghidra, plus a capstone disassembly of the `work/
 The status adds `charms`. The lab command `coop_grant_charm <id>` gives and equips one charm.
 
 **Takes:** `Run-V2110.sh` runs the twin `progress-eotw-v2110b` (progression off, must lose the charm) and `v2110a`. Both use route `progress-eotw-charm-v2110` (charm 13858082), and `Check-Charms-v2110.py` judges them.
+
+**Result, confirmed runtime:**
+- **`progress-eotw-v2110a` passed.** Charm 13858082 is not owned when the partner's game is fresh (0 owned). Before her game closes it is owned and equipped (1 owned). After the rejoin it is owned and equipped again (1). Health and tranquilizer bolts are kept as in v2107 (`Check-Progress` PASS). The end diff is equal (2279 values).
+- **The twin `v2110b` is RED as required.** With progression off, the charm is lost after the rejoin (0 owned), and so are health and bolts. Its end diff is equal too, so the bonecharm calls change nothing in the shared world.
+- Found bonecharms are carried. Crafted ones (named keys) are still only counted.
 - **Takes:** `Run-Progress-v2096.sh`. Twin `progress-eotw-v2096b` (switch off, must lose both), then `progress-eotw-v2096a`. The VM partner is granted extended_health and tranquilizer bolts; her game is closed, relaunched and joins from the main menu; `Check-Progress-v2096.py` compares her entries.
 
 | Take | Candidate | Result |
