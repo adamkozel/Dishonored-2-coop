@@ -233,6 +233,21 @@ The partner's high contacts are at starts and stops, where the native worker sco
 - **Take a** started during the squash merge of PR #262 (`git switch main` removed the branch's route file for about a minute) and failed on the missing file. It is rerun with the next round.
 - **The engine-frame sampler (candidate progress-v2125, harness v2116, `Run-V2127.sh`).** Lab command `coop_anim_sample <ms>` (`anim_sample.h`) reads the partner avatar's root and feet in the same engine frame, every frame, and writes them in the probe's format, so `d2_anim_quality.py` reads them unchanged. The host-side samples also run the external probe beside it for comparison. **All five V2127 takes stopped at the first sample:** `Send-D2Command.ps1` refused the command, which was not in its allowed command set. That is a harness gap, not a result. The command is now allowed, and `Run-V2131.sh` repeats the round on progress-v2126 and harness v2118 (queued after `Run-V2130.sh`).
 
+**Result, `Run-V2131.sh` (progress-v2126, harness v2118): #266 is not reproduced in the engine frame (confirmed runtime).** All five takes passed the route. The samples are at steps 7 (the host samples the partner) and 12 (the partner samples the host): the route gained a step, so the runner's own printout, which looks for steps 6 and 11, printed none, and the values below are read from the take files. Skate p95 / max, limits 0.08 / 0.12 m:
+
+| Take | Pairing | Start phase | Partner seen by the host, engine frame (57 Hz) | The same walk, external probe (21 Hz) | Host seen by the partner, engine frame (38 Hz, VM) |
+|---|---|---|---|---|---|
+| `animquality-eotw-v2131a` | Corvo / Emily | on | 0.017 / 0.036 m PASS | 0.032 / 0.034 m PASS | 0.078 / 0.078 m PASS |
+| `animquality-eotw-v2131b` | Emily / Corvo | on | 0.015 / 0.016 m PASS | 0.063 / 0.078 m PASS | 0.079 / 0.079 m PASS |
+| `animquality-eotw-v2131c` | Corvo / Corvo | on | 0.019 / 0.077 m PASS | 0.072 / 0.207 m FAIL | 0.115 / 0.115 m FAIL |
+| `animquality-eotw-v2131d` | Emily / Emily | on | 0.019 / 0.038 m PASS | 0.052 / 0.151 m FAIL | 0.013 / 0.045 m PASS |
+| `animquality-eotw-v2131e` (twin) | Corvo / Emily | off | 0.013 / 0.013 m PASS | 0.055 / 0.177 m FAIL | 0.012 / 0.113 m PASS |
+
+- **The partner's walk start and stop, seen from the host, stay within the limits in all four pairings**, read in the same engine frame as the pose. The external probe, reading the same walk beside the sampler, fails three of five takes on one contact (0.15 to 0.21 m). So the 14.5 cm glide of `animquality-eotw-v2091a` was the probe reading the root and the pose a frame apart, not a glide in the game.
+- **The start phase (progress-v2114) makes no measured difference:** the twin with it off is as clean as the takes with it on (0.013 m). The twin cannot go red because nothing glides. It stays on (it is part of the passing candidates); removing it would need its own round.
+- **Sensitivity check instead of the twin (`animquality-eotw-v2131-glidecheck`):** the stance toe of the longest planted contact in each step-7 sample was moved 14.5 cm with the walk, as #266 described, and the analyser fails all four at max 0.145 m. The engine-frame measurement sees a glide of that size.
+- **New, smaller (#269):** the host's rig in the partner's world (on the VM, about 38 fps) drifts one contact 7.8, 7.9 and 11.5 cm in a, b and c (4.5 cm in d). In each take it is the same contact: one foot at the full-speed reversal, about 4.0 s into the sample (full forward 3.0 to 3.8 s, then full back). With 14 or 15 contacts the p95 is the largest one, so c fails the p95 limit on that single contact; the next largest contact is 5.3 cm or less. Hypothesis: the lower frame rate on the VM, or the reversal blend of the host's rig. #266 is closed with this result; #269 follows the reversal.
+
 ## The version notice (candidates notice-v2092, progress-v2097, progress-v2100)
 
 When the friend's mod is a different version (control hello or lobby tag), each game shows a one-button engine message box (`native_notice.h`). Lab command `coop_notice_test` raises one.
