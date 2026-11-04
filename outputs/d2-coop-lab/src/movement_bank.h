@@ -175,6 +175,17 @@ struct MovementBank {
             if(parents[joint]<0)return false;joint=unsigned(parents[joint]);
         }return false;
     }
+    // 2136 (#271): a child's rotation kept in the world orientation its authored parent gave it, under another parent
+    // rotation (xyzw; translation unchanged). The pistol idle's spine counter-rotates its own center_root (-48 deg);
+    // moving, the gait's center_root (+28 to +51 deg) replaced it and turned the head and gun arm 65 to 90 deg left of
+    // the walk (measure_gun_walk_mix_v2135d.py).
+    static Joint keepUnder(const Joint& authoredParent,const Joint& parent,const Joint& child){
+        const auto mul=[](const float* a,const float* b){return std::array<float,4>{a[3]*b[0]+a[0]*b[3]+a[1]*b[2]-a[2]*b[1],
+            a[3]*b[1]-a[0]*b[2]+a[1]*b[3]+a[2]*b[0],a[3]*b[2]+a[0]*b[1]-a[1]*b[0]+a[2]*b[3],a[3]*b[3]-a[0]*b[0]-a[1]*b[1]-a[2]*b[2]};};
+        const float inverse[4]{-parent[0],-parent[1],-parent[2],parent[3]};
+        const auto world=mul(authoredParent.data(),child.data());const auto local=mul(inverse,world.data());
+        Joint v=child;for(unsigned k=0;k<4;++k)v[k]=local[k];return v;
+    }
     static unsigned clipCount(unsigned v){constexpr unsigned counts[]={0,9,17,26,29,33,37,44,59,89,107,111,113,115,117,126,141,149,161,173,177,179,181,183,193,194,197,198,201,213,225,229,231,232,232,233,234,235,238,247,248,251,260,264,273,276,285,289,301,304,313,315,316,318,319,322,325,331,335,336,340,347,348,351,352,353,354,357,359,365,369,374,378,380,381,382};return v<=75?counts[v]:0;}
     static Joint blend(const Joint& a,const Joint& b,float t){
         Joint v{};float dot=0,n=0;for(unsigned k=0;k<4;++k)dot+=a[k]*b[k];

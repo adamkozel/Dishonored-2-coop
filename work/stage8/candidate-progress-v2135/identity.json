@@ -1,0 +1,10 @@
+{
+ "candidate": "progress-v2135",
+ "card": 264,
+ "dll": "CCA59634FD101E95453E1E92A77682E21B764FA9C312D2E39E0B64B66070F929",
+ "probe": "0C9350B830A52E774268DB8DFC3EA670163319293C31F64206D87B584462405F",
+ "previousCandidate": "progress-v2134",
+ "sourceCommit": "9894cedb6ea8fcd681315507e34a6b0f3216255d",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2134 plus a world digest that fails (exit 45, npc_health) when the NPC catalog lists NPCs and none has readable health: s4-dunwall-v2135a host ramsey-loot digest had 63 catalog NPCs and none read (readNativeHealth needs gameplay logic), so the diff counted all absent. Probe only. The DLL sources equal progress-v2134 (git diff c9dee3f7a: runtime_probe.cpp only); its hash differs because the branch switch rebuilt every unit"
+}

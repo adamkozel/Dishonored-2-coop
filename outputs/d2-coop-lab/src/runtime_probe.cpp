@@ -552,11 +552,16 @@ int main(int argc, char** argv) {
          // counted as every NPC absent (sweep-s2-dunwall-v2133c, ramsey-loot, the host's three samples). It now fails the
          // digest, so the harness retries.
          if(!readWorldNpcCatalog(reader,base,game,catalog,unbound))return fail("npc_catalog");
+         // 2135: the catalog read can pass while every health read fails (readNativeHealth needs gameplay logic and no
+         // pending switch). s4-dunwall-v2135a's host ramsey-loot digest had 63 catalog NPCs and none read, so the diff
+         // counted all of them absent. A catalog with NPCs and no readable health now fails the digest too.
+         unsigned npcRead=0,npcListed=0;
          for(const auto& n:catalog){
-            if(actorName(n.actor).rfind("d2coop",0)==0)continue;
-            NativeHealth hp{};if(!readNativeHealth(reader,base,n.handle,hp)||hp.game!=game||hp.actor!=n.actor)continue;
+            if(actorName(n.actor).rfind("d2coop",0)==0)continue;++npcListed;
+            NativeHealth hp{};if(!readNativeHealth(reader,base,n.handle,hp)||hp.game!=game||hp.actor!=n.actor)continue;++npcRead;
             const unsigned state=hp.current<=0?2u:((hp.ownerFlags&0x20)?1u:0u);
             if(n.unique)put("npcs",n.spawnerName,state==2?"\"dead\"":state==1?"\"unconscious\"":"\"alive\"");else packs[n.spawnerName][state]++;}
+         if(npcListed&&!npcRead)return fail("npc_health");
          for(const auto& p:packs)put("npcs",p.first,"["+std::to_string(p.second[0])+","+std::to_string(p.second[1])+","+std::to_string(p.second[2])+"]");}
         {std::uintptr_t buckets=0;std::uint32_t mask=0;
          if(reader(game+0x1f7780+0x18,&buckets,8)&&buckets&&reader(game+0x1f7780+0x28,&mask,4)&&mask<=0xffff)
