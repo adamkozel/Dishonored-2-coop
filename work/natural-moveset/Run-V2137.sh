@@ -29,7 +29,9 @@
 # Meagan, the partner stands 2 m in front facing it and a diff films both (-LookStages), then each game samples the
 # other rig in its engine frame (coop_anim_sample, with head, nose, arm and wrist joints since progress-v2136) while it
 # stands 1 s, walks forward 1.8 s and back 1.8 s, pistol selected. Before: progress-v2136 (sampler only). After:
-# progress-v2137 (MovementBank::keepUnder). The candidate is deployed per take.
+# progress-v2137 (MovementBank::keepUnder). The candidate is deployed per take. Harness v2137 keeps the partner's and the
+# host's combat counters on every press of the partner's Ramsey fight and her frame every 8th press (the held fights of
+# s4-dunwall-v2135c, d and g). e (Corvo / Corvo) and f (Emily / Emily) are also the S4 reruns of those pairings.
 # Usage: Run-V2137.sh [a b c d]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
@@ -45,14 +47,14 @@ run(){
  cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
  "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "$take-deploy.log" 2>&1 || { echo "deploy failed"; return; }
  clean
- "$P" -NoProfile -File Route-MissionVM-v2135.ps1 -LookStages -Take "$take" -MapInfo campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+ "$P" -NoProfile -File Route-MissionVM-v2137.ps1 -LookStages -Take "$take" -MapInfo campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
  echo "$take exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'));[print(k,v) for k,v in n.items() if k.startswith(('diff-','diffwait-'))];f=n.get('final',{});print({x:(f[x].get('map'),f[x].get('hold')) for x in f})" 2>&1 | head -c 2500)"
  grep -h "world-digest:" "$take.log" | head -3; ls "$take" | grep -i box
  for t in mayhew ramsey-loot saferoom balcony streets end; do [ -f "$take/diff-$t.txt" ] && { echo "$t:"; head -6 "$take/diff-$t.txt"; }; done
  for f in "$take"/step2[0-9]-*-pickupcatchup-host.json; do [ -f "$f" ] && echo "$(basename "$f"): $(python -c "import json,sys;d=json.load(open(sys.argv[1]));print(d['result'],d['planned'],d['awarded'],d['awardedNames'],d['failedNames'])" "$f")"; done
  last=$(ls "$take" | grep -o "^step[0-9]*-[a-z]*-missiondecision-client.json" | sort | tail -1); [ -n "$last" ] && echo "decision: $(tr -d '\r\n ' < "$take/$last" | head -c 600)"
 }
-want="${*:-a b c}"
+want="${*:-a b e f c}"
 for x in $want; do
  case $x in
   a) run pistol-walk-dunwall-v2137a routes/pistol-walk-dunwall-v2137.json corvo emily Left candidate-progress-v2136;;
