@@ -548,7 +548,11 @@ int main(int argc, char** argv) {
                 put(story?"storypickups":"pickups",actorName(actor),"["+std::to_string((flags>>3)&1)+","+std::to_string(ownerFlags&1)+"]");}
         }
         {std::vector<NativeWorldNpc> catalog;unsigned unbound=0;std::map<std::string,std::array<unsigned,3>> packs;
-         if(readWorldNpcCatalog(reader,base,game,catalog,unbound))for(const auto& n:catalog){
+         // 2134: an unreadable catalog (the entity list changed during the read) left the category empty, which the diff
+         // counted as every NPC absent (sweep-s2-dunwall-v2133c, ramsey-loot, the host's three samples). It now fails the
+         // digest, so the harness retries.
+         if(!readWorldNpcCatalog(reader,base,game,catalog,unbound))return fail("npc_catalog");
+         for(const auto& n:catalog){
             if(actorName(n.actor).rfind("d2coop",0)==0)continue;
             NativeHealth hp{};if(!readNativeHealth(reader,base,n.handle,hp)||hp.game!=game||hp.actor!=n.actor)continue;
             const unsigned state=hp.current<=0?2u:((hp.ownerFlags&0x20)?1u:0u);
