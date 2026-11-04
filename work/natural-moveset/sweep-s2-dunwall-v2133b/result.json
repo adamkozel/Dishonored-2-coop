@@ -1,0 +1,300 @@
+{
+  "passed": false,
+  "failure": "host died during step33-trigger (GameOver)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2133",
+      "hostDll": "A8CE50D35DCFC62A0BC1747EFE78FF147C6DBA17FFC4F250C155CB5C324F6012",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 19969,
+        "writtenAt": 204988796,
+        "startedAgoMs": 2609,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 12703,
+        "writtenAt": 204940937,
+        "startedAgoMs": 1859,
+        "phase2Checks": 15
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.4,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "client": "models/characters/player/corvo/body.def",
+      "host": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command host coop_usable_safe_doors on",
+      "step03-command client coop_usable_safe_doors on",
+      "step04-command host coop_follow_host on",
+      "step05-command client coop_follow_host on",
+      "step06-command client coop_continue_follow on"
+    ],
+    "diffwait-start": {
+      "settled": true,
+      "s": 1.7
+    },
+    "armwait-start": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-start": {
+      "status": "EQUAL",
+      "compared": 538,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "diffwait-deaths": {
+      "settled": true,
+      "s": 1.7
+    },
+    "armwait-deaths": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-deaths": {
+      "status": "EQUAL",
+      "compared": 554,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "diffwait-mayhew": {
+      "settled": true,
+      "s": 1.7
+    },
+    "armwait-mayhew": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-mayhew": {
+      "status": "EQUAL",
+      "compared": 554,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "step20-partnerattack": {
+      "npc": "models/characters/def/story/mortimer_ramsey.def_1908",
+      "handle": "0xb580774",
+      "presses": 18,
+      "dead": true
+    },
+    "diffwait-ramsey-loot": {
+      "settled": true,
+      "s": 1.7
+    },
+    "armwait-ramsey-loot": {
+      "armed": true,
+      "s": 13.7
+    },
+    "diff-ramsey-loot": {
+      "status": "EQUAL",
+      "compared": 551,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "diffwait-ring-locker": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-ring-locker": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-ring-locker": {
+      "status": "EQUAL",
+      "compared": 551,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "diffwait-saferoom": {
+      "settled": true,
+      "s": 7.1
+    },
+    "armwait-saferoom": {
+      "armed": true,
+      "s": 6.3
+    },
+    "diff-saferoom": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "diffwait-balcony": {
+      "settled": true,
+      "s": 1.7
+    },
+    "armwait-balcony": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-balcony": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "failureState": {
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 35,
+        "pos": [
+          -30.447870,
+          -40.374924,
+          57.370724
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          0,
+          3,
+          10,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 6,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "1/133/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwall,Task_DW_ReachBoat"
+      },
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 44,
+        "pos": [
+          -52.601532,
+          -21.998466,
+          57.503647
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          0,
+          3,
+          10,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/1094",
+        "ka": "94/68/7",
+        "active": "Mission_DW,Obj_DW_EscapeDunwall,Task_DW_ReachBoat"
+      }
+    },
+    "vmGameAlive": 1
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

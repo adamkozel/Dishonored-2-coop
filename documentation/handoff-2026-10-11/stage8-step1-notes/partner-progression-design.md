@@ -182,6 +182,8 @@ The crafted record goes through the native readers and comes back equipped. Stil
 
 **Fix, candidate progress-v2124 (progress-v2123 plus this):** a request changes anything only when it changes the setting (`breakableEnableChanges`, unit tests). Prop rest does the same. `Run-V2124.sh` runs the forced test again (`bottlepresence-eotw-v2124a`, chained after Run-V2122). Its later diff must be equal, with `presence.broken` 1 or more. The twin is unchanged by this fix (the partner's sync stays off), so `v2115b` stands as the RED twin.
 
+**Result, `bottlepresence-eotw-v2124a` (progress-v2124): PASS (confirmed runtime).** The partner's presence broke her copy of the bottle by the 20 s read (`presence.broken` 1, `listed` 1268, 13 lists evaluated). It stayed broken at 45 s (17 lists). Both diffs were equal (2279 and 2278 values), and the only other entries were the per-character news pickups, as expected. With the RED twin `v2115b`, #260's presence fix is done.
+
 **Exact join restores, candidate progress-v2105 (`partner_progress.h`):** on a join's load the class 2 entries (ammunition, elixirs, runes, gear, whalebone) and money are set to the saved values, as a native mission change carries them. Powers, upgrades and enhancements are still only raised. `Check-Progress-v2107.py` asks for each granted entry to differ from its fresh value before the close and to be equal after the rejoin.
 
 ## Plan

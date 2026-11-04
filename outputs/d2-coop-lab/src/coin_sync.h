@@ -399,7 +399,7 @@ void servicePickupCatchUp(ULONGLONG tick){
         std::unordered_map<std::string,bool> shared;for(const auto& e:coinSync.entries)shared[e.binding.name]=true;
         for(const auto& item:pickupCensusItems()){
             const auto at=pickupCensus.actors.find(item.handle>>16);
-            if(at==pickupCensus.actors.end()||c.previousAt<at->second.seenAt+10000||shared.count(item.name)||c.attempted.count(item.name)||!pickupCatchUpTarget(item,c.peer,c.previous,!localRole))continue;
+            if(at==pickupCensus.actors.end()||c.previousAt<at->second.seenAt+10000||shared.count(item.name)||c.attempted.count(item.name)||!(pickupCharacterNamed(item.name)?story&&localCharacterKnown()&&remoteCharacterKnown()&&pickupCharacterCatchUpTarget(item,localCharacter(),remoteCharacter(),c.peer,c.previous):pickupCatchUpTarget(item,c.peer,c.previous,!localRole)))continue; // 2132: character variants
             NativeCoin n{};if(story?readNativeStoryPickup(memoryRead,base,observedGame,item.handle,n):readNativeCoin(memoryRead,base,observedGame,item.handle,n,true)&&coinCatalogEligible(n))c.targets.push_back({item.name,item.handle}); // dormant: a later cycle
         }
         c.planned+=c.targets.size();c.result=c.targets.empty()?"caught_up":"catching_up";

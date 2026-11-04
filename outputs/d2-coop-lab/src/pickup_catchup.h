@@ -39,6 +39,9 @@ inline bool pickupRuntimeNamed(const std::string& name,std::uint32_t handle){
     return slot==(handle>>16);
 }
 inline std::string pickupBaseName(const std::string& name){const auto at=name.find_last_of('_');return at==std::string::npos?name:name.substr(0,at);}
+// Stage 8.4.2 (#238): the item families that reach both players (chapter 120). 2133 (#264): family 11 holds the
+// mission items, such as Ramsey's ring (both variants, simple-pickup-catalog-v810); Edge of the World has none.
+inline bool storyPickupFamily(unsigned family){return family==11||family==12||family==17||family==22||family==24||family==27;}
 inline bool pickupCharacterNamed(const std::string& name){return name.find("corvo")!=std::string::npos||name.find("emily")!=std::string::npos;}
 struct PickupPresenceItem {std::string name;std::uint32_t handle=0;float position[3]{};};
 inline PickupPresenceEntry pickupPresenceEntry(const PickupPresenceItem& item){
@@ -80,4 +83,16 @@ inline bool pickupInPresence(const PickupPresenceItem& item,const std::vector<Pi
 inline bool pickupCatchUpTarget(const PickupPresenceItem& item,const std::vector<PickupPresenceEntry>& peer,const std::vector<PickupPresenceEntry>& previous,bool authoredOnly=false){
     if(pickupCharacterNamed(item.name)||(authoredOnly&&pickupRuntimeNamed(item.name,item.handle)))return false;
     return !pickupInPresence(item,peer)&&!pickupInPresence(item,previous);
+}
+// 2132 (#264): a story pickup with one variant per character. Both worlds hold both variants of Ramsey's ring
+// (ld_imperial_ring_pickup_corvo and _emily, sweep-s2-dunwall-v2130a digests) and each player takes only their own
+// character's, so a name never leaves both worlds. This world's own variant is caught up when the peer's world no longer
+// has the peer's variant, in its last two presences (sweep-s2-dunwall-v2130a and b: the partner took the ring, and the
+// host, without one, could not open the safe room for Task_DW_OpenVault). Characters: 1 Corvo, 2 Emily.
+inline bool pickupCharacterCatchUpTarget(const PickupPresenceItem& item,int local,int remote,const std::vector<PickupPresenceEntry>& peer,const std::vector<PickupPresenceEntry>& previous){
+    if(local<1||local>2||remote<1||remote>2||pickupRuntimeNamed(item.name,item.handle))return false;
+    const std::string mine=local==1?"corvo":"emily",other=local==1?"emily":"corvo",theirs=remote==1?"corvo":"emily";
+    const auto at=item.name.rfind(mine);if(at==std::string::npos||item.name.find(other)!=std::string::npos)return false;
+    auto counterpart=item;counterpart.name.replace(at,mine.size(),theirs);
+    return !pickupInPresence(counterpart,peer)&&!pickupInPresence(counterpart,previous);
 }

@@ -1,0 +1,10 @@
+{
+ "candidate": "progress-v2134",
+ "card": 264,
+ "dll": "A8CE50D35DCFC62A0BC1747EFE78FF147C6DBA17FFC4F250C155CB5C324F6012",
+ "probe": "C6A82365A5C5C075E10E454EE97D1F8DAFAFD212FF172D43A5E2D070DB3A00D4",
+ "previousCandidate": "progress-v2133",
+ "sourceCommit": "c9dee3f7a1417957c7ad24a582a9f65d6f3fcf7c",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2133 plus a world digest that fails (exit 45, npc_catalog) when the NPC catalog is unreadable, so the harness retries: the host digest of sweep-s2-dunwall-v2133c at ramsey-loot had no NPCs in all three samples and the diff counted 62 NPCs absent. The DLL is unchanged in behaviour (runtime_probe.cpp only)"
+}
