@@ -1,0 +1,479 @@
+{
+ "script": "preview_gun_neutral_v2142.py",
+ "label": "confirmed static (offline native samples, no runtime)",
+ "rig": "base_tall (native source)",
+ "conventions": {
+  "facing": "origin joint 0 bind forward (toes from ankles) carried by its rotation",
+  "yaw_positive": "to the character's left",
+  "left_arm_check_deg": 90.0,
+  "drop": "wrist z minus upper-arm z, m (negative = wrist below shoulder)",
+  "head": "center_head_jnt bind forward carried by its world rotation; nose_from_facing is head 12 to nose 92 for reference"
+ },
+ "clips": {
+  "sword_gun_idle": {
+   "id": "f45ecaa1f1f7a6f0",
+   "asset": "models/characters/tall/_animations_/high/sword/sword_gun_idle.md6anim",
+   "frames": 51,
+   "fps": 29.999998092651367,
+   "sample_file": "native-samples\\f45ecaa1f1f7a6f0.edgepose",
+   "samples": {
+    "0": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": -48.42,
+     "head_from_facing": -9.45,
+     "nose_from_facing": -8.05,
+     "left_arm": {
+      "yaw_from_facing": -0.47,
+      "drop_m": 0.078,
+      "pitch_deg": 8.8,
+      "reach_m": 0.508,
+      "wrist_z": 1.676,
+      "arm_z": 1.598
+     },
+     "right_arm": {
+      "yaw_from_facing": -146.27,
+      "drop_m": -0.48,
+      "pitch_deg": -71.1,
+      "reach_m": 0.165,
+      "wrist_z": 1.002,
+      "arm_z": 1.482
+     }
+    },
+    "25": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": -48.58,
+     "head_from_facing": -9.24,
+     "nose_from_facing": -7.96,
+     "left_arm": {
+      "yaw_from_facing": -0.28,
+      "drop_m": 0.077,
+      "pitch_deg": 8.6,
+      "reach_m": 0.509,
+      "wrist_z": 1.679,
+      "arm_z": 1.602
+     },
+     "right_arm": {
+      "yaw_from_facing": -145.77,
+      "drop_m": -0.486,
+      "pitch_deg": -72.8,
+      "reach_m": 0.151,
+      "wrist_z": 0.996,
+      "arm_z": 1.482
+     }
+    },
+    "50": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": -48.42,
+     "head_from_facing": -9.45,
+     "nose_from_facing": -8.05,
+     "left_arm": {
+      "yaw_from_facing": -0.47,
+      "drop_m": 0.078,
+      "pitch_deg": 8.8,
+      "reach_m": 0.508,
+      "wrist_z": 1.676,
+      "arm_z": 1.598
+     },
+     "right_arm": {
+      "yaw_from_facing": -146.27,
+      "drop_m": -0.48,
+      "pitch_deg": -71.1,
+      "reach_m": 0.165,
+      "wrist_z": 1.002,
+      "arm_z": 1.482
+     }
+    }
+   }
+  },
+  "sword_gun_neutral": {
+   "id": "613fb70b3db1ef4e",
+   "asset": "models/characters/tall/_animations_/high/sword/sword_gun_neutral.md6anim",
+   "frames": 2,
+   "fps": 29.999998092651367,
+   "sample_file": "native-samples\\613fb70b3db1ef4e.edgepose",
+   "samples": {
+    "0": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": -48.42,
+     "head_from_facing": -9.45,
+     "nose_from_facing": -8.05,
+     "left_arm": {
+      "yaw_from_facing": -0.47,
+      "drop_m": 0.078,
+      "pitch_deg": 8.8,
+      "reach_m": 0.508,
+      "wrist_z": 1.676,
+      "arm_z": 1.598
+     },
+     "right_arm": {
+      "yaw_from_facing": -146.27,
+      "drop_m": -0.48,
+      "pitch_deg": -71.1,
+      "reach_m": 0.165,
+      "wrist_z": 1.002,
+      "arm_z": 1.482
+     }
+    },
+    "1": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": -48.42,
+     "head_from_facing": -9.45,
+     "nose_from_facing": -8.05,
+     "left_arm": {
+      "yaw_from_facing": -0.47,
+      "drop_m": 0.078,
+      "pitch_deg": 8.8,
+      "reach_m": 0.508,
+      "wrist_z": 1.676,
+      "arm_z": 1.598
+     },
+     "right_arm": {
+      "yaw_from_facing": -146.4,
+      "drop_m": -0.48,
+      "pitch_deg": -71.1,
+      "reach_m": 0.165,
+      "wrist_z": 1.002,
+      "arm_z": 1.482
+     }
+    }
+   }
+  },
+  "sword_neutral": {
+   "id": "0d13091b0e96b4f9",
+   "asset": "models/characters/tall/_animations_/high/sword/sword_neutral.md6anim",
+   "frames": 3,
+   "fps": 29.999998092651367,
+   "sample_file": "native-samples\\0d13091b0e96b4f9.edgepose",
+   "samples": {
+    "0": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 0.73,
+     "nose_from_facing": 0.4,
+     "left_arm": {
+      "yaw_from_facing": 129.8,
+      "drop_m": -0.427,
+      "pitch_deg": -59.3,
+      "reach_m": 0.254,
+      "wrist_z": 1.064,
+      "arm_z": 1.491
+     },
+     "right_arm": {
+      "yaw_from_facing": -47.64,
+      "drop_m": -0.456,
+      "pitch_deg": -64.9,
+      "reach_m": 0.213,
+      "wrist_z": 1.046,
+      "arm_z": 1.502
+     }
+    },
+    "1": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 0.73,
+     "nose_from_facing": 0.4,
+     "left_arm": {
+      "yaw_from_facing": 129.8,
+      "drop_m": -0.427,
+      "pitch_deg": -59.3,
+      "reach_m": 0.254,
+      "wrist_z": 1.064,
+      "arm_z": 1.491
+     },
+     "right_arm": {
+      "yaw_from_facing": -47.64,
+      "drop_m": -0.456,
+      "pitch_deg": -64.9,
+      "reach_m": 0.213,
+      "wrist_z": 1.046,
+      "arm_z": 1.502
+     }
+    },
+    "2": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 0.73,
+     "nose_from_facing": 0.4,
+     "left_arm": {
+      "yaw_from_facing": 129.8,
+      "drop_m": -0.427,
+      "pitch_deg": -59.3,
+      "reach_m": 0.254,
+      "wrist_z": 1.064,
+      "arm_z": 1.491
+     },
+     "right_arm": {
+      "yaw_from_facing": -47.64,
+      "drop_m": -0.456,
+      "pitch_deg": -64.9,
+      "reach_m": 0.213,
+      "wrist_z": 1.046,
+      "arm_z": 1.502
+     }
+    }
+   }
+  },
+  "sword_idle": {
+   "id": "9fa5c81f6eb8de55",
+   "asset": "models/characters/tall/_animations_/high/sword/sword_idle.md6anim",
+   "frames": 115,
+   "fps": 29.999998092651367,
+   "sample_file": "native-samples\\9fa5c81f6eb8de55.edgepose",
+   "samples": {
+    "0": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 0.73,
+     "nose_from_facing": 0.4,
+     "left_arm": {
+      "yaw_from_facing": 129.81,
+      "drop_m": -0.427,
+      "pitch_deg": -59.3,
+      "reach_m": 0.254,
+      "wrist_z": 1.064,
+      "arm_z": 1.491
+     },
+     "right_arm": {
+      "yaw_from_facing": -47.64,
+      "drop_m": -0.456,
+      "pitch_deg": -64.9,
+      "reach_m": 0.213,
+      "wrist_z": 1.046,
+      "arm_z": 1.502
+     }
+    },
+    "57": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 1.97,
+     "nose_from_facing": 1.81,
+     "left_arm": {
+      "yaw_from_facing": 114.29,
+      "drop_m": -0.433,
+      "pitch_deg": -61.3,
+      "reach_m": 0.238,
+      "wrist_z": 1.038,
+      "arm_z": 1.471
+     },
+     "right_arm": {
+      "yaw_from_facing": -36.62,
+      "drop_m": -0.454,
+      "pitch_deg": -64.4,
+      "reach_m": 0.217,
+      "wrist_z": 1.03,
+      "arm_z": 1.484
+     }
+    },
+    "114": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 0.73,
+     "nose_from_facing": 0.4,
+     "left_arm": {
+      "yaw_from_facing": 129.81,
+      "drop_m": -0.427,
+      "pitch_deg": -59.3,
+      "reach_m": 0.254,
+      "wrist_z": 1.064,
+      "arm_z": 1.491
+     },
+     "right_arm": {
+      "yaw_from_facing": -47.64,
+      "drop_m": -0.456,
+      "pitch_deg": -64.9,
+      "reach_m": 0.213,
+      "wrist_z": 1.046,
+      "arm_z": 1.502
+     }
+    }
+   }
+  },
+  "sword_gun_additive": {
+   "id": "cce2fba0631ce205",
+   "asset": "models/characters/tall/_animations_/high/sword/sword_gun_additive.md6anim",
+   "frames": 3,
+   "fps": 29.999998092651367,
+   "sample_file": "native-samples\\cce2fba0631ce205.edgepose",
+   "samples": {},
+   "delta_check": {
+    "0": {
+     "max_local_angle_deg": 0.0,
+     "joint": "right_wrist_jnt",
+     "max_translation_m": 0.0
+    },
+    "1": {
+     "max_local_angle_deg": 0.0,
+     "joint": "right_wrist_jnt",
+     "max_translation_m": 0.0
+    },
+    "2": {
+     "max_local_angle_deg": 0.0,
+     "joint": "right_wrist_jnt",
+     "max_translation_m": 0.0
+    }
+   },
+   "on_sword_gun_neutral": {
+    "0": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": -48.42,
+     "head_from_facing": -9.46,
+     "nose_from_facing": -8.06,
+     "left_arm": {
+      "yaw_from_facing": -0.49,
+      "drop_m": 0.078,
+      "pitch_deg": 8.8,
+      "reach_m": 0.508,
+      "wrist_z": 1.676,
+      "arm_z": 1.598
+     },
+     "right_arm": {
+      "yaw_from_facing": -146.29,
+      "drop_m": -0.48,
+      "pitch_deg": -71.0,
+      "reach_m": 0.165,
+      "wrist_z": 1.002,
+      "arm_z": 1.482
+     }
+    },
+    "1": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": -48.42,
+     "head_from_facing": -9.46,
+     "nose_from_facing": -8.06,
+     "left_arm": {
+      "yaw_from_facing": -0.49,
+      "drop_m": 0.078,
+      "pitch_deg": 8.8,
+      "reach_m": 0.508,
+      "wrist_z": 1.676,
+      "arm_z": 1.598
+     },
+     "right_arm": {
+      "yaw_from_facing": -146.29,
+      "drop_m": -0.48,
+      "pitch_deg": -71.0,
+      "reach_m": 0.165,
+      "wrist_z": 1.002,
+      "arm_z": 1.482
+     }
+    },
+    "2": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": -48.42,
+     "head_from_facing": -9.46,
+     "nose_from_facing": -8.06,
+     "left_arm": {
+      "yaw_from_facing": -0.49,
+      "drop_m": 0.078,
+      "pitch_deg": 8.8,
+      "reach_m": 0.508,
+      "wrist_z": 1.676,
+      "arm_z": 1.598
+     },
+     "right_arm": {
+      "yaw_from_facing": -146.29,
+      "drop_m": -0.48,
+      "pitch_deg": -71.0,
+      "reach_m": 0.165,
+      "wrist_z": 1.002,
+      "arm_z": 1.482
+     }
+    }
+   },
+   "on_sword_neutral": {
+    "0": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 0.71,
+     "nose_from_facing": 0.38,
+     "left_arm": {
+      "yaw_from_facing": 129.79,
+      "drop_m": -0.427,
+      "pitch_deg": -59.3,
+      "reach_m": 0.254,
+      "wrist_z": 1.064,
+      "arm_z": 1.491
+     },
+     "right_arm": {
+      "yaw_from_facing": -47.66,
+      "drop_m": -0.456,
+      "pitch_deg": -64.9,
+      "reach_m": 0.213,
+      "wrist_z": 1.046,
+      "arm_z": 1.502
+     }
+    },
+    "1": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 0.71,
+     "nose_from_facing": 0.38,
+     "left_arm": {
+      "yaw_from_facing": 129.79,
+      "drop_m": -0.427,
+      "pitch_deg": -59.3,
+      "reach_m": 0.254,
+      "wrist_z": 1.064,
+      "arm_z": 1.491
+     },
+     "right_arm": {
+      "yaw_from_facing": -47.66,
+      "drop_m": -0.456,
+      "pitch_deg": -64.9,
+      "reach_m": 0.213,
+      "wrist_z": 1.046,
+      "arm_z": 1.502
+     }
+    },
+    "2": {
+     "origin_yaw": 0.0,
+     "center_root_from_facing": 40.35,
+     "head_from_facing": 0.71,
+     "nose_from_facing": 0.38,
+     "left_arm": {
+      "yaw_from_facing": 129.79,
+      "drop_m": -0.427,
+      "pitch_deg": -59.3,
+      "reach_m": 0.254,
+      "wrist_z": 1.064,
+      "arm_z": 1.491
+     },
+     "right_arm": {
+      "yaw_from_facing": -47.66,
+      "drop_m": -0.456,
+      "pitch_deg": -64.9,
+      "reach_m": 0.213,
+      "wrist_z": 1.046,
+      "arm_z": 1.502
+     }
+    }
+   }
+  }
+ },
+ "comparisons": {
+  "gun_neutral_f0_vs_sword_neutral_f0": {
+   "max_world_angle_deg": 134.28,
+   "joint": "left_shoulder_jnt"
+  },
+  "gun_neutral_f0_vs_f1": {
+   "max_world_angle_deg": 0.04,
+   "joint": "right_elbow_jnt"
+  },
+  "gun_neutral_f0_vs_gun_idle_f0": {
+   "max_world_angle_deg": 0,
+   "joint": null
+  },
+  "gun_neutral_f0_vs_sword_idle_f0": {
+   "max_world_angle_deg": 134.28,
+   "joint": "left_shoulder_jnt"
+  }
+ },
+ "retarget_check_vs_native_retargeted_gun_idle_f0": {
+  "corvo": 0.0,
+  "emily": 0.0
+ },
+ "stills": {
+  "sword_gun_neutral": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\s4-review-v2135\\source-sword_gun_neutral.png (existing, not re-rendered)",
+  "sword_gun_idle": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\work\\natural-moveset\\s4-review-v2135\\source-sword_gun_idle.png (existing, not re-rendered)"
+ }
+}

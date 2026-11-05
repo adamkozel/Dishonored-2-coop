@@ -1,0 +1,10 @@
+{
+ "candidate": "progress-v2143",
+ "card": 264,
+ "dll": "0F1CAD02D9276223F543D6AFB5D23BA732BB78DA594C8526125114049BAF7BEC",
+ "probe": "0C9350B830A52E774268DB8DFC3EA670163319293C31F64206D87B584462405F",
+ "previousCandidate": "progress-v2137",
+ "sourceCommit": "760eb14d3fe79e733e1ca3160f41ca199f873b0b",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2137 plus the npc-combat stale Ready reset: a Ready addressed to this side's nonce on a re-armed channel with no peer nonce after 1.5 s of Hellos gets one Stop under the peer's nonce, so a peer still bound to the retired channel closes it and both sides renegotiate (pistol-walk-dunwall-v2142c: the host re-armed Ramsey's channel after hit_damage_parameters, the partner kept answering Ready only, Ramsey held at 8 health for 55 presses)"
+}
