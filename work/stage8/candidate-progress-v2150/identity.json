@@ -1,0 +1,10 @@
+{
+ "candidate": "progress-v2150",
+ "card": 264,
+ "dll": "A330801EE6D957672106D93410CE4DA8FF6BD403F06D9EDF2CF583EABA92F204",
+ "probe": "EE0475DC7A9F5228493ACD261602E31F20D53DD39B86754E31B3E8DAB773EE1D",
+ "previousCandidate": "progress-v2145",
+ "sourceCommit": "ad04661bf842497f3598b5ced5066c548fece8ef",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2145 plus the replica scene equipment (npc_authority_stream.h, 2150): while her own takedown scene waits at phase 2 on a bound replica whose group asks for an equipment its locomotion graph lacks (+0x189; start gate 1407cbbe0 -> 1407dcc10), the client requests that stance and equipment on the replica natively (486c50, 486b00). Ramsey's key-target finisher asks for Sword, which only his host AI draws (pistol-walk-dunwall-v2148e/h, v2149h held)"
+}
