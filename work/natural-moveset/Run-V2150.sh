@@ -80,7 +80,7 @@
 # 2148 (S4, #264): Run-V2147 e (Emily / Emily) passed, Ramsey died at press 21 with no hold, and its streets bounce
 # held. g lost the host game at press 20 of the Ramsey fight (M10 again: no dump, no Windows event). Harness v2148
 # keeps the host's exit code and loader log on a failure. Emily-partner cases repeat to catch the finisher hold.
-# 2149 (S4, #264): pistol-walk-dunwall-v2150e held Ramsey's finisher at phase 2 with its clock at -1 and his proxy
+# 2149 (S4, #264): pistol-walk-dunwall-v2148e held Ramsey's finisher at phase 2 with its clock at -1 and his proxy
 # slots empty, so the start gate 1407cbbe0 (LOD driver / required animation byte per bound actor) holds it, not a
 # slot conflict. Harness v2149 keeps the waiting finisher's actors, LOD drivers and those bytes.
 # 2150 (S4, #264): Run-V2149 e and g passed; h held the finisher. Its bound groups confirmed the cause: Ramsey's

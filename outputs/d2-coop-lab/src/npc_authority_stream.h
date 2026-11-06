@@ -653,6 +653,11 @@ void serviceNpcReplicaVulnerable(NpcAuthorityChannel& c,ULONGLONG tick){
 // finisher waited for good (v2143e, v2144e, v2146e, v2148e/h, v2149h). While such a scene waits on this replica, its
 // own locomotion request is set to that stance and equipment (native setters 486c50 and 486b00, immediate). The host's
 // poses still own its body (d2-ghidra, confirmed static).
+// 2151 (S4, #264): Run-V2150 d and a showed the request alone does not move the replica's graph: its group still asked
+// for Sword at press 70 and the finisher never started (d) or started late (a). The graph's equipment changes only through
+// the AI the lease pauses. The host's Ramsey holds the sword, so the group is marked ready the way 1407dc1d0 marks a
+// group whose actor already matches (+0x188 = 0xffff, read by 1407dcc10). The binding is made once (1407ce7e0), so the
+// mark stays (d2-ghidra, confirmed static).
 void serviceNpcReplicaSceneEquipment(NpcAuthorityChannel& c){
     if(!c.ready||c.corpse||c.unconscious||!observedGame||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const std::uintptr_t actor=c.lease.binding.npc.actor;if(!actor)return;
@@ -676,10 +681,12 @@ void serviceNpcReplicaSceneEquipment(NpcAuthorityChannel& c){
                !memoryRead(anim,&vt,8)||vt!=base+0x1b80408||!memoryRead(anim+0x10,&owner,8)||owner!=actor)continue;
             reinterpret_cast<char*(*)(std::uintptr_t,char*)>(gameImage+0x548480)(anim,&now);
             if(now==want[1])continue;
-            const auto modern=locomotionParameter(anim,0x4c0,"locomotionInputData",21,0x1e8);if(!modern)continue;
+            const auto modern=locomotionParameter(anim,0x4c0,"locomotionInputData",21,0x1e8);
+            if(!modern){*reinterpret_cast<std::uint16_t*>(mine+0x188)=0xffff;++c.sceneEquipApplies;continue;}
             if(want[0]>=0)reinterpret_cast<void(*)(void*,int,bool)>(gameImage+0x486c50)(reinterpret_cast<void*>(modern+0x118),want[0],true);
             reinterpret_cast<void(*)(void*,int,bool)>(gameImage+0x486b00)(reinterpret_cast<void*>(modern+0x118),want[1],true);
-            if(!c.sceneEquipApplies++)consoleOutput("COOP: replica %u scene equipment %d stance %d (graph %d) for %s\n",
+            *reinterpret_cast<std::uint16_t*>(mine+0x188)=0xffff;
+            if(!c.sceneEquipApplies++)consoleOutput("COOP: replica %u scene equipment %d stance %d (graph %d) ready for %s\n",
                 c.lease.binding.npc.handle,want[1],want[0],now,asset.c_str());
         }
     }
