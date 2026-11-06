@@ -96,6 +96,10 @@
 # no loot stand focused his body by the planters (harness, as v2143e). Harness v2152 aims the later passes from
 # the partner's eye. Two clean passes in a row on progress-v2151: Run-V2153, then Run-V2154.
 # 2154 (S4, #264): the second of the two clean passes on progress-v2151 and harness v2152 (see 2153).
+# 2154 (later): Run-V2153 g passed; a stopped on the VM's pause menu (no route input pauses it, hypothesis: the pad
+# dropped in a 4.2 s VM stall), c was lost to a Steam restart on the host PC, and d passed every diff but the rest guard
+# before step45-animsample read 5.15 mm on its third reading. Harness v2153 allows six readings. Run-V2154 and
+# Run-V2155 are the two clean passes on progress-v2151.
 # Usage: Run-V2154.sh [a b c d e f g h]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
@@ -111,7 +115,7 @@ run(){
  cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
  "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "$take-deploy.log" 2>&1 || { echo "deploy failed"; return; }
  clean
- "$P" -NoProfile -File Route-MissionVM-v2152.ps1 -LookStages -Take "$take" -MapInfo campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+ "$P" -NoProfile -File Route-MissionVM-v2153.ps1 -LookStages -Take "$take" -MapInfo campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
  echo "$take exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'));[print(k,v) for k,v in n.items() if k.startswith(('diff-','diffwait-'))];f=n.get('final',{});print({x:(f[x].get('map'),f[x].get('hold')) for x in f})" 2>&1 | head -c 2500)"
  grep -h "world-digest:" "$take.log" | head -3; ls "$take" | grep -i box
  for t in mayhew ramsey-loot saferoom balcony streets end; do [ -f "$take/diff-$t.txt" ] && { echo "$t:"; head -6 "$take/diff-$t.txt"; }; done
