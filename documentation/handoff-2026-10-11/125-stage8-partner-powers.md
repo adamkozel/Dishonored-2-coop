@@ -109,6 +109,31 @@ Test: `Test-MissionPartnerPowers-v2080.ps1`, from v1833, on the local lab with t
 | `blinkkick-v2081a` | blinkkick-v2081 | Her kick's flags, reactions and direction reach the host. The host guard was pushed **6.75 m** (3.73 m in v2080b with the defaults) and her copy 6.52 m. Health 40 to 30 in both worlds, end gap 0 m. **Still no knockdown** (host down poses 0) |
 | `blinkkick-v2081b` | blinkkick-v2081 | Twin with `coop_blink_kick legacy`: the guard died in both worlds (40 to 0, so the 219 down poses are its corpse). That differs from v2080b on the same legacy path, so the kick outcome varies between takes and this is not a clean twin. Switch reset to native after the take |
 
+## Blink Assault knockdown (2172 to 2176, #261)
+
+**Why the host's guard only staggered** (d2-ghidra, confirmed static):
+
+- `arkCpntAIPhysicsReaction::HandleDamaged` (`0x140591df0`) tries `PlayThrowHit` (`0x140593bd0`) first, and plays the hit react (`0x140593860`, the push) only when that returns false.
+- `PlayThrowHit` ragdolls only when the damage parameters' throw-hit block (+0x58) is set. Case 5 of its jump table (`0x1405948b0`) copies the velocity at +0x5c into the guard's physics reaction (+0xe4).
+- The parameter constructor leaves +0x58 at 0, so a forwarded kick only pushed.
+- A host's own kick knocks the guard down through its kick scene, which binds the NPC (chapter 108).
+
+**The earlier takes never landed the kick** (confirmed runtime). In `blinkkick-params-v2080b`, `blinkkick-v2081a` and `blinkkick-v2172a` to `d`, her client's last damage was `player_sword.damage`, or nothing. Only `partner-corvo-power-v1805a` forwarded a real `blink_attack`. The kick depends on where her blink ends.
+
+**Candidate progress-v2173:**
+
+- On a partner kick request, the host also writes the throw-hit: type 5, with 6 m/s along the kick and 3 m/s up.
+- Lab switch: `coop_blink_kick throw|native|legacy`. `throw` is the default; `native` is v2081's forward.
+- Lab command `coop_lab_blink_kick`: the host applies one partner-style kick request (`blink_attack`, flags 0x12, reactions 2 and 2) to the bound guard nearest the partner (v2176), through `npcCombatApplyPeerNative`.
+- v2175 names the refusing check: v2175a was `partner_far` while it still took the guard nearest the host.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `blinkthrow-eotw-v2176a` | progress-v2176 | **PASS** (confirmed runtime). The kick was applied with the throw-hit (`blinkKickThrows` 1, committed). The host's guard went down: it sent 103 down poses, and the partner received 103. Every diff was equal. |
+| `blinkthrow-eotw-v2176t` (twin, `native`) | progress-v2176 | **RED as required.** The same kick was applied and committed with no throw-hit, and there were no down poses: the stagger only. |
+
+Visual acceptance of the fall is recorded separately: the cameras of these takes did not face the guard, so it is left to the final playtest.
+
 ## Status of area 4.6
 
 **Done:**
