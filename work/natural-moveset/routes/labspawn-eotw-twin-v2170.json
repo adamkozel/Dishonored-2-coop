@@ -1,0 +1,55 @@
+[
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_npc_present off"
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--spawners"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--spawners"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_spawn script_spawner_outpost_reinf_01"
+ },
+ {
+  "do": "wait",
+  "ms": 35000,
+  "settle": 3000
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--spawners"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--spawners"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "diff",
+  "tag": "after"
+ }
+]
