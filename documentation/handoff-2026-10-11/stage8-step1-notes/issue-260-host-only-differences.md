@@ -120,3 +120,15 @@ The event is rare, so **candidate progress-v2166** makes it happen on demand:
 | `labspawn-eotw-v2170t` (twin, `coop_npc_present off`) | **RED as required by the spawner counts:** the host had 1 child and the partner 0, still pooled. But the world diff read equal, because the digest counted the pooled NPC alive. |
 
 **progress-v2171** digests a dormant NPC as `dormant`, so the world diff sees an NPC one world has woken and the other has not. `Run-V2171L.sh` runs the twin and the test again.
+
+| Take | Result |
+|---|---|
+| `labspawn-eotw-v2171t` (twin, progress-v2171) | **RED by the world diff itself:** after the host's spawn, `script_spawner_outpost_reinf_01 host=alive client=dormant` (after and final diffs). At spawn both read dormant, equal. |
+| `labspawn-eotw-v2171a` | **PASS.** The partner woke her copy on the first try (`lifeSpawned` 1, `spawned`). The spawn and after diffs were equal. |
+
+**#260 is done** (confirmed runtime, progress-v2171).
+
+- A host-only spawn reaches the partner's world, proven on demand with a twin.
+- The world diff now sees woken-versus-dormant NPCs.
+- The bottle was fixed by the presence change (progress-v2124).
+- The natural reinforcement event, about 1 in 3 to 1 in 8 runs of v2071b's route, follows the same path. The step 6 runs keep watching for it.
