@@ -14,12 +14,17 @@ struct SwarmRatVisualFixture {
     float sourceScale=1,pendingScale=0;std::array<float,3> frameScale{},entityScale{},renderScale{};
     ULONGLONG scaleDeadline=0;std::uint64_t scaleVerified=0;bool scaleReady=false;
     unsigned scaleStage=0;std::array<std::uintptr_t,8> scaleDiagnostic{};
+    bool fish=false; // 2187 (#261): the possessed-fish visual (swarm_fish_visual.def) instead of the rat
 };
 std::array<SwarmRatVisualFixture,100> swarmRatVisualPool{};
 double swarmRatServiceMaxMs=0;
 std::uint64_t swarmRatCreated=0,swarmRatStarted=0,swarmRatHidden=0,swarmRatUpdated=0,swarmRatRefused=0,swarmRatRetired=0;
 const char* swarmRatResult="idle";
 constexpr const char* kSwarmRatVisualDefinition="models/powers/d2coop/swarm_rat_visual.def";
+// 2187 (#261): the cosmetic fish, the rat visual's decls on the game's trout model (fish_idle, fish_swim); trout.def
+// renders at 0.3. The swim reference speed (m/s at scale 1 for animation rate 1) is a hypothesis to tune by eye.
+constexpr const char* kSwarmFishVisualDefinition="models/powers/d2coop/swarm_fish_visual.def";
+constexpr float kSwarmFishVisualScale=.3f,kSwarmFishSwimReference=5.f;
 struct SwarmRatTiming {std::uint64_t count=0;double total=0,maximum=0;void add(double ms){if(ms>=0&&std::isfinite(ms)){++count;total+=ms;maximum=(std::max)(maximum,ms);}}};
 std::array<std::array<SwarmRatTiming,5>,2> swarmRatTimings{};
 std::array<SwarmRatTiming,2> swarmRatServiceIntervals{};
@@ -36,9 +41,9 @@ bool swarmRatVisualIdentity(const SwarmRatVisualFixture& p){
        !memoryRead(p.target.actor+0xac,&parent,4)||parent!=0x3fff0010||
        !memoryRead(p.target.actor+0x2e8,&d,8)||d!=p.definition||
        !memoryRead(d,&vt,8)||vt!=base+0x1ab58f8||!memoryRead(d+8,&n,8)||
-       !worldIdentityString(memoryRead,n,text)||text!=kSwarmRatVisualDefinition||
+       !worldIdentityString(memoryRead,n,text)||text!=(p.fish?kSwarmFishVisualDefinition:kSwarmRatVisualDefinition)||
        !memoryRead(p.target.actor+0x268,&list,8)||!list||!memoryRead(p.target.actor+0x270,&count,4)||(count&0xffffff)!=4)return false;
-    constexpr const char* allowed[]={"components/d2coop/swarm_rat_visual.cpntanimevolved",
+    const char* allowed[]={p.fish?"components/d2coop/swarm_fish_visual.cpntanimevolved":"components/d2coop/swarm_rat_visual.cpntanimevolved",
         "components/base/midnightproxy_default.cpntmidnightproxy","components/base/audio_default.cpntaudio",
         "components/base/referenceframe_default.cpntreferenceframe"};
     unsigned seen=0;
@@ -125,7 +130,7 @@ bool swarmRatDriveGait(SwarmRatVisualFixture& p){
             if(vt==base+0x1b80408)animation=c;}
         std::uintptr_t name=0;std::string text;
         if(!animation||!memoryRead(animation+0x340,&graph,8)||!graph||!memoryRead(graph+8,&name,8)||
-           !worldIdentityString(memoryRead,name,text)||text!="animtree/d2coop_swarm_rat_visual.animtree"||
+           !worldIdentityString(memoryRead,name,text)||text!=(p.fish?"animtree/d2coop_swarm_fish_visual.animtree":"animtree/d2coop_swarm_rat_visual.animtree")||
            !memoryRead(animation+0x338,&tree,8)||!tree||!memoryRead(tree,&inputData,8)||!inputData)return false;
         const auto rateInput=shadowNamedInput(animation,"ratRate",1),movingInput=shadowNamedInput(animation,"ratMoving",1);
         if(!rateInput||!movingInput||rateInput==movingInput)return false;
@@ -139,7 +144,7 @@ bool swarmRatDriveGait(SwarmRatVisualFixture& p){
     if(p.gaitTick&&dt>0&&dt<=250){const float x=p.sourceTransform[0]-p.gaitPosition[0],y=p.sourceTransform[1]-p.gaitPosition[1];
         const float distance=std::sqrt(x*x+y*y);if(distance<=3.f)speed=distance*static_cast<float>(1000./dt);}
     if(!std::isfinite(speed)||speed<0)return false;
-    p.gaitSpeed=speed;p.gaitRate=(std::min)(3.f,speed/(1.11f*(p.scaleReady?p.sourceScale:1.f))); // Use applied model scale only.
+    p.gaitSpeed=speed;p.gaitRate=(std::min)(3.f,speed/((p.fish?kSwarmFishSwimReference:1.11f)*(p.scaleReady?p.sourceScale:1.f))); // Use applied model scale only.
     const float target=speed>.03f?1.f:0.f;
     const float step=static_cast<float>((std::min)(125.,(std::max)(0.,dt))*.008);
     p.gaitMoving+=(std::max)(-step,(std::min)(step,target-p.gaitMoving));
@@ -229,26 +234,26 @@ void serviceSwarmRatVisual(ULONGLONG tick){
 }
 // 2178 (#261): while the other player possesses a rat (pose bit 0x800) this world shows the cosmetic rat
 // (swarm_rat_visual.def: no AI, swarm or possession components) at her streamed root, with the swarm rat's native gait;
-// her avatar is hidden by the possession body lease (movement_playback.h). A fish (0x1000) only hides her for now.
+// her avatar is hidden by the possession body lease (movement_playback.h). 2187: a fish (0x1000) shows the cosmetic fish.
 SwarmRatVisualFixture possessedRat{};const char* possessedRatResult="idle";std::uint64_t possessedRatCreated=0,possessedRatHidden=0,possessedRatRefused=0;
+// 2187 (#261): a fish (0x1000) shows the cosmetic fish the same way.
+SwarmRatVisualFixture possessedFish{};const char* possessedFishResult="idle";std::uint64_t possessedFishCreated=0,possessedFishHidden=0,possessedFishRefused=0;
 bool coopPossessAnimalEnabled=true;
 // 2180 (lab): coop_lab_animal rat|fish|off stamps this player's animal bit without a possession, so the other world's
 // rat and hidden avatar can be judged without casting Possession on a moving swarm rat (possessrat-eotw-v2178a missed).
 std::uint32_t labAnimalOverride=0;
-void servicePossessedRatVisual(ULONGLONG tick){
-    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
-    coopAnimalPossessionFlags=labAnimalOverride?labAnimalOverride:readNativeAnimalPossession(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage));
-    auto& p=possessedRat;const auto refuse=[&](const char* why){possessedRatResult=why;++possessedRatRefused;};
-    if(p.target.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};possessedRatResult="world_retired";}
-    const bool want=coopPossessAnimalEnabled&&partnerAssetsEnabled&&coopGameplayReady(remote)&&(remote.flags&1u)&&(remote.flags&0x800u);
+void servicePossessedAnimalVisual(ULONGLONG tick,SwarmRatVisualFixture& p,bool fish,const char*& result,std::uint64_t& created,std::uint64_t& hidden,std::uint64_t& refused){
+    const auto refuse=[&](const char* why){result=why;++refused;};
+    if(p.target.actor&&(p.game!=observedGame||p.epoch!=outgoing.worldEpoch)){p={};result="world_retired";}
+    const bool want=coopPossessAnimalEnabled&&partnerAssetsEnabled&&coopGameplayReady(remote)&&(remote.flags&1u)&&(remote.flags&(fish?0x1000u:0x800u));
     if(!coopGameplayReady(outgoing)||!powerApiMatches()||!rangedPropApiMatches()||!carryVictimApis())return;
     if(want){
         if(!p.target.actor){
-            const auto definition=lookupEntityDefinition(kSwarmRatVisualDefinition);if(!definition){refuse("visual_definition_missing");return;}
+            const auto definition=lookupEntityDefinition(fish?kSwarmFishVisualDefinition:kSwarmRatVisualDefinition);if(!definition){refuse("visual_definition_missing");return;}
             unsigned char parameters[12]{};reinterpret_cast<void*(*)(void*)>(gameImage+0x146520)(parameters);
             void* actor=reinterpret_cast<void*(*)(void*,void*,void*)>(gameImage+0x8a78f0)(reinterpret_cast<void*>(observedGame),reinterpret_cast<void*>(definition),parameters);
             if(!actor){refuse("native_creation_refused");return;}
-            p.game=observedGame;p.epoch=outgoing.worldEpoch;p.definition=definition;p.target.actor=reinterpret_cast<std::uintptr_t>(actor);++possessedRatCreated;
+            p.game=observedGame;p.epoch=outgoing.worldEpoch;p.definition=definition;p.fish=fish;p.target.actor=reinterpret_cast<std::uintptr_t>(actor);++created;
             float transform[12]{};std::memcpy(transform,remote.position,12);std::memcpy(transform+3,remote.orientation,36);
             reinterpret_cast<void(*)(void*,const float*)>(gameImage+0x87c320)(actor,transform);reinterpret_cast<void(*)(void*,const float*)>(gameImage+0x87c2c0)(actor,transform+3);
             reinterpret_cast<void(*)(void*,void*,int)>(gameImage+0x8aecc0)(reinterpret_cast<void*>(observedGame),actor,-1);
@@ -256,13 +261,13 @@ void servicePossessedRatVisual(ULONGLONG tick){
         }
         if(!swarmRatVisualIdentity(p)){refuse("visual_identity_refused");return;}
         std::memcpy(p.sourceTransform.data(),remote.position,12);std::memcpy(p.sourceTransform.data()+3,remote.orientation,36);
-        p.sourceScale=1;p.wanted=2;p.until=tick+300;p.pendingHide=false;
+        p.sourceScale=fish?kSwarmFishVisualScale:1.f;p.wanted=2;p.until=tick+300;p.pendingHide=false;
     }else if(p.until&&!p.pendingHide){p.pendingHide=true;p.wanted=0;}
     if(!p.target.actor||(!p.until&&!p.pendingHide))return;
     if(!swarmRatVisualIdentity(p)){refuse("owned_model_identity_changed");return;}
     if(p.pendingHide){
         reinterpret_cast<void(*)(void*)>(gameImage+0x8784b0)(reinterpret_cast<void*>(p.target.actor));unsigned char flags=0;
-        if(memoryRead(p.target.actor+0xd0,&flags,1)&&(flags&1)){p.pendingHide=false;p.until=0;p.playing=0;++possessedRatHidden;possessedRatResult="hidden";}return;
+        if(memoryRead(p.target.actor+0xd0,&flags,1)&&(flags&1)){p.pendingHide=false;p.until=0;p.playing=0;++hidden;result="hidden";}return;
     }
     if(p.wanted&&p.playing!=p.wanted){
         if(tick<p.readyAfter)return;
@@ -273,8 +278,14 @@ void servicePossessedRatVisual(ULONGLONG tick){
         if(!swarmRatDriveGait(p)){refuse("native_gait_input_refused");return;}
         if(!swarmRatSetNativeScale(p,tick)){refuse("native_scale_refused");return;}
         if(!swarmRatSetLiveTransform(p)){refuse("live_transform_refused");return;}
-        possessedRatResult="shown";
+        result="shown";
     }
+}
+void servicePossessedRatVisual(ULONGLONG tick){
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    coopAnimalPossessionFlags=labAnimalOverride?labAnimalOverride:readNativeAnimalPossession(memoryRead,reinterpret_cast<std::uintptr_t>(gameImage));
+    servicePossessedAnimalVisual(tick,possessedRat,false,possessedRatResult,possessedRatCreated,possessedRatHidden,possessedRatRefused);
+    servicePossessedAnimalVisual(tick,possessedFish,true,possessedFishResult,possessedFishCreated,possessedFishHidden,possessedFishRefused);
 }
 void writeSwarmRatVisual(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.swarm-rat-visual.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
@@ -300,9 +311,11 @@ void writeSwarmRatVisual(){
         fputs("]}",f);
     }
     fputs("]}",f);
-    fprintf(f,",\"possessedAnimal\":{\"local\":%u,\"remote\":%u,\"enabled\":%s,\"result\":\"%s\",\"created\":%llu,\"hidden\":%llu,\"refused\":%llu,\"verified\":%llu,\"maxPositionError\":%.5f}}\n",
+    fprintf(f,",\"possessedAnimal\":{\"local\":%u,\"remote\":%u,\"enabled\":%s,\"result\":\"%s\",\"created\":%llu,\"hidden\":%llu,\"refused\":%llu,\"verified\":%llu,\"maxPositionError\":%.5f,\"fishResult\":\"%s\",\"fishCreated\":%llu,\"fishHidden\":%llu,\"fishRefused\":%llu,\"fishVerified\":%llu,\"fishMaxPositionError\":%.5f,\"fishGaitSpeed\":%.4f,\"fishGaitRate\":%.4f}}\n",
         coopAnimalPossessionFlags.load(),static_cast<unsigned>(remote.flags&0x1800u),coopPossessAnimalEnabled?"true":"false",possessedRatResult,
         static_cast<unsigned long long>(possessedRatCreated),static_cast<unsigned long long>(possessedRatHidden),static_cast<unsigned long long>(possessedRatRefused),
-        static_cast<unsigned long long>(possessedRat.verifiedTransforms),possessedRat.maxPositionError);
+        static_cast<unsigned long long>(possessedRat.verifiedTransforms),possessedRat.maxPositionError,possessedFishResult,
+        static_cast<unsigned long long>(possessedFishCreated),static_cast<unsigned long long>(possessedFishHidden),static_cast<unsigned long long>(possessedFishRefused),
+        static_cast<unsigned long long>(possessedFish.verifiedTransforms),possessedFish.maxPositionError,possessedFish.gaitSpeed,possessedFish.gaitRate);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
