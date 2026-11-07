@@ -1,0 +1,482 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             92 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+{
+  "passed": false,
+  "failure": "Receipt unconfirmed for host command sequence 2960406037; it may still execute before its original expiry.",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2151",
+      "hostDll": "CD8D7182EE30B47D8981F462A6DB03A64B36774B075C1CC0D1EA7F2A7FE5B6F7",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 20563,
+        "writtenAt": 413137609,
+        "startedAgoMs": 3406,
+        "phase2Checks": 12
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 84063,
+        "writtenAt": 413091062,
+        "startedAgoMs": 3062,
+        "phase2Checks": 4
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 3.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command host coop_usable_safe_doors on",
+      "step03-command client coop_usable_safe_doors on",
+      "step04-command host coop_follow_host on",
+      "step05-command client coop_follow_host on",
+      "step06-command client coop_continue_follow on"
+    ],
+    "diffwait-start": {
+      "settled": true,
+      "s": 1.9
+    },
+    "armwait-start": {
+      "armed": true,
+      "s": 0.4
+    },
+    "diff-start": {
+      "status": "EQUAL",
+      "compared": 538,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-start": {
+      "host": {
+        "shots": 3,
+        "distance": 0.87
+      },
+      "client": {
+        "shots": 3,
+        "distance": 0.87
+      }
+    },
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "step11-die-restartDialog-host": 1,
+    "diffwait-deaths": {
+      "settled": true,
+      "s": 2.1
+    },
+    "armwait-deaths": {
+      "armed": true,
+      "s": 0.6
+    },
+    "diff-deaths": {
+      "status": "EQUAL",
+      "compared": 554,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-deaths": {
+      "host": {
+        "shots": 3,
+        "distance": 0.94
+      },
+      "client": {
+        "shots": 3,
+        "distance": 0.94
+      }
+    },
+    "diffwait-mayhew": {
+      "settled": true,
+      "s": 1.8
+    },
+    "armwait-mayhew": {
+      "armed": true,
+      "s": 0.5
+    },
+    "diff-mayhew": {
+      "status": "EQUAL",
+      "compared": 554,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-mayhew": {
+      "host": {
+        "shots": 3,
+        "distance": 2.7
+      },
+      "client": {
+        "shots": 3,
+        "distance": 2.7
+      }
+    },
+    "step20-partnerattack": {
+      "npc": "models/characters/def/story/mortimer_ramsey.def_1908",
+      "handle": "0xb580774",
+      "presses": 22,
+      "dead": true
+    },
+    "diffwait-ramsey-loot": {
+      "settled": true,
+      "s": 10.5
+    },
+    "armwait-ramsey-loot": {
+      "armed": true,
+      "s": 11.5
+    },
+    "diff-ramsey-loot": {
+      "status": "EQUAL",
+      "compared": 552,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-ramsey-loot": {
+      "host": {
+        "shots": 3,
+        "distance": 34.98
+      },
+      "client": {
+        "shots": 3,
+        "distance": 34.98
+      }
+    },
+    "diffwait-ring-locker": {
+      "settled": true,
+      "s": 1.8
+    },
+    "armwait-ring-locker": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-ring-locker": {
+      "status": "EQUAL",
+      "compared": 552,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-ring-locker": {
+      "host": {
+        "shots": 3,
+        "distance": 45.76
+      },
+      "client": {
+        "shots": 3,
+        "distance": 45.76
+      }
+    },
+    "diffwait-saferoom": {
+      "settled": true,
+      "s": 7.8
+    },
+    "armwait-saferoom": {
+      "armed": true,
+      "s": 8.9
+    },
+    "diff-saferoom": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-saferoom": {
+      "host": {
+        "shots": 3,
+        "distance": 0.72
+      },
+      "client": {
+        "shots": 3,
+        "distance": 0.73
+      }
+    },
+    "diffwait-balcony": {
+      "settled": true,
+      "s": 1.8
+    },
+    "armwait-balcony": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-balcony": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-balcony": {
+      "host": {
+        "shots": 3,
+        "distance": 28.39
+      },
+      "client": {
+        "shots": 3,
+        "distance": 28.39
+      }
+    },
+    "diffwait-streets": {
+      "settled": true,
+      "s": 1.8
+    },
+    "armwait-streets": {
+      "armed": true,
+      "s": 0.5
+    },
+    "diff-streets": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-streets": {
+      "host": {
+        "shots": 3,
+        "distance": 28.39
+      },
+      "client": {
+        "shots": 3,
+        "distance": 28.39
+      }
+    },
+    "step35-facepartner": {
+      "partner": [
+        -31.174999,
+        -40.375000,
+        57.503647
+      ],
+      "dist": 4.5,
+      "tries": [
+        {
+          "da": 0,
+          "z": 57.503517
+        }
+      ],
+      "ok": 0
+    },
+    "step37-pistol-client": {
+      "rangedKind": 1,
+      "rangedVariant": 0,
+      "rangedWeight": 1.0,
+      "presentedDrawn": true,
+      "armedMix": 1.0,
+      "equipmentVariant": 0,
+      "active": true
+    },
+    "step37-pistol-host": {
+      "rangedKind": 1,
+      "rangedVariant": 0,
+      "rangedWeight": 1.000000,
+      "presentedDrawn": true,
+      "armedMix": 1.000000,
+      "equipmentVariant": 0,
+      "active": true
+    },
+    "diffwait-pistol-facing": {
+      "settled": true,
+      "s": 1.8
+    },
+    "armwait-pistol-facing": {
+      "armed": true,
+      "s": 0.4
+    },
+    "diff-pistol-facing": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-pistol-facing": {
+      "host": {
+        "shots": 2,
+        "error": "Receipt unconfirmed for host command sequence 2960341721; it may still execute before its original expiry."
+      },
+      "client": {
+        "shots": 3,
+        "distance": 4.95
+      }
+    },
+    "frameTimeouts": 1,
+    "step41-animsample-handleWaitMs": 1016,
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 45,
+        "pos": [
+          -34.404583,
+          -36.62664,
+          57.483562
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          0,
+          3,
+          10,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/0",
+        "ka": "95/17/8",
+        "active": "Mission_DW,Obj_DW_EscapeDunwall,Task_DW_ReachBoat"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 40,
+        "pos": [
+          -31.174999,
+          -40.375000,
+          57.503647
+        ],
+        "fresh": false,
+        "gameflow": [
+          234,
+          0,
+          3,
+          10,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 4,
+        "lt": "applied/0/1",
+        "hold": "released/859",
+        "ka": "1/88/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwall,Task_DW_ReachBoat"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": {
+      "code": "0xFFFFFFFF",
+      "at": "2026-11-06T11:42:58.6902393+01:00"
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2152.ps1:1137[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m1137 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mReceipt unconfirmed for host command sequence 2960406037; it may still execute before its original expiry.[0m

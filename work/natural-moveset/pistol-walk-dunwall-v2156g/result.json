@@ -1,0 +1,621 @@
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2151",
+      "hostDll": "CD8D7182EE30B47D8981F462A6DB03A64B36774B075C1CC0D1EA7F2A7FE5B6F7",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 19406,
+        "writtenAt": 33916296,
+        "startedAgoMs": 2437,
+        "phase2Checks": 21
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 15781,
+        "writtenAt": 33867890,
+        "startedAgoMs": 1844,
+        "phase2Checks": 15
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 26,
+        "client": 26,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command host coop_usable_safe_doors on",
+      "step03-command client coop_usable_safe_doors on",
+      "step04-command host coop_follow_host on",
+      "step05-command client coop_follow_host on",
+      "step06-command client coop_continue_follow on"
+    ],
+    "diffwait-start": {
+      "settled": true,
+      "s": 1.5
+    },
+    "armwait-start": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-start": {
+      "status": "EQUAL",
+      "compared": 538,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-start": {
+      "host": {
+        "shots": 3,
+        "distance": 0.84
+      },
+      "client": {
+        "shots": 3,
+        "distance": 0.88
+      }
+    },
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "diffwait-deaths": {
+      "settled": true,
+      "s": 1.5
+    },
+    "armwait-deaths": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-deaths": {
+      "status": "EQUAL",
+      "compared": 554,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-deaths": {
+      "host": {
+        "shots": 3,
+        "distance": 0.88
+      },
+      "client": {
+        "shots": 3,
+        "distance": 0.88
+      }
+    },
+    "diffwait-mayhew": {
+      "settled": true,
+      "s": 1.5
+    },
+    "armwait-mayhew": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-mayhew": {
+      "status": "EQUAL",
+      "compared": 554,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-mayhew": {
+      "host": {
+        "shots": 3,
+        "distance": 2.6
+      },
+      "client": {
+        "shots": 3,
+        "distance": 2.6
+      }
+    },
+    "step20-partnerattack": {
+      "npc": "models/characters/def/story/mortimer_ramsey.def_1908",
+      "handle": "0xb580774",
+      "presses": 14,
+      "dead": true
+    },
+    "diffwait-ramsey-loot": {
+      "settled": true,
+      "s": 1.5
+    },
+    "armwait-ramsey-loot": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-ramsey-loot": {
+      "status": "EQUAL",
+      "compared": 552,
+      "differences": 0,
+      "retried": "World digest failed (host, 45)",
+      "tries": 2
+    },
+    "look-ramsey-loot": {
+      "host": {
+        "shots": 3,
+        "distance": 34.98
+      },
+      "client": {
+        "shots": 3,
+        "distance": 34.98
+      }
+    },
+    "diffwait-ring-locker": {
+      "settled": true,
+      "s": 1.5
+    },
+    "armwait-ring-locker": {
+      "armed": true,
+      "s": 2.7
+    },
+    "diff-ring-locker": {
+      "status": "EQUAL",
+      "compared": 551,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-ring-locker": {
+      "host": {
+        "shots": 3,
+        "distance": 47.08
+      },
+      "client": {
+        "shots": 3,
+        "distance": 47.08
+      }
+    },
+    "diffwait-saferoom": {
+      "settled": true,
+      "s": 6.6
+    },
+    "armwait-saferoom": {
+      "armed": true,
+      "s": 9.3
+    },
+    "diff-saferoom": {
+      "status": "EQUAL",
+      "compared": 1151,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-saferoom": {
+      "host": {
+        "shots": 3,
+        "distance": 0.98
+      },
+      "client": {
+        "shots": 3,
+        "distance": 0.98
+      }
+    },
+    "diffwait-balcony": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-balcony": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-balcony": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-balcony": {
+      "host": {
+        "shots": 3,
+        "distance": 28.22
+      },
+      "client": {
+        "shots": 3,
+        "distance": 28.22
+      }
+    },
+    "diffwait-streets": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-streets": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-streets": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-streets": {
+      "host": {
+        "shots": 3,
+        "distance": 28.22
+      },
+      "client": {
+        "shots": 3,
+        "distance": 28.22
+      }
+    },
+    "step35-facepartner": {
+      "partner": [
+        -31.174999,
+        -40.375000,
+        57.503647
+      ],
+      "dist": 4.5,
+      "tries": [
+        {
+          "da": 0,
+          "z": 57.369728
+        }
+      ],
+      "ok": 0
+    },
+    "step37-pistol-client": {
+      "rangedKind": 1,
+      "rangedVariant": 0,
+      "rangedWeight": 1.0,
+      "presentedDrawn": true,
+      "armedMix": 1.0,
+      "equipmentVariant": 0,
+      "active": true
+    },
+    "step37-pistol-host": {
+      "rangedKind": 1,
+      "rangedVariant": 0,
+      "rangedWeight": 1.000000,
+      "presentedDrawn": true,
+      "armedMix": 1.000000,
+      "equipmentVariant": 0,
+      "active": true
+    },
+    "diffwait-pistol-facing": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-pistol-facing": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-pistol-facing": {
+      "status": "EQUAL",
+      "compared": 1152,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-pistol-facing": {
+      "host": {
+        "shots": 3,
+        "distance": 5.01
+      },
+      "client": {
+        "shots": 3,
+        "distance": 4.9
+      }
+    },
+    "step41-animsample-handleWaitMs": 1009,
+    "step41-animsample": {
+      "observer": "host",
+      "target": "partner rig",
+      "status": "PASS",
+      "samples": 411,
+      "hz": 63.39,
+      "travel": 4.917,
+      "contacts": 19,
+      "footSkateP95": 0.0237,
+      "footSkateMax": 0.0237,
+      "jitter": 0,
+      "snaps": 0,
+      "rubberBands": 0,
+      "failures": []
+    },
+    "step42-facepartner": {
+      "partner": [
+        -30.444574,
+        -39.733021,
+        57.503647
+      ],
+      "dist": 4.5,
+      "tries": [
+        {
+          "da": 0,
+          "z": 57.447414
+        }
+      ],
+      "ok": 0
+    },
+    "step45-animsample-handleWaitMs": 1294,
+    "step45-animsample": {
+      "observer": "client",
+      "target": "partner rig",
+      "status": "PASS",
+      "samples": 259,
+      "hz": 40.04,
+      "travel": 5.256,
+      "contacts": 19,
+      "footSkateP95": 0.0384,
+      "footSkateMax": 0.0384,
+      "jitter": 0,
+      "snaps": 0,
+      "rubberBands": 0,
+      "failures": []
+    },
+    "diffwait-end": {
+      "settled": true,
+      "s": 1.8
+    },
+    "armwait-end": {
+      "armed": true,
+      "s": 0.4
+    },
+    "diff-end": {
+      "status": "EQUAL",
+      "compared": 286,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "look-end": {
+      "host": {
+        "shots": 3,
+        "distance": 0.84
+      },
+      "client": {
+        "shots": 3,
+        "distance": 0.84
+      }
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 36,
+        "pos": [
+          -6.793309,
+          -14.941000,
+          -99.996407
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 19,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "3/120/0",
+        "active": "Mission_Void01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_01/void_01_p",
+        "epoch": 36,
+        "cine": 56,
+        "pos": [
+          -6.99624,
+          -14.099016,
+          -99.908333
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          1,
+          15,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/5859",
+        "ka": "146/9/7",
+        "active": "Mission_Void01"
+      }
+    },
+    "gameflowEqual": true,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "continue_sent",
+        "decision": 1,
+        "slot": -1,
+        "startMap": "",
+        "sent": 1,
+        "resent": 116,
+        "hostReplays": 0,
+        "hostContinues": 1,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "continued_to_host_mission",
+        "decision": 1,
+        "loadedSlot": -1,
+        "received": 117,
+        "refused": 0,
+        "duplicates": 116,
+        "partnerHeld": 1,
+        "replayed": 0,
+        "continued": 1,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "EQUAL",
+      "compared": 286,
+      "differences": 0
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "eddbc8875098ba6e",
+        "connection": 2853280515,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "eddbc8875098ba6e",
+        "sent": 1667,
+        "received": 1658,
+        "refused": 0,
+        "silentMs": 781
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "eddbc8875098ba6e",
+        "connection": 1686443659,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "eddbc8875098ba6e",
+        "sent": 1659,
+        "received": 1667,
+        "refused": 0,
+        "silentMs": 688
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 98,
+      "asked": 93,
+      "inFlow": 31,
+      "replayed": 120,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 102
+    },
+    "pairing": {
+      "host": "emily",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "replayRefused": 0,
+      "replayAccepted": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/emily/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

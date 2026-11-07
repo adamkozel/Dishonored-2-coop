@@ -7,6 +7,12 @@
 void check(bool b,const char* why){if(!b){std::cerr<<"FAIL "<<why<<'\n';std::exit(1);}}
 template<class T>void put(std::vector<unsigned char>& b,size_t off,T v){std::memcpy(b.data()+off,&v,sizeof(v));}
 int main(int argc,char** argv){
+    {// 2136 (#271): keepUnder holds the child's world rotation under a different parent rotation.
+     const auto yaw=[](float d){const float h=d*3.14159265f/360;return MovementBank::Joint{0,0,std::sin(h),std::cos(h),.1f,.2f,.3f};};
+     const auto kept=MovementBank::keepUnder(yaw(-48),yaw(40),yaw(30)),expect=yaw(-58);
+     for(unsigned k=0;k<7;++k)check(std::fabs(kept[k]-expect[k])<1e-5f,"pistol spine keeps its world yaw over the gait root");
+     const auto same=MovementBank::keepUnder(yaw(-48),yaw(-48),yaw(30));
+     for(unsigned k=0;k<7;++k)check(std::fabs(same[k]-yaw(30)[k])<1e-5f,"the idle's own parent leaves the spine unchanged");}
     {MovementBank old;old.version=63;check(old.hasChoke(3)&&!old.hasChoke(4),"old choke bank cannot address absent breakout clip");}
     {MovementBank old;old.version=64;check(old.hasChoke(4)&&!old.hasChoke(5)&&!old.hasChoke(6)&&!old.hasChoke(58),"bank64 cannot address absent lethal clip");}
     {MovementBank b;b.version=65;check(b.hasChoke(58)&&b.hasChoke(92)&&b.hasChoke(kNativeTakedownSceneCount)&&!b.hasChoke(kNativeTakedownSceneCount+1),"bank65 presents every census takedown scene, nothing else");}

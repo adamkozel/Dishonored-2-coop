@@ -34,6 +34,11 @@ void serviceAnimSample(ULONGLONG tick){
         for(unsigned k=0;k<4&&n<int(sizeof(line));++k){float w[3]{};if(chain[k]>=0&&chain[k]<int(s.globalPose.size()))world(chain[k],w);
             n+=std::snprintf(line+n,sizeof(line)-n,"%s{\"joint\":%d,\"at\":[%.6f,%.6f,%.6f]}",k?",":"",chain[k],w[0],w[1],w[2]);}
         if(n<int(sizeof(line)))n+=std::snprintf(line+n,sizeof(line)-n,"]}");}
+    // 2136 (#271): the head, nose, both arms and wrists, for the held-pistol facing (head 12 to nose 92 against the
+    // gun arm, left arm 7 to wrist 9). The shadow rig's indices, the same for both characters.
+    if(n>0&&n<int(sizeof(line)))n+=std::snprintf(line+n,sizeof(line)-n,"],\"upper\":[");
+    {const int upper[6]={12,92,7,9,14,16};for(unsigned k=0;k<6&&n>0&&n<int(sizeof(line))-80;++k){float w[3]{};if(upper[k]<int(s.globalPose.size()))world(upper[k],w);
+        n+=std::snprintf(line+n,sizeof(line)-n,"%s{\"joint\":%d,\"at\":[%.6f,%.6f,%.6f]}",k?",":"",upper[k],w[0],w[1],w[2]);}}
     if(n<=0||n>=int(sizeof(line))-24){++a.failed;return;}
     n+=std::snprintf(line+n,sizeof(line)-n,"],\"joints\":%zu}\n",s.globalPose.size());
     a.lines.append(line,n);++a.frames;}

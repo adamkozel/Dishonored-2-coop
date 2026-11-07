@@ -196,6 +196,13 @@ inline bool validNpcCombat(const CoopNpcCombat& p,const CoopPosePacket& local,co
         (p.after>0 ? (p.damage==NpcCombatDamage::Sword||p.damage==NpcCombatDamage::Kick||npcCombatRanged(p.damage)||world)&&npcCombatClose(p.inflicted,p.before-p.after) :
         p.inflicted<=p.before&&npcCombatNativeLethal(p.before,p.inflicted));
 }
+// 2142 (S4, #264): a Ready addressed to this side's nonce, on a channel that has no peer nonce yet although its
+// Hellos have gone out for 1.5 s, comes from a peer still bound to a channel this side retired and re-armed. That
+// peer stays ready, so it answers each new Hello with Ready only and never sends the Hello this channel needs.
+// Within 1.5 s it is the ordinary race of a Ready arriving just before its Hello (1214fo).
+inline bool npcCombatStaleReady(bool ready,std::uint64_t peerNonce,std::uint64_t targetNonce,std::uint64_t localNonce,std::uint64_t started,std::uint64_t tick){
+    return !ready&&!peerNonce&&targetNonce&&targetNonce==localNonce&&tick>=started&&tick-started>=1500;
+}
 enum class NpcCombatOrder {Duplicate,Next,Gap};
 inline NpcCombatOrder npcCombatOrder(std::uint64_t previous,std::uint64_t event){return event<=previous?NpcCombatOrder::Duplicate:(event==previous+1?NpcCombatOrder::Next:NpcCombatOrder::Gap);}
 // One native action can report several damage contacts before its first

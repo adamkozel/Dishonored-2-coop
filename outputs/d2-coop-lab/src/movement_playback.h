@@ -644,6 +644,7 @@ void applyMovementBank(void* component,void* actor,int phase){
     if(p.bank.hasTurns()&&p.turnSerial!=p.clock.turnSerial){p.turnSerial=p.clock.turnSerial;p.turnFrom=p.turnLast;}
     if(p.bank.hasTurns()&&p.turnLast.size()!=count)p.turnLast.resize(count);
     float moving=(std::max)(0.f,(std::min)(1.f,(p.clock.speed-.025f)/.30f));moving=moving*moving*(3-2*moving);
+    MovementBank::Joint rangedRoot[2]{};bool rangedRootValid=false;
     for(unsigned j=2;ok&&j<count;++j){
         const auto special=[&](unsigned clip,float amount){return p.bank.sampleWeaponParameter(clip,j,amount,p.armedMix);};
         auto a=p.bank.sample(p.clock.a,j,p.clock.phase),b=p.bank.sample(p.clock.b,j,p.clock.phase);
@@ -770,7 +771,12 @@ void applyMovementBank(void* component,void* actor,int phase){
             auto ranged=p.bank.sampleRanged(RangedPresentation::clip(p.rangedKind,p.rangedVariant),j,p.rangedAmount,p.clock.stanceMix);
             if(p.rangedFrom.size()==count)ranged=MovementBank::blend(p.rangedFrom[j],ranged,p.rangedTransition*p.rangedTransition*(3-2*p.rangedTransition));
             if(p.rangedLast.size()!=count)p.rangedLast.resize(count);p.rangedLast[j]=ranged;
+            // 2136 (#271): the spine keeps the world orientation the pistol idle gives it over the center_root the gait
+            // supplies while moving or airborne. Standing (no move mix) the parent is the idle's own and nothing changes.
+            if(j==3&&rangedRootValid&&p.parents.size()>3&&p.parents[3]==2)ranged=MovementBank::keepUnder(rangedRoot[0],rangedRoot[1],ranged);
+            if(j==2)rangedRoot[0]=ranged;
             if(MovementBank::combatLocomotionJoint(j,p.parents))ranged=MovementBank::blend(ranged,v,(std::max)(p.rangedMoveMix,p.clock.airWeight));
+            if(j==2){rangedRoot[1]=ranged;rangedRootValid=true;}
             v=MovementBank::blend(v,ranged,p.rangedWeight);
         }
         if(p.bank.hasGrenade()&&p.grenadeWeight>.001f){

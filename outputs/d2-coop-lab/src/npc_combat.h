@@ -10,7 +10,7 @@
 // observed native loss, removed by the native health subtraction.
 struct NpcCombatChannel {
     std::uint64_t arm=0,peerArm=0,peerNonce=0,event=0,request=0,peerRequest=0,pending=0;
-    bool ready=false,enabled=true,terminal=false,deathPending=false;
+    bool ready=false,enabled=true,terminal=false,deathPending=false,resetSent=false;
     ULONGLONG started=0,retiredAt=0;const char* retired="none";
     ULONGLONG deathAt=0;unsigned deathSource=2;std::uint64_t deathRequest=0,deathEvent=0,deathSourceArm=0;
     NpcCombatDamage deathDamage=NpcCombatDamage::None;EnemyMeleeGeometry deathGeometry{};
@@ -37,7 +37,7 @@ struct NpcCombatRuntime {
     std::array<NpcCombatPacketTrace,64> trace{};std::uint64_t traceCount=0;
     std::array<std::uint64_t,6> sent{},received{};
     std::uint64_t sendFailures=0,worldCommitted=0,worldApplied=0,replicaWorldSuppressed=0;unsigned pendingHighWater=0;
-    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0,linkedRequests=0,linkedApplied=0,impliedReady=0,hostWorldRebased=0;
+    std::uint64_t hostWorldCommitted=0,hostWorldApplied=0,hostWorldGains=0,helloFollowed=0,helloWaited=0,peerNativeRequests=0,peerNativeApplied=0,peerNativeBusy=0,linkedRequests=0,linkedApplied=0,impliedReady=0,hostWorldRebased=0,staleReadyResets=0;
 };
 const char* npcCombatNativeStage="idle";float npcCombatNativeInflicted=0,npcCombatNativeAfter=0;unsigned npcCombatNativeGeneration=0;
 NpcCombatRuntime npcCombat{};std::uint64_t npcCombatNonce=0;int npcCombatRequest=-1;
@@ -812,6 +812,14 @@ void receiveNpcCombat(const CoopNpcCombat& p,ULONGLONG tick){
         if(!localRole)b.health=h.current;
         b.peerNonce=p.sourceNonce;sendNpcCombat(npcCombatPacket(*c,b,NpcCombatMessage::Ready));return;
     }
+    // 2142 (S4, #264): pistol-walk-dunwall-v2142c held Ramsey at 8 health for 55 presses. The host retired his channel on
+    // a hit it could not replay (hit_damage_parameters) and re-armed it; the partner's channel stayed ready under the same
+    // nonces, so she answered each new Hello with Ready only, the fresh channel refused it (no peer nonce), and the host
+    // re-armed every 5 s (913 Hellos) while her requests waited. Such a Ready gets one Stop under the peer's nonce: the
+    // stale channel closes there and both sides renegotiate from fresh counters.
+    if(p.kind==NpcCombatMessage::Ready&&!b.resetSent&&npcCombatStaleReady(b.ready,b.peerNonce,p.targetNonce,npcCombat.nonce,b.started,tick)){
+        b.resetSent=true;auto stop=npcCombatPacket(*c,b,NpcCombatMessage::Stop);stop.targetNonce=p.sourceNonce;
+        traceNpcCombat(p,false,"stale_ready_reset",b.peerNonce);++npcCombat.staleReadyResets;sendNpcCombat(stop);return;}
     if(p.targetNonce!=npcCombat.nonce||!b.peerNonce||p.sourceNonce!=b.peerNonce){rejectNpcCombat(p,"receive_nonce",b.peerNonce);return;}
     traceNpcCombat(p,false,"accepted",b.peerNonce);
     if(p.kind==NpcCombatMessage::Ready){b.ready=true;return;}
@@ -968,7 +976,7 @@ void writeNpcCombat(){
     fputs("]",f);
     fprintf(f,",\"triggerFixture\":{\"nonce\":%llu,\"result\":\"%s\"}",npcCombatTriggerFixtureNonce,npcCombatTriggerFixtureResult);
     fprintf(f,",\"worldCommitted\":%llu,\"worldApplied\":%llu,\"replicaWorldSuppressed\":%llu",s.worldCommitted,s.worldApplied,s.replicaWorldSuppressed);
-    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu,\"linkedRequests\":%llu,\"linkedApplied\":%llu,\"impliedReady\":%llu,\"hostWorldRebased\":%llu",
-        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy,s.linkedRequests,s.linkedApplied,s.impliedReady,s.hostWorldRebased);
+    fprintf(f,",\"hostWorldPassed\":%llu,\"hostWorldCommitted\":%llu,\"hostWorldApplied\":%llu,\"hostWorldGains\":%llu,\"helloFollowed\":%llu,\"helloWaited\":%llu,\"followSubtractions\":%llu,\"hostUnconsciousPassed\":%llu,\"hostNativePassed\":%llu,\"hostNativeLast\":\"%s\",\"peerNativeRequests\":%llu,\"peerNativeApplied\":%llu,\"peerNativeBusy\":%llu,\"linkedRequests\":%llu,\"linkedApplied\":%llu,\"impliedReady\":%llu,\"hostWorldRebased\":%llu,\"staleReadyResets\":%llu",
+        npcCombatHostWorldPassed.load(),s.hostWorldCommitted,s.hostWorldApplied,s.hostWorldGains,s.helloFollowed,s.helloWaited,npcCombatFollowSubtractions,npcCombatHostUnconsciousPassed.load(),npcCombatHostNativePassed.load(),[]{const char* n=npcDamageDeclarationName(npcCombatHostNativeLastKey.load());return n?n:"none";}(),s.peerNativeRequests,s.peerNativeApplied,s.peerNativeBusy,s.linkedRequests,s.linkedApplied,s.impliedReady,s.hostWorldRebased,s.staleReadyResets);
     fprintf(f,",\"ordinaryTestUntil\":%llu,\"testAssassinationsRefused\":%llu,\"fixtureFrameHolds\":%llu,\"fixture\":{\"active\":%s,\"ready\":%s,\"result\":\"%s\",\"acquired\":%llu,\"released\":%llu,\"lost\":%llu}}\n",npcCombatOrdinaryTestUntil.load(),npcCombatTestAssassinationsRefused.load(),npcCombatFixtureFrameHolds.load(),fixture.until?"true":"false",fixture.ready?"true":"false",fixture.result,fixture.acquired,fixture.released,fixture.lost);const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
