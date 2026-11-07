@@ -100,7 +100,9 @@
 # dropped in a 4.2 s VM stall), c was lost to a Steam restart on the host PC, and d passed every diff but the rest guard
 # before step45-animsample read 5.15 mm on its third reading. Harness v2153 allows six readings. Run-V2154 and
 # Run-V2155 are the two clean passes on progress-v2151.
-# Usage: Run-V2154.sh [a b c d e f g h]
+# 2154i: the PC was shut down during pistol-walk-dunwall-v2154e (Emily / Emily; start and deaths diffs equal, then
+# interrupted). i runs the same pairing again under a new name; e stays as interrupted evidence.
+# Usage: Run-V2154.sh [a b c d e f g h i]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
 # The partner's progress files are lab state; every take starts and ends without them.
@@ -133,6 +135,7 @@ for x in $want; do
   f) run pistol-walk-dunwall-v2154f routes/pistol-walk-dunwall-v2140.json corvo emily Left candidate-progress-v2151;;
   g) run pistol-walk-dunwall-v2154g routes/pistol-walk-dunwall-v2140.json emily emily Right candidate-progress-v2151;;
   h) run pistol-walk-dunwall-v2154h routes/pistol-walk-dunwall-v2140.json emily emily Right candidate-progress-v2151;;
+  i) run pistol-walk-dunwall-v2154i routes/pistol-walk-dunwall-v2140.json emily emily Right candidate-progress-v2151;;
  esac
 done
 clean
