@@ -2105,6 +2105,28 @@ int main(int argc, char** argv) {
         }
         std::cout<<"]}\n";return 0;
     }
+    // 2166 (#260): every spawner entity with its arkCpntSpawner counts: live children (+0x38), pooled NPCs (+0x48),
+    // pending requests (+0x20) and the definition's spawnOnStart (+0xa2) and help flags (+0xa3, +0xa4). Read-only.
+    if(argc==3 && std::strcmp(argv[2],"--spawners")==0) {
+        std::uintptr_t game=0,vt=0,handles=0;std::uint32_t flags=0;
+        const auto reader=[&](std::uintptr_t at,void* data,std::size_t size){return read(process.value,at,data,size);};
+        if(!reader(base+0x39a5290,&game,8)||!game||!reader(game,&vt,8)||vt!=base+0x1c940a8||!reader(game+0x601c0,&handles,8)||!handles||
+           !reader(game+0x601c8,&flags,4)||(flags&0xffffff)>16384)return 45;
+        std::vector<std::uint32_t> live(flags&0xffffff);if(!live.empty()&&!reader(handles,live.data(),live.size()*4))return 45;
+        std::cout<<"{\"pid\":"<<pid<<",\"spawners\":[";bool first=true;
+        for(auto h:live){const auto entity=worldIdentityEntity(reader,game,h);std::uintptr_t name=0,list=0;std::uint32_t count=0;std::string text;
+            if(!entity||!reader(entity,&vt,8)||vt!=base+0x1c5e948||!reader(entity+0x20,&name,8)||!worldIdentityString(reader,name,text))continue;
+            std::uintptr_t component=0;if(reader(entity+0x268,&list,8)&&list&&reader(entity+0x270,&count,4)&&(count&0xffffff)<=256)
+                for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0,owner=0;if(reader(list+i*8,&c,8)&&c&&reader(c,&vt,8)&&vt==base+0x1c57d78&&reader(c+0x10,&owner,8)&&owner==entity){component=c;break;}}
+            std::uint32_t children=0,pool=0;std::int32_t pending=0;std::uintptr_t def=0;unsigned char start=0,help=0,help2=0;
+            if(component){reader(component+0x38,&children,4);reader(component+0x48,&pool,4);reader(component+0x20,&pending,4);
+                if(reader(component+8,&def,8)&&def){reader(def+0xa2,&start,1);reader(def+0xa3,&help,1);reader(def+0xa4,&help2,1);}}
+            if(!first)std::cout<<',';first=false;
+            std::cout<<"{\"name\":"<<jsonString(text)<<",\"handle\":\"0x"<<std::hex<<h<<std::dec<<"\",\"component\":"<<(component?"true":"false")
+                <<",\"children\":"<<(children&0xffffff)<<",\"pool\":"<<(pool&0xffffff)<<",\"pending\":"<<pending
+                <<",\"spawnOnStart\":"<<unsigned(start)<<",\"help\":"<<unsigned(help)<<",\"help2\":"<<unsigned(help2)<<'}';}
+        std::cout<<"]}\n";return 0;
+    }
     if(argc==3 && std::strcmp(argv[2],"--world-npcs")==0) {
         std::uintptr_t game=0;unsigned unbound=0;std::vector<NativeWorldNpc> catalog;
         const auto reader=[&](std::uintptr_t at,void* data,std::size_t size){return read(process.value,at,data,size);};

@@ -1762,6 +1762,8 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_continue_follow on")||!std::strcmp(text,"coop_continue_follow off"))return true; // 2103 (#264)
     if(!std::strcmp(text,"coop_usable_safe_doors on")||!std::strcmp(text,"coop_usable_safe_doors off"))return true; // 2100 (#264)
     if(!std::strcmp(text,"coop_safe_dials on")||!std::strcmp(text,"coop_safe_dials off"))return true; // stage 8.4.3 (#239), 2050
+    if(!std::strcmp(text,"coop_npc_present on")||!std::strcmp(text,"coop_npc_present off"))return true; // 2163 (#260)
+    if(!std::strncmp(text,"coop_lab_spawn ",15))return labNpcSpawnNameAllowed(text+15); // 2166 (#260, lab)
     if(!std::strcmp(text,"coop_join_snapshot on")||!std::strcmp(text,"coop_join_snapshot off"))return true; // stage 8.4.4 (#240), 2055
     if(!std::strcmp(text,"coop_shared_load on")||!std::strcmp(text,"coop_shared_load off"))return true; // stage 8.4.4 (#240), 2065
     if(!std::strcmp(text,"coop_npc_keep_awake on")||!std::strcmp(text,"coop_npc_keep_awake off"))return true; // stage 8.4.5 (#241), 2066
@@ -1996,6 +1998,8 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_blink_kick native")||!std::strcmp(request.command,"coop_blink_kick legacy")){npcBlinkKickForward=!std::strcmp(request.command,"coop_blink_kick native");return;}
     if(!std::strcmp(request.command,"coop_npc_keep_awake on")||!std::strcmp(request.command,"coop_npc_keep_awake off")){npcKeepAwake=!std::strcmp(request.command,"coop_npc_keep_awake on");return;}
     if(!std::strcmp(request.command,"coop_shared_load on")||!std::strcmp(request.command,"coop_shared_load off")){checkpointSharedLoad=!std::strcmp(request.command,"coop_shared_load on");return;}
+    if(!std::strncmp(request.command,"coop_lab_spawn ",15)&&labNpcSpawnNameAllowed(request.command+15)){strcpy_s(labNpcSpawnName,request.command+15);return;} // 2166 (#260, lab)
+    if(!std::strcmp(request.command,"coop_npc_present on")||!std::strcmp(request.command,"coop_npc_present off")){npcLifePresentSync=!std::strcmp(request.command,"coop_npc_present on");return;} // 2163 (#260)
     if(!std::strcmp(request.command,"coop_join_snapshot on")||!std::strcmp(request.command,"coop_join_snapshot off")){npcLifeJoinSnapshot=!std::strcmp(request.command,"coop_join_snapshot on");return;}
     if(!std::strcmp(request.command,"coop_safe_dials on")||!std::strcmp(request.command,"coop_safe_dials off")){safeCodeSync.dialTurns=!std::strcmp(request.command,"coop_safe_dials on");safeCodeSync.dialTargets.clear();return;}
     if(!std::strcmp(request.command,"coop_mission_decision on")||!std::strcmp(request.command,"coop_mission_decision off")){missionDecision.enabled=!std::strcmp(request.command,"coop_mission_decision on");return;} // stage 8 (#253)

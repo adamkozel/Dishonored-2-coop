@@ -39,6 +39,27 @@ void serviceNpcKnockoutTest(){
 }
 // 1214ad: apply a peer's life state to this world's unbound NPC, silently: a knockout
 // by sleep_no_reaction or a kill by kill_no_reaction, the world as attacker.
+// 2163 (#260): spawn the NPC of the spawner entity named spawner now, on the engine thread in gameplay. The spawner entity
+// (vtable +0x1c5e948, name at +0x20) lists its arkCpntSpawner (vtable +0x1c57d78, owner at +0x10) at +0x268/+0x270;
+// 0x14075b770(component) takes a pooled NPC or creates one, places and activates it, lists it at +0x30 and returns 1.
+// +0x20 counts a pending spawn request (d2-ghidra, confirmed static). nullptr on success, else the reason.
+const char* npcSpawnFromSpawner(const std::string& spawner){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const auto game=observedGame;
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||outgoing.gameLogicState!=1||outgoing.pendingGameLogicState||!game)return "not_allowed";
+    std::uintptr_t vt=0,handles=0;std::uint32_t flags=0;
+    if(!memoryRead(game,&vt,8)||vt!=base+0x1c940a8||!memoryRead(game+0x601c0,&handles,8)||!handles||!memoryRead(game+0x601c8,&flags,4)||(flags&0xffffff)>16384)return "no_world";
+    std::vector<std::uint32_t> live(flags&0xffffff);if(!live.empty()&&!memoryRead(handles,live.data(),live.size()*4))return "no_world";
+    std::uintptr_t found=0;unsigned matches=0;
+    for(auto h:live){const auto entity=worldIdentityEntity(memoryRead,game,h);std::uintptr_t name=0;std::string text;
+        if(!entity||!memoryRead(entity,&vt,8)||vt!=base+0x1c5e948||!memoryRead(entity+0x20,&name,8)||!worldIdentityString(memoryRead,name,text)||text!=spawner)continue;
+        ++matches;found=entity;}
+    if(!matches)return "no_spawner";if(matches>1)return "ambiguous_spawner";
+    std::uintptr_t list=0,component=0;std::uint32_t count=0;
+    if(!memoryRead(found+0x268,&list,8)||!list||!memoryRead(found+0x270,&count,4)||(count&0xffffff)>256)return "no_component";
+    for(unsigned i=0;i<(count&0xffffff);++i){std::uintptr_t c=0,owner=0;if(memoryRead(list+i*8,&c,8)&&c&&memoryRead(c,&vt,8)&&vt==base+0x1c57d78&&memoryRead(c+0x10,&owner,8)&&owner==found){component=c;break;}}
+    if(!component)return "no_component";std::int32_t pending=0;if(!memoryRead(component+0x20,&pending,4)||pending>0)return "spawn_pending";
+    return reinterpret_cast<char(*)(void*)>(gameImage+0x75b770)(reinterpret_cast<void*>(component))?nullptr:"spawn_failed";
+}
 // 2161 (#265): the reason of the last refusal, for the partner's life status (lifeRefusedLast).
 const char* npcLifeApplyFail="none";
 bool applyNpcLife(const NativeNpcLife& n,unsigned state){
