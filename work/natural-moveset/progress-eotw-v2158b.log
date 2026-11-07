@@ -1,0 +1,495 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             94 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+Native AI decision snapshot unavailable or changing
+{
+  "passed": false,
+  "failure": "The partner rejoined as models/characters/player/emily/body.def, expected corvo",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2151",
+      "hostDll": "CD8D7182EE30B47D8981F462A6DB03A64B36774B075C1CC0D1EA7F2A7FE5B6F7",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 21860,
+        "writtenAt": 49996718,
+        "startedAgoMs": 2328,
+        "phase2Checks": 21
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 4,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 16406,
+        "writtenAt": 49948437,
+        "startedAgoMs": 1812,
+        "phase2Checks": 17
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command client coop_partner_progress off",
+      "step06-command client coop_grant_named components/characters/player/base/attributes/extended_health.inventoryitem",
+      "step07-command client coop_grant_charm 13858082"
+    ],
+    "step13-rejoin-kill": {
+      "afterStep": 13,
+      "lobbyKnown": true,
+      "before": {
+        "channels": 12,
+        "readyChannels": 12,
+        "references": 0,
+        "boundHandles": [
+          769927680,
+          773728826,
+          770910735,
+          774580807,
+          770124291,
+          770058754,
+          774711881,
+          774908492,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 12,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -30.2965,
+              192.25,
+              1.2144
+            ]
+          }
+        ]
+      },
+      "pauseBefore": {
+        "769927680": null,
+        "773728826": null,
+        "770910735": null,
+        "774580807": 0,
+        "770124291": 0,
+        "770058754": 0,
+        "774711881": 0,
+        "774908492": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 0
+      },
+      "stop": "stopped pid 2472",
+      "detectMs": 1356,
+      "hostSeesPartner": false,
+      "hostLogic": 1,
+      "hostMap": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "after": {
+        "channels": 0,
+        "readyChannels": 0,
+        "references": 0,
+        "boundHandles": [],
+        "streamResult": "session_pose_stale",
+        "attackEnabled": false,
+        "attackReady": 0,
+        "attackResult": "session_pose_stale",
+        "avatar": []
+      },
+      "pauseAfter": {
+        "769927680": null,
+        "773728826": null,
+        "770910735": null,
+        "774580807": 0,
+        "770124291": 0,
+        "770058754": 0,
+        "774711881": 0,
+        "774908492": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 1
+      },
+      "pausedLonger": [],
+      "pausedNames": {
+        "770189828": "models/characters/def/generic/worker_male_small_01.def_10756"
+      },
+      "pausedLater": {
+        "770189828": 1
+      },
+      "pausedTransient": [],
+      "keepAwakeReleased": 1,
+      "lodPaused": [
+        "770189828"
+      ],
+      "moved": 5.47,
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 2,
+        "result": "partner_connection_ended",
+        "connectionState": 0,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 1
+      },
+      "stillHosting": true,
+      "product": "waiting_partner",
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "eddbc8875098ba6e",
+        "connection": 0,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "eddbc8875098ba6e",
+        "sent": 249,
+        "received": 236,
+        "refused": 0,
+        "silentMs": 0
+      }
+    },
+    "step13-rejoin-relaunch": {
+      "afterStep": 13,
+      "connected": true,
+      "connectMs": 34744,
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 1,
+        "warpDistance": 5.46
+      },
+      "distance": 1.2,
+      "gameflow": {
+        "host": "241 2 5 0 0 0 0",
+        "client": "241 2 5 0 0 0 0",
+        "equal": true
+      },
+      "armed": {
+        "product": {
+          "client": "armed",
+          "host": "armed"
+        },
+        "banks": {
+          "client": true,
+          "host": true
+        },
+        "ok": true
+      },
+      "host": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 0,
+        "boundHandles": [
+          769927680,
+          773728826,
+          774580807,
+          770910735,
+          768682477,
+          774711881,
+          774908492,
+          770124291,
+          770058754,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -30.817,
+              188.483,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "client": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 26,
+        "boundHandles": [
+          769927680,
+          773728826,
+          774580807,
+          770910735,
+          768682477,
+          774711881,
+          774908492,
+          770124291,
+          770058754,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -30.8167,
+              187.283,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "loadMs": 93445,
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "eddbc8875098ba6e",
+        "connection": 1032011931,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "eddbc8875098ba6e",
+        "sent": 61,
+        "received": 59,
+        "refused": 0,
+        "silentMs": 453
+      },
+      "vmControl": {
+        "protocol": 1,
+        "dllHash": "eddbc8875098ba6e",
+        "connection": 1857489899,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "eddbc8875098ba6e",
+        "sent": 60,
+        "received": 60,
+        "refused": 0,
+        "silentMs": 734
+      }
+    },
+    "step13-rejoin-character": "models/characters/player/emily/body.def",
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 11,
+        "cine": 6,
+        "pos": [
+          -30.816999,
+          188.483002,
+          1.253970
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/105/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 10,
+        "pos": [
+          -30.81665,
+          187.283234,
+          1.25397
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2158.ps1:1157[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m1157 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe partner rejoined as models/characters/player/emily/body.def, expected corvo[0m

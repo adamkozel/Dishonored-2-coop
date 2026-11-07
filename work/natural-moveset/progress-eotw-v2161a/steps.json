@@ -1,0 +1,156 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_partner_progress on"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--player-inventory"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--bonecharms"
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".partner-progress.json"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named components/characters/player/base/attributes/extended_health.inventoryitem"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_charm 13858082"
+ },
+ {
+  "do": "wait",
+  "ms": 9000
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--player-inventory"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--bonecharms"
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".partner-progress.json"
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "rejoin",
+  "character": "corvo"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--player-inventory"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--bonecharms"
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".partner-progress.json"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named components/equipment/ammo/bolt_tranquilizer.inventoryitem"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_charm 3997576305"
+ },
+ {
+  "do": "wait",
+  "ms": 9000
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--player-inventory"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--bonecharms"
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".partner-progress.json"
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "rejoin",
+  "character": "emily"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--player-inventory"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--bonecharms"
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".partner-progress.json"
+ },
+ {
+  "do": "rejoin",
+  "character": "corvo"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--player-inventory"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--bonecharms"
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".partner-progress.json"
+ },
+ {
+  "do": "diff",
+  "tag": "end"
+ }
+]

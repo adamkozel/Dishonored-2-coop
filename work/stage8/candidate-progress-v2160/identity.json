@@ -1,0 +1,10 @@
+{
+ "candidate": "progress-v2160",
+ "card": 265,
+ "dll": "AD046DB74F7BEB3FDFB9599ABDD9CFCEFF64EF6F6655F04C80D571133F3BA860",
+ "probe": "3402A4C7C0EA035AA944F53D1CD492D4421D368D6EB0C51E913BBF1B50AEBF4B",
+ "previousCandidate": "progress-v2151",
+ "sourceCommit": "37d71394c007190cc7cb67566abad79e67ca8f12",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2151 plus the NPC life roster (npc_authority_stream.h, 2160): each entry keeps its last roster record and the highest state its world reported, and the host sends a known state the peer lacks once the NPC has left its catalog (progress-eotw-v2159a and b: script_spawner_bfbuilding_exterminato_1 dead only in the host's world after the partner's third rejoin). Status: relevance.lifeCatalogGoneSent"
+}

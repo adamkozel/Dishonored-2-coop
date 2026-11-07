@@ -1,0 +1,10 @@
+{
+ "candidate": "progress-v2161",
+ "card": 265,
+ "dll": "00C1BDF5602D4494C2F01324C16331697CB458360431C2DC8D5508F21F30B802",
+ "probe": "3402A4C7C0EA035AA944F53D1CD492D4421D368D6EB0C51E913BBF1B50AEBF4B",
+ "previousCandidate": "progress-v2160",
+ "sourceCommit": "798b3c268036381d66f91848c5b5962948734a4f",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2160 plus the life snapshot resend and refusal diagnostics (2161): the host sends a join snapshot again every 10 s for 60 s (relevance.lifeResends; progress-eotw-v2159b and v2160b: the partner's new game rejected the whole snapshot), applyNpcLife names its refusal reason and the partner keeps its last eight refused or bound-skipped states (relevance.lifeRefusedLast; v2159a refused 17). Earlier: the NPC life roster (npc_authority_stream.h, 2160): each entry keeps its last roster record and the highest state its world reported, and the host sends a known state the peer lacks once the NPC has left its catalog (progress-eotw-v2159a and b: script_spawner_bfbuilding_exterminato_1 dead only in the host's world after the partner's third rejoin). Status: relevance.lifeCatalogGoneSent"
+}

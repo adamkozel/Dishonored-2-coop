@@ -186,6 +186,56 @@ The crafted record goes through the native readers and comes back equipped. Stil
 
 **Exact join restores, candidate progress-v2105 (`partner_progress.h`):** on a join's load the class 2 entries (ammunition, elixirs, runes, gear, whalebone) and money are set to the saved values, as a native mission change carries them. Powers, upgrades and enhancements are still only raised. `Check-Progress-v2107.py` asks for each granted entry to differ from its fresh value before the close and to be equal after the rejoin.
 
+## Per character: harness v2158 to v2160, candidate progress-v2160
+
+The route `progress-eotw-perchar-v2158` uses a new harness step, `rejoin`. It kills the VM game, starts it again and joins as the named character. The route runs four sessions:
+
+1. Emily earns extended_health and charm 13858082.
+2. She rejoins as Corvo, who must start without them. Corvo earns tranquilizer bolts and charm 3997576305.
+3. She rejoins as Emily, who must get only her own set back.
+4. She rejoins as Corvo, who must get only his set back.
+
+`Check-PerChar-v2158.py` judges each take. The twin turns `coop_partner_progress` off.
+
+| Take | Result |
+|---|---|
+| `progress-eotw-v2158b`, `v2158a` | **No verdict (harness).** Both rejoined as Emily: a lab game asks for the character on a join only with `coop_character_choice on` (product mode always asks). Harness v2159 turns it on for a route rejoin. |
+| `progress-eotw-v2159b` (twin) | **Not a valid twin (harness).** The characters switched, and Emily lost her set, but Corvo kept his: the lab switch lives in the game process, so each relaunched game came back with progression on. Harness v2160 sends `coop_partner_progress off` before each twin rejoin. |
+| `progress-eotw-v2159a` | **PASS per character (confirmed runtime, progress-v2151).** Corvo after the switch had neither Emily's extended_health nor her charm. Corvo earned his bolts and charm. Emily again had her extended_health, her bolts and her charm, owned and equipped, and not Corvo's charm. Corvo again had his bolts and charm and not hers. |
+
+**A world difference found by these takes (both of them):** at the end, `script_spawner_bfbuilding_exterminato_1` was dead in the host's world and alive in the partner's, after her third rejoin. Earlier single-rejoin takes had him dead in both worlds.
+
+- **Confirmed runtime:** the host had sent four join snapshots and 96 life messages; the partner's last game received no life message.
+- **Hypothesis:** the host's world had removed his body, so he had left the catalog that the join snapshot walks.
+- **Candidate progress-v2160** keeps each life entry's last roster record and the highest state its world reported. The host then sends a known state that the peer lacks once the NPC has left the catalog (status `relevance.lifeCatalogGoneSent`).
+- `Run-V2160P.sh` runs the twin and the take again on progress-v2160 and harness v2160.
+
+| Take | Result |
+|---|---|
+| `progress-eotw-v2160b` (twin, harness v2160) | **RED as required.** Progression stayed off through each relaunch: Emily and Corvo both lost their sets. The end diff still had the exterminator. `lifeCatalogGoneSent` was 0, so the 2160 path never ran. The partner's last game rejected the whole snapshot: 24 rejected beside 202 early hellos, and 0 received. |
+| `progress-eotw-v2160a` | **PASS per character** (progress-v2160). The same difference: the partner received the 24 states and refused 18. |
+| `progress-eotw-v2161b` (twin), `v2161a` | **RED** and **PASS per character** (progress-v2161: the snapshot is sent again every 10 s for 60 s, and refusals are named). The partner received 144 life messages. The only refused state was `script_spawner_bfbuilding_exterminato_1\|models/characters/base/human_dead`, reason `survived`, 18 and 20 tries. |
+| `progress-eotw-v2162b` (twin) | **RED as required** (progress-v2162, harness v2160): both characters lost their sets, and the end diff is **EQUAL** (2279 values). |
+| `progress-eotw-v2162a` | **PASS per character** and the end diff is **EQUAL** (2279 values). Corvo started without Emily's set, each character got only its own set back, and the characters read Emily, Corvo, Emily, Corvo. |
+
+**Cause of the end difference (confirmed runtime):** the differing NPC is a placed corpse.
+
+- Its definition is `human_dead`. It reads alive just after a load and dead later, in either world on its own.
+- Lethal damage leaves it unchanged.
+- Earlier single-rejoin takes read it dead in both worlds, because the partner's world was older by the end.
+
+**The fixes:**
+
+- **progress-v2161** sends the join snapshot again every 10 s for 60 s. This fixed a real loss: before it, a rejoining partner received none of the host's deaths.
+- **progress-v2162** leaves placed corpses out of the life sync. The probe digests them as `corpse`, so they are compared by presence only.
+
+**#265 is done** (confirmed runtime, progress-v2162).
+
+- Progression is kept per partner and per character across joins. Restore within a character passed in v2107a/c and v2117a, and per character passed in v2159a to v2162a.
+- The twins, with the switch off, lose it.
+- The release notes draft describes it.
+- Open, written down: a bonecharm made at a crafting table in a later mission.
+
 ## Plan
 
 1. **Save** on the partner's PC, per character (`coop-progress-corvo.json`, `coop-progress-emily.json` beside the isolated co-op saves): at each autosave, on leave and at mission end.
