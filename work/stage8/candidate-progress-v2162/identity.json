@@ -1,0 +1,10 @@
+{
+ "candidate": "progress-v2162",
+ "card": 265,
+ "dll": "2DEDDCE6064F165680BD5C4BF488E96313C4B060CD5E8A9E8AD1BDA4F5BDA6D3",
+ "probe": "A3A129AADD66495E9AA74B5449B0F1FD66DB842B429EB980489C6E9FF15F2F2C",
+ "previousCandidate": "progress-v2161",
+ "sourceCommit": "142f7d50ccd8e86ebfdf1ef82d68eed456f5a7ff",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2161 plus scene corpses (2162): an NPC whose definition ends in human_dead is placed dead and reaches health 0 on its own after a load, and damage cannot kill it (progress-eotw-v2161b lifeRefusedLast: survived, 18 tries). The life sync neither sends nor applies its state, and the probe digest reports it as corpse (presence only). Earlier (2161): the join snapshot is sent again every 10 s for 60 s; refusals are named"
+}

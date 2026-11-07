@@ -210,6 +210,32 @@ The route `progress-eotw-perchar-v2158` uses a new harness step, `rejoin`. It ki
 - **Candidate progress-v2160** keeps each life entry's last roster record and the highest state its world reported. The host then sends a known state that the peer lacks once the NPC has left the catalog (status `relevance.lifeCatalogGoneSent`).
 - `Run-V2160P.sh` runs the twin and the take again on progress-v2160 and harness v2160.
 
+| Take | Result |
+|---|---|
+| `progress-eotw-v2160b` (twin, harness v2160) | **RED as required.** Progression stayed off through each relaunch: Emily and Corvo both lost their sets. The end diff still had the exterminator. `lifeCatalogGoneSent` was 0, so the 2160 path never ran. The partner's last game rejected the whole snapshot: 24 rejected beside 202 early hellos, and 0 received. |
+| `progress-eotw-v2160a` | **PASS per character** (progress-v2160). The same difference: the partner received the 24 states and refused 18. |
+| `progress-eotw-v2161b` (twin), `v2161a` | **RED** and **PASS per character** (progress-v2161: the snapshot is sent again every 10 s for 60 s, and refusals are named). The partner received 144 life messages. The only refused state was `script_spawner_bfbuilding_exterminato_1\|models/characters/base/human_dead`, reason `survived`, 18 and 20 tries. |
+| `progress-eotw-v2162b` (twin) | **RED as required** (progress-v2162, harness v2160): both characters lost their sets, and the end diff is **EQUAL** (2279 values). |
+| `progress-eotw-v2162a` | **PASS per character** and the end diff is **EQUAL** (2279 values). Corvo started without Emily's set, each character got only its own set back, and the characters read Emily, Corvo, Emily, Corvo. |
+
+**Cause of the end difference (confirmed runtime):** the differing NPC is a placed corpse.
+
+- Its definition is `human_dead`. It reads alive just after a load and dead later, in either world on its own.
+- Lethal damage leaves it unchanged.
+- Earlier single-rejoin takes read it dead in both worlds, because the partner's world was older by the end.
+
+**The fixes:**
+
+- **progress-v2161** sends the join snapshot again every 10 s for 60 s. This fixed a real loss: before it, a rejoining partner received none of the host's deaths.
+- **progress-v2162** leaves placed corpses out of the life sync. The probe digests them as `corpse`, so they are compared by presence only.
+
+**#265 is done** (confirmed runtime, progress-v2162).
+
+- Progression is kept per partner and per character across joins. Restore within a character passed in v2107a/c and v2117a, and per character passed in v2159a to v2162a.
+- The twins, with the switch off, lose it.
+- The release notes draft describes it.
+- Open, written down: a bonecharm made at a crafting table in a later mission.
+
 ## Plan
 
 1. **Save** on the partner's PC, per character (`coop-progress-corvo.json`, `coop-progress-emily.json` beside the isolated co-op saves): at each autosave, on leave and at mission end.
