@@ -565,6 +565,12 @@ bool npcCombatFollowHost(NpcAuthorityChannel& c,const NativeHealth& before,float
 // knockdown is PlayThrowHit (0x140593bd0), which ragdolls only when the throw-hit block at +0x58 is set (d2-ghidra,
 // confirmed static); v2080b's recorded kick rows were hits between other NPCs, so her real kick was never read.
 std::array<unsigned char,144> npcBlinkKickInfo{};std::uint64_t npcBlinkKickInfoCaptures=0;
+// 2173 (#261): a single-player Blink Assault knocks the guard down because its kick scene binds the NPC (chapter 108);
+// the partner's kick reaches the host as damage, which only pushes. The host now also fills the throw-hit block
+// (+0x58, arkThrowHitInfo): type 5 copies the velocity at +0x5c into the guard's physics reaction and PlayThrowHit
+// (0x140593bd0) ragdolls it (d2-ghidra, confirmed static; cases at 0x1405948b0). coop_blink_kick throw|native|legacy.
+bool labBlinkKickRequested=false;const char* labBlinkKickResult="idle";std::uint64_t labBlinkKicks=0; // 2173 (lab): coop_lab_blink_kick
+bool npcBlinkKickThrow=true;float npcBlinkKickThrowSpeed=6.f,npcBlinkKickThrowLift=3.f;std::uint64_t npcBlinkKickThrows=0;
 bool npcBlinkKickForward=true;std::uint64_t npcBlinkKicksSent=0,npcBlinkKicksApplied=0; // 2081 (#242): coop_blink_kick legacy|native
 bool npcCombatApplyPeerNative(NpcAuthorityChannel& c,const NativeHealth& before,const NpcCombatRangedDamage& r,bool linked=false){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const char* name=npcDamageDeclarationName(r.declaration);
@@ -581,7 +587,9 @@ bool npcCombatApplyPeerNative(NpcAuthorityChannel& c,const NativeHealth& before,
     else if(r.weapon&&npcCombatBlinkKickDeclaration(r.declaration)){const std::uint64_t flags=r.weapon&0xff;const std::uint32_t r0=(r.weapon>>8)&0xff,r1=(r.weapon>>16)&0xff;
         std::memcpy(params.data()+0x10,&flags,8);std::memcpy(params.data()+0x18,&r0,4);std::memcpy(params.data()+0x1c,&r1,4);
         float from[3]{},to[3]{};if(avatar.actor&&memoryRead(avatar.actor+0x300,from,12)&&memoryRead(before.actor+0x300,to,12)){
-            float d[3]={to[0]-from[0],to[1]-from[1],0.f};const float n=std::sqrt(d[0]*d[0]+d[1]*d[1]);if(n>.01f){d[0]/=n;d[1]/=n;std::memcpy(params.data()+0x3c,d,12);}}
+            float d[3]={to[0]-from[0],to[1]-from[1],0.f};const float n=std::sqrt(d[0]*d[0]+d[1]*d[1]);if(n>.01f){d[0]/=n;d[1]/=n;std::memcpy(params.data()+0x3c,d,12);
+                if(npcBlinkKickThrow){const std::int32_t type=5;const float v[3]={d[0]*npcBlinkKickThrowSpeed,d[1]*npcBlinkKickThrowSpeed,npcBlinkKickThrowLift};
+                    std::memcpy(params.data()+0x58,&type,4);std::memcpy(params.data()+0x5c,v,12);++npcBlinkKickThrows;}}}
         ++npcBlinkKicksApplied;}
     std::memcpy(params.data()+0x50,&avatar.handle,4);std::memcpy(params.data()+0x54,&avatar.handle,4);
     NativeHealth recheck{};
@@ -943,6 +951,8 @@ void writeNpcCombat(){
     const auto& s=npcCombat;fprintf(f,"{\"linkedSleepCaptured\":%llu,\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatLinkedSleepCaptured.load()),static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
     for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s,\"retired\":\"%s\",\"health\":%.4f}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false",b.retired,b.health);}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
+    fprintf(f,",\"blinkKickThrow\":%s,\"blinkKickThrows\":%llu,\"labBlinkKick\":\"%s\",\"labBlinkKicks\":%llu",npcBlinkKickThrow?"true":"false",static_cast<unsigned long long>(npcBlinkKickThrows),
+        labBlinkKickResult,static_cast<unsigned long long>(labBlinkKicks));
     fprintf(f,",\"blinkKicksSent\":%llu,\"blinkKicksApplied\":%llu,\"blinkKickInfoCaptures\":%llu,\"blinkKickInfo\":\"",static_cast<unsigned long long>(npcBlinkKicksSent),static_cast<unsigned long long>(npcBlinkKicksApplied),static_cast<unsigned long long>(npcBlinkKickInfoCaptures));
     for(const auto v:npcBlinkKickInfo)fprintf(f,"%02x",v);fprintf(f,"\"");
     fprintf(f,",\"replicaGapSuppressed\":%llu,\"hostPairedPassed\":%llu",static_cast<unsigned long long>(npcCombatReplicaGapSuppressed.load()),

@@ -1,0 +1,174 @@
+{
+  "power": "blinkkick",
+  "pairing": "corvo-corvo",
+  "passed": true,
+  "failure": null,
+  "checks": [
+    "Blink Assault: host down poses sent 0, host guard moved 7.42 m",
+    "Host guard moved up to 7.42 m (health 40 -> 40); her copy up to 7.25 m (health 40 -> 40); outcome alive/alive, end gap 0 m (last samples 0 m)"
+  ],
+  "definitions": {
+    "host": "models/characters/player/corvo/body.def",
+    "client": "models/characters/player/corvo/body.def"
+  },
+  "grants": [
+    {
+      "item": "models/powers/blink/blink.inventoryitem",
+      "result": "named_power_equip_requested"
+    },
+    {
+      "item": "components/characters/player/base/attributes/blink_assault.inventoryitem",
+      "result": "granted_named"
+    }
+  ],
+  "upgrades": [],
+  "stand": {
+    "side": "front",
+    "stand": [
+      3.44479,
+      65.1239,
+      15.9791
+    ],
+    "guard": [
+      4.43611,
+      59.2066,
+      15.953
+    ],
+    "facing": [
+      -0.16510402649985878,
+      0.9862761583012812
+    ],
+    "trials": [
+      {
+        "side": "front",
+        "asked": [
+          3.4454858410008473,
+          65.12425694980769
+        ],
+        "rest": [
+          3.44479,
+          65.1239,
+          15.9791
+        ],
+        "ok": true
+      }
+    ]
+  },
+  "guardAtWait": {
+    "host": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43837,
+        59.1915,
+        15.9529
+      ]
+    },
+    "client": {
+      "handle": "0x2dc829e4",
+      "position": [
+        4.43837,
+        59.1915,
+        15.9529
+      ]
+    }
+  },
+  "replicaReady": {
+    "ready": true,
+    "ms": 850,
+    "channel": "client_replica",
+    "gap": 0.0
+  },
+  "camera": [
+    -1.9759976914415,
+    61.166602494325666,
+    18.5529
+  ],
+  "aim": {
+    "target": [
+      4.43837,
+      59.1915,
+      15.9529
+    ],
+    "stand": [
+      3.44479,
+      65.1239,
+      15.9791
+    ],
+    "yaw": -80.5,
+    "pitch": 4.0,
+    "distance": 6.02
+  },
+  "before": {
+    "ms": 0,
+    "host": {
+      "present": true,
+      "position": [
+        4.09442,
+        60.9555,
+        15.9596
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_host": {
+      "result": "host_authority",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    },
+    "client": {
+      "present": true,
+      "position": [
+        4.1209,
+        61.1539,
+        15.961
+      ],
+      "health": 40,
+      "suppressed": false
+    },
+    "channel_client": {
+      "result": "client_replica",
+      "localPaired": false,
+      "pairedVariant": 0,
+      "pairedResult": "none",
+      "reversePoses": 0,
+      "downSent": 0,
+      "downReceived": 0
+    }
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "sentBefore": 0,
+      "sentAfter": 2
+    }
+  ],
+  "castAt": 1,
+  "castEnd": 4268,
+  "outcome": {
+    "host": "alive",
+    "client": "alive"
+  },
+  "summary": {
+    "hostGuardMaxMove": 7.42,
+    "herCopyMaxMove": 7.25,
+    "endGap": 0.0,
+    "rawEndGap": 0.0,
+    "hostHealth": [
+      40,
+      40
+    ],
+    "herHealth": [
+      40,
+      40
+    ],
+    "outcome": {
+      "host": "alive",
+      "client": "alive"
+    }
+  },
+  "hiddenInHerWorld": 0
+}

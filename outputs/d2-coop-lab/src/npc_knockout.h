@@ -88,6 +88,30 @@ constexpr char kNpcHostWorldTestDecl[]="components/characters/animals/bloodfly/d
 constexpr char kNpcHostNativeTestDecl[]="components/equipment/damage/explosion_grenade.damage";
 struct NpcHostWorldTest{bool requested=false,player=false;const char* result="idle";std::uint32_t target=0,source=0;NativeHealth before{},after{};float amount=0;std::uint64_t runs=0;};
 NpcHostWorldTest npcHostWorldTest;
+// 2173 (#261, lab): coop_lab_blink_kick applies, on the host, a Blink Assault kick request as the partner's would arrive
+// (blink_attack, flags 0x12, reactions 2 and 2) to the bound guard nearest the host player, through npcCombatApplyPeerNative,
+// so the knockdown can be judged without depending on where her blink ends (only partner-corvo-power-v1805a ever landed
+// a real kick; v2080b, v2081a and v2172c landed sword hits).
+void serviceLabBlinkKick(){
+    if(!labBlinkKickRequested)return;labBlinkKickRequested=false;++labBlinkKicks;
+    if(localRole||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame||!npcCombat.enabled){labBlinkKickResult="context_refused";return;}
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);float best=1e12f;NpcAuthorityChannel* target=nullptr;
+    for(const auto& b:npcCombat.channels){if(!b.enabled||!b.ready||b.terminal||b.deathPending)continue;auto* c=npcCombatActor(b.arm);NativeHealth h{};
+        if(!c||c->unconscious||c->corpse||!c->enabled||!c->ready||!readNativeHealth(memoryRead,base,c->lease.binding.npc.handle,h)||h.actor!=c->lease.binding.npc.actor||h.current<=3)continue;
+        float root[3]{};if(!memoryRead(c->lease.binding.npc.actor+0x300,root,12))continue;float d=0;for(unsigned i=0;i<3;++i){const float x=root[i]-remote.position[i];d+=x*x;} // 2175: nearest the partner, whose kick it stands for
+        if(d<best){best=d;target=c;}}
+    if(!target){labBlinkKickResult="no_bound_target";return;}
+    NativeHealth before{};if(!readNativeHealth(memoryRead,base,target->lease.binding.npc.handle,before)||before.actor!=target->lease.binding.npc.actor){labBlinkKickResult="health_refused";return;}
+    NpcCombatRangedDamage r{npcDamageKey("components/characters/player/base/damage/blink_attack.damage"),10.f,0.f,0x12u|(2u<<8)|(2u<<16)};
+    // 2175: blinkthrow-eotw-v2174a read only "refused"; name the check that refuses.
+    if(!npcDamageDeclarationName(r.declaration)){labBlinkKickResult="no_declaration_name";return;}
+    if(!validNpcPeerNative(r)){labBlinkKickResult="invalid_request";return;}
+    if(!npcCombatNear(*target,1,32.f)){labBlinkKickResult="partner_far";return;}
+    if(npcCombatNativeApplication){labBlinkKickResult="busy";return;}
+    if(before.ownerFlags&8){labBlinkKickResult="owner_flag8";return;}
+    if(!validCoopDamageAvatar(memoryRead,base,shadowDamageIdentity())){labBlinkKickResult="no_avatar";return;}
+    labBlinkKickResult=npcCombatApplyPeerNative(*target,before,r)?"applied":"refused_late";
+}
 void serviceNpcHostWorldTest(){
     auto& t=npcHostWorldTest;if(!t.requested)return;t.requested=false;++t.runs;t.result="refused";t.before={};t.after={};t.target=t.source=0;t.amount=0;
     // 1214af: with NPC combat off the host-world mode targets a stream-bound NPC (a host loss outside any combat channel; Hello follow test 1278).
