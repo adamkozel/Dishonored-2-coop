@@ -1,0 +1,11 @@
+{
+ "candidate": "progress-v2178",
+ "card": 261,
+ "dll": "1322A19A381D709DA9725B0C64F17F2DC524F378F3316806778FF95B0E6824CD",
+ "probe": "098F41694F711843A05D5B0CA10B17C21DCFA1025589329D2AD24CE3E9C3A75A",
+ "previousCandidate": "progress-v2176",
+ "sourceCommit": "ca1112902d78591a61d082a3e6f52e28ba4c199a",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2176 plus animal possession presence (2178, #261): pose bits 0x800 rat / 0x1000 fish while the local player possesses one (controller state 2/3, swarm agent target 0x1b63fa8, kind 4/0x10); the other world hides her avatar and shows the cosmetic rat at her root (swarm-rat-visual possessedAnimal), coop_possess_animal on|off; protocol tests updated",
+ "diffNote": "source-change.diff was taken after the build and also contains the 2180 bottle change (breakable_sync.h breakablePartnerVanish, engine_bridge.cpp and Send-D2Command.ps1 coop_breakable_partner_vanish); this dinput8.dll does not include it (the string coop_breakable_partner_vanish is absent)."
+}

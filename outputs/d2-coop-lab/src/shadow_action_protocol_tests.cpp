@@ -200,7 +200,11 @@ void timeBendPoseTests(){
     q=p;q.flags|=0x400u|(100u<<16);check(!validCoopPose(q,0),"1214ie: 100 percent is no Bend Time");
     q=p;q.flags|=(30u<<16);check(!validCoopPose(q,0),"1214ie: a percent without the running bit");
     q=p;q.flags=0x400u|(1u<<8);check(!validCoopPose(q,0),"1214ie: a Bend Time outside gameplay");
-    q=p;q.flags|=0x800u;check(!validCoopPose(q,0),"1214ie: reserved bit 11");
+    q=p;q.flags|=0x800u;check(validCoopPose(q,0),"2178: bit 11, possessing a rat");
+    q=p;q.flags|=0x1000u;check(validCoopPose(q,0),"2178: bit 12, possessing a fish");
+    q=p;q.flags|=0x1800u;check(!validCoopPose(q,0),"2178: never a rat and a fish");
+    q=p;q.flags=0x800u|(1u<<8);check(!validCoopPose(q,0),"2178: an animal outside gameplay");
+    q=p;q.flags|=0x2000u;check(!validCoopPose(q,0),"2178: reserved bit 13");
     q=p;q.flags|=0x800000u|0x400u;check(!validCoopPose(q,0),"1214ie: reserved bit 23");
     q=p;q.version=12;check(!validCoopPose(q,0),"1214ie: pose version 12 refused");}
 // Stage 8.4.3 (#239): the Jindosh answer packet and the journal values derived from it.

@@ -231,6 +231,7 @@ void publishMovementBank(const PresentationPose& pose,const float* position,doub
     if(p.end&&tick<p.lease){
         MovementSemantics::Sample semantic{};const bool semanticValid=shadowStream.movement.sample(pose.time,semantic);
         possessionHidden=semanticValid&&semantic.state==17&&p.bank.hasPossessionRelease();
+        if((remote.flags&1u)&&(remote.flags&0x1800u))possessionHidden=true; // 2178 (#261): she is a rat or a fish
         // Sword semantics travel through the existing native Steam action
         // stream. Unknown/stale actions never count as an idle permission.
         const bool ground=pose.stance==0&&pose.motion==0;

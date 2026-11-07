@@ -96,7 +96,7 @@ inline std::uint64_t coopCinematicSignature(const CoopCinematicKey* keys,unsigne
 }
 inline bool validCoopPose(const CoopPosePacket& p,std::uint32_t localRole) {
     if(p.magic!=0x50433244 || p.version!=13 || p.size!=sizeof(p) || p.build!=0x67a50cde ||!p.sampleTimeUs||p.sampleTimeUs>9007199254740991ull||
-       p.role>1 || p.role==localRole || !p.sequence || !p.session || (p.flags&~0x7f0701u) || ((p.flags>>8)&3u)==3u || ((p.flags&0x400u)?(!(p.flags&1u)||((p.flags>>16)&0x7fu)>99u):((p.flags&0x7f0000u)!=0u)) || ((p.flags&1)&&(!p.worldEpoch||!p.mapId))) return false;
+       p.role>1 || p.role==localRole || !p.sequence || !p.session || (p.flags&~0x7f1f01u)||((p.flags&0x1800u)==0x1800u)||((p.flags&0x1800u)&&!(p.flags&1u)) || ((p.flags>>8)&3u)==3u || ((p.flags&0x400u)?(!(p.flags&1u)||((p.flags>>16)&0x7fu)>99u):((p.flags&0x7f0000u)!=0u)) || ((p.flags&1)&&(!p.worldEpoch||!p.mapId))) return false;
     if(p.gameLogicState>=17||p.pendingGameLogicState>=17)return false;
     if(p.playerStanceValid>1||p.playerStance>1||(!p.playerStanceValid&&p.playerStance)||
        (p.playerStanceValid&&(!(p.flags&1)||(p.gameLogicState!=1&&p.gameLogicState!=10)||p.pendingGameLogicState)))return false; // 1214dr: black market
