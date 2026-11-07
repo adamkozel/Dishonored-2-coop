@@ -561,6 +561,10 @@ bool npcCombatFollowHost(NpcAuthorityChannel& c,const NativeHealth& before,float
 // 1214y: the host applies a client PeerNative hit natively, the partner avatar as
 // attacker and inflictor; HostWorld commits a loss and Dead a death.
 // 1214fm (#117): a Linked hit too, with its native amount and flags, up to 96 m from the partner (Domino links far).
+// 2163 (#261): the last Blink Assault kick's own 144 parameter bytes in the partner's world (blinkKickInfo). The native
+// knockdown is PlayThrowHit (0x140593bd0), which ragdolls only when the throw-hit block at +0x58 is set (d2-ghidra,
+// confirmed static); v2080b's recorded kick rows were hits between other NPCs, so her real kick was never read.
+std::array<unsigned char,144> npcBlinkKickInfo{};std::uint64_t npcBlinkKickInfoCaptures=0;
 bool npcBlinkKickForward=true;std::uint64_t npcBlinkKicksSent=0,npcBlinkKicksApplied=0; // 2081 (#242): coop_blink_kick legacy|native
 bool npcCombatApplyPeerNative(NpcAuthorityChannel& c,const NativeHealth& before,const NpcCombatRangedDamage& r,bool linked=false){
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);const char* name=npcDamageDeclarationName(r.declaration);
@@ -679,7 +683,7 @@ bool processNpcCombatCapture(NpcCombatCapture& capture){
             }
             NpcCombatRangedDamage native{npcDamageKey(npcCombatLastDecl),0,0,0};std::memcpy(&native.amount,capture.info.data()+8,4);
             if(npcBlinkKickForward&&npcCombatBlinkKickDeclaration(native.declaration)){std::uint32_t r0=0,r1=0;std::memcpy(&r0,capture.info.data()+0x18,4);std::memcpy(&r1,capture.info.data()+0x1c,4); // 2081
-                native.weapon=static_cast<unsigned>(capturedFlags&0xff)|((r0&0xff)<<8)|((r1&0xff)<<16);++npcBlinkKicksSent;}
+                native.weapon=static_cast<unsigned>(capturedFlags&0xff)|((r0&0xff)<<8)|((r1&0xff)<<16);++npcBlinkKicksSent;std::memcpy(npcBlinkKickInfo.data(),capture.info.data(),144);++npcBlinkKickInfoCaptures;}
             // 1214gx (#131): a hit by Emily's own shade (the deadly shadow's kill_damage) was refused here as
             // hit_damage_parameters (partner-shade-v1731a). Its amount is clamped to the PeerNative limit (the host applies its
             // own declaration) and a world inflictor or attacker is allowed when the other one is her shade.
@@ -939,6 +943,8 @@ void writeNpcCombat(){
     const auto& s=npcCombat;fprintf(f,"{\"linkedSleepCaptured\":%llu,\"passedThrough\":%llu,\"lastDecl\":\"%s\",\"channelsAdded\":%llu,\"channelsRetired\":%llu,\"rearms\":%llu,\"lastRetire\":\"%s\",\"wanted\":%s,",static_cast<unsigned long long>(npcCombatLinkedSleepCaptured.load()),static_cast<unsigned long long>(npcCombatPassedThrough.load()),npcCombatLastDecl.c_str(),static_cast<unsigned long long>(npcCombatChannelsAdded),static_cast<unsigned long long>(npcCombatChannelsRetired),static_cast<unsigned long long>(npcCombatRearms),npcCombatLastRetire,npcCombatWanted?"true":"false");fprintf(f,"\"enabled\":%s,\"result\":\"%s\",\"nonce\":%llu,\"localHits\":%llu,\"requests\":%llu,\"committed\":%llu,\"applied\":%llu,\"duplicates\":%llu,\"rejected\":%llu,\"suppressed\":%llu,\"eventsQueued\":%zu,\"lastOutcome\":{\"before\":%.9g,\"after\":%.9g,\"maximum\":%.9g,\"inflicted\":%.9g},\"entries\":[",s.enabled?"true":"false",s.result,s.nonce,s.localHits,s.requests,s.committed,s.applied,s.duplicates,s.rejected,s.suppressed,s.outgoing.size(),s.lastSent.before,s.lastSent.after,s.lastSent.maximum,s.lastSent.inflicted);
     for(unsigned i=0;i<s.channels.size();++i){const auto& b=s.channels[i];fprintf(f,"%s{\"arm\":%llu,\"peerArm\":%llu,\"peerNonce\":%llu,\"enabled\":%s,\"ready\":%s,\"event\":%llu,\"request\":%llu,\"peerRequest\":%llu,\"pending\":%llu,\"terminal\":%s,\"deathPending\":%s,\"retired\":\"%s\",\"health\":%.4f}",i?",":"",b.arm,b.peerArm,b.peerNonce,b.enabled?"true":"false",b.ready?"true":"false",b.event,b.request,b.peerRequest,b.pending,b.terminal?"true":"false",b.deathPending?"true":"false",b.retired,b.health);}
     fprintf(f,"],\"deaths\":%llu,\"preDeathReleased\":%llu",s.deaths,s.preDeathReleased);
+    fprintf(f,",\"blinkKicksSent\":%llu,\"blinkKicksApplied\":%llu,\"blinkKickInfoCaptures\":%llu,\"blinkKickInfo\":\"",static_cast<unsigned long long>(npcBlinkKicksSent),static_cast<unsigned long long>(npcBlinkKicksApplied),static_cast<unsigned long long>(npcBlinkKickInfoCaptures));
+    for(const auto v:npcBlinkKickInfo)fprintf(f,"%02x",v);fprintf(f,"\"");
     fprintf(f,",\"replicaGapSuppressed\":%llu,\"hostPairedPassed\":%llu",static_cast<unsigned long long>(npcCombatReplicaGapSuppressed.load()),
         static_cast<unsigned long long>(npcCombatHostPairedPassed.load()));
     // 1214ft: the stop and retire histories, oldest first.

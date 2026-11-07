@@ -50,3 +50,45 @@ When one digest sample's NPC catalog read failed (`npcs {}`), `d2_world_diff.py`
 | `bottle-eotw-v2078c` | **Equal at spawn and 30 s later** (2279) |
 
 Two equal spawns in a row, against 3 of 4 failures before: good evidence for the prop-rest cause, not yet conclusive. The step 6 runs keep watching it.
+
+## The reinforcements again, 2163 to 2166
+
+**Reproduced** (confirmed runtime).
+
+- `Run-V2163R.sh` ran v2071b's route three times on progress-v2162. `reinf-eotw-v2163a` showed the difference again; v2163b and c were equal.
+- In v2163a, `script_spawner_checkpoint_reinf_01` and `_02` were in both worlds at spawn. At the after diff they were in neither (2277 values compared). At the end they were alive in the host's world and absent in the partner's.
+- Neither world's Kiscule events show a spawner node.
+
+**How a spawner spawns** (d2-ghidra, confirmed static; a helper agent's research, rechecked).
+
+- `arkCpntSpawner` has vtable +0x1c57d78. It is listed at +0x268/+0x270 of the spawner entity, which has vtable +0x1c5e948 and its name at +0x20.
+- `0x14075b770(component)` spawns now:
+  - it takes a pooled NPC (+0x40, count at +0x48), or creates one;
+  - it places and activates it, and lists it among the spawner's children (+0x30, count at +0x38);
+  - it returns 1.
+- +0x20 counts a pending spawn request.
+- The two other paths queue a spawn request:
+  - a help request (message 0xc6, `0x14075ae60`), heard by spawners whose definition sets +0xa3 or +0xa4;
+  - an alarm (message 0x1a0).
+- **Hypothesis:** the host's guards called for help when they saw the partner's avatar. The partner's copies of those guards follow the host, so they call no one.
+
+**Candidate progress-v2163** (life state *present*, host only).
+
+- The host announces each living unbound NPC of its world: once per partner world, during the resend window, and when a new one appears.
+- A partner world still missing that NPC 10 s later spawns it from the spawner of the same name, with up to three tries.
+- Story NPCs and placed corpses are left out.
+- Lab switch: `coop_npc_present on|off`. Status: `lifePresentSent`/`Received`, `lifeSpawned`, `lifeSpawnRefused`, and `lifeRefusedLast` reasons.
+- The same candidate keeps the partner's last Blink Assault kick parameters (`blinkKickInfo`, #261).
+
+| Take | Result |
+|---|---|
+| `reinf-eotw-v2164a` | Equal throughout; the event did not happen. |
+| `reinf-eotw-v2164t` | Setup fail: `coop_npc_present` was not in `Send-D2Command.ps1`'s list (added). |
+| `reinf-eotw-v2164b` | Every route diff equal. The final check after the route then had the two reinforcements alive only in the host's world: they appeared after the end diff, possibly inside the partner's 10 s wait. No status was kept then. |
+| `reinf-eotw-v2165t` (twin), `v2165a` | Equal; the event did not happen. Present messages flowed (host sent 606, partner received 606); nothing needed spawning. |
+
+The event is rare, so **candidate progress-v2166** makes it happen on demand:
+
+- `coop_lab_spawn <spawner>` spawns from that spawner in this world only.
+- The probe's `--spawners` lists every spawner with its live, pooled and pending counts.
+- `Run-V2166S.sh` lists both worlds' spawners on Edge of the World, to pick one with no live NPC.

@@ -1,0 +1,26 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--spawners"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--spawners"
+ },
+ {
+  "do": "wait",
+  "ms": 5000
+ }
+]

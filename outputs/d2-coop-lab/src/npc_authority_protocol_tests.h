@@ -65,6 +65,8 @@ void npcAuthorityProtocolTests(){
      require(validNpcControl(l,client,host),"the host reports an unbound NPC's death");
      auto x=l;x.h.reserved=1;require(validNpcControl(x,client,host),"or its knockout");
      x=l;x.h.reserved=3;require(!validNpcControl(x,client,host),"only unconscious or dead");x.h.reserved=0;require(!validNpcControl(x,client,host),"never alive");
+     x=l;x.h.reserved=kNpcLifePresent;require(l.h.role!=0||validNpcControl(x,client,host),"2163: the host announces a present NPC");
+     x.h.reserved=5;require(!validNpcControl(x,client,host),"no other life state");
      x=l;x.h.targetArm=8;require(!validNpcControl(x,client,host),"names no channel");
      x=l;x.h.sourceArm=7;require(!validNpcControl(x,client,host),"carries the sender NPC handle only");
      require(npcLifeApplies(0,2)&&npcLifeApplies(1,2)&&npcLifeApplies(0,1)&&!npcLifeApplies(2,1)&&!npcLifeApplies(1,1)&&!npcLifeApplies(0,3),"only a more severe known state applies");}
