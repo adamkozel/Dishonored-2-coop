@@ -1,0 +1,62 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "cast",
+  "role": "client",
+  "grant": "models/powers/devouring_swarm/devouring_swarm.inventoryitem",
+  "ms": 800
+ },
+ {
+  "do": "wait",
+  "ms": 1500
+ },
+ {
+  "do": "aim",
+  "role": "client",
+  "pitch": 35
+ },
+ {
+  "do": "cast",
+  "role": "client",
+  "grant": "models/powers/possession/possession.inventoryitem",
+  "ms": 1500
+ },
+ {
+  "do": "wait",
+  "ms": 2500
+ },
+ {
+  "do": "status",
+  "suffix": ".swarm-rat-visual.json"
+ },
+ {
+  "do": "wait",
+  "ms": 6000
+ },
+ {
+  "do": "status",
+  "suffix": ".swarm-rat-visual.json"
+ },
+ {
+  "do": "wait",
+  "ms": 15000,
+  "settle": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".swarm-rat-visual.json"
+ },
+ {
+  "do": "diff",
+  "tag": "after"
+ }
+]

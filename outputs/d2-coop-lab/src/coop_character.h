@@ -26,7 +26,9 @@ bool remoteCharacterKnown(){const int c=coopRemoteCharacter.load();return c==1||
 bool localCharacterKnown(){const int c=coopLocalCharacter.load();return c==1||c==2;}
 int remoteCharacter(){const int c=coopRemoteCharacter.load();return c==1||c==2?c:(localRole?1:2);}
 int localCharacter(){const int c=coopLocalCharacter.load();return c==1||c==2?c:(localRole?2:1);}
-inline void coopStampCharacter(){outgoing.flags=(outgoing.flags&1u)|(static_cast<std::uint32_t>(coopLocalCharacter.load()&3)<<8)|((outgoing.flags&1u)?coopTimeBendFlags.load():0u);}
+// 2178 (#261): 0x800 while the local player possesses a rat, 0x1000 a fish (native_player_possession_target.h).
+std::atomic<std::uint32_t> coopAnimalPossessionFlags{0};
+inline void coopStampCharacter(){outgoing.flags=(outgoing.flags&1u)|(static_cast<std::uint32_t>(coopLocalCharacter.load()&3)<<8)|((outgoing.flags&1u)?coopTimeBendFlags.load()|coopAnimalPossessionFlags.load():0u);}
 inline void coopChoiceAnswered(void*,int handle,int result){
     auto& c=coopChoice;if(handle!=c.handle)return;c.handle=-1;c.lastResult=result;++c.answers;
     if(result==0||result==1){c.character=result?2:1;c.state=2;c.result=result?"emily":"corvo";}

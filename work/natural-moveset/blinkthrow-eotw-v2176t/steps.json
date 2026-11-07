@@ -1,0 +1,66 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "partner",
+  "pos": [
+   4.04,
+   61.67,
+   15.97
+  ],
+  "yaw": -81.0
+ },
+ {
+  "do": "wait",
+  "ms": 6000,
+  "settle": 1000
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-combat.json"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_blink_kick native"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_blink_kick"
+ },
+ {
+  "do": "wait",
+  "ms": 4000
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-combat.json"
+ },
+ {
+  "do": "wait",
+  "ms": 12000,
+  "settle": 2000
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "diff",
+  "tag": "after",
+  "require": true
+ }
+]

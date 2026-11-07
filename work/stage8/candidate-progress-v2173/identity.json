@@ -1,0 +1,10 @@
+{
+ "candidate": "progress-v2173",
+ "card": 261,
+ "dll": "2BDDC1B655711B16FF102727B4881C0B8912743E2197BF7FFFCC00AD9674C96B",
+ "probe": "DA8AE069D2FF0AC4A2898E408FF405AF2DDD12DAF6D06257B2A5DBD7D3B72EF1",
+ "previousCandidate": "progress-v2171",
+ "sourceCommit": "b193774a77fb0c31df57169eb9166db959ff2073",
+ "sourceDiff": "source-change.diff",
+ "change": "progress-v2171 plus the Blink Assault throw-hit (2173, #261): the host fills the partner kick request params +0x58 with type 5 and a velocity along the kick (6 m/s, 3 up) so PlayThrowHit ragdolls the guard; coop_blink_kick throw|native|legacy; lab coop_lab_blink_kick applies one partner-style kick to the nearest bound guard"
+}

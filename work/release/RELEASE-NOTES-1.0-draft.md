@@ -29,6 +29,7 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
   - The finished first mission was not marked complete in the partner's game.
   - When the partner fought Ramsey, his finisher could wait and never play, and the partner could not take his ring.
   - The other player's pistol arm pointed out to the side (#271).
+- **Partner powers (#261):** a partner's Blink Assault kick now knocks the host's guards down, as it does in single player. A partner who possesses a rat is shown as a rat in the host's game.
 - **Rejoining:** a partner who left and joined again could miss the deaths that had happened in the host's world while they were away. The host now sends them again until the new game accepts them (#265).
 
 ## Still to come before 1.0
@@ -41,8 +42,7 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
 
 - Two players only.
 - **Partner powers (#261):**
-  - A Blink Assault kick pushes the host's guards but does not knock them down.
-  - Possessing a rat or fish is not shown in the host's game.
+  - While the partner possesses a fish, the host's game hides them but shows no fish.
   - Possessing a corpse is unverified.
 - On a host without Doppelganger (Corvo), the partner's Deadly Shade appears in the host's world as the Doppelganger decoy.
 - On Edge of the World, the checkpoint reinforcements can disappear from the partner's world (#260). A bottle that breaks as the host's game loads the map stays whole in the partner's world; a fix is being tested (it now leaves the streets speakers of the first mission alone).

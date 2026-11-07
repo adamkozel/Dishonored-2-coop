@@ -31,6 +31,16 @@ template<class Read> bool readNativePossessionTargetFrame(Read read,std::uintptr
     if(members!=1)return false;
     p.hasTarget=true;return true;
 }
+// 2178 (#261): animal possession (d2-ghidra, confirmed static; a helper agent's research, rechecked in part). The
+// controller at internal+0x410 is in state 2 (occupied animal) or 3 (leaving it), its target component is an
+// arkCpntSwarmAgentPossession (vtable +0x1b63fa8), and its kind at internal+0x670 (set by 0x140823300) is 4 for a rat,
+// 0x10 for a fish. Returns the pose bit: 0x800 rat, 0x1000 fish, 0 otherwise.
+template<class Read> std::uint32_t readNativeAnimalPossession(Read read,std::uintptr_t base){
+    NativePlayerStates s{};std::uintptr_t internal=0,target=0,vt=0;std::uint32_t state=0,kind=0;
+    if(!readNativePlayerStates(read,base,s)||!read(s.component+0x2f8,&internal,8)||!internal||!read(internal+0x5d0,&state,4)||(state!=2&&state!=3)||
+       !read(internal+0x648,&target,8)||!target||!read(target,&vt,8)||vt!=base+0x1b63fa8||!read(internal+0x670,&kind,4))return 0;
+    return kind==4?0x800u:kind==0x10?0x1000u:0u;
+}
 template<class Read> bool readNativePossessionTarget(Read read,std::uintptr_t base,NativePossessionTarget& out){
     NativePossessionTarget a{},b{};
     if(!readNativePossessionTargetFrame(read,base,a)||!readNativePossessionTargetFrame(read,base,b)||

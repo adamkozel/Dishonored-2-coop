@@ -12,6 +12,7 @@
 // - Breaks only go forward and an applied step counts as sent, so nothing echoes. Lab and product: coop_breakable_sync.
 struct BreakableEntry {std::uint32_t handle=0;std::string name;int stepCount=0,step=0,sent=0;std::uint64_t sends=0,applied=0;ULONGLONG seenAt=0,firstSeen=0;};
 struct BreakableRemoteStep {std::uint32_t handle=0;int step=0,stepCount=0;bool hitValid=false;float hit[3]{},direction[3]{};std::string name;};
+bool breakablePartnerVanish=true; // 2180 (#260): coop_breakable_partner_vanish on|off
 struct BreakableSyncState {
     bool enabled=false;std::uint64_t epoch=0,peerEpoch=0,map=0,session=0,peerSession=0,sequence=0;
     std::vector<BreakableEntry> entries;std::vector<BreakableRemoteStep> pending;
@@ -157,8 +158,10 @@ void serviceBreakableSync(ULONGLONG tick){
                 // poll reads the step. An entry that vanished within 5 s of a noted hit is sent as broken to its last step.
                 BreakableHit h{};
                 // 2078 (#260): on the host a vanished entry is sent without a noted hit too (a knock or a fall leaves none; the
-                // host decides the shared world). The partner still needs a hit, so its own physics noise is not pushed.
-                if(e.sent<e.stepCount&&!worldIdentityEntity(memoryRead,observedGame,e.handle)&&(!localRole||latestBreakableHit(e.handle,tick>=5000?tick-5000:0,h))&&
+                // host decides the shared world). 2180: the partner sends one too. animquality-eotw-v2177d ended with
+                // env_bottle_04_19 gone in the partner's world only (no hit): a smashed bottle cannot come back, so the only equal
+                // end is the host breaking its copy as well (coop_breakable_partner_vanish off restores the hit rule).
+                if(e.sent<e.stepCount&&!worldIdentityEntity(memoryRead,observedGame,e.handle)&&(!localRole||breakablePartnerVanish||latestBreakableHit(e.handle,tick>=5000?tick-5000:0,h))&&
                    sendBreakableStep(e,e.stepCount,tick)){e.sent=e.step=e.stepCount;++s.vanishedSent;}
                 continue;}
             e.step=b.step;if(b.step>e.sent&&sendBreakableStep(e,b.step,tick))e.sent=b.step;}

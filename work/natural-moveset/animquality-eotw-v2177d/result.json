@@ -1,0 +1,372 @@
+{
+  "passed": false,
+  "failure": "The worlds differ at the end: 1 values",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2176",
+      "hostDll": "55E4E7B4EC12547170E717D0508FEC5DD88A87B63394788D95AC4211BA71B227",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 17359,
+        "writtenAt": 85468750,
+        "startedAgoMs": 2547,
+        "phase2Checks": 15
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 17218,
+        "writtenAt": 85420828,
+        "startedAgoMs": 2125,
+        "phase2Checks": 13
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command host coop_movement_start_phase on",
+      "step03-command client coop_movement_start_phase on"
+    ],
+    "step07-animsample-handleWaitMs": 1014,
+    "step07-animsample-probe": {
+      "status": "PASS",
+      "samples": 156,
+      "hz": 21.02,
+      "contacts": 24,
+      "footSkateP95": 0.073,
+      "footSkateMax": 0.0752
+    },
+    "step07-animsample": {
+      "observer": "host",
+      "target": "partner rig",
+      "status": "FAIL",
+      "samples": 448,
+      "hz": 59.86,
+      "travel": 8.779,
+      "contacts": 26,
+      "footSkateP95": 0.0181,
+      "footSkateMax": 0.3361,
+      "jitter": 0,
+      "snaps": 0,
+      "rubberBands": 0,
+      "failures": [
+        "footSkateMax"
+      ]
+    },
+    "step12-animsample-handleWaitMs": 1304,
+    "step12-animsample": {
+      "observer": "client",
+      "target": "partner rig",
+      "status": "FAIL",
+      "samples": 325,
+      "hz": 38.45,
+      "travel": 9.954,
+      "contacts": 19,
+      "footSkateP95": 0.102,
+      "footSkateMax": 0.102,
+      "jitter": 0,
+      "snaps": 0,
+      "rubberBands": 0,
+      "failures": [
+        "footSkateP95"
+      ]
+    },
+    "diffwait-end": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-end": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-end": {
+      "status": "DIFFERENT",
+      "compared": 2278,
+      "differences": 1,
+      "retried": null,
+      "tries": 1
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 6,
+        "pos": [
+          -31.200001,
+          177.500000,
+          1.205706
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/4/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 10,
+        "pos": [
+          -31.248581,
+          180.447128,
+          1.205706
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "4/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "gameflowEqual": true,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "slot": -1,
+        "startMap": "",
+        "sent": 0,
+        "resent": 0,
+        "hostReplays": 0,
+        "hostContinues": 0,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "loadedSlot": -1,
+        "received": 0,
+        "refused": 0,
+        "duplicates": 0,
+        "partnerHeld": 0,
+        "replayed": 0,
+        "continued": 0,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 2278,
+      "differences": 1
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "5e9c1797fce9e484",
+        "connection": 3590954088,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "5e9c1797fce9e484",
+        "sent": 297,
+        "received": 294,
+        "refused": 0,
+        "silentMs": 609
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "5e9c1797fce9e484",
+        "connection": 290147556,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "5e9c1797fce9e484",
+        "sent": 295,
+        "received": 297,
+        "refused": 0,
+        "silentMs": 375
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 4,
+      "asked": 0,
+      "inFlow": 0,
+      "replayed": 4,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 22
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 6,
+        "pos": [
+          -31.200001,
+          177.500000,
+          1.205706
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/4/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 10,
+        "pos": [
+          -31.248581,
+          180.447128,
+          1.205706
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "4/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
