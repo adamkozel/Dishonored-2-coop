@@ -134,6 +134,34 @@ Test: `Test-MissionPartnerPowers-v2080.ps1`, from v1833, on the local lab with t
 
 Visual acceptance of the fall is recorded separately: the cameras of these takes did not face the guard, so it is left to the final playtest.
 
+## Animal possession presence (2178 to 2180, #261)
+
+**Detection** (d2-ghidra, confirmed static; a helper agent's research, rechecked in part):
+
+- The possession controller at `internal+0x410` is in state 2 (an occupied animal) or 3 (leaving it).
+- Its target component is an `arkCpntSwarmAgentPossession` (vtable +0x1b63fa8).
+- Its kind at `internal+0x670` (set by `0x140823300`) is 4 for a rat and 0x10 for a fish.
+- `readNativeAnimalPossession` (`native_player_possession_target.h`) returns the pose bit: 0x800 for a rat, 0x1000 for a fish.
+
+**Candidate progress-v2178:**
+
+- The possessing player's game stamps the bit into its pose. `validCoopPose` accepts each bit only in gameplay and never both; the protocol tests are updated.
+- The other world hides her avatar, through the possession body lease.
+- For a rat, the other world also shows the cosmetic rat (`swarm_rat_visual.def`: no AI, swarm or possession components) at her streamed root, with the swarm rat's native gait.
+- Lab switch: `coop_possess_animal on|off`. Status: `swarm-rat-visual.json` `possessedAnimal`.
+
+`possessrat-eotw-v2178a` never possessed a rat. Its blind casts showed no swarm, and her view stayed first person. So progress-v2180 adds `coop_lab_animal rat|fish|off`, which stamps the bit without a possession. The detection itself stays confirmed static, to be seen in the final playtest.
+
+| Take | Candidate | Result |
+|---|---|---|
+| `labanimal-eotw-v2180a` | progress-v2180 | **PASS** (confirmed runtime). The partner's bit reached the host (0x800). The host created and showed the rat, which followed her walk: 1650, then 3841 verified transforms, 0 m position error. It was hidden when the bit cleared. Every diff was equal. **Visual acceptance:** in the host's frames her Corvo stands on the quay before, and a rat is at her place while the bit is set (`step05-wait-host`, `step10-status-host`). |
+| `labanimal-eotw-v2180t` (twin, host `coop_possess_animal off`) | progress-v2180 | **RED as required.** The bit arrived, but no rat was created. |
+
+**Still open (#261):**
+
+- A fish is shown as nothing: the host hides her, but a fish needs a cosmetic fish definition.
+- Corpse possession is unverified, even natively.
+
 ## Status of area 4.6
 
 **Done:**

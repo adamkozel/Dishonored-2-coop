@@ -1,0 +1,95 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_possess_animal off"
+ },
+ {
+  "do": "at",
+  "pos": [
+   -31.2,
+   182.1,
+   2.91
+  ],
+  "yaw": -90
+ },
+ {
+  "do": "partner",
+  "pos": [
+   -31.2,
+   177.5,
+   2.91
+  ],
+  "yaw": 90
+ },
+ {
+  "do": "wait",
+  "ms": 3000,
+  "settle": 1000
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_lab_animal rat"
+ },
+ {
+  "do": "wait",
+  "ms": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".swarm-rat-visual.json"
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 4000,
+  "inputs": [
+   {
+    "LeftY": -16000,
+    "ms": 1500
+   },
+   {
+    "LeftY": 16000,
+    "ms": 1500
+   }
+  ]
+ },
+ {
+  "do": "status",
+  "suffix": ".swarm-rat-visual.json"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_lab_animal off"
+ },
+ {
+  "do": "wait",
+  "ms": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".swarm-rat-visual.json"
+ },
+ {
+  "do": "diff",
+  "tag": "end",
+  "require": true
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_possess_animal on"
+ }
+]
