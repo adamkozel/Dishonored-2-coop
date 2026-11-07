@@ -9,10 +9,14 @@
 #  deadlyshade-eotw-v2188a  Corvo host, Emily partner casts Deadly Shade: the host's puppet is deadlyshade_puppet.def
 #                       (.shade-host.json deadlyPuppets >= 1, deadlyOwnDefinition 0); b: twin puppet_off (v2079's decoy);
 #                       e: Emily host (the host's own clone definition is the deadly shadow, the 2077/2078 crash path).
-# Usage: Run-V2188F.sh [takes...]   (default: install a t r sa sb se)
+#  corpse-eotw-v2189c  2189: corpse possession measured. The host kills entrance guard 02, gets Possession with
+#                       possession_decayed_harbor, probes the corpse (.corpse-possession.json, both worlds) and casts at it
+#                       with coop_lab_possess_corpse, walks 4 s; then the partner tries the same on her copy of the corpse.
+# The candidate is progress-v2189 (progress-v2188 plus the corpse lab commands), so every take here runs on v2189.
+# Usage: Run-V2188F.sh [takes...]   (default: install a t r sa sb se c)
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2188
+CAND=candidate-progress-v2189
 clean(){
  rm -f ../lab-instances/host/base/savegame_coop/coop-progress-*.txt
  "$P" -NoProfile -Command '. ../../tools/vm/D2LabVM.Common.ps1; . ../../tools/vm/D2LabVM.Lab.ps1; Invoke-D2LabVM { Remove-Item C:/D2Lab/ws/work/lab-instances/client/base/savegame_coop/coop-progress-*.txt -ErrorAction SilentlyContinue }' > /dev/null 2>&1
@@ -32,7 +36,7 @@ run(){
  "$P" -NoProfile -File Route-MissionVM-v2182.ps1 -Take "$take" -MapInfo campaign/edge_of_the_world/eotw.mapinfo -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
  echo "$take exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'));[print(k,v) for k,v in n.items() if k.startswith('diff-')]" 2>&1 | head -c 900)"
 }
-want="${*:-install a t r sa sb se}"
+want="${*:-install a t r sa sb se c}"
 for x in $want; do
  case $x in
   install) install;;
@@ -42,6 +46,7 @@ for x in $want; do
   sa) run deadlyshade-eotw-v2188a routes/deadlyshade-eotw-v2188.json corvo emily;;
   sb) run deadlyshade-eotw-v2188b routes/deadlyshade-eotw-puppetoff-v2188.json corvo emily;;
   se) run deadlyshade-eotw-v2188e routes/deadlyshade-eotw-v2188.json emily emily;;
+  c) run corpse-eotw-v2189c routes/corpse-eotw-v2189.json corvo corvo;;
  esac
 done
 clean
