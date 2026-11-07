@@ -1,0 +1,433 @@
+{
+  "passed": false,
+  "failure": "The partner rejoined as models/characters/player/emily/body.def, expected corvo",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2151",
+      "hostDll": "CD8D7182EE30B47D8981F462A6DB03A64B36774B075C1CC0D1EA7F2A7FE5B6F7",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 17234,
+        "writtenAt": 50646937,
+        "startedAgoMs": 2375,
+        "phase2Checks": 22
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 15406,
+        "writtenAt": 50598578,
+        "startedAgoMs": 1750,
+        "phase2Checks": 15
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command client coop_partner_progress on",
+      "step06-command client coop_grant_named components/characters/player/base/attributes/extended_health.inventoryitem",
+      "step07-command client coop_grant_charm 13858082"
+    ],
+    "step13-rejoin-kill": {
+      "afterStep": 13,
+      "lobbyKnown": true,
+      "before": {
+        "channels": 12,
+        "readyChannels": 12,
+        "references": 0,
+        "boundHandles": [
+          769927680,
+          773728826,
+          770910735,
+          774580807,
+          770124291,
+          770058754,
+          774711881,
+          774908492,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 12,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -30.2716,
+              192.256,
+              1.17792
+            ]
+          }
+        ]
+      },
+      "pauseBefore": {
+        "769927680": null,
+        "773728826": null,
+        "770910735": null,
+        "774580807": 0,
+        "770124291": 0,
+        "770058754": 0,
+        "774711881": 0,
+        "774908492": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 0
+      },
+      "stop": "stopped pid 6212",
+      "detectMs": 1879,
+      "hostSeesPartner": false,
+      "hostLogic": 1,
+      "hostMap": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "after": {
+        "channels": 0,
+        "readyChannels": 0,
+        "references": 0,
+        "boundHandles": [],
+        "streamResult": "session_pose_stale",
+        "attackEnabled": false,
+        "attackReady": 0,
+        "attackResult": "session_pose_stale",
+        "avatar": []
+      },
+      "pauseAfter": {
+        "769927680": null,
+        "773728826": null,
+        "770910735": null,
+        "774580807": 0,
+        "770124291": 0,
+        "770058754": 0,
+        "774711881": 0,
+        "774908492": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 1
+      },
+      "pausedLonger": [],
+      "pausedNames": {
+        "770189828": "models/characters/def/generic/worker_male_small_01.def_10756"
+      },
+      "pausedLater": {
+        "770189828": 1
+      },
+      "pausedTransient": [],
+      "keepAwakeReleased": 1,
+      "lodPaused": [
+        "770189828"
+      ],
+      "moved": 5.5,
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 2,
+        "result": "partner_connection_ended",
+        "connectionState": 0,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 1
+      },
+      "stillHosting": true,
+      "product": "waiting_partner",
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "eddbc8875098ba6e",
+        "connection": 0,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "eddbc8875098ba6e",
+        "sent": 247,
+        "received": 235,
+        "refused": 0,
+        "silentMs": 0
+      }
+    },
+    "step13-rejoin-relaunch": {
+      "afterStep": 13,
+      "connected": true,
+      "connectMs": 34076,
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 1,
+        "warpDistance": 5.50
+      },
+      "distance": 1.2,
+      "gameflow": {
+        "host": "241 2 5 0 0 0 0",
+        "client": "241 2 5 0 0 0 0",
+        "equal": true
+      },
+      "armed": {
+        "product": {
+          "host": "armed",
+          "client": "armed"
+        },
+        "banks": {
+          "host": true,
+          "client": true
+        },
+        "ok": true
+      },
+      "host": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 0,
+        "boundHandles": [
+          769927680,
+          773728826,
+          774580807,
+          770910735,
+          768682477,
+          774711881,
+          774908492,
+          770124291,
+          770058754,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -30.814,
+              188.443,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "client": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 26,
+        "boundHandles": [
+          769927680,
+          773728826,
+          774580807,
+          770910735,
+          768682477,
+          774711881,
+          774908492,
+          770124291,
+          770058754,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -30.814,
+              187.243,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "loadMs": 92370,
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "eddbc8875098ba6e",
+        "connection": 456684425,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "eddbc8875098ba6e",
+        "sent": 61,
+        "received": 59,
+        "refused": 0,
+        "silentMs": 500
+      },
+      "vmControl": {
+        "protocol": 1,
+        "dllHash": "eddbc8875098ba6e",
+        "connection": 2127083033,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "eddbc8875098ba6e",
+        "sent": 59,
+        "received": 59,
+        "refused": 0,
+        "silentMs": 421
+      }
+    },
+    "step13-rejoin-character": "models/characters/player/emily/body.def",
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 11,
+        "pos": [
+          -30.814037,
+          187.242996,
+          1.25397
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 11,
+        "cine": 6,
+        "pos": [
+          -30.813999,
+          188.442993,
+          1.253970
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/106/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
