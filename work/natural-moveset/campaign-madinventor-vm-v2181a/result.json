@@ -1,0 +1,186 @@
+{
+  "passed": false,
+  "failure": "Receipt unconfirmed for host command sequence 3088265856; it may still execute before its original expiry.",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2180",
+      "hostDll": "9886B7B9CD0712B62F03E164223BDF234CAD70AB90DDE7F1D36789F3DFEA853F",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 19609,
+        "writtenAt": 93818859,
+        "startedAgoMs": 2375,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 16110,
+        "writtenAt": 93770437,
+        "startedAgoMs": 1750,
+        "phase2Checks": 17
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 104,
+        "client": 104,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "healthHold": [
+      "from step step11-heal",
+      "from step step17-heal",
+      "from step step20-heal",
+      "from step step22-heal"
+    ],
+    "transitionConfirms": [
+      "step14-use pending 0",
+      "step14-use pending 0",
+      "step14-use pending 0"
+    ],
+    "failureState": {
+      "client": {
+        "logic": 15,
+        "pending": 0,
+        "map": "campaign/madinventor/house/madinventor_p",
+        "epoch": 26,
+        "cine": 13,
+        "pos": [
+          45.515465,
+          -39.595329,
+          -6.196373
+        ],
+        "fresh": true,
+        "gameflow": [
+          220,
+          0,
+          3,
+          12,
+          1,
+          12,
+          0
+        ],
+        "gfApplied": 30,
+        "lt": "applied/0/3",
+        "hold": "expecting/0",
+        "ka": "1/307/0",
+        "active": "Mission_MI,Obj_MI_Sokolov,Task_MI_Rescue"
+      },
+      "host": {
+        "logic": 15,
+        "pending": 5,
+        "map": "",
+        "epoch": 30,
+        "cine": 59,
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fresh": true,
+        "gameflow": null,
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "expecting/1313",
+        "ka": "764/4/3",
+        "active": null
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

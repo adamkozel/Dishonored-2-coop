@@ -30,6 +30,7 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
   - When the partner fought Ramsey, his finisher could wait and never play, and the partner could not take his ring.
   - The other player's pistol arm pointed out to the side (#271).
 - **Partner powers (#261):** a partner's Blink Assault kick now knocks the host's guards down, as it does in single player. A partner who possesses a rat is shown as a rat in the host's game.
+- **Characters the host's game adds later** (Edge of the World's checkpoint reinforcements) now appear in the partner's world too, and a bottle that broke only in one world breaks in both (#260).
 - **Rejoining:** a partner who left and joined again could miss the deaths that had happened in the host's world while they were away. The host now sends them again until the new game accepts them (#265).
 
 ## Still to come before 1.0
@@ -37,6 +38,7 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
 - **Step 5:** partner movement measured in numbers, and the polish pass over messages and menus (#243).
 - A bonecharm made at a crafting table in a later mission is still to be checked (#265).
 - **Step 6:** the proof runs and the release (#244).
+- **Updating:** 1.0's Install.cmd updates an earlier version in one step. It removes the earlier version through that version's own receipt, then installs 1.0 (to be proven from 0.9.6, #244).
 
 ## Known limitations (so far)
 
@@ -45,4 +47,3 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
   - While the partner possesses a fish, the host's game hides them but shows no fish.
   - Possessing a corpse is unverified.
 - On a host without Doppelganger (Corvo), the partner's Deadly Shade appears in the host's world as the Doppelganger decoy.
-- On Edge of the World, the checkpoint reinforcements can disappear from the partner's world (#260). A bottle that breaks as the host's game loads the map stays whole in the partner's world; a fix is being tested (it now leaves the streets speakers of the first mission alone).
