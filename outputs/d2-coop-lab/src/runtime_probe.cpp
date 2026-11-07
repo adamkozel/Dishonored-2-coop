@@ -504,7 +504,7 @@ int main(int argc, char** argv) {
     // the same in both games, for tools/diag/d2_world_diff.py. Categories: doors (current, pending, locked, broken),
     // usables (current, enabled; safe dials included on purpose: they are the known per-world drift), storyflags
     // (bool +0x19 / int +0x1c by variable vtable), gameflow (node id -> state), chaos (points), npcs (alive /
-    // unconscious / dead per unique spawner; packs as counts), breakables (step) and pickups (taken, hidden; per
+    // unconscious / dead per unique spawner, corpse for a placed human_dead; packs as counts), breakables (step) and pickups (taken, hidden; per
     // player by design). A name seen twice in one category is dropped (not a stable key). Mod entities (d2coop_*)
     // and the local player are excluded. Read-only; names are game-derived, keep output local.
     if(argc==3&&!std::strcmp(argv[2],"--world-digest")){
@@ -560,6 +560,11 @@ int main(int argc, char** argv) {
             if(actorName(n.actor).rfind("d2coop",0)==0)continue;++npcListed;
             NativeHealth hp{};if(!readNativeHealth(reader,base,n.handle,hp)||hp.game!=game||hp.actor!=n.actor)continue;++npcRead;
             const unsigned state=hp.current<=0?2u:((hp.ownerFlags&0x20)?1u:0u);
+            // 2162 (#265): a scene corpse (definition models/characters/base/human_dead) is placed dead, and its health reaches 0
+            // some time after the load: progress-eotw-v2159a to v2161b read script_spawner_bfbuilding_exterminato_1 dead in the
+            // host's world and alive in a partner world loaded a minute before, and lethal damage leaves it unchanged
+            // (lifeRefusedLast: survived). It is compared by presence only.
+            if(n.unique&&n.definition.size()>=10&&!n.definition.compare(n.definition.size()-10,10,"human_dead")){put("npcs",n.spawnerName,"\"corpse\"");continue;}
             if(n.unique)put("npcs",n.spawnerName,state==2?"\"dead\"":state==1?"\"unconscious\"":"\"alive\"");else packs[n.spawnerName][state]++;}
          if(npcListed&&!npcRead)return fail("npc_health");
          for(const auto& p:packs)put("npcs",p.first,"["+std::to_string(p.second[0])+","+std::to_string(p.second[1])+","+std::to_string(p.second[2])+"]");}

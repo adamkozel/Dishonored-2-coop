@@ -1,0 +1,1074 @@
+{
+  "passed": false,
+  "failure": "Diffs differed: diff-end",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2161",
+      "hostDll": "00C1BDF5602D4494C2F01324C16331697CB458360431C2DC8D5508F21F30B802",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 18500,
+        "writtenAt": 57764500,
+        "startedAgoMs": 2672,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 15,
+        "serviceGapMaxMs": 15687,
+        "writtenAt": 57716265,
+        "startedAgoMs": 2078,
+        "phase2Checks": 13
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/corvo/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command client coop_partner_progress off",
+      "step06-command client coop_grant_named components/characters/player/base/attributes/extended_health.inventoryitem",
+      "step07-command client coop_grant_charm 13858082",
+      "step17-command client coop_grant_named components/equipment/ammo/bolt_tranquilizer.inventoryitem",
+      "step18-command client coop_grant_charm 3997576305"
+    ],
+    "step13-rejoin-kill": {
+      "afterStep": 13,
+      "lobbyKnown": true,
+      "before": {
+        "channels": 12,
+        "readyChannels": 12,
+        "references": 0,
+        "boundHandles": [
+          769927680,
+          773728826,
+          774580807,
+          770910735,
+          770124291,
+          770058754,
+          774711881,
+          774908492,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 12,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -30.2784,
+              193.243,
+              1.18639
+            ]
+          }
+        ]
+      },
+      "pauseBefore": {
+        "769927680": null,
+        "773728826": null,
+        "774580807": 0,
+        "770910735": null,
+        "770124291": 0,
+        "770058754": 0,
+        "774711881": 0,
+        "774908492": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 0
+      },
+      "stop": "stopped pid 12296",
+      "detectMs": 1407,
+      "hostSeesPartner": false,
+      "hostLogic": 1,
+      "hostMap": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "after": {
+        "channels": 0,
+        "readyChannels": 0,
+        "references": 0,
+        "boundHandles": [],
+        "streamResult": "session_pose_stale",
+        "attackEnabled": false,
+        "attackReady": 0,
+        "attackResult": "session_pose_stale",
+        "avatar": []
+      },
+      "pauseAfter": {
+        "769927680": null,
+        "773728826": null,
+        "774580807": 0,
+        "770910735": null,
+        "770124291": 0,
+        "770058754": 0,
+        "774711881": 0,
+        "774908492": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 1
+      },
+      "pausedLonger": [],
+      "pausedNames": {
+        "770189828": "models/characters/def/generic/worker_male_small_01.def_10756"
+      },
+      "pausedLater": {
+        "770189828": 1
+      },
+      "pausedTransient": [],
+      "keepAwakeReleased": 1,
+      "lodPaused": [
+        "770189828"
+      ],
+      "moved": 5.47,
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 2,
+        "result": "partner_connection_ended",
+        "connectionState": 0,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 1
+      },
+      "stillHosting": true,
+      "product": "waiting_partner",
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 0,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 251,
+        "received": 239,
+        "refused": 0,
+        "silentMs": 0
+      }
+    },
+    "step13-rejoin-relaunch": {
+      "afterStep": 13,
+      "connected": true,
+      "connectMs": 35855,
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 1,
+        "warpDistance": 5.47
+      },
+      "distance": 1.2,
+      "gameflow": {
+        "host": "241 2 5 0 0 0 0",
+        "client": "241 2 5 0 0 0 0",
+        "equal": true
+      },
+      "armed": {
+        "product": {
+          "client": "armed",
+          "host": "armed"
+        },
+        "banks": {
+          "client": true,
+          "host": true
+        },
+        "ok": true
+      },
+      "host": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 0,
+        "boundHandles": [
+          769927680,
+          773728826,
+          774580807,
+          770910735,
+          768682477,
+          774711881,
+          774908492,
+          770124291,
+          770058754,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -30.814,
+              188.474,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "client": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 26,
+        "boundHandles": [
+          769927680,
+          773728826,
+          774580807,
+          770910735,
+          768682477,
+          774711881,
+          774908492,
+          770124291,
+          770058754,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -30.8141,
+              187.274,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "loadMs": 105419,
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 1538951514,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 71,
+        "received": 69,
+        "refused": 0,
+        "silentMs": 469
+      },
+      "vmControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 1213187638,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 70,
+        "received": 70,
+        "refused": 0,
+        "silentMs": 1016
+      }
+    },
+    "step13-rejoin-character": "models/characters/player/corvo/body.def",
+    "step24-rejoin-kill": {
+      "afterStep": 24,
+      "lobbyKnown": true,
+      "before": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 0,
+        "boundHandles": [
+          769927680,
+          773728826,
+          774580807,
+          770910735,
+          768682477,
+          774711881,
+          774908492,
+          770124291,
+          770058754,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -30.814,
+              188.474,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "pauseBefore": {
+        "769927680": null,
+        "773728826": null,
+        "774580807": 0,
+        "770910735": null,
+        "768682477": null,
+        "774711881": 0,
+        "774908492": 0,
+        "770124291": 0,
+        "770058754": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 0
+      },
+      "stop": "stopped pid 13188",
+      "detectMs": 1861,
+      "hostSeesPartner": false,
+      "hostLogic": 1,
+      "hostMap": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "after": {
+        "channels": 0,
+        "readyChannels": 0,
+        "references": 0,
+        "boundHandles": [],
+        "streamResult": "session_pose_stale",
+        "attackEnabled": false,
+        "attackReady": 0,
+        "attackResult": "session_pose_stale",
+        "avatar": []
+      },
+      "pauseAfter": {
+        "769927680": null,
+        "773728826": null,
+        "774580807": 0,
+        "770910735": null,
+        "768682477": null,
+        "774711881": 0,
+        "774908492": 0,
+        "770124291": 0,
+        "770058754": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 1
+      },
+      "pausedLonger": [],
+      "pausedNames": {
+        "770189828": "models/characters/def/generic/worker_male_small_01.def_10756"
+      },
+      "pausedLater": {
+        "770189828": 1
+      },
+      "pausedTransient": [],
+      "keepAwakeReleased": 1,
+      "lodPaused": [
+        "770189828"
+      ],
+      "moved": 5.38,
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 2,
+        "result": "partner_connection_ended",
+        "connectionState": 0,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 1
+      },
+      "stillHosting": true,
+      "product": "waiting_partner",
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 0,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 249,
+        "received": 236,
+        "refused": 0,
+        "silentMs": 0
+      }
+    },
+    "step24-rejoin-relaunch": {
+      "afterStep": 24,
+      "connected": true,
+      "connectMs": 35696,
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 1,
+        "warpDistance": 10.85
+      },
+      "distance": 1.2,
+      "gameflow": {
+        "host": "241 2 5 0 0 0 0",
+        "client": "241 2 5 0 0 0 0",
+        "equal": true
+      },
+      "armed": {
+        "product": {
+          "client": "armed",
+          "host": "armed"
+        },
+        "banks": {
+          "client": true,
+          "host": true
+        },
+        "ok": true
+      },
+      "host": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 0,
+        "boundHandles": [
+          773728826,
+          774580807,
+          770910735,
+          769927680,
+          774711881,
+          768682477,
+          774908492,
+          770058754,
+          770124291,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -30.814,
+              183.098,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "client": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 26,
+        "boundHandles": [
+          773728826,
+          774580807,
+          770910735,
+          769927680,
+          774711881,
+          768682477,
+          774908492,
+          770058754,
+          770124291,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -30.8141,
+              181.898,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "loadMs": 104953,
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 3178865889,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 71,
+        "received": 70,
+        "refused": 0,
+        "silentMs": 656
+      },
+      "vmControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 3806604299,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 71,
+        "received": 71,
+        "refused": 0,
+        "silentMs": 250
+      }
+    },
+    "step24-rejoin-character": "models/characters/player/emily/body.def",
+    "step28-rejoin-kill": {
+      "afterStep": 28,
+      "lobbyKnown": true,
+      "before": {
+        "channels": 13,
+        "readyChannels": 13,
+        "references": 0,
+        "boundHandles": [
+          773728826,
+          774580807,
+          770910735,
+          769927680,
+          774711881,
+          768682477,
+          774908492,
+          770058754,
+          770124291,
+          768748014,
+          768616940,
+          768551403,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 13,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_emily",
+            "pos": [
+              -30.814,
+              183.098,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "pauseBefore": {
+        "773728826": null,
+        "774580807": 0,
+        "770910735": null,
+        "769927680": null,
+        "774711881": 0,
+        "768682477": null,
+        "774908492": 0,
+        "770058754": 0,
+        "770124291": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 0
+      },
+      "stop": "stopped pid 12000",
+      "detectMs": 1866,
+      "hostSeesPartner": false,
+      "hostLogic": 1,
+      "hostMap": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "after": {
+        "channels": 0,
+        "readyChannels": 0,
+        "references": 0,
+        "boundHandles": [],
+        "streamResult": "session_pose_stale",
+        "attackEnabled": false,
+        "attackReady": 0,
+        "attackResult": "session_pose_stale",
+        "avatar": []
+      },
+      "pauseAfter": {
+        "773728826": null,
+        "774580807": 0,
+        "770910735": null,
+        "769927680": null,
+        "774711881": 0,
+        "768682477": null,
+        "774908492": 0,
+        "770058754": 0,
+        "770124291": 0,
+        "768748014": 0,
+        "768616940": 0,
+        "768551403": 0,
+        "770189828": 1
+      },
+      "pausedLonger": [],
+      "pausedNames": {
+        "770189828": "models/characters/def/generic/worker_male_small_01.def_10756"
+      },
+      "pausedLater": {
+        "770189828": 1
+      },
+      "pausedTransient": [],
+      "keepAwakeReleased": 1,
+      "lodPaused": [
+        "770189828"
+      ],
+      "moved": 5.05,
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 2,
+        "result": "partner_connection_ended",
+        "connectionState": 0,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 1
+      },
+      "stillHosting": true,
+      "product": "waiting_partner",
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 0,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 138,
+        "received": 126,
+        "refused": 0,
+        "silentMs": 0
+      }
+    },
+    "step28-rejoin-relaunch": {
+      "afterStep": 28,
+      "connected": true,
+      "connectMs": 35606,
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "follow": {
+        "result": "same_mission",
+        "loads": 1,
+        "warps": 1,
+        "warpDistance": 15.90
+      },
+      "distance": 1.2,
+      "gameflow": {
+        "host": "241 2 5 0 0 0 0",
+        "client": "241 2 5 0 0 0 0",
+        "equal": true
+      },
+      "armed": {
+        "product": {
+          "client": "armed",
+          "host": "armed"
+        },
+        "banks": {
+          "client": true,
+          "host": true
+        },
+        "ok": true
+      },
+      "host": {
+        "channels": 14,
+        "readyChannels": 14,
+        "references": 0,
+        "boundHandles": [
+          773728826,
+          774580807,
+          770910735,
+          774711881,
+          774908492,
+          769927680,
+          774449733,
+          768682477,
+          770058754,
+          770124291,
+          768748014,
+          768551403,
+          768616940,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 14,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -30.983,
+              178.048,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "client": {
+        "channels": 14,
+        "readyChannels": 14,
+        "references": 28,
+        "boundHandles": [
+          773728826,
+          774580807,
+          770910735,
+          774711881,
+          774908492,
+          769927680,
+          774449733,
+          768682477,
+          770058754,
+          770124291,
+          768748014,
+          768551403,
+          768616940,
+          770189828
+        ],
+        "streamResult": "active",
+        "attackEnabled": true,
+        "attackReady": 14,
+        "attackResult": "active_native_sword",
+        "avatar": [
+          {
+            "name": "d2coop_probe_corvo",
+            "pos": [
+              -30.9827,
+              176.848,
+              1.25397
+            ]
+          }
+        ]
+      },
+      "loadMs": 108694,
+      "hostControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 4055037149,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 75,
+        "received": 73,
+        "refused": 0,
+        "silentMs": 219
+      },
+      "vmControl": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 4067485030,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 74,
+        "received": 75,
+        "refused": 0,
+        "silentMs": 781
+      }
+    },
+    "step28-rejoin-character": "models/characters/player/corvo/body.def",
+    "diffwait-end": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-end": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-end": {
+      "status": "DIFFERENT",
+      "compared": 2279,
+      "differences": 1,
+      "retried": null,
+      "tries": 1
+    },
+    "final": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 11,
+        "cine": 6,
+        "pos": [
+          -30.983000,
+          178.048004,
+          1.253969
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 6,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/12/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 11,
+        "pos": [
+          -30.982702,
+          176.848358,
+          1.253969
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "12/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+      }
+    },
+    "gameflowEqual": true,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "slot": -1,
+        "startMap": "",
+        "sent": 0,
+        "resent": 0,
+        "hostReplays": 0,
+        "hostContinues": 0,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "loadedSlot": -1,
+        "received": 0,
+        "refused": 0,
+        "duplicates": 0,
+        "partnerHeld": 0,
+        "replayed": 0,
+        "continued": 0,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "ERROR",
+      "error": "World digest failed (host, 45)"
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 4055037149,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 171,
+        "received": 168,
+        "refused": 0,
+        "silentMs": 782
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "4ca6f125671d0aed",
+        "connection": 4067485030,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "4ca6f125671d0aed",
+        "sent": 169,
+        "received": 171,
+        "refused": 0,
+        "silentMs": 94
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 108,
+      "asked": 106,
+      "inFlow": 0,
+      "replayed": 12,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 11
+    },
+    "pairing": {
+      "host": "corvo",
+      "partner": "corvo",
+      "partnerBoxAnswers": 3,
+      "pendingChoices": 0,
+      "replayRefused": 0,
+      "replayAccepted": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/corvo/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
