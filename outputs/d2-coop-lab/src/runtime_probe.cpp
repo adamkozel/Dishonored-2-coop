@@ -565,6 +565,10 @@ int main(int argc, char** argv) {
             // host's world and alive in a partner world loaded a minute before, and lethal damage leaves it unchanged
             // (lifeRefusedLast: survived). It is compared by presence only.
             if(n.unique&&n.definition.size()>=10&&!n.definition.compare(n.definition.size()-10,10,"human_dead")){put("npcs",n.spawnerName,"\"corpse\"");continue;}
+            // 2171 (#260): an NPC its spawner holds dormant (actor+0xd1 bit 0) is invisible; labspawn-eotw-v2170t read the host's
+            // woken outpost_reinf_01 and the partner's still-pooled one both as alive. It reads dormant.
+            unsigned char dormant=0;reader(n.actor+0xd1,&dormant,1);
+            if(n.unique&&state==0&&(dormant&1)){put("npcs",n.spawnerName,"\"dormant\"");continue;}
             if(n.unique)put("npcs",n.spawnerName,state==2?"\"dead\"":state==1?"\"unconscious\"":"\"alive\"");else packs[n.spawnerName][state]++;}
          if(npcListed&&!npcRead)return fail("npc_health");
          for(const auto& p:packs)put("npcs",p.first,"["+std::to_string(p.second[0])+","+std::to_string(p.second[1])+","+std::to_string(p.second[2])+"]");}

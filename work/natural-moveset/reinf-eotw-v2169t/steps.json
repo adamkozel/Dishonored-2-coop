@@ -1,0 +1,108 @@
+[
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_npc_present off"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_shade_native deadly_off"
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named components/characters/player/base/attributes/doppelganger_deadlyshade.inventoryitem"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   4.04,
+   61.67,
+   15.97
+  ],
+  "yaw": -81.0
+ },
+ {
+  "do": "wait",
+  "ms": 3000,
+  "settle": 1000
+ },
+ {
+  "do": "cast",
+  "role": "client",
+  "grant": "models/powers/doppelganger/doppelganger.inventoryitem",
+  "ms": 1000
+ },
+ {
+  "do": "status",
+  "role": "host",
+  "suffix": ".shade-host.json"
+ },
+ {
+  "do": "wait",
+  "ms": 12000,
+  "settle": 1000
+ },
+ {
+  "do": "status",
+  "suffix": ".shade-host.json"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-combat.json"
+ },
+ {
+  "do": "diff",
+  "tag": "after",
+  "require": true
+ },
+ {
+  "do": "wait",
+  "ms": 30000,
+  "settle": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "diff",
+  "tag": "end",
+  "require": true
+ },
+ {
+  "do": "wait",
+  "ms": 40000,
+  "settle": 3000
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--spawners"
+ },
+ {
+  "do": "probe",
+  "role": "client",
+  "mode": "--spawners"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "diff",
+  "tag": "late",
+  "require": true
+ }
+]

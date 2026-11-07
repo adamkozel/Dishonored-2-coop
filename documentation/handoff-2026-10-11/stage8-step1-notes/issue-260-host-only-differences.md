@@ -92,3 +92,31 @@ The event is rare, so **candidate progress-v2166** makes it happen on demand:
 - `coop_lab_spawn <spawner>` spawns from that spawner in this world only.
 - The probe's `--spawners` lists every spawner with its live, pooled and pending counts.
 - `Run-V2166S.sh` lists both worlds' spawners on Edge of the World, to pick one with no live NPC.
+
+## The spawn listing and three more rounds, 2166 to 2171
+
+- **`spawners-eotw-v2166l`:** both worlds list 141 spawners.
+  - Eight hold no live NPC and one pooled (dormant) NPC: the checkpoint, outpost and Addermire reinforcements, the shrine's Outsider, and a dead civilian.
+  - A pooled NPC is listed in the catalog and digested as alive.
+- **`reinf-eotw-v2167a`** (progress-v2166; route `reinf-eotw-v2167`, which adds a 40 s tail, both spawner lists and the status) had the event again. The partner spawned nothing:
+  - the host had announced the reinforcements while they were pooled;
+  - its spawners then made new ones under the same key, and nothing was announced again (`lifePresentSent` stayed 606).
+  - The chain was stopped before take b; the protected files were checked unchanged.
+- **progress-v2168** announces a key again when its NPC handle changes.
+  - `reinf-eotw-v2168a` differed at the after diff: the host woke its pooled reinforcements in place (same handle) while the partner's were gone.
+  - v2168b was equal. The chain was stopped after b.
+- **progress-v2169** (confirmed static: dormant is `actor+0xd1` bit 0, set by `0x14087c350` and cleared by the activation `0x14087caa0`):
+  - The host announces only active NPCs, and again every 20 s.
+  - The partner spawns any key the host announced within 30 s that has had no active NPC locally for 10 s; the native spawn wakes a pooled NPC first.
+  - `reinf-eotw-v2169a`, `b`, `c` and the twin `t` were equal. The event did not happen. There were no spurious spawns (`lifeSpawned` 0 in each) while the partner received 1430 to 2305 announcements.
+
+### The on-demand test, 2170
+
+`coop_lab_spawn script_spawner_outpost_reinf_01` is a host-only spawn: the host wakes its pooled reinforcement.
+
+| Take | Result |
+|---|---|
+| `labspawn-eotw-v2170a` (progress-v2169) | **PASS** (confirmed runtime). Before: 0 children and 1 pooled in both worlds. The host reported `labSpawn: spawned`, and the partner woke her copy on the first try (`lifeSpawned` 1, `spawned`). After: 1 child and an empty pool in both worlds; the diffs were equal. |
+| `labspawn-eotw-v2170t` (twin, `coop_npc_present off`) | **RED as required by the spawner counts:** the host had 1 child and the partner 0, still pooled. But the world diff read equal, because the digest counted the pooled NPC alive. |
+
+**progress-v2171** digests a dormant NPC as `dormant`, so the world diff sees an NPC one world has woken and the other has not. `Run-V2171L.sh` runs the twin and the test again.

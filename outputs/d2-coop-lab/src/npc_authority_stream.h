@@ -530,11 +530,15 @@ void beginNpcStream(ULONGLONG tick){
 // stays sendable after the body has left the catalog.
 struct NpcLifeEntry{std::string key;unsigned sent=0,desired=0;bool applied=true;unsigned attempts=0;ULONGLONG lastAt=0;NativeNpcLife last{};unsigned known=0;
     // 2163 (#260): present sent by the host to this peer; on the partner, a present NPC to spawn if it stays missing.
-    bool presentSent=false,presentWanted=false;ULONGLONG presentAt=0,spawnAt=0;unsigned spawnTries=0;std::string presentSpawner,presentDefinition;};
+    bool presentSent=false;ULONGLONG hostPresentAt=0,absentSince=0,spawnAt=0;unsigned spawnTries=0;std::string presentSpawner,presentDefinition;};
 // 2166 (#260, lab): "coop_lab_spawn <spawner>" spawns from that spawner in this world only (a host-only spawn on demand).
 char labNpcSpawnName[128]{};const char* labNpcSpawnResult="idle";std::uint64_t labNpcSpawns=0;
 inline bool labNpcSpawnNameAllowed(const char* t){const auto n=std::strlen(t);if(!n||n>=sizeof(labNpcSpawnName))return false;
     for(std::size_t i=0;i<n;++i){const char c=t[i];if(!((c>='a'&&c<='z')||(c>='A'&&c<='Z')||(c>='0'&&c<='9')||c=='_'))return false;}return true;}
+// 2169 (#260): an NPC its spawner holds dormant (actor+0xd1 bit 0: set by 0x14087c350, cleared by the activation
+// 0x14087caa0; d2-ghidra, confirmed static) is invisible, so present means active.
+inline bool npcLifeActive(const NativeNpcLife& n){unsigned char d=1;return n.actor&&memoryRead(n.actor+0xd1,&d,1)&&!(d&1);}
+ULONGLONG npcLifePresentRefreshAt=0;
 bool npcLifePresentSync=true;std::uint64_t npcLifePresentSent=0,npcLifePresentReceived=0,npcLifeSpawned=0,npcLifeSpawnRefused=0;
 const char* npcSpawnFromSpawner(const std::string& spawner); // npc_knockout.h
 // 2161 (#265): a join snapshot is sent again every 10 s for 60 s (npcLifeResends), and the partner keeps its last eight
@@ -587,23 +591,32 @@ void processNpcLife(const NpcCatalogSnapshot& s){
         if(npcLifeBound(n.spawner,n.definition)){
             if(localRole)for(const auto& e:npcLifeEntries)if(!e.applied&&e.key==n.spawner+"|"+n.definition&&npcLifeApplies(n.state,e.desired))npcLifeRefusal(e.key,"bound",e.attempts,e.desired);
             continue;}
-        auto& e=npcLifeEntry(n.spawner+"|"+n.definition);e.last=n;e.known=(std::max)(e.known,n.state);
+        // 2168 (#260): reinf-eotw-v2167a: the checkpoint reinforcements were announced while they were their spawners' pooled
+        // NPCs; both worlds then lost them and the host's spawners made new ones under the same key, so nothing was announced
+        // again (presentSent 606, the snapshot only) and the partner spawned nothing. A new NPC under a key is announced again.
+        auto& e=npcLifeEntry(n.spawner+"|"+n.definition);if(e.last.handle&&e.last.handle!=n.handle)e.presentSent=false;e.last=n;e.known=(std::max)(e.known,n.state);
         if(!e.applied&&(e.attempts<5||npcLifeJoinSnapshot&&e.attempts<40&&tick-e.lastAt>=5000)){
             if(!npcLifeApplies(n.state,e.desired)){e.applied=true;}
             else{++e.attempts;e.lastAt=tick;if(applyNpcLife(n,e.desired)){e.applied=true;++npcLifeApplied;e.sent=(std::max)(e.sent,e.desired);continue;}++npcLifeRefused;npcLifeRefusal(e.key,npcLifeApplyFail,e.attempts,e.desired);}
         }
         if(n.state>e.sent&&sendNpcLife(n))e.sent=n.state;
-        if(!localRole&&npcLifePresentSync&&n.state==0&&!e.presentSent&&!npcStoryDefinition(n.definition)){auto m=n;m.state=kNpcLifePresent;if(sendNpcLife(m)){e.presentSent=true;++npcLifePresentSent;}}
+        if(!localRole&&npcLifePresentSync&&n.state==0&&!e.presentSent&&!npcStoryDefinition(n.definition)&&npcLifeActive(n)){auto m=n;m.state=kNpcLifePresent;if(sendNpcLife(m)){e.presentSent=true;++npcLifePresentSent;}}
     }
     // 2163 (#260): reinf-eotw-v2163a, the checkpoint reinforcements script_spawner_checkpoint_reinf_01 and _02 were alive in
     // the host's world and absent in the partner's at the end, with no script node in either world: the host's world
-    // spawned them again and the partner's did not. A present NPC still missing here 10 s after the host's word is
-    // spawned from the spawner of the same name (arkCpntSpawner 0x14075b770, d2-ghidra, confirmed static), 3 tries.
+    // spawned them again and the partner's did not. 2169: in reinf-eotw-v2168a the host woke its pooled NPC in place (same
+    // handle) while the partner's was gone, so announcing on a change was not enough. The host announces its active NPCs
+    // again every 20 s; the partner spawns, from the spawner of the same name (arkCpntSpawner 0x14075b770, d2-ghidra,
+    // confirmed static; it wakes a pooled NPC first), a key the host announced within 30 s that has had no active NPC here
+    // for 10 s. Three tries per absence.
+    if(!localRole&&npcLifePresentSync&&tick-npcLifePresentRefreshAt>=20000){npcLifePresentRefreshAt=tick;for(auto& e:npcLifeEntries)e.presentSent=false;}
     if(localRole&&npcLifePresentSync)for(auto& e:npcLifeEntries){
-        if(!e.presentWanted||e.spawnTries>=3||tick-e.presentAt<10000||(e.spawnAt&&tick-e.spawnAt<5000))continue;
-        if(std::any_of(s.life.begin(),s.life.end(),[&](const auto& n){return n.spawner==e.presentSpawner&&n.definition==e.presentDefinition;})){e.presentWanted=false;continue;}
+        if(!e.hostPresentAt||tick-e.hostPresentAt>30000||e.presentSpawner.empty())continue;
+        if(std::any_of(s.life.begin(),s.life.end(),[&](const auto& n){return n.spawner==e.presentSpawner&&n.definition==e.presentDefinition&&n.state==0&&npcLifeActive(n);})){e.absentSince=0;e.spawnTries=0;continue;}
+        if(!e.absentSince){e.absentSince=tick;continue;}
+        if(tick-e.absentSince<10000||e.spawnTries>=3||(e.spawnAt&&tick-e.spawnAt<5000))continue;
         ++e.spawnTries;e.spawnAt=tick;const char* why=npcSpawnFromSpawner(e.presentSpawner);
-        if(!why){++npcLifeSpawned;npcLifeRefusal(e.key,"spawned",e.spawnTries,kNpcLifePresent);e.presentWanted=false;}else{++npcLifeSpawnRefused;npcLifeRefusal(e.key,why,e.spawnTries,kNpcLifePresent);}
+        if(!why){++npcLifeSpawned;npcLifeRefusal(e.key,"spawned",e.spawnTries,kNpcLifePresent);}else{++npcLifeSpawnRefused;npcLifeRefusal(e.key,why,e.spawnTries,kNpcLifePresent);}
     }
     // 2160 (#265): progress-eotw-v2159b ended with script_spawner_bfbuilding_exterminato_1 dead in the host's world and alive
     // in the partner's after her third rejoin: the host sent four join snapshots, but its world had removed that body, so
@@ -620,8 +633,8 @@ extern bool kisculeHostStory;
 void receiveNpcLife(const CoopNpcControl& p){
     if(npcLifeEpoch!=outgoing.worldEpoch){npcLifeEntries.clear();npcLifeEpoch=outgoing.worldEpoch;}
     ++npcLifeReceived;auto& e=npcLifeEntry(std::string(p.spawner,strnlen(p.spawner,sizeof(p.spawner)))+"|"+std::string(p.definition,strnlen(p.definition,sizeof(p.definition))));
-    if(p.h.reserved==kNpcLifePresent){if(localRole&&!e.presentWanted&&!e.spawnTries){e.presentWanted=true;e.presentAt=GetTickCount64();
-        e.presentSpawner.assign(p.spawner,strnlen(p.spawner,sizeof(p.spawner)));e.presentDefinition.assign(p.definition,strnlen(p.definition,sizeof(p.definition)));}++npcLifePresentReceived;return;}
+    if(p.h.reserved==kNpcLifePresent){if(localRole){e.hostPresentAt=GetTickCount64();if(e.presentSpawner.empty()){
+        e.presentSpawner.assign(p.spawner,strnlen(p.spawner,sizeof(p.spawner)));e.presentDefinition.assign(p.definition,strnlen(p.definition,sizeof(p.definition)));}}++npcLifePresentReceived;return;}
     // The peer already has this state: never echo it back.
     e.sent=(std::max)(e.sent,p.h.reserved);
     // npclife-hoststory-v2041l (#254): under host story a partner's state for a named character is a request the host
