@@ -8,7 +8,8 @@
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
 L="${1:-a}"
-CAND=candidate-progress-v2180
+# 2190: on candidate progress-v2190 (every finished mission state reaches a following partner).
+CAND=candidate-progress-v2191
 take="soak-hour-vm-v2186$L"
 if [ -e "$take" ]; then echo "$take exists, skipped"; echo done; exit 0; fi
 echo "candidate $CAND"
