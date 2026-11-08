@@ -193,6 +193,9 @@ struct MissionFollowPacket {
 #pragma pack(pop)
 static_assert(sizeof(MissionFollowPacket)==200);
 bool followHostEnabled=false;
+// 2199: a partner loading the host's next mission from the mission decision (mission_decision.h) quiets this follow for
+// 90 s, so one load is queued (soak-hour-vm-v2186b: two campaign loads in one frame).
+ULONGLONG missionFollowQuietUntil=0;std::uint64_t missionFollowQuieted=0;
 // 1214hs (#156, native_menu_ui.h): a session never reads or writes the player's own saves. In product mode the partner's
 // game switches to co-op saves (savegame_coop and its profile) before it follows the host's mission (the native
 // "campaign" load would otherwise start a campaign in her own slots), and F7 puts the host in co-op mode too.
@@ -269,6 +272,7 @@ void serviceMissionFollow(void* system,ULONGLONG tick){
             char command[160]{};std::snprintf(command,sizeof(command),"setviewpos %.3f %.3f %.3f %.2f 0",w.x,w.y,w.z,w.yaw);
             dispatchCoopCommand(system,command);++m.warps;m.result="placed_beside_host";}
         return;}
+    if(missionFollowQuietUntil&&tick<missionFollowQuietUntil){if(m.result!=std::string_view("decision_follow_loading"))++missionFollowQuieted;m.result="decision_follow_loading";return;}
     if(m.loadedForMap==m.hostMap&&tick-m.loadAt<60000){m.result="loading_host_mission";return;}
     // 1214ju (#174): only a fresh publication starts a load. The host publishes its mission every second in gameplay and
     // nothing from the main menu, so a partner whose tutorial had ended on the menu with the host's reloaded the mission

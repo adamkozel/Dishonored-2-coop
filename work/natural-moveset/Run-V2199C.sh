@@ -8,7 +8,7 @@
 # Usage: Run-V2199C.sh
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2198
+CAND=candidate-progress-v2199
 take=corpse-eotw-v2199c
 if [ -e "$take" ]; then echo "$take exists, skipped"; echo done; exit 0; fi
 echo "candidate $CAND"

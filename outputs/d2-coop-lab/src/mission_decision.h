@@ -127,6 +127,7 @@ bool continueToHostMission(void* system){
     char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s %s",mapinfo,std::strstr(peer,"highchaos")?"high":"low",character==1?"corvo":"emily");
     coopNativeChoicePick=character;partnerProgressJoinPending=true;partnerProgressJoinCharacter=character;
     d.partnerAppliedEpoch=outgoing.worldEpoch;d.appliedKind=1;d.held=false;d.awaitingHostMap=false;
+    missionFollowQuietUntil=GetTickCount64()+90000; // 2199: the product mission follow does not load it a second time
     dispatchCoopCommand(system,command);++d.followContinues;++d.continued;d.result="continued_to_host_mission";
     return true;
 }
@@ -172,14 +173,16 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
     }
     if(d.ownFirst){
         if(tickAge(tick,d.ownFirstSince)>180000){d.ownFirst=false;d.result="own_first_timeout";return;}
-        if(outgoing.worldEpoch==d.ownFirstEpoch||!coopGameplayReady(outgoing)||outgoing.pendingGameLogicState)return;
+        // 2199: also from a result screen. campaign-bunker-vm-v2197n: her own Continue reloaded Dust District, whose mission
+        // end then showed its result screen again, where the product mission follow never loads; she stayed there.
+        if(outgoing.worldEpoch==d.ownFirstEpoch||outgoing.pendingGameLogicState||(!coopGameplayReady(outgoing)&&outgoing.gameLogicState!=11))return;
         const char* peer=transitionHold.peerMap;if(!*peer)return;
         d.ownFirst=false;
         if(!std::strcmp(peer,mapName)){++d.ownFirstSame;d.result="own_first_host_map";return;}
-        // 2195: the product mission follow (session_product.h) loads the host's mission for a partner on another map, with
-        // her chosen character; loading here as well queued two campaign loads in one frame and the partner's game vanished
-        // (soak-hour-vm-v2186b, Edge of the World to The Good Doctor). So this only records it.
-        ++d.ownFirstFollowed;d.result="own_first_other_map";
+        // 2199: she loads the host's mission here, and continueToHostMission quiets the product mission follow for 90 s, so
+        // one load is queued (2195 left it to that follow, which never loads from a result screen: campaign-bunker-vm-v2197n;
+        // both loading was the double load of soak-hour-vm-v2186b).
+        if(continueToHostMission(system)){++d.ownFirstFollowed;d.result="own_first_then_followed";}else d.result="own_first_follow_refused";
         return;
     }
     if(d.awaitingHostMap){
