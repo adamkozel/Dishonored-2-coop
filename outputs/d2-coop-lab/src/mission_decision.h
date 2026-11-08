@@ -20,6 +20,7 @@ struct MissionDecision {
     bool awaitingHostMap=false;std::uint64_t awaitSince=0,followContinues=0,followFallbacks=0; // 2103 (#264, M1)
     std::uint64_t ownEndContinues=0; // 2191
     bool ownFirst=false;std::uint64_t ownFirstEpoch=0,ownFirstSince=0,ownFirstSame=0,ownFirstFollowed=0; // 2193
+    int cachedSlot=-2;std::uint64_t followAtOnce=0; // 2201
 };
 MissionDecision missionDecision{};
 bool coopMissionDecisionFlag(){return localRole==0&&missionDecision.enabled;}
@@ -202,7 +203,16 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
         // No mission-start save of that map: continue alone, without the hold, and follow the host's mission from there.
         ++d.missingSaves;transitionHold.expect=false;dispatchMissionDecision(system,1,-1);d.result="replay_save_missing";return;
     }
-    if(missionContinueFollow&&missionFollowOn()&&missionContinueOwnFirst){d.ownFirst=true;d.ownFirstEpoch=outgoing.worldEpoch;d.ownFirstSince=tick;
+    // 2201: her own Continue only when her world cached a next mission at its result screen. A native mission end caches the
+    // next mission's start save (slot campaign*30+21..29, chapter 107) in 0x142318198, which RestartFromMemoryCheckpoint then
+    // loads. A world whose end was only mirrored keeps an in-mission autosave (81, 82), and her Continue reloads her own
+    // mission (campaign-bunker-vm-v2201n: Dust District again, then the follow arrived after the host's boat had run its
+    // load nodes, and Jessamine and a window differed). She then follows the host at once from the result screen, as
+    // campaign-bunker-vm-v2181b did with every diff equal.
+    {int cached=-1;memoryRead(reinterpret_cast<std::uintptr_t>(gameImage)+0x2318198,&cached,4);d.cachedSlot=cached;}
+    const bool nextMissionCached=d.cachedSlot>=0&&d.cachedSlot%30>=21&&d.cachedSlot%30<=29;
+    if(missionContinueFollow&&missionFollowOn()&&missionContinueOwnFirst&&!nextMissionCached)++d.followAtOnce;
+    if(missionContinueFollow&&missionFollowOn()&&missionContinueOwnFirst&&nextMissionCached){d.ownFirst=true;d.ownFirstEpoch=outgoing.worldEpoch;d.ownFirstSince=tick;
         ++d.ownEndContinues;expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued_own_first";return;}
     if(missionContinueFollow&&missionFollowOn()){d.awaitingHostMap=true;d.awaitSince=tick;expectMissionTransition(tick);d.result="awaiting_host_mission";
         continueToHostMission(system);return;}
@@ -214,10 +224,10 @@ void writeMissionDecision() {
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& d=missionDecision;const auto& p=localRole?d.incoming:d.last;
     fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"decision\":%u,\"slot\":%d,\"startMap\":\"%s\",\"loadedSlot\":%d,\"pending\":%s,\"held\":%s,\"heldKind\":%u,"
         "\"sent\":%llu,\"resent\":%llu,\"received\":%llu,\"refused\":%llu,\"duplicates\":%llu,\"hostContinues\":%llu,\"hostReplays\":%llu,\"unreadable\":%llu,"
-        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu,\"continueOwn\":%s,\"ownEndContinues\":%llu,\"ownFirst\":%s,\"ownFirstSame\":%llu,\"ownFirstFollowed\":%llu,\"otherMapReleases\":%llu,\"saveLoad\":\"%s\",\"hostSaveLoads\":%llu,\"hostSaveLoadSends\":%llu,\"saveLoadReceived\":%llu,\"partnerSaveLoadFollows\":%llu,\"partnerSaveLoadOtherMap\":%llu}\n",
+        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu,\"continueOwn\":%s,\"ownEndContinues\":%llu,\"ownFirst\":%s,\"ownFirstSame\":%llu,\"ownFirstFollowed\":%llu,\"otherMapReleases\":%llu,\"cachedSlot\":%d,\"followAtOnce\":%llu,\"saveLoad\":\"%s\",\"hostSaveLoads\":%llu,\"hostSaveLoadSends\":%llu,\"saveLoadReceived\":%llu,\"partnerSaveLoadFollows\":%llu,\"partnerSaveLoadOtherMap\":%llu}\n",
         missionDecisionOn()?"true":"false",localRole,d.result,p.decision,p.slot,p.startMap,d.loadedSlot,d.pending?"true":"false",d.held?"true":"false",d.heldKind,
         d.sent,d.resent,d.received,d.refused,d.duplicates,d.hostContinues,d.hostReplays,d.unreadable,d.partnerHeld,d.continued,d.replayed,d.missingSaves,d.localReleases,
-        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks,missionContinueOwnFirst?"true":"false",d.ownEndContinues,d.ownFirst?"true":"false",d.ownFirstSame,d.ownFirstFollowed,transitionOtherMapReleases,
+        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks,missionContinueOwnFirst?"true":"false",d.ownEndContinues,d.ownFirst?"true":"false",d.ownFirstSame,d.ownFirstFollowed,transitionOtherMapReleases,d.cachedSlot,d.followAtOnce,
         saveLoadResult,hostSaveLoads,hostSaveLoadSends,hostSaveLoadReceived,partnerSaveLoadFollows,partnerSaveLoadOtherMap);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

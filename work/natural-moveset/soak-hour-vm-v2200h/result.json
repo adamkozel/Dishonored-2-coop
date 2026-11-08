@@ -1,0 +1,186 @@
+{
+  "passed": false,
+  "failure": "Talk to meagan not registered",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2199",
+      "hostDll": "0893682A9E248E853F7C44BBEEF3311072A36062052B00F7873463FBC7F52F67",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 4,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 21765,
+        "writtenAt": 170811812,
+        "startedAgoMs": 2422,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 17891,
+        "writtenAt": 170763531,
+        "startedAgoMs": 1766,
+        "phase2Checks": 14
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.4,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "lootCleared1": [],
+    "talkSecondPass": "meagan",
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 44,
+        "pos": [
+          93.870903,
+          -18.279842,
+          -3.270949
+        ],
+        "fresh": true,
+        "gameflow": [
+          233,
+          0,
+          3,
+          11,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/1/0",
+        "hold": "released/1219",
+        "ka": "108/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwall,Task_DW_TalkToBoatCaptain"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/streets/dunwall_escape_streets_p",
+        "epoch": 31,
+        "cine": 30,
+        "pos": [
+          -52.200005,
+          -22.400000,
+          57.503647
+        ],
+        "fresh": true,
+        "gameflow": [
+          233,
+          0,
+          3,
+          11,
+          0,
+          1,
+          0
+        ],
+        "gfApplied": 8,
+        "lt": "applied/0/1",
+        "hold": "released/0",
+        "ka": "0/76/1",
+        "active": "Mission_DW,Obj_DW_EscapeDunwall,Task_DW_TalkToBoatCaptain"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
