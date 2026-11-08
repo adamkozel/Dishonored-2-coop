@@ -31,6 +31,13 @@ PER_PLAYER = {"pickups"}
 # Mutation twins (coop-anything): COOP_MUT names a deliberately broken variant that test_d2_world_diff.py must catch.
 MUT = os.environ.get("COOP_MUT", "")
 PER_CHARACTER = re.compile(r"(^|_)(corvo|emily)(_|$)", re.I)
+# 2194: per-character entities whose names do not say so (map data, confirmed static): the Dreadful Wale after the
+# Conservatory keeps script_audiograph_01_7 for Corvo and script_audiograph_01_1_1 for Emily.
+PER_CHARACTER_KEYS = {"script_audiograph_01_7", "script_audiograph_01_1_1"}
+
+
+def per_character(key):
+    return bool(PER_CHARACTER.search(key)) or key in PER_CHARACTER_KEYS
 
 
 def load_snapshots(path):
@@ -138,7 +145,7 @@ def compare(host_snaps, client_snaps, ignore=()):
         diffs = []
         for k in sorted(set(h) | set(c)):
             if (k in h) != (k in c) if MUT == "presence_only" else h.get(k) != c.get(k):
-                diffs.append({"key": k, "perCharacter": bool(PER_CHARACTER.search(k)),
+                diffs.append({"key": k, "perCharacter": per_character(k),
                               "host": json.loads(h[k]) if k in h else "<absent>",
                               "client": json.loads(c[k]) if k in c else "<absent>"})
         per_player = cat in PER_PLAYER

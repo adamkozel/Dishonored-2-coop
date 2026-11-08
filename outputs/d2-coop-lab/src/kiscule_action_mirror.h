@@ -80,6 +80,11 @@ const KisculeCharacterGrant kisculeCharacterGrants[]={
     {"campaign/dunwall/escape/tower/dunwall_escape_tower_p","ld_kiscule",2305,2,3778,2},      // gun_player / gun_emily
     {"campaign/dunwall/escape/tower/dunwall_escape_tower_p","ld_kiscule_coup",4209,2,4215,2}, // gun_player / gun_emily
     {"campaign/boat/edge_of_the_world/boat_eotw_p","script_kiscule",7033,2,7038,2},          // crossbow_corvo / crossbow_emily
+    // 2194: the Dreadful Wale after the Conservatory keeps one audiograph per character; the test_player branch (node
+    // 1725366902) hides the other one: Corvo hides script_audiograph_01_1_1, Emily hides script_audiograph_01_7. In a
+    // mixed pairing the partner applied the host's hide of her own and hid the other too (campaign-curator-vm-v2191k,
+    // -v2190c; map data confirmed static). She hides the other character's instead.
+    {"campaign/boat/dust/boat_dust_p","script_kiscule_node_template_1",1407129762,1087095216,288370032,1087095216}, // hide audiograph_01_1_1 / _01_7
 };
 // The local player's character: 1 Corvo, 2 Emily, 0 unknown (body definition at actor+0x2e8).
 int kisculeLocalCharacter(){
