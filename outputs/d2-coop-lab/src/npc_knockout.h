@@ -146,7 +146,9 @@ void serviceLabCorpsePossession(){
     // combat channels did not hold the host's fresh corpse, and the partner's nearest channel corpse was 172 m away).
     float best=15.f*15.f;std::uintptr_t actor=0;std::uint32_t handle=0;std::vector<NativeWorldNpc> catalog;unsigned unbound=0;
     if(!readWorldNpcCatalog(memoryRead,base,observedGame,catalog,unbound)){finish("catalog_refused");return;}
-    for(const auto& n:catalog){NativeHealth h{};if(!readNativeHealth(memoryRead,base,n.handle,h)||h.actor!=n.actor||h.current>0)continue;
+    // 2200: an unconscious body (owner flag 0x20) too: the game possesses ASLEEP and DEAD bodies, and corpse-eotw-v2199c's
+    // takedown left the guard unconscious, so no corpse was found within 15 m.
+    for(const auto& n:catalog){NativeHealth h{};if(!readNativeHealth(memoryRead,base,n.handle,h)||h.actor!=n.actor||(h.current>0&&!(h.ownerFlags&0x20)))continue;
         float d=0;for(unsigned i=0;i<3;++i){const float x=n.position[i]-me[i];d+=x*x;}
         if(d<best){best=d;actor=n.actor;handle=n.handle;}}
     if(!actor){finish("no_corpse_within_15m");return;}
