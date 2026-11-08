@@ -1766,6 +1766,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_safe_codes on")||!std::strcmp(text,"coop_safe_codes off"))return true; // stage 8.4.3 (#239)
     if(!std::strcmp(text,"coop_continue_follow on")||!std::strcmp(text,"coop_continue_follow off"))return true; // 2103 (#264)
     if(!std::strcmp(text,"coop_continue_own on")||!std::strcmp(text,"coop_continue_own off"))return true; // 2191
+    if(!std::strcmp(text,"coop_host_save_follow on")||!std::strcmp(text,"coop_host_save_follow off"))return true; // 2197
     if(!std::strcmp(text,"coop_usable_safe_doors on")||!std::strcmp(text,"coop_usable_safe_doors off"))return true; // 2100 (#264)
     if(!std::strcmp(text,"coop_safe_dials on")||!std::strcmp(text,"coop_safe_dials off"))return true; // stage 8.4.3 (#239), 2050
     if(!std::strcmp(text,"coop_npc_present on")||!std::strcmp(text,"coop_npc_present off"))return true; // 2163 (#260)
@@ -2003,6 +2004,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_story_flags flip")){storyFlagSync.flipRequest=true;return;} // 1214kk (#220, test fixture)
     if(!std::strcmp(request.command,"coop_safe_codes on")||!std::strcmp(request.command,"coop_safe_codes off")){safeCodeSync.enabled=!std::strcmp(request.command,"coop_safe_codes on");safeCodeSync.lastValid=false;return;}
     if(!std::strcmp(request.command,"coop_continue_follow on")||!std::strcmp(request.command,"coop_continue_follow off")){missionContinueFollow=!std::strcmp(request.command,"coop_continue_follow on");return;} // 2103 (#264)
+    if(!std::strcmp(request.command,"coop_host_save_follow on")||!std::strcmp(request.command,"coop_host_save_follow off")){hostSaveLoadFollow=!std::strcmp(request.command,"coop_host_save_follow on");return;} // 2197
     if(!std::strcmp(request.command,"coop_continue_own on")||!std::strcmp(request.command,"coop_continue_own off")){missionContinueOwnFirst=!std::strcmp(request.command,"coop_continue_own on");return;} // 2191, 2193: own Continue first
     if(!std::strcmp(request.command,"coop_usable_safe_doors on")||!std::strcmp(request.command,"coop_usable_safe_doors off")){usableSafeDoorsShared=!std::strcmp(request.command,"coop_usable_safe_doors on");return;} // 2100 (#264): from the next map load
     if(!std::strcmp(request.command,"coop_notice_test")){coopNoticePending.store(1);return;}

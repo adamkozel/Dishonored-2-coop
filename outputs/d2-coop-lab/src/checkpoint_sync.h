@@ -161,6 +161,12 @@ std::uint64_t checkpointMissionContinues=0;
 // off is no twin: hostload-dunwall-v2064b reloaded both worlds). Death restarts stay shared.
 bool checkpointSharedLoad=true;std::uint64_t checkpointSharedLoadBypassed=0;
 int missionDecisionIntercept(unsigned kind,int slot); // stage 8 (#253, mission_decision.h)
+// 2197 (#244): the host's Load Game of one of its own saves (any slot but the paired autosave 82) loads that save in its
+// world; the partner, who has no such save, then loads the host's mission again as a join does (mission_decision.h,
+// D2MR reserved 1) and the join snapshot brings her world to the host's. Before, the shared load took it as a request
+// and the chosen save was never loaded (coop-hostsave-v2196a: the host stayed on the Load Game screen).
+// Lab switch coop_host_save_follow on|off (off: the shared load as before).
+bool hostSaveLoadFollow=true,hostSaveLoadPending=false;std::uint64_t hostSaveLoadFromEpoch=0,hostSaveLoads=0;
 bool checkpointIntercept(unsigned kind,int slot,bool& continuation) {
     continuation=false;
     // Stage 8 (#253): on a shared result screen the host's Continue or Replay decides for both worlds.
@@ -206,6 +212,8 @@ bool checkpointIntercept(unsigned kind,int slot,bool& continuation) {
     // transitions, not user reloads: pass them through unless this checkpoint
     // sync is itself mid-reload.
     if(kind==1&&(outgoing.gameLogicState==11||(outgoing.gameLogicState==15&&!s.expectBoundary&&!s.permitContinuation))){++checkpointMissionContinues;return false;}
+    if(kind==2&&slot!=82&&!localRole&&hostSaveLoadFollow&&!s.deathActive&&checkpointConnected()){
+        hostSaveLoadPending=true;hostSaveLoadFromEpoch=outgoing.worldEpoch;++hostSaveLoads;s.result="host_save_load";return false;}
     if(!checkpointSharedLoad&&!s.deathActive){++checkpointSharedLoadBypassed;return false;}
     checkpointRequest(GetTickCount64());return true;
 }

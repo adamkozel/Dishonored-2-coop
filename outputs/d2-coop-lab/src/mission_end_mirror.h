@@ -117,11 +117,15 @@ MissionTransitionHold transitionHold{};
 // waiting 90 s on both sides. Lab switch coop_continue_own on|off (off: the v2103 follow at once, and the 90 s hold).
 bool missionContinueOwnFirst=true;std::uint64_t transitionOtherMapReleases=0;
 void expectMissionTransition(std::uint64_t tick){auto& h=transitionHold;h.expect=true;h.expectAt=tick;*h.peerMap=0;*h.localMap=0;h.result="expecting";}
+// 2197: D2MR reserved 1 is the host's "I loaded a save of this map" (checkpoint_sync.h, mission_decision.h).
+char hostSaveLoadMap[160]{};std::uint64_t hostSaveLoadReceivedAt=0,hostSaveLoadReceived=0;
 void receiveMapReady(const MapReadyPacket& p){
     auto& h=transitionHold;++h.received;
     if(p.magic!=0x524D3244||p.version!=1||p.size!=sizeof(p)||p.role>1||p.role==localRole||p.session!=remote.session||p.sequence<=h.peerSequence||
        !std::memchr(p.map,0,sizeof(p.map))||std::strncmp(p.map,"campaign/",9)){++h.refused;return;}
-    h.peerSequence=p.sequence;std::snprintf(h.peerMap,sizeof(h.peerMap),"%s",p.map);
+    h.peerSequence=p.sequence;
+    if(p.reserved==1){if(localRole){std::snprintf(hostSaveLoadMap,sizeof(hostSaveLoadMap),"%s",p.map);hostSaveLoadReceivedAt=GetTickCount64();++hostSaveLoadReceived;}return;}
+    std::snprintf(h.peerMap,sizeof(h.peerMap),"%s",p.map);
 }
 // 1214be: the ready is re-sent every second while holding and for 30 s after
 // release. Across machines a single send could arrive before the partner

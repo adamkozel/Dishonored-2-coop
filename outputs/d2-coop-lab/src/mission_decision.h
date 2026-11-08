@@ -130,8 +130,34 @@ bool continueToHostMission(void* system){
     dispatchCoopCommand(system,command);++d.followContinues;++d.continued;d.result="continued_to_host_mission";
     return true;
 }
+// 2197 (#244): a host that loaded one of its own saves announces its map once its world is in gameplay again (D2MR
+// reserved 1, every second for 10 s). A partner on that same map loads the host's mission again, as a join does; on
+// another map the product mission follow brings her (a second load here would be the double load of v2186b).
+std::uint64_t hostSaveLoadUntil=0,hostSaveLoadSentAt=0,hostSaveLoadSends=0,partnerSaveLoadFollows=0,partnerSaveLoadAt=0,partnerSaveLoadOtherMap=0;
+const char* saveLoadResult="idle";
+void serviceHostSaveLoad(void* system,std::uint64_t tick){
+    if(!localRole){
+        if(hostSaveLoadPending&&outgoing.worldEpoch!=hostSaveLoadFromEpoch&&coopGameplayReady(outgoing)&&!outgoing.pendingGameLogicState&&*mapName&&!std::strncmp(mapName,"campaign/",9)){
+            hostSaveLoadPending=false;hostSaveLoadUntil=tick+10000;saveLoadResult="host_loaded";}
+        if(hostSaveLoadUntil&&tick<hostSaveLoadUntil&&tick-hostSaveLoadSentAt>=1000&&sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected){
+            MapReadyPacket p{};p.role=0;p.reserved=1;p.session=outgoing.session;p.sequence=++transitionHold.sequence;std::snprintf(p.map,sizeof(p.map),"%s",mapName);
+            if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){++hostSaveLoadSends;hostSaveLoadSentAt=tick;saveLoadResult="host_announced";}}
+        if(hostSaveLoadUntil&&tick>=hostSaveLoadUntil)hostSaveLoadUntil=0;
+        return;}
+    if(!hostSaveLoadReceivedAt||tickAge(tick,hostSaveLoadReceivedAt)>15000)return;
+    if(partnerSaveLoadAt&&tickAge(tick,partnerSaveLoadAt)<30000)return; // one load per announcement window
+    if(!missionFollowOn()||!hostSaveLoadFollow)return;
+    if(outgoing.pendingGameLogicState||(outgoing.gameLogicState!=1&&outgoing.gameLogicState!=2))return;
+    if(std::strcmp(hostSaveLoadMap,mapName)){++partnerSaveLoadOtherMap;hostSaveLoadReceivedAt=0;saveLoadResult="partner_other_map_follow";return;}
+    char mapinfo[160]{};if(!mapinfoFromMapName(hostSaveLoadMap,mapinfo,sizeof(mapinfo))){saveLoadResult="partner_no_mapinfo";hostSaveLoadReceivedAt=0;return;}
+    const int character=localCharacter();char command[220]{};
+    std::snprintf(command,sizeof(command),"campaign %s %s %s",mapinfo,std::strstr(hostSaveLoadMap,"highchaos")?"high":"low",character==1?"corvo":"emily");
+    coopNativeChoicePick=character;partnerProgressJoinPending=true;partnerProgressJoinCharacter=character;
+    dispatchCoopCommand(system,command);++partnerSaveLoadFollows;partnerSaveLoadAt=tick;hostSaveLoadReceivedAt=0;saveLoadResult="partner_reloaded_host_mission";
+}
 void serviceMissionDecision(void* system,std::uint64_t tick) {
     if(GetCurrentThreadId()!=engineThread.load())return;
+    serviceHostSaveLoad(system,tick); // 2197
     auto& d=missionDecision;
     if(localRole==0){resendMissionDecision(tick);return;}
     const bool shared=(missionEndMirrorEnabled||productMode)&&missionEnd.sentEpoch==outgoing.worldEpoch;
@@ -185,9 +211,10 @@ void writeMissionDecision() {
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& d=missionDecision;const auto& p=localRole?d.incoming:d.last;
     fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"decision\":%u,\"slot\":%d,\"startMap\":\"%s\",\"loadedSlot\":%d,\"pending\":%s,\"held\":%s,\"heldKind\":%u,"
         "\"sent\":%llu,\"resent\":%llu,\"received\":%llu,\"refused\":%llu,\"duplicates\":%llu,\"hostContinues\":%llu,\"hostReplays\":%llu,\"unreadable\":%llu,"
-        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu,\"continueOwn\":%s,\"ownEndContinues\":%llu,\"ownFirst\":%s,\"ownFirstSame\":%llu,\"ownFirstFollowed\":%llu,\"otherMapReleases\":%llu}\n",
+        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu,\"continueOwn\":%s,\"ownEndContinues\":%llu,\"ownFirst\":%s,\"ownFirstSame\":%llu,\"ownFirstFollowed\":%llu,\"otherMapReleases\":%llu,\"saveLoad\":\"%s\",\"hostSaveLoads\":%llu,\"hostSaveLoadSends\":%llu,\"saveLoadReceived\":%llu,\"partnerSaveLoadFollows\":%llu,\"partnerSaveLoadOtherMap\":%llu}\n",
         missionDecisionOn()?"true":"false",localRole,d.result,p.decision,p.slot,p.startMap,d.loadedSlot,d.pending?"true":"false",d.held?"true":"false",d.heldKind,
         d.sent,d.resent,d.received,d.refused,d.duplicates,d.hostContinues,d.hostReplays,d.unreadable,d.partnerHeld,d.continued,d.replayed,d.missingSaves,d.localReleases,
-        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks,missionContinueOwnFirst?"true":"false",d.ownEndContinues,d.ownFirst?"true":"false",d.ownFirstSame,d.ownFirstFollowed,transitionOtherMapReleases);
+        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks,missionContinueOwnFirst?"true":"false",d.ownEndContinues,d.ownFirst?"true":"false",d.ownFirstSame,d.ownFirstFollowed,transitionOtherMapReleases,
+        saveLoadResult,hostSaveLoads,hostSaveLoadSends,hostSaveLoadReceived,partnerSaveLoadFollows,partnerSaveLoadOtherMap);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
