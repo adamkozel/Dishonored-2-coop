@@ -16,7 +16,9 @@
 # Usage: Run-V2188F.sh [takes...]   (default: install a t r sa sb se c)
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2189
+# 2190: the candidate is progress-v2190 (v2189 plus every finished mission state written for a following partner); m re-runs
+# The Clockwork Mansion on it (campaign-madinventor-vm-v2181b ended with node bf086e4f host 4, partner 0).
+CAND=candidate-progress-v2190
 clean(){
  rm -f ../lab-instances/host/base/savegame_coop/coop-progress-*.txt
  "$P" -NoProfile -Command '. ../../tools/vm/D2LabVM.Common.ps1; . ../../tools/vm/D2LabVM.Lab.ps1; Invoke-D2LabVM { Remove-Item C:/D2Lab/ws/work/lab-instances/client/base/savegame_coop/coop-progress-*.txt -ErrorAction SilentlyContinue }' > /dev/null 2>&1
@@ -33,10 +35,10 @@ run(){
  take="$1";steps="$2";hc="$3";pc="$4"
  if [ -e "$take" ]; then echo "$take exists, skipped";return;fi
  clean
- "$P" -NoProfile -File Route-MissionVM-v2183.ps1 -Take "$take" -MapInfo campaign/edge_of_the_world/eotw.mapinfo -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+ "$P" -NoProfile -File Route-MissionVM-v2183.ps1 -Take "$take" -MapInfo "${MAPINFO:-campaign/edge_of_the_world/eotw.mapinfo}" -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$hc" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
  echo "$take exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'));[print(k,v) for k,v in n.items() if k.startswith('diff-')]" 2>&1 | head -c 900)"
 }
-want="${*:-install a t r sa sb se c}"
+want="${*:-install a t r sa sb se c m}"
 for x in $want; do
  case $x in
   install) install;;
@@ -47,6 +49,7 @@ for x in $want; do
   sb) run deadlyshade-eotw-v2188b routes/deadlyshade-eotw-puppetoff-v2188.json corvo emily;;
   se) run deadlyshade-eotw-v2188e routes/deadlyshade-eotw-v2188.json emily emily;;
   c) run corpse-eotw-v2189c routes/corpse-eotw-v2189.json corvo corvo;;
+  m) MAPINFO=campaign/boat/madinventor/boat_madinventor.mapinfo run campaign-madinventor-vm-v2190m routes/campaign-madinventor-vm-v2038.json corvo emily;;
  esac
 done
 clean

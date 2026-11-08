@@ -1,0 +1,344 @@
+{
+  "passed": false,
+  "failure": "The worlds differ at the end: 1 values",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2180",
+      "hostDll": "9886B7B9CD0712B62F03E164223BDF234CAD70AB90DDE7F1D36789F3DFEA853F",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 22141,
+        "writtenAt": 105539140,
+        "startedAgoMs": 2406,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 16875,
+        "writtenAt": 105490875,
+        "startedAgoMs": 1813,
+        "phase2Checks": 15
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 104,
+        "client": 104,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 27,
+        "client": 27,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "healthHold": [
+      "from step step11-heal",
+      "from step step17-heal",
+      "from step step20-heal",
+      "from step step22-heal",
+      "from step step28-heal"
+    ],
+    "transitionConfirms": [
+      "step14-use pending 0",
+      "step14-use pending 0",
+      "step14-use pending 0"
+    ],
+    "skipped": [
+      "step31-wait",
+      "step32-use",
+      "step33-heal",
+      "step34-wait"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 36,
+        "cine": 110,
+        "pos": [
+          -6.934011,
+          -15.555288,
+          0.004261
+        ],
+        "fresh": true,
+        "gameflow": [
+          216,
+          1,
+          1,
+          15,
+          1,
+          14,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "released/4484",
+        "ka": "854/8/1",
+        "active": "Mission_Void02"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 36,
+        "cine": 27,
+        "pos": [
+          -6.831126,
+          -14.740268,
+          0.010671
+        ],
+        "fresh": true,
+        "gameflow": [
+          217,
+          1,
+          1,
+          15,
+          0,
+          14,
+          0
+        ],
+        "gfApplied": 71,
+        "lt": "applied/0/3",
+        "hold": "released/0",
+        "ka": "3/550/0",
+        "active": "Mission_Void02"
+      }
+    },
+    "gameflowEqual": false,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "continue_sent",
+        "decision": 1,
+        "slot": -1,
+        "startMap": "",
+        "sent": 1,
+        "resent": 39,
+        "hostReplays": 0,
+        "hostContinues": 1,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "continued_to_host_mission",
+        "decision": 1,
+        "loadedSlot": -1,
+        "received": 40,
+        "refused": 0,
+        "duplicates": 39,
+        "partnerHeld": 1,
+        "replayed": 0,
+        "continued": 1,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "DIFFERENT",
+      "compared": 281,
+      "differences": 1
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "d986012028c3d480",
+        "connection": 2811835147,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "d986012028c3d480",
+        "sent": 1172,
+        "received": 1162,
+        "refused": 0,
+        "silentMs": 234
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "d986012028c3d480",
+        "connection": 3213719118,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "d986012028c3d480",
+        "sent": 1163,
+        "received": 1172,
+        "refused": 0,
+        "silentMs": 766
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 422,
+      "asked": 250,
+      "inFlow": 309,
+      "replayed": 550,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 51
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 36,
+        "cine": 110,
+        "pos": [
+          -6.934011,
+          -15.555288,
+          0.004261
+        ],
+        "fresh": true,
+        "gameflow": [
+          216,
+          1,
+          1,
+          15,
+          1,
+          14,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "released/4484",
+        "ka": "854/8/1",
+        "active": "Mission_Void02"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/void/void_02/void_02_p",
+        "epoch": 36,
+        "cine": 27,
+        "pos": [
+          -6.831126,
+          -14.740268,
+          0.010671
+        ],
+        "fresh": true,
+        "gameflow": [
+          217,
+          1,
+          1,
+          15,
+          0,
+          14,
+          0
+        ],
+        "gfApplied": 71,
+        "lt": "applied/0/3",
+        "hold": "released/0",
+        "ka": "3/550/0",
+        "active": "Mission_Void02"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/boat/madinventor/boat_madinventor.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

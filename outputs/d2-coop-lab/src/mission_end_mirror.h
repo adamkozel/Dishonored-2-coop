@@ -458,7 +458,9 @@ void serviceGameflowMirror(std::uint64_t tick){
                 // ended mission at 0: the host's world ran its end (firstmission-dunwall-v2100a, v2103a-e: Escape Dunwall
                 // node bf0f0d6f host 3, partner 0 in the Void). Written into the node (+0xc, the state the scan reads)
                 // without the native routine, so no mission notice shows and no script reacts to a mission of another map.
-                else if(nodes[j].first.state==0&&want.state==3){*reinterpret_cast<std::int32_t*>(nodes[j].second+0xc)=3;
+                // 2190: any finished state the host has (3, or 4 as The Clockwork Mansion ends: campaign-madinventor-vm-v2181b,
+                // node bf086e4f host 4, partner 0 in the Conservatory after following the host), not only 3.
+                else if(nodes[j].first.state==0&&want.state>=3&&want.state<=15){*reinterpret_cast<std::int32_t*>(nodes[j].second+0xc)=want.state;
                 g.mirrorSet[want.id]=want.state;++g.missionCompleted;++changed;}else ++g.skippedMission;break;}
             if(nodes[j].first.state!=want.state){
                 const auto hd=g.held.find(want.id);

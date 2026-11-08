@@ -1,0 +1,321 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             93 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2180",
+      "hostDll": "9886B7B9CD0712B62F03E164223BDF234CAD70AB90DDE7F1D36789F3DFEA853F",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 19203,
+        "writtenAt": 101044656,
+        "startedAgoMs": 2203,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 18563,
+        "writtenAt": 100996421,
+        "startedAgoMs": 1703,
+        "phase2Checks": 15
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.4,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 114,
+        "client": 114,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 140,
+        "client": 140,
+        "decisionDifferences": 0
+      }
+    ],
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command host coop_difficulty_set 0",
+      "step29-command host coop_difficulty_set 1"
+    ],
+    "difficulty": [
+      {
+        "step": "step03-difficulty",
+        "expect": 0,
+        "host": 0,
+        "client": 0,
+        "clientResult": "matched",
+        "clientApplied": 0,
+        "hostPreset": "difficulty/preset/easy.difficultypreset",
+        "clientPreset": "difficulty/preset/easy.difficultypreset",
+        "ok": true
+      },
+      {
+        "step": "step30-difficulty",
+        "expect": 1,
+        "host": 1,
+        "client": 1,
+        "clientResult": "matched",
+        "clientApplied": 1,
+        "hostPreset": "difficulty/preset/medium.difficultypreset",
+        "clientPreset": "difficulty/preset/medium.difficultypreset",
+        "ok": true
+      }
+    ],
+    "healthHold": [
+      "from step step04-heal"
+    ],
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "transitionConfirms": [
+      "step15-use pending 0"
+    ],
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+        "epoch": 31,
+        "cine": 65,
+        "pos": [
+          -6.50218,
+          -15.261708,
+          0.008649
+        ],
+        "fresh": true,
+        "gameflow": [
+          228,
+          1,
+          3,
+          14,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/2/0",
+        "hold": "released/3156",
+        "ka": "368/14/5",
+        "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/dunwall_return/boat_dunwall_return_p",
+        "epoch": 31,
+        "cine": 28,
+        "pos": [
+          -6.914040,
+          -14.493819,
+          0.126895
+        ],
+        "fresh": true,
+        "gameflow": [
+          228,
+          1,
+          3,
+          14,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 19,
+        "lt": "applied/0/2",
+        "hold": "released/0",
+        "ka": "5/313/2",
+        "active": "Mission_DTTE_B,Obj_DTTE_DreadfulWale,Task_DTTE_TalkMeagan"
+      }
+    },
+    "gameflowEqual": true,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "continue_sent",
+        "decision": 1,
+        "slot": -1,
+        "startMap": "",
+        "sent": 1,
+        "resent": 59,
+        "hostReplays": 0,
+        "hostContinues": 1,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "continued",
+        "decision": 1,
+        "loadedSlot": -1,
+        "received": 60,
+        "refused": 0,
+        "duplicates": 59,
+        "partnerHeld": 1,
+        "replayed": 0,
+        "continued": 1,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "EQUAL",
+      "compared": 608,
+      "differences": 0
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "d986012028c3d480",
+        "connection": 924054692,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "d986012028c3d480",
+        "sent": 1797,
+        "received": 1785,
+        "refused": 0,
+        "silentMs": 515
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "d986012028c3d480",
+        "connection": 2902454970,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "d986012028c3d480",
+        "sent": 1786,
+        "received": 1797,
+        "refused": 0,
+        "silentMs": 484
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 245,
+      "asked": 212,
+      "inFlow": 76,
+      "replayed": 313,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 60
+    },
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "replayRefused": 0,
+      "replayAccepted": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/duke_palace/boat_palace.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
