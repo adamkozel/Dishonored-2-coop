@@ -15,7 +15,7 @@ cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../ou
 run(){
  take="$1";steps="$2"
  if [ -e "$take" ]; then echo "$take exists, skipped";return;fi
- "$P" -NoProfile -File Route-MissionVM-v2182.ps1 -Take "$take" -MapInfo campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo -Candidate "$CAND" -StepsFile "$steps" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+ "$P" -NoProfile -File Route-MissionVM-v2183.ps1 -Take "$take" -MapInfo campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo -Candidate "$CAND" -StepsFile "$steps" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
  echo "$take exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'),n.get('diff-opened'),n.get('diff-reload'),n.get('worldDiff'))" 2>&1 | head -c 900)"
 }
 run hostload-dunwall-v2185a routes/hostload-dunwall-v2065.json

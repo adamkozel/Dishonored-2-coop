@@ -26,7 +26,7 @@ while read -r m mapinfo steps; do
   take="campaign-$m-vm-v2181$L"
   if [ -e "$take" ]; then echo "$m: $take exists, skipped"; continue; fi
   clean
-  "$P" -NoProfile -File Route-MissionVM-v2182.ps1 -Take "$take" -MapInfo "$mapinfo" -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$HC" -PartnerCharacter "$PC" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+  "$P" -NoProfile -File Route-MissionVM-v2183.ps1 -Take "$take" -MapInfo "$mapinfo" -Candidate "$CAND" -StepsFile "$steps" -HostCharacter "$HC" -PartnerCharacter "$PC" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
   echo "$m: exit $? $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),r.get('failure'),n.get('worldDiff'),n.get('frameTimeouts'))" 2>&1 | head -c 700)"
 done < "$PLAN"
 clean
