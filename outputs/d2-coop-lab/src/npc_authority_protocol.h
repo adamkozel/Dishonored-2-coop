@@ -35,6 +35,10 @@ inline bool npcLifeApplies(unsigned local,unsigned desired){return desired<=2&&d
 // 2163 (#260, #237): the host announces each living unbound NPC of its world (present). A partner world that lacks it
 // spawns it from the same spawner. Only the host sends it.
 constexpr unsigned kNpcLifePresent=4;
+// 2205 (#277): host only. The alive, unconscious and dead counts of a spawner key holding several NPCs (a reinforcement
+// pack), one byte each in reserved2 (at most 64 each, at least one NPC); the partner brings her copies to them.
+constexpr unsigned kNpcLifeCounts=5;
+inline bool validNpcLifeCounts(std::uint32_t c){const unsigned a=c&0xff,u=(c>>8)&0xff,d=(c>>16)&0xff;return !(c>>24)&&a<=64&&u<=64&&d<=64&&a+u+d>0;}
 // The host's combat channel for the NPC: 0 no outcome, 1 death pending, 2 death committed.
 // Dead follows a grace after the corpse appears, only for a death the combat channel
 // neither committed nor holds pending; up to five sends 500 ms apart.
@@ -135,7 +139,7 @@ inline bool validNpcHeader(const NpcAuthorityHeader& h,const CoopPosePacket& loc
     const bool paired=h.kind==NpcAuthorityMessage::PairedHold||h.kind==NpcAuthorityMessage::PairedKnockout;
     // 1214en: a host Pose may carry reserved bit 0 = the NPC is down (knocked down, native IsOnGround); 1214kc (#209): bit 1 =
     // the NPC is vulnerable (off-balance after a parry, native IsVulnerable).
-    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.kind==NpcAuthorityMessage::Life?(h.reserved!=1&&h.reserved!=2&&!(h.reserved==kNpcLifePresent&&h.role==0)):h.kind==NpcAuthorityMessage::Pose?h.reserved>3:h.kind==NpcAuthorityMessage::Dead?(h.reserved!=0&&h.reserved!=kNpcDeadAshed&&h.reserved!=kNpcDeadRemoved):h.reserved!=0)||h.reserved2||
+    if(h.magic!=0x414e3244||h.build!=0x67a50cde||h.version!=2||h.role!=peer.role||h.role>1||(paired?!npcPairedVariant(h.reserved):h.kind==NpcAuthorityMessage::Life?(h.reserved!=1&&h.reserved!=2&&!((h.reserved==kNpcLifePresent||h.reserved==kNpcLifeCounts)&&h.role==0)):h.kind==NpcAuthorityMessage::Pose?h.reserved>3:h.kind==NpcAuthorityMessage::Dead?(h.reserved!=0&&h.reserved!=kNpcDeadAshed&&h.reserved!=kNpcDeadRemoved):h.reserved!=0)||(h.kind==NpcAuthorityMessage::Life&&h.reserved==kNpcLifeCounts?!validNpcLifeCounts(h.reserved2):h.reserved2!=0)||
        !h.sequence||!h.sourceArm||!h.sourceHandle||!h.rig||!h.joints||h.joints>kNpcAuthorityMaxJoints||!coopWorldPairReady(local,peer)||
        h.sourceSession!=peer.session||h.targetSession!=local.session||h.sourceEpoch!=peer.worldEpoch||h.targetEpoch!=local.worldEpoch||h.map!=local.mapId)return false;
     switch(h.kind){
