@@ -2003,7 +2003,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_story_flags flip")){storyFlagSync.flipRequest=true;return;} // 1214kk (#220, test fixture)
     if(!std::strcmp(request.command,"coop_safe_codes on")||!std::strcmp(request.command,"coop_safe_codes off")){safeCodeSync.enabled=!std::strcmp(request.command,"coop_safe_codes on");safeCodeSync.lastValid=false;return;}
     if(!std::strcmp(request.command,"coop_continue_follow on")||!std::strcmp(request.command,"coop_continue_follow off")){missionContinueFollow=!std::strcmp(request.command,"coop_continue_follow on");return;} // 2103 (#264)
-    if(!std::strcmp(request.command,"coop_continue_own on")||!std::strcmp(request.command,"coop_continue_own off")){missionContinueOwnWhenFinished=!std::strcmp(request.command,"coop_continue_own on");return;} // 2191
+    if(!std::strcmp(request.command,"coop_continue_own on")||!std::strcmp(request.command,"coop_continue_own off")){missionContinueOwnFirst=!std::strcmp(request.command,"coop_continue_own on");return;} // 2191, 2193: own Continue first
     if(!std::strcmp(request.command,"coop_usable_safe_doors on")||!std::strcmp(request.command,"coop_usable_safe_doors off")){usableSafeDoorsShared=!std::strcmp(request.command,"coop_usable_safe_doors on");return;} // 2100 (#264): from the next map load
     if(!std::strcmp(request.command,"coop_notice_test")){coopNoticePending.store(1);return;}
     if(!std::strcmp(request.command,"coop_partner_progress on")||!std::strcmp(request.command,"coop_partner_progress off")){partnerProgressEnabled=request.command[22]=='o'&&request.command[23]=='n';return;}

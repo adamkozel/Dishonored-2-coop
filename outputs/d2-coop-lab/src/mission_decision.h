@@ -19,6 +19,7 @@ struct MissionDecision {
     MissionDecisionPacket last{},incoming{};const char* result="idle";
     bool awaitingHostMap=false;std::uint64_t awaitSince=0,followContinues=0,followFallbacks=0; // 2103 (#264, M1)
     std::uint64_t ownEndContinues=0; // 2191
+    bool ownFirst=false;std::uint64_t ownFirstEpoch=0,ownFirstSince=0,ownFirstSame=0,ownFirstFollowed=0; // 2193
 };
 MissionDecision missionDecision{};
 bool coopMissionDecisionFlag(){return localRole==0&&missionDecision.enabled;}
@@ -111,22 +112,12 @@ void dispatchMissionDecision(void* system,unsigned kind,int slot) {
 // does ("campaign <mapinfo>", her progression restored after it, partner_progress.h). No announcement in 60 s:
 // her own Continue as before. Lab switch coop_continue_follow on|off (the twin).
 bool missionContinueFollow=true;
-// 2191: following the host by "campaign <mapinfo>" loads the next mission fresh, so a hub such as the Dreadful Wale lacks
-// the state her own campaign carried (campaign-curator-vm-v2181b: a bloodfly spawn flag and an audiograph on the boat).
-// Her own Continue carries it, and it goes to the right mission when her world ran the host's ended mission to its end
-// itself. So she follows only when a mission the host finished (a mirrored mission node at 3 or more) is unfinished in
-// her world, or was finished only by the mirror (campaign-bunker-vm-v2181a and -empress: her own Continue reloaded her
-// last checkpoint of the ended mission; firstmission-dunwall-v2095a). Lab switch coop_continue_own on|off (off: v2103).
-bool missionContinueOwnWhenFinished=true;
-bool partnerFinishedHostMissions(){
-    const auto& g=gameflowMirror;if(!g.incomingCount)return false;
-    std::vector<std::pair<GameflowNodeState,std::uintptr_t>> nodes;std::vector<bool> mission;if(!readGameflowNodes(nodes,mission))return false;
-    unsigned finished=0;
-    for(std::uint32_t i=0;i<g.incomingCount;++i){const auto& want=g.incoming[i];if(want.state<3)continue;
-        for(std::size_t j=0;j<nodes.size();++j){if(nodes[j].first.id!=want.id||!mission[j])continue;
-            if(nodes[j].first.state<3||g.mirrorSet.count(want.id))return false;++finished;break;}}
-    return finished>0;
-}
+// 2193: her own Continue first, then the host's map. Following by "campaign <mapinfo>" loads the next mission fresh, so
+// a hub such as the Dreadful Wale lacks what her campaign carried (campaign-curator-vm-v2181b), and a finished mission
+// node her world had is gone (campaign-madinventor-vm-v2191m: bf086e4f 4 on both, absent after the follow). Her native
+// Continue loads the next mission start her world cached at Results and keeps all of it. When that is not the host's
+// map (her world never ran the mission end: campaign-bunker-vm-v2181a, -empress, firstmission-dunwall-v2095a), the
+// hold releases at once (mission_end_mirror.h) and she loads the host's mission. missionContinueOwnFirst is the switch.
 bool missionFollowOn(){return productMode||followHostEnabled;}
 bool continueToHostMission(void* system){
     auto& d=missionDecision;const char* peer=transitionHold.peerMap;
@@ -153,6 +144,15 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
         else d.held=false;
         return;
     }
+    if(d.ownFirst){
+        if(tickAge(tick,d.ownFirstSince)>180000){d.ownFirst=false;d.result="own_first_timeout";return;}
+        if(outgoing.worldEpoch==d.ownFirstEpoch||!coopGameplayReady(outgoing)||outgoing.pendingGameLogicState)return;
+        const char* peer=transitionHold.peerMap;if(!*peer)return;
+        d.ownFirst=false;
+        if(!std::strcmp(peer,mapName)){++d.ownFirstSame;d.result="own_first_host_map";return;}
+        if(continueToHostMission(system)){++d.ownFirstFollowed;d.result="own_first_then_followed";}else d.result="own_first_follow_refused";
+        return;
+    }
     if(d.awaitingHostMap){
         if(!atResults||!shared){d.awaitingHostMap=false;d.result="await_left_results";return;}
         if(continueToHostMission(system))return;
@@ -170,8 +170,8 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
         // No mission-start save of that map: continue alone, without the hold, and follow the host's mission from there.
         ++d.missingSaves;transitionHold.expect=false;dispatchMissionDecision(system,1,-1);d.result="replay_save_missing";return;
     }
-    if(missionContinueFollow&&missionFollowOn()&&missionContinueOwnWhenFinished&&partnerFinishedHostMissions()){
-        ++d.ownEndContinues;expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued_own_end";return;}
+    if(missionContinueFollow&&missionFollowOn()&&missionContinueOwnFirst){d.ownFirst=true;d.ownFirstEpoch=outgoing.worldEpoch;d.ownFirstSince=tick;
+        ++d.ownEndContinues;expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued_own_first";return;}
     if(missionContinueFollow&&missionFollowOn()){d.awaitingHostMap=true;d.awaitSince=tick;expectMissionTransition(tick);d.result="awaiting_host_mission";
         continueToHostMission(system);return;}
     expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued";
@@ -182,9 +182,9 @@ void writeMissionDecision() {
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& d=missionDecision;const auto& p=localRole?d.incoming:d.last;
     fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"decision\":%u,\"slot\":%d,\"startMap\":\"%s\",\"loadedSlot\":%d,\"pending\":%s,\"held\":%s,\"heldKind\":%u,"
         "\"sent\":%llu,\"resent\":%llu,\"received\":%llu,\"refused\":%llu,\"duplicates\":%llu,\"hostContinues\":%llu,\"hostReplays\":%llu,\"unreadable\":%llu,"
-        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu,\"continueOwn\":%s,\"ownEndContinues\":%llu}\n",
+        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu,\"continueOwn\":%s,\"ownEndContinues\":%llu,\"ownFirst\":%s,\"ownFirstSame\":%llu,\"ownFirstFollowed\":%llu,\"otherMapReleases\":%llu}\n",
         missionDecisionOn()?"true":"false",localRole,d.result,p.decision,p.slot,p.startMap,d.loadedSlot,d.pending?"true":"false",d.held?"true":"false",d.heldKind,
         d.sent,d.resent,d.received,d.refused,d.duplicates,d.hostContinues,d.hostReplays,d.unreadable,d.partnerHeld,d.continued,d.replayed,d.missingSaves,d.localReleases,
-        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks,missionContinueOwnWhenFinished?"true":"false",d.ownEndContinues);
+        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks,missionContinueOwnFirst?"true":"false",d.ownEndContinues,d.ownFirst?"true":"false",d.ownFirstSame,d.ownFirstFollowed,transitionOtherMapReleases);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

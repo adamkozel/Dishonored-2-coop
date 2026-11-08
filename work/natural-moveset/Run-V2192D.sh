@@ -8,7 +8,7 @@
 # Usage: Run-V2192D.sh [c e k]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2192
+CAND=candidate-progress-v2193
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
 "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "campaign-v2192-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }

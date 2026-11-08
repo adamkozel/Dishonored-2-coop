@@ -111,6 +111,11 @@ struct MissionTransitionHold {
     bool ownsWindow=false;std::uint64_t peeks=0;
 };
 MissionTransitionHold transitionHold{};
+// 2193: a partner's Continue at a shared mission end is her own first (it keeps her world's native state, as the
+// hub needs: campaign-curator-vm-v2181b, campaign-madinventor-vm-v2191m), then she follows the host when the host
+// announces another map (mission_decision.h). So a hold whose peer reports another map releases at once instead of
+// waiting 90 s on both sides. Lab switch coop_continue_own on|off (off: the v2103 follow at once, and the 90 s hold).
+bool missionContinueOwnFirst=true;std::uint64_t transitionOtherMapReleases=0;
 void expectMissionTransition(std::uint64_t tick){auto& h=transitionHold;h.expect=true;h.expectAt=tick;*h.peerMap=0;*h.localMap=0;h.result="expecting";}
 void receiveMapReady(const MapReadyPacket& p){
     auto& h=transitionHold;++h.received;
@@ -157,6 +162,7 @@ void waitMissionTransition(){
     h.ownsWindow=holdThreadOwnsWindow();std::uint64_t lastPeek=0;
     for(;;){
         if(*h.peerMap&&!std::strcmp(h.peerMap,h.localMap)){h.result="released";break;}
+        if(missionContinueOwnFirst&&*h.peerMap&&std::strcmp(h.peerMap,h.localMap)){h.result="released_other_map";++transitionOtherMapReleases;break;}
         const auto tick=GetTickCount64();
         if(tick-h.startedAt>90000){++h.timeouts;h.result=*h.peerMap?"timeout_other_map":"timeout";break;}
         if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected){++h.aborted;h.result="connection_lost";break;}
