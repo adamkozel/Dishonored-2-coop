@@ -530,7 +530,8 @@ void beginNpcStream(ULONGLONG tick){
 // stays sendable after the body has left the catalog.
 struct NpcLifeEntry{std::string key;unsigned sent=0,desired=0;bool applied=true;unsigned attempts=0;ULONGLONG lastAt=0;NativeNpcLife last{};unsigned known=0;
     // 2163 (#260): present sent by the host to this peer; on the partner, a present NPC to spawn if it stays missing.
-    bool presentSent=false;ULONGLONG hostPresentAt=0,absentSince=0,spawnAt=0;unsigned spawnTries=0;std::string presentSpawner,presentDefinition;};
+    bool presentSent=false;ULONGLONG hostPresentAt=0,absentSince=0,spawnAt=0;unsigned spawnTries=0;std::string presentSpawner,presentDefinition;
+    ULONGLONG lifeEndAt=0;}; // 2196: the host's latest unconscious or dead state for the key, on the partner
 // 2166 (#260, lab): "coop_lab_spawn <spawner>" spawns from that spawner in this world only (a host-only spawn on demand).
 char labNpcSpawnName[128]{};const char* labNpcSpawnResult="idle";std::uint64_t labNpcSpawns=0;
 inline bool labNpcSpawnNameAllowed(const char* t){const auto n=std::strlen(t);if(!n||n>=sizeof(labNpcSpawnName))return false;
@@ -611,7 +612,10 @@ void processNpcLife(const NpcCatalogSnapshot& s){
     // for 10 s. Three tries per absence.
     if(!localRole&&npcLifePresentSync&&tick-npcLifePresentRefreshAt>=20000){npcLifePresentRefreshAt=tick;for(auto& e:npcLifeEntries)e.presentSent=false;}
     if(localRole&&npcLifePresentSync)for(auto& e:npcLifeEntries){
-        if(!e.hostPresentAt||tick-e.hostPresentAt>30000||e.presentSpawner.empty())continue;
+        // 2196: a death or knockout ends the host's present: corpse-eotw-v2194c, the host killed entrance guard 02 within 30 s of its
+        // last present, the partner's copy died too and counted as missing, and her spawner made three more guards. Only a
+        // present newer than the death (a new NPC under the key) spawns again; reliable delivery keeps their order.
+        if(!e.hostPresentAt||tick-e.hostPresentAt>30000||e.presentSpawner.empty()||(e.lifeEndAt&&e.hostPresentAt<=e.lifeEndAt))continue;
         if(std::any_of(s.life.begin(),s.life.end(),[&](const auto& n){return n.spawner==e.presentSpawner&&n.definition==e.presentDefinition&&n.state==0&&npcLifeActive(n);})){e.absentSince=0;e.spawnTries=0;continue;}
         if(!e.absentSince){e.absentSince=tick;continue;}
         if(tick-e.absentSince<10000||e.spawnTries>=3||(e.spawnAt&&tick-e.spawnAt<5000))continue;
@@ -640,6 +644,7 @@ void receiveNpcLife(const CoopNpcControl& p){
     // npclife-hoststory-v2041l (#254): under host story a partner's state for a named character is a request the host
     // refuses. The partner's carriage Sokolov fell and died, and the host lost its own 8 to 13 s later (v2041ha, v2041ia).
     if(!localRole&&kisculeHostStory&&npcLifeHostStoryWatched(std::string(p.definition,strnlen(p.definition,sizeof(p.definition))))){++npcLifeHostStoryRefused;return;}
+    if(localRole&&(p.h.reserved==1||p.h.reserved==2))e.lifeEndAt=GetTickCount64(); // 2196
     if(p.h.reserved>e.desired){e.desired=p.h.reserved;e.applied=false;e.attempts=0;}
 }
 void receiveNpcControl(const CoopNpcControl& p,ULONGLONG tick){

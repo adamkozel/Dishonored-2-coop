@@ -142,13 +142,15 @@ void serviceLabCorpsePossession(){
     const auto finish=[&](const char* why){labCorpseResult=why;writeLabCorpse();};
     if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame||!observedPlayer){finish("context_refused");return;}
     const auto base=reinterpret_cast<std::uintptr_t>(gameImage);float me[3]{};if(!memoryRead(observedPlayer+0x300,me,12)){finish("player_refused");return;}
-    float best=1e12f;NpcAuthorityChannel* target=nullptr;std::uintptr_t actor=0;
-    for(const auto& b:npcCombat.channels){auto* c=npcCombatActor(b.arm);if(!c||!c->lease.binding.npc.actor)continue;NativeHealth h{};
-        const bool dead=c->corpse||(readNativeHealth(memoryRead,base,c->lease.binding.npc.handle,h)&&h.actor==c->lease.binding.npc.actor&&h.current<=0);if(!dead)continue;
-        float root[3]{};if(!memoryRead(c->lease.binding.npc.actor+0x300,root,12))continue;float d=0;for(unsigned i=0;i<3;++i){const float x=root[i]-me[i];d+=x*x;}
-        if(d<best){best=d;target=c;actor=c->lease.binding.npc.actor;}}
-    if(!target){finish("no_dead_channel_npc");return;}
-    auto& p=labCorpse;p.handle=target->lease.binding.npc.handle;p.distance=std::sqrt(best);
+    // 2196: the dead NPC nearest this player in the world catalog, within the 15 m possession range (corpse-eotw-v2194c: the
+    // combat channels did not hold the host's fresh corpse, and the partner's nearest channel corpse was 172 m away).
+    float best=15.f*15.f;std::uintptr_t actor=0;std::uint32_t handle=0;std::vector<NativeWorldNpc> catalog;unsigned unbound=0;
+    if(!readWorldNpcCatalog(memoryRead,base,observedGame,catalog,unbound)){finish("catalog_refused");return;}
+    for(const auto& n:catalog){NativeHealth h{};if(!readNativeHealth(memoryRead,base,n.handle,h)||h.actor!=n.actor||h.current>0)continue;
+        float d=0;for(unsigned i=0;i<3;++i){const float x=n.position[i]-me[i];d+=x*x;}
+        if(d<best){best=d;actor=n.actor;handle=n.handle;}}
+    if(!actor){finish("no_corpse_within_15m");return;}
+    auto& p=labCorpse;p.handle=handle;p.distance=std::sqrt(best);
     memoryRead(actor+0xd1,&p.d1,1);memoryRead(actor+0xd3,&p.d3,1);memoryRead(actor+0x288,&p.context,4);
     const auto comp=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,void*,int)>(gameImage+0x877720)(actor,gameImage+0x39cba70,2);std::uintptr_t vt=0;
     p.component=comp&&memoryRead(comp,&vt,8)&&vt==base+0x1b640a8;
