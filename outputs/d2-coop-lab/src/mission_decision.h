@@ -150,7 +150,10 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
         const char* peer=transitionHold.peerMap;if(!*peer)return;
         d.ownFirst=false;
         if(!std::strcmp(peer,mapName)){++d.ownFirstSame;d.result="own_first_host_map";return;}
-        if(continueToHostMission(system)){++d.ownFirstFollowed;d.result="own_first_then_followed";}else d.result="own_first_follow_refused";
+        // 2195: the product mission follow (session_product.h) loads the host's mission for a partner on another map, with
+        // her chosen character; loading here as well queued two campaign loads in one frame and the partner's game vanished
+        // (soak-hour-vm-v2186b, Edge of the World to The Good Doctor). So this only records it.
+        ++d.ownFirstFollowed;d.result="own_first_other_map";
         return;
     }
     if(d.awaitingHostMap){
