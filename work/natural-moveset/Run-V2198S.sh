@@ -10,7 +10,7 @@
 # Usage: Run-V2198S.sh
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2197
+CAND=candidate-progress-v2198
 T=coop-hostsave-v2198a
 if [ -e "../release/$T" ]; then echo "$T exists, skipped"; echo done; exit 0; fi
 echo "candidate $CAND"
