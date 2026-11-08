@@ -128,7 +128,9 @@ CoinApply applyNativeStoryPickup(const NativeCoin& binding,unsigned& calls){
     if(!nativeCoinApiAvailable()||!readNativeStoryPickup(memoryRead,base,observedGame,binding.handle,n)||!sameNativeCoin(n,binding)||n.ownerFlags&1||n.flags&8)return CoinApply::Failed;
     if(n.flags&2)return CoinApply::Deferred;
     if(n.flags)return CoinApply::Failed;
-    if(!readCoinPlayer(p)||!nativePlayerGroundIdleStates(p.states,base))return CoinApply::Deferred;
+    // 2192: the Heart out counts too (campaign-curator-vm-v2190c: a Corvo partner held the Heart and the archived journals note
+    // was deferred 1009 times, then the map changed); a player loots natively with the Heart out.
+    if(!readCoinPlayer(p)||!(nativePlayerGroundIdleStates(p.states,base)||nativePlayerGroundHeartStates(p.states,base)))return CoinApply::Deferred;
     ++calls;reinterpret_cast<void(*)(void*)>(gameImage+0x76e2b0)(reinterpret_cast<void*>(n.component));
     unsigned char flags=0;if(!memoryRead(n.component+0xd0,&flags,1)||!(flags&2)||flags&8)return CoinApply::Failed;
     ++calls;realCoinReward(reinterpret_cast<void*>(p.loot),reinterpret_cast<void*>(n.component),0);

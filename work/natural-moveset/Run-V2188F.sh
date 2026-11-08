@@ -20,7 +20,7 @@ P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/nativ
 # The Clockwork Mansion on it (campaign-madinventor-vm-v2181b ended with node bf086e4f host 4, partner 0).
 # 2191: candidate progress-v2191 (her own Continue when her world finished the host missions); k re-runs The Royal
 # Conservatory (campaign-curator-vm-v2181b: the follow load lacked the boat state).
-CAND=candidate-progress-v2191
+CAND=candidate-progress-v2192
 clean(){
  rm -f ../lab-instances/host/base/savegame_coop/coop-progress-*.txt
  "$P" -NoProfile -Command '. ../../tools/vm/D2LabVM.Common.ps1; . ../../tools/vm/D2LabVM.Lab.ps1; Invoke-D2LabVM { Remove-Item C:/D2Lab/ws/work/lab-instances/client/base/savegame_coop/coop-progress-*.txt -ErrorAction SilentlyContinue }' > /dev/null 2>&1

@@ -9,7 +9,7 @@
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
 # 2190: on candidate progress-v2190 (every finished mission state reaches a following partner).
-CAND=candidate-progress-v2191
+CAND=candidate-progress-v2192
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
 "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "saveload-v2185-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
