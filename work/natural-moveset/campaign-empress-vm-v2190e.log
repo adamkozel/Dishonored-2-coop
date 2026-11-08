@@ -1,0 +1,316 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             88 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2191",
+      "hostDll": "7A95A0869C210A3961F7C419FC34F468CD2518B999B4D079C9051FFAE95C5A0F",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 18250,
+        "writtenAt": 126809843,
+        "startedAgoMs": 2297,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 17906,
+        "writtenAt": 126761578,
+        "startedAgoMs": 1766,
+        "phase2Checks": 15
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "client": "models/characters/player/emily/body.def",
+      "host": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 140,
+        "client": 140,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "healthHold": [
+      "from step step05-heal"
+    ],
+    "transitionConfirms": [
+      "step11-use pending 0",
+      "step13-use pending 0",
+      "step16-use pending 0"
+    ],
+    "step21-flag": {
+      "variable": "Bool_MissionStep_ThroneRoom_Reached",
+      "value": 1,
+      "ms": 611
+    },
+    "step23-flag": {
+      "variable": "Bool_MissionStep_Portal_IsActive",
+      "value": 1,
+      "ms": 637
+    },
+    "step26-flag": {
+      "variable": "Bool_MissionStep_UDW_Reached",
+      "value": 1,
+      "ms": 602
+    },
+    "step28-flag": {
+      "variable": "Bool_MissionStep_Delilah_IsDead",
+      "value": 1,
+      "ms": 580
+    },
+    "creditSkips": {
+      "host": 1,
+      "client": 1,
+      "lastMs": 12930
+    },
+    "storyFlagsError": "Native query failed host --storyflags",
+    "final": {
+      "client": {
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p",
+        "epoch": 51,
+        "cine": 16,
+        "pos": [
+          0.000000,
+          0.000000,
+          0.000000
+        ],
+        "fresh": true,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 16,
+        "lt": "applied/0/5",
+        "hold": "expecting/90016",
+        "ka": "13/676/0",
+        "active": null
+      },
+      "host": {
+        "logic": 6,
+        "pending": 0,
+        "map": "campaign/menu/menu_p",
+        "epoch": 46,
+        "cine": 45,
+        "pos": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "fresh": true,
+        "gameflow": [
+          248,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/5/0",
+        "hold": "expecting/90015",
+        "ka": "1090/6/0",
+        "active": null
+      }
+    },
+    "gameflowEqual": true,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "continue_sent",
+        "decision": 1,
+        "slot": -1,
+        "startMap": "",
+        "sent": 1,
+        "resent": 117,
+        "hostReplays": 0,
+        "hostContinues": 1,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "continued_own_end",
+        "decision": 1,
+        "loadedSlot": -1,
+        "received": 118,
+        "refused": 0,
+        "duplicates": 117,
+        "partnerHeld": 0,
+        "replayed": 0,
+        "continued": 1,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "EQUAL",
+      "compared": 249,
+      "differences": 0
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "7344af4cfeeddbfa",
+        "connection": 2591771491,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "7344af4cfeeddbfa",
+        "sent": 2219,
+        "received": 2208,
+        "refused": 0,
+        "silentMs": 359
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "7344af4cfeeddbfa",
+        "connection": 850875264,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "7344af4cfeeddbfa",
+        "sent": 2208,
+        "received": 2218,
+        "refused": 0,
+        "silentMs": 610
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 621,
+      "asked": 609,
+      "inFlow": 409,
+      "replayed": 676,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 44
+    },
+    "pairing": {
+      "host": "emily",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "replayRefused": 0,
+      "replayAccepted": 0,
+      "readAt": "start",
+      "hostDefinition": "models/characters/player/emily/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/boat/dunwall_return/boat_dunwall_return.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
