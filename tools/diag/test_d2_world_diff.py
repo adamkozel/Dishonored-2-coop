@@ -66,6 +66,12 @@ class Diff(unittest.TestCase):
         self.assertEqual(r["status"], "EQUAL")
         self.assertEqual(len(r["categories"]["usables"]["differences"]), 2)
 
+    def test_named_per_character_pair_missing_on_one_side_fails(self):
+        h = [snap({"usables": {"script_audiograph_01_7": [0, 1], "lever": [1, 1]}})] * 3
+        c = [snap({"usables": {"lever": [1, 1]}})] * 3
+        r = wd.compare(h, c)
+        self.assertEqual(r["status"], "DIFFERENT")
+
     def test_generated_numbers_are_grouped(self):
         h = [snap({"pickups": {}, "usables": {"rope_tie_01_12377": [0, 0], "lever": [1, 1]}})] * 3
         c = [snap({"pickups": {}, "usables": {"rope_tie_01_12380": [0, 0], "lever": [1, 1]}})] * 3
