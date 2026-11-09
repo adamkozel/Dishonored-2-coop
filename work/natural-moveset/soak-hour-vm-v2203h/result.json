@@ -1,0 +1,308 @@
+{
+  "passed": false,
+  "failure": "Talk to meagan not registered",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2201",
+      "hostDll": "6E072E60A6568E14765DFCF6DBE156C0FE1262DC75DA628A8D53A4C3456A04DD",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 6,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 23250,
+        "writtenAt": 177320531,
+        "startedAgoMs": 2438,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 17485,
+        "writtenAt": 177272468,
+        "startedAgoMs": 1953,
+        "phase2Checks": 12
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.4,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      },
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      }
+    ],
+    "lootCleared1": [],
+    "step23-talk": "skipped: npc gone (scene already ran)",
+    "diffwait-after-dunwall": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-after-dunwall": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-after-dunwall": {
+      "status": "EQUAL",
+      "compared": 286,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "diffwait-after-eotw": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-after-eotw": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-after-eotw": {
+      "status": "EQUAL",
+      "compared": 2158,
+      "differences": 0,
+      "retried": "world-digest: npc_catalog game=298a2170050 vt=1c940a8 list=29917e89020 count=50024b6",
+      "tries": 4
+    },
+    "commands": [
+      "step55-command host coop_difficulty_set 0",
+      "step79-command host coop_difficulty_set 1"
+    ],
+    "difficulty": [
+      {
+        "step": "step56-difficulty",
+        "expect": 0,
+        "host": 0,
+        "client": 0,
+        "clientResult": "matched",
+        "clientApplied": 1,
+        "hostPreset": "difficulty/preset/easy.difficultypreset",
+        "clientPreset": "difficulty/preset/easy.difficultypreset",
+        "ok": true
+      },
+      {
+        "step": "step80-difficulty",
+        "expect": 1,
+        "host": 1,
+        "client": 1,
+        "clientResult": "matched",
+        "clientApplied": 2,
+        "hostPreset": "difficulty/preset/medium.difficultypreset",
+        "clientPreset": "difficulty/preset/medium.difficultypreset",
+        "ok": true
+      }
+    ],
+    "healthHold": [
+      "clear guard|elite|officer",
+      "clear guard|elite|officer",
+      "ld_kar_whaleoil_tank_01_3",
+      null
+    ],
+    "diffwait-after-institute": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-after-institute": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-after-institute": {
+      "status": "EQUAL",
+      "compared": 530,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "talkSecondPass": "meagan",
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/madinventor/boat_madinventor_p",
+        "epoch": 61,
+        "cine": 219,
+        "pos": [
+          -4.223,
+          -18.142405,
+          6.208074
+        ],
+        "fresh": true,
+        "gameflow": [
+          182,
+          2,
+          3,
+          47,
+          0,
+          14,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "released/0",
+        "ka": "1093/14/6",
+        "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Meagan"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/boat/madinventor/boat_madinventor_p",
+        "epoch": 61,
+        "cine": 66,
+        "pos": [
+          -4.733127,
+          -15.195902,
+          0.750417
+        ],
+        "fresh": true,
+        "gameflow": [
+          182,
+          2,
+          3,
+          47,
+          0,
+          14,
+          0
+        ],
+        "gfApplied": 49,
+        "lt": "applied/0/3",
+        "hold": "released/21421",
+        "ka": "7/934/1",
+        "active": "Mission_MI_Boat,Obj_Boat_MI_ToStreets,Task_Boat_MI_Meagan"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
