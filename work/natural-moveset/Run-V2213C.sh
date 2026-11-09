@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2219: runs on candidate progress-v2219 (every own spawn per key removed).
 # 2215b: d reruns c (institute-cure-partner-vm-v2215a stopped in the co-op saves switch, #263) on candidate progress-v2217.
 # 2215: c, route institute-cure-partner-v2215: the burner valve and the goblet sit about 45 degrees below the view on the
 # lab table (z 28.0, the camera 28.75); v2213a looked level at the blinds six times. Stands 0.9 m out, aim offsets
@@ -12,7 +13,7 @@
 # Usage: Run-V2213C.sh [a b]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2217
+CAND=candidate-progress-v2219
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
 "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2213-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
