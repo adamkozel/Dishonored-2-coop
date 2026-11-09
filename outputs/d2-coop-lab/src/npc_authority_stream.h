@@ -555,6 +555,7 @@ bool npcLifeCountsSync=true;std::uint64_t npcLifeCountsSent=0,npcLifeCountsRecei
 // 2209 (#277): her own spawns the host never had (coop_npc_own_only on|off).
 // 2222: why the own-only rule kept an NPC, per condition (bound, young, host recent, counts, pending state, no presents, spacing).
 std::uint64_t npcLifeOwnOnlySkip[7]{};
+std::string npcLifePackDebug;ULONGLONG npcLifePackDebugAt=0; // 2229 (#277, diagnostics)
 bool npcLifeOwnOnlySync=true;std::uint64_t npcLifeOwnOnlyRemoved=0;ULONGLONG npcLifeEpochAt=0,npcLifeLastPresentAt=0;
 // 2198: an NPC this partner spawned for a host present leaves her world when the host has not announced it for 45 s
 // (corpse-eotw-v2197c: the checkpoint reinforcements she spawned stayed after the host's were gone). The native remove
@@ -695,6 +696,18 @@ void processNpcLife(const NpcCatalogSnapshot& s){
             if(!npcLifeLastPresentAt||tick-npcLifeLastPresentAt>25000){++npcLifeOwnOnlySkip[5];continue;}
             if(e.ownOnlyActAt&&tick-e.ownOnlyActAt<2000){++npcLifeOwnOnlySkip[6];continue;}
             e.ownOnlyActAt=tick;npcLifeRemoveOwnSpawn(n.actor);++npcLifeOwnOnlyRemoved;npcLifeRefusal(e.key,"removed_own_only",0,kNpcLifePresent);}}
+    // 2229 (#277, diagnostics): every NPC of a reinforcement key (spawner name holds "reinf") on the partner, once a second:
+    // handle, state, active, bound, own-spawn listed, its first sighting's age and the key's host present age, own list and
+    // pending count. corpse-possess-eotw-v2227t kept 2 + 2 of her copies with no own-only removal.
+    if(localRole&&tick-npcLifePackDebugAt>=1000){npcLifePackDebugAt=tick;std::string d;char row[400];
+        for(const auto& n:s.life){if(n.spawner.find("reinf")==std::string::npos||d.size()>3500)continue;
+            const NpcLifeEntry* e=nullptr;const auto key=n.spawner+"|"+n.definition;for(const auto& x:npcLifeEntries)if(x.key==key){e=&x;break;}
+            ULONGLONG seen=0;bool listed=false;if(e){for(const auto& x:e->seenAt)if(x.first==n.handle)seen=x.second;for(const auto& o:e->ownSpawns)if(o.first==n.handle)listed=true;}
+            std::snprintf(row,sizeof(row),"%s{\"spawner\":\"%s\",\"handle\":%u,\"state\":%u,\"active\":%s,\"bound\":%s,\"listed\":%s,\"seenAgeMs\":%lld,\"hostPresentAgeMs\":%lld,\"own\":%u,\"pending\":%u,\"desired\":%u,\"applied\":%s}",
+                d.empty()?"":",",n.spawner.c_str(),n.handle,n.state,npcLifeActive(n)?"true":"false",npcLifeBound(n.spawner,n.definition)?"true":"false",listed?"true":"false",
+                seen?static_cast<long long>(tick-seen):-1LL,e&&e->hostPresentAt?static_cast<long long>(tick-e->hostPresentAt):-1LL,e?static_cast<unsigned>(e->ownSpawns.size()):0u,e?e->ownSpawnPending:0u,
+                e?e->desired:0u,e&&e->applied?"true":"false");d+=row;}
+        npcLifePackDebug=d;}
     // 2205 (#277): corpse-eotw-v2202c, the host's checkpoint reinforcements (several NPCs under one spawner key) died or left
     // while the partner's copies stayed alive: one state per key cannot say which copy died. The host sends each such
     // key's alive, unconscious and dead counts (active NPCs) on a change and every 20 s; after a difference has lasted 3 s
@@ -1140,6 +1153,7 @@ void writeNpcStream(){
     // 2161 (#265): the partner's last refused or bound-skipped life states, inside relevance.
     fprintf(f,",\"lifeRefusedLast\":[");for(unsigned i=0,k=0;i<8;++i){const auto& r=npcLifeRefusals[i];if(r.key.empty())continue;fprintf(f,"%s{\"key\":\"%s\",\"reason\":\"%s\",\"attempts\":%u,\"desired\":%u}",k++?",":"",r.key.c_str(),r.reason,r.attempts,r.desired);}fprintf(f,"]");
     fprintf(f,",\"labSpawn\":\"%s\",\"labSpawns\":%llu",labNpcSpawnResult,static_cast<unsigned long long>(labNpcSpawns));
+    fprintf(f,",\"packDebug\":[%s]",npcLifePackDebug.c_str()); // 2229
     fprintf(f,"},\"transport\":{\"available\":%s,\"sendRate\":%d,\"pendingUnreliable\":%d,\"pendingReliable\":%d,\"queueUs\":%lld},\"decodeRejected\":%llu,\"poseScopeRejected\":%llu,",qos?"true":"false",status.m_nSendRateBytesPerSecond,status.m_cbPendingUnreliable,status.m_cbPendingReliable,status.m_usecQueueTime,npcDecodeRejected,npcPoseScopeRejected);
     fprintf(f,"\"session\":{\"enabled\":%s,\"result\":\"%s\",\"reloadPending\":%s,\"reloadReady\":%s,\"reloads\":%llu,\"rearms\":%llu,\"menuSuspended\":%s,\"menuSuspensions\":%llu,\"menuResumes\":%llu,\"menuPausedMs\":%llu,\"ignored\":%llu,\"acquired\":%llu,\"released\":%llu,\"retired\":%llu,\"lost\":%llu,\"phaseBlips\":%llu,\"phaseBlipEnds\":%llu,\"phaseBlip\":[%u,%u,%u,%u,%u,%u,%u,%u,%u,%u]}",s.enabled?"true":"false",s.result,s.reloadPending?"true":"false",s.reloadReady?"true":"false",s.reloads,s.rearms,s.menuSuspended?"true":"false",s.menuSuspensions,s.menuResumes,s.menuPausedMs,s.ignored,s.acquired,s.released,s.retired,s.lost,npcPhaseBlips,npcPhaseBlipEnds,
         npcPhaseBlipFields[0],npcPhaseBlipFields[1],npcPhaseBlipFields[2],npcPhaseBlipFields[3],npcPhaseBlipFields[4],npcPhaseBlipFields[5],npcPhaseBlipFields[6],npcPhaseBlipFields[7],npcPhaseBlipFields[8],npcPhaseBlipFields[9]);

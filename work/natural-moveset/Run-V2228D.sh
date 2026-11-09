@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2229: runs on candidate progress-v2229 (v2228 plus packDebug); u: the corpse twin again for the reinforcement diagnostics.
 # 2228 (#279): candidate progress-v2228. a: the host opens and closes Edge of the World's glass door env_interiors_door_glass_350cm_01_2
 # natively (coop_lab_door_native, as a host NPC would); every diff is required. t: the twin, coop_door_linked off (must differ).
 # 2227 (#277): candidate progress-v2227 (the own-only test per NPC).
@@ -18,10 +19,10 @@
 # Usage: Run-V2217R.sh [a t p r]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2228
+CAND=candidate-progress-v2229
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2228d-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2229d-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
 # 2218 (#263): the four co-op saves stalls of 2026-11-09 were the first take after a deploy; let both games settle first.
 sleep 60
 clean(){
@@ -38,10 +39,11 @@ run(){
  # 2222 (#263): a take that stops in the co-op saves switch runs once more under the name with 2 appended.
  if [ -z "$RETRY" ] && grep -q "Co-op saves did not switch on" "$take/result.json" 2>/dev/null; then RETRY=1 run "${take}2" "$2" "$3" "$4"; fi
 }
-for x in ${*:-a t}; do
+for x in ${*:-a t u}; do
  case $x in
   a) run doorlinked-eotw-v2228a routes/doorlinked-eotw-v2228.json corvo corvo;;
   t) run doorlinked-eotw-v2228t routes/doorlinked-eotw-twin-v2228.json corvo corvo;;
+  u) run corpse-possess-eotw-v2229u routes/corpse-possess-eotw-twin-v2214.json corvo corvo;;
   p) run corpse-possess-eotw-v2222p routes/corpse-possess-eotw-packsoff-v2217.json corvo corvo;;
   r) run reinfpack-eotw-v2222r routes/reinfpack-eotw-v2205.json corvo corvo;;
  esac
