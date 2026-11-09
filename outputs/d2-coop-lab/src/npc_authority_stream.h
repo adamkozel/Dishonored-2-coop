@@ -533,7 +533,8 @@ struct NpcLifeEntry{std::string key;unsigned sent=0,desired=0;bool applied=true;
     bool presentSent=false;ULONGLONG hostPresentAt=0,absentSince=0,spawnAt=0;unsigned spawnTries=0;std::string presentSpawner,presentDefinition;
     ULONGLONG lifeEndAt=0; // 2196: the host's latest unconscious or dead state for the key, on the partner
     bool ownSpawnPending=false;std::uint32_t ownSpawnHandle=0;std::uintptr_t ownSpawnActor=0; // 2198: the NPC she spawned
-    std::uint32_t countsSent=0,hostCounts=0;ULONGLONG countsSentAt=0,hostCountsAt=0,countsDiffSince=0,countsActAt=0;}; // 2205 (#277)
+    std::uint32_t countsSent=0,hostCounts=0;ULONGLONG countsSentAt=0,hostCountsAt=0,countsDiffSince=0,countsActAt=0; // 2205 (#277)
+    ULONGLONG firstActiveAt=0,ownOnlyActAt=0;}; // 2209 (#277): her first sighting of an active NPC under the key, her last removal
 // 2166 (#260, lab): "coop_lab_spawn <spawner>" spawns from that spawner in this world only (a host-only spawn on demand).
 char labNpcSpawnName[128]{};const char* labNpcSpawnResult="idle";std::uint64_t labNpcSpawns=0;
 inline bool labNpcSpawnNameAllowed(const char* t){const auto n=std::strlen(t);if(!n||n>=sizeof(labNpcSpawnName))return false;
@@ -545,6 +546,8 @@ ULONGLONG npcLifePresentRefreshAt=0;
 bool npcLifePresentSync=true;std::uint64_t npcLifePresentSent=0,npcLifePresentReceived=0,npcLifeSpawned=0,npcLifeSpawnRefused=0,npcLifeSpawnRemoved=0;
 // 2205 (#277): pack counts (coop_npc_counts on|off).
 bool npcLifeCountsSync=true;std::uint64_t npcLifeCountsSent=0,npcLifeCountsReceived=0,npcLifeCountsApplied=0,npcLifeCountsRemoved=0;
+// 2209 (#277): her own spawns the host never had (coop_npc_own_only on|off).
+bool npcLifeOwnOnlySync=true;std::uint64_t npcLifeOwnOnlyRemoved=0;ULONGLONG npcLifeEpochAt=0,npcLifeLastPresentAt=0;
 // 2198: an NPC this partner spawned for a host present leaves her world when the host has not announced it for 45 s
 // (corpse-eotw-v2197c: the checkpoint reinforcements she spawned stayed after the host's were gone). The native remove
 // event, as the shade puppet uses (0x1408847f0 with event 0x1439a6f30, then 0x140882fc0).
@@ -594,7 +597,7 @@ bool sendNpcLife(const NativeNpcLife& n){
 }
 void processNpcLife(const NpcCatalogSnapshot& s){
     if(!npcAuthorityStreamActive||!npcStreamContext(GetTickCount64()))return;
-    if(npcLifeEpoch!=outgoing.worldEpoch){npcLifeEntries.clear();npcLifeEpoch=outgoing.worldEpoch;}
+    if(npcLifeEpoch!=outgoing.worldEpoch){npcLifeEntries.clear();npcLifeEpoch=outgoing.worldEpoch;npcLifeEpochAt=GetTickCount64();}
     if(!localRole&&npcLifeJoinSnapshot&&(npcLifePeerSession!=npcStreamPeerSession||npcLifePeerEpoch!=npcStreamPeerEpoch)){
         npcLifePeerSession=npcStreamPeerSession;npcLifePeerEpoch=npcStreamPeerEpoch;for(auto& e:npcLifeEntries){e.sent=0;e.presentSent=false;}++npcLifeSnapshots;
         npcLifeResendUntil=GetTickCount64()+60000;npcLifeResendAt=GetTickCount64()+10000;}
@@ -650,6 +653,19 @@ void processNpcLife(const NpcCatalogSnapshot& s){
         ++e.spawnTries;e.spawnAt=tick;const char* why=npcSpawnFromSpawner(e.presentSpawner);
         if(!why){++npcLifeSpawned;e.ownSpawnPending=true;npcLifeRefusal(e.key,"spawned",e.spawnTries,kNpcLifePresent);}else{++npcLifeSpawnRefused;npcLifeRefusal(e.key,why,e.spawnTries,kNpcLifePresent);}
     }
+    // 2209 (#277): corpse-possess-eotw-v2207a, after her walk past the checkpoint her world alone spawned
+    // script_spawner_checkpoint_reinf_01 and _02 (alive) and the host's world had no NPC under either key; the pack counts
+    // cover only keys the host has. The host announces every active unbound NPC of its whole world every 20 s (the roster is
+    // not range-limited), so an active, unbound, non-story NPC here that first became active 30 s or more after this world's
+    // roster began, has been active 45 s, and whose key the host has neither announced for 60 s nor given a state or count,
+    // while the host's presents are arriving, is her world's own: it leaves, one per key every 2 s. The host decides.
+    if(localRole&&npcLifeOwnOnlySync&&npcLifePresentSync){if(!npcLifeEpochAt)npcLifeEpochAt=tick;
+        for(const auto& n:s.life){if(n.state!=0||!npcLifeActive(n)||npcStoryDefinition(n.definition)||npcLifeBound(n.spawner,n.definition)||
+                (n.definition.size()>=10&&!n.definition.compare(n.definition.size()-10,10,"human_dead")))continue;
+            auto& e=npcLifeEntry(n.spawner+"|"+n.definition);if(!e.firstActiveAt)e.firstActiveAt=tick;
+            if(e.firstActiveAt<npcLifeEpochAt+30000||tick-e.firstActiveAt<45000||(e.hostPresentAt&&tick-e.hostPresentAt<60000)||e.desired||e.hostCountsAt)continue;
+            if(!npcLifeLastPresentAt||tick-npcLifeLastPresentAt>25000||(e.ownOnlyActAt&&tick-e.ownOnlyActAt<2000))continue;
+            e.ownOnlyActAt=tick;npcLifeRemoveOwnSpawn(n.actor);++npcLifeOwnOnlyRemoved;npcLifeRefusal(e.key,"removed_own_only",0,kNpcLifePresent);}}
     // 2205 (#277): corpse-eotw-v2202c, the host's checkpoint reinforcements (several NPCs under one spawner key) died or left
     // while the partner's copies stayed alive: one state per key cannot say which copy died. The host sends each such
     // key's alive, unconscious and dead counts (active NPCs) on a change and every 20 s; after a difference has lasted 3 s
@@ -684,10 +700,10 @@ void processNpcLife(const NpcCatalogSnapshot& s){
 }
 extern bool kisculeHostStory;
 void receiveNpcLife(const CoopNpcControl& p){
-    if(npcLifeEpoch!=outgoing.worldEpoch){npcLifeEntries.clear();npcLifeEpoch=outgoing.worldEpoch;}
+    if(npcLifeEpoch!=outgoing.worldEpoch){npcLifeEntries.clear();npcLifeEpoch=outgoing.worldEpoch;npcLifeEpochAt=GetTickCount64();}
     ++npcLifeReceived;auto& e=npcLifeEntry(std::string(p.spawner,strnlen(p.spawner,sizeof(p.spawner)))+"|"+std::string(p.definition,strnlen(p.definition,sizeof(p.definition))));
     if(p.h.reserved==kNpcLifeCounts){if(localRole){e.hostCounts=p.h.reserved2;e.hostCountsAt=GetTickCount64();++npcLifeCountsReceived;}return;} // 2205
-    if(p.h.reserved==kNpcLifePresent){if(localRole){e.hostPresentAt=GetTickCount64();if(e.presentSpawner.empty()){
+    if(p.h.reserved==kNpcLifePresent){if(localRole){e.hostPresentAt=GetTickCount64();npcLifeLastPresentAt=e.hostPresentAt;if(e.presentSpawner.empty()){
         e.presentSpawner.assign(p.spawner,strnlen(p.spawner,sizeof(p.spawner)));e.presentDefinition.assign(p.definition,strnlen(p.definition,sizeof(p.definition)));}}++npcLifePresentReceived;return;}
     // The peer already has this state: never echo it back.
     e.sent=(std::max)(e.sent,p.h.reserved);
@@ -1091,7 +1107,7 @@ void writeNpcStream(){
     }
     SteamNetConnectionRealTimeStatus_t status{};const bool qos=sockets&&connection&&sockets->GetConnectionRealTimeStatus(connection,&status,0,nullptr)==k_EResultOK;
     const auto& s=npcStreamSessionState;
-    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeCatalogGoneSent\":%llu,\"lifeResends\":%llu,\"lifePresentSent\":%llu,\"lifePresentReceived\":%llu,\"lifeSpawned\":%llu,\"lifeSpawnRefused\":%llu,\"lifeSpawnRemoved\":%llu,\"lifeCountsSent\":%llu,\"lifeCountsReceived\":%llu,\"lifeCountsApplied\":%llu,\"lifeCountsRemoved\":%llu,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"lifeHostStoryRefused\":%llu,\"keepAwake\":%s,\"keepAwakeHeld\":%llu,\"keepAwakeReleased\":%llu,\"keepAwakeRefused\":%llu,\"dwellHeld\":%llu,\"lifeSnapshots\":%llu,\"joinSnapshot\":%s,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"vanishedDead\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeCatalogGoneSent,npcLifeResends,npcLifePresentSent,npcLifePresentReceived,npcLifeSpawned,npcLifeSpawnRefused,npcLifeSpawnRemoved,npcLifeCountsSent,npcLifeCountsReceived,npcLifeCountsApplied,npcLifeCountsRemoved,npcLifeReceived,npcLifeApplied,npcLifeRefused,npcLifeHostStoryRefused,npcKeepAwake?"true":"false",npcKeepAwakeHeld,npcKeepAwakeReleased,npcKeepAwakeRefused,npcRelevanceDwellHeld,npcLifeSnapshots,npcLifeJoinSnapshot?"true":"false",npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcVanishedDead,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
+    fprintf(f,"],\"relevance\":{\"bound\":%u,\"scans\":%llu,\"added\":%llu,\"dropped\":%llu,\"evicted\":%llu,\"lifeSent\":%llu,\"lifeCatalogGoneSent\":%llu,\"lifeResends\":%llu,\"lifePresentSent\":%llu,\"lifePresentReceived\":%llu,\"lifeSpawned\":%llu,\"lifeSpawnRefused\":%llu,\"lifeSpawnRemoved\":%llu,\"lifeCountsSent\":%llu,\"lifeCountsReceived\":%llu,\"lifeCountsApplied\":%llu,\"lifeCountsRemoved\":%llu,\"lifeOwnOnlyRemoved\":%llu,\"lifeOwnOnly\":%s,\"lifeReceived\":%llu,\"lifeApplied\":%llu,\"lifeRefused\":%llu,\"lifeHostStoryRefused\":%llu,\"keepAwake\":%s,\"keepAwakeHeld\":%llu,\"keepAwakeReleased\":%llu,\"keepAwakeRefused\":%llu,\"dwellHeld\":%llu,\"lifeSnapshots\":%llu,\"joinSnapshot\":%s,\"clientBound\":%llu,\"clientRefused\":%llu,\"clientDeferred\":%llu,\"clientBoundLive\":%llu,\"clientBusy\":%llu,\"helloCatalogReads\":%llu,\"pairedHolds\":%llu,\"pairedKnockouts\":%llu,\"pairedRefused\":%llu,\"pairedLocal\":%llu,\"pairedCorpses\":%llu,\"pairedFollows\":%llu,\"hostOwnPaired\":%llu,\"priorityPoses\":%llu,\"deadReconciled\":%llu,\"deadSent\":%llu,\"vanishedDead\":%llu,\"combatSharedDeaths\":%llu,\"clientDeadApplied\":%llu,\"clientDeadAlready\":%llu,\"clientDeadRefused\":%llu,\"clientDeadLast\":\"%s\",\"reconcileDecl\":[%.3f,%llu,%u,%u],\"catalogStale\":%llu,\"workerRequests\":%llu,\"workerCompleted\":%llu,\"workerFailed\":%llu,\"workerLastMs\":%.3f,\"workerMaxMs\":%.3f",npcEnabledChannels(),npcRelevanceScans,npcRelevanceAdded,npcRelevanceDropped,npcRelevanceEvicted,npcLifeSent,npcLifeCatalogGoneSent,npcLifeResends,npcLifePresentSent,npcLifePresentReceived,npcLifeSpawned,npcLifeSpawnRefused,npcLifeSpawnRemoved,npcLifeCountsSent,npcLifeCountsReceived,npcLifeCountsApplied,npcLifeCountsRemoved,static_cast<unsigned long long>(npcLifeOwnOnlyRemoved),npcLifeOwnOnlySync?"true":"false",npcLifeReceived,npcLifeApplied,npcLifeRefused,npcLifeHostStoryRefused,npcKeepAwake?"true":"false",npcKeepAwakeHeld,npcKeepAwakeReleased,npcKeepAwakeRefused,npcRelevanceDwellHeld,npcLifeSnapshots,npcLifeJoinSnapshot?"true":"false",npcClientBound,npcClientBindRefused,npcClientBindDeferred,npcClientBoundLive,npcClientBindBusy,npcHelloCatalogReads,npcPairedHolds,npcPairedKnockouts,npcPairedRefused,npcPairedLocal,npcPairedCorpses,npcPairedFollows,npcHostOwnPaired,npcPriorityPoses,npcDeadReconciled,npcDeadSent,npcVanishedDead,npcCombatSharedDeaths,npcClientDeadApplied,npcClientDeadAlready,npcClientDeadRefused,npcClientDeadLast,npcReconcileDeclAmount,static_cast<unsigned long long>(npcReconcileDeclFlags),npcReconcileDeclReactions[0],npcReconcileDeclReactions[1],npcCatalogStale,npcCatalogWorker.requests,npcCatalogWorker.completed,npcCatalogWorker.failed,npcCatalogWorker.lastMs,npcCatalogWorker.maxMs);
     // 2161 (#265): the partner's last refused or bound-skipped life states, inside relevance.
     fprintf(f,",\"lifeRefusedLast\":[");for(unsigned i=0,k=0;i<8;++i){const auto& r=npcLifeRefusals[i];if(r.key.empty())continue;fprintf(f,"%s{\"key\":\"%s\",\"reason\":\"%s\",\"attempts\":%u,\"desired\":%u}",k++?",":"",r.key.c_str(),r.reason,r.attempts,r.desired);}fprintf(f,"]");
     fprintf(f,",\"labSpawn\":\"%s\",\"labSpawns\":%llu",labNpcSpawnResult,static_cast<unsigned long long>(labNpcSpawns));
