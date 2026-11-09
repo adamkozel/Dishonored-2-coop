@@ -94,7 +94,7 @@ bool doorNativeDesired(const NativeOpenable& n,unsigned& target,unsigned& side){
     if(n.current==1||n.pending==1){unsigned char p[4]{};if(!memoryRead(n.component+0x90,p,4)||p[0]>1||p[1]||p[2]>1)return false;target=p[0]?2:0;side=p[2];}
     else{if(n.current!=n.pending)return false;target=n.current;side=n.openSide;}
     // 1214jf (#185): the lock is its own shared state (serviceDoorChannel), not an eligibility change.
-    return !n.blocked&&!n.broken&&!n.linked;
+    return !n.blocked&&!n.broken&&(!n.linked||nativeOpenableLinkedAllowed); // 2228 (#279)
 }
 void enableDoorSync(bool on){
     if(!on){stopDoorSession("disabled");return;}

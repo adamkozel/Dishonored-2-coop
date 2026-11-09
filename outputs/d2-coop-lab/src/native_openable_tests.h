@@ -31,7 +31,8 @@ inline void nativeOpenableTests(){
     bad.d(cp+0xc8,1);require(inspect(bad)&&out.openSide==1,"active Open state retains native closing side");
     bad.d(cp+0x48,1);bad.d(cp+0x4c,1);bad.d(cp+0xc8,0xf0);require(inspect(bad)&&out.openSide==0,"Moving uses its own params and ignores inactive Open data");
     for(auto offset:{0x118,0x1e8,0x1ed}){bad=m;bad.d(cp+offset,1);require(inspect(bad)&&!nativeOpenableTransitionAllowed(out,2,0),"blocked locked or broken doors cannot bypass native preconditions");}
-    bad=m;bad.q(cp+0xf0,child);require(inspect(bad)&&out.linked&&!nativeOpenableTransitionAllowed(out,2,0),"linked door requires later group authority");
+    nativeOpenableLinkedAllowed=false;bad=m;bad.q(cp+0xf0,child);require(inspect(bad)&&out.linked&&!nativeOpenableTransitionAllowed(out,2,0),"linked door refused with the linked switch off");
+    nativeOpenableLinkedAllowed=true;bad=m;bad.q(cp+0xf0,child);require(inspect(bad)&&out.linked&&nativeOpenableTransitionAllowed(out,2,0),"linked door eligible with the linked switch on (2228)");
     bad=m;bad.d(cp+0x4c,1);require(inspect(bad)&&!nativeOpenableTransitionAllowed(out,2,0),"queued native transition is not overwritten");
     bad=m;bad.d(cp+0x48,1);bad.d(cp+0x4c,1);require(inspect(bad)&&!nativeOpenableTransitionAllowed(out,0,0),"moving native door is not interrupted");
     require(inspect(m),"restore reader fixture");
