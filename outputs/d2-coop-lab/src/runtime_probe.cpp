@@ -123,6 +123,7 @@ std::string objectType(HANDLE process,std::uintptr_t base,std::uintptr_t pointer
 #include "native_ai_targets.h"
 #include "native_breakable.h"
 static std::vector<std::string> npcUnread; // 2232 (#277): spawners of NPCs whose health the digest could not read
+static std::vector<std::string> npcUnbound; // 2233 (#277): NPC actors that failed the identity read (counted unbound)
 // Read-only reconstruction of idAnimationLocal::GetJointName (23cb00).
 // Interned IDs are process-local; these labels are diagnostic only.
 bool jointNames(HANDLE process,std::uintptr_t base,const std::vector<std::uint16_t>& ids,std::vector<std::string>& out){
@@ -548,12 +549,14 @@ int main(int argc, char** argv) {
                     reader(item,&dvt,8)&&dvt==base+0x1b9ea48&&reader(item+0x60,&family,4)&&(family==11||family==12||family==17||family==22||family==24||family==27);
                 put(story?"storypickups":"pickups",actorName(actor),"["+std::to_string((flags>>3)&1)+","+std::to_string(ownerFlags&1)+"]");}
         }
-        npcUnread.clear();
+        npcUnread.clear();npcUnbound.clear();
         {std::vector<NativeWorldNpc> catalog;unsigned unbound=0;std::map<std::string,std::array<unsigned,3>> packs;
          // 2134: an unreadable catalog (the entity list changed during the read) left the category empty, which the diff
          // counted as every NPC absent (sweep-s2-dunwall-v2133c, ramsey-loot, the host's three samples). It now fails the
          // digest, so the harness retries.
-         if(!readWorldNpcCatalog(reader,base,game,catalog,unbound))return fail("npc_catalog");
+         std::vector<std::uint32_t> failedHandles;
+         if(!readWorldNpcCatalog(reader,base,game,catalog,unbound,&failedHandles))return fail("npc_catalog");
+         for(auto h:failedHandles){std::uintptr_t a=worldIdentityEntity(reader,game,h);npcUnbound.push_back(a?actorName(a):std::string("?"));} // 2233
          // 2135: the catalog read can pass while every health read fails (readNativeHealth needs gameplay logic and no
          // pending switch). s4-dunwall-v2135a's host ramsey-loot digest had 63 catalog NPCs and none read, so the diff
          // counted all of them absent. A catalog with NPCs and no readable health now fails the digest too.
@@ -608,6 +611,7 @@ int main(int argc, char** argv) {
                     if(!reader(e+0x10,&next,8))break;e=next;}}}}
         std::cout<<"{\"readOnly\":true,\"pid\":"<<pid<<",\"tick\":"<<GetTickCount64()<<",\"map\":"<<jsonString(map)<<",\"worldState\":"<<worldState<<",\"npcUnread\":[";
         for(std::size_t i=0;i<npcUnread.size();++i)std::cout<<(i?",":"")<<jsonString(npcUnread[i]);
+        std::cout<<"],\"npcUnbound\":[";for(std::size_t i=0;i<npcUnbound.size();++i)std::cout<<(i?",":"")<<jsonString(npcUnbound[i]);
         std::cout<<"],\"categories\":{";
         bool firstCat=true;
         for(const auto& c:cats){std::cout<<(firstCat?"":",")<<jsonString(c.first)<<":{";firstCat=false;bool first=true;
