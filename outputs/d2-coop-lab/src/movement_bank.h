@@ -432,7 +432,9 @@ struct MovementClock {
         directionTransition=(std::min)(1.f,directionTransition+float(dt)/.18f);
         if(distance>.00001f&&!powered){
             const float x=dx*rotation[0]+dy*rotation[1],y=dx*rotation[3]+dy*rotation[4];
-            if(movementDirectionBlendEnabled&&eligible&&physicalRate>.2f&&speedBefore>.15f&&(x*angleX+y*angleY)/distance<-.1f){++directionSerial;directionTransition=0;}
+            // 2218: the flip happens in the slow frames of the reversal (animquality-eotw-v2216a: serial 0 with the 2216 rate gates),
+            // so any frame that moves over 2 mm against the last frame's direction starts the crossfade; a still rig never does.
+            if(movementDirectionBlendEnabled&&eligible&&distance>.002f&&(x*angleX+y*angleY)/distance<-.1f){++directionSerial;directionTransition=0;}
             if(MovementBank::directions(x,y,a,b,mix)){angleX=x/distance;angleY=y/distance;}
             sprintSide=y<0?28:27;sprintDirection=(std::min)(1.f,std::fabs(std::atan2(y,x))/.7853981634f);
             float stride=bank.clips[a].stride*(1-mix)+bank.clips[b].stride*mix;

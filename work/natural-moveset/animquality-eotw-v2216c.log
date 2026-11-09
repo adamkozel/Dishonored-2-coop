@@ -1,0 +1,198 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+13:25:40 copying lab scripts, tooling and bin
+13:25:46 mod resources (voidmod, master.index) into the game copy
+13:25:49 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : DC64F0DC66D9B180
+probe           : 6C9937D5EEDDE7F6
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 89
+PSComputerName  : D2CoopVM
+RunspaceId      : 89eec053-9091-478f-9529-89413f30eece
+
+
+13:26:53 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             89 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+Module snapshot failed: 6
+{
+  "passed": false,
+  "failure": "Co-op saves did not switch on",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2217",
+      "hostDll": "DC64F0DC66D9B180A6BCA9A611BBA96EAD61CFF57D677968EE62AD4BC4E35B88",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSavesRetried": true,
+    "coopSaves": {
+      "host": {
+        "result": "profile_saving",
+        "active": false,
+        "phase": 2,
+        "switches": 0,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 0,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 24703,
+        "writtenAt": 37626312,
+        "startedAgoMs": 234,
+        "phase2Checks": 15
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 15922,
+        "writtenAt": 37758734,
+        "startedAgoMs": 179813,
+        "phase2Checks": 16
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "profile_saving",
+        "phase": 2,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 1,
+        "pos": [
+          -28.092100,
+          -153.962006,
+          66.403648
+        ],
+        "fresh": false,
+        "gameflow": [
+          241,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 11,
+        "cine": 6,
+        "pos": [
+          -33.0,
+          -153.0,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          239,
+          2,
+          5,
+          2,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EliminateRamsey,Obj_DW_EscapeDunwallTower,Task_DW_FindRamsey,Task_DW_OpenVault"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": {
+      "code": "0x80000003",
+      "at": "2026-11-09T13:29:08.8265253+01:00"
+    }
+  },
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2185.ps1:1194[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m1194 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mCo-op saves did not switch on[0m
