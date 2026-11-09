@@ -1,0 +1,79 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "attack",
+  "name": "guard_male_small",
+  "near": [
+   58.73,
+   24.05
+  ],
+  "max": 80,
+  "settle": 4000,
+  "behind": true
+ },
+ {
+  "do": "wait",
+  "ms": 40000,
+  "settle": 3000
+ },
+ {
+  "do": "npcs",
+  "near": [
+   58.73,
+   24.05
+  ],
+  "settle": 1000
+ },
+ {
+  "do": "diff",
+  "tag": "reinforced"
+ },
+ {
+  "do": "clear",
+  "name": "guard_male_small|elite_female",
+  "near": [
+   58.73,
+   24.05
+  ],
+  "radius": 30,
+  "max": 2,
+  "settle": 3000,
+  "heal": true
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "diff",
+  "tag": "cleared"
+ },
+ {
+  "do": "wait",
+  "ms": 30000,
+  "settle": 3000
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "diff",
+  "tag": "end",
+  "require": true
+ }
+]

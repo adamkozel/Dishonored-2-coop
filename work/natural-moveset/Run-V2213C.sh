@@ -26,7 +26,7 @@ run(){
  take="$1";hc="$2";pc="$3";side="Left";[ "$hc" = emily ] && side="Right"
  if [ -e "$take" ]; then echo "$take exists, skipped";return;fi
  clean;start=$(date +%s)
- "$P" -NoProfile -File Route-MissionVM-v2213.ps1 -Take "$take" -MapInfo campaign/institute/institute.mapinfo -Candidate "$CAND" -StepsFile "${4:-routes/institute-cure-partner-v2034.json}" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
+ "$P" -NoProfile -File "${H:-Route-MissionVM-v2213.ps1}" -Take "$take" -MapInfo campaign/institute/institute.mapinfo -Candidate "$CAND" -StepsFile "${4:-routes/institute-cure-partner-v2034.json}" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
  rc=$?
  echo "$take: exit $rc minutes $(( ($(date +%s)-start)/60 )) $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),str(r.get('failure'))[:300],[(k,(v or {}).get('status') if isinstance(v,dict) else v) for k,v in n.items() if k.startswith('diff-')])" 2>&1 | head -c 1200)"
 }
@@ -36,6 +36,7 @@ for x in ${*:-a}; do
   b) run institute-cure-partner-vm-v2213b emily corvo;;
   c) run institute-cure-partner-vm-v2215a corvo emily routes/institute-cure-partner-v2215.json;;
   d) run institute-cure-partner-vm-v2215b corvo emily routes/institute-cure-partner-v2215.json;;
+  e) H=Route-MissionVM-v2215.ps1 run institute-cure-partner-vm-v2215c corvo emily routes/institute-cure-partner-v2215b.json;;
  esac
 done
 clean
