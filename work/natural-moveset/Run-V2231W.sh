@@ -47,6 +47,7 @@ for x in ${*:-w}; do
   a) run doorlinked-eotw-v2228a routes/doorlinked-eotw-v2228.json corvo corvo;;
   t) run doorlinked-eotw-v2228t routes/doorlinked-eotw-twin-v2228.json corvo corvo;;
   w) run corpse-possess-eotw-v2231w routes/corpse-possess-eotw-twin-v2214.json corvo corvo;;
+  x) run corpse-possess-eotw-v2231x routes/corpse-possess-eotw-twin-v2214.json corvo corvo;;
   p) run corpse-possess-eotw-v2222p routes/corpse-possess-eotw-packsoff-v2217.json corvo corvo;;
   r) run reinfpack-eotw-v2222r routes/reinfpack-eotw-v2205.json corvo corvo;;
  esac
