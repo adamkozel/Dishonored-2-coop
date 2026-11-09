@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2222: runs on candidate progress-v2222 (v2221 plus the own-only change).
 # 2221 (#269): candidate progress-v2221 (the reversal phase match); takes animquality-eotw-v2221c, a and t. animquality-eotw-v2218a: the
 # crossfade fired (serial 5) and the pop became a 19 cm slide of the planted toe.
 # 2218x: c again (animquality-eotw-v2218c stopped in the co-op saves switch, #263), after a 60 s settle.
@@ -20,10 +21,10 @@
 # Usage: Run-V2212A.sh [a b c d t]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2221
+CAND=candidate-progress-v2222
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2221-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2222-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
 sleep 60
 run(){
  take="$1";steps="$2";hc="$3";pc="$4";side="Left";[ "$hc" = emily ] && side="Right";obs="$5"
