@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# 2210: candidate progress-v2210 instead (the own-only rule on recent host activity; corpse-possess-eotw-v2207t kept three of
+# her reinforcements after the host had announced and counted its pack).
 # 2209 (#278, #277): candidate progress-v2209 (her own spawns the host never had leave). a: the partner possesses the corpse with the
 # native cast (aim, then the left trigger with Possession; the lab cast never left travel state 0: the travel waits for the
 # cast animation timeline), 4 m from it; t: the twin, coop_corpse_possession off. corpse-possess-eotw-v2207a differed on
@@ -25,10 +27,10 @@
 # Usage: Run-V2197X.sh [c h n m k q]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2209
+CAND=candidate-progress-v2210
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2209-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2210-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
 clean(){
  rm -f ../lab-instances/host/base/savegame_coop/coop-progress-*.txt
  "$P" -NoProfile -Command '. ../../tools/vm/D2LabVM.Common.ps1; . ../../tools/vm/D2LabVM.Lab.ps1; Invoke-D2LabVM { Remove-Item C:/D2Lab/ws/work/lab-instances/client/base/savegame_coop/coop-progress-*.txt -ErrorAction SilentlyContinue }' > /dev/null 2>&1

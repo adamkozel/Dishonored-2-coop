@@ -649,9 +649,11 @@ void processNpcLife(const NpcCatalogSnapshot& s){
         // died through the combat stream (the life sync sends no death for a bound NPC), counted as missing, and was spawned again.
         if(std::any_of(s.life.begin(),s.life.end(),[&](const auto& n){return n.spawner==e.presentSpawner&&n.definition==e.presentDefinition&&npcLifeActive(n);})){e.absentSince=0;e.spawnTries=0;continue;}
         if(!e.absentSince){e.absentSince=tick;continue;}
-        if(tick-e.absentSince<10000||e.spawnTries>=3||(e.spawnAt&&tick-e.spawnAt<5000))continue;
+        // 2210: corpse-possess-eotw-v2207t, three tries reported spawn_failed and her world then had three NPCs under the key: the
+        // spawner activates its NPC later. Tries are 15 s apart, and a failed try also marks the next NPC under the key as hers.
+        if(tick-e.absentSince<10000||e.spawnTries>=3||(e.spawnAt&&tick-e.spawnAt<15000))continue;
         ++e.spawnTries;e.spawnAt=tick;const char* why=npcSpawnFromSpawner(e.presentSpawner);
-        if(!why){++npcLifeSpawned;e.ownSpawnPending=true;npcLifeRefusal(e.key,"spawned",e.spawnTries,kNpcLifePresent);}else{++npcLifeSpawnRefused;npcLifeRefusal(e.key,why,e.spawnTries,kNpcLifePresent);}
+        if(!why){++npcLifeSpawned;e.ownSpawnPending=true;npcLifeRefusal(e.key,"spawned",e.spawnTries,kNpcLifePresent);}else{++npcLifeSpawnRefused;if(!std::strcmp(why,"spawn_failed"))e.ownSpawnPending=true;npcLifeRefusal(e.key,why,e.spawnTries,kNpcLifePresent);}
     }
     // 2209 (#277): corpse-possess-eotw-v2207a, after her walk past the checkpoint her world alone spawned
     // script_spawner_checkpoint_reinf_01 and _02 (alive) and the host's world had no NPC under either key; the pack counts
@@ -663,7 +665,10 @@ void processNpcLife(const NpcCatalogSnapshot& s){
         for(const auto& n:s.life){if(n.state!=0||!npcLifeActive(n)||npcStoryDefinition(n.definition)||npcLifeBound(n.spawner,n.definition)||
                 (n.definition.size()>=10&&!n.definition.compare(n.definition.size()-10,10,"human_dead")))continue;
             auto& e=npcLifeEntry(n.spawner+"|"+n.definition);if(!e.firstActiveAt)e.firstActiveAt=tick;
-            if(e.firstActiveAt<npcLifeEpochAt+30000||tick-e.firstActiveAt<45000||(e.hostPresentAt&&tick-e.hostPresentAt<60000)||e.desired||e.hostCountsAt)continue;
+            // 2210: only recent host activity keeps her copies (corpse-possess-eotw-v2207t: the host had announced the pack and sent
+            // its counts, then its reinforcements left; her three stayed). A pending host state is applied first.
+            if(e.firstActiveAt<npcLifeEpochAt+30000||tick-e.firstActiveAt<45000||(e.hostPresentAt&&tick-e.hostPresentAt<60000)||
+               (e.hostCountsAt&&tick-e.hostCountsAt<60000)||!e.applied)continue;
             if(!npcLifeLastPresentAt||tick-npcLifeLastPresentAt>25000||(e.ownOnlyActAt&&tick-e.ownOnlyActAt<2000))continue;
             e.ownOnlyActAt=tick;npcLifeRemoveOwnSpawn(n.actor);++npcLifeOwnOnlyRemoved;npcLifeRefusal(e.key,"removed_own_only",0,kNpcLifePresent);}}
     // 2205 (#277): corpse-eotw-v2202c, the host's checkpoint reinforcements (several NPCs under one spawner key) died or left
