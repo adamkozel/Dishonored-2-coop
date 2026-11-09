@@ -111,6 +111,12 @@ template<class Read> bool readNativeNpcAuthority(Read read,std::uintptr_t base,s
 }
 
 // 1214ad: life state of every unique, reciprocal NPC (0 alive, 1 unconscious, 2 dead).
+// 2217 (#277): and of every pack NPC (several children of one spawner, or orphans sharing it; world_identity.h marks them
+// not unique). corpse-possess-eotw-v2214t: her world alone had two checkpoint reinforcements under each of two keys and
+// neither the pack counts (2205) nor the own-only rule (2209) acted, because packs never reached the life roster on either
+// side (confirmed static). They join the roster only: the authority entries (streams, channels) stay unique-only, and
+// readNativeNpcAuthority refuses them, so no pack NPC is ever bound. coop_npc_life_packs on|off.
+inline bool npcLifeIncludePacks=true;
 struct NativeNpcLife{std::string spawner,definition;std::uint32_t handle=0;std::uintptr_t actor=0;unsigned state=0;};
 // Catalog uniqueness includes unused authored spawners. Single-handle reads
 // establish local lifetime only; they cannot discover cross-process targets.
@@ -119,11 +125,12 @@ template<class Read> bool readNativeNpcAuthorityCatalog(Read read,std::uintptr_t
     std::vector<NativeWorldNpc> catalog;entries.clear();ineligible=unavailable=0;
     if(!readWorldNpcCatalog(read,base,game,catalog,unbound))return false;
     for(const auto& n:catalog){
-        if(!n.unique||!n.reciprocal){++ineligible;continue;}
+        if(!n.reciprocal||(!n.unique&&!(life&&npcLifeIncludePacks))){++ineligible;continue;}
         NativeHealth h{};
-        if(!readNativeHealth(read,base,n.handle,h)){++unavailable;continue;}
+        if(!readNativeHealth(read,base,n.handle,h)){if(n.unique)++unavailable;else ++ineligible;continue;}
         if(life&&h.game==game&&h.actor==n.actor&&std::isfinite(h.current)&&life->size()<1024)
             life->push_back({n.spawnerName,n.definition,n.handle,n.actor,h.current<=0?2u:((h.ownerFlags&0x20)?1u:0u)});
+        if(!n.unique){++ineligible;continue;} // 2217: a pack NPC is in the life roster only
         if(h.game!=game||h.actor!=n.actor||h.logic!=1||h.current<=0){++ineligible;continue;}
         NativeNpcAuthority s{};
         if(!readNativeNpcAuthority(read,base,game,n.handle,s)){++unavailable;continue;}

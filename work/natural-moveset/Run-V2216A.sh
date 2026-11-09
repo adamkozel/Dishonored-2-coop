@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2217: runs on candidate progress-v2217 (v2216 plus pack NPCs in the life roster), the release line.
 # 2216 (#269): candidate progress-v2216 (the direction crossfade). Run-V2212A: a and c failed the host-reversal sample
 # (16 and 23 cm) with the VM frames even; c showed both toes jumping 0.2-0.4 m in one sample at the reversal. c, a, and
 # t: c with coop_movement_direction_blend off on both games (route animquality-eotw-twin-v2216, sample at step 16).
@@ -12,10 +13,10 @@
 # Usage: Run-V2212A.sh [a b c d t]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2216
+CAND=candidate-progress-v2217
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2216-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2217-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
 run(){
  take="$1";steps="$2";hc="$3";pc="$4";side="Left";[ "$hc" = emily ] && side="Right";obs="$5"
  if [ -e "$take" ]; then echo "$take exists, skipped";return;fi
