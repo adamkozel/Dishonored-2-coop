@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# 2221 (#269): candidate progress-v2221 (the reversal phase match); takes animquality-eotw-v2221c, a and t. animquality-eotw-v2218a: the
+# crossfade fired (serial 5) and the pop became a 19 cm slide of the planted toe.
 # 2218x: c again (animquality-eotw-v2218c stopped in the co-op saves switch, #263), after a 60 s settle.
 # 2220: runs on candidate progress-v2220 (dead own spawns removed too).
 # 2219: runs on candidate progress-v2219 (v2218 plus every own spawn per key removed).
@@ -18,10 +20,10 @@
 # Usage: Run-V2212A.sh [a b c d t]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2220
+CAND=candidate-progress-v2221
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2220-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2221-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
 sleep 60
 run(){
  take="$1";steps="$2";hc="$3";pc="$4";side="Left";[ "$hc" = emily ] && side="Right";obs="$5"
@@ -31,15 +33,15 @@ run(){
  for s in step07 $obs; do f="$take/$s-animsample-anim-quality.json"; [ -f "$f" ] && echo "$s $(python -c "import json;d=json.load(open('$f',encoding='utf-8-sig'));m=d.get('metrics',d);print({k:m.get(k) for k in ('status','footSkateP95','footSkateMax','contacts','footSkateWorst')})" 2>&1 | head -c 600)"; done
  grep -o '"directionBlend":{[^}]*}' "$take"/*-movement.json-*.json 2>/dev/null | sed "s#^$take/##"
 }
-want="${*:-x}"
+want="${*:-c a t}"
 for x in $want; do
  case $x in
-  a) run animquality-eotw-v2218a routes/animquality-eotw-v2218.json corvo emily step14;;
+  a) run animquality-eotw-v2221a routes/animquality-eotw-v2218.json corvo emily step14;;
   b) run animquality-eotw-v2218b routes/animquality-eotw-v2218.json emily corvo step14;;
-  c) run animquality-eotw-v2218c routes/animquality-eotw-v2218.json corvo corvo step14;;
-  x) run animquality-eotw-v2218x routes/animquality-eotw-v2218.json corvo corvo step14;;
+  c) run animquality-eotw-v2221c routes/animquality-eotw-v2218.json corvo corvo step14;;
+  x) run animquality-eotw-v2221x routes/animquality-eotw-v2218.json corvo corvo step14;;
   d) run animquality-eotw-v2218d routes/animquality-eotw-v2218.json emily emily step14;;
-  t) run animquality-eotw-v2218t routes/animquality-eotw-twin-v2218.json corvo corvo step16;;
+  t) run animquality-eotw-v2221t routes/animquality-eotw-twin-v2218.json corvo corvo step16;;
  esac
 done
 echo done
