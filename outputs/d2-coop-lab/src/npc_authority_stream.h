@@ -532,7 +532,7 @@ struct NpcLifeEntry{std::string key;unsigned sent=0,desired=0;bool applied=true;
     // 2163 (#260): present sent by the host to this peer; on the partner, a present NPC to spawn if it stays missing.
     bool presentSent=false;ULONGLONG hostPresentAt=0,absentSince=0,spawnAt=0;unsigned spawnTries=0;std::string presentSpawner,presentDefinition;
     ULONGLONG lifeEndAt=0; // 2196: the host's latest unconscious or dead state for the key, on the partner
-    bool ownSpawnPending=false; // 2198: her next active NPC under the key is one she spawned
+    unsigned ownSpawnPending=0; // 2198: her next active NPC under the key is one she spawned; 2226: one per spawn, not one in all
     // 2219 (#277): every NPC she spawned for the key, not only the last (corpse-possess-eotw-v2217t: 7 spawns over 4 keys,
     // 3 removed; the earlier spawn under each key stayed after the host's pack was gone).
     std::vector<std::pair<std::uint32_t,std::uintptr_t>> ownSpawns;
@@ -643,13 +643,13 @@ void processNpcLife(const NpcCatalogSnapshot& s){
         // 2219: an NPC already on her list is not taken again (packs are in the roster since 2217).
         if(e.ownSpawnPending)for(const auto& n:s.life)if(n.spawner==e.presentSpawner&&n.definition==e.presentDefinition&&n.state==0&&npcLifeActive(n)&&
             std::none_of(e.ownSpawns.begin(),e.ownSpawns.end(),[&](const auto& o){return o.first==n.handle&&o.second==n.actor;})){
-            if(e.ownSpawns.size()<16)e.ownSpawns.emplace_back(n.handle,n.actor);e.ownSpawnPending=false;break;}
+            if(e.ownSpawns.size()<16)e.ownSpawns.emplace_back(n.handle,n.actor);if(!--e.ownSpawnPending)break;}
         if(!e.ownSpawns.empty()&&e.hostPresentAt&&tick-e.hostPresentAt>45000){
             // 2220: her dead or unconscious copy goes too when the host never reported a death or knockout under the key
             // (corpse-possess-eotw-v2217a: her outpost reinforcement lay dead, the host had no NPC under the key).
             for(const auto& o:e.ownSpawns)for(const auto& n:s.life)if(n.handle==o.first&&n.actor==o.second&&(n.state==0?npcLifeActive(n):!e.desired)){
                 npcLifeRemoveOwnSpawn(n.actor);++npcLifeSpawnRemoved;npcLifeRefusal(e.key,"removed_host_gone",e.spawnTries,kNpcLifePresent);break;}
-            e.ownSpawns.clear();e.ownSpawnPending=false;}
+            e.ownSpawns.clear();e.ownSpawnPending=0;}
         // 2196: a death or knockout ends the host's present: corpse-eotw-v2194c, the host killed entrance guard 02 within 30 s of its
         // last present, the partner's copy died too and counted as missing, and her spawner made three more guards. Only a
         // present newer than the death (a new NPC under the key) spawns again; reliable delivery keeps their order.
@@ -662,7 +662,7 @@ void processNpcLife(const NpcCatalogSnapshot& s){
         // spawner activates its NPC later. Tries are 15 s apart, and a failed try also marks the next NPC under the key as hers.
         if(tick-e.absentSince<10000||e.spawnTries>=3||(e.spawnAt&&tick-e.spawnAt<15000))continue;
         ++e.spawnTries;e.spawnAt=tick;const char* why=npcSpawnFromSpawner(e.presentSpawner);
-        if(!why){++npcLifeSpawned;e.ownSpawnPending=true;npcLifeRefusal(e.key,"spawned",e.spawnTries,kNpcLifePresent);}else{++npcLifeSpawnRefused;if(!std::strcmp(why,"spawn_failed"))e.ownSpawnPending=true;npcLifeRefusal(e.key,why,e.spawnTries,kNpcLifePresent);}
+        if(!why){++npcLifeSpawned;if(e.ownSpawnPending<16)++e.ownSpawnPending;npcLifeRefusal(e.key,"spawned",e.spawnTries,kNpcLifePresent);}else{++npcLifeSpawnRefused;if(!std::strcmp(why,"spawn_failed")&&e.ownSpawnPending<16)++e.ownSpawnPending;npcLifeRefusal(e.key,why,e.spawnTries,kNpcLifePresent);}
     }
     // 2209 (#277): corpse-possess-eotw-v2207a, after her walk past the checkpoint her world alone spawned
     // script_spawner_checkpoint_reinf_01 and _02 (alive) and the host's world had no NPC under either key; the pack counts

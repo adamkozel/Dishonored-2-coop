@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2226: runs on candidate progress-v2226 (v2225 plus one own-spawn capture per spawn).
 # 2225 (#269): candidate progress-v2225 (crossfade and phase match on any direction jump over 60 degrees); all four pairings and the
 # blend-off twin.
 # 2224: runs on candidate progress-v2224 (v2223 plus the own-only late-spawn test for every key).
@@ -26,10 +27,10 @@
 # Usage: Run-V2212A.sh [a b c d t]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2225
+CAND=candidate-progress-v2226
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2225-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2226-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
 sleep 60
 run(){
  take="$1";steps="$2";hc="$3";pc="$4";side="Left";[ "$hc" = emily ] && side="Right";obs="$5"
