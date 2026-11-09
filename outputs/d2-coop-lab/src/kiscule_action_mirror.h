@@ -177,6 +177,12 @@ KisculeMirror kisculeMirror{};SRWLOCK kisculeLock=SRWLOCK_INIT;bool kisculeMirro
 // A node the host has not run yet is requested once (partner-first), so a step the partner reaches first still
 // happens, in the host's world. Class indices from kKisculeHostStoryBase are policy-table indices.
 bool kisculeHostStory=false;constexpr int kKisculeHostStoryBase=100;
+// 2208: the state-setting World classes a reflow may repeat (kiscule_policy.h names).
+bool kisculeReflowEnabled=true;std::uint64_t kisculeReflows=0;
+inline bool kisculeReflowClass(int cls){
+    static const int idx[]={kisculePolicyIndexByName("ActionUsable"),kisculePolicyIndexByName("ActionInteractable"),kisculePolicyIndexByName("EntityStateControl"),
+        kisculePolicyIndexByName("ActionNavBlocker"),kisculePolicyIndexByName("ActionBind")};
+    for(int k:idx)if(k>=0&&cls==kKisculeHostStoryBase+k)return true;return false;}
 // In the product, host story is on unless the host's d2coop.cfg sets host_story=0 (D2COOP_HOST_STORY=0); the partner
 // follows the host's setting from its hello (control flag 4). The lab sets it with coop_host_story instead.
 bool productHostStory=true;
@@ -362,6 +368,13 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
         // (saferoom-trace-v2028a; hoststory-lead-dunwall-v2027a reached the node first and passed).
         if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&c.executed<c.requests&&c.requests<=c.hostCount){
             ++c.executed;++kisculeMirror.hostStoryInFlow;kisculeEvent("in_flow",cls,entity,nodeId,input,c.executed);}
+        // 2208: her own flow reaching a run the host's message already applied out of flow (it arrived first). Blocking it
+        // stopped her flow there: soak-hour-vm-v2206h, The Good Doctor's elevator node ran twice on the host, her world
+        // applied the second run on its own, her flow then stopped at it and the buttons it re-enables stayed disabled
+        // (v2203h, where her flow came first, was equal). For state-setting classes it runs again in her flow, so the
+        // flow continues; a repeated state set changes nothing. coop_kiscule_reflow on|off.
+        else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&kisculeReflowEnabled&&c.requests<=c.executed&&c.requests<=c.hostCount&&kisculeReflowClass(cls)){
+            ++kisculeReflows;kisculeEvent("reflow",cls,entity,nodeId,input,c.requests);}
         else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&kisculeLoadDressing(entity,nodeId)){
             ++c.executed;++kisculeMirror.hostStoryDressing;kisculeEvent("load_dressing",cls,entity,nodeId,input,c.executed);}
         else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);

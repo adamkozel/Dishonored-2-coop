@@ -1,0 +1,244 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             88 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The worlds differ at after-eotw: 9 values (DIFFERENT)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2205",
+      "hostDll": "332FB33E5318A74A3D6BF6D24F3F07C79EF261C492C4C03BDF1BA70B640E6323",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 24422,
+        "writtenAt": 190087437,
+        "startedAgoMs": 2641,
+        "phase2Checks": 21
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 16812,
+        "writtenAt": 190039187,
+        "startedAgoMs": 1953,
+        "phase2Checks": 17
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.3,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "client": "models/characters/player/corvo/body.def",
+      "host": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "casts": [
+      {
+        "role": "host",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": null,
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "host",
+        "grant": "models/powers/blink/blink.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      },
+      {
+        "role": "client",
+        "grant": "models/powers/grapple/grapple.inventoryitem",
+        "sent": 2,
+        "received": 2,
+        "applied": 2
+      }
+    ],
+    "lootCleared1": [],
+    "step23-talk": "skipped: npc gone (scene already ran)",
+    "diffwait-after-dunwall": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-after-dunwall": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-after-dunwall": {
+      "status": "EQUAL",
+      "compared": 286,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "diffwait-after-eotw": {
+      "settled": true,
+      "s": 1.7
+    },
+    "armwait-after-eotw": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-after-eotw": {
+      "status": "DIFFERENT",
+      "compared": 2158,
+      "differences": 9,
+      "retried": null,
+      "tries": 1
+    },
+    "failureState": {
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 56,
+        "cine": 60,
+        "pos": [
+          2.748986,
+          -28.227478,
+          12.642112
+        ],
+        "fresh": true,
+        "gameflow": [
+          197,
+          3,
+          6,
+          33,
+          0,
+          9,
+          0
+        ],
+        "gfApplied": 24,
+        "lt": "applied/0/3",
+        "hold": "released/0",
+        "ka": "6/385/1",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      },
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 56,
+        "cine": 114,
+        "pos": [
+          1.93572,
+          -28.050735,
+          12.952658
+        ],
+        "fresh": true,
+        "gameflow": [
+          197,
+          3,
+          6,
+          33,
+          0,
+          9,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "sent/3/0",
+        "hold": "released/2719",
+        "ka": "477/6/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2185.ps1:1194[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m1194 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe worlds differ at after-eotw: 9 values (DIFFERENT)[0m
