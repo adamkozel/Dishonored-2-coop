@@ -537,7 +537,10 @@ struct NpcLifeEntry{std::string key;unsigned sent=0,desired=0;bool applied=true;
     // 3 removed; the earlier spawn under each key stayed after the host's pack was gone).
     std::vector<std::pair<std::uint32_t,std::uintptr_t>> ownSpawns;
     std::uint32_t countsSent=0,hostCounts=0;ULONGLONG countsSentAt=0,hostCountsAt=0,countsDiffSince=0,countsActAt=0; // 2205 (#277)
-    ULONGLONG firstActiveAt=0,ownOnlyActAt=0;}; // 2209 (#277): her first sighting of an active NPC under the key, her last removal
+    ULONGLONG firstActiveAt=0,ownOnlyActAt=0; // 2209 (#277): her first sighting of an active NPC under the key, her last removal
+    // 2227: the first sighting of each active NPC under the key (a reinforcement spawner's pooled NPC is active for a moment at
+    // the load, so the key's first sighting is early while its reinforcements come minutes later; corpse-possess-eotw-v2226t).
+    std::vector<std::pair<std::uint32_t,ULONGLONG>> seenAt;};
 // 2166 (#260, lab): "coop_lab_spawn <spawner>" spawns from that spawner in this world only (a host-only spawn on demand).
 char labNpcSpawnName[128]{};const char* labNpcSpawnResult="idle";std::uint64_t labNpcSpawns=0;
 inline bool labNpcSpawnNameAllowed(const char* t){const auto n=std::strlen(t);if(!n||n>=sizeof(labNpcSpawnName))return false;
@@ -675,6 +678,8 @@ void processNpcLife(const NpcCatalogSnapshot& s){
                 (n.definition.size()>=10&&!n.definition.compare(n.definition.size()-10,10,"human_dead")))continue;
             if(npcLifeBound(n.spawner,n.definition)){++npcLifeOwnOnlySkip[0];continue;}
             auto& e=npcLifeEntry(n.spawner+"|"+n.definition);if(!e.firstActiveAt)e.firstActiveAt=tick;
+            ULONGLONG seen=0;for(const auto& x:e.seenAt)if(x.first==n.handle){seen=x.second;break;}
+            if(!seen){seen=tick;if(e.seenAt.size()<32)e.seenAt.emplace_back(n.handle,tick);}
             // 2210: only recent host activity keeps her copies (corpse-possess-eotw-v2207t: the host had announced the pack and sent
             // its counts, then its reinforcements left; her three stayed). A pending host state is applied first.
             // 2222 (#277): a key the host once announced and has not for 45 s: every active copy here goes, whoever spawned it
@@ -683,7 +688,7 @@ void processNpcLife(const NpcCatalogSnapshot& s){
             const bool hostHad=e.hostPresentAt!=0;
             // 2224: the late-spawn test holds for every key. corpse-possess-eotw-v2222t: without it the rule removed level NPCs (roof
             // and office guards) whose host copies are streamed and so never announced, and the present spawn made them again.
-            if(e.firstActiveAt<npcLifeEpochAt+30000||tick-e.firstActiveAt<45000){++npcLifeOwnOnlySkip[1];continue;}
+            if(seen<npcLifeEpochAt+30000||tick-seen<45000){++npcLifeOwnOnlySkip[1];continue;}
             if(hostHad&&tick-e.hostPresentAt<45000){++npcLifeOwnOnlySkip[2];continue;}
             if(e.hostCountsAt&&tick-e.hostCountsAt<45000){++npcLifeOwnOnlySkip[3];continue;}
             if(!e.applied){++npcLifeOwnOnlySkip[4];continue;}

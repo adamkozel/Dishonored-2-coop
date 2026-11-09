@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2227: on candidate progress-v2227 (the own-only test per NPC), the release line.
 # 2226: the hour session on the release line, candidate progress-v2226 (soak-hour-vm-v2211h passed on v2211).
 # 2211: the hour session again on candidate progress-v2211 (the reflow, own-only NPCs and story ints); soak-hour-vm-v2208h was
 # interrupted by a PC shutdown at step 33, equal after Dunwall.
@@ -20,8 +21,8 @@ cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
 L="${1:-a}"
 # 2190: on candidate progress-v2190 (every finished mission state reaches a following partner).
-CAND=candidate-progress-v2226
-take="soak-hour-vm-v2226$L"
+CAND=candidate-progress-v2227
+take="soak-hour-vm-v2227$L"
 if [ -e "$take" ]; then echo "$take exists, skipped"; echo done; exit 0; fi
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
