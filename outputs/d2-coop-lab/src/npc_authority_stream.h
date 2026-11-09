@@ -904,7 +904,9 @@ void serviceNpcStream(ULONGLONG tick){
             // 1214ga (#140, player_scene_probe.h): a takedown state whose scene is not recognized.
             else if(playerTakedownStateActive(st))probePlayerScene(memoryRead,base,st,"takedown_state_unrecognized",tick);
             // 1214if (#160): her Possession of a bound replica holds the host NPC; the host follows her possessed body.
-            if(!pairedHandle){std::uint32_t h=0;if(readNativeHumanPossessionOccupation(memoryRead,base,st,&h)&&h){pairedHandle=h;pairedVariant=kNpcPossessionVariant;}}}
+            if(!pairedHandle){std::uint32_t h=0;if(readNativeHumanPossessionOccupation(memoryRead,base,st,&h)&&h){pairedHandle=h;pairedVariant=kNpcPossessionVariant;}}
+            // 2207 (#278): her corpse possession of a bound replica holds the host's body the same way: the host follows it.
+            if(!pairedHandle&&coopCorpsePossessionEnabled){std::uint32_t h=0;if(readNativeCorpsePossessionOccupation(memoryRead,base,&h)&&h){pairedHandle=h;pairedVariant=kNpcPossessionVariant;++coopCorpsePossessionFrames;}}}
         // 1214ig (#160): her Possession target (aimed, travelling or occupied) owns the replica natively; the ownership
         // watchdog stopped its channel at once (partner-corvo-power-v1798a: ai_ownership_changed, 1 reverse pose sent).
         NativePossessionTarget target{};if(readNativePossessionTarget(memoryRead,base,target)&&target.hasTarget)possessionTargetHandle=target.handle;}

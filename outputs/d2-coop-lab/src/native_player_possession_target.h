@@ -35,6 +35,19 @@ template<class Read> bool readNativePossessionTargetFrame(Read read,std::uintptr
 // controller at internal+0x410 is in state 2 (occupied animal) or 3 (leaving it), its target component is an
 // arkCpntSwarmAgentPossession (vtable +0x1b63fa8), and its kind at internal+0x670 (set by 0x140823300) is 4 for a rat,
 // 0x10 for a fish. Returns the pose bit: 0x800 rat, 0x1000 fish, 0 otherwise.
+// 2207 (#278): lab switch coop_corpse_possession on|off, and the frames her corpse possession held a replica.
+inline bool coopCorpsePossessionEnabled=true;inline std::uint64_t coopCorpsePossessionFrames=0;
+// 2207 (#278): corpse possession (research-corpse-possession-v2188.md, confirmed static; corpse-eotw-v2202c confirmed the
+// start at runtime). The controller is in state 4 (occupying a corpse) or 5 (leaving it), kind 2 at internal+0x670, and its
+// target is an arkCpntCorpsePossession (vtable +0x1b640a8) owned (+0x10) by the body whose handle is at internal+0x63c.
+// It returns that body's handle, which on a partner is her bound replica of the host's NPC.
+template<class Read> bool readNativeCorpsePossessionOccupation(Read read,std::uintptr_t base,std::uint32_t* handle=nullptr){
+    NativePlayerStates s{};std::uintptr_t internal=0,target=0,vt=0,entity=0;std::uint32_t state=0,kind=0,h=0,eh=0;
+    if(!readNativePlayerStates(read,base,s)||!read(s.component+0x2f8,&internal,8)||!internal||!read(internal+0x5d0,&state,4)||(state!=4&&state!=5)||
+       !read(internal+0x670,&kind,4)||kind!=2||!read(internal+0x648,&target,8)||!target||!read(target,&vt,8)||vt!=base+0x1b640a8||
+       !read(internal+0x63c,&h,4)||!h||!read(target+0x10,&entity,8)||!entity||!read(entity+0xa8,&eh,4)||eh!=h)return false;
+    if(handle)*handle=h;return true;
+}
 template<class Read> std::uint32_t readNativeAnimalPossession(Read read,std::uintptr_t base){
     NativePlayerStates s{};std::uintptr_t internal=0,target=0,vt=0;std::uint32_t state=0,kind=0;
     if(!readNativePlayerStates(read,base,s)||!read(s.component+0x2f8,&internal,8)||!internal||!read(internal+0x5d0,&state,4)||(state!=2&&state!=3)||
