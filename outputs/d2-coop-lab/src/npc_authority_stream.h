@@ -699,14 +699,17 @@ void processNpcLife(const NpcCatalogSnapshot& s){
     // 2229 (#277, diagnostics): every NPC of a reinforcement key (spawner name holds "reinf") on the partner, once a second:
     // handle, state, active, bound, own-spawn listed, its first sighting's age and the key's host present age, own list and
     // pending count. corpse-possess-eotw-v2227t kept 2 + 2 of her copies with no own-only removal.
-    if(localRole&&tick-npcLifePackDebugAt>=1000){npcLifePackDebugAt=tick;std::string d;char row[400];
+    // 2231: both roles; with the actor's name, its dormant byte (+0xd1) and whether the key's present went out.
+    if(tick-npcLifePackDebugAt>=1000){npcLifePackDebugAt=tick;std::string d;char row[560];
         for(const auto& n:s.life){if(n.spawner.find("reinf")==std::string::npos||d.size()>3500)continue;
             const NpcLifeEntry* e=nullptr;const auto key=n.spawner+"|"+n.definition;for(const auto& x:npcLifeEntries)if(x.key==key){e=&x;break;}
             ULONGLONG seen=0;bool listed=false;if(e){for(const auto& x:e->seenAt)if(x.first==n.handle)seen=x.second;for(const auto& o:e->ownSpawns)if(o.first==n.handle)listed=true;}
-            std::snprintf(row,sizeof(row),"%s{\"spawner\":\"%s\",\"handle\":%u,\"state\":%u,\"active\":%s,\"bound\":%s,\"listed\":%s,\"seenAgeMs\":%lld,\"hostPresentAgeMs\":%lld,\"own\":%u,\"pending\":%u,\"desired\":%u,\"applied\":%s}",
+            std::string actorName;{std::uintptr_t np=0;if(memoryRead(n.actor+0x20,&np,8))worldIdentityString(memoryRead,np,actorName);}if(actorName.size()>60)actorName.resize(60);
+            unsigned char dormantByte=0;memoryRead(n.actor+0xd1,&dormantByte,1);
+            std::snprintf(row,sizeof(row),"%s{\"spawner\":\"%s\",\"handle\":%u,\"state\":%u,\"active\":%s,\"bound\":%s,\"listed\":%s,\"seenAgeMs\":%lld,\"hostPresentAgeMs\":%lld,\"own\":%u,\"pending\":%u,\"desired\":%u,\"applied\":%s,\"actor\":\"%s\",\"dormantByte\":%u,\"presentSent\":%s,\"role\":%u}",
                 d.empty()?"":",",n.spawner.c_str(),n.handle,n.state,npcLifeActive(n)?"true":"false",npcLifeBound(n.spawner,n.definition)?"true":"false",listed?"true":"false",
                 seen?static_cast<long long>(tick-seen):-1LL,e&&e->hostPresentAt?static_cast<long long>(tick-e->hostPresentAt):-1LL,e?static_cast<unsigned>(e->ownSpawns.size()):0u,e?e->ownSpawnPending:0u,
-                e?e->desired:0u,e&&e->applied?"true":"false");d+=row;}
+                e?e->desired:0u,e&&e->applied?"true":"false",actorName.c_str(),unsigned(dormantByte),e&&e->presentSent?"true":"false",unsigned(localRole));d+=row;}
         npcLifePackDebug=d;}
     // 2205 (#277): corpse-eotw-v2202c, the host's checkpoint reinforcements (several NPCs under one spawner key) died or left
     // while the partner's copies stayed alive: one state per key cannot say which copy died. The host sends each such
