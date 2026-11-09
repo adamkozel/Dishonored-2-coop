@@ -32,6 +32,8 @@ run(){
  "$P" -NoProfile -File "${H:-Route-MissionVM-v2213.ps1}" -Take "$take" -MapInfo campaign/institute/institute.mapinfo -Candidate "$CAND" -StepsFile "${4:-routes/institute-cure-partner-v2034.json}" -HostCharacter "$hc" -HostChoice "$side" -PartnerCharacter "$pc" -CoopSaves -StoryFlags -HostStory -ItemsPerPlayer > "$take.log" 2>&1
  rc=$?
  echo "$take: exit $rc minutes $(( ($(date +%s)-start)/60 )) $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),str(r.get('failure'))[:300],[(k,(v or {}).get('status') if isinstance(v,dict) else v) for k,v in n.items() if k.startswith('diff-')])" 2>&1 | head -c 1200)"
+ # 2222 (#263): a take that stops in the co-op saves switch runs once more under the name with 2 appended.
+ if [ -z "$RETRY" ] && grep -q "Co-op saves did not switch on" "$take/result.json" 2>/dev/null; then RETRY=1 run "${take}2" "$2" "$3" "$4"; fi
 }
 for x in ${*:-a}; do
  case $x in
@@ -40,6 +42,7 @@ for x in ${*:-a}; do
   c) run institute-cure-partner-vm-v2215a corvo emily routes/institute-cure-partner-v2215.json;;
   d) run institute-cure-partner-vm-v2215b corvo emily routes/institute-cure-partner-v2215.json;;
   e) H=Route-MissionVM-v2215.ps1 run institute-cure-partner-vm-v2215c corvo emily routes/institute-cure-partner-v2215b.json;;
+  f) H=Route-MissionVM-v2215.ps1 run institute-cure-partner-vm-v2215d corvo emily routes/institute-cure-partner-v2215b.json;;
  esac
 done
 clean
