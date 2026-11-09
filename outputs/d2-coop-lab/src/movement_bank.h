@@ -452,7 +452,9 @@ struct MovementClock {
             const float x=dx*rotation[0]+dy*rotation[1],y=dx*rotation[3]+dy*rotation[4];
             // 2218: the flip happens in the slow frames of the reversal (animquality-eotw-v2216a: serial 0 with the 2216 rate gates),
             // so any frame that moves over 2 mm against the last frame's direction starts the crossfade; a still rig never does.
-            const bool reversal=movementDirectionBlendEnabled&&eligible&&distance>.002f&&(x*angleX+y*angleY)/distance<-.1f;
+            // 2225: any jump of the travel direction over 60 degrees in one frame (animquality-eotw-v2223c: back to sideways, 90
+            // degrees, popped a toe 0.5 m; the 2216 trigger needed over 95). Steering turns a few degrees per frame and never fires it.
+            const bool reversal=movementDirectionBlendEnabled&&eligible&&distance>.002f&&(x*angleX+y*angleY)/distance<.5f;
             const unsigned oldA=a,oldB=b;const float oldMix=mix;
             if(MovementBank::directions(x,y,a,b,mix)){angleX=x/distance;angleY=y/distance;}
             // 2221: the reversal continues from the new clips' phase nearest the old pose.

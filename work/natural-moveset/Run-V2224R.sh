@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2225: runs on candidate progress-v2225.
 # 2224 (#277): candidate progress-v2224 (the own-only late-spawn test for every key again).
 # 2222 (#277): candidate progress-v2222 (own-only on keys the host once announced; skip counters). corpse-possess-eotw-v2219t: 8 spawns,
 # 4 removed, 6 copies left with own-only 0.
@@ -13,10 +14,10 @@
 # Usage: Run-V2217R.sh [a t p r]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2224
+CAND=candidate-progress-v2225
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2224r-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2225r-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
 # 2218 (#263): the four co-op saves stalls of 2026-11-09 were the first take after a deploy; let both games settle first.
 sleep 60
 clean(){
