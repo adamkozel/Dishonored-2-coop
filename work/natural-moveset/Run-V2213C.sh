@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2215b: d reruns c (institute-cure-partner-vm-v2215a stopped in the co-op saves switch, #263) on candidate progress-v2217.
 # 2215: c, route institute-cure-partner-v2215: the burner valve and the goblet sit about 45 degrees below the view on the
 # lab table (z 28.0, the camera 28.75); v2213a looked level at the blinds six times. Stands 0.9 m out, aim offsets
 # 0 to 20 degrees, and focus: a press only while the native use focus is on the target, each try logged.
@@ -11,7 +12,7 @@
 # Usage: Run-V2213C.sh [a b]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2211
+CAND=candidate-progress-v2217
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
 "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2213-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
@@ -32,6 +33,7 @@ for x in ${*:-a}; do
   a) run institute-cure-partner-vm-v2213a corvo emily;;
   b) run institute-cure-partner-vm-v2213b emily corvo;;
   c) run institute-cure-partner-vm-v2215a corvo emily routes/institute-cure-partner-v2215.json;;
+  d) run institute-cure-partner-vm-v2215b corvo emily routes/institute-cure-partner-v2215.json;;
  esac
 done
 clean
