@@ -14,6 +14,8 @@ CAND=candidate-progress-v2220
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
 "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2220r-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
+# 2218 (#263): the four co-op saves stalls of 2026-11-09 were the first take after a deploy; let both games settle first.
+sleep 60
 clean(){
  rm -f ../lab-instances/host/base/savegame_coop/coop-progress-*.txt
  "$P" -NoProfile -Command '. ../../tools/vm/D2LabVM.Common.ps1; . ../../tools/vm/D2LabVM.Lab.ps1; Invoke-D2LabVM { Remove-Item C:/D2Lab/ws/work/lab-instances/client/base/savegame_coop/coop-progress-*.txt -ErrorAction SilentlyContinue }' > /dev/null 2>&1
