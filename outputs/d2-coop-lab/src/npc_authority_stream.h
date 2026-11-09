@@ -681,7 +681,9 @@ void processNpcLife(const NpcCatalogSnapshot& s){
             // (corpse-possess-eotw-v2219t: 8 spawns, 4 removed, 6 copies left, own-only 0). A key the host never announced keeps the
             // late-spawn test (first active 30 s after the roster began, active 45 s).
             const bool hostHad=e.hostPresentAt!=0;
-            if(hostHad?false:(e.firstActiveAt<npcLifeEpochAt+30000||tick-e.firstActiveAt<45000)){++npcLifeOwnOnlySkip[1];continue;}
+            // 2224: the late-spawn test holds for every key. corpse-possess-eotw-v2222t: without it the rule removed level NPCs (roof
+            // and office guards) whose host copies are streamed and so never announced, and the present spawn made them again.
+            if(e.firstActiveAt<npcLifeEpochAt+30000||tick-e.firstActiveAt<45000){++npcLifeOwnOnlySkip[1];continue;}
             if(hostHad&&tick-e.hostPresentAt<45000){++npcLifeOwnOnlySkip[2];continue;}
             if(e.hostCountsAt&&tick-e.hostCountsAt<45000){++npcLifeOwnOnlySkip[3];continue;}
             if(!e.applied){++npcLifeOwnOnlySkip[4];continue;}

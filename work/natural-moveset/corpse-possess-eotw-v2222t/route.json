@@ -1,0 +1,1560 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -30.814037,
+        192.747986,
+        1.25397
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        -30.814053,
+        192.747940,
+        1.253970
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 20000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -30.290236,
+        193.249619,
+        1.204158
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        -30.819540,
+        192.742447,
+        1.253970
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step02-diff",
+    "spec": {
+      "do": "diff",
+      "tag": "spawn",
+      "require": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -30.290236,
+        193.249619,
+        1.204158
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        -30.819540,
+        192.742447,
+        1.253970
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step03-attack",
+    "spec": {
+      "do": "attack",
+      "name": "guard_male_small",
+      "near": [
+        58.73,
+        24.05
+      ],
+      "max": 80,
+      "settle": 4000,
+      "behind": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        58.004128,
+        24.292585,
+        18.972101
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        -30.819540,
+        192.742447,
+        1.253970
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/2/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step04-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 30000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        51.38739,
+        25.449734,
+        18.774632
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        -30.819540,
+        192.742447,
+        1.253970
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/2/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step05-diff",
+    "spec": {
+      "do": "diff",
+      "tag": "killed"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        41.8713,
+        26.988749,
+        18.194784
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        -30.819540,
+        192.742447,
+        1.253970
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/2/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step06-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_corpse_possession off"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        34.709999,
+        30.211224,
+        17.733809
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        -30.819540,
+        192.742447,
+        1.253970
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/4/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_A_02,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step07-partner",
+    "spec": {
+      "do": "partner",
+      "pos": [
+        54.99,
+        23.17,
+        20.6
+      ],
+      "yaw": 30
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965517,
+        29.685587,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step08-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 4000,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965523,
+        29.685583,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step09-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_grant_named components/characters/player/base/attributes/possession_decayed_harbor.inventoryitem"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        27.076292,
+        29.611572,
+        17.50242
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step10-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_grant_named models/powers/possession/possession.inventoryitem"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        27.021324,
+        29.741386,
+        17.50189
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step11-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 2000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685583,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step12-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_lab_corpse_probe"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965523,
+        29.685583,
+        17.501713
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step13-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 1500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965523,
+        29.685583,
+        17.501713
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step14-status",
+    "spec": {
+      "do": "status",
+      "role": "client",
+      "suffix": ".corpse-possession.json"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965519,
+        29.685581,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step15-npcs",
+    "spec": {
+      "do": "npcs",
+      "near": [
+        58.73,
+        24.05
+      ],
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965519,
+        29.685581,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step16-aim",
+    "spec": {
+      "do": "aim",
+      "role": "client",
+      "pitch": 18
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965519,
+        29.685581,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        54.990002,
+        23.170000,
+        19.490625
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step17-cast",
+    "spec": {
+      "do": "cast",
+      "role": "client",
+      "grant": "models/powers/possession/possession.inventoryitem",
+      "ms": 1500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685585,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        59.755489,
+        24.765745,
+        19.169140
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step18-press",
+    "spec": {
+      "do": "press",
+      "role": "client",
+      "leftY": 20000,
+      "ms": 4000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685585,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        59.755489,
+        24.765745,
+        19.003654
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step19-npcs",
+    "spec": {
+      "do": "npcs",
+      "near": [
+        58.73,
+        24.05
+      ],
+      "settle": 500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685585,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        59.755489,
+        24.765745,
+        19.003654
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step20-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_lab_corpse_probe"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685585,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        59.755489,
+        24.765745,
+        19.003654
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step21-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685585,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        59.755489,
+        24.765745,
+        19.003654
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step22-status",
+    "spec": {
+      "do": "status",
+      "role": "client",
+      "suffix": ".corpse-possession.json"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685585,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        59.755489,
+        24.765745,
+        19.003654
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step23-status",
+    "spec": {
+      "do": "status",
+      "suffix": ".npc-stream.json"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685585,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        59.755489,
+        24.765745,
+        19.003654
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  },
+  {
+    "step": "step24-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 90000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        26.965521,
+        29.685585,
+        17.501711
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/1/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+      "epoch": 16,
+      "cine": 6,
+      "pos": [
+        59.755489,
+        24.765745,
+        19.003654
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        2,
+        4,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 1,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/6/0",
+      "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+    }
+  }
+]

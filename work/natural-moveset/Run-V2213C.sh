@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2224: runs on candidate progress-v2224.
 # 2222: runs on candidate progress-v2222.
 # 2220: runs on candidate progress-v2220 (dead own spawns removed too).
 # 2219: runs on candidate progress-v2219 (every own spawn per key removed).
@@ -15,7 +16,7 @@
 # Usage: Run-V2213C.sh [a b]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2222
+CAND=candidate-progress-v2224
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
 "$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2213-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
