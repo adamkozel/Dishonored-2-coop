@@ -643,7 +643,9 @@ void processNpcLife(const NpcCatalogSnapshot& s){
             std::none_of(e.ownSpawns.begin(),e.ownSpawns.end(),[&](const auto& o){return o.first==n.handle&&o.second==n.actor;})){
             if(e.ownSpawns.size()<16)e.ownSpawns.emplace_back(n.handle,n.actor);e.ownSpawnPending=false;break;}
         if(!e.ownSpawns.empty()&&e.hostPresentAt&&tick-e.hostPresentAt>45000){
-            for(const auto& o:e.ownSpawns)for(const auto& n:s.life)if(n.handle==o.first&&n.actor==o.second&&n.state==0&&npcLifeActive(n)){
+            // 2220: her dead or unconscious copy goes too when the host never reported a death or knockout under the key
+            // (corpse-possess-eotw-v2217a: her outpost reinforcement lay dead, the host had no NPC under the key).
+            for(const auto& o:e.ownSpawns)for(const auto& n:s.life)if(n.handle==o.first&&n.actor==o.second&&(n.state==0?npcLifeActive(n):!e.desired)){
                 npcLifeRemoveOwnSpawn(n.actor);++npcLifeSpawnRemoved;npcLifeRefusal(e.key,"removed_host_gone",e.spawnTries,kNpcLifePresent);break;}
             e.ownSpawns.clear();e.ownSpawnPending=false;}
         // 2196: a death or knockout ends the host's present: corpse-eotw-v2194c, the host killed entrance guard 02 within 30 s of its

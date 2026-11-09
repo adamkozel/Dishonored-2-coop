@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2220: runs on candidate progress-v2220 (dead own spawns removed too).
 # 2219 (#277): candidate progress-v2219. corpse-possess-eotw-v2217t: 7 spawns over 4 keys and 3 removals, one copy per key left
 # after the host's pack was gone. t and r again.
 # 2217 (#277, #278): candidate progress-v2217 (pack NPCs in the life roster). corpse-possess-eotw-v2214t ended with two
@@ -9,10 +10,10 @@
 # Usage: Run-V2217R.sh [a t p r]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2219
+CAND=candidate-progress-v2220
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2219r-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > "v2220r-deploy.log" 2>&1 || { echo "deploy failed"; exit 1; }
 clean(){
  rm -f ../lab-instances/host/base/savegame_coop/coop-progress-*.txt
  "$P" -NoProfile -Command '. ../../tools/vm/D2LabVM.Common.ps1; . ../../tools/vm/D2LabVM.Lab.ps1; Invoke-D2LabVM { Remove-Item C:/D2Lab/ws/work/lab-instances/client/base/savegame_coop/coop-progress-*.txt -ErrorAction SilentlyContinue }' > /dev/null 2>&1
@@ -25,7 +26,7 @@ run(){
  rc=$?
  echo "$take: exit $rc minutes $(( ($(date +%s)-start)/60 )) $(python -c "import json;r=json.load(open('$take/result.json',encoding='utf-8-sig'));n=r.get('notes',{});print(r.get('passed'),str(r.get('failure'))[:300],[(k,(v or {}).get('status') if isinstance(v,dict) else v) for k,v in n.items() if k.startswith('diff-')])" 2>&1 | head -c 1200)"
 }
-for x in ${*:-t r}; do
+for x in ${*:-t a r}; do
  case $x in
   a) run corpse-possess-eotw-v2219a routes/corpse-possess-eotw-v2214.json corvo corvo;;
   t) run corpse-possess-eotw-v2219t routes/corpse-possess-eotw-twin-v2214.json corvo corvo;;

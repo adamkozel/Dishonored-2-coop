@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2220: runs on candidate progress-v2220 (dead own spawns removed too).
 # 2219: runs on candidate progress-v2219 (v2218 plus every own spawn per key removed).
 # 2218 (#269): candidate progress-v2218 (the reversal crossfade fires in the slow frames). v2216a passed with directionBlend
 # serial 0: the 2216 trigger never fired, so that pass is not evidence for the crossfade.
@@ -16,10 +17,10 @@
 # Usage: Run-V2212A.sh [a b c d t]
 cd "$(dirname "$0")"
 P="C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
-CAND=candidate-progress-v2219
+CAND=candidate-progress-v2220
 echo "candidate $CAND"
 cp "../stage8/$CAND/dinput8.dll" "../stage8/$CAND/d2_runtime_probe.exe" ../../outputs/d2-coop-lab/bin/
-"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2219-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
+"$P" -NoProfile -File ../movement-integration/Deploy-SourceClock.ps1 > v2220-deploy.log 2>&1 || { echo "deploy failed"; exit 1; }
 run(){
  take="$1";steps="$2";hc="$3";pc="$4";side="Left";[ "$hc" = emily ] && side="Right";obs="$5"
  if [ -e "$take" ]; then echo "$take exists, skipped";return;fi
