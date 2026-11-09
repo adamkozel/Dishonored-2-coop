@@ -1118,6 +1118,11 @@ void exchangePoses(ULONGLONG tick) {
             else ++storyFlagSync.refused;
             messages[i]->Release();continue;
         }
+        if(magic==kStoryIntMagic) { // 2211 (#244): D2SI, the host's int story variables
+            if(messages[i]->m_cbSize==sizeof(StoryIntPacket)){StoryIntPacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveStoryInts(p);}
+            else ++storyIntSync.refused;
+            messages[i]->Release();continue;
+        }
         if(magic==0x46443244) { // 1214kb (#177): D2DF, the host's difficulty
             if(messages[i]->m_cbSize==sizeof(DifficultyPacket)){DifficultyPacket p{};std::memcpy(&p,messages[i]->m_pData,sizeof(p));receiveDifficulty(p);}
             else ++difficultySync.refused;

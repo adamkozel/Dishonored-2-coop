@@ -11,4 +11,13 @@ void storyFlagProtocolTests(){
         case 8:q.entries[0].decl=q.entries[0].name=0;break;}
         require(!validStoryFlags(q),"partner, malformed, non-bool or untidy story flags refused");}
     {auto q=p;q.count=0;for(auto& e:q.entries)e={};require(validStoryFlags(q),"a map with no story flags is a valid empty set");}
+    // 2211: D2SI int story variables.
+    StoryIntPacket n{};n.sequence=1;n.count=2;n.entries[0]={storyFlagHash("storyflags/global.kiscule"),storyFlagHash("songs_listened"),1};
+    n.entries[1]={storyFlagHash("storyflags/global.kiscule"),storyFlagHash("other_count"),-3};
+    require(validStoryInts(n),"host story ints accepted, negative values too");
+    for(unsigned i=0;i<8;++i){auto q=n;switch(i){
+        case 0:q.role=1;break;case 1:q.version=2;break;case 2:--q.size;break;case 3:q.magic=kStoryFlagMagic;break;case 4:q.sequence=0;break;
+        case 5:q.count=kStoryIntMax+1;break;case 6:q.entries[2].value=1;break;case 7:q.entries[0].decl=q.entries[0].name=0;break;}
+        require(!validStoryInts(q),"partner, malformed or untidy story ints refused");}
+    {auto q=n;q.count=0;for(auto& e:q.entries)e={};require(validStoryInts(q),"a map with no story ints is a valid empty set");}
 }

@@ -15,6 +15,15 @@
 #include "story_flag_protocol.h"
 constexpr std::uintptr_t kWorldspawnVtableRva=0x1c89868,kKisculeBoolVariableVtableRva=0x1cc4388; // confirmed runtime (Dunwall: 23 bools; ints 0x1c9f998, lists 0x1cd9bc8)
 struct StoryFlag {std::uint32_t decl=0,name=0;std::uintptr_t var=0;std::uint8_t value=0;};
+// 2211 (#244): an int story variable keeps its value at +0x1c (default +0x18; safe_code_mirror.h, confirmed runtime).
+constexpr std::uintptr_t kStoryIntVariableVtableRva=0x1c9f998;
+struct StoryInt {std::uint32_t decl=0,name=0;std::uintptr_t var=0;std::int32_t value=0;};
+struct StoryIntSync {
+    std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,refused=0,writes=0,unknown=0,overflow=0;
+    ULONGLONG sentAt=0,receivedAt=0;std::uint32_t sentDigest=0;unsigned local=0,host=0,differing=0;
+    StoryIntPacket last{};bool lastValid=false;
+};
+StoryIntSync storyIntSync{};
 struct StoryFlagSync {
     bool enabled=true;std::uint64_t sequence=0,peerSequence=0,sent=0,received=0,refused=0,writes=0,unknown=0,readFailures=0;
     ULONGLONG sentAt=0,receivedAt=0,appliedAt=0;std::uint32_t sentDigest=0;unsigned local=0,host=0,differing=0;const char* result="idle";
@@ -23,8 +32,8 @@ struct StoryFlagSync {
 };
 StoryFlagSync storyFlagSync{};
 // The local world's bool story flags. Reads only; false when the worldspawn or its flags are unreadable.
-bool readStoryFlags(std::vector<StoryFlag>& out){
-    out.clear();const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
+bool readStoryFlags(std::vector<StoryFlag>& out,std::vector<StoryInt>* ints=nullptr){
+    out.clear();if(ints)ints->clear();const auto base=reinterpret_cast<std::uintptr_t>(gameImage);
     if(!observedGame||!kKisculeBoolVariableVtableRva)return false;
     const std::uint32_t worldspawn=0x3ffe0000;std::uintptr_t vt=0;
     const auto actor=worldIdentityEntity(memoryRead,observedGame,worldspawn);
@@ -41,7 +50,11 @@ bool readStoryFlags(std::vector<StoryFlag>& out){
             count&=0xffffff;if(count>512)return false;const auto declHash=storyFlagHash(declText);
             for(std::uint32_t v=0;v<count;++v){std::uintptr_t var=0,varVt=0,name=0;std::string nameText;std::uint8_t value=0;
                 if(!memoryRead(vars+v*8,&var,8)||!var||!memoryRead(var,&varVt,8))return false;
-                if(varVt!=base+kKisculeBoolVariableVtableRva)continue;
+                if(varVt!=base+kKisculeBoolVariableVtableRva){
+                    if(ints&&varVt==base+kStoryIntVariableVtableRva){std::int32_t iv=0;
+                        if(!memoryRead(var+8,&name,8)||!worldIdentityString(memoryRead,name,nameText)||!memoryRead(var+0x1c,&iv,4))return false;
+                        if(ints->size()<kStoryIntMax)ints->push_back({declHash,storyFlagHash(nameText),var,iv});else ++storyIntSync.overflow;}
+                    continue;}
                 if(!memoryRead(var+8,&name,8)||!worldIdentityString(memoryRead,name,nameText)||!memoryRead(var+0x19,&value,1)||value>1)return false;
                 if(out.size()>=kStoryFlagMax)return false;
                 out.push_back({declHash,storyFlagHash(nameText),var,value});}
@@ -53,6 +66,30 @@ void receiveStoryFlags(const StoryFlagPacket& p){
     if(!validStoryFlags(p)||localRole!=1||p.session!=remote.session||p.sequence<=s.peerSequence){++s.refused;return;}
     s.peerSequence=p.sequence;s.last=p;s.lastValid=true;s.receivedAt=GetTickCount64();s.host=p.count;
 }
+void receiveStoryInts(const StoryIntPacket& p){
+    auto& s=storyIntSync;++s.received;
+    if(!validStoryInts(p)||localRole!=1||p.session!=remote.session||p.sequence<=s.peerSequence){++s.refused;return;}
+    s.peerSequence=p.sequence;s.last=p;s.lastValid=true;s.receivedAt=GetTickCount64();s.host=p.count;
+}
+// 2211: the host's int story variables, as its bools: sent on a change and every 2 s, written into her world's variables.
+void serviceStoryInts(ULONGLONG tick,const std::vector<StoryInt>& ints){
+    auto& s=storyIntSync;s.local=static_cast<unsigned>(ints.size());
+    if(localRole==0){
+        std::uint32_t digest=2166136261u;for(const auto& v:ints){digest^=v.decl^(v.name*31u)^(static_cast<std::uint32_t>(v.value)*977u);digest*=16777619u;}
+        if(digest==s.sentDigest&&tick-s.sentAt<2000)return;
+        StoryIntPacket p{};p.session=outgoing.session;p.sequence=++s.sequence;p.count=static_cast<std::uint32_t>(ints.size());
+        for(unsigned i=0;i<p.count;++i)p.entries[i]={ints[i].decl,ints[i].name,ints[i].value};
+        if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_Reliable,nullptr)==k_EResultOK){++s.sent;s.sentAt=tick;s.sentDigest=digest;}
+        return;
+    }
+    if(!s.lastValid||tick-s.receivedAt>10000)return;
+    unsigned differing=0;
+    for(unsigned i=0;i<s.last.count;++i){const auto& e=s.last.entries[i];bool found=false;
+        for(const auto& v:ints)if(v.decl==e.decl&&v.name==e.name){found=true;
+            if(v.value!=e.value){*reinterpret_cast<std::int32_t*>(v.var+0x1c)=e.value;++differing;++s.writes;}break;}
+        if(!found)++s.unknown;}
+    s.differing=differing;
+}
 void serviceStoryFlags(ULONGLONG tick){
     auto& s=storyFlagSync;if(!s.enabled){s.result="off";return;}
     const bool connected=sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected&&lastReceive&&tick-lastReceive<1000;
@@ -60,7 +97,8 @@ void serviceStoryFlags(ULONGLONG tick){
     if(outgoing.gameLogicState!=1||outgoing.pendingGameLogicState){s.result="waiting_gameplay";return;}
     if(localRole==0){
         if(tick-s.sentAt<500)return;
-        std::vector<StoryFlag> flags;if(!readStoryFlags(flags)){++s.readFailures;s.result="unreadable";return;}
+        std::vector<StoryFlag> flags;std::vector<StoryInt> ints;if(!readStoryFlags(flags,&ints)){++s.readFailures;s.result="unreadable";return;}
+        serviceStoryInts(tick,ints);
         std::uint32_t digest=2166136261u;for(const auto& f:flags){digest^=f.decl^(f.name*31u)^(f.value*977u);digest*=16777619u;}
         s.local=static_cast<unsigned>(flags.size());if(digest==s.sentDigest&&tick-s.sentAt<2000)return;
         StoryFlagPacket p{};p.session=outgoing.session;p.sequence=++s.sequence;p.count=static_cast<std::uint32_t>(flags.size());
@@ -72,7 +110,8 @@ void serviceStoryFlags(ULONGLONG tick){
         if(readStoryFlags(own)&&!own.empty()){*reinterpret_cast<std::uint8_t*>(own[0].var+0x19)=own[0].value?0:1;++s.flips;}}
     if(!s.lastValid||tick-s.receivedAt>10000){s.result="waiting_host";return;}
     if(tick-s.appliedAt<500)return;s.appliedAt=tick;
-    std::vector<StoryFlag> flags;if(!readStoryFlags(flags)){++s.readFailures;s.result="unreadable";return;}
+    std::vector<StoryFlag> flags;std::vector<StoryInt> ints;if(!readStoryFlags(flags,&ints)){++s.readFailures;s.result="unreadable";return;}
+    serviceStoryInts(tick,ints);
     s.local=static_cast<unsigned>(flags.size());unsigned differing=0;
     for(unsigned i=0;i<s.last.count;++i){const auto& e=s.last.entries[i];bool found=false;
         for(const auto& f:flags)if(f.decl==e.decl&&f.name==e.name){found=true;
@@ -84,7 +123,8 @@ void writeStoryFlags(){
     char path[MAX_PATH]{},temp[MAX_PATH]{};
     if(std::snprintf(path,sizeof(path),"%s.story-flags.json",statusPath)>=static_cast<int>(sizeof(path))||std::snprintf(temp,sizeof(temp),"%s.tmp",path)>=static_cast<int>(sizeof(temp)))return;
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& s=storyFlagSync;
-    fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"local\":%u,\"host\":%u,\"differing\":%u,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"unknown\":%llu,\"readFailures\":%llu,\"flips\":%llu}\n",
-        s.enabled?"true":"false",localRole,s.result,s.local,s.host,s.differing,s.sent,s.received,s.refused,s.writes,s.unknown,s.readFailures,s.flips);
+    fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"local\":%u,\"host\":%u,\"differing\":%u,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"unknown\":%llu,\"readFailures\":%llu,\"flips\":%llu,\"ints\":{\"local\":%u,\"host\":%u,\"differing\":%u,\"sent\":%llu,\"received\":%llu,\"refused\":%llu,\"writes\":%llu,\"unknown\":%llu,\"overflow\":%llu}}\n",
+        s.enabled?"true":"false",localRole,s.result,s.local,s.host,s.differing,s.sent,s.received,s.refused,s.writes,s.unknown,s.readFailures,s.flips,
+        storyIntSync.local,storyIntSync.host,storyIntSync.differing,storyIntSync.sent,storyIntSync.received,storyIntSync.refused,storyIntSync.writes,storyIntSync.unknown,storyIntSync.overflow);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
