@@ -18,7 +18,10 @@ from pathlib import Path
 import hashlib, json, re, shutil, datetime, subprocess, sys, tempfile, zipfile
 R = Path(__file__).resolve().parents[2]
 VERSION = '1.0.0'
-LAB = R / 'work/asset-game'; ORIG = Path(r'C:\Program Files (x86)\Steam\steamapps\common\Dishonored2')
+# Since 2026-10-29 the Steam folder has the mod installed (its master.index is the modded one); the untouched original is the
+# backup 'Dishonored2 - Copy' beside it (read only). It must still be the original 0.9.6 pinned.
+LAB = R / 'work/asset-game'; ORIG = Path(r'C:\Program Files (x86)\Steam\steamapps\common\Dishonored2 - Copy')
+assert hashlib.sha256((ORIG / 'base/master.index').read_bytes()).hexdigest().upper() == json.loads((R / 'outputs/release/d2coop-v0.9.6/manifest.json').read_text(encoding='utf-8-sig'))['originalMasterIndexSha256'].upper(), 'ORIG is not the original install'
 CAND = R / 'work/stage8' / sys.argv[1]
 REL = R / 'work/release'
 sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest().upper()

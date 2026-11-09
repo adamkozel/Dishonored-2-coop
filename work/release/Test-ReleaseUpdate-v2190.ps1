@@ -11,7 +11,8 @@ param([string]$Take='release-update-v2190a',[Parameter(Mandatory)][string]$Packa
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$out=Join-Path $PSScriptRoot $Take
 if(!$OldPackage){$OldPackage=Join-Path $root 'outputs/release/d2coop-v0.9.6'}
-$orig='C:\Program Files (x86)\Steam\steamapps\common\Dishonored2'
+# The Steam folder has the mod installed since 2026-10-29; the untouched original is its backup 'Dishonored2 - Copy' (read only).
+$orig='C:\Program Files (x86)\Steam\steamapps\common\Dishonored2 - Copy'
 if(Test-Path $out){throw 'Unique take required'};New-Item -ItemType Directory $out|Out-Null;Copy-Item $PSCommandPath "$out/run-script.ps1"
 function Get-Sha256Hash($p){(Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash}
 function Snapshot($t){$m=@{};Get-ChildItem -LiteralPath $t -Recurse -File -Force|ForEach-Object {$k=$_.FullName.Substring($t.Length+1).Replace('\','/');$m[$k]=if($_.Length-lt64MB){Get-Sha256Hash $_.FullName}else{"$($_.Length)|$($_.LastWriteTimeUtc.Ticks)"}};$m}
