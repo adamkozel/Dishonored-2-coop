@@ -1728,6 +1728,7 @@ bool allowedCommand(const char* text) {
     if(!std::strcmp(text,"coop_movement_resume on")||!std::strcmp(text,"coop_movement_resume off"))return true;
     if(!std::strcmp(text,"coop_movement_feet on")||!std::strcmp(text,"coop_movement_feet off")||!std::strcmp(text,"coop_movement_feet authored"))return true;
     if(!std::strcmp(text,"coop_movement_start_phase on")||!std::strcmp(text,"coop_movement_start_phase off"))return true; // 2114 (#266)
+    if(!std::strcmp(text,"coop_movement_direction_blend on")||!std::strcmp(text,"coop_movement_direction_blend off"))return true; // 2216 (#269)
     if(!std::strcmp(text,"coop_decl_probe")||!std::strcmp(text,"coop_tables_probe"))return true;
     if(!std::strcmp(text,"coop_character_choice on")||!std::strcmp(text,"coop_character_choice off"))return true; // 1214hx (#158, lab)
     if(!std::strcmp(text,"coop_time_bend on")||!std::strcmp(text,"coop_time_bend off")||!std::strcmp(text,"coop_time_bend unbent100")||!std::strcmp(text,"coop_time_bend unbent70"))return true; // 1214if (#160, lab)
@@ -2178,6 +2179,7 @@ void dispatchCoopCommand(void* system,const char* text) {
     if(!std::strcmp(request.command,"coop_movement_bank off")){stopMovementBank();return;}
     if(!std::strcmp(request.command,"coop_movement_resume on")){beginMovementResume();return;}
     if(!std::strcmp(request.command,"coop_movement_resume off")){stopMovementResume();return;}
+    if(!std::strcmp(request.command,"coop_movement_direction_blend on")||!std::strcmp(request.command,"coop_movement_direction_blend off")){movementDirectionBlendEnabled=!std::strcmp(request.command,"coop_movement_direction_blend on");return;} // 2216
     if(!std::strcmp(request.command,"coop_movement_start_phase on")||!std::strcmp(request.command,"coop_movement_start_phase off")){movementStartPhaseEnabled=!std::strcmp(request.command,"coop_movement_start_phase on");return;} // 2114 (#266)
     if(!std::strcmp(request.command,"coop_movement_feet on")||!std::strcmp(request.command,"coop_movement_feet off")||!std::strcmp(request.command,"coop_movement_feet authored")){
         if(!movementBankActive()&&!movementLoad.state.load()){

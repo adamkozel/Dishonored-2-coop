@@ -289,8 +289,16 @@ struct MovementBank {
 // accumulated distance; idle time never advances the walking cycle.
 // 2114 (#266): lab switch coop_movement_start_phase on|off (on by default).
 inline bool movementStartPhaseEnabled=true;
+// 2216 (#269): crossfade a direction reversal (coop_movement_direction_blend on|off).
+inline bool movementDirectionBlendEnabled=true;
 struct MovementClock {
     unsigned startPhaseResets=0;
+    // 2216 (#269): the gait's direction pair (a, b, mix) follows each frame's displacement, so a reversal swaps the
+    // forward clips for the back clips in one frame and the legs jump (animquality-eotw-v2212c, the host seen from the
+    // VM: both toes 0.2-0.4 m in one 31 ms sample with the root still; a and c failed the skate limits on that contact).
+    // A turn of the travel direction over about 95 degrees while moving bumps directionSerial; the playback blends from
+    // the last locomotion pose over 0.18 s (directionTransition).
+    unsigned directionSerial=0;float directionTransition=1;
     // Last rejected physical step, retained for independent runtime diagnosis.
     unsigned rejectCode=0,rejectCount=0,rejectMotion=0,rejectAirState=0;
     float rejectDt=0,rejectDz=0,rejectRate=0;
@@ -421,8 +429,10 @@ struct MovementClock {
             turnWeight+=((turning?1.f:0.f)-turnWeight)*(1-std::exp(-float(dt)/.10f));
             turnTransition=(std::min)(1.f,turnTransition+float(dt)/.10f);
         }
+        directionTransition=(std::min)(1.f,directionTransition+float(dt)/.18f);
         if(distance>.00001f&&!powered){
             const float x=dx*rotation[0]+dy*rotation[1],y=dx*rotation[3]+dy*rotation[4];
+            if(movementDirectionBlendEnabled&&eligible&&physicalRate>.2f&&speedBefore>.15f&&(x*angleX+y*angleY)/distance<-.1f){++directionSerial;directionTransition=0;}
             if(MovementBank::directions(x,y,a,b,mix)){angleX=x/distance;angleY=y/distance;}
             sprintSide=y<0?28:27;sprintDirection=(std::min)(1.f,std::fabs(std::atan2(y,x))/.7853981634f);
             float stride=bank.clips[a].stride*(1-mix)+bank.clips[b].stride*mix;
