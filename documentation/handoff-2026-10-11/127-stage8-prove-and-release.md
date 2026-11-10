@@ -10,9 +10,18 @@ Step 6 proves the host-decides design on two Steam accounts (this PC hosts, the 
 | The whole campaign in one pairing | Pass, Corvo host and Emily partner, across candidates: Dunwall, Edge of the World, The Good Doctor, Dust District and the Grand Palace (v2180); A Crack in the Slab and Death to the Empress (v2183); The Clockwork Mansion and The Royal Conservatory (v2194, v2197, v2204) | `campaign-<mission>-vm-*` |
 | The other three pairings through the first, a middle and the last mission | Pass: Corvo / Corvo all three; Emily / Emily (Dunwall `v2192e`, the Conservatory, the Empress); Emily / Corvo (Dunwall `v2192c`, the Conservatory `v2194q` and `v2197q`, the Empress) | `campaign-*-vm-*` |
 | Save and load with the partner present | Pass: host load `hostload-v2185a` and `c`; pause-menu save and load `coop-hostsave-v2198a`, all eight checks | `work/release/coop-hostsave-v2198a` |
-| An update from 0.9.6 and a fresh install from GitHub on the clean VM | Run after the release build (below) | `work/release/release-update-*`, `product-two-account-*` |
+| An update from 0.9.6 and a fresh install from GitHub on the clean VM | **Pass:** the update passes 5 of 5 cases and the install 8 of 8. On the clean VM, `Install.cmd` alone installs the GitHub download, then two accounts play Dunwall: join, walk, a story trigger, a shared death and restart. The uninstall rolls back byte for byte | `work/release/release-update-v2227a`, `release-install-v2227b`, `product-two-account-v2235a` |
 
-The release regression repeats the hour session on the release candidate (`soak-hour-vm-v2227h`).
+The release regression repeated the hour session on the release candidate: `soak-hour-vm-v2227h` passed in 78 minutes, with every diff equal.
+
+## Release 1.0.0 (published 2026-11-10)
+
+- **Package:** `d2coop-v1.0.0.zip`, built from progress-v2227 with setup tool v2209 and decl-recipes-v3. It is 37,474,983 bytes, SHA-256 `D74DCBEFDCAACCE7B16E89EDE38A8A2381467ED0FAEDA2AC65760FCB18089CA1`.
+- **Published:** https://github.com/adamkozel/Dishonored-2-coop/releases/tag/v1.0.0. It went up as a prerelease first, at the user's choice, and was marked latest after the clean-VM proof.
+- **Local proofs:** `release-install-v2227b` passes 8 of 8 cases and `release-update-v2227a` 5 of 5.
+  - `release-install-v2227a` had failed `built_banks_load`. Since 2114 the bank test expected a walk from rest to start at phase 0. The test now checks the start phase on its own.
+- **Clean VM from the GitHub download:** `product-two-account-v2235a` passes. Its test, `Test-ProductTwoAccount-v2235`, answers the partner's main-menu Character dialog. `product-two-account-v2227a` (the local zip) waited at that dialog under the 0.9.3-era test.
+- **Final playtest with a friend:** a Needs-you step.
 
 ## Fixes step 6 forced
 
