@@ -1,153 +1,50 @@
-# Dishonored 2 Corvo/Emily co-op 0.9.6
+# Dishonored 2 Corvo/Emily co-op 1.0.0
 
 Two friends play the Dishonored 2 campaign together. Each plays Corvo or Emily, and each sees the other in the world.
 
 **This package contains no Dishonored 2 files.** The installer builds every file it needs from your own copy of the game.
 
-## Fixed in 0.9.6
+## New in 1.0: the host decides the shared world
 
-- **Your partner sees your powers.** On every install but our test machine, the other player's game never showed the
-  native effects of your powers ([#230](https://github.com/adamkozel/Dishonored-2-coop/issues/230)). This covered:
-  - Blink's burst and Blink Assault;
-  - Windblast's wave and Greater Windblast;
-  - Devouring Swarm's rats;
-  - Possession;
-  - Far Reach's beam;
-  - Domino's links;
-  - the Doppelganger and Twin Shade;
-  - the Mesmerize spirit;
-  - Shadow Walk's form;
-  - the grenade, Heart and trap you hold.
+Both players still run the whole game on their own PC. What changes in 1.0 is who decides: the host's game decides the shared world, and the partner's game sends requests to it.
 
-  They now show for both characters, whether you host or join. Dark Vision's glow is still yours alone, as in the
-  single-player game; your partner sees the gesture.
-- Both players need 0.9.6.
+- **Story, objectives and mission decisions** come from the host's game. The partner's game no longer runs them on its own, so the two games can no longer drift apart in the story.
+- **Items are per player.** Each player can pick up each item once, in their own world. Story items (keys, notes, maps, the rewire tool) reach both. Coins, runes, bonecharms, ammunition and elixirs are your own. The chaos level is shared, and the host decides it.
+- **One safe combination for both players.** A partner who turns a safe's dials or the Jindosh lock's wheels opens the host's lock as well.
+- **Joining mid-mission:** you join the host's world as it is, with the characters the host has already dealt with gone.
+- **Loading:** any load, by the host or the partner, rewinds both games together. The host can also load one of their own co-op saves from the pause menu; the partner follows.
+- **Guards near a partner who is far from the host keep moving.** Before, they stood still in the partner's game.
+- **The partner's powers act on the host's world:**
+  - The partner's Deadly Shade is fought by the host's guards, and on a Corvo host it appears as Emily's own shadow.
+  - A Blink Assault kick knocks the host's guards down, as in single player.
+  - A partner who possesses a rat or a fish is shown as that animal in the host's game. A partner who possesses a corpse is hidden in the host's game while inside it.
+- **Reinforcements:** guards the host's game sends later (Edge of the World's checkpoint reinforcements) appear for both players.
+- **First mission:** the partner chooses Corvo or Emily in the co-op *Character* dialog here too.
+- **The partner keeps their progression between joins, per character.** Powers, upgrades, extra health, runes, coins, ammunition, elixirs and bonecharms (found and crafted, and which are equipped) come back after the partner leaves and joins again, exactly as they were. Each character keeps its own set, saved on the partner's own PC beside the co-op saves.
+- **Mission ends:** the partner's game follows the host into the next mission straight away.
+- **A different co-op version is explained on screen:** if your friend runs another version of the mod, a message says that both players need the same version.
+- **Smoother partner movement:** the other player's feet no longer jump when they reverse direction.
 
-## New in 0.9.5
+## Fixed in 1.0
 
-- **Hosting starts by itself.** A co-op game started or loaded from *Co-op* on the main menu hosts its friends-only
-  Steam lobby as soon as it is in a mission, with no key to press. Invite your friend from Steam's overlay (Shift+Tab,
-  *Friends*, *Invite to Game*), or press **F7** to open Steam's invite window. Before, F7 during a session restarted it
-  and dropped a partner who was already playing ([#222](https://github.com/adamkozel/Dishonored-2-coop/issues/222)).
-- **When a game closes or crashes.** If the other player's game closes, crashes or loses its connection in the
-  middle of a mission, your game no longer opens its pause menu, and their character leaves your world after a few
-  seconds. The enemies they were near act on their own again. The host keeps hosting, so the partner can start the
-  game again and join the same session ([#221](https://github.com/adamkozel/Dishonored-2-coop/issues/221)).
-- **The same decisions in both games.** The partner's game now follows the host's mission decisions (who is alive,
-  non-lethal outcomes, robberies), also when joining from a co-op save made in another playthrough. The next
-  missions and the ending read the same decisions in both games ([#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220)).
-- **Every enemy attack hurts the partner.** Before, only guards' swords reached the partner. Guns, grenades, clockwork
-  soldiers, hounds and witches now hurt the partner as they hurt the host, through the partner's own game, so
-  blocking and the difficulty apply as usual ([#219](https://github.com/adamkozel/Dishonored-2-coop/issues/219)).
-- **No lost autosaves.** Once your co-op save folder held autosaves, the game could lose a new autosave when it
-  overwrote the slot the mod was reading at that moment. The shared death screen and restart then failed for that
-  player ([#225](https://github.com/adamkozel/Dishonored-2-coop/issues/225)). The mod now reads a save's details without blocking the game.
-- Both players need 0.9.5.
+- After joining a mission in progress, characters the host had already dealt with could still be present in your world.
+- Safe combinations could differ between the two worlds.
+- In the first mission the partner had to use the game's own choice screen.
+- **First mission:**
+  - The tower safe-room doors could open for the host and stay closed for the partner.
+  - At the end of the mission the partner went back to the streets and reached the next mission about two minutes late.
+  - The finished first mission was not marked complete in the partner's game.
+  - When the partner fought Ramsey, his finisher could wait and never play, and the partner could not take his ring.
+  - The other player's pistol arm pointed out to the side.
+- **The Good Doctor:** an elevator's buttons could stay disabled in the partner's world.
+- **The Clockwork Mansion and A Crack in the Slab:** the partner's mission end could lose a story step or reload the wrong mission.
+- A bottle that broke only in one world now breaks in both.
+- **Rejoining:** a partner who left and joined again could miss the deaths that had happened in the host's world while they were away.
+- In the end credits the partner no longer keeps two end-game script nodes active.
 
-## Fixed in 0.9.4
+## Updating from an earlier version
 
-- **The partner's combat choke.** After a timed parry leaves an enemy off-balance, the partner can now grab and choke
-  them, as the host always could. The enemy is knocked out in both worlds, so the partner can complete non-lethal
-  outcomes such as Ramsey's ([#209](https://github.com/adamkozel/Dishonored-2-coop/issues/209)).
-- **Story characters agree between the two worlds.** Civilians who belong to the story, such as the Duke's double, now
-  stand and move the same way in both games. Before, each game ran their routine on its own whenever neither player
-  was within 15 m of them.
-- Both players needed 0.9.4.
-
-## Fixed in 0.9.3
-
-- **Both worlds play the host's difficulty.** The partner's game now switches to the host's difficulty when the partner
-  joins, and again whenever the host changes it, including a Custom difficulty with all its settings
-  ([#177](https://github.com/adamkozel/Dishonored-2-coop/issues/177)). The setting is stored in the partner's co-op
-  profile only; their own campaigns keep their difficulty.
-- **Session status files.** In 0.9.2 an installed game stopped writing its small session status files
-  (`d2coop\coop-status.json.*`: the connection, the mission, checkpoints and difficulty) along with the diagnostics.
-  They are written again, about once a second, so a bug report can include them. The full diagnostics stay off unless
-  you turn them on.
-- Both players needed 0.9.3.
-
-## Fixed in 0.9.2
-
-- **Smoother frame pacing.** Co-op sessions stuttered: the mod spent most of each frame reading game memory the slow
-  way, and it also wrote diagnostic files. Native reads are now direct, and the diagnostic files are off unless you
-  turn them on ([#195](https://github.com/adamkozel/Dishonored-2-coop/issues/195)). In our tests the frame-time spikes
-  are as rare as with the mod off, on both PCs.
-- **Shared pickups work again.** A diagnostic hook added for levers had turned shared pickups off in every world, so
-  each player could take their own copy of everything
-  ([#189](https://github.com/adamkozel/Dishonored-2-coop/issues/189)).
-- **Joining a host who continued from a save.** The partner's world now loses the pickups the host already took, and
-  doors the host unlocked with a key are unlocked for the partner too. Characters the host already killed were already
-  handled ([#189](https://github.com/adamkozel/Dishonored-2-coop/issues/189)).
-- **Pickups outside the shared list.** A pickup that one player takes in an area the other has not visited yet leaves
-  the other player's world too, a little later ([#203](https://github.com/adamkozel/Dishonored-2-coop/issues/203)).
-- **The end of *Memories of Training*.** The partner's game no longer starts the tutorial again when both players
-  return to the main menu. A partner who joins midway starts co-op once they close the tutorial page
-  ([#174](https://github.com/adamkozel/Dishonored-2-coop/issues/174)).
-- Both players needed 0.9.2.
-
-## Fixed in 0.9.1
-
-- **Deaths and checkpoint restarts are shared again.** In 0.9.0 a co-op game saved into the co-op saves, but the mod
-  still looked for the mission autosave among your campaign saves, so the shared checkpoints never started: when one
-  player died, the other played on ([#171](https://github.com/adamkozel/Dishonored-2-coop/issues/171)). Both players
-  need 0.9.1.
-
-## New in 0.9.0
-
-- **Co-op on the main menu.** *Co-op* sits under *Campaign*. It starts or continues a co-op game with its own saves, kept
-  apart from your campaign saves ([#156](https://github.com/adamkozel/Dishonored-2-coop/issues/156)):
-  - every co-op save, autosave and checkpoint goes to the co-op saves;
-  - your own campaign saves and settings are never touched.
-- **Leave co-op.** During a session the pause menu's *Quit Game* reads *Leave Co-op*. It asks *Leave the co-op session?*
-  with *Cancel*, *Confirm* and *Back To Desktop* ([#157](https://github.com/adamkozel/Dishonored-2-coop/issues/157)).
-- **Play as Corvo or Emily, in any pairing** ([#158](https://github.com/adamkozel/Dishonored-2-coop/issues/158),
-  [#159](https://github.com/adamkozel/Dishonored-2-coop/issues/159)):
-  - the host chooses once, at the start of a co-op game;
-  - the partner chooses every time they join, in the game's own *Character* dialog;
-  - Corvo and Emily, Emily and Corvo, Corvo and Corvo, Emily and Emily all work.
-- **A Corvo partner's powers act on the host's world** ([#160](https://github.com/adamkozel/Dishonored-2-coop/issues/160),
-  [#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)):
-  - **Windblast**, *Greater Windblast* and *Shockwave* hit the host's characters;
-  - **Devouring Swarm** (and *Double Swarm*) eats the host's characters;
-  - **Bend Time** and **Stop Time** slow or stop the host's world, while both players keep moving in real time;
-  - **Possession** takes over the host's character: it walks where the partner walks it.
-
-## Fixed in 0.8.4
-
-- When the partner assassinates a story target (for example Ramsey), the body now stays in her world and lies where it fell in both worlds, so either player can search it ([#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140)).
-- A partner who accepts the invite at the title screen ("Press any key") now joins only after pressing a key there, so saving works ([#146](https://github.com/adamkozel/Dishonored-2-coop/issues/146)).
-
-## New in 0.8.3
-
-Emily's powers now act on the host's characters as they do in single player ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)):
-
-- **Mesmerize:** the characters it takes walk to her spirit and stand entranced, in both games.
-- **Doppelganger:** the host's guards see her shade and fight it. When they kill it, it dies in her game too.
-- **Deadly Shade:** the shade's kills happen in both games.
-- **Baffling Shade:** the confusion when the shade dies affects the host's guards.
-
-## Fixed in 0.8.2
-
-- On the first map of *A Long Day in Dunwall*, a death is now shared: both games show the game-over screen and restart together ([#148](https://github.com/adamkozel/Dishonored-2-coop/issues/148)).
-- When the partner assassinates a story target (for example Ramsey), the kill now happens in both worlds: the host's game holds the target still during her finishing move ([#140](https://github.com/adamkozel/Dishonored-2-coop/issues/140)).
-- A partner who leaves (F8) and joins the same mission again is placed beside the host ([#135](https://github.com/adamkozel/Dishonored-2-coop/issues/135)).
-
-## Fixed in 0.8.1
-
-- When the host finished a mission, the partner's game could stay in the finished mission while the host's moved on. Both games now move on to the next mission together.
-
-## New in 0.8.0
-
-- **Shared combat.** The host's game decides what happens to every NPC, and both worlds show the same result:
-  - damage, knockouts, deaths and takedowns by either player;
-  - guards, hounds, clockwork soldiers and scripted civilians;
-  - the partner now takes damage from guards ([#108](https://github.com/adamkozel/Dishonored-2-coop/issues/108)).
-- Counterattacks and knockdowns are shown on the partner ([#9](https://github.com/adamkozel/Dishonored-2-coop/issues/9)).
-- Spyglass, Timepiece, stumbles and recoils are shown on the partner ([#102](https://github.com/adamkozel/Dishonored-2-coop/issues/102), [#122](https://github.com/adamkozel/Dishonored-2-coop/issues/122)).
-- The Doppelganger clone and the Mesmerize spirit are shown to the partner ([#104](https://github.com/adamkozel/Dishonored-2-coop/issues/104)).
-- Far Reach pulls of objects and bodies happen in both worlds ([#115](https://github.com/adamkozel/Dishonored-2-coop/issues/115)).
-- Power upgrades with world outcomes are shared, for example time stops, kills and possessed bodies ([#117](https://github.com/adamkozel/Dishonored-2-coop/issues/117)).
-- Breakable doors, barricades and glass break in both worlds ([#132](https://github.com/adamkozel/Dishonored-2-coop/issues/132)).
+`Install.cmd` updates an earlier version in one step: it removes the earlier version through that version's own receipt, restoring the original files, and then installs 1.0. You do not need to run the old `Uninstall.cmd` first.
 
 ## Requirements
 
@@ -160,8 +57,8 @@ Emily's powers now act on the host's characters as they do in single player ([#1
 
 ## Install (both players)
 
-1. Close Dishonored 2. If an earlier version of the mod is installed, run its `Uninstall.cmd` first.
-2. Download `d2coop-v0.9.6.zip` from the GitHub release and extract it anywhere.
+1. Close Dishonored 2. An earlier version of the mod is updated in one step (see *Updating* above).
+2. Download `d2coop-v1.0.0.zip` from the GitHub release and extract it anywhere.
 3. Double-click **`Install.cmd`**.
    - It finds Dishonored 2 through Steam. If your game is somewhere else, run `Install.cmd "D:\Games\Steam\steamapps\common\Dishonored2"` from a command prompt.
    - It checks the game version and the package files.
@@ -187,6 +84,11 @@ Emily's powers now act on the host's characters as they do in single player ([#1
 5. Once both players are in the same mission, every co-op system turns on by itself.
 6. To leave, open the pause menu and choose **Leave Co-op** (or press **F8**).
 
+How the two games share the world:
+
+- Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
+- *Memories of Training* (the tutorial) is a stealth lesson for two: its trainer notices either player, and a noticed lesson restarts for both. Let one player take the stealth lessons while the other stays out of sight.
+
 ## Saves, deaths and missions
 
 - Co-op games have their own saves, apart from your campaign saves. *Co-op* on the main menu shows only co-op saves;
@@ -198,7 +100,7 @@ Emily's powers now act on the host's characters as they do in single player ([#1
 - Cutscenes play for both players.
 - At a mission's end the host chooses for both players: *Continue* takes both games to the next mission, and *Replay
   Mission* restarts the mission in both. The partner's own buttons on the result screen wait for the host's choice.
-- Either player can do the story: objectives, story items and level changes completed by the partner count for both worlds.
+- Either player can do the story. The host's game records it for both: objectives, story items, level changes and the outcomes of characters (spared, killed, knocked out) reach the host's world whoever caused them.
 
 ## Uninstall
 
@@ -216,7 +118,7 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 | "Unsupported Dishonored2.exe build" | Update the game in Steam. The mod supports only the version above. |
 | "base/master.index is not the original" | Another mod or an old install changed it. Verify the game files in Steam, then install again. |
 | "Dishonored 2 was not found" | Pass your game folder to `Install.cmd` (see Install). |
-| "Co-op is already installed here" | Run `Uninstall.cmd` first. |
+| "Co-op 1.0.0 is already installed here" | This version is already installed. To reinstall it, run `Uninstall.cmd` first. |
 | Windows Defender reports `dinput8.dll` (for example `Trojan:Win32/Bearfoos.A!ml`) | This is a false positive. The mod hooks the game's own functions, which is what this heuristic looks for. Restore the file from *Protection history*, or add the game folder as an exclusion, then install again. |
 | F7 does nothing | Check that `d2coop\d2coop.cfg` exists in the game folder (re-install). The game window must have focus. |
 | The invite window does not open | Enable the Steam overlay for Dishonored 2. |
@@ -229,20 +131,12 @@ To be completely sure afterwards, let Steam verify the game files: *Properties >
 ## Known limitations
 
 - Two players only.
-- A Corvo partner's *Blink Assault* kick staggers the host's guards rather than knocking them down, possessing rats or fish happens only in her game, and possessing a corpse is unverified ([#168](https://github.com/adamkozel/Dishonored-2-coop/issues/168)).
-- In the first mission (*A Long Day in Dunwall*) the partner chooses Corvo or Emily on the game's own choice screen rather than the *Character* dialog.
-- *Memories of Training* (the tutorial): Corvo fails his stealth lessons when he notices either player, in either game, and a failed lesson restarts both games at the start of the lesson. Let one player do the stealth lessons while the other stays well out of his sight.
-- After joining a mission already in progress, a few characters the host has already dealt with can still be present in your world.
-- Safes belong to each player's own world: each player opens their own, and combinations can differ between the two worlds (read them from the notes in your own game). Whatever one player takes from a safe is gone for both.
-- Partners cannot affect each other directly: no damage, powers, takedowns or prompts on each other. Normal collision is kept.
-- The host's game records the mission decisions for both players. The partner can complete the non-lethal
-  eliminations of Ramsey and Stilton. For the other targets the host completes the non-lethal steps: a step done
-  only in the partner's game (for example curing Hypatia) does not count ([#220](https://github.com/adamkozel/Dishonored-2-coop/issues/220)).
-- In the end credits the partner keeps two end-game script nodes active ([#94](https://github.com/adamkozel/Dishonored-2-coop/issues/94)). Both players still reach the main menu.
-- With **Deadly Shade**, the host's guards do not fight Emily's deadly shadow itself, although its kills happen in both games ([#131](https://github.com/adamkozel/Dishonored-2-coop/issues/131)).
+- The game uses a little more memory over long sessions, with or without the mod. Restart the game after several hours.
+
+## About the partner animation
+
 - The partner's movement banks are rebuilt from your game's animations. On a different CPU the values can differ from ours in their last digits, which is invisible.
 - Some partner movement clips are retargeted from Adobe Mixamo motion.
-- The game uses a little more memory over long sessions, with or without the mod. Restart the game after several hours.
 
 ## What the installer builds
 

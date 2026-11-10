@@ -18,7 +18,7 @@ Both players still run the whole game on their own PC. What changes in 1.0 is wh
   - The partner's Deadly Shade is fought by the host's guards, and on a Corvo host it appears as Emily's own shadow.
   - A Blink Assault kick knocks the host's guards down, as in single player.
   - A partner who possesses a rat or a fish is shown as that animal in the host's game. A partner who possesses a corpse is hidden in the host's game while inside it.
-- **Reinforcements:** guards the host's game sends later (Edge of the World's checkpoint reinforcements) appear for both players, and the partner's game no longer keeps reinforcements of its own.
+- **Reinforcements:** guards the host's game sends later (Edge of the World's checkpoint reinforcements) appear for both players.
 - **First mission:** the partner chooses Corvo or Emily in the co-op *Character* dialog here too.
 - **The partner keeps their progression between joins, per character.** Powers, upgrades, extra health, runes, coins, ammunition, elixirs and bonecharms (found and crafted, and which are equipped) come back after the partner leaves and joins again, exactly as they were. Each character keeps its own set, saved on the partner's own PC beside the co-op saves.
 - **Mission ends:** the partner's game follows the host into the next mission straight away.

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 2233z2: z again (corpse-possess-eotw-v2233z stopped when Steam was restarted on this PC: the host game process left).
 # 2233: candidate progress-v2233 (npcUnbound in the digest); z, the twin once more.
 # 2232: candidate progress-v2232 (npcUnread in the digest); y, the twin once more.
 # 2231: candidate progress-v2231 (packDebug in both roles); the host kept announcing the checkpoint keys in v2229v.
@@ -52,6 +53,7 @@ for x in ${*:-z}; do
   x) run corpse-possess-eotw-v2231x routes/corpse-possess-eotw-twin-v2214.json corvo corvo;;
   y) run corpse-possess-eotw-v2232y routes/corpse-possess-eotw-twin-v2214.json corvo corvo;;
   z) run corpse-possess-eotw-v2233z routes/corpse-possess-eotw-twin-v2214.json corvo corvo;;
+  r) run corpse-possess-eotw-v2233z2 routes/corpse-possess-eotw-twin-v2214.json corvo corvo;;
   p) run corpse-possess-eotw-v2222p routes/corpse-possess-eotw-packsoff-v2217.json corvo corvo;;
   r) run reinfpack-eotw-v2222r routes/reinfpack-eotw-v2205.json corvo corvo;;
  esac
