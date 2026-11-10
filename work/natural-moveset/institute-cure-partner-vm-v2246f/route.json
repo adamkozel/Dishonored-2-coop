@@ -1,0 +1,2220 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        2.400522,
+        -28.165901,
+        12.642111
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 8000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        2.400522,
+        -28.165901,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        239,
+        3,
+        6,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_HypatiaOffice,Task_IS_investigate,Task_IS_Locate_Dr_Hypatia"
+    }
+  },
+  {
+    "step": "step02-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_note_door_hypatia",
+      "pitches": [
+        0,
+        6,
+        -6
+      ],
+      "yaws": [
+        0,
+        -6,
+        6
+      ],
+      "settle": 4000,
+      "aim": true,
+      "gone": true,
+      "offsets": [
+        [
+          0.6,
+          0
+        ],
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          0,
+          -0.6
+        ]
+      ]
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        0.186,
+        57.566002,
+        41.003651
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        2,
+        6,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "207/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_Find_the_Master_key,Task_IS_FindClues,Task_IS_investigate"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        2,
+        6,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/182/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_Find_the_Master_key,Task_IS_FindClues,Task_IS_investigate"
+    }
+  },
+  {
+    "step": "step03-press",
+    "spec": {
+      "do": "press",
+      "button": "B",
+      "ms": 200,
+      "settle": 1500
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        0.186,
+        57.566002,
+        41.003651
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        2,
+        6,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "211/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_Find_the_Master_key,Task_IS_FindClues,Task_IS_investigate"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        2,
+        6,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/186/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_Find_the_Master_key,Task_IS_FindClues,Task_IS_investigate"
+    }
+  },
+  {
+    "step": "step04-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 4000,
+      "settle": 2000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        0.186,
+        57.566002,
+        41.003651
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        2,
+        6,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "211/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_Find_the_Master_key,Task_IS_FindClues,Task_IS_investigate"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        2,
+        6,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/186/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_Find_the_Master_key,Task_IS_FindClues,Task_IS_investigate"
+    }
+  },
+  {
+    "step": "step05-clear",
+    "spec": {
+      "do": "clear",
+      "name": "guard|elite|officer",
+      "near": [
+        -2.0,
+        54.5
+      ],
+      "radius": 14,
+      "max": 3,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 95,
+      "pos": [
+        1.763,
+        56.514999,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        2,
+        6,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "211/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_Find_the_Master_key,Task_IS_FindClues,Task_IS_investigate"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        238,
+        2,
+        6,
+        1,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/186/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_Find_the_Master_key,Task_IS_FindClues,Task_IS_investigate"
+    }
+  },
+  {
+    "step": "step06-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_hypatia_key",
+      "pitches": [
+        0,
+        6,
+        -6
+      ],
+      "yaws": [
+        0,
+        -6,
+        6
+      ],
+      "settle": 4000,
+      "aim": true,
+      "gone": true,
+      "offsets": [
+        [
+          0.6,
+          0
+        ],
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          0,
+          -0.6
+        ]
+      ]
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 95,
+      "pos": [
+        -2.259982,
+        52.932404,
+        41.60582
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        2,
+        6,
+        2,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "214/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_FindClues,Task_IS_Go_to_Recuperation,Task_IS_investigate"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        237,
+        2,
+        6,
+        2,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/188/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_FindClues,Task_IS_Go_to_Recuperation,Task_IS_investigate"
+    }
+  },
+  {
+    "step": "step07-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_door_glass_350cm_01_2_14",
+      "pitches": [
+        10,
+        0
+      ],
+      "yaws": [
+        0
+      ],
+      "settle": 5000,
+      "hold": 1500,
+      "offsets": [
+        [
+          1.3,
+          -1.5
+        ],
+        [
+          -1.3,
+          -1.5
+        ],
+        [
+          1.3,
+          -1.0
+        ],
+        [
+          -1.3,
+          -1.0
+        ]
+      ],
+      "z": 35.7
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 95,
+      "pos": [
+        -5.11,
+        60.004002,
+        34.003651
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        2,
+        6,
+        3,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "217/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_FindClues,Task_IS_investigate,Task_IS_Locate_Dr_Hypatiabis"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        236,
+        2,
+        6,
+        3,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 4,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/188/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_FindClues,Task_IS_investigate,Task_IS_Locate_Dr_Hypatiabis"
+    }
+  },
+  {
+    "step": "step08-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_45",
+      "settle": 6000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 95,
+      "pos": [
+        -48.189999,
+        30.525,
+        27.003649
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        6,
+        4,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "230/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_FindClues,Task_IS_investigate,Task_IS_Talk_to_Dr_Hypatia"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        2,
+        6,
+        4,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 4,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/197/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Investigate_Sokolov_whereabouts,Task_IS_FindClues,Task_IS_investigate,Task_IS_Talk_to_Dr_Hypatia"
+    }
+  },
+  {
+    "step": "step09-talk",
+    "spec": {
+      "do": "talk",
+      "name": "hypat|alexandr|grim",
+      "near": [
+        -49.0,
+        33.7
+      ],
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 100,
+      "pos": [
+        -40.276024,
+        33.69244,
+        27.003374
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        1,
+        4,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "239/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_FindClues,Task_IS_searcharea"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        235,
+        1,
+        4,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 4,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/206/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_FindClues,Task_IS_searcharea"
+    }
+  },
+  {
+    "step": "step10-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_npc_belt_scroll_case_01",
+      "aim": true,
+      "offsets": [
+        [
+          0.6,
+          0
+        ],
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          0,
+          -0.6
+        ]
+      ],
+      "pitches": [
+        0,
+        8,
+        -8
+      ],
+      "yaws": [
+        0,
+        -8,
+        8
+      ],
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 104,
+      "pos": [
+        -56.556313,
+        17.426735,
+        27.003645
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "265/0/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        233,
+        0,
+        4,
+        8,
+        0,
+        3,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/230/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step11-command",
+    "spec": {
+      "do": "command",
+      "role": "client",
+      "text": "coop_grant_named models/interactive/keys/institute/vascolabkey.inventoryitem"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 104,
+      "pos": [
+        -56.556313,
+        17.426735,
+        27.003645
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "265/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/233/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step12-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_door_glass_350cm_01_1_30",
+      "pitches": [
+        10,
+        0
+      ],
+      "yaws": [
+        0
+      ],
+      "hold": 1500,
+      "offsets": [
+        [
+          1.3,
+          -1.5
+        ],
+        [
+          -1.3,
+          -1.5
+        ],
+        [
+          1.3,
+          -1.0
+        ],
+        [
+          -1.3,
+          -1.0
+        ]
+      ],
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 106,
+      "pos": [
+        27.913471,
+        39.10397,
+        27.009386
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "269/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/237/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step13-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_campaign_syringe",
+      "aim": true,
+      "gone": true,
+      "offsets": [
+        [
+          0.6,
+          0
+        ],
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          0,
+          -0.6
+        ]
+      ],
+      "pitches": [
+        0,
+        8,
+        -8
+      ],
+      "yaws": [
+        0,
+        -8,
+        8
+      ],
+      "settle": 4000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 108,
+      "pos": [
+        26.215696,
+        35.617306,
+        27.003664
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "349/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/317/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step14-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_usable_dead_body_2",
+      "aim": true,
+      "offsets": [
+        [
+          0.6,
+          0
+        ],
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          0,
+          -0.6
+        ]
+      ],
+      "pitches": [
+        20,
+        35,
+        10
+      ],
+      "yaws": [
+        0,
+        -8,
+        8
+      ],
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 114,
+      "pos": [
+        17.371965,
+        48.392578,
+        27.003666
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "363/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/331/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step15-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_lab_retort_03_1",
+      "aim": true,
+      "offsets": [
+        [
+          0.6,
+          0
+        ],
+        [
+          -0.6,
+          0
+        ],
+        [
+          0,
+          0.6
+        ],
+        [
+          0,
+          -0.6
+        ]
+      ],
+      "pitches": [
+        0,
+        8,
+        -8
+      ],
+      "yaws": [
+        0,
+        -8,
+        8
+      ],
+      "settle": 15000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 120,
+      "pos": [
+        26.537371,
+        36.435284,
+        27.003666
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "468/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/436/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step16-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_valve",
+      "aim": true,
+      "offsets": [
+        [
+          0.9,
+          0
+        ],
+        [
+          -0.9,
+          0
+        ],
+        [
+          0,
+          0.9
+        ],
+        [
+          0,
+          -0.9
+        ]
+      ],
+      "pitches": [
+        0,
+        10,
+        -10,
+        20
+      ],
+      "yaws": [
+        0,
+        -8,
+        8
+      ],
+      "settle": 5000,
+      "focus": true,
+      "focusPress": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 120,
+      "pos": [
+        26.518999,
+        35.987999,
+        27.003666
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "572/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/540/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step17-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 30000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 120,
+      "pos": [
+        26.518999,
+        35.987999,
+        27.003666
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "573/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/541/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step18-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_lab_gobelet_01_1",
+      "aim": true,
+      "offsets": [
+        [
+          0.9,
+          0
+        ],
+        [
+          -0.9,
+          0
+        ],
+        [
+          0,
+          0.9
+        ],
+        [
+          0,
+          -0.9
+        ]
+      ],
+      "pitches": [
+        0,
+        10,
+        -10,
+        20
+      ],
+      "yaws": [
+        0,
+        -8,
+        8
+      ],
+      "settle": 15000,
+      "focus": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 125,
+      "pos": [
+        26.537354,
+        36.435287,
+        27.003666
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "723/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/691/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step19-diff",
+    "spec": {
+      "do": "diff",
+      "tag": "antidote"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 125,
+      "pos": [
+        26.537354,
+        36.435287,
+        27.003666
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "723/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/691/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step20-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_transfo_alone_2",
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 125,
+      "pos": [
+        -53.834999,
+        32.342999,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "732/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/700/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step21-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 60000,
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 125,
+      "pos": [
+        -53.834999,
+        32.342999,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "732/2/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        2.525481,
+        -27.458630,
+        12.642112
+      ],
+      "fresh": true,
+      "gameflow": [
+        234,
+        0,
+        4,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/700/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step22-choke",
+    "spec": {
+      "do": "choke",
+      "role": "client",
+      "name": "hypat|alexandr|grim",
+      "near": [
+        -49.0,
+        33.7
+      ],
+      "crouch": true,
+      "dist": 1.0,
+      "walkMs": 800,
+      "ms": 6000,
+      "max": 3,
+      "settle": 15000,
+      "pause": 60
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 129,
+      "pos": [
+        -59.647369,
+        28.550343,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "748/23/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -41.858536,
+        35.072346,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/737/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    }
+  },
+  {
+    "step": "step23-flag",
+    "spec": {
+      "do": "flag",
+      "role": "client",
+      "entity": "storyflags",
+      "name": "hypatia_is_cured",
+      "value": 1,
+      "ms": 30000,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 129,
+      "pos": [
+        -59.647369,
+        28.550343,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "748/23/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -41.858536,
+        35.072346,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/737/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    }
+  },
+  {
+    "step": "step24-flag",
+    "spec": {
+      "do": "flag",
+      "role": "host",
+      "entity": "storyflags",
+      "name": "hypatia_is_cured",
+      "value": 1,
+      "ms": 30000,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 129,
+      "pos": [
+        -59.647369,
+        28.550343,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "748/23/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -41.858536,
+        35.072346,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/737/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    }
+  },
+  {
+    "step": "step25-diff",
+    "spec": {
+      "do": "diff",
+      "tag": "cured"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 129,
+      "pos": [
+        -59.647369,
+        28.550343,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "748/23/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -41.858536,
+        35.072346,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/737/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    }
+  },
+  {
+    "step": "step26-clear",
+    "spec": {
+      "do": "clear",
+      "name": "guard|elite|officer",
+      "near": [
+        -70.0,
+        41.0
+      ],
+      "radius": 11,
+      "max": 4,
+      "settle": 3000,
+      "heal": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 155,
+      "pos": [
+        -68.394035,
+        37.994949,
+        19.607496
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "822/23/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -41.858536,
+        35.072346,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/811/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    }
+  },
+  {
+    "step": "step27-clear",
+    "spec": {
+      "do": "clear",
+      "name": "guard|elite|officer",
+      "near": [
+        -70.0,
+        41.0
+      ],
+      "radius": 11,
+      "max": 4,
+      "settle": 3000,
+      "heal": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 155,
+      "pos": [
+        -68.394035,
+        37.994949,
+        19.607496
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "822/23/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -41.858536,
+        35.072346,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        2,
+        6,
+        8,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 8,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/811/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe,Task_IS_Turn_OFF_the_watchtower"
+    }
+  },
+  {
+    "step": "step28-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_kar_whaleoil_tank_01_3",
+      "offsets": [
+        [
+          0,
+          0
+        ]
+      ],
+      "z": 17.9,
+      "pitches": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+      ],
+      "yaws": [
+        0
+      ],
+      "hold": 300,
+      "settle": 5000,
+      "live": true,
+      "heal": true,
+      "orbit": [
+        -75.34,
+        42.92
+      ],
+      "radius": 2.1
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 155,
+      "pos": [
+        -73.119308,
+        42.972797,
+        16.562387
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        1,
+        6,
+        9,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "824/23/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_continuemission,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -41.858536,
+        35.072346,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        1,
+        6,
+        9,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/812/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_continuemission,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  },
+  {
+    "step": "step29-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 30000,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 155,
+      "pos": [
+        -73.119301,
+        42.972797,
+        16.562387
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        1,
+        6,
+        9,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "824/23/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_continuemission,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/institute/institute_p_lowchaos",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -41.858536,
+        35.072346,
+        27.003647
+      ],
+      "fresh": true,
+      "gameflow": [
+        230,
+        1,
+        6,
+        9,
+        0,
+        2,
+        0
+      ],
+      "gfApplied": 10,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "0/812/0",
+      "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_continuemission,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+    }
+  }
+]

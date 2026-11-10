@@ -41,11 +41,16 @@ void scanBreakables(ULONGLONG tick){
     std::uintptr_t game=0,handles=0;std::uint32_t flags=0;s.scanAt=tick;s.scanFull=true;
     if(!memoryRead(base+0x39a5290,&game,8)||!game||!memoryRead(game+0x601c0,&handles,8)||!handles||!memoryRead(game+0x601c8,&flags,4))return;
     const auto count=flags&0xffffff;if(count>16384)return;
-    std::vector<BreakableEntry> next;
+    std::vector<BreakableEntry> next;const bool firstScanDone=!s.entries.empty();
     for(std::uint32_t i=0;i<count;++i){std::uint32_t handle=0;NativeBreakable b{};
         if(!memoryRead(handles+i*4,&handle,4)||!handle||!readNativeBreakable(memoryRead,base,game,handle,b,true))continue;
+        // 2248 (#285): a rescan keeps what was sent, so a step taken since the last poll is still sent by the next poll; it
+        // used to count as sent (institute-cure-partner-vm-v2247d: env_building_int_partition_02_glas_6 at step 1 on the host,
+        // sent 1, sends 0, whole in the partner world). On the host an entry that appears after the world's first scan is
+        // new to the catalog, not to the save, so its step is sent too (the partner applies only steps above its own).
         BreakableEntry e{};e.handle=handle;e.name=b.name;e.stepCount=b.stepCount;e.step=e.sent=b.step;e.seenAt=e.firstSeen=tick;
-        for(const auto& old:s.entries)if(old.handle==handle&&old.name==b.name){e.sent=(std::max)(old.sent,b.step);e.sends=old.sends;e.applied=old.applied;e.firstSeen=old.firstSeen;break;}
+        if(!localRole&&firstScanDone)e.sent=0;
+        for(const auto& old:s.entries)if(old.handle==handle&&old.name==b.name){e.sent=old.sent;e.sends=old.sends;e.applied=old.applied;e.firstSeen=old.firstSeen;break;}
         // 1214is (#179): 4096, was 1024. With movables Edge of the World has 1269 breakables (mission-breakables-v1774a),
         // and the catalog stopped at 1024 (mission-breakables-v1778a): later entries were never polled.
         next.push_back(std::move(e));if(next.size()>=4096){++s.catalogFull;break;}

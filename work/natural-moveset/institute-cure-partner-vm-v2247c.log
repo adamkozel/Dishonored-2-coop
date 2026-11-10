@@ -1,0 +1,222 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+18:59:06 copying lab scripts, tooling and bin
+18:59:12 mod resources (voidmod, master.index) into the game copy
+18:59:15 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : F76C5E151F48CE7A
+probe           : 88168DAF45DCBB20
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 88
+PSComputerName  : D2CoopVM
+RunspaceId      : 82935323-8436-4cac-8e0f-515ce17d9c3c
+
+
+19:00:16 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             88 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": false,
+  "failure": "The choke of hypat|alexandr|grim never reached hypatia_is_cured",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2247",
+      "hostDll": "F76C5E151F48CE7A69D322A95CC8985B48223E30D80BF93BA3EC697F5BB3E611",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 11,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 30296,
+        "writtenAt": 144017656,
+        "startedAgoMs": 2406,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 17516,
+        "writtenAt": 143970000,
+        "startedAgoMs": 2219,
+        "phase2Checks": 11
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.4,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 25,
+        "client": 25,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step11-command client coop_grant_named models/interactive/keys/institute/vascolabkey.inventoryitem"
+    ],
+    "diffwait-antidote": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-antidote": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-antidote": {
+      "status": "EQUAL",
+      "compared": 2139,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 176,
+        "pos": [
+          -59.141327,
+          29.687147,
+          27.003647
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          0,
+          4,
+          8,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "960/2/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 7,
+        "pos": [
+          -41.486408,
+          34.848312,
+          27.003645
+        ],
+        "fresh": true,
+        "gameflow": [
+          234,
+          0,
+          4,
+          8,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 8,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/927/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}
+[31;1mException: [0mC:\Users\adako\Documents\Codex\2026-10-08\i-x20\work\natural-moveset\Route-MissionVM-v2247.ps1:1231[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m1231 | [0m Get-Content "$out/result.json";if($failure){[36;1mthrow $failure[0m}[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                                             ~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mThe choke of hypat|alexandr|grim never reached hypatia_is_cured[0m

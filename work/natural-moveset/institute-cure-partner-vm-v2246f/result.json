@@ -1,0 +1,220 @@
+{
+  "passed": false,
+  "failure": "Host died at ",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2246",
+      "hostDll": "AFD115107E37F5ED7AA1F727F9BEAAD9A2F41F1DEE695D1BC23D0BC99DB7741A",
+      "guestDllMatches": true,
+      "hostCharacter": "emily"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 11,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 24859,
+        "writtenAt": 142059203,
+        "startedAgoMs": 2313,
+        "phase2Checks": 20
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 13,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 19125,
+        "writtenAt": 142011453,
+        "startedAgoMs": 2078,
+        "phase2Checks": 13
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.4,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/emily/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 25,
+        "client": 25,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step11-command client coop_grant_named models/interactive/keys/institute/vascolabkey.inventoryitem"
+    ],
+    "diffwait-antidote": {
+      "settled": true,
+      "s": 1.7
+    },
+    "armwait-antidote": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-antidote": {
+      "status": "EQUAL",
+      "compared": 2138,
+      "differences": 0,
+      "retried": "World digest failed (host, 45)",
+      "tries": 3
+    },
+    "step23-flag": {
+      "variable": "hypatia_is_cured",
+      "value": 1,
+      "ms": 1134
+    },
+    "step24-flag": {
+      "variable": "hypatia_is_cured",
+      "value": 1,
+      "ms": 1133
+    },
+    "diffwait-cured": {
+      "settled": true,
+      "s": 1.7
+    },
+    "armwait-cured": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-cured": {
+      "status": "EQUAL",
+      "compared": 2138,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "healthHold": [
+      "clear guard|elite|officer",
+      "clear guard|elite|officer",
+      "ld_kar_whaleoil_tank_01_3",
+      null
+    ],
+    "useRescues": [
+      "step30-use"
+    ],
+    "failureState": {
+      "host": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 155,
+        "pos": [
+          -83.57,
+          53.248001,
+          -4.909375
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          6,
+          9,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "832/23/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_continuemission,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+      },
+      "client": {
+        "logic": 13,
+        "pending": 0,
+        "map": "campaign/institute/institute_p_lowchaos",
+        "epoch": 16,
+        "cine": 9,
+        "pos": [
+          -41.858536,
+          35.072346,
+          27.003647
+        ],
+        "fresh": true,
+        "gameflow": [
+          230,
+          1,
+          6,
+          9,
+          0,
+          2,
+          0
+        ],
+        "gfApplied": 10,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/820/0",
+        "active": "Mission_IS,Obj_IS_Eliminate_the_Crown_Killer,Obj_IS_Escape,Task_IS_continuemission,Task_IS_Kill_the_Crown_Killer,Task_IS_NLethal_Take_Vasco_journal_in_his_safe"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/institute/institute.mapinfo across two machines and two Steam accounts in product mode (host emily on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

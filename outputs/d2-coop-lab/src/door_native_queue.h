@@ -14,7 +14,11 @@ bool nativeDoorUnlockAvailable(){
     return !std::memcmp(gameImage+0x74e4c0,start,sizeof(start));
 }
 bool unlockNativeDoor(const NativeOpenable& s){
-    if(!nativeDoorUnlockAvailable()||!s.locked||s.blocked||s.broken||s.linked)return false;
+    // 2246 (#281): a linked leaf unlocks too while linked doors are synced (coop_door_linked, on since 2228). Each leaf has
+    // its own channel and receives its own Unlock, and the third argument 0 keeps the native routine 0x74e4c0 to this leaf
+    // (1 would also set the leaf at component+0xe8). institute-keydoor-vm-v2245a: the Institute key door
+    // (ld_door_glass_350cm_01_1_24, _2_14) stayed locked in the partner world with native_unlock_refused.
+    if(!nativeDoorUnlockAvailable()||!s.locked||s.blocked||s.broken||(s.linked&&!nativeOpenableLinkedAllowed))return false;
     reinterpret_cast<void(*)(void*,char,char)>(gameImage+0x74e4c0)(reinterpret_cast<void*>(s.component),0,0);
     unsigned char locked=1;return memoryRead(s.component+0x1e8,&locked,1)&&!locked;
 }
