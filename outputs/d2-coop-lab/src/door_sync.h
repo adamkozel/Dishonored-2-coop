@@ -16,6 +16,9 @@ struct DoorSync {
     // 1214jf (#185): the shared key unlock. observedLocked is the last native lock byte seen here; unlockPending sends
     // this world's unlock, unlockOrdered applies the peer's.
     bool unlockPending=false,unlockOrdered=false;unsigned char observedLocked=0;
+    // 2247 (#281): which check stopped the channel at native_door_identity_or_eligibility_changed (institute-keydoor-vm-v2245a:
+    // ld_door_200_metal_rich_1_4 stopped on the host, then opened there only).
+    char failDetail[80]{};
     std::uint64_t unlocksSent=0,unlocksReceived=0,unlocksApplied=0;
     // 1214js (#189): the host's unlocked door at arming, for a partner world where it is still locked (a host who used
     // the key before saving). Sent before each first State until the partner acknowledges one: the partner accepts
@@ -187,7 +190,11 @@ void serviceDoorChannel(DoorSync& s,ULONGLONG tick){
     s.ready=s.peerArm&&s.helloAt&&tick-s.helloAt<channelHelloReadyMs();
     if(!s.ready)return;
     NativeOpenable n{};unsigned target=0,side=0;
-    if(!readBoundDoor(s,n)||!doorNativeDesired(n,target,side)){failDoorSync(s,"native_door_identity_or_eligibility_changed");return;}
+    if(!readBoundDoor(s,n)){std::snprintf(s.failDetail,sizeof(s.failDetail),"identity");failDoorSync(s,"native_door_identity_or_eligibility_changed");return;}
+    if(!doorNativeDesired(n,target,side)){unsigned char p[4]{0xff,0xff,0xff,0xff};memoryRead(n.component+0x90,p,4);
+        std::snprintf(s.failDetail,sizeof(s.failDetail),"cur=%u pend=%u blk=%u brk=%u lnk=%u side=%u p=%02x%02x%02x%02x",n.current,n.pending,
+            unsigned(n.blocked),unsigned(n.broken),unsigned(n.linked),unsigned(n.openSide),p[0],p[1],p[2],p[3]);
+        failDoorSync(s,"native_door_identity_or_eligibility_changed");return;}
     // 1214jf (#185): a key unlock in either world is applied once in the other through the native lock routine. Keys are
     // personal pickups, so the other player could never open that door (mission-locked-door-v1841b). An unlock applied
     // here is not sent back. A later native relock is not shared: door scripts run in both worlds.
@@ -316,7 +323,7 @@ void writeDoorSync(){
     fprintf(f,"\"menu\":{\"suspended\":%s,\"since\":%llu,\"suspensions\":%llu,\"resumes\":%llu,\"pausedMs\":%llu,\"packetsIgnored\":%llu},",doorSession.menuSuspended?"true":"false",doorSession.menuSince,doorSession.menuSuspensions,doorSession.menuResumes,doorSession.menuPausedMs,doorSession.menuPacketsIgnored);
     fprintf(f,"\"experimental\":true,\"enabled\":%s,\"catalogCount\":%zu,\"ambiguous\":%u,\"ineligible\":%u,\"ignoredWhileDisabled\":%llu,\"unmatched\":%llu,\"rejected\":%llu,\"scanMs\":%u,\"serviceMs\":%u,\"serviceMaxMs\":%u,\"result\":\"%s\",\"entries\":[",doorCatalogEnabled?"true":"false",doorChannels.size(),doorCatalogAmbiguous,doorCatalogIneligible,doorCatalogIgnored,doorCatalogUnmatched,doorCatalogRejected,doorCatalogScanMs,doorServiceMs,doorServiceMaxMs,doorCatalogResult);
     bool first=true;for(const auto& s:doorChannels){if(!first)fputc(',',f);first=false;fputs("{\"name\":",f);writeWorldText(f,s.binding.name.c_str());fputs(",\"definition\":",f);writeWorldText(f,s.binding.definitionName.c_str());
-    fprintf(f,",\"role\":%u,\"enabled\":%s,\"ready\":%s,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%llu,\"target\":%u,\"side\":%u,\"applied\":%llu,\"ack\":%llu,\"awaiting\":%s,\"inFlight\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"requests\":%llu,\"commits\":%llu,\"nativeCalls\":%llu,\"converged\":%llu,\"sideCorrections\":%llu,\"locked\":%u,\"unlocksSent\":%llu,\"unlocksReceived\":%llu,\"unlocksApplied\":%llu,\"armUnlocksSent\":%llu,\"result\":\"%s\"}",localRole,s.enabled?"true":"false",s.ready?"true":"false",s.arm,s.peerArm,s.order.revision,s.order.target,s.order.side,s.applied,s.ack,s.awaiting?"true":"false",s.inFlight,s.sent,s.received,s.rejected,s.duplicates,s.requests,s.commits,s.calls,s.converged,s.sideCorrections,unsigned(s.observedLocked),s.unlocksSent,s.unlocksReceived,s.unlocksApplied,s.armUnlocksSent,s.result);
+    fprintf(f,",\"role\":%u,\"enabled\":%s,\"ready\":%s,\"arm\":%llu,\"peerArm\":%llu,\"revision\":%llu,\"target\":%u,\"side\":%u,\"applied\":%llu,\"ack\":%llu,\"awaiting\":%s,\"inFlight\":%llu,\"sent\":%llu,\"received\":%llu,\"rejected\":%llu,\"duplicates\":%llu,\"requests\":%llu,\"commits\":%llu,\"nativeCalls\":%llu,\"converged\":%llu,\"sideCorrections\":%llu,\"locked\":%u,\"unlocksSent\":%llu,\"unlocksReceived\":%llu,\"unlocksApplied\":%llu,\"armUnlocksSent\":%llu,\"failDetail\":\"%s\",\"result\":\"%s\"}",localRole,s.enabled?"true":"false",s.ready?"true":"false",s.arm,s.peerArm,s.order.revision,s.order.target,s.order.side,s.applied,s.ack,s.awaiting?"true":"false",s.inFlight,s.sent,s.received,s.rejected,s.duplicates,s.requests,s.commits,s.calls,s.converged,s.sideCorrections,unsigned(s.observedLocked),s.unlocksSent,s.unlocksReceived,s.unlocksApplied,s.armUnlocksSent,s.failDetail,s.result);
     }
     fputs("]}\n",f);const bool ok=!ferror(f);const auto closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }
