@@ -29,7 +29,13 @@ if($running.Count){throw 'Close Dishonored 2 first; nothing changed.'}
 if((Get-Sha256Hash (Join-Path $game 'Dishonored2.exe'))-ne$manifest.requiredExecutableSha256){throw 'Unsupported Dishonored2.exe build (the mod needs the current Steam version); nothing changed.'}
 if((Get-Sha256Hash (Join-Path $game 'steam_api64.dll'))-ne$manifest.requiredSteamApiSha256){throw 'Unexpected steam_api64.dll; nothing changed.'}
 $receiptPath=Join-Path $game 'd2coop-install-receipt.json'
-if(Test-Path -LiteralPath $receiptPath){throw 'Co-op is already installed here (receipt present); uninstall first.'}
+# 1.0: an earlier version installed here is updated in one step. Its own receipt removes it first (the uninstaller
+# checks every backup before it changes anything and restores the originals byte for byte); the same version is refused.
+if(Test-Path -LiteralPath $receiptPath){$old=Get-Content -LiteralPath $receiptPath -Raw|ConvertFrom-Json
+  if("$($old.version)"-eq"$($manifest.version)"){throw "Co-op $($manifest.version) is already installed here (receipt present); nothing changed."}
+  Write-Host "Updating co-op $($old.version) to $($manifest.version): removing $($old.version) first..."
+  & (Join-Path $package 'Uninstall-D2Coop.ps1') -GameDirectory $game|ForEach-Object {Write-Host $_}
+  if(Test-Path -LiteralPath $receiptPath){throw "Co-op $($old.version) could not be removed; run its Uninstall.cmd, then this Install.cmd."}}
 if((Get-Sha256Hash (Join-Path $game 'base/master.index'))-ne$manifest.originalMasterIndexSha256){throw 'base/master.index is not the original; restore it (Steam: Properties > Installed Files > Verify) first.'}
 # Shipped files sit under files\ in the package and install to the same relative path in the game folder.
 foreach($f in @($manifest.files|ForEach-Object {[pscustomobject]@{path="files/$($_.path)";sha256=$_.sha256}})+@($manifest.tools)+@($manifest.data)){if((Get-Sha256Hash (Join-Path $package $f.path))-ne$f.sha256){throw "Package file corrupted: $($f.path); download the release again."}}

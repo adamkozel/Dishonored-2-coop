@@ -356,7 +356,9 @@ bool shadowSourceAction(unsigned& action,float* leanSide=nullptr,float* leanUp=n
     if(nativeStateValid)shadowDeath.start=0;
     const bool stunValid=nativeStateValid&&shadowTimedRead(1,[&]{return readNativePlayerStunScene(memoryRead,base,states,stun);});
     const bool powerValid=nativeStateValid&&!stunValid&&shadowTimedRead(2,[&]{return (readNativePlayerPowerScene(memoryRead,base,states,power,true)||readNativePlayerDominoScene(memoryRead,base,states,power)||readNativePlayerDoppelgangerScene(memoryRead,base,states,power)||readNativePlayerSwarmScene(memoryRead,base,states,power)||readNativePlayerPossessionScene(memoryRead,base,states,power,true)||readNativePlayerShadowWalkScene(memoryRead,base,states,power));});
-    const bool possessionOccupied=nativeStateValid&&!stunValid&&!powerValid&&readNativeHumanPossessionOccupation(memoryRead,base,states);
+    // 2207 (#278): a corpse she occupies counts as an occupied host too (semantic 17), so the other world hides her avatar.
+    const bool possessionOccupied=nativeStateValid&&!stunValid&&!powerValid&&(readNativeHumanPossessionOccupation(memoryRead,base,states)||
+        (coopCorpsePossessionEnabled&&readNativeCorpsePossessionOccupation(memoryRead,base)));
     NativePlayerRangedScene ranged{};
     const bool rangedValid=nativeStateValid&&!powerValid&&shadowTimedRead(3,[&]{return readNativePlayerRangedScene(memoryRead,base,states,ranged);});
     NativePlayerGrenadeScene grenade{};

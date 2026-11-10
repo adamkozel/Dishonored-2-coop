@@ -111,12 +111,21 @@ struct MissionTransitionHold {
     bool ownsWindow=false;std::uint64_t peeks=0;
 };
 MissionTransitionHold transitionHold{};
+// 2193: a partner's Continue at a shared mission end is her own first (it keeps her world's native state, as the
+// hub needs: campaign-curator-vm-v2181b, campaign-madinventor-vm-v2191m), then she follows the host when the host
+// announces another map (mission_decision.h). So a hold whose peer reports another map releases at once instead of
+// waiting 90 s on both sides. Lab switch coop_continue_own on|off (off: the v2103 follow at once, and the 90 s hold).
+bool missionContinueOwnFirst=true;std::uint64_t transitionOtherMapReleases=0;
 void expectMissionTransition(std::uint64_t tick){auto& h=transitionHold;h.expect=true;h.expectAt=tick;*h.peerMap=0;*h.localMap=0;h.result="expecting";}
+// 2197: D2MR reserved 1 is the host's "I loaded a save of this map" (checkpoint_sync.h, mission_decision.h).
+char hostSaveLoadMap[160]{};std::uint64_t hostSaveLoadReceivedAt=0,hostSaveLoadReceived=0;
 void receiveMapReady(const MapReadyPacket& p){
     auto& h=transitionHold;++h.received;
     if(p.magic!=0x524D3244||p.version!=1||p.size!=sizeof(p)||p.role>1||p.role==localRole||p.session!=remote.session||p.sequence<=h.peerSequence||
        !std::memchr(p.map,0,sizeof(p.map))||std::strncmp(p.map,"campaign/",9)){++h.refused;return;}
-    h.peerSequence=p.sequence;std::snprintf(h.peerMap,sizeof(h.peerMap),"%s",p.map);
+    h.peerSequence=p.sequence;
+    if(p.reserved==1){if(localRole){std::snprintf(hostSaveLoadMap,sizeof(hostSaveLoadMap),"%s",p.map);hostSaveLoadReceivedAt=GetTickCount64();++hostSaveLoadReceived;}return;}
+    std::snprintf(h.peerMap,sizeof(h.peerMap),"%s",p.map);
 }
 // 1214be: the ready is re-sent every second while holding and for 30 s after
 // release. Across machines a single send could arrive before the partner
@@ -157,6 +166,7 @@ void waitMissionTransition(){
     h.ownsWindow=holdThreadOwnsWindow();std::uint64_t lastPeek=0;
     for(;;){
         if(*h.peerMap&&!std::strcmp(h.peerMap,h.localMap)){h.result="released";break;}
+        if(missionContinueOwnFirst&&*h.peerMap&&std::strcmp(h.peerMap,h.localMap)){h.result="released_other_map";++transitionOtherMapReleases;break;}
         const auto tick=GetTickCount64();
         if(tick-h.startedAt>90000){++h.timeouts;h.result=*h.peerMap?"timeout_other_map":"timeout";break;}
         if(!sockets||!connection||connectionState!=k_ESteamNetworkingConnectionState_Connected){++h.aborted;h.result="connection_lost";break;}
@@ -458,7 +468,9 @@ void serviceGameflowMirror(std::uint64_t tick){
                 // ended mission at 0: the host's world ran its end (firstmission-dunwall-v2100a, v2103a-e: Escape Dunwall
                 // node bf0f0d6f host 3, partner 0 in the Void). Written into the node (+0xc, the state the scan reads)
                 // without the native routine, so no mission notice shows and no script reacts to a mission of another map.
-                else if(nodes[j].first.state==0&&want.state==3){*reinterpret_cast<std::int32_t*>(nodes[j].second+0xc)=3;
+                // 2190: any finished state the host has (3, or 4 as The Clockwork Mansion ends: campaign-madinventor-vm-v2181b,
+                // node bf086e4f host 4, partner 0 in the Conservatory after following the host), not only 3.
+                else if(nodes[j].first.state==0&&want.state>=3&&want.state<=15){*reinterpret_cast<std::int32_t*>(nodes[j].second+0xc)=want.state;
                 g.mirrorSet[want.id]=want.state;++g.missionCompleted;++changed;}else ++g.skippedMission;break;}
             if(nodes[j].first.state!=want.state){
                 const auto hd=g.held.find(want.id);

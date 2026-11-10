@@ -18,6 +18,9 @@ bool unlockNativeDoor(const NativeOpenable& s){
     reinterpret_cast<void(*)(void*,char,char)>(gameImage+0x74e4c0)(reinterpret_cast<void*>(s.component),0,0);
     unsigned char locked=1;return memoryRead(s.component+0x1e8,&locked,1)&&!locked;
 }
+// 2228 (#279, lab): "coop_lab_door_native <name> open|close" queues the native transition of the named door in this world only
+// (as a host NPC opening it would); the result is in .door-fixture.json.
+char labDoorNativeName[96]{};unsigned labDoorNativeTarget=2;const char* labDoorNativeResult="idle";std::uint64_t labDoorNativeCalls=0;
 bool queueNativeDoorTransition(const NativeOpenable& s,unsigned target,unsigned side){
     if(!nativeDoorQueueAvailable()||!nativeOpenableTransitionAllowed(s,target,side)||s.current==target)return false;
     const auto parameters=nativeOpenableParameters(s,target,side);

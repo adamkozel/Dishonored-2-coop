@@ -1,0 +1,38 @@
+{
+  "oldPackage": "C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v0.9.6",
+  "passed": true,
+  "failure": null,
+  "cases": [
+    {
+      "case": "old_install",
+      "passed": true,
+      "message": "Building the co-op resource packages from your game files...\nBuilding the corvo movement bank from your game files...\nBuilding the emily movement bank from your game files...\nBuilding the prop animation tables from your game files...\nInstalled Dishonored 2 co-op 0.9.6: 14 files; originals backed up in d2coop-backup\\20261110-011145\r\n\r\n",
+      "seconds": 63.7
+    },
+    {
+      "case": "update",
+      "passed": true,
+      "message": "Updating co-op 0.9.6 to 1.0.0: removing 0.9.6 first...\nRolled back: 13 added files removed, 1 originals restored.\nBuilding the co-op resource packages from your game files...\nBuilding the corvo movement bank from your game files...\nBuilding the emily movement bank from your game files...\nBuilding the prop animation tables from your game files...\nInstalled Dishonored 2 co-op 1.0.0: 14 files; originals backed up in d2coop-backup\\20261110-011304\r\n\r\n",
+      "seconds": 78.8
+    },
+    {
+      "case": "reinstall_refused",
+      "passed": true,
+      "message": "Co-op 1.0.0 is already installed here (receipt present); nothing changed.\r\nAt C:\\Users\\adako\\Documents\\Codex\\2026-10-08\\i-x20\\outputs\\release\\d2coop-v1.0.0\\Install-D2Coop.ps1:35 char:50\r\n+ ... .version)\"){throw \"Co-op $($manifest.version) is already installed he ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : OperationStopped: (Co-op 1.0.0 is ...othing changed.:String) [], RuntimeException\r\n    + FullyQualifiedErrorId : Co-op 1.0.0 is already installed here (receipt present); nothing changed.\r\n \r\n\r\n",
+      "seconds": null
+    },
+    {
+      "case": "rollback_byte_identical",
+      "passed": true,
+      "message": "Rolled back: 13 added files removed, 1 originals restored.\r\n\r\n",
+      "seconds": null
+    },
+    {
+      "case": "steam_install_untouched",
+      "passed": true,
+      "message": null,
+      "seconds": null
+    }
+  ],
+  "package": "C:/Users/adako/Documents/Codex/2026-10-08/i-x20/outputs/release/d2coop-v1.0.0"
+}

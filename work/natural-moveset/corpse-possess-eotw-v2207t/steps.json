@@ -1,0 +1,148 @@
+[
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_corpse_possession off"
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "attack",
+  "name": "guard_male_small",
+  "near": [
+   58.73,
+   24.05
+  ],
+  "max": 80,
+  "settle": 4000,
+  "behind": true
+ },
+ {
+  "do": "wait",
+  "ms": 30000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "killed"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   53.07,
+   22.04,
+   20.6
+  ],
+  "yaw": 20
+ },
+ {
+  "do": "wait",
+  "ms": 4000,
+  "settle": 1000
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named components/characters/player/base/attributes/possession_decayed_harbor.inventoryitem"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named models/powers/possession/possession.inventoryitem"
+ },
+ {
+  "do": "wait",
+  "ms": 2000
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_lab_corpse_probe"
+ },
+ {
+  "do": "wait",
+  "ms": 1500
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "npcs",
+  "near": [
+   58.73,
+   24.05
+  ],
+  "settle": 1000
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_lab_possess_corpse"
+ },
+ {
+  "do": "wait",
+  "ms": 4000
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 6000,
+  "inputs": [
+   {
+    "LeftY": 20000,
+    "ms": 4000
+   }
+  ]
+ },
+ {
+  "do": "npcs",
+  "near": [
+   58.73,
+   24.05
+  ],
+  "settle": 1000
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "end",
+  "require": true
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_corpse_possession on"
+ }
+]

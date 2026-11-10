@@ -66,7 +66,12 @@ void npcAuthorityProtocolTests(){
      auto x=l;x.h.reserved=1;require(validNpcControl(x,client,host),"or its knockout");
      x=l;x.h.reserved=3;require(!validNpcControl(x,client,host),"only unconscious or dead");x.h.reserved=0;require(!validNpcControl(x,client,host),"never alive");
      x=l;x.h.reserved=kNpcLifePresent;require(l.h.role!=0||validNpcControl(x,client,host),"2163: the host announces a present NPC");
-     x.h.reserved=5;require(!validNpcControl(x,client,host),"no other life state");
+     x=l;x.h.reserved=kNpcLifeCounts;x.h.reserved2=2u|(2u<<16);require(l.h.role!=0||validNpcControl(x,client,host),"2205: the host sends a pack's counts");
+     x.h.reserved2=0;require(!validNpcControl(x,client,host),"counts name at least one NPC");
+     x.h.reserved2=65;require(!validNpcControl(x,client,host),"at most 64 per state");
+     x.h.reserved2=1u<<24;require(!validNpcControl(x,client,host),"three count bytes only");
+     x=l;x.h.reserved2=1;require(!validNpcControl(x,client,host),"reserved2 only with counts");
+     x=l;x.h.reserved=6;require(!validNpcControl(x,client,host),"no other life state");
      x=l;x.h.targetArm=8;require(!validNpcControl(x,client,host),"names no channel");
      x=l;x.h.sourceArm=7;require(!validNpcControl(x,client,host),"carries the sender NPC handle only");
      require(npcLifeApplies(0,2)&&npcLifeApplies(1,2)&&npcLifeApplies(0,1)&&!npcLifeApplies(2,1)&&!npcLifeApplies(1,1)&&!npcLifeApplies(0,3),"only a more severe known state applies");}

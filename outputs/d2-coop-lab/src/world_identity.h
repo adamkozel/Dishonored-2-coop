@@ -95,7 +95,7 @@ template<class Read> bool readWorldNpcIdentity(Read read,std::uintptr_t base,std
     out=std::move(n);return true;
 }
 template<class Read> bool readWorldNpcCatalog(Read read,std::uintptr_t base,std::uintptr_t game,
-                                            std::vector<NativeWorldNpc>& catalog,unsigned& unbound) {
+                                            std::vector<NativeWorldNpc>& catalog,unsigned& unbound,std::vector<std::uint32_t>* failed=nullptr) {
     catalog.clear();unbound=0;
     std::uintptr_t vt=0,handles=0;std::uint32_t flags=0;
     if(!game||!read(game,&vt,8)||vt!=base+0x1c940a8||!read(game+0x601c0,&handles,8)||!handles||
@@ -114,7 +114,8 @@ template<class Read> bool readWorldNpcCatalog(Read read,std::uintptr_t base,std:
         if(!entity||!read(entity,&vt,8))continue;
         if(vt==base+0x1c5e108){
             NativeWorldNpc n{};
-            if(readWorldNpcIdentity(read,base,game,handle,n))catalog.push_back(std::move(n));else ++unbound;
+            // 2233 (#277): the handles that failed the identity read, for the digest's npcUnbound.
+            if(readWorldNpcIdentity(read,base,game,handle,n))catalog.push_back(std::move(n));else{++unbound;if(failed&&failed->size()<64)failed->push_back(handle);}
         }else if(vt==base+0x1c5e948){
             std::uintptr_t name=0;if(!read(entity+0x20,&name,8))continue;
             std::string text;if(!worldIdentityString(read,name,text))return false;

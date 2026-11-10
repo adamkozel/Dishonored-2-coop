@@ -9,6 +9,19 @@ void writeDoorFixture(){
     fprintf(f,"{\"localExperiment\":true,\"calls\":%u,\"refused\":%u,\"noops\":%u,\"target\":%u,\"before\":%u,\"pendingAfter\":%u,\"handle\":%u,\"epoch\":%llu,\"result\":\"%s\"}\n",d.calls,d.refused,d.noops,d.target,d.before,d.after,d.handle,d.epoch,d.result);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }
+void serviceLabDoorNative(){
+    if(!labDoorNativeName[0]||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
+    const std::string name=labDoorNativeName;labDoorNativeName[0]=0;++labDoorNativeCalls;
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);std::uintptr_t list=0;unsigned count=0;
+    if(!observedGame||!memoryRead(observedGame+0x601c0,&list,8)||!list||!memoryRead(observedGame+0x601c8,&count,4)||(count&0xffffff)>16384){labDoorNativeResult="registry_unavailable";}
+    else{std::vector<unsigned> handles(count&0xffffff);NativeOpenable selected{};unsigned matches=0;
+        if(!handles.empty()&&memoryRead(list,handles.data(),handles.size()*4))
+            for(auto h:handles){NativeOpenable s{};if(readNativeOpenable(memoryRead,base,observedGame,h,s)&&s.name==name){selected=std::move(s);++matches;}}
+        if(matches!=1)labDoorNativeResult=matches?"ambiguous_door":"no_door";
+        else if(selected.current==labDoorNativeTarget)labDoorNativeResult="already_at_target";
+        else labDoorNativeResult=queueNativeDoorTransition(selected,labDoorNativeTarget,labDoorNativeTarget==2?0:selected.openSide)?(selected.linked?"queued_linked":"queued"):"refused";}
+    doorFixture.result=labDoorNativeResult;writeDoorFixture();
+}
 void serviceDoorFixture(ULONGLONG tick){
     if(doorFixtureRequest==~0u||!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load())return;
     const auto target=doorFixtureRequest;doorFixtureRequest=~0u;auto& d=doorFixture;

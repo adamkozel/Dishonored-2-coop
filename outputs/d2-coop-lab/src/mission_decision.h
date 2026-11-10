@@ -18,6 +18,9 @@ struct MissionDecision {
     std::uint64_t decidedEpoch=0,decidedAt=0,sentAt=0,receivedAt=0,appliedEndEpoch=0,partnerAppliedEpoch=0;
     MissionDecisionPacket last{},incoming{};const char* result="idle";
     bool awaitingHostMap=false;std::uint64_t awaitSince=0,followContinues=0,followFallbacks=0; // 2103 (#264, M1)
+    std::uint64_t ownEndContinues=0; // 2191
+    bool ownFirst=false;std::uint64_t ownFirstEpoch=0,ownFirstSince=0,ownFirstSame=0,ownFirstFollowed=0; // 2193
+    int cachedSlot=-2;std::uint64_t followAtOnce=0; // 2201
 };
 MissionDecision missionDecision{};
 bool coopMissionDecisionFlag(){return localRole==0&&missionDecision.enabled;}
@@ -110,6 +113,12 @@ void dispatchMissionDecision(void* system,unsigned kind,int slot) {
 // does ("campaign <mapinfo>", her progression restored after it, partner_progress.h). No announcement in 60 s:
 // her own Continue as before. Lab switch coop_continue_follow on|off (the twin).
 bool missionContinueFollow=true;
+// 2193: her own Continue first, then the host's map. Following by "campaign <mapinfo>" loads the next mission fresh, so
+// a hub such as the Dreadful Wale lacks what her campaign carried (campaign-curator-vm-v2181b), and a finished mission
+// node her world had is gone (campaign-madinventor-vm-v2191m: bf086e4f 4 on both, absent after the follow). Her native
+// Continue loads the next mission start her world cached at Results and keeps all of it. When that is not the host's
+// map (her world never ran the mission end: campaign-bunker-vm-v2181a, -empress, firstmission-dunwall-v2095a), the
+// hold releases at once (mission_end_mirror.h) and she loads the host's mission. missionContinueOwnFirst is the switch.
 bool missionFollowOn(){return productMode||followHostEnabled;}
 bool continueToHostMission(void* system){
     auto& d=missionDecision;const char* peer=transitionHold.peerMap;
@@ -119,11 +128,38 @@ bool continueToHostMission(void* system){
     char command[220]{};std::snprintf(command,sizeof(command),"campaign %s %s %s",mapinfo,std::strstr(peer,"highchaos")?"high":"low",character==1?"corvo":"emily");
     coopNativeChoicePick=character;partnerProgressJoinPending=true;partnerProgressJoinCharacter=character;
     d.partnerAppliedEpoch=outgoing.worldEpoch;d.appliedKind=1;d.held=false;d.awaitingHostMap=false;
+    missionFollowQuietUntil=GetTickCount64()+90000; // 2199: the product mission follow does not load it a second time
     dispatchCoopCommand(system,command);++d.followContinues;++d.continued;d.result="continued_to_host_mission";
     return true;
 }
+// 2197 (#244): a host that loaded one of its own saves announces its map once its world is in gameplay again (D2MR
+// reserved 1, every second for 10 s). A partner on that same map loads the host's mission again, as a join does; on
+// another map the product mission follow brings her (a second load here would be the double load of v2186b).
+std::uint64_t hostSaveLoadUntil=0,hostSaveLoadSentAt=0,hostSaveLoadSends=0,partnerSaveLoadFollows=0,partnerSaveLoadAt=0,partnerSaveLoadOtherMap=0;
+const char* saveLoadResult="idle";
+void serviceHostSaveLoad(void* system,std::uint64_t tick){
+    if(!localRole){
+        if(hostSaveLoadPending&&outgoing.worldEpoch!=hostSaveLoadFromEpoch&&coopGameplayReady(outgoing)&&!outgoing.pendingGameLogicState&&*mapName&&!std::strncmp(mapName,"campaign/",9)){
+            hostSaveLoadPending=false;hostSaveLoadUntil=tick+10000;saveLoadResult="host_loaded";}
+        if(hostSaveLoadUntil&&tick<hostSaveLoadUntil&&tick-hostSaveLoadSentAt>=1000&&sockets&&connection&&connectionState==k_ESteamNetworkingConnectionState_Connected){
+            MapReadyPacket p{};p.role=0;p.reserved=1;p.session=outgoing.session;p.sequence=++transitionHold.sequence;std::snprintf(p.map,sizeof(p.map),"%s",mapName);
+            if(coopSendMessage(connection,&p,sizeof(p),k_nSteamNetworkingSend_ReliableNoNagle,nullptr)==k_EResultOK){++hostSaveLoadSends;hostSaveLoadSentAt=tick;saveLoadResult="host_announced";}}
+        if(hostSaveLoadUntil&&tick>=hostSaveLoadUntil)hostSaveLoadUntil=0;
+        return;}
+    if(!hostSaveLoadReceivedAt||tickAge(tick,hostSaveLoadReceivedAt)>15000)return;
+    if(partnerSaveLoadAt&&tickAge(tick,partnerSaveLoadAt)<30000)return; // one load per announcement window
+    if(!missionFollowOn()||!hostSaveLoadFollow)return;
+    if(outgoing.pendingGameLogicState||(outgoing.gameLogicState!=1&&outgoing.gameLogicState!=2))return;
+    if(std::strcmp(hostSaveLoadMap,mapName)){++partnerSaveLoadOtherMap;hostSaveLoadReceivedAt=0;saveLoadResult="partner_other_map_follow";return;}
+    char mapinfo[160]{};if(!mapinfoFromMapName(hostSaveLoadMap,mapinfo,sizeof(mapinfo))){saveLoadResult="partner_no_mapinfo";hostSaveLoadReceivedAt=0;return;}
+    const int character=localCharacter();char command[220]{};
+    std::snprintf(command,sizeof(command),"campaign %s %s %s",mapinfo,std::strstr(hostSaveLoadMap,"highchaos")?"high":"low",character==1?"corvo":"emily");
+    coopNativeChoicePick=character;partnerProgressJoinPending=true;partnerProgressJoinCharacter=character;
+    dispatchCoopCommand(system,command);++partnerSaveLoadFollows;partnerSaveLoadAt=tick;hostSaveLoadReceivedAt=0;saveLoadResult="partner_reloaded_host_mission";
+}
 void serviceMissionDecision(void* system,std::uint64_t tick) {
     if(GetCurrentThreadId()!=engineThread.load())return;
+    serviceHostSaveLoad(system,tick); // 2197
     auto& d=missionDecision;
     if(localRole==0){resendMissionDecision(tick);return;}
     const bool shared=(missionEndMirrorEnabled||productMode)&&missionEnd.sentEpoch==outgoing.worldEpoch;
@@ -134,6 +170,20 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
         const unsigned kind=d.heldKind;const int slot=d.heldSlot;
         if(kind==1||(kind==2&&slot>=0&&slot<=99)){dispatchMissionDecision(system,kind,slot);++d.localReleases;d.result="released_local";}
         else d.held=false;
+        return;
+    }
+    if(d.ownFirst){
+        if(tickAge(tick,d.ownFirstSince)>180000){d.ownFirst=false;d.result="own_first_timeout";return;}
+        // 2199: also from a result screen. campaign-bunker-vm-v2197n: her own Continue reloaded Dust District, whose mission
+        // end then showed its result screen again, where the product mission follow never loads; she stayed there.
+        if(outgoing.worldEpoch==d.ownFirstEpoch||outgoing.pendingGameLogicState||(!coopGameplayReady(outgoing)&&outgoing.gameLogicState!=11))return;
+        const char* peer=transitionHold.peerMap;if(!*peer)return;
+        d.ownFirst=false;
+        if(!std::strcmp(peer,mapName)){++d.ownFirstSame;d.result="own_first_host_map";return;}
+        // 2199: she loads the host's mission here, and continueToHostMission quiets the product mission follow for 90 s, so
+        // one load is queued (2195 left it to that follow, which never loads from a result screen: campaign-bunker-vm-v2197n;
+        // both loading was the double load of soak-hour-vm-v2186b).
+        if(continueToHostMission(system)){++d.ownFirstFollowed;d.result="own_first_then_followed";}else d.result="own_first_follow_refused";
         return;
     }
     if(d.awaitingHostMap){
@@ -153,6 +203,17 @@ void serviceMissionDecision(void* system,std::uint64_t tick) {
         // No mission-start save of that map: continue alone, without the hold, and follow the host's mission from there.
         ++d.missingSaves;transitionHold.expect=false;dispatchMissionDecision(system,1,-1);d.result="replay_save_missing";return;
     }
+    // 2201: her own Continue only when her world cached a next mission at its result screen. A native mission end caches the
+    // next mission's start save (slot campaign*30+21..29, chapter 107) in 0x142318198, which RestartFromMemoryCheckpoint then
+    // loads. A world whose end was only mirrored keeps an in-mission autosave (81, 82), and her Continue reloads her own
+    // mission (campaign-bunker-vm-v2201n: Dust District again, then the follow arrived after the host's boat had run its
+    // load nodes, and Jessamine and a window differed). She then follows the host at once from the result screen, as
+    // campaign-bunker-vm-v2181b did with every diff equal.
+    {int cached=-1;memoryRead(reinterpret_cast<std::uintptr_t>(gameImage)+0x2318198,&cached,4);d.cachedSlot=cached;}
+    const bool nextMissionCached=d.cachedSlot>=0&&d.cachedSlot%30>=21&&d.cachedSlot%30<=29;
+    if(missionContinueFollow&&missionFollowOn()&&missionContinueOwnFirst&&!nextMissionCached)++d.followAtOnce;
+    if(missionContinueFollow&&missionFollowOn()&&missionContinueOwnFirst&&nextMissionCached){d.ownFirst=true;d.ownFirstEpoch=outgoing.worldEpoch;d.ownFirstSince=tick;
+        ++d.ownEndContinues;expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued_own_first";return;}
     if(missionContinueFollow&&missionFollowOn()){d.awaitingHostMap=true;d.awaitSince=tick;expectMissionTransition(tick);d.result="awaiting_host_mission";
         continueToHostMission(system);return;}
     expectMissionTransition(tick);dispatchMissionDecision(system,1,-1);++d.continued;d.result="continued";
@@ -163,9 +224,10 @@ void writeMissionDecision() {
     FILE* f=nullptr;if(fopen_s(&f,temp,"wb")||!f)return;const auto& d=missionDecision;const auto& p=localRole?d.incoming:d.last;
     fprintf(f,"{\"enabled\":%s,\"role\":%u,\"result\":\"%s\",\"decision\":%u,\"slot\":%d,\"startMap\":\"%s\",\"loadedSlot\":%d,\"pending\":%s,\"held\":%s,\"heldKind\":%u,"
         "\"sent\":%llu,\"resent\":%llu,\"received\":%llu,\"refused\":%llu,\"duplicates\":%llu,\"hostContinues\":%llu,\"hostReplays\":%llu,\"unreadable\":%llu,"
-        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu}\n",
+        "\"partnerHeld\":%llu,\"continued\":%llu,\"replayed\":%llu,\"missingSaves\":%llu,\"localReleases\":%llu,\"continueFollow\":%s,\"awaitingHostMap\":%s,\"followContinues\":%llu,\"followFallbacks\":%llu,\"continueOwn\":%s,\"ownEndContinues\":%llu,\"ownFirst\":%s,\"ownFirstSame\":%llu,\"ownFirstFollowed\":%llu,\"otherMapReleases\":%llu,\"cachedSlot\":%d,\"followAtOnce\":%llu,\"saveLoad\":\"%s\",\"hostSaveLoads\":%llu,\"hostSaveLoadSends\":%llu,\"saveLoadReceived\":%llu,\"partnerSaveLoadFollows\":%llu,\"partnerSaveLoadOtherMap\":%llu}\n",
         missionDecisionOn()?"true":"false",localRole,d.result,p.decision,p.slot,p.startMap,d.loadedSlot,d.pending?"true":"false",d.held?"true":"false",d.heldKind,
         d.sent,d.resent,d.received,d.refused,d.duplicates,d.hostContinues,d.hostReplays,d.unreadable,d.partnerHeld,d.continued,d.replayed,d.missingSaves,d.localReleases,
-        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks);
+        missionContinueFollow?"true":"false",d.awaitingHostMap?"true":"false",d.followContinues,d.followFallbacks,missionContinueOwnFirst?"true":"false",d.ownEndContinues,d.ownFirst?"true":"false",d.ownFirstSame,d.ownFirstFollowed,transitionOtherMapReleases,d.cachedSlot,d.followAtOnce,
+        saveLoadResult,hostSaveLoads,hostSaveLoadSends,hostSaveLoadReceived,partnerSaveLoadFollows,partnerSaveLoadOtherMap);
     const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(temp,path,MOVEFILE_REPLACE_EXISTING);
 }

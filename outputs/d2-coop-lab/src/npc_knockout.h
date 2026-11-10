@@ -112,6 +112,61 @@ void serviceLabBlinkKick(){
     if(!validCoopDamageAvatar(memoryRead,base,shadowDamageIdentity())){labBlinkKickResult="no_avatar";return;}
     labBlinkKickResult=npcCombatApplyPeerNative(*target,before,r)?"applied":"refused_late";
 }
+// 2189 (#261, lab): corpse possession. Static research (work/stage8/research-corpse-possession-v2188.md, confirmed static):
+// possession_decayed_harbor sets ARK_ATTRIBUTE_POSSESSION_ALLOW_CORPSES; a corpse is possessable when its
+// arkCpntCorpsePossession (vtable +0x1b640a8, from GetComponent 0x140877720 type +0x39cba70, returned only in the DEAD or
+// ASLEEP context at entity+0x288) passes CanBePossessed 0x1404c3580. The native cast 0x140447db0(power) starts the
+// possession of the target the picker 0x140448200 left at power+0xb0 (handle) / +0xb8 (reference) / +0xc8; the picker
+// rewrites them each update, so the lab sets them and casts in the same tick (hypothesis until a take). A corpse
+// possession reads controller state 4 (leaving 5), kind 2 at internal+0x670, target vtable +0x1b640a8.
+// coop_lab_corpse_probe writes .corpse-possession.json for the dead channel NPC nearest this player (no mutation);
+// coop_lab_possess_corpse also casts this player's equipped Possession at it. Lab only.
+bool labCorpseProbeRequested=false,labCorpseCastRequested=false;const char* labCorpseResult="idle";std::uint64_t labCorpseCasts=0,labCorpseProbes=0;
+struct LabCorpseProbe {unsigned handle=0;float distance=-1;unsigned char d1=0,d3=0;std::uint32_t context=0,comp1c=0,comp7c=0;bool component=false,possessable=false,power=false;
+    std::uint32_t powerFlags=0,stateBefore=0,stateAfter=0,kindAfter=0;bool corpseTarget=false;} labCorpse{};
+void readLabCorpseController(std::uint32_t& state,std::uint32_t& kind,bool& corpseTarget){
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);NativePlayerStates s{};std::uintptr_t internal=0,target=0,vt=0;state=kind=0;corpseTarget=false;
+    if(!readNativePlayerStates(memoryRead,base,s)||!memoryRead(s.component+0x2f8,&internal,8)||!internal)return;
+    memoryRead(internal+0x5d0,&state,4);memoryRead(internal+0x670,&kind,4);
+    if(memoryRead(internal+0x648,&target,8)&&target&&memoryRead(target,&vt,8))corpseTarget=vt==base+0x1b640a8;}
+void writeLabCorpse(){
+    char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.corpse-possession.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
+    FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;std::uint32_t state=0,kind=0;bool corpseTarget=false;readLabCorpseController(state,kind,corpseTarget);const auto& c=labCorpse;
+    fprintf(f,"{\"result\":\"%s\",\"probes\":%llu,\"casts\":%llu,\"handle\":%u,\"distance\":%.3f,\"flagsD1\":%u,\"flagsD3\":%u,\"context\":%u,\"component\":%s,\"comp1c\":%u,\"comp7c\":%u,\"possessable\":%s,\"power\":%s,\"powerFlags\":%u,\"stateBefore\":%u,\"stateAfter\":%u,\"kindAfter\":%u,\"corpseTargetAfter\":%s,\"state\":%u,\"kind\":%u,\"corpseTarget\":%s}\n",
+        labCorpseResult,static_cast<unsigned long long>(labCorpseProbes),static_cast<unsigned long long>(labCorpseCasts),c.handle,c.distance,c.d1,c.d3,c.context,c.component?"true":"false",c.comp1c,c.comp7c,
+        c.possessable?"true":"false",c.power?"true":"false",c.powerFlags,c.stateBefore,c.stateAfter,c.kindAfter,c.corpseTarget?"true":"false",state,kind,corpseTarget?"true":"false");
+    const bool ok=!ferror(f);const int closed=fclose(f);if(ok&&!closed)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);}
+void serviceLabCorpsePossession(){
+    if(!labCorpseProbeRequested&&!labCorpseCastRequested)return;
+    const bool cast=labCorpseCastRequested;labCorpseProbeRequested=labCorpseCastRequested=false;++labCorpseProbes;labCorpse={};
+    const auto finish=[&](const char* why){labCorpseResult=why;writeLabCorpse();};
+    if(!nativeMutationAllowed||GetCurrentThreadId()!=engineThread.load()||!observedGame||!observedPlayer){finish("context_refused");return;}
+    const auto base=reinterpret_cast<std::uintptr_t>(gameImage);float me[3]{};if(!memoryRead(observedPlayer+0x300,me,12)){finish("player_refused");return;}
+    // 2196: the dead NPC nearest this player in the world catalog, within the 15 m possession range (corpse-eotw-v2194c: the
+    // combat channels did not hold the host's fresh corpse, and the partner's nearest channel corpse was 172 m away).
+    float best=15.f*15.f;std::uintptr_t actor=0;std::uint32_t handle=0;std::vector<NativeWorldNpc> catalog;unsigned unbound=0;
+    if(!readWorldNpcCatalog(memoryRead,base,observedGame,catalog,unbound)){finish("catalog_refused");return;}
+    // 2200: an unconscious body (owner flag 0x20) too: the game possesses ASLEEP and DEAD bodies, and corpse-eotw-v2199c's
+    // takedown left the guard unconscious, so no corpse was found within 15 m.
+    for(const auto& n:catalog){NativeHealth h{};if(!readNativeHealth(memoryRead,base,n.handle,h)||h.actor!=n.actor||(h.current>0&&!(h.ownerFlags&0x20)))continue;
+        float d=0;for(unsigned i=0;i<3;++i){const float x=n.position[i]-me[i];d+=x*x;}
+        if(d<best){best=d;actor=n.actor;handle=n.handle;}}
+    if(!actor){finish("no_corpse_within_15m");return;}
+    auto& p=labCorpse;p.handle=handle;p.distance=std::sqrt(best);
+    memoryRead(actor+0xd1,&p.d1,1);memoryRead(actor+0xd3,&p.d3,1);memoryRead(actor+0x288,&p.context,4);
+    const auto comp=reinterpret_cast<std::uintptr_t(*)(std::uintptr_t,void*,int)>(gameImage+0x877720)(actor,gameImage+0x39cba70,2);std::uintptr_t vt=0;
+    p.component=comp&&memoryRead(comp,&vt,8)&&vt==base+0x1b640a8;
+    if(p.component){memoryRead(comp+0x1c,&p.comp1c,4);memoryRead(comp+0x7c,&p.comp7c,4);p.possessable=reinterpret_cast<bool(*)(std::uintptr_t,int)>(gameImage+0x4c3580)(comp,1);}
+    NativePossessionItem item{};p.power=readNativePossessionItem(memoryRead,base,item,true)&&item.instantiated&&item.started;if(p.power)p.powerFlags=item.flags;
+    bool ct=false;std::uint32_t kind=0;readLabCorpseController(p.stateBefore,kind,ct);
+    if(!cast){finish(p.component?(p.possessable?"probe_possessable":"probe_not_possessable"):"probe_no_component");return;}
+    if(!p.component){finish("no_corpse_component");return;}if(!p.possessable){finish("not_possessable");return;}if(!p.power){finish("no_equipped_possession");return;}
+    std::memcpy(reinterpret_cast<void*>(item.component+0xb0),&p.handle,4);
+    reinterpret_cast<void(*)(std::uintptr_t,std::uintptr_t)>(gameImage+0x3dab80)(item.component+0xb8,comp);
+    reinterpret_cast<void(*)(std::uintptr_t,std::uintptr_t)>(gameImage+0x6b26f0)(item.component+0xc8,0);
+    reinterpret_cast<void(*)(std::uintptr_t)>(gameImage+0x447db0)(item.component);++labCorpseCasts;
+    readLabCorpseController(p.stateAfter,p.kindAfter,p.corpseTarget);
+    finish(p.kindAfter==2&&p.corpseTarget?"cast_corpse_target":"cast_no_corpse_target");}
 void serviceNpcHostWorldTest(){
     auto& t=npcHostWorldTest;if(!t.requested)return;t.requested=false;++t.runs;t.result="refused";t.before={};t.after={};t.target=t.source=0;t.amount=0;
     // 1214af: with NPC combat off the host-world mode targets a stream-bound NPC (a host loss outside any combat channel; Hello follow test 1278).

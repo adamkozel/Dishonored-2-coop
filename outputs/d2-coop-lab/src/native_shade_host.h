@@ -12,6 +12,11 @@
 // per clone slot; a puppet lost natively (killed) is not respawned for the same cast. Host only, in an armed product
 // session or the lab movement fixture on the guard map; coop_shade_native follow_off|follow_on (lab) for a control cast.
 constexpr const char* kShadeHostDefinition="models/powers/doppelganger/decoy_entity.def";
+// 2187 (#261): her Deadly Shade on the host is our puppet decl: the decoy entity (the component set the host proved in
+// v2079a) with the deadly shadow's own spawn, despawn and death scenes on its decoy component, so a Corvo host no longer
+// shows the plain decoy. It is always free-standing: the native deadly shadow parented to a player crashed in 2077/2078
+// (FUN_1404a3f90 reads an unchecked component at 0x1404a404e), and an Emily host's own clone definition is that shadow.
+constexpr const char* kShadeHostDeadlyPuppetDefinition="models/powers/d2coop/deadlyshade_puppet.def";
 // 1214gu: with Deadly Shade her clone is the deadly shadow (a combat NPC); the puppet uses the same definition, so it
 // fights the host's NPCs natively.
 constexpr const char* kShadeHostDeadlyDefinition="models/powers/doppelganger/deadlyshadow_entity.def";
@@ -24,7 +29,7 @@ bool shadeHostFollowEnabled=true;
 // then at the aim), the clone definition is that NPC's component 0x39ae070 +0x6d8, and the clone is created with that NPC
 // as parent (the free-standing deadly shadow crashed the host in FUN_1404a3f90, partner-shade-v1729c). The host looks
 // the NPC up from its own player's team at her streamed shade. Lab switch coop_shade_native deadly_off|deadly_on.
-bool shadeHostDeadly=true;std::uint64_t shadeHostDeadlyParents=0,shadeHostDeadlyRefused=0,shadeHostDeadlyNearest=0,shadeHostDeadlyOwnDefinition=0;ULONGLONG shadeHostDeadlyTriedAt=0;
+bool shadeHostDeadly=true,shadeHostDeadlyPuppet=true;std::uint64_t shadeHostDeadlyPuppets=0,shadeHostDeadlyPuppetMissing=0,shadeHostDeadlyParents=0,shadeHostDeadlyRefused=0,shadeHostDeadlyNearest=0,shadeHostDeadlyOwnDefinition=0;ULONGLONG shadeHostDeadlyTriedAt=0;
 std::uint64_t shadeHostSpawned=0,shadeHostRemoved=0,shadeHostLost=0,shadeHostPins=0,shadeHostRefused=0,shadeHostStimuli=0;
 // 1214gt: her shade runs (the native decoy flees: 25 m in 7 s in partner-shade-v1727c) while the host puppet stood, so
 // the 1 m pin teleported it 62 times. A native transform is a teleport that refreshes observable membership (1BF/1BE;
@@ -153,7 +158,8 @@ bool shadeHostDeadlyParent(const float* at,std::uintptr_t& parent,std::uintptr_t
 bool shadeHostSpawn(ShadeHostPuppet& p,const CoopDoppelgangerWorldPacket& q,ULONGLONG tick){
     std::uintptr_t parent=0,definition=0;
     if(q.kind==2){if(tick-shadeHostDeadlyTriedAt<500)return false;shadeHostDeadlyTriedAt=tick; // 2075: one try per 500 ms
-        if(!shadeHostDeadlyParent(q.transform.data(),parent,definition)){shadeHostResult="deadly_no_parent";++shadeHostDeadlyRefused;++shadeHostRefused;return false;}++shadeHostDeadlyParents;}
+        if(shadeHostDeadlyPuppet){definition=lookupEntityDefinition(kShadeHostDeadlyPuppetDefinition);if(definition)++shadeHostDeadlyPuppets;else ++shadeHostDeadlyPuppetMissing;}
+        if(!definition&&!shadeHostDeadlyParent(q.transform.data(),parent,definition)){shadeHostResult="deadly_no_parent";++shadeHostDeadlyRefused;++shadeHostRefused;return false;}++shadeHostDeadlyParents;}
     else definition=lookupEntityDefinition(kShadeHostDefinition);
     if(!definition){shadeHostResult="definition_missing";++shadeHostRefused;return false;}
     if(!shadeHostPhantomOn()){shadeHostResult=shadeHostSlotWasSet?"player_has_doppelganger":"phantom_refused";++shadeHostRefused;return false;}
@@ -222,8 +228,9 @@ void serviceShadeHost(ULONGLONG tick){
 void writeShadeHost(){
     char path[MAX_PATH]{},tmp[MAX_PATH]{};std::snprintf(path,sizeof(path),"%s.shade-host.json",statusPath);std::snprintf(tmp,sizeof(tmp),"%s.tmp",path);
     FILE* f=nullptr;if(fopen_s(&f,tmp,"wb")||!f)return;
-    fprintf(f,"{\"result\":\"%s\",\"enabled\":%s,\"spawned\":%llu,\"removed\":%llu,\"lost\":%llu,\"pins\":%llu,\"refused\":%llu,\"stimuli\":%llu,\"deadly\":%s,\"deadlyParents\":%llu,\"deadlyNearest\":%llu,\"deadlyRefused\":%llu,\"deadlyOwnDefinition\":%llu,\"slots\":[",
-        shadeHostResult,shadeHostFollowEnabled?"true":"false",shadeHostSpawned,shadeHostRemoved,shadeHostLost,shadeHostPins,shadeHostRefused,shadeHostStimuli,shadeHostDeadly?"true":"false",shadeHostDeadlyParents,shadeHostDeadlyNearest,shadeHostDeadlyRefused,shadeHostDeadlyOwnDefinition);
+    fprintf(f,"{\"result\":\"%s\",\"enabled\":%s,\"spawned\":%llu,\"removed\":%llu,\"lost\":%llu,\"pins\":%llu,\"refused\":%llu,\"stimuli\":%llu,\"deadly\":%s,\"deadlyParents\":%llu,\"deadlyNearest\":%llu,\"deadlyRefused\":%llu,\"deadlyOwnDefinition\":%llu,\"deadlyPuppet\":%s,\"deadlyPuppets\":%llu,\"deadlyPuppetMissing\":%llu,\"slots\":[",
+        shadeHostResult,shadeHostFollowEnabled?"true":"false",shadeHostSpawned,shadeHostRemoved,shadeHostLost,shadeHostPins,shadeHostRefused,shadeHostStimuli,shadeHostDeadly?"true":"false",shadeHostDeadlyParents,shadeHostDeadlyNearest,shadeHostDeadlyRefused,shadeHostDeadlyOwnDefinition,
+        shadeHostDeadlyPuppet?"true":"false",shadeHostDeadlyPuppets,shadeHostDeadlyPuppetMissing);
     for(unsigned k=0;k<kDoppelgangerWireSlots;++k){const auto& p=shadeHostPuppets[k];const auto& q=doppelgangerWorldStreams[k].presented;
         fprintf(f,"%s{\"kind\":%u,\"partnerKind\":%u,\"puppet\":%s,\"handle\":%u,\"source\":%u,\"event\":%llu,\"lostEvent\":%llu,\"pins\":%u,\"drift\":%.3f,\"at\":[%.3f,%.3f,%.3f],\"partnerPresent\":%u,\"partnerEvent\":%llu,\"partnerAt\":[%.3f,%.3f,%.3f]}",
             k?",":"",p.kind,q.kind,p.actor?"true":"false",p.handle,p.source,p.event,p.lostEvent,p.pins,p.drift,p.at[0],p.at[1],p.at[2],q.present,q.event,q.transform[0],q.transform[1],q.transform[2]);}

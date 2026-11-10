@@ -31,6 +31,23 @@ PER_PLAYER = {"pickups"}
 # Mutation twins (coop-anything): COOP_MUT names a deliberately broken variant that test_d2_world_diff.py must catch.
 MUT = os.environ.get("COOP_MUT", "")
 PER_CHARACTER = re.compile(r"(^|_)(corvo|emily)(_|$)", re.I)
+# 2194: per-character entities whose names do not say so (map data, confirmed static): the Dreadful Wale after the
+# Conservatory keeps script_audiograph_01_7 for Corvo and script_audiograph_01_1_1 for Emily. Each world must keep
+# exactly one of a pair (its own player's): a world with neither or both is a real difference (campaign-curator-vm-v2192k:
+# the partner had neither, which the first rule called expected).
+PER_CHARACTER_PAIRS = [("script_audiograph_01_7", "script_audiograph_01_1_1")]
+PER_CHARACTER_KEYS = {k for pair in PER_CHARACTER_PAIRS for k in pair}
+
+
+def per_character(key, h=None, c=None):
+    if PER_CHARACTER.search(key):
+        return True
+    for pair in PER_CHARACTER_PAIRS:
+        if key in pair:
+            if h is None or c is None:
+                return True
+            return sum(k in h for k in pair) == 1 and sum(k in c for k in pair) == 1
+    return False
 
 
 def load_snapshots(path):
@@ -138,7 +155,7 @@ def compare(host_snaps, client_snaps, ignore=()):
         diffs = []
         for k in sorted(set(h) | set(c)):
             if (k in h) != (k in c) if MUT == "presence_only" else h.get(k) != c.get(k):
-                diffs.append({"key": k, "perCharacter": bool(PER_CHARACTER.search(k)),
+                diffs.append({"key": k, "perCharacter": per_character(k, h, c),
                               "host": json.loads(h[k]) if k in h else "<absent>",
                               "client": json.loads(c[k]) if k in c else "<absent>"})
         per_player = cat in PER_PLAYER

@@ -1,0 +1,232 @@
+{
+  "passed": false,
+  "failure": "The worlds differ at end: 3 values (DIFFERENT)",
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2222",
+      "hostDll": "A5C67B0FFD2D70A5B320D6E02AEA5B122B8FC30EA5BBABCB0DD5EFA8D0F2B8A2",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 3,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 26438,
+        "writtenAt": 51185187,
+        "startedAgoMs": 2656,
+        "phase2Checks": 22
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 16,
+        "serviceGapMaxMs": 20156,
+        "writtenAt": 51137437,
+        "startedAgoMs": 2187,
+        "phase2Checks": 14
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.5,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/corvo/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "diffwait-spawn": {
+      "settled": true,
+      "s": 2.0
+    },
+    "armwait-spawn": {
+      "armed": true,
+      "s": 0.6
+    },
+    "diff-spawn": {
+      "status": "EQUAL",
+      "compared": 2279,
+      "differences": 0,
+      "retried": "world-digest: npc_catalog game=1dc61658050 vt=1c940a8 list=1dcf29f0030 count=5002b98",
+      "tries": 2
+    },
+    "diffwait-killed": {
+      "settled": true,
+      "s": 1.8
+    },
+    "armwait-killed": {
+      "armed": true,
+      "s": 0.4
+    },
+    "diff-killed": {
+      "status": "EQUAL",
+      "compared": 2279,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "commands": [
+      "step08-command client coop_grant_named components/characters/player/base/attributes/possession_decayed_harbor.inventoryitem",
+      "step09-command client coop_grant_named models/powers/possession/possession.inventoryitem",
+      "step11-command client coop_lab_corpse_probe",
+      "step19-command client coop_lab_corpse_probe"
+    ],
+    "step15-aim": {
+      "pitch": 18,
+      "read": 18.873208899904228
+    },
+    "casts": [
+      {
+        "role": "client",
+        "grant": "models/powers/possession/possession.inventoryitem",
+        "sent": 0,
+        "received": 0,
+        "applied": 0
+      }
+    ],
+    "diffwait-end": {
+      "settled": true,
+      "s": 1.9
+    },
+    "armwait-end": {
+      "armed": true,
+      "s": 0.4
+    },
+    "diff-end": {
+      "status": "DIFFERENT",
+      "compared": 2277,
+      "differences": 3,
+      "retried": "World digest failed (host, 45)",
+      "tries": 2
+    },
+    "failureState": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 26,
+        "pos": [
+          22.816738,
+          19.38283,
+          22.14669
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          4,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "7/0/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/edge_of_the_world/eotw_p_lowchaos",
+        "epoch": 16,
+        "cine": 6,
+        "pos": [
+          65.323128,
+          25.790216,
+          19.032177
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          2,
+          4,
+          1,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/2/0",
+        "active": "Mission_EotW,Obj_EotW_A,Obj_EotW_B,Task_EotW_B_01"
+      }
+    },
+    "vmGameAlive": 1,
+    "hostExit": "running"
+  },
+  "scope": "Campaign route steps for campaign/edge_of_the_world/eotw.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner corvo, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

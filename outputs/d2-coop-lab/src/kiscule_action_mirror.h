@@ -80,6 +80,11 @@ const KisculeCharacterGrant kisculeCharacterGrants[]={
     {"campaign/dunwall/escape/tower/dunwall_escape_tower_p","ld_kiscule",2305,2,3778,2},      // gun_player / gun_emily
     {"campaign/dunwall/escape/tower/dunwall_escape_tower_p","ld_kiscule_coup",4209,2,4215,2}, // gun_player / gun_emily
     {"campaign/boat/edge_of_the_world/boat_eotw_p","script_kiscule",7033,2,7038,2},          // crossbow_corvo / crossbow_emily
+    // 2194: the Dreadful Wale after the Conservatory keeps one audiograph per character; the test_player branch (node
+    // 1725366902) hides the other one: Corvo hides script_audiograph_01_1_1, Emily hides script_audiograph_01_7. In a
+    // mixed pairing the partner applied the host's hide of her own and hid the other too (campaign-curator-vm-v2191k,
+    // -v2190c; map data confirmed static). She hides the other character's instead.
+    {"campaign/boat/dust/boat_dust_p","script_kiscule_node_template_1",1407129762,1087095216,288370032,1087095216}, // hide audiograph_01_1_1 / _01_7
 };
 // The local player's character: 1 Corvo, 2 Emily, 0 unknown (body definition at actor+0x2e8).
 int kisculeLocalCharacter(){
@@ -172,6 +177,12 @@ KisculeMirror kisculeMirror{};SRWLOCK kisculeLock=SRWLOCK_INIT;bool kisculeMirro
 // A node the host has not run yet is requested once (partner-first), so a step the partner reaches first still
 // happens, in the host's world. Class indices from kKisculeHostStoryBase are policy-table indices.
 bool kisculeHostStory=false;constexpr int kKisculeHostStoryBase=100;
+// 2208: the state-setting World classes a reflow may repeat (kiscule_policy.h names).
+bool kisculeReflowEnabled=true;std::uint64_t kisculeReflows=0;
+inline bool kisculeReflowClass(int cls){
+    static const int idx[]={kisculePolicyIndexByName("ActionUsable"),kisculePolicyIndexByName("ActionInteractable"),kisculePolicyIndexByName("EntityStateControl"),
+        kisculePolicyIndexByName("ActionNavBlocker"),kisculePolicyIndexByName("ActionBind")};
+    for(int k:idx)if(k>=0&&cls==kKisculeHostStoryBase+k)return true;return false;}
 // In the product, host story is on unless the host's d2coop.cfg sets host_story=0 (D2COOP_HOST_STORY=0); the partner
 // follows the host's setting from its hello (control flag 4). The lab sets it with coop_host_story instead.
 bool productHostStory=true;
@@ -357,6 +368,13 @@ unsigned char* kisculeDispatchWrapper(void* self,unsigned char* out,unsigned cha
         // (saferoom-trace-v2028a; hoststory-lead-dunwall-v2027a reached the node first and passed).
         if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&c.executed<c.requests&&c.requests<=c.hostCount){
             ++c.executed;++kisculeMirror.hostStoryInFlow;kisculeEvent("in_flow",cls,entity,nodeId,input,c.executed);}
+        // 2208: her own flow reaching a run the host's message already applied out of flow (it arrived first). Blocking it
+        // stopped her flow there: soak-hour-vm-v2206h, The Good Doctor's elevator node ran twice on the host, her world
+        // applied the second run on its own, her flow then stopped at it and the buttons it re-enables stayed disabled
+        // (v2203h, where her flow came first, was equal). For state-setting classes it runs again in her flow, so the
+        // flow continues; a repeated state set changes nothing. coop_kiscule_reflow on|off.
+        else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&kisculeReflowEnabled&&c.requests<=c.executed&&c.requests<=c.hostCount&&kisculeReflowClass(cls)){
+            ++kisculeReflows;kisculeEvent("reflow",cls,entity,nodeId,input,c.requests);}
         else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock&&kisculeLoadDressing(entity,nodeId)){
             ++c.executed;++kisculeMirror.hostStoryDressing;kisculeEvent("load_dressing",cls,entity,nodeId,input,c.executed);}
         else if(cls>=kKisculeHostStoryBase&&localRole==1&&!kisculeHostStoryTwinNoBlock){skip=true;++kisculeMirror.hostStoryBlocked;kisculeEvent("host_story_blocked",cls,entity,nodeId,input,c.executed);

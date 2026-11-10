@@ -1,0 +1,26 @@
+param([string]$Name='progress-v2188')
+$ErrorActionPreference='Stop'
+# 2188 (#261, stage 8 step 6): candidate progress-v2188 = progress-v2180 plus
+# - the possessed fish: the other world shows the cosmetic fish (models/powers/d2coop/swarm_fish_visual.def, the rat
+#   visual's decls on the trout model) at the player's root while she possesses a fish (pose bit 0x1000), as the rat;
+# - her Deadly Shade on the host: always our puppet decl (models/powers/d2coop/deadlyshade_puppet.def, the decoy entity
+#   with the deadly shadow's spawn, despawn and death scenes), free-standing; lab switch coop_shade_native puppet_on|puppet_off
+#   (off: v2079's path, the host's clone definition or the plain decoy).
+# The decls are installed in the lab game by outputs/d2-coop-lab/Build-D2PowerVisualAssets-v2187.ps1. Builds the proxy, the
+# runtime probe and two test suites into work/build (never bin/), runs the tests and archives work/stage8/candidate-<Name>.
+$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$here=$PSScriptRoot
+$cmake='C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe'
+$node='C:/Users/adako/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe'
+if(!(Test-Path -LiteralPath $cmake)-or!(Test-Path -LiteralPath $node)){throw 'Pinned build tools missing'}
+$archive=Join-Path $here "candidate-$Name";if(Test-Path $archive){throw "Candidate $Name exists"}
+& $node "$root/outputs/d2-coop-lab/tooling/run-clean.cjs" $cmake --build "$root/work/build" --config Release --target d2_lab_proxy d2_runtime_probe d2_shadow_action_tests d2_world_identity_tests *> "$here/build-$Name.log"
+if($LASTEXITCODE){Get-Content "$here/build-$Name.log" -Tail 40;throw 'Build failed'}
+foreach($t in 'd2_shadow_action_tests','d2_world_identity_tests'){& "$root/work/build/Release/$t.exe" *> "$here/$t-$Name.log";if($LASTEXITCODE){Get-Content "$here/$t-$Name.log" -Tail 20;throw "Test failed: $t"}}
+New-Item -ItemType Directory $archive|Out-Null
+foreach($f in 'dinput8.dll','d2_runtime_probe.exe'){Copy-Item -LiteralPath "$root/work/build/Release/$f" -Destination "$archive/$f"}
+Push-Location $root;try{$commit=(git rev-parse HEAD).Trim();git diff HEAD -- outputs/d2-coop-lab/src|Set-Content -LiteralPath "$archive/source-change.diff" -Encoding utf8
+ $untracked=@(git ls-files --others --exclude-standard -- outputs/d2-coop-lab/src);foreach($u in $untracked){Add-Content -LiteralPath "$archive/source-change.diff" -Value "--- new file $u" -Encoding utf8;Get-Content -LiteralPath $u|Add-Content -LiteralPath "$archive/source-change.diff" -Encoding utf8}}finally{Pop-Location}
+Set-Content -LiteralPath "$archive/source-commit.txt" -Value $commit -Encoding ascii
+[ordered]@{candidate=$Name;card=261;dll=(Get-FileHash "$archive/dinput8.dll").Hash;probe=(Get-FileHash "$archive/d2_runtime_probe.exe").Hash;previousCandidate='progress-v2180';sourceCommit=$commit;sourceDiff='source-change.diff'
+ change='progress-v2180 plus the possessed fish shown as the cosmetic fish (swarm_fish_visual.def, pose bit 0x1000) and the partner Deadly Shade on the host as our deadlyshade_puppet.def, free-standing (coop_shade_native puppet_on|puppet_off); needs the decls of Build-D2PowerVisualAssets-v2187.ps1 in the lab game'}|ConvertTo-Json|Set-Content -LiteralPath "$archive/identity.json" -Encoding utf8
+"Built and archived candidate $Name"

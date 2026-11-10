@@ -243,6 +243,24 @@ struct MovementBank {
                 cost+=1-std::fabs(dot);for(unsigned k=4;k<7;++k)cost+=(w[k]-i[k])*(w[k]-i[k]);}
             if(cost<bestCost){bestCost=cost;best=ph;}}
         return startPhases[clip]=best;}
+    // 2221 (#269): the phase of the gait pair (na, nb, nm) whose pose is nearest the pose of (oa, ob, om) at phase op, by
+    // startPhase's joint distance, in 60 steps. A reversal continues from it, so the crossfade blends two similar poses
+    // (animquality-eotw-v2218a: the crossfade from the forward stride slid the planted toe 19 cm in 0.1 s).
+    // 2223: with two gaits the pose is the walk/run blend the rig plays (runMix), as a full-speed reversal is mostly run.
+    float matchPhase(unsigned oa,unsigned ob,float om,float op,unsigned na,unsigned nb,float nm,float run=0)const{
+        const size_t need=size_t(frames)*joints;
+        if(oa>=clips.size()||ob>=clips.size()||na>=clips.size()||nb>=clips.size()||clips[oa].values.size()<need||clips[ob].values.size()<need||
+           clips[na].values.size()<need||clips[nb].values.size()<need)return op;
+        const bool runs=gaits>1&&run>.001f&&oa+8<clips.size()&&ob+8<clips.size()&&na+8<clips.size()&&nb+8<clips.size()&&
+            clips[oa+8].values.size()>=need&&clips[ob+8].values.size()>=need&&clips[na+8].values.size()>=need&&clips[nb+8].values.size()>=need;
+        const auto pose=[&](unsigned x,unsigned y,float m,float ph,unsigned j){auto v=blend(sample(x,j,ph),sample(y,j,ph),m);
+            if(runs)v=blend(v,blend(sample(x+8,j,ph),sample(y+8,j,ph),m),run);return v;};
+        float best=op,bestCost=1e30f;
+        for(unsigned s=0;s<60;++s){const float ph=s/60.f;float cost=0;
+            for(unsigned j=2;j<joints;++j){const auto w=pose(na,nb,nm,ph,j),o=pose(oa,ob,om,op,j);float dot=0;
+                for(unsigned k=0;k<4;++k)dot+=w[k]*o[k];cost+=1-std::fabs(dot);for(unsigned k=4;k<7;++k)cost+=(w[k]-o[k])*(w[k]-o[k]);}
+            if(cost<bestCost){bestCost=cost;best=ph;}}
+        return best;}
     Joint sample(unsigned clip,unsigned joint,float phase)const{
         phase-=std::floor(phase);const float f=phase*(frames-1);const auto a=unsigned(f),b=a+1;
         return blend(clips[clip].values[a*joints+joint],clips[clip].values[b*joints+joint],f-a);
@@ -289,8 +307,16 @@ struct MovementBank {
 // accumulated distance; idle time never advances the walking cycle.
 // 2114 (#266): lab switch coop_movement_start_phase on|off (on by default).
 inline bool movementStartPhaseEnabled=true;
+// 2216 (#269): crossfade a direction reversal (coop_movement_direction_blend on|off).
+inline bool movementDirectionBlendEnabled=true;
 struct MovementClock {
     unsigned startPhaseResets=0;
+    // 2216 (#269): the gait's direction pair (a, b, mix) follows each frame's displacement, so a reversal swaps the
+    // forward clips for the back clips in one frame and the legs jump (animquality-eotw-v2212c, the host seen from the
+    // VM: both toes 0.2-0.4 m in one 31 ms sample with the root still; a and c failed the skate limits on that contact).
+    // A turn of the travel direction over about 95 degrees while moving bumps directionSerial; the playback blends from
+    // the last locomotion pose over 0.18 s (directionTransition).
+    unsigned directionSerial=0;float directionTransition=1;unsigned directionPhaseMatches=0; // 2221: phase matches
     // Last rejected physical step, retained for independent runtime diagnosis.
     unsigned rejectCode=0,rejectCount=0,rejectMotion=0,rejectAirState=0;
     float rejectDt=0,rejectDz=0,rejectRate=0;
@@ -421,9 +447,18 @@ struct MovementClock {
             turnWeight+=((turning?1.f:0.f)-turnWeight)*(1-std::exp(-float(dt)/.10f));
             turnTransition=(std::min)(1.f,turnTransition+float(dt)/.10f);
         }
+        directionTransition=(std::min)(1.f,directionTransition+float(dt)/.18f);
         if(distance>.00001f&&!powered){
             const float x=dx*rotation[0]+dy*rotation[1],y=dx*rotation[3]+dy*rotation[4];
+            // 2218: the flip happens in the slow frames of the reversal (animquality-eotw-v2216a: serial 0 with the 2216 rate gates),
+            // so any frame that moves over 2 mm against the last frame's direction starts the crossfade; a still rig never does.
+            // 2225: any jump of the travel direction over 60 degrees in one frame (animquality-eotw-v2223c: back to sideways, 90
+            // degrees, popped a toe 0.5 m; the 2216 trigger needed over 95). Steering turns a few degrees per frame and never fires it.
+            const bool reversal=movementDirectionBlendEnabled&&eligible&&distance>.002f&&(x*angleX+y*angleY)/distance<.5f;
+            const unsigned oldA=a,oldB=b;const float oldMix=mix;
             if(MovementBank::directions(x,y,a,b,mix)){angleX=x/distance;angleY=y/distance;}
+            // 2221: the reversal continues from the new clips' phase nearest the old pose.
+            if(reversal){++directionSerial;directionTransition=0;phase=bank.matchPhase(oldA,oldB,oldMix,phase,a,b,mix,runMix);++directionPhaseMatches;}
             sprintSide=y<0?28:27;sprintDirection=(std::min)(1.f,std::fabs(std::atan2(y,x))/.7853981634f);
             float stride=bank.clips[a].stride*(1-mix)+bank.clips[b].stride*mix;
             if(bank.gaits>1){const float runStride=bank.clips[a+8].stride*(1-mix)+bank.clips[b+8].stride*mix;stride+=(runStride-stride)*runMix;}

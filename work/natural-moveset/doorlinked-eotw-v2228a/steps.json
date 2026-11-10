@@ -1,0 +1,60 @@
+[
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 3000
+  },
+  {
+    "do": "diff",
+    "tag": "spawn",
+    "require": true
+  },
+  {
+    "do": "command",
+    "role": "host",
+    "text": "coop_lab_door_native env_interiors_door_glass_350cm_01_2 open"
+  },
+  {
+    "do": "wait",
+    "ms": 6000
+  },
+  {
+    "do": "status",
+    "role": "host",
+    "suffix": ".door-fixture.json"
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 2000
+  },
+  {
+    "do": "diff",
+    "tag": "opened",
+    "require": true
+  },
+  {
+    "do": "command",
+    "role": "host",
+    "text": "coop_lab_door_native env_interiors_door_glass_350cm_01_2 close"
+  },
+  {
+    "do": "wait",
+    "ms": 6000
+  },
+  {
+    "do": "status",
+    "role": "host",
+    "suffix": ".door-fixture.json"
+  },
+  {
+    "do": "wait",
+    "ms": 10000,
+    "settle": 2000
+  },
+  {
+    "do": "diff",
+    "tag": "closed",
+    "require": true
+  }
+]

@@ -63,9 +63,13 @@ inline bool nativeOpenableMatchesTarget(const NativeOpenable& s,unsigned target,
 inline bool nativeOpenableNeedsSideCorrection(const NativeOpenable& s,unsigned target,unsigned side){
     return target==2&&side<=1&&s.current==2&&s.pending==2&&s.openSide!=side;
 }
+// 2228 (#279): a linked door (a leaf with a partner leaf, component+0xf0) is synced like an ordinary one, each leaf on its own
+// channel: corpse-possess-eotw-v2217t ended with a glass door a host NPC opened, open in the host's world only. A leaf the
+// native open already moved with its partner matches its target and needs nothing. Lab switch coop_door_linked on|off.
+inline bool nativeOpenableLinkedAllowed=true;
 inline bool nativeOpenableTransitionAllowed(const NativeOpenable& s,unsigned target,unsigned side){
     return (target==0||target==2)&&side<=1&&(s.current==0||s.current==2)&&s.pending==s.current&&
-        !s.locked&&!s.blocked&&!s.broken&&!s.linked&&s.entries[nativeOpenableEntry(target,side)]!=255;
+        !s.locked&&!s.blocked&&!s.broken&&(!s.linked||nativeOpenableLinkedAllowed)&&s.entries[nativeOpenableEntry(target,side)]!=255;
 }
 inline std::array<unsigned char,4> nativeOpenableParameters(const NativeOpenable& s,unsigned target,unsigned side){
     // Match ordinary interaction74b6e0 and native auto-close74ac50. The

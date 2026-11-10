@@ -1,0 +1,164 @@
+[
+  {
+    "do": "wait",
+    "ms": 20000,
+    "settle": 3000
+  },
+  {
+    "do": "command",
+    "role": "host",
+    "text": "coop_movement_start_phase on"
+  },
+  {
+    "do": "command",
+    "role": "client",
+    "text": "coop_movement_start_phase on"
+  },
+  {
+    "do": "at",
+    "pos": [
+      -31.2,
+      182.1,
+      2.91
+    ],
+    "yaw": -90
+  },
+  {
+    "do": "partner",
+    "pos": [
+      -31.2,
+      177.5,
+      2.91
+    ],
+    "yaw": 90
+  },
+  {
+    "do": "wait",
+    "ms": 3000,
+    "settle": 1000
+  },
+  {
+    "do": "animsample",
+    "role": "host",
+    "ms": 7500,
+    "inputs": [
+      {
+        "LeftY": -16000,
+        "ms": 1500
+      },
+      {
+        "LeftY": 16000,
+        "ms": 1500
+      },
+      {
+        "LeftY": -32000,
+        "ms": 800
+      },
+      {
+        "LeftY": 32000,
+        "ms": 800
+      },
+      {
+        "LeftX": -16000,
+        "ms": 500
+      },
+      {
+        "LeftX": 16000,
+        "ms": 500
+      }
+    ],
+    "engine": true,
+    "both": true
+  },
+  {
+    "do": "status",
+    "role": "host",
+    "suffix": ".movement.json"
+  },
+  {
+    "do": "partner",
+    "pos": [
+      -31.2,
+      177.5,
+      2.91
+    ],
+    "yaw": 90
+  },
+  {
+    "do": "at",
+    "pos": [
+      -31.2,
+      182.1,
+      2.91
+    ],
+    "yaw": -90
+  },
+  {
+    "do": "wait",
+    "ms": 2000
+  },
+  {
+    "do": "command",
+    "role": "client",
+    "text": "coop_diagnostics off"
+  },
+  {
+    "do": "wait",
+    "ms": 1500
+  },
+  {
+    "do": "animsample",
+    "role": "client",
+    "ms": 8500,
+    "inputs": [
+      {
+        "LeftY": -16000,
+        "ms": 1500
+      },
+      {
+        "LeftY": 16000,
+        "ms": 1500
+      },
+      {
+        "LeftY": -32000,
+        "ms": 800
+      },
+      {
+        "LeftY": 32000,
+        "ms": 800
+      },
+      {
+        "LeftX": -16000,
+        "ms": 500
+      },
+      {
+        "LeftX": 16000,
+        "ms": 500
+      }
+    ],
+    "engine": true,
+    "both": true
+  },
+  {
+    "do": "status",
+    "role": "client",
+    "suffix": ".movement.json"
+  },
+  {
+    "do": "command",
+    "role": "client",
+    "text": "coop_diagnostics on"
+  },
+  {
+    "do": "wait",
+    "ms": 1500
+  },
+  {
+    "do": "status",
+    "suffix": ".frame-timing.json"
+  },
+  {
+    "do": "diff",
+    "tag": "end"
+  }
+]

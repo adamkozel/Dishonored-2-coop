@@ -74,6 +74,7 @@ struct MovementPlayback {
     float carryAmount=0,carryWeight=0,carryMove=0,carryPhase[2]{};
     float carrySettle=1;std::vector<MovementBank::Joint> carryFrom,carryLast;
     unsigned turnSerial=0;std::vector<MovementBank::Joint> turnFrom,turnLast;
+    unsigned directionSerial=0;std::vector<MovementBank::Joint> directionFrom,directionLast; // 2216 (#269)
     std::array<BodyMatrix,27> kneeReference{};std::uint64_t kneeSequence=0,kneeCorrections=0;bool kneeReady=false;unsigned kneeReject=0;float kneeOffsetError=0;
 } movementPlayback;
 // File validation grows with the authored library. Keep it entirely off the
@@ -644,6 +645,8 @@ void applyMovementBank(void* component,void* actor,int phase){
     if(p.bank.hasCarryPickupSettle())p.carryLast.resize(count);
     if(p.bank.hasTurns()&&p.turnSerial!=p.clock.turnSerial){p.turnSerial=p.clock.turnSerial;p.turnFrom=p.turnLast;}
     if(p.bank.hasTurns()&&p.turnLast.size()!=count)p.turnLast.resize(count);
+    if(p.directionSerial!=p.clock.directionSerial){p.directionSerial=p.clock.directionSerial;p.directionFrom=p.directionLast;}
+    if(p.directionLast.size()!=count)p.directionLast.resize(count);
     float moving=(std::max)(0.f,(std::min)(1.f,(p.clock.speed-.025f)/.30f));moving=moving*moving*(3-2*moving);
     MovementBank::Joint rangedRoot[2]{};bool rangedRootValid=false;
     for(unsigned j=2;ok&&j<count;++j){
@@ -669,6 +672,9 @@ void applyMovementBank(void* component,void* actor,int phase){
             empty=MovementBank::blend(empty,low,p.clock.stanceMix);v=MovementBank::blend(empty,v,p.armedMix);
         }
         if(p.bank.hasTerrain())v=MovementBank::blend(v,p.bank.sampleTerrain(j,p.clock.phase,p.clock.terrainDown,p.clock.terrainRun,p.armedMix),p.clock.terrainWeight*moving);
+        // 2216 (#269): a reversal blends from the last locomotion pose (MovementClock::directionSerial).
+        if(movementDirectionBlendEnabled&&p.directionFrom.size()==count&&p.clock.directionTransition<1){const float t=p.clock.directionTransition;v=MovementBank::blend(p.directionFrom[j],v,t*t*(3-2*t));}
+        p.directionLast[j]=v;
         if(p.bank.hasTurns()){
             auto turn=p.bank.sampleTurn(p.clock.turnClip,j,p.clock.turnPhase,p.armedMix,p.clock.stanceMix);
             if(p.turnFrom.size()==count&&p.clock.turnTransition<1)turn=MovementBank::blend(p.turnFrom[j],turn,p.clock.turnTransition);
@@ -949,7 +955,7 @@ void writeMovementStatus(){
     fputs("],",f);
     fprintf(f,"\"refuseStreak\":%u,\"refuseLongest\":%u,\"refuseLast\":%u,\"refuseReasons\":[",p.refusal.streak,p.refusal.longest,p.refusal.last);
     for(unsigned i=0;i<p.refusal.reasons.size();++i)fprintf(f,"%s%llu",i?",":"",static_cast<unsigned long long>(p.refusal.reasons[i]));
-    fputs("],",f);fprintf(f,"\"startPhase\":{\"enabled\":%s,\"resets\":%u},",movementStartPhaseEnabled?"true":"false",p.clock.startPhaseResets); // 2114 (#266)
+    fputs("],",f);fprintf(f,"\"startPhase\":{\"enabled\":%s,\"resets\":%u},\"directionBlend\":{\"enabled\":%s,\"serial\":%u},",movementStartPhaseEnabled?"true":"false",p.clock.startPhaseResets,movementDirectionBlendEnabled?"true":"false",p.clock.directionSerial); // 2114 (#266)
     fprintf(f,"\"experimental\":true,\"active\":%s,\"end\":%llu,\"joints\":%u,\"phase\":%.7f,\"speed\":%.6f,\"weight\":%.6f,\"a\":%u,\"b\":%u,\"mix\":%.6f,\"checksum\":%llu,\"applied\":%llu,\"refused\":%llu,\"gaits\":%u,\"runMix\":%.6f,\"version\":%u,\"stanceMix\":%.6f,\"sprintMix\":%.6f,\"sprintSide\":%u,\"sprintDirection\":%.6f,\"leanAmount\":%.6f,\"leanWeight\":%.6f,\"leanUp\":%.6f,\"slideState\":%u,\"slideTime\":%.6f,\"slideWeight\":%.6f,\"airState\":%u,\"airTime\":%.6f,\"airWeight\":%.6f,\"airProgress\":%.6f,\"airRun\":%.6f,\"airCrouch\":%.6f,\"combatVariant\":%u,\"combatPhase\":%u,\"combatClip\":%u,\"combatAmount\":%.6f,\"combatWeight\":%.6f,\"combatEvent\":%llu,\"equipmentVariant\":%u,\"equipmentAmount\":%.6f,\"equipmentWeight\":%.6f,\"armedMix\":%.6f,\"presentedDrawn\":%s,\"traversalVariant\":%u,\"traversalAmount\":%.6f,\"traversalWeight\":%.6f,\"traversalEvent\":%llu,\"powerVariant\":%u,\"powerAmount\":%.6f,\"powerWeight\":%.6f,\"powerEvent\":%llu,\"shadowWalkPhase\":%.6f,\"combatAirMix\":%.6f,\"combatMoveMix\":%.6f,\"nativeFeet\":%s,\"currentFeet\":%s,\"feetCasts\":%llu,\"feetSolves\":%llu,\"feetResetsAvoided\":%llu,\"feetReferences\":%llu,\"terrainWeight\":%.6f,\"terrainGrade\":%.6f,\"terrainDown\":%.6f,\"terrainRun\":%.6f,\"turnWeight\":%.6f,\"turnPhase\":%.6f,\"turnVelocity\":%.6f,\"turnClip\":%u,\"turnSerial\":%u,\"kneeCorrections\":%llu,\"kneeReject\":%u,\"kneeOffsetError\":%.8f,\"secondJump\":%s,\"secondJumpSerial\":%u,\"secondJumpProgress\":%.6f,\"secondJumpTransition\":%.6f,\"landingCrouchMix\":%.6f,\"rangedShot\":%u,\"rangedMechanism\":%u,\"rangedKind\":%u,\"rangedVariant\":%u,\"rangedAmount\":%.6f,\"rangedWeight\":%.6f,\"rangedEvent\":%llu,\"carryVariant\":%u,\"carryWeight\":%.6f,\"carryMove\":%.6f,\"carryPhase\":%.6f,\"carryCrouchPhase\":%.6f,\"carryEvent\":%llu}\n",p.end?"true":"false",p.end,p.bank.joints,p.clock.phase,p.clock.speed,p.clock.weight,p.clock.a,p.clock.b,p.clock.mix,p.bank.checksum,p.applied,p.refused,p.bank.gaits,p.clock.runMix,p.bank.version,p.clock.stanceMix,p.clock.sprintMix,p.clock.sprintSide,p.clock.sprintDirection,p.clock.leanAmount,p.clock.leanWeight,p.clock.leanUp,p.clock.slideState,p.clock.slideTime,p.clock.slideWeight,p.clock.airState,p.clock.airTime,p.clock.airWeight,p.clock.airProgress,p.clock.airRun,p.clock.airCrouch,p.combatVariant,p.combatPhase,p.combatClip,p.combatAmount,p.combatWeight,p.combatEvent,p.equipmentVariant,p.equipmentAmount,p.equipmentWeight,p.armedMix,p.presentedDrawn?"true":"false",p.traversalVariant,p.traversalAmount,p.traversalWeight,p.traversalEvent,p.powerVariant,p.powerAmount,p.powerWeight,p.powerEvent,p.shadowWalkPhase,p.combatAirMix,p.combatMoveMix,p.nativeFeet?"true":"false",p.currentFeet?"true":"false",movementFeetCasts.load(),movementFeetSolves.load(),movementFeetResetsAvoided.load(),movementFeetReferences.load(),p.clock.terrainWeight,p.clock.terrainGrade,p.clock.terrainDown,p.clock.terrainRun,p.clock.turnWeight,p.clock.turnPhase,p.clock.turnVelocity,p.clock.turnClip,p.clock.turnSerial,p.kneeCorrections,p.kneeReject,p.kneeOffsetError,p.secondJump.active?"true":"false",p.secondJump.serial,p.secondJump.progress,p.secondJump.transition,p.landingCrouchMix,p.rangedShot,p.rangedMechanism,p.rangedKind,p.rangedVariant,p.rangedAmount,p.rangedWeight,p.rangedEvent,p.carryVariant,p.carryWeight,p.carryMove,p.carryPhase[0],p.carryPhase[1],p.carryEvent);
     ReleaseSRWLockShared(&movementLock);const bool ok=!ferror(f);const int close=fclose(f);if(ok&&!close)MoveFileExA(tmp,path,MOVEFILE_REPLACE_EXISTING);
 }

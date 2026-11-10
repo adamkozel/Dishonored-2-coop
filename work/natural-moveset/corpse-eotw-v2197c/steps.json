@@ -1,0 +1,205 @@
+[
+ {
+  "do": "wait",
+  "ms": 20000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "spawn",
+  "require": true
+ },
+ {
+  "do": "attack",
+  "name": "guard_male_small",
+  "near": [
+   58.73,
+   24.05
+  ],
+  "max": 80,
+  "settle": 4000,
+  "behind": true
+ },
+ {
+  "do": "wait",
+  "ms": 6000,
+  "settle": 2000
+ },
+ {
+  "do": "diff",
+  "tag": "killed"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_grant_named components/characters/player/base/attributes/possession_decayed_harbor.inventoryitem"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_grant_named models/powers/possession/possession.inventoryitem"
+ },
+ {
+  "do": "wait",
+  "ms": 2000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_corpse_probe"
+ },
+ {
+  "do": "wait",
+  "ms": 1000
+ },
+ {
+  "do": "status",
+  "role": "host",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_lab_corpse_probe"
+ },
+ {
+  "do": "wait",
+  "ms": 1500
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_possess_corpse"
+ },
+ {
+  "do": "wait",
+  "ms": 3000
+ },
+ {
+  "do": "status",
+  "role": "host",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "animsample",
+  "role": "host",
+  "ms": 5000,
+  "inputs": [
+   {
+    "LeftY": 20000,
+    "ms": 4000
+   }
+  ]
+ },
+ {
+  "do": "status",
+  "role": "host",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "status",
+  "suffix": ".npc-stream.json"
+ },
+ {
+  "do": "probe",
+  "role": "host",
+  "mode": "--npc-authority-all"
+ },
+ {
+  "do": "wait",
+  "ms": 25000,
+  "settle": 3000
+ },
+ {
+  "do": "command",
+  "role": "host",
+  "text": "coop_lab_corpse_probe"
+ },
+ {
+  "do": "wait",
+  "ms": 1000
+ },
+ {
+  "do": "status",
+  "role": "host",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "diff",
+  "tag": "host-after"
+ },
+ {
+  "do": "partner",
+  "pos": [
+   56.7,
+   24.05,
+   19.0
+  ],
+  "yaw": 0
+ },
+ {
+  "do": "wait",
+  "ms": 4000,
+  "settle": 1000
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_lab_corpse_probe"
+ },
+ {
+  "do": "wait",
+  "ms": 1500
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named components/characters/player/base/attributes/possession_decayed_harbor.inventoryitem"
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_grant_named models/powers/possession/possession.inventoryitem"
+ },
+ {
+  "do": "wait",
+  "ms": 2000
+ },
+ {
+  "do": "command",
+  "role": "client",
+  "text": "coop_lab_possess_corpse"
+ },
+ {
+  "do": "wait",
+  "ms": 3000
+ },
+ {
+  "do": "status",
+  "role": "client",
+  "suffix": ".corpse-possession.json"
+ },
+ {
+  "do": "wait",
+  "ms": 25000,
+  "settle": 3000
+ },
+ {
+  "do": "diff",
+  "tag": "end"
+ }
+]
