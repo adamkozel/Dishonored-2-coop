@@ -149,6 +149,9 @@ struct CoopSaveSwitch {int phase=0;bool target=false,active=false;ULONGLONG star
     std::uint64_t phase2Checks=0;
     char folder[MAX_PATH]{};const char* original=nullptr;};
 CoopSaveSwitch coopSaves{};bool coopSavesEnabled=true;
+// 2244 (#263, lab): coop_saves stress on|off. Every switch saves the profile (SaveProfile), clean or not: all 18 stalls
+// followed a SaveProfile, so the lab can repeat that path many times in one session.
+bool coopSavesForceSave=false;
 #include "coop_saves_watchdog.h"
 static const char kCoopSaveRoot[]="savegame_coop";
 inline void coopSaveFolder(char* out,std::size_t size){
@@ -208,7 +211,7 @@ void serviceCoopSaves(ULONGLONG tick){
         // savegame/profile.bin with identical keys (only its 16-byte header differed). The writable profile accessor
         // (FUN_140657ce0, confirmed static) sets the dirty byte at profile+8; while it is clear, memory matches the file.
         unsigned char dirty=1;memoryRead(h.profile+8,&dirty,1);s.lastDirty=dirty;
-        if(!dirty){++s.profileSkips;s.phase=2;s.startedAt=tick-300;s.result="profile_clean";return;}
+        if(!dirty&&!coopSavesForceSave){++s.profileSkips;s.phase=2;s.startedAt=tick-300;s.result="profile_clean";return;}
         ++s.profileSaves;
         coopSavesStep=11;reinterpret_cast<void(*)(void*)>(gameImage+0xd3bd0)(reinterpret_cast<void*>(h.pm));coopSavesStep=12;s.phase=2;s.startedAt=tick;s.result="profile_saving";return;}
     if(s.phase==2){++s.phase2Checks;if(tick-s.startedAt<300||!coopProfileIdle(h)){if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="profile_save_timeout";}return;}

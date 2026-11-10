@@ -103,6 +103,7 @@ After v2227 the end diff still read both checkpoint keys absent in the host's wo
 - **Correction:** the lab switch runs in gameplay with the partner connected (the harness requires host gameplay, opens the lobby and joins the VM first). A product host who presses F7 mid-mission takes the same path (`session_product.h`: `requestCoopSaves` and `startOnlineHost`). So this is not lab-only until shown otherwise.
 - **Measured over all VM takes:** 18 of 672 stopped this way, every one on the host, every one after `SaveProfile` with `startedAgoMs` under 300. The status file is rewritten about every 300 ms, so the hang is at or before the 300 ms step that locks and loads the profile.
 - **progress-v2240 adds a watchdog** (`coop_saves_watchdog.h`). Step breadcrumbs mark each native call of the switch. When the service stops for 5 s mid-switch, the watchdog writes `<status>.coop-saves-stall.json` with the last step and every thread's stack (module and RVA). The four-pairing runner `Run-V2241P` keeps it with a stalled take.
+- **Stress, progress-v2244** (lab only): `coop_saves stress on` makes every switch call `SaveProfile`, dirty or not. `Run-V2244S` ran three takes (`coopsaves-stress-vm-v2244a`-`c`, Dunwall, VM partner joined), each with 40 off/on cycles in gameplay. Each take made 41 switches and 41 profile saves (0 skips, 0 failures), and its end diff is equal. The first take came right after the deploy, like the five stalls of 2026-11-09. No stall in 123 forced saves (confirmed runtime), so repeating `SaveProfile` in a running session does not reproduce #263. Hypothesis: the stall needs a state that only the first switch of a fresh game process has (for example a profile write still pending from the boot).
 
 ### Lab and harness
 - Harness v2213 adds a `choke` step for either player. Harness v2215 adds `focusPress`: a press made while the native use focus is on the target counts. The Institute burner valve sends only script events.
@@ -119,4 +120,4 @@ After v2227 the end diff still read both checkpoint keys absent in the host's wo
 ## Still open
 - **#237, Hypatia's cure by the partner:** the route reaches Grim Alexandra (`institute-cure-partner-vm-v2215d`, the whole antidote chain on the host), but the choke misses a moving, fighting target.
 - **#278:** a corpse walked under the partner's control.
-- **#263:** the stall's cause. The v2240 watchdog has not caught one yet (0 of 16 takes).
+- **#263:** the stall's cause. The v2240 watchdog has not caught one yet (0 of 16 takes), and 123 forced saves on v2244 did not stall.
