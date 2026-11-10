@@ -62,7 +62,9 @@ inline bool validCoopBreakablePresence(const CoopBreakablePresencePacket& p,std:
 }
 // A partner breakable the host's world lacks, still unbroken here, and known here for 10 s before the host's list was
 // received (so a breakable the partner's world has only just streamed in is not judged on an older list).
-constexpr std::size_t kBreakablePresenceMaxBreaks=16;
+// 2248 (#285): 64, was 16. The Institute lab lost 25 bottles in the host's world at once (institute-cure-partner-vm-v2247d:
+// missing 25, targets 25, refused 19 times). Lists of two different worlds miss hundreds of names, not dozens.
+constexpr std::size_t kBreakablePresenceMaxBreaks=64;
 // 2110: a name ending in _<4+ digits> is generated at spawn and differs between the two worlds (the streets speakers:
 // host speaker_01_a0_brk_5276, partner _5462; firstmission-dunwall-v2111a broke every partner speaker). Presence never
 // judges such a name; the world diff groups them the same way (#gen).

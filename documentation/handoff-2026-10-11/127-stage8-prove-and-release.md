@@ -87,7 +87,19 @@ After v2227 the end diff still read both checkpoint keys absent in the host's wo
 - The lab cast (`coop_lab_possess_corpse`) only set the target. The controller never left travel state 0, because the travel update `0x140825970` waits for the cast animation's timeline at `[[ctrl+0x1d8]+0x90]+0xe0`, and calling `0x140447db0` directly never starts it (confirmed static).
 - Routes since `corpse-possess-eotw-v2209` cast natively: aim, then the left trigger with Possession.
 - `corpse-possess-eotw-v2214a`: the partner is inside the body (Leave Host Body). The host's world hides her rig, and every diff is equal (confirmed runtime, visual).
-- A body walked under her control is not tested: the body did not move in either world.
+- **Leaving the body (harness v2245, confirmed runtime).** In `corpse-leave-eotw-v2245a` the partner leaves the body (the frame shows Leave Host Body). The host's world then shows her avatar where she left it, the same position to the millimetre in both worlds (facepartner frame), and every diff is equal.
+- Walking a corpse is not native: a possessed corpse does not move (confirmed static). With v2214a, its twin v2214t and v2245a, #278 is covered.
+
+### Hypatia's cure by the partner (#281)
+- **The choke (harness v2245, confirmed runtime).** The `choke` step finds its target in the choking player's own world and holds Grim Alexandra's AI in both worlds (`coop_lab_ai_pause` on spawner `ld_grimalex`). In `institute-cure-partner-vm-v2245c` (Corvo host) and `d` (Emily host) the partner chokes her on the first try, and `hypatia_is_cured` is 1 in both worlds.
+- **The key door (progress-v2246).** The host's key opens the lab's glass door (`ld_door_glass_350cm_01_1_24` and `_2_14`, a linked pair). In `institute-keydoor-vm-v2245a` each leaf's channel sent its unlock, and the partner's world refused it (`native_unlock_refused`): `unlockNativeDoor` still refused linked leaves, which the door sync has synced since 2228. The channel stopped and the door stayed locked there.
+  - progress-v2246 unlocks a linked leaf while `coop_door_linked` is on. The native routine `0x14074e4c0` gets 0 as its third argument, so it sets only that leaf; 1 would also set the leaf at component+0xe8 (confirmed static).
+  - `institute-keydoor-vm-v2246a`: both door diffs are equal. Its twin `v2246t` (`coop_door_linked off` in both worlds first) still differs (confirmed runtime).
+- **Meagan Foster at the boat.** v2245c, v2245d and v2246f lost her after the cure (game over "You have lost a critical ally"). The soak route that reached the boat ran at difficulty 0. Route v2247 sets it the same way before the boat (hypothesis: the default difficulty loses her).
+- **One choke can miss.** In `v2246e` the partner's one try left the flag at 0. Harness v2247's `untilFlag` retries until the host's story flag is 1.
+- **Found on the way:**
+  - #284: the metal door `ld_door_200_metal_rich_1_4` stopped its host channel with `native_door_identity_or_eligibility_changed` in keydoor-v2245a. progress-v2247 records which check stopped it (`failDetail`).
+  - #285: 24 lab breakables broken only in the host's world in v2246e. Harness v2247 keeps both breakable-sync statuses with a differing diff.
 
 ### Partner movement at reversals (#269, step 5)
 - The gait picked its direction clips from each frame's displacement. A reversal or a sharp turn swapped clip pairs in one frame, and both legs jumped 0.2 to 0.8 m in one sample (confirmed static and runtime).
@@ -107,6 +119,7 @@ After v2227 the end diff still read both checkpoint keys absent in the host's wo
 
 ### Lab and harness
 - Harness v2213 adds a `choke` step for either player. Harness v2215 adds `focusPress`: a press made while the native use focus is on the target counts. The Institute burner valve sends only script events.
+- Harness v2245: the choke target is found in the choking player's world, with `pause` (both worlds' AI held) and the use step's `heal`. Harness v2247: the choke's `untilFlag`, and a differing diff keeps both `.breakable-sync.json`.
 - A PC shutdown corrupted git's index. It was rebuilt from HEAD (`git reset`); `git fsck` was clean.
 
 ## Release inputs
@@ -118,6 +131,6 @@ After v2227 the end diff still read both checkpoint keys absent in the host's wo
 - `work/release/Run-Release-v2226.sh` builds d2coop-v1.0.0 and runs the install and update tests.
 
 ## Still open
-- **#237, Hypatia's cure by the partner:** the route reaches Grim Alexandra (`institute-cure-partner-vm-v2215d`, the whole antidote chain on the host), but the choke misses a moving, fighting target.
-- **#278:** a corpse walked under the partner's control.
+- **#281:** the whole partner cure to the boat in both host pairings (Run-V2247C).
+- **#284, #285:** the metal door's channel and the host-only lab breakables.
 - **#263:** the stall's cause. The v2240 watchdog has not caught one yet (0 of 16 takes), and 123 forced saves on v2244 did not stall.
