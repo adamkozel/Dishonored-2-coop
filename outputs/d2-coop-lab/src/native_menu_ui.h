@@ -149,6 +149,7 @@ struct CoopSaveSwitch {int phase=0;bool target=false,active=false;ULONGLONG star
     std::uint64_t phase2Checks=0;
     char folder[MAX_PATH]{};const char* original=nullptr;};
 CoopSaveSwitch coopSaves{};bool coopSavesEnabled=true;
+#include "coop_saves_watchdog.h"
 static const char kCoopSaveRoot[]="savegame_coop";
 inline void coopSaveFolder(char* out,std::size_t size){
     out[0]=0;if(productMode){char profile[MAX_PATH]{};if(GetEnvironmentVariableA("USERPROFILE",profile,sizeof(profile)))
@@ -180,11 +181,11 @@ inline bool coopProfileIdle(const CoopProfileHandles& h){
 inline void coopProfileLocked(bool lock){std::uintptr_t obj=reinterpret_cast<std::uintptr_t(*)()>(gameImage+0x1548e0)(),vt=0,fn=0;
     if(obj&&memoryRead(obj,&vt,8)&&vt&&memoryRead(vt+(lock?0x48:0x50),&fn,8)&&fn)reinterpret_cast<void(*)(void*,int)>(fn)(reinterpret_cast<void*>(obj),0);}
 inline bool coopProfileLoad(const CoopProfileHandles& h,bool seedCoop){
-    coopProfileLocked(true);reinterpret_cast<void(*)(void*)>(gameImage+0x5a8c0)(reinterpret_cast<void*>(h.profile));
+    coopSavesStep=22;coopProfileLocked(true);coopSavesStep=23;reinterpret_cast<void(*)(void*)>(gameImage+0x5a8c0)(reinterpret_cast<void*>(h.profile));
     if(seedCoop)reinterpret_cast<char(*)(void*,const char*,const char*)>(gameImage+0x105040)(reinterpret_cast<void*>(h.profile+0x28),"HasSetGamma","1");
-    coopProfileLocked(false);
+    coopSavesStep=24;coopProfileLocked(false);
     std::int32_t sentinel=0x7eadbeef;std::memcpy(reinterpret_cast<void*>(h.pm+0x20),&sentinel,4);
-    reinterpret_cast<void(*)(void*)>(gameImage+0xd37b0)(reinterpret_cast<void*>(h.pm));
+    coopSavesStep=25;reinterpret_cast<void(*)(void*)>(gameImage+0xd37b0)(reinterpret_cast<void*>(h.pm));coopSavesStep=26;
     std::int32_t after=0;memoryRead(h.pm+0x20,&after,4);return after!=sentinel;}
 void serviceCoopSaves(ULONGLONG tick){
     if(!coopSavesEnabled)return;auto& s=coopSaves;const bool want=coopModeSelected.load();
@@ -199,7 +200,7 @@ void serviceCoopSaves(ULONGLONG tick){
         reinterpret_cast<int(*)(void*,void*,void*,void*)>(fn)(reinterpret_cast<void*>(r.session),nullptr,nullptr,nullptr);
         s.target=s.active;s.phase=3;s.startedAt=tick;s.result="refreshing";++s.refreshes;return;}
     if(s.phase==0){if(want==s.active)return;const bool gameplay=outgoing.gameLogicState==1&&!outgoing.pendingGameLogicState;
-        if(!sampledMainMenuState&&!gameplay){s.result="waiting_menu_or_gameplay";return;}s.target=want;s.phase=1;s.startedAt=tick;}
+        if(!sampledMainMenuState&&!gameplay){s.result="waiting_menu_or_gameplay";return;}s.target=want;s.phase=1;s.startedAt=tick;startCoopSavesWatchdog();coopSavesStep=10;}
     CoopProfileHandles h{};if(!coopProfileHandles(base,h)){s.result="no_profile";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="profile_timeout";}return;}
     std::int32_t enabled=0;memoryRead(base+0x3132e88,&enabled,4);
     if(s.phase==1){if(!enabled||!coopProfileIdle(h)){s.result="save_busy";if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="busy_timeout";}return;}
@@ -209,32 +210,32 @@ void serviceCoopSaves(ULONGLONG tick){
         unsigned char dirty=1;memoryRead(h.profile+8,&dirty,1);s.lastDirty=dirty;
         if(!dirty){++s.profileSkips;s.phase=2;s.startedAt=tick-300;s.result="profile_clean";return;}
         ++s.profileSaves;
-        reinterpret_cast<void(*)(void*)>(gameImage+0xd3bd0)(reinterpret_cast<void*>(h.pm));s.phase=2;s.startedAt=tick;s.result="profile_saving";return;}
+        coopSavesStep=11;reinterpret_cast<void(*)(void*)>(gameImage+0xd3bd0)(reinterpret_cast<void*>(h.pm));coopSavesStep=12;s.phase=2;s.startedAt=tick;s.result="profile_saving";return;}
     if(s.phase==2){++s.phase2Checks;if(tick-s.startedAt<300||!coopProfileIdle(h)){if(tick-s.startedAt>15000){s.phase=0;++s.failures;s.result="profile_save_timeout";}return;}
         // The target root and its profile.
-        coopSaveFolder(s.folder,sizeof(s.folder));char target[MAX_PATH]{};
+        coopSavesStep=20;coopSaveFolder(s.folder,sizeof(s.folder));char target[MAX_PATH]{};
         if(s.target){if(s.folder[0])CreateDirectoryA(s.folder,nullptr);std::snprintf(target,sizeof(target),"%s\\profile.bin",s.folder);}
         else{std::snprintf(target,sizeof(target),"%s",s.folder);const auto n=std::strlen(target);if(n>5&&!std::strcmp(target+n-5,"_coop"))target[n-5]=0;
             std::strncat(target,"\\profile.bin",sizeof(target)-std::strlen(target)-1);}
-        const bool exists=GetFileAttributesA(target)!=INVALID_FILE_ATTRIBUTES;
+        const bool exists=GetFileAttributesA(target)!=INVALID_FILE_ATTRIBUTES;coopSavesStep=21;
         *root=s.target?kCoopSaveRoot:s.original;
         if(!coopProfileLoad(h,s.target&&!exists)){
             *root=s.target?s.original:kCoopSaveRoot;coopProfileLoad(h,false);s.phase=0;++s.failures;s.result="profile_load_refused";s.target=s.active;return;}
         ++s.profileLoads;if(s.target&&!exists)++s.profileSeeds;
         std::uintptr_t vt=0,fn=0;if(!memoryRead(h.session,&vt,8)||!vt||!memoryRead(vt+0xa0,&fn,8)||!fn){s.result="no_enumerate";s.phase=0;++s.failures;return;}
-        reinterpret_cast<int(*)(void*,void*,void*,void*)>(fn)(reinterpret_cast<void*>(h.session),nullptr,nullptr,nullptr);
+        coopSavesStep=27;reinterpret_cast<int(*)(void*,void*,void*,void*)>(fn)(reinterpret_cast<void*>(h.session),nullptr,nullptr,nullptr);coopSavesStep=30;
         s.phase=3;s.startedAt=tick;s.result="listing";return;}
     if(s.phase==3){unsigned char ready=0;memoryRead(h.sgm+0x3920,&ready,1);
         if(!ready){if(tick-s.startedAt>10000){s.result="list_timeout";s.phase=0;++s.failures;s.active=s.target;}return;}
         {std::uint32_t count=0;memoryRead(h.sgm+0xd8,&count,4);s.listed=count&0xffffff;}
-        std::uintptr_t game=0;if(memoryRead(base+0x39a5290,&game,8)&&game){auto* cm=reinterpret_cast<void*>(game+0x2e75d8);
+        coopSavesStep=31;std::uintptr_t game=0;if(memoryRead(base+0x39a5290,&game,8)&&game){auto* cm=reinterpret_cast<void*>(game+0x2e75d8);
             const int index=reinterpret_cast<int(*)(void*)>(gameImage+0x657380)(cm);reinterpret_cast<void(*)(void*,int)>(gameImage+0x660210)(cm,index);
             reinterpret_cast<void(*)(void*)>(gameImage+0x67d3f0)(reinterpret_cast<void*>(game+0x1f77c8));}
         if(const auto state=sampledMainMenuState){std::uintptr_t file=0;memoryRead(state+0x20,&file,8);
             for(std::uintptr_t off=0x98;off<0x100&&file;off+=8){std::uintptr_t section=0,svt=0;
                 if(memoryRead(state+off,&section,8)&&section&&memoryRead(section,&svt,8)&&svt==base+0x1b6d2e8){
                     reinterpret_cast<void(*)(void*,void*)>(gameImage+0x4fb3b0)(reinterpret_cast<void*>(section),reinterpret_cast<void*>(file));++s.rebuilds;break;}}}
-        s.active=s.target;++s.switches;s.phase=0;s.result=s.active?"coop":"campaign";}
+        coopSavesStep=0;s.active=s.target;++s.switches;s.phase=0;s.result=s.active?"coop":"campaign";}
 }
 bool coopSavesReadyForSession(){return !coopSavesEnabled||(coopSaves.active&&!coopSaves.phase);}
 void requestCoopSaves(){if(coopSavesEnabled&&!coopModeSelected.load()){coopModeSelected=true;++coopMenu.sessionRequests;}}

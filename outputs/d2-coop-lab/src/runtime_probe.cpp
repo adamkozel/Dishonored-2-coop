@@ -550,7 +550,7 @@ int main(int argc, char** argv) {
                 put(story?"storypickups":"pickups",actorName(actor),"["+std::to_string((flags>>3)&1)+","+std::to_string(ownerFlags&1)+"]");}
         }
         npcUnread.clear();npcUnbound.clear();
-        {std::vector<NativeWorldNpc> catalog;unsigned unbound=0;std::map<std::string,std::array<unsigned,3>> packs;
+        {std::vector<NativeWorldNpc> catalog;unsigned unbound=0;std::map<std::string,std::array<unsigned,5>> packs;
          // 2134: an unreadable catalog (the entity list changed during the read) left the category empty, which the diff
          // counted as every NPC absent (sweep-s2-dunwall-v2133c, ramsey-loot, the host's three samples). It now fails the
          // digest, so the harness retries.
@@ -571,14 +571,22 @@ int main(int argc, char** argv) {
             // some time after the load: progress-eotw-v2159a to v2161b read script_spawner_bfbuilding_exterminato_1 dead in the
             // host's world and alive in a partner world loaded a minute before, and lethal damage leaves it unchanged
             // (lifeRefusedLast: survived). It is compared by presence only.
-            if(n.unique&&n.definition.size()>=10&&!n.definition.compare(n.definition.size()-10,10,"human_dead")){put("npcs",n.spawnerName,"\"corpse\"");continue;}
+            if(n.unique&&n.definition.size()>=10&&!n.definition.compare(n.definition.size()-10,10,"human_dead")){packs[n.spawnerName][3]++;continue;}
             // 2171 (#260): an NPC its spawner holds dormant (actor+0xd1 bit 0) is invisible; labspawn-eotw-v2170t read the host's
             // woken outpost_reinf_01 and the partner's still-pooled one both as alive. It reads dormant.
             unsigned char dormant=0;reader(n.actor+0xd1,&dormant,1);
-            if(n.unique&&state==0&&(dormant&1)){put("npcs",n.spawnerName,"\"dormant\"");continue;}
-            if(n.unique)put("npcs",n.spawnerName,state==2?"\"dead\"":state==1?"\"unconscious\"":"\"alive\"");else packs[n.spawnerName][state]++;}
+            // 2239 (#277): every NPC of a key is counted, then the key is written once. A spawner that has spawned keeps a pooled
+            // spare (health 1, dormant, not unique): corpse-possess-eotw-v2238f's host had one beside each active checkpoint
+            // reinforcement, and the unique NPC plus its spare wrote the key twice, which put() reads as a clash and drops.
+            // A dormant NPC counts only when the key has no other; one active NPC reads as its state, several as [alive,
+            // unconscious,dead], so a key is compared the same way whether its spawner marks it unique or not.
+            if(state==0&&(dormant&1)){packs[n.spawnerName][4]++;continue;}
+            packs[n.spawnerName][state]++;}
          if(npcListed&&!npcRead)return fail("npc_health");
-         for(const auto& p:packs)put("npcs",p.first,"["+std::to_string(p.second[0])+","+std::to_string(p.second[1])+","+std::to_string(p.second[2])+"]");}
+         for(const auto& p:packs){const auto& c=p.second;const unsigned active=c[0]+c[1]+c[2];
+            if(!active)put("npcs",p.first,c[3]?"\"corpse\"":"\"dormant\"");
+            else if(active==1&&!c[3])put("npcs",p.first,c[2]?"\"dead\"":c[1]?"\"unconscious\"":"\"alive\"");
+            else put("npcs",p.first,"["+std::to_string(c[0])+","+std::to_string(c[1])+","+std::to_string(c[2])+(c[3]?","+std::to_string(c[3]):std::string())+"]");}}
         {std::uintptr_t buckets=0;std::uint32_t mask=0;
          if(reader(game+0x1f7780+0x18,&buckets,8)&&buckets&&reader(game+0x1f7780+0x28,&mask,4)&&mask<=0xffff)
             for(std::uint32_t k=0;k<=mask;++k){std::uintptr_t e=0;reader(buckets+k*8,&e,8);
