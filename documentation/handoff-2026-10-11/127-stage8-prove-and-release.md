@@ -37,6 +37,11 @@ Each pairing (host / partner) ran the first mission, a middle one and the last o
 - **Clean VM from the GitHub download:** `product-two-account-v2235a` passes. Its test, `Test-ProductTwoAccount-v2235`, answers the partner's main-menu Character dialog. `product-two-account-v2227a` (the local zip) waited at that dialog under the 0.9.3-era test.
 - **Final playtest with a friend:** a Needs-you step.
 
+### Linux installer (added to 1.0.0 on 2026-11-10, user request)
+- `d2coop-v1.0.0-linux.zip` is the unchanged 1.0.0 package plus `install-linux.sh`, `uninstall-linux.sh`, `d2coop_linux.py` and `README-LINUX.md` (source and builder: `work/release/linux-v2249`). It makes the same checks, backup and receipt as `Install-D2Coop.ps1`, finding the game case-insensitively in the Steam libraries (native and Flatpak Steam).
+- `bin/d2coop_setup.exe` runs under the Wine of the Proton build that made the game's prefix (`compatdata/403640/config_info`), then any other Proton, then system Wine (`D2COOP_WINE` overrides). The player sets the launch option `WINEDLLOVERRIDES="dinput8=n,b" %command%`.
+- `linux-install-v2249a` (Windows, setup tool run natively, scratch folder of hard links to the original game with a real `master.index`): install passed, the built files matched the pinned hashes, both banks loaded, a reinstall was refused, and uninstall restored all 203 files byte for byte. The Proton path and play under Proton are untested (hypothesis).
+
 ## Fixes step 6 forced
 
 ### The story reflow (progress-v2208)
