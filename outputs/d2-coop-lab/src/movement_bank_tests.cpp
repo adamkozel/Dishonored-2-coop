@@ -276,6 +276,14 @@ int main(int argc,char** argv){
         check(MovementBank::directions(0,-1,a,b,mix)&&a==7&&mix<.00001f,"right");
         check(MovementBank::directions(1,-.000001f,a,b,mix)&&a==8&&b==1&&mix>.99f,"angle seam");
         check(!MovementBank::directions(0,0,a,b,mix),"idle has no invented direction");
+        // 2234: the distance checks below start from rest; the start phase (2114, #266) would move a walk start to the clip's
+        // idle-nearest phase, so it is checked on its own here and kept off for the distance checks.
+        {const float r0[9]={1,0,0,0,1,0,0,0,1};float q[3]{};MovementClock started;movementStartPhaseEnabled=true;
+         started.advance(bank,0,q,r0,true);for(unsigned n=1;n<=10;++n)started.advance(bank,n*10.,q,r0,true);
+         q[0]=.001f;started.advance(bank,110.,q,r0,true);
+         const float expect=bank.startPhase(1)+.001f/bank.clips[1].stride;
+         check(std::fabs(started.phase-(expect-std::floor(expect)))<.0001f,"a walk start from rest begins at the idle-nearest phase");}
+        movementStartPhaseEnabled=false;
         const float r[9]={1,0,0,0,1,0,0,0,1};float p[3]{};MovementClock clock;
         check(clock.advance(bank,0,p,r,true),"first root");
         for(unsigned n=1;n<=100;++n)check(clock.advance(bank,n*10.,p,r,true),"idle clock");
