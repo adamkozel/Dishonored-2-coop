@@ -1,0 +1,393 @@
+ok   vm running             Running, autostart Start
+ok   guest desktop          autologon d2lab, PowerShell Direct
+ok   gpu partition          guest NVIDIA OK=True, host driver 32.0.16.2101 present in guest=True, share 40%
+ok   steam                  running=True signedIn=True
+13:00:31 copying lab scripts, tooling and bin
+13:00:37 mod resources (voidmod, master.index) into the game copy
+13:00:41 instance seed: work/lab-instances/client
+
+pwsh            : 7.6.5
+assetExe        : B671F8249422862B
+steamApi        : 71AF8666392ACAD2
+masterIndex     : DF8FF7ED1FD727EC
+voidmod         : True
+gameCopyGB      : 42.2
+dll             : EDB2CB07C71E1B77
+probe           : B32D89691E25E65D
+appLocalCrtLeft : 0
+slot81          : True
+slot82          : True
+bankMB          : 265
+freeGB          : 90
+PSComputerName  : D2CoopVM
+RunspaceId      : db124c36-dc44-4d9e-a60e-2c0ef805128d
+
+
+13:01:46 guest workspace in sync
+ok   guest workspace        dll/probe/scripts match host=True, game copy=True, pwsh=True
+ok   guest disk             90 GB free
+ok   virtual pad            vigem_pad running=True, Xbox 360 controller present=True (start the game after it)
+ok   time sync              Hyper-V time synchronization (packet expiry clocks)
+READY
+{
+  "passed": true,
+  "failure": null,
+  "notes": {
+    "localClientStopped": true,
+    "identity": {
+      "candidate": "candidate-progress-v2244",
+      "hostDll": "EDB2CB07C71E1B771D3FB1294E02F4BD7E034DB8226BE177C3CC1F909AD0D4E4",
+      "guestDllMatches": true,
+      "hostCharacter": "corvo"
+    },
+    "join": {
+      "hostOnline": {
+        "active": true,
+        "host": true,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 0,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "guestOnline": {
+        "active": true,
+        "host": false,
+        "phase": 5,
+        "result": "connected",
+        "connectionState": 3,
+        "joinRequests": 0,
+        "role": 1,
+        "inviteOpened": false,
+        "lobbyMembers": 2
+      },
+      "connected": true
+    },
+    "coopSaves": {
+      "host": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 1,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 11,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 28516,
+        "writtenAt": 122515250,
+        "startedAgoMs": 2641,
+        "phase2Checks": 19
+      },
+      "client": {
+        "result": "coop",
+        "active": true,
+        "phase": 0,
+        "switches": 1,
+        "failures": 0,
+        "rebuilds": 0,
+        "profileLoads": 2,
+        "profileSeeds": 0,
+        "sessionRequests": 1,
+        "refreshes": 0,
+        "listed": 0,
+        "profileSaves": 1,
+        "profileSkips": 0,
+        "lastDirty": 1,
+        "serviceAgeMs": 0,
+        "serviceGapMaxMs": 20204,
+        "writtenAt": 122467250,
+        "startedAgoMs": 2032,
+        "phase2Checks": 14
+      }
+    },
+    "coopSavesTrace": [
+      {
+        "s": 2.4,
+        "result": "coop",
+        "phase": 0,
+        "logic": 1,
+        "client": "coop"
+      }
+    ],
+    "characters": {
+      "host": "models/characters/player/corvo/body.def",
+      "client": "models/characters/player/emily/body.def"
+    },
+    "hostRetries": 0,
+    "partnerRetries": 0,
+    "charactersReadable": true,
+    "storyFlags": [
+      {
+        "label": "start",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      },
+      {
+        "label": "end",
+        "host": 31,
+        "client": 31,
+        "decisionDifferences": 0
+      }
+    ],
+    "followHostOn": true,
+    "hostStoryOn": true,
+    "itemsPerPlayerOn": true,
+    "commands": [
+      "step02-command host coop_saves stress on",
+      "step04-command host coop_saves off",
+      "step06-command host coop_saves on",
+      "step08-command host coop_saves off",
+      "step10-command host coop_saves on",
+      "step12-command host coop_saves off",
+      "step14-command host coop_saves on",
+      "step16-command host coop_saves off",
+      "step18-command host coop_saves on",
+      "step20-command host coop_saves off",
+      "step22-command host coop_saves on",
+      "step24-command host coop_saves off",
+      "step26-command host coop_saves on",
+      "step28-command host coop_saves off",
+      "step30-command host coop_saves on",
+      "step32-command host coop_saves off",
+      "step34-command host coop_saves on",
+      "step36-command host coop_saves off",
+      "step38-command host coop_saves on",
+      "step40-command host coop_saves off",
+      "step42-command host coop_saves on",
+      "step45-command host coop_saves off",
+      "step47-command host coop_saves on",
+      "step49-command host coop_saves off",
+      "step51-command host coop_saves on",
+      "step53-command host coop_saves off",
+      "step55-command host coop_saves on",
+      "step57-command host coop_saves off",
+      "step59-command host coop_saves on",
+      "step61-command host coop_saves off",
+      "step63-command host coop_saves on",
+      "step65-command host coop_saves off",
+      "step67-command host coop_saves on",
+      "step69-command host coop_saves off",
+      "step71-command host coop_saves on",
+      "step73-command host coop_saves off",
+      "step75-command host coop_saves on",
+      "step77-command host coop_saves off",
+      "step79-command host coop_saves on",
+      "step81-command host coop_saves off",
+      "step83-command host coop_saves on",
+      "step86-command host coop_saves off",
+      "step88-command host coop_saves on",
+      "step90-command host coop_saves off",
+      "step92-command host coop_saves on",
+      "step94-command host coop_saves off",
+      "step96-command host coop_saves on",
+      "step98-command host coop_saves off",
+      "step100-command host coop_saves on",
+      "step102-command host coop_saves off",
+      "step104-command host coop_saves on",
+      "step106-command host coop_saves off",
+      "step108-command host coop_saves on",
+      "step110-command host coop_saves off",
+      "step112-command host coop_saves on",
+      "step114-command host coop_saves off",
+      "step116-command host coop_saves on",
+      "step118-command host coop_saves off",
+      "step120-command host coop_saves on",
+      "step122-command host coop_saves off",
+      "step124-command host coop_saves on",
+      "step127-command host coop_saves off",
+      "step129-command host coop_saves on",
+      "step131-command host coop_saves off",
+      "step133-command host coop_saves on",
+      "step135-command host coop_saves off",
+      "step137-command host coop_saves on",
+      "step139-command host coop_saves off",
+      "step141-command host coop_saves on",
+      "step143-command host coop_saves off",
+      "step145-command host coop_saves on",
+      "step147-command host coop_saves off",
+      "step149-command host coop_saves on",
+      "step151-command host coop_saves off",
+      "step153-command host coop_saves on",
+      "step155-command host coop_saves off",
+      "step157-command host coop_saves on",
+      "step159-command host coop_saves off",
+      "step161-command host coop_saves on",
+      "step163-command host coop_saves off",
+      "step165-command host coop_saves on",
+      "step168-command host coop_saves stress off"
+    ],
+    "diffwait-end": {
+      "settled": true,
+      "s": 1.6
+    },
+    "armwait-end": {
+      "armed": true,
+      "s": 0.3
+    },
+    "diff-end": {
+      "status": "EQUAL",
+      "compared": 538,
+      "differences": 0,
+      "retried": null,
+      "tries": 1
+    },
+    "final": {
+      "host": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 24,
+        "pos": [
+          -28.382668,
+          -154.200607,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+      },
+      "client": {
+        "logic": 1,
+        "pending": 0,
+        "map": "campaign/dunwall/escape/tower/dunwall_escape_tower_p",
+        "epoch": 16,
+        "cine": 18,
+        "pos": [
+          -27.787413,
+          -153.496841,
+          66.403648
+        ],
+        "fresh": true,
+        "gameflow": [
+          241,
+          4,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        "gfApplied": 0,
+        "lt": "idle/0/0",
+        "hold": "idle/0",
+        "ka": "0/0/0",
+        "active": "Mission_DW,Obj_DW_EscapeDunwallTower,Task_DW_FindYourWayOut"
+      }
+    },
+    "gameflowEqual": true,
+    "missionDecision": {
+      "host": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "slot": -1,
+        "startMap": "",
+        "sent": 0,
+        "resent": 0,
+        "hostReplays": 0,
+        "hostContinues": 0,
+        "unreadable": 0
+      },
+      "vm": {
+        "enabled": true,
+        "result": "idle",
+        "decision": 0,
+        "loadedSlot": -1,
+        "received": 0,
+        "refused": 0,
+        "duplicates": 0,
+        "partnerHeld": 0,
+        "replayed": 0,
+        "continued": 0,
+        "missingSaves": 0,
+        "localReleases": 0
+      }
+    },
+    "worldDiff": {
+      "status": "EQUAL",
+      "compared": 538,
+      "differences": 0
+    },
+    "finalControl": {
+      "host": {
+        "protocol": 1,
+        "dllHash": "70016752684d1933",
+        "connection": 2622689402,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "70016752684d1933",
+        "sent": 2243,
+        "received": 2229,
+        "refused": 0,
+        "silentMs": 719
+      },
+      "vm": {
+        "protocol": 1,
+        "dllHash": "70016752684d1933",
+        "connection": 4223480382,
+        "result": "live",
+        "helloOk": true,
+        "peerLeft": false,
+        "peerLoading": false,
+        "peerProtocol": 1,
+        "peerDll": "70016752684d1933",
+        "sent": 2230,
+        "received": 2243,
+        "refused": 0,
+        "silentMs": 219
+      }
+    },
+    "hostStory": {
+      "vmHostStory": true,
+      "partnerWorldRuns": 0,
+      "blocked": 0,
+      "asked": 0,
+      "inFlow": 0,
+      "replayed": 0,
+      "fallback": 0
+    },
+    "itemsPerPlayer": {
+      "vm": true,
+      "vmSharedArmed": false,
+      "vmRefusals": 113
+    },
+    "pairing": {
+      "host": "corvo",
+      "partner": "emily",
+      "partnerBoxAnswers": 0,
+      "pendingChoices": 0,
+      "replayRefused": 0,
+      "replayAccepted": 0,
+      "readAt": "end",
+      "hostDefinition": "models/characters/player/corvo/body.def",
+      "partnerDefinition": "models/characters/player/emily/body.def"
+    }
+  },
+  "scope": "Campaign route steps for campaign/dunwall/escape/tower/dunwall_escape_tower.mapinfo across two machines and two Steam accounts in product mode (host corvo on this PC, VM partner emily, both on co-op saves); 1714/1703 (#135): the VM joins after step 0 from its main menu (placement beside the host, gameflow and NPC lives compared), leaves after step 0 and rejoins after step 0 (reconnect, rearm, gameflow converges, placed beside the host again)."
+}

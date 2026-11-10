@@ -14,6 +14,20 @@ Step 6 proves the host-decides design on two Steam accounts (this PC hosts, the 
 
 The release regression repeated the hour session on the release candidate: `soak-hour-vm-v2227h` passed in 78 minutes, with every diff equal.
 
+### The four pairings again, on progress-v2240 (Run-V2241P, Run-V2243E)
+Each pairing (host / partner) ran the first mission, a middle one and the last on the same candidate, with every diff the routes require:
+
+| Pairing | Dunwall (286 values) | The Conservatory (520–522) | Death to the Empress (249) |
+|---|---|---|---|
+| a Corvo / Emily | `campaign-dunwall-vm-v2241a` equal | `campaign-curator-vm-v2241a` equal | `campaign-empress-vm-v2241a` equal |
+| b Emily / Corvo | `v2241b` equal | `v2241b` equal | `v2243b` equal |
+| c Corvo / Corvo | `v2241c` equal | `v2241c` equal | `v2241c` equal |
+| d Emily / Emily | `v2241d` equal | `v2241d` equal | `v2243d` equal |
+
+- `campaign-empress-vm-v2241b` and `v2241d` stopped on the boat, before any diff. The host's skiff use had focus on "Go to Dunwall Streets" and the presses arrived (loader log), but no level change started in either world. Both worlds were identical, on the boat. The reruns `v2243b` and `v2243d` on the same candidate passed, so this was the route's press and not a difference (hypothesis: the press landed while the native use was not yet accepting input).
+- No take stopped in the co-op saves switch (#263): 0 of 16 VM takes on v2240, counting the door takes below.
+- progress-v2240 differs from the 1.0.0 proxy (progress-v2227) in the linked-door sync (v2228, `coop_door_linked`, on by default), the probe digest and the #263 watchdog. A 1.0.x built from it needs the install, update and clean-VM proofs again.
+
 ## Release 1.0.0 (published 2026-11-10)
 
 - **Package:** `d2coop-v1.0.0.zip`, built from progress-v2227 with setup tool v2209 and decl-recipes-v3. It is 37,474,983 bytes, SHA-256 `D74DCBEFDCAACCE7B16E89EDE38A8A2381467ED0FAEDA2AC65760FCB18089CA1`.
@@ -42,6 +56,33 @@ Edge of the World's checkpoint reinforcements kept ending up in the partner's wo
 - **v2224** restored the late-spawn test (an NPC first seen 30 s after the roster began and active 45 s), and **v2227** applies it per NPC rather than per key: a reinforcement spawner's pooled NPC is active for a moment at the load.
 - `lifeOwnOnlySkip` in the NPC stream status counts why the rule kept an NPC.
 
+#### The last difference was the digest (progress-v2239)
+After v2227 the end diff still read both checkpoint keys absent in the host's world and alive in the partner's. That happened in `corpse-possess-eotw-v2227t`, `v2231x`, `v2232y`, `v2233z2` and `v2238f`. Three readings of the host's world settled it:
+- **v2236:** the whole entity list before and after the end diff;
+- **v2238:** the out-of-process catalog with spawners (`--npc-authority-all`).
+
+**What the host's world holds (confirmed runtime).** Each key has its active reinforcement plus a pooled spare. The spare has health 1, `ownerFlags` 129 and is dormant, the same kind of NPC that `outpost_reinf_01` keeps in both worlds.
+
+**Why the key went missing (confirmed static).** The digest wrote the unique NPC and then the spare's pack count under the same key. Its `put()` treats a key written twice as a clash and drops it.
+
+**The fix (probe only; the shipped proxy is unchanged).** The digest now counts every NPC of a key and writes the key once:
+- a dormant NPC counts only when the key has nothing else;
+- one active NPC reads as its state;
+- several read as `[alive,unconscious,dead]`.
+
+**Results:**
+- `corpse-possess-eotw-v2239t` on progress-v2239: every diff is equal.
+- `corpse-possess-eotw-v2239r` on candidate `release-v2239r` (the 1.0.0 package's proxy, progress-v2227, with the v2239 probe): every diff is equal, with both keys `alive` in both worlds at the end and final diffs.
+
+### A door the host's world opens (#279)
+`corpse-possess-eotw-v2217t` ended with the glass door `env_interiors_door_glass_350cm_01_2` open in the host's world only.
+- **What that diff was (confirmed runtime).** The door was closed in both worlds at the spawn diff and at all six tries of the killed diff. The end diff was one snapshot with no retry, taken while a host NPC was going through the door: host `[2,2,0,0]`, partner `[0,0,0,0]`. That fits a transition still on its way to the partner's world.
+- **Recovery (confirmed static, `door_sync.h`).** A stopped or re-armed session starts each host channel from the host's current native state and sends it, so a re-arm reconciles. A single channel that fails (`failDoorSync`) stays off until the next map or checkpoint. 101 door-sync status files in the takes hold no such failure: 1,067 converged channels, and only session-level stops that re-arm.
+- **The release behaviour.** `doorlinked-eotw-v2228t` (`coop_door_linked off`, as in 1.0.0): the host's native open and close converge in the partner's world.
+- **The proof and its twin (progress-v2240, Run-V2242D):**
+  - `doorsync-eotw-v2242s`: the host's world opens and closes the door natively; the spawn, opened and closed diffs are equal (2,278 values).
+  - `doorsync-eotw-v2242t`: the same route with the product maintenance and the door sync turned off in both games first. The opened diff differs in exactly one value, that door (host `[2,2,0,0]`, partner `[0,0,0,0]`). The closed and final diffs are equal. So the door sync is what keeps that door the same.
+
 ### Corpse possession by the partner (#278)
 - The lab cast (`coop_lab_possess_corpse`) only set the target. The controller never left travel state 0, because the travel update `0x140825970` waits for the cast animation's timeline at `[[ctrl+0x1d8]+0x90]+0xe0`, and calling `0x140447db0` directly never starts it (confirmed static).
 - Routes since `corpse-possess-eotw-v2209` cast natively: aim, then the left trigger with Possession.
@@ -59,6 +100,10 @@ Edge of the World's checkpoint reinforcements kept ending up in the partner's wo
 - In each, the host called the native SaveProfile. Its `.coop-menu.json` was written once, 14 checks and 218 ms into phase 2, and never again, and the game later exited with `0x80000003`.
 - Neither a 60 s settle nor the VM sync log explains it. The runners now rerun such a take once (`<take>2`).
 - The product switches from the main menu and syncs no VM. The clean-VM product take covers that path.
+- **Correction:** the lab switch runs in gameplay with the partner connected (the harness requires host gameplay, opens the lobby and joins the VM first). A product host who presses F7 mid-mission takes the same path (`session_product.h`: `requestCoopSaves` and `startOnlineHost`). So this is not lab-only until shown otherwise.
+- **Measured over all VM takes:** 18 of 672 stopped this way, every one on the host, every one after `SaveProfile` with `startedAgoMs` under 300. The status file is rewritten about every 300 ms, so the hang is at or before the 300 ms step that locks and loads the profile.
+- **progress-v2240 adds a watchdog** (`coop_saves_watchdog.h`). Step breadcrumbs mark each native call of the switch. When the service stops for 5 s mid-switch, the watchdog writes `<status>.coop-saves-stall.json` with the last step and every thread's stack (module and RVA). The four-pairing runner `Run-V2241P` keeps it with a stalled take.
+- **Stress, progress-v2244** (lab only): `coop_saves stress on` makes every switch call `SaveProfile`, dirty or not. `Run-V2244S` ran three takes (`coopsaves-stress-vm-v2244a`-`c`, Dunwall, VM partner joined), each with 40 off/on cycles in gameplay. Each take made 41 switches and 41 profile saves (0 skips, 0 failures), and its end diff is equal. The first take came right after the deploy, like the five stalls of 2026-11-09. No stall in 123 forced saves (confirmed runtime), so repeating `SaveProfile` in a running session does not reproduce #263. Hypothesis: the stall needs a state that only the first switch of a fresh game process has (for example a profile write still pending from the boot).
 
 ### Lab and harness
 - Harness v2213 adds a `choke` step for either player. Harness v2215 adds `focusPress`: a press made while the native use focus is on the target counts. The Institute burner valve sends only script events.
@@ -73,7 +118,6 @@ Edge of the World's checkpoint reinforcements kept ending up in the partner's wo
 - `work/release/Run-Release-v2226.sh` builds d2coop-v1.0.0 and runs the install and update tests.
 
 ## Still open
-- **#279:** a linked door that a host NPC opens stays closed for the partner. Doors with a partner leaf are outside the door catalogue.
 - **#237, Hypatia's cure by the partner:** the route reaches Grim Alexandra (`institute-cure-partner-vm-v2215d`, the whole antidote chain on the host), but the choke misses a moving, fighting target.
 - **#278:** a corpse walked under the partner's control.
-- **#263:** the stall's cause.
+- **#263:** the stall's cause. The v2240 watchdog has not caught one yet (0 of 16 takes), and 123 forced saves on v2244 did not stall.

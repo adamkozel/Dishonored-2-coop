@@ -1,5 +1,5 @@
 {
-  "UpdatedAt": "2026-11-07T18:41:13+01:00",
+  "UpdatedAt": "2026-11-10T15:40:00+01:00",
   "LoaderSha256": "18B8E8D69565F6E3D9B0AAB020B9D05EB04990D582457207FF0294B0F625B5EE",
   "GuardPoseLink": {
     "Passed": true,
@@ -22952,6 +22952,10 @@
   "Stage8Step6": {
     "Card": "#244",
     "Status": "done, chapter 127",
-    "Open": "#277 (host digest vs roster on checkpoint reinforcements), #279, #263, #278, #281"
+    "Open": "#263 (watchdog in progress-v2240, no stall caught in 16 takes; 123 forced SaveProfile switches on v2244 did not stall), #278, #281",
+    "CoopSavesStress2244": "Run-V2244S: coopsaves-stress-vm-v2244a-c, 41 switches and 41 forced profile saves each, 0 failures, end diff equal, no stall",
+    "FourPairingsV2240": "Run-V2241P and Run-V2243E: Dunwall, the Conservatory and the Empress in all four pairings, every diff equal (empress b and d reran as v2243b and v2243d after a skiff press that started no level change)",
+    "Door279": "doorsync-eotw-v2242s equal; mutation twin doorsync-eotw-v2242t differs only on env_interiors_door_glass_350cm_01_2 at the opened diff",
+    "Digest277": "progress-v2239 probe digest writes each NPC key once; corpse-possess-eotw-v2239t and v2239r every diff equal"
   }
 }

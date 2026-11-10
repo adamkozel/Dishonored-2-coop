@@ -1,0 +1,2443 @@
+[
+  {
+    "step": "start",
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -6.796998,
+        -14.932001,
+        0.003649
+      ],
+      "fresh": true,
+      "gameflow": [
+        246,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Void02"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -6.973193,
+        -15.651961,
+        0.110359
+      ],
+      "fresh": true,
+      "gameflow": [
+        246,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Void02"
+    }
+  },
+  {
+    "step": "step01-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 8000,
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 11,
+      "pos": [
+        -6.796981,
+        -14.931938,
+        0.003649
+      ],
+      "fresh": true,
+      "gameflow": [
+        246,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Void02"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 7,
+      "pos": [
+        -6.973187,
+        -15.651961,
+        0.110359
+      ],
+      "fresh": true,
+      "gameflow": [
+        246,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Void02"
+    }
+  },
+  {
+    "step": "step02-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_player_entervoid",
+      "settle": 6000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 13,
+      "pos": [
+        2.58245,
+        -10.58717,
+        2.120676
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "5/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 9,
+      "pos": [
+        -6.973185,
+        -15.651961,
+        0.110360
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    }
+  },
+  {
+    "step": "step03-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_brief_01",
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 20,
+      "pos": [
+        4.092301,
+        -35.19278,
+        11.063961
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "8/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 16,
+      "pos": [
+        3.812933,
+        -34.499126,
+        10.946684
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    }
+  },
+  {
+    "step": "step04-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_memories_01",
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 21,
+      "pos": [
+        13.31994,
+        -53.777302,
+        18.72731
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "9/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 17,
+      "pos": [
+        3.812893,
+        -34.499046,
+        10.946671
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/1/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    }
+  },
+  {
+    "step": "step05-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_teleport_03",
+      "settle": 6000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 23,
+      "pos": [
+        14.775867,
+        -53.646496,
+        18.759222
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "15/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 17,
+      "pos": [
+        12.491309,
+        -52.707951,
+        18.597683
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/1/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    }
+  },
+  {
+    "step": "step06-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_brief_02",
+      "settle": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 29,
+      "pos": [
+        27.19606,
+        -73.201439,
+        56.148449
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "42/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 23,
+      "pos": [
+        28.804047,
+        -70.725403,
+        55.956043
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/1/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    }
+  },
+  {
+    "step": "step07-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_teleport_afterbrief02",
+      "settle": 6000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 29,
+      "pos": [
+        27.524925,
+        -72.933945,
+        56.125343
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "59/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 23,
+      "pos": [
+        26.771900,
+        -73.546280,
+        56.178249
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/1/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    }
+  },
+  {
+    "step": "step08-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "script_trigger_brief_03",
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 35,
+      "pos": [
+        50.427086,
+        -92.559715,
+        69.792923
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "61/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 23,
+      "pos": [
+        26.771900,
+        -73.546280,
+        56.178249
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/3/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    }
+  },
+  {
+    "step": "step09-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 10000,
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 35,
+      "pos": [
+        50.427086,
+        -92.559715,
+        69.792923
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "73/0/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/void/void_02/void_02_p",
+      "epoch": 16,
+      "cine": 23,
+      "pos": [
+        26.771900,
+        -73.546280,
+        56.178249
+      ],
+      "fresh": true,
+      "gameflow": [
+        245,
+        0,
+        3,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "idle/0/0",
+      "hold": "idle/0",
+      "ka": "2/15/0",
+      "active": "Mission_Void02,Obj_Void02_A,Task_Void02_A_01"
+    }
+  },
+  {
+    "step": "step10-use",
+    "spec": {
+      "do": "use",
+      "name": "script_usable_portal_exit",
+      "focus": true,
+      "offsets": [
+        [
+          -0.85,
+          0.85
+        ]
+      ],
+      "z": 71.15,
+      "pitches": [
+        10,
+        0,
+        20,
+        10
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 60000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 45,
+      "pos": [
+        -6.87149,
+        -14.88483,
+        0.110897
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/1219",
+      "ka": "109/0/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_GetBriefing"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 30,
+      "pos": [
+        -6.871435,
+        -14.885212,
+        0.110888
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "3/45/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_GetBriefing"
+    }
+  },
+  {
+    "step": "step11-expect",
+    "spec": {
+      "do": "expect",
+      "map": "boat/curator/boat_curator",
+      "ms": 300000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 45,
+      "pos": [
+        -6.877158,
+        -14.153564,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/1219",
+      "ka": "109/0/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_GetBriefing"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 30,
+      "pos": [
+        -6.871435,
+        -14.885212,
+        0.110888
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "3/45/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_GetBriefing"
+    }
+  },
+  {
+    "step": "step12-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 10000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 45,
+      "pos": [
+        -6.877158,
+        -14.153564,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/1219",
+      "ka": "109/0/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_GetBriefing"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 30,
+      "pos": [
+        -6.871435,
+        -14.885212,
+        0.110888
+      ],
+      "fresh": true,
+      "gameflow": [
+        241,
+        1,
+        3,
+        3,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "3/45/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_GetBriefing"
+    }
+  },
+  {
+    "step": "step13-use",
+    "spec": {
+      "do": "use",
+      "name": "mdnt_briefing_chair",
+      "focus": true,
+      "offsets": [
+        [
+          1.0,
+          0
+        ]
+      ],
+      "z": 1.55,
+      "pitches": [
+        40,
+        30,
+        50,
+        40
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 150000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 50,
+      "pos": [
+        1.812884,
+        6.072922,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/1219",
+      "ka": "123/0/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_LeaveDreadfulWale"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 30,
+      "pos": [
+        -6.871435,
+        -14.885212,
+        0.110888
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "3/58/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_LeaveDreadfulWale"
+    }
+  },
+  {
+    "step": "step14-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 5000,
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 50,
+      "pos": [
+        1.812884,
+        6.072922,
+        0.253647
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/1/0",
+      "hold": "released/1219",
+      "ka": "123/0/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_LeaveDreadfulWale"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/curator/boat_curator_p",
+      "epoch": 21,
+      "cine": 30,
+      "pos": [
+        -6.871435,
+        -14.885212,
+        0.110888
+      ],
+      "fresh": true,
+      "gameflow": [
+        240,
+        1,
+        3,
+        4,
+        0,
+        0,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/1",
+      "hold": "released/0",
+      "ka": "3/58/0",
+      "active": "Mission_CU_Boat,Obj_CU_GetBriefing,Task_CU_LeaveDreadfulWale"
+    }
+  },
+  {
+    "step": "step15-use",
+    "spec": {
+      "do": "use",
+      "name": "script_skiff_01_usable",
+      "focus": true,
+      "offsets": [
+        [
+          1.2,
+          0
+        ]
+      ],
+      "z": 9.15,
+      "pitches": [
+        25,
+        15,
+        35,
+        25
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 400,
+      "settle": 90000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -119.720406,
+        -134.53038,
+        -29.857895
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "223/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.720406,
+        -134.530380,
+        -29.857895
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/129/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step16-expect",
+    "spec": {
+      "do": "expect",
+      "map": "curator/curator_p",
+      "ms": 300000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -119.827034,
+        -134.591949,
+        -29.857895
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "223/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/129/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step17-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 15000,
+      "settle": 30000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -119.827034,
+        -134.591949,
+        -29.857895
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "223/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/129/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step18-cast",
+    "spec": {
+      "do": "cast",
+      "role": "host",
+      "ms": 1200,
+      "settle": 3000,
+      "expectMoved": true,
+      "grant": "models/powers/blink/blink.inventoryitem",
+      "expectFx": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -117.773636,
+        -125.472084,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "223/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/129/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step19-wait",
+    "spec": {
+      "do": "wait",
+      "ms": 2000,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -117.773636,
+        -125.472084,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "223/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/129/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step20-cast",
+    "spec": {
+      "do": "cast",
+      "role": "client",
+      "ms": 1200,
+      "settle": 3000,
+      "expectMoved": true,
+      "grant": "models/powers/grapple/grapple.inventoryitem",
+      "expectFx": true
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -117.773636,
+        -125.472084,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "223/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/129/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step21-command",
+    "spec": {
+      "do": "command",
+      "role": "host",
+      "text": "coop_difficulty_set 0"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -117.773636,
+        -125.472084,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "223/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/129/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step22-difficulty",
+    "spec": {
+      "do": "difficulty",
+      "expect": 0,
+      "ms": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -117.773636,
+        -125.472084,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "223/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        7,
+        7,
+        7,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/129/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_EnterConservatory,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step23-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_main_entrance_door",
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -13.301859,
+        37.959267,
+        -5.496435
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        6,
+        7,
+        8,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "231/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_FindAshworth,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        6,
+        7,
+        8,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/135/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_FindAshworth,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step24-heal",
+    "spec": {
+      "do": "heal",
+      "on": true,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -13.301859,
+        37.959267,
+        -5.496435
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        6,
+        7,
+        8,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "231/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_FindAshworth,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        6,
+        7,
+        8,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/135/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_FindAshworth,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step25-trigger",
+    "spec": {
+      "do": "trigger",
+      "name": "ld_trigger_ashworth_intro_trigger",
+      "settle": 15000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -10.351191,
+        39.22036,
+        9.048423
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        6,
+        7,
+        8,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "241/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_FindAshworth,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        6,
+        7,
+        8,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/145/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_FindAshworth,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step26-npcs",
+    "spec": {
+      "do": "npcs",
+      "near": [
+        -5.6,
+        45.5
+      ],
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 61,
+      "pos": [
+        -10.05637,
+        39.128227,
+        9.008486
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        6,
+        7,
+        8,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "241/0/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_FindAshworth,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        6,
+        7,
+        8,
+        0,
+        1,
+        0
+      ],
+      "gfApplied": 2,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/145/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Obj_CU_EliminateAshworth,Obj_CU_FindByrne,Task_CU_ByrneInformation,Task_CU_FindAshworth,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step27-attack",
+    "spec": {
+      "do": "attack",
+      "name": "breanna_ashworth",
+      "near": [
+        -5.6,
+        45.5
+      ],
+      "max": 200,
+      "settle": 10000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 76,
+      "pos": [
+        -7.252529,
+        39.731972,
+        8.503417
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        2,
+        3,
+        11,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "273/2/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        2,
+        3,
+        11,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 13,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/178/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step28-clear",
+    "spec": {
+      "do": "clear",
+      "name": "witch|gravehound",
+      "near": [
+        -5.6,
+        45.5
+      ],
+      "radius": 20,
+      "max": 6,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 174,
+      "pos": [
+        2.505092,
+        49.031223,
+        1.503649
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        2,
+        3,
+        11,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "294/2/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        2,
+        3,
+        11,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 13,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/188/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step29-clear",
+    "spec": {
+      "do": "clear",
+      "name": "witch|gravehound",
+      "near": [
+        -5.6,
+        45.5
+      ],
+      "radius": 20,
+      "max": 6,
+      "settle": 3000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 246,
+      "pos": [
+        -13.383418,
+        44.236675,
+        -5.496337
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        2,
+        3,
+        11,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "303/2/0",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_SearchOffice"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        2,
+        3,
+        11,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 13,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/193/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_SearchOffice"
+    }
+  },
+  {
+    "step": "step30-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_note_archived_journals",
+      "focus": true,
+      "offsets": [
+        [
+          0.49,
+          0.49
+        ]
+      ],
+      "z": 9.85,
+      "pitches": [
+        50,
+        40,
+        60,
+        50
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 300,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 248,
+      "pos": [
+        -5.360041,
+        53.019672,
+        8.503679
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        1,
+        3,
+        12,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "308/3/1",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_AshworthJournal"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        226,
+        1,
+        3,
+        12,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 13,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/199/2",
+      "active": "Mission_CU,Obj_CU_DiscoverAshworthRole,Task_CU_AshworthJournal"
+    }
+  },
+  {
+    "step": "step31-use",
+    "spec": {
+      "do": "use",
+      "name": "ld_audiograph_01_1_2",
+      "focus": true,
+      "offsets": [
+        [
+          0.8,
+          0
+        ]
+      ],
+      "z": -12.25,
+      "pitches": [
+        50,
+        40,
+        60,
+        50
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 300,
+      "settle": 8000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 248,
+      "pos": [
+        26.566765,
+        49.444633,
+        -12.646079
+      ],
+      "fresh": true,
+      "gameflow": [
+        224,
+        1,
+        3,
+        14,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/4187",
+      "ka": "314/3/1",
+      "active": "Mission_CU,Obj_CU_Escape,Task_CU_EscapeCanal"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/curator/curator_p_lowchaos",
+      "epoch": 26,
+      "cine": 34,
+      "pos": [
+        -119.007256,
+        -134.118637,
+        -29.908314
+      ],
+      "fresh": true,
+      "gameflow": [
+        224,
+        1,
+        3,
+        14,
+        0,
+        6,
+        0
+      ],
+      "gfApplied": 13,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "3/199/2",
+      "active": "Mission_CU,Obj_CU_Escape,Task_CU_EscapeCanal"
+    }
+  },
+  {
+    "step": "step32-use",
+    "spec": {
+      "do": "use",
+      "focus": true,
+      "offsets": [
+        [
+          1.6,
+          0
+        ]
+      ],
+      "z": -28.55,
+      "pitches": [
+        10,
+        0,
+        20,
+        10
+      ],
+      "yaws": [
+        0,
+        -15,
+        15
+      ],
+      "hold": 300,
+      "settle": 150000,
+      "expect": "logic",
+      "match": "meagan_foster"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 263,
+      "pos": [
+        -6.866287,
+        -14.884153,
+        0.111885
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/2860",
+      "ka": "355/3/1",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 40,
+      "pos": [
+        -6.866106,
+        -14.886350,
+        0.111813
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 16,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "4/225/2",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step33-expect",
+    "spec": {
+      "do": "expect",
+      "map": "boat_dust",
+      "ms": 300000,
+      "settle": 5000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 263,
+      "pos": [
+        -6.954487,
+        -14.491478,
+        0.195354
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/2860",
+      "ka": "355/3/1",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 40,
+      "pos": [
+        -6.494739,
+        -15.257716,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 16,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "4/225/2",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step34-heal",
+    "spec": {
+      "do": "heal",
+      "on": false,
+      "settle": 1000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 263,
+      "pos": [
+        -6.954487,
+        -14.491478,
+        0.195354
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/2860",
+      "ka": "355/3/1",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 40,
+      "pos": [
+        -6.494739,
+        -15.257716,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 16,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "4/225/2",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step35-command",
+    "spec": {
+      "do": "command",
+      "role": "host",
+      "text": "coop_difficulty_set 1"
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 263,
+      "pos": [
+        -6.954487,
+        -14.491478,
+        0.195354
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/2860",
+      "ka": "355/3/1",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 40,
+      "pos": [
+        -6.494739,
+        -15.257716,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 16,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "4/225/2",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  },
+  {
+    "step": "step36-difficulty",
+    "spec": {
+      "do": "difficulty",
+      "expect": 1,
+      "ms": 20000
+    },
+    "host": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 263,
+      "pos": [
+        -6.954487,
+        -14.491478,
+        0.195354
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 0,
+      "lt": "sent/2/0",
+      "hold": "released/2860",
+      "ka": "355/3/1",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    },
+    "client": {
+      "logic": 1,
+      "pending": 0,
+      "map": "campaign/boat/dust/boat_dust_p",
+      "epoch": 31,
+      "cine": 40,
+      "pos": [
+        -6.494739,
+        -15.257716,
+        0.008649
+      ],
+      "fresh": true,
+      "gameflow": [
+        221,
+        0,
+        3,
+        17,
+        0,
+        7,
+        0
+      ],
+      "gfApplied": 16,
+      "lt": "applied/0/2",
+      "hold": "released/0",
+      "ka": "4/225/2",
+      "active": "Mission_DD_Boat,Obj_Boat_DD_GoDust,Task_Boat_DD_TalkSokolov"
+    }
+  }
+]
